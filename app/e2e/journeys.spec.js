@@ -47,17 +47,39 @@ test.describe('Browse (TC-04..TC-07)', () => {
   });
 });
 
-test.describe('Kshetram detail (TC-08, TC-09)', () => {
+test.describe('Kshetram detail (TC-08, TC-09, V2)', () => {
   test('shows all sections with a safe map link', async ({ page }) => {
     await page.goto('kshetram/srirangam');
     await expect(page.getByRole('heading', { name: /srirangam/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /presiding deity/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /location/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /mangalasasanam/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /temple timings/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /presiding deities/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /mangalasasanam pasuram/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /sthala puranam/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /nearby divya desams/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /significance/i })).toBeVisible();
     const mapLink = page.getByRole('link', { name: /view on google maps/i });
     await expect(mapLink).toHaveAttribute('target', '_blank');
     await expect(mapLink).toHaveAttribute('rel', /noopener/);
+  });
+
+  test('offers share, print, distance and directions (V2)', async ({ page }) => {
+    await page.goto('kshetram/srirangam');
+    await expect(page.getByRole('button', { name: /share/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: /print/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: /distance from me/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /get directions/i })).toHaveAttribute('rel', /noopener/);
+  });
+
+  test('nearby list links to adjacent desams', async ({ page }) => {
+    await page.goto('kshetram/srirangam');
+    const nearby = page.locator('.nearby__list a');
+    expect(await nearby.count()).toBeGreaterThan(0);
+  });
+
+  test('celestial desam hides earthly features', async ({ page }) => {
+    await page.goto('kshetram/paramapadam');
+    await expect(page.getByText(/celestial realm/i)).toBeVisible();
+    await expect(page.getByRole('button', { name: /distance from me/i })).toHaveCount(0);
   });
 
   test('unknown id shows the not-found state', async ({ page }) => {

@@ -238,3 +238,96 @@
   .detail__grid { grid-template-columns: repeat(2, 1fr); }
   .search-filter-bar { grid-template-columns: 2fr repeat(4, 1fr) auto; align-items: end; }
 }
+
+/* Detail V2 — hero band, deity gallery, pasuram, nearby, actions */
+.detail__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.page-actions { display: flex; gap: var(--space-2); }
+.btn--small { padding: var(--space-1) var(--space-2); font-size: var(--font-size-sm); }
+
+.timings__sessions { font-weight: 600; }
+.timings__notes { color: var(--color-text-muted); margin: var(--space-1) 0; }
+.timings__note, .nearby__note {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+}
+
+.deity-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+.deity-card {
+  background: var(--color-bg);
+  border: 1px solid rgba(201, 154, 46, 0.5);
+  border-radius: var(--radius-card);
+  padding: var(--space-3);
+}
+.deity-card h3 { margin: var(--space-2) 0 0; }
+.deity-card__tamil { margin: 0; color: var(--color-text-muted); }
+.deity-card__name { margin: 0; font-weight: 600; }
+.deity-card__form { margin: 0; font-size: var(--font-size-sm); color: var(--color-text-muted); }
+.deity-photo {
+  margin: 0;
+  border-top: 3px solid var(--color-accent);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.deity-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.deity-photo--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(160deg, #fdf3e0, #f3e2c4);
+  color: var(--color-accent);
+  font-size: var(--font-size-3xl);
+}
+.deity-photo__credit {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  padding: var(--space-1) var(--space-2);
+}
+
+.pasuram {
+  margin: var(--space-3) 0 0;
+  padding: var(--space-3);
+  background: var(--color-bg);
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--radius-card);
+}
+.pasuram__tamil { font-size: var(--font-size-lg); margin: 0 0 var(--space-2); }
+.pasuram__transliteration { color: var(--color-text-muted); margin: 0 0 var(--space-2); }
+.pasuram__meaning { margin: 0 0 var(--space-2); }
+.pasuram__attribution { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+.pasuram__listen { margin-left: var(--space-2); }
+
+.puranam { white-space: pre-line; }
+.nearby__radius { font-size: var(--font-size-sm); color: var(--color-text-muted); font-family: var(--font-body); }
+.nearby__list { margin: var(--space-2) 0; padding-left: var(--space-4); }
+.nearby__km { color: var(--color-text-muted); }
+.distance { margin-top: var(--space-3); display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; }
+.distance__result { margin: 0; font-weight: 600; }
+.distance__error { margin: 0; color: var(--color-danger); font-size: var(--font-size-sm); }
+.detail__pair { margin: var(--space-2) 0 0; }
+.detail__pair dt { font-weight: 700; color: var(--color-text-muted); }
+
+@media (min-width: 640px) {
+  .deity-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Print stylesheet (FR-70) */
+@media print {
+  .site-header, .site-footer, .page-actions, .distance, .detail__back { display: none; }
+  body { background: #fff; }
+  .detail__section { border: none; break-inside: avoid; }
+  .detail__head { justify-content: flex-start; }
+  h1 { font-size: 18pt; }
+}

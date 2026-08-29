@@ -64,15 +64,28 @@ describe('BrowsePage (UT-BRW-01..04)', () => {
   });
 });
 
-describe('KshetramDetailPage (UT-DTL-01..04)', () => {
-  it('renders all sections of the kshetram record', () => {
+describe('KshetramDetailPage (UT-DTL-01..04, V2 UT-DTL-03..13)', () => {
+  it('renders all V2 sections of the kshetram record', () => {
     renderAt('/kshetram/srirangam');
     expect(screen.getByRole('heading', { name: /srirangam/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /presiding deity/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /temple timings/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /presiding deities/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /mangalasasanam pasuram/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /sthala puranam/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /location/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /mangalasasanam/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /significance/i })).toBeInTheDocument();
-    expect(screen.getByText('Ranganatha')).toBeInTheDocument();
+    expect(screen.getAllByText(/Ranganathan/).length).toBeGreaterThan(0);
+  });
+
+  it('shows deity cards, timings and share/print actions', () => {
+    renderAt('/kshetram/srirangam');
+    expect(screen.getAllByText('Moolavar').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Thaayar').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Urchavar').length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/06:15/).length).toBeGreaterThan(0);
+    expect(screen.getByRole('button', { name: /share/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /print/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /distance from me/i })).toBeInTheDocument();
   });
 
   it('renders a safe external map link', () => {
@@ -83,9 +96,33 @@ describe('KshetramDetailPage (UT-DTL-01..04)', () => {
     expect(mapLink).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
+  it('lists nearby desams within 50 km with links (FR-63)', () => {
+    renderAt('/kshetram/srirangam');
+    const nearby = screen.getByRole('heading', { name: /nearby divya desams/i });
+    expect(nearby).toBeInTheDocument();
+    const links = screen.getAllByRole('link', { name: /uthamar koil|uraiyur|thiruvellarai/i });
+    expect(links.length).toBeGreaterThan(0);
+    for (const link of links) expect(link).toHaveAttribute('href', expect.stringContaining('/kshetram/'));
+  });
+
+  it('shows the pasuram with attribution and listen link (FR-64/65)', () => {
+    renderAt('/kshetram/srirangam');
+    expect(screen.getByText(/பாயும் ஒளி விளக்கும்/)).toBeInTheDocument();
+    expect(screen.getByText(/Thiruppalliyezhuchchi 1/)).toBeInTheDocument();
+    const listen = screen.getByRole('link', { name: /listen/i });
+    expect(listen).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
   it('shows the pasuram count badge only when documented', () => {
     renderAt('/kshetram/srirangam');
     expect(screen.getByText(/247 pasurams/i)).toBeInTheDocument();
+  });
+
+  it('hides timings/nearby/distance for celestial desams', () => {
+    renderAt('/kshetram/paramapadam');
+    expect(screen.getByText(/celestial realm/i)).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /temple timings/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /distance from me/i })).not.toBeInTheDocument();
   });
 
   it('shows the not-found state for an unknown id', () => {

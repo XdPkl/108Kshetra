@@ -1,0 +1,103 @@
+/**
+ * Enrichment details — the Thirunangur eleven and Tiruvaali-Thirunagari.
+ * Shared legend: Shiva's cosmic dance at Thirunangur drew the Lord in eleven
+ * forms from the celestial ocean — hence the eleven adjacent Desams.
+ */
+export const TIRUNANGUR_DETAILS = {
+  'thiruvali-thirunagari': {
+    timings: { morning: ['08:00', '12:00'], evening: ['17:00', '19:30'], notes: 'Twin villages counted as one Desam' },
+    moolavar: { name: 'Lakshmi Narasimha (Thiruvaali) / Devaraja (Thirunagari)', tamilName: 'லட்சுமி நரசிம்மர்', form: 'Irundhan — seated' },
+    thaayar: { name: 'Amruthavalli Thaayar', tamilName: 'அமிர்தவல்லி' },
+    urchavar: null,
+    puranam: 'The pacified Lakshmi Narasimha of Thiruvaali and the Devaraja of Thirunagari — Mahabali is said to worship here as King of the Naga lords; the two villages\u2019 shrines are honoured together in every hymn.',
+    pasuram: { azhwarId: 'thirumangai', reference: 'Periya Thirumozhi 3-5', work: 'Periya Thirumozhi', meaning: 'The Azhwar sings the paired glory of Thiruvaali and Thirunagari where Narasimha rests in peace.' },
+  },
+  thirukavalambadi: {
+    timings: { morning: ['08:00', '11:30'], evening: ['17:00', '19:30'], notes: 'Thirunangur group' },
+    moolavar: { name: 'Gopala Krishna', tamilName: 'கோபாலகிருஷ்ணன்', form: 'Nindran — standing' },
+    thaayar: null,
+    urchavar: null,
+    puranam: 'The cowherd Krishna of the Kavalan-grove — one of the eleven Thirunangur forms that rose when Shiva danced.',
+    pasuram: { azhwarId: 'thirumangai', reference: 'Periya Thirumozhi 4-6', work: 'Periya Thirumozhi', meaning: 'The cowherd lord of Kavalambadi whose flute still calls the devotee.' },
+  },
+  'arimeya-vinnagaram': {
+    timings: { morning: ['08:00', '11:30'], evening: ['17:00', '19:30'], notes: 'Thirunangur group' },
+    moolavar: { name: 'Kudamudakoothan', tamilName: 'குடமுடக்கூத்தன்', form: 'Irundhan — seated' },
+    thaayar: null,
+    urchavar: null,
+    puranam: 'When Shiva danced with the pot, the Lord appeared here as Kudamudakoothan — the pot-dancer — in his seat at Arimeya Vinnagaram.',
+    pasuram: { azhwarId: 'thirumangai', reference: 'Periya Thirumozhi 3-8', work: 'Periya Thirumozhi', meaning: 'The pot-dance lord of Arimeya Vinnagaram amid the Thirunangur eleven.' },
+  },
+  vanpurushothamam: {
+    timings: { morning: ['08:00', '11:30'], evening: ['17:00', '19:30'], notes: 'Thirunangur group' },
+    moolavar: { name: 'Purushothaman', tamilName: 'புருஷோத்தமன்', form: 'Nindran — standing' },
+    thaayar: null,
+    urchavar: null,
+    puranam: 'The supreme Purusha of the Thirunangur grove — worshipped as the first among beings at Vanpurushothamam.',
+    pasuram: { azhwarId: 'thirumangai', reference: 'Periya Thirumozhi 4-2', work: 'Periya Thirumozhi', meaning: 'The primal Purusha of Thiruvanpurushothamam who precedes all creation.' },
+  },
+  semponseikoil: {
+    timings: { morning: ['08:00', '11:30'], evening: ['17:00', '19:30'], notes: 'Thirunangur group' },
+    moolavar: { name: 'Perarulaalan', tamilName: 'பேரருளாளன்', form: 'Nindran — standing' },
+    thaayar: null,
+    urchavar: null,
+    puranam: 'Rama is said to have worshipped here with gold for Jatayu\u2019s rites — the golden (sempon) shrine of Perarulaalan, the great-graceful one.',
+    pasuram: { azhwarId: 'thirumangai', reference: 'Periya Thirumozhi 4-3', work: 'Periya Thirumozhi', meaning: 'The great-graceful Lord of Semponseikoil who crowns the humblest offering.' },
+  },
+  manimadakoil: {
+    timings: { morning: ['08:00', '11:30'], evening: ['17:00', '19:30'], notes: 'Thirunangur group' },
+    moolavar: { name: 'Narayanan', tamilName: 'நாராயணன்', form: 'Irundhan — seated' },
+    thaayar: null,
+    urchavar: null,
+    puranam: 'The jewel-pavilion (mani madam) temple where the seated Lord grants audience to the Thirunangur devotee as a king to his court.',
+    pasuram: { azhwarId: 'thirumangai', reference: 'Periya Thirumozhi 3-8', work: 'Periya Thirumozhi', meaning: 'The seated king of Manimadakoil who receives the devotee as his own.' },
+  },
+  'vaikunta-vinnagaram': {
+    timings: { morning: ['08:00', '11:30'], evening: ['17:00', '19:30'], notes: 'Thirunangur group; Garuda seva festival' },
+    moolavar: { name: 'Vaikuntanathan', tamilName: 'வைகுந்தநாதன்', form: 'Nindran — standing' },
+    thaayar: null,
+    urchavar: null,
+    puranam: 'Vaikunta on earth among the Thirunangur eleven — all eleven deities ride together in the famed Garuda seva festival that draws the delta\u2019s faithful.',
+    pasuram: { azhwarId: 'thirumangai', reference: 'Periya Thirumozhi 3-9', work: 'Periya Thirumozhi', meaning: 'The Vaikuntanathan of Thirunangur who brings heaven to the Kaveri\u2019s sands.' },
+  },
+  devanartogai: {
+    timings: { morning: ['08:00', '11:30'], evening: ['17:00', '19:30'], notes: 'Thirunangur group' },
+    moolavar: { name: 'Deivanayagan', tamilName: 'தெய்வநாயகன்', form: 'Nindran — standing' },
+    thaayar: null,
+    urchavar: null,
+    puranam: 'Where the assembled (thogai) Devas worshipped — Deivanayagan, leader of the celestial host, among the eleven of Thirunangur.',
+    pasuram: { azhwarId: 'thirumangai', reference: 'Periya Thirumozhi 4-1', work: 'Periya Thirumozhi', meaning: 'The lord of the assembled Devas at Thirudevanartogai.' },
+  },
+  thetriyambalam: {
+    timings: { morning: ['08:00', '11:30'], evening: ['17:00', '19:30'], notes: 'Thirunangur group' },
+    moolavar: { name: 'Seganmaal Ranganatha', tamilName: 'செங்காமல் ரங்கநாதன்', form: 'Kidandan — reclining' },
+    thaayar: null,
+    urchavar: null,
+    puranam: 'The red-hued (segnmaal) Ranganatha who reclines eternally at Thiruthetriyambalam — the shrine of vows within the Thirunangur ring.',
+    pasuram: { azhwarId: 'thirumangai', reference: 'Periya Thirumozhi 4-4', work: 'Periya Thirumozhi', meaning: 'The reclining red-hued Lord of Thetriyambalam who never abandons his vow to the devotee.' },
+  },
+  manikkoodam: {
+    timings: { morning: ['08:00', '11:30'], evening: ['17:00', '19:30'], notes: 'Thirunangur group' },
+    moolavar: { name: 'Varadharajan', tamilName: 'வரதராஜன்', form: 'Nindran — standing' },
+    thaayar: null,
+    urchavar: null,
+    puranam: 'The boon-giver of the jewel-court (mani koodam) — Varadharajan among the Thirunangur eleven.',
+    pasuram: { azhwarId: 'thirumangai', reference: 'Periya Thirumozhi 4-5', work: 'Periya Thirumozhi', meaning: 'The boon-giving Varadharaja of Manikkoodam.' },
+  },
+  vellakulam: {
+    timings: { morning: ['08:00', '11:30'], evening: ['17:00', '19:30'], notes: 'Annan Kovil — "elder brother of Venkatam"' },
+    moolavar: { name: 'Srinivasan (Annan)', tamilName: 'அண்ணன்', form: 'Nindran — standing' },
+    thaayar: null,
+    urchavar: null,
+    puranam: 'The white-tank shrine honoured as the elder brother (annan) of Tirupati Srinivasa — worshipping here is held to bear the fruit of the Seven Hills.',
+    pasuram: { azhwarId: 'thirumangai', reference: 'Periya Thirumozhi 4-7', work: 'Periya Thirumozhi', meaning: 'The elder-brother Srinivasa of Vellakulam, equal to Venkatam\u2019s Lord.' },
+  },
+  parthanpalli: {
+    timings: { morning: ['08:00', '11:30'], evening: ['17:00', '19:30'], notes: 'Thirunangur group' },
+    moolavar: { name: 'Thamaraiyal Kelvan', tamilName: 'தாமரையாள் கேள்வன்', form: 'Nindran — standing' },
+    thaayar: null,
+    urchavar: null,
+    puranam: 'Arjuna (Parthan) worshipped here after the war\u2019s grief; the Lord who belongs to the lotus-eyed (thamaraiyal kelvan) received his offering at Parthanpalli.',
+    pasuram: { azhwarId: 'poigai', reference: 'Mudhal Thiruvandadi 67', work: 'Mudhal Thiruvandadi', meaning: 'Poigai Azhwar\u2019s verse for the lotus-eyed one\u2019s lord at Parthanpalli.' },
+  },
+};
