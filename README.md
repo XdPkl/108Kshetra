@@ -7,6 +7,8 @@ Nalayira Divya Prabandham.
 Built with React + Vite, styled in a traditional temple theme, fully tested
 (unit + E2E) and delivered through a classic ALM process.
 
+**Live site:** https://xdpkl.github.io/108Kshetra/
+
 ## Quick start
 
 ```bash
