@@ -1,0 +1,240 @@
+/*
+ * Layout and component styles (UXD-108K-005 §3–4).
+ */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.app-main { flex: 1; width: 100%; }
+
+.page {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+.page__lead { color: var(--color-text-muted); }
+
+/* Header */
+.site-header {
+  border-bottom: 3px solid var(--color-accent);
+  background: var(--color-surface);
+}
+.site-header__inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-2) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.site-header__brand {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-decoration: none;
+}
+.site-nav ul {
+  display: flex;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.site-nav__link {
+  text-decoration: none;
+  color: var(--color-text);
+  padding: var(--space-1) var(--space-2);
+}
+.site-nav__link--active {
+  color: var(--color-primary);
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-accent);
+}
+
+/* Footer */
+.site-footer {
+  background: var(--color-primary-dark);
+  color: var(--color-bg);
+  text-align: center;
+  padding: var(--space-3);
+  font-size: var(--font-size-sm);
+}
+.site-footer p { margin: var(--space-1) 0; }
+
+/* Hero */
+.hero { text-align: center; padding: var(--space-6) var(--space-3); }
+.hero__ornament { color: var(--color-accent); letter-spacing: 0.5em; }
+.hero h1 { font-size: var(--font-size-3xl); margin: var(--space-2) 0; }
+.hero__intro {
+  max-width: 42rem;
+  margin: 0 auto var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+}
+.hero__actions {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Stat band */
+.stat-band {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  padding: var(--space-4);
+  background: rgba(201, 154, 46, 0.12);
+  border-top: 1px solid var(--color-accent);
+  border-bottom: 1px solid var(--color-accent);
+}
+.stat-band__item { text-align: center; }
+.stat-band__value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+.stat-band__label { color: var(--color-text-muted); }
+
+/* Card grid + kshetram card */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+.kshetram-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(201, 154, 46, 0.5);
+  border-top: 3px solid var(--color-accent);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.kshetram-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 14px rgba(58, 42, 30, 0.16);
+}
+.kshetram-card__link {
+  display: block;
+  padding: var(--space-3);
+  color: inherit;
+  text-decoration: none;
+}
+.kshetram-card__tamil { margin: 0; color: var(--color-text-muted); }
+.kshetram-card__name { margin: var(--space-1) 0; font-size: var(--font-size-xl); }
+.kshetram-card__place { margin: 0; font-size: var(--font-size-sm); color: var(--color-text-muted); }
+.kshetram-card__badges {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-top: var(--space-2);
+}
+
+/* Search & filter bar */
+.search-filter-bar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid rgba(201, 154, 46, 0.5);
+  border-radius: var(--radius-card);
+  padding: var(--space-3);
+  margin: var(--space-3) 0;
+}
+.search-filter-bar__search input,
+.search-filter-bar__select select {
+  width: 100%;
+  padding: var(--space-2);
+  border: 1px solid var(--color-text-muted);
+  border-radius: var(--radius-card);
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+.search-filter-bar label {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+.result-count { color: var(--color-text-muted); }
+
+/* Empty state */
+.empty-state { text-align: center; padding: var(--space-6) var(--space-3); }
+.empty-state__title { color: var(--color-danger); }
+
+/* Detail page */
+.detail__back { margin-top: 0; }
+.detail__tamil { color: var(--color-text-muted); margin: 0; font-size: var(--font-size-lg); }
+.detail__badges {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin: var(--space-2) 0 var(--space-4);
+}
+.detail__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+.detail__section {
+  background: var(--color-surface);
+  border: 1px solid rgba(201, 154, 46, 0.5);
+  border-top: 3px solid var(--color-accent);
+  border-radius: var(--radius-card);
+  padding: var(--space-3);
+}
+.detail__section h2 { margin-top: 0; }
+.detail__section dt { font-weight: 700; color: var(--color-text-muted); margin-top: var(--space-2); }
+.detail__section dd { margin: 0; }
+.detail__map-link { display: inline-block; margin-top: var(--space-3); }
+.detail__map-note { color: var(--color-text-muted); font-style: italic; }
+.detail__azhwar-list { margin: var(--space-2) 0 0; padding-left: var(--space-4); }
+
+/* Azhwars */
+.azhwar-teaser { text-align: center; padding: var(--space-5) 0; }
+.azhwar-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+.azhwar-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(201, 154, 46, 0.5);
+  border-top: 3px solid var(--color-accent);
+  border-radius: var(--radius-card);
+  padding: var(--space-3);
+}
+.azhwar-card__head span { color: var(--color-text-muted); }
+.azhwar-card__head h2 { display: inline; margin-left: var(--space-2); }
+.azhwar-card__meta { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+.azhwar-card__work { color: var(--color-text-muted); }
+.azhwar-card__desams {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: var(--space-2);
+}
+
+/* Responsive (mobile-first) */
+@media (min-width: 640px) {
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
+  .azhwar-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .card-grid { grid-template-columns: repeat(4, 1fr); }
+  .azhwar-list { grid-template-columns: repeat(3, 1fr); }
+  .detail__grid { grid-template-columns: repeat(2, 1fr); }
+  .search-filter-bar { grid-template-columns: 2fr repeat(4, 1fr) auto; align-items: end; }
+}

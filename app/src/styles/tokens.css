@@ -1,0 +1,38 @@
+/*
+ * Design tokens — the single source of truth for theme values (UXD-108K-005 §2).
+ */
+:root {
+  /* Color palette — traditional temple theme */
+  --color-primary: #b34700;        /* deep saffron */
+  --color-primary-dark: #7a2e00;
+  --color-accent: #c99a2e;         /* temple gold (decorative only) */
+  --color-bg: #fdf8f0;             /* warm cream */
+  --color-surface: #ffffff;
+  --color-text: #3a2a1e;           /* deep brown */
+  --color-text-muted: #6b5a4a;
+  --color-danger: #a32020;
+
+  /* Typography */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Mukta Malar", "Segoe UI", Arial, sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 3rem;
+
+  /* Spacing scale (rem) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+
+  /* Shape & elevation */
+  --radius-card: 10px;
+  --radius-pill: 999px;
+  --shadow-card: 0 2px 8px rgba(58, 42, 30, 0.1);
+  --content-max: 1200px;
+}

@@ -1,0 +1,120 @@
+/**
+ * Page-level component tests rendered with a MemoryRouter.
+ */
+import { describe, it, expect } from 'vitest';
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
+import App from '../../App.jsx';
+
+// Render helper mounting the full App at a given URL.
+function renderAt(url) {
+  return render(<MemoryRouter initialEntries={[url]}><App /></MemoryRouter>);
+}
+
+describe('HomePage (UT-HOME-01..03)', () => {
+  it('shows title, intro, stats and featured kshetrams', () => {
+    renderAt('/');
+    expect(screen.getByRole('heading', { name: /108 divya kshetrams/i })).toBeInTheDocument();
+    expect(screen.getAllByText(/Nalayira Divya Prabandham/i).length).toBeGreaterThan(0);
+    expect(screen.getByText('108')).toBeInTheDocument();
+    expect(screen.getByText('12')).toBeInTheDocument();
+    expect(screen.getByText('4,000+')).toBeInTheDocument();
+    // 4 featured kshetram links
+    expect(screen.getAllByRole('link', { name: /srirangam|tirumala|kanchipuram|srivilliputhur/i }).length)
+      .toBeGreaterThanOrEqual(4);
+  });
+
+  it('offers navigation to Browse and Azhwars', () => {
+    renderAt('/');
+    expect(screen.getByRole('link', { name: /explore the 108/i })).toHaveAttribute('href', '/kshetrams');
+    expect(screen.getAllByRole('link', { name: /meet the azhwars/i }).length).toBeGreaterThan(0);
+  });
+});
+
+describe('BrowsePage (UT-BRW-01..04)', () => {
+  it('shows all 108 kshetrams with the result count', () => {
+    renderAt('/kshetrams');
+    expect(screen.getByText(/showing 108 of 108 kshetrams/i)).toBeInTheDocument();
+    expect(screen.getAllByRole('article')).toHaveLength(108);
+  });
+
+  it('narrows results as the user types and updates the count (UT-BRW-02)', async () => {
+    const user = userEvent.setup();
+    renderAt('/kshetrams');
+    await user.type(screen.getByLabelText(/search kshetrams/i), 'kanchipuram');
+    const countText = await screen.findByText(/showing \d+ of 108 kshetrams/i);
+    expect(countText.textContent).not.toMatch(/showing 108/);
+    expect(screen.getAllByRole('article').length).toBeGreaterThan(0);
+  });
+
+  it('shows the empty state and restores all 108 after reset (UT-BRW-03/04)', async () => {
+    const user = userEvent.setup();
+    renderAt('/kshetrams');
+    await user.type(screen.getByLabelText(/search kshetrams/i), 'atlantis');
+    expect(await screen.findByText(/no kshetrams found/i)).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: /clear all filters/i }));
+    expect(await screen.findByText(/showing 108 of 108 kshetrams/i)).toBeInTheDocument();
+  });
+
+  it('filters by azhwar via the ?azhwar= query param (FR-41)', async () => {
+    renderAt('/kshetrams?azhwar=andal');
+    expect((await screen.findAllByRole('article')).length).toBeGreaterThan(0);
+    expect(screen.queryByText(/showing 108 of 108 kshetrams/i)).not.toBeInTheDocument();
+  });
+});
+
+describe('KshetramDetailPage (UT-DTL-01..04)', () => {
+  it('renders all sections of the kshetram record', () => {
+    renderAt('/kshetram/srirangam');
+    expect(screen.getByRole('heading', { name: /srirangam/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /presiding deity/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /location/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /mangalasasanam/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /significance/i })).toBeInTheDocument();
+    expect(screen.getByText('Ranganatha')).toBeInTheDocument();
+  });
+
+  it('renders a safe external map link', () => {
+    renderAt('/kshetram/srirangam');
+    const mapLink = screen.getByRole('link', { name: /view on google maps/i });
+    expect(mapLink).toHaveAttribute('href', expect.stringContaining('https://www.google.com/maps/search/'));
+    expect(mapLink).toHaveAttribute('target', '_blank');
+    expect(mapLink).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
+  it('shows the pasuram count badge only when documented', () => {
+    renderAt('/kshetram/srirangam');
+    expect(screen.getByText(/247 pasurams/i)).toBeInTheDocument();
+  });
+
+  it('shows the not-found state for an unknown id', () => {
+    renderAt('/kshetram/atlantis');
+    expect(screen.getByText(/this kshetram was not found/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /back to browse/i })).toHaveAttribute('href', '/kshetrams');
+  });
+});
+
+describe('AzhwarsPage (UT-AZW-01/02)', () => {
+  it('lists all 12 azhwars in order with metadata and desam counts', () => {
+    renderAt('/azhwars');
+    const main = screen.getByRole('main');
+    expect(within(main).getAllByRole('heading', { level: 2 })).toHaveLength(12);
+    expect(screen.getByText('Nammazhwar')).toBeInTheDocument();
+    expect(screen.getAllByText(/desams/i).length).toBeGreaterThan(0);
+  });
+
+  it('links desam chips to detail pages and the pre-filtered browse', () => {
+    renderAt('/azhwars');
+    expect(screen.getAllByRole('link', { name: /\+\d+ more/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole('link', { name: /\+\d+ more/i })[0])
+      .toHaveAttribute('href', expect.stringContaining('/kshetrams?azhwar='));
+  });
+});
+
+describe('unknown routes (UT-NAV)', () => {
+  it('shows the not-found page', () => {
+    renderAt('/nowhere');
+    expect(screen.getByText(/page not found/i)).toBeInTheDocument();
+  });
+});

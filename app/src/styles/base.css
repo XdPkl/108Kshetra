@@ -1,0 +1,76 @@
+/*
+ * Base element styles and shared primitives (buttons, badges, headings).
+ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--color-primary-dark);
+  line-height: 1.2;
+}
+
+h1 { font-size: var(--font-size-2xl); }
+
+a { color: var(--color-primary); }
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.btn {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-card);
+  border: 2px solid var(--color-primary);
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-bg);
+}
+.btn--primary:hover { background: var(--color-primary-dark); }
+.btn--outline {
+  background: transparent;
+  color: var(--color-primary);
+}
+.btn--outline:hover { background: rgba(179, 71, 0, 0.08); }
+
+.badge {
+  display: inline-block;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-pill);
+  background: rgba(201, 154, 46, 0.1);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  border: 1px solid var(--color-accent);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+}
+.chip--more { font-weight: 600; }
