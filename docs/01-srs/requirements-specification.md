@@ -246,3 +246,12 @@ The product is accepted when:
 ---
 
 *End of Document — SRS-108K-001 v1.0*
+
+## 3.8 V2 confirmed additions (2026-08-29 PO answers)
+
+| ID | Requirement | Priority |
+|---|---|---|
+| FR-69 | Detail pages shall offer a Share action using the Web Share API with a clipboard fallback and confirmation. | S |
+| FR-70 | Detail pages shall offer a Print action backed by a dedicated print stylesheet (nav/footer/controls hidden, sections expanded) suitable for PDF export. | S |
+
+Product Owner decisions recorded: distance = straight-line (Haversine) plus Google Maps directions link; pasuram audio = curated external links; photos = Wikimedia-sourced where available with decorative placeholders otherwise.

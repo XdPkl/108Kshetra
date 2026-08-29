@@ -218,3 +218,13 @@ Goal: transform the detail page into a rich devotional reference — deities wit
 ### Definition of Done addendum
 
 Photos carry attribution per their licence; audio links point to public/authorised sources only; geolocation is opt-in per user action (never requested on page load).
+
+### EP-DTL2 addendum — confirmed 2026-08-29 (Product Owner answers)
+
+**US-DTL-12 — Share the page** (2 pts, Priority 2) — *FR-69*
+> As a visitor, I want to share a kshetram page so that I can send it to family and trip companions.
+- **Given** a detail page, **when** I tap Share, **then** the native share sheet appears where supported (navigator.share), with a copy-to-clipboard fallback and confirmation.
+
+**US-DTL-13 — Print / PDF** (2 pts, Priority 2) — *FR-70*
+> As a pilgrim, I want a print-friendly page so that I can carry the kshetram details.
+- **Given** a detail page, **when** I choose Print, **then** a dedicated print stylesheet renders a clean document (no nav/footer/buttons, all sections expanded) suitable for Save-as-PDF.
