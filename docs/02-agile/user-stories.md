@@ -164,3 +164,57 @@
 ## 5. JIRA Synchronization Record
 
 Synced 2026-08-29 to https://dtrprasanna.atlassian.net project **DTRPR108K** (33 issues: 7 epics DTRPR108K-1..7, 26 stories DTRPR108K-8..26, each linked to its epic with acceptance criteria in the description).
+
+---
+
+## Version 1.1 — Detail Enrichment Backlog (V2)
+
+### Revision History (addendum)
+
+| Version | Date | Author | Description |
+|---|---|---|---|
+| 1.1 | 2026-08-29 | Dev Team | Added Epic EP-DTL2 (Detail Enrichment) with stories US-DTL-03..11 per Product Owner request |
+
+### Epic EP-DTL2 — Kshetram Detail Enrichment
+
+Goal: transform the detail page into a rich devotional reference — deities with photos, timings, geography, pasurams with audio, and puranic background.
+
+**US-DTL-03 — Moolavar & Thaayar details** (3 pts, Priority 1) — *FR-60*
+> As a devotee, I want the Moolavar (main deity) and Thaayar (consort) details with photos so that I can understand the temple's primary worship.
+- **Given** a kshetram detail page, **when** it renders, **then** it shows the Moolavar (name in English and Tamil, posture/form) and Thaayar (name) sections, each with a photo or an explicit decorative placeholder.
+
+**US-DTL-04 — Urchavar & Urchavar Thaayar details** (3 pts, Priority 1) — *FR-61*
+> As a devotee, I want the Urchavar (processional deity) and Urchavar Thaayar details with photos so that I know the festival forms worshipped.
+- **Given** a kshetram detail page, **when** it renders, **then** it shows the Urchavar (name, form) and Urchavar Thaayar sections with photos or placeholders.
+
+**US-DTL-05 — Temple timings** (2 pts, Priority 1) — *FR-62*
+> As a pilgrim, I want the temple open/close timings so that I can plan my visit.
+- **Given** a kshetram detail page, **when** it renders, **then** morning and evening open/close times are shown with any special timing notes (e.g., festival closures). Celestial desams display a "no earthly timings" note instead.
+
+**US-DTL-06 — Nearby Divya Desams** (5 pts, Priority 1) — *FR-63*
+> As a pilgrim, I want to see other Divya Desams within 50 km so that I can plan a combined trip.
+- **Given** a kshetram with coordinates, **when** its detail page renders, **then** all desams within a 50 km radius are listed as links to their detail pages, nearest first, with their distances. Desams without coordinates (celestial) show no nearby section.
+
+**US-DTL-07 — Mangalasasanam pasuram display** (5 pts, Priority 1) — *FR-64*
+> As a student of the Prabandham, I want to read a representative pasuram sung at this kshetram so that I can experience the Azhwar's hymn.
+- **Given** a kshetram detail page, **when** it renders, **then** a representative Mangalasasanam pasuram is shown in Tamil script with transliteration and English meaning, attributed to its Azhwar with its Prabandham reference.
+
+**US-DTL-08 — Pasuram audio** (3 pts, Priority 2) — *FR-65*
+> As a devotee, I want to hear the pasuram recited so that I can learn it by listening.
+- **Given** a pasuram with a known public recording, **when** the detail page renders, **then** a play control or an external link to the recording is available; where none is available, no broken UI appears.
+
+**US-DTL-09 — Sthala Puranam** (3 pts, Priority 1) — *FR-66*
+> As a visitor, I want the puranic/itihasic background of the temple so that I understand its legend.
+- **Given** a kshetram detail page, **when** it renders, **then** a Sthala Puranam section presents 1–3 paragraphs of the temple's traditional legend.
+
+**US-DTL-10 — Distance from my location** (3 pts, Priority 1) — *FR-67*
+> As a pilgrim, I want to see how far a temple is from where I am so that I can decide whether to visit.
+- **Given** a earthly kshetram detail page, **when** I activate "Distance from me", **then** the browser geolocation is requested (with permission explanation) and the straight-line distance in km is shown; denial or unsupported devices show a graceful message. Celestial desams do not offer the feature.
+
+**US-DTL-11 — Enriched dataset & integrity** (8 pts, Priority 1) — *FR-68*
+> As the team, we want deity, timing, coordinate, puranam, pasuram and media data for all 108 kshetrams so that the enriched pages are fully data-driven.
+- **Given** the datasets, **when** data-integrity tests run, **then** every earthly kshetram has coordinates within valid bounds, deity fields, timings, and at least one pasuram entry; photo credits and audio licences are recorded; the 108-record invariants still hold.
+
+### Definition of Done addendum
+
+Photos carry attribution per their licence; audio links point to public/authorised sources only; geolocation is opt-in per user action (never requested on page load).

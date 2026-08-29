@@ -183,3 +183,75 @@ Header: cream surface, gold bottom border; site title in display serif with a sm
 ---
 
 *End of Document — UXD-108K-005 v1.0*
+
+---
+
+## Version 1.1 — Kshetram Detail Page V2 (UXD addendum)
+
+### 8. Detail Page V2 — Screen Specification (showcase)
+
+The detail page is restructured into a hero band, a two-column deity gallery,
+and stacked informational sections. Mobile stacks all sections vertically.
+
+```
+┌────────────────────────────────────────────────────────────────────┐
+│ ← Back to all kshetrams          [📍 Distance from me]  (button)   │
+│ திருவரங்கம்   (Tamil, muted)                                        │
+│ Srirangam — Sri Ranganathaswamy Temple (h1)                        │
+│ [Chola Nadu] [Kidandan — Reclining] [247 pasurams]                 │
+│ ┌──────────────────────────────────────────────────────────────┐   │
+│ │ 🕉 OM 06:00 – 12:00 · 15:30 – 21:00   (timing notes ↗)       │   │
+│ └──────────────────────────────────────────────────────────────┘   │
+├────────────────────────────────────────────────────────────────────┤
+│ PRESIDING DEITIES (h2)                                             │
+│ ┌────────────────────────────┐  ┌────────────────────────────┐     │
+│ │ [photo: MOOLAVAR]          │  │ [photo: THAAYAR]           │     │
+│ │ Moolavar (h3)              │  │ Thaayar (h3)               │     │
+│ │ நம்பெருமாள் — Ranganathan   │  │ திருவரங்கநாச்சியார் —       │     │
+│ │ Kidantha (reclining)       │  │ Ranganayaki                │     │
+│ └────────────────────────────┘  └────────────────────────────┘     │
+│ ┌────────────────────────────┐  ┌────────────────────────────┐     │
+│ │ [photo: URCHAVAR]          │  │ [photo: URCHAVAR THAAYAR]  │     │
+│ │ Urchavar (h3)              │  │ Urchavar Thaayar (h3)      │     │
+│ │ நம்பெருமாள் — Namperumal    │  │ (name if distinct)         │     │
+│ └────────────────────────────┘  └────────────────────────────┘     │
+│ photo credit line (small, muted)                                   │
+├────────────────────────────────────────────────────────────────────┤
+│ MANGALASASANAM PASURAM (h2)              [▶ Listen] (if available) │
+│ ┌──────────────────────────────────────────────────────────────┐   │
+│ │ பாயும் ஒளி விளக்கும் …  (Tamil, display serif)                │   │
+│ │ Transliteration (italic, muted)                               │   │
+│ │ English meaning (body)                                        │   │
+│ │ — Thondaradippodi Azhwar, Thiruppalliyezhuchchi 1             │   │
+│ └──────────────────────────────────────────────────────────────┘   │
+├────────────────────────────────────────────────────────────────────┤
+│ STHALA PURANAM (h2)                                                │
+│ 1–3 paragraphs of the traditional legend…                          │
+├────────────────────────────────────────────────────────────────────┤
+│ LOCATION (h2)                                                      │
+│ Srirangam, Trichy · Tamil Nadu   [View on Google Maps ↗]           │
+│ ┌──────────────────────────────────────────────────────────────┐   │
+│ │ NEARBY DIVYA DESAMS — within 50 km (h3)                      │   │
+│ │  • Uthamar Kovil — 5 km    • Thirukkandiyur — 6 km            │   │
+│ │  • Uraiyur — 7 km         • Thiruvellarai — 21 km            │   │
+│ │  (each links to its detail page; nearest first)              │   │
+│ └──────────────────────────────────────────────────────────────┘   │
+├────────────────────────────────────────────────────────────────────┤
+│ AZHWARS WHO GLORIFIED (h2): Periyazhwar · Andal · … (chips)        │
+└────────────────────────────────────────────────────────────────────┘
+```
+
+### 9. V2 Interaction & Edge States
+
+| Element | Behavior |
+|---|---|
+| Distance from me | Opt-in button; requests geolocation on click only; shows "You are ~X km away" (straight-line) or a permission-denied message; hidden for celestial desams |
+| Nearby desams | Computed at build time from coordinates (Haversine ≤ 50 km), nearest first, links + km labels; hidden when no coordinates |
+| Deity photos | `loading="lazy"`, fixed 4:3 crop, gold top-border motif; decorative SVG placeholder (shrine silhouette) when no licensed photo exists; credit line always visible when a photo is used |
+| Pasuram audio | ▶ button when an audio URL exists (HTML5 audio with controls); otherwise an external link chip "Listen ↗"; absent entirely when neither exists |
+| Celestial desams (2) | No timings, photos where not applicable, no location/nearby/distance — replaced by a short "beyond earthly geography" note |
+| Timings | Shown as two sessions (morning/evening) + free-text notes; no computed open-now status in V2 (avoids wrong info risk) |
+
+### 10. V2 Data Extensions (single source of truth in `src/data`)
+
+Each kshetram record gains: `location {lat,lng}`, `timings {morning:[open,close], evening:[open,close], notes}`, `moolavar {name, tamilName, form, photo?}`, `thaayar {name, tamilName, photo?}`, `urchavar {name, tamilName, form, photo?}`, `urchavarThaayar {name}`, `pasuram {azhwarId, reference, tamil, transliteration, meaning, audio?}`, `sthalaPuranam`. All optional media carry `credit`. Integrity tests extend accordingly (US-DTL-11).

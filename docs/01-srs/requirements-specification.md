@@ -22,6 +22,7 @@
 |---|---|---|---|
 | 0.1 | 2026-08-29 | Dev Team | Initial draft — purpose, scope, glossary |
 | 1.0 | 2026-08-29 | Dev Team | Baseline: full FR/NFR set, constraints, traceability matrix; approved for design |
+| 1.1 | 2026-08-29 | Dev Team | Added §3.7 Detail Enrichment (FR-60..68): deities with media, timings, nearby desams, pasuram display & audio, sthala puranam, geolocation distance |
 
 ### Approvals
 
@@ -166,6 +167,24 @@ Requirements are uniquely identified (FR-xx) with priority (M = Must, S = Should
 | FR-50 | The application shall provide a persistent header with the site identity and navigation to Home, Browse, and Azhwars. | M |
 | FR-51 | The application shall provide a footer with content attribution and a disclaimer that compiled data is provided in good faith. | S |
 | FR-52 | The active navigation item shall be visually indicated. | S |
+
+---
+
+## 3.7 Detail Enrichment (V2)
+
+| ID | Requirement | Priority |
+|---|---|---|
+| FR-60 | The detail page shall present the Moolavar (main deity) and Thaayar (consort) with name (English/Tamil), form/posture, and a photo or an explicit decorative placeholder. | M |
+| FR-61 | The detail page shall present the Urchavar (processional deity) and Urchavar Thaayar with names and photo/placeholder. | M |
+| FR-62 | The detail page shall display the temple's open/close timings (morning and evening sessions) with special notes; celestial desams shall show an explicit non-earthly note instead. | M |
+| FR-63 | For any kshetram with coordinates, the detail page shall list all other desams within 50 km (straight-line), nearest first, each linking to its detail page with the distance shown. | M |
+| FR-64 | The detail page shall display a representative Mangalasasanam pasuram in Tamil with transliteration and English meaning, attributed to its Azhwar and Prabandham reference. | M |
+| FR-65 | Where a publicly available recording exists, the pasuram section shall offer playback or an external link to it; no broken controls otherwise. | S |
+| FR-66 | The detail page shall present a Sthala Puranam section with the temple's traditional legend (1–3 paragraphs). | M |
+| FR-67 | The detail page shall offer an opt-in "Distance from me" action using browser geolocation and display the straight-line distance in km, with graceful handling of permission denial. | M |
+| FR-68 | The datasets shall extend to carry deity details, timings, coordinates, puranam text, pasuram entries and media credits for all 108 kshetrams, verified by data-integrity tests. | M |
+
+Media constraints: photos must carry attribution per their licence; audio must link to public/authorised sources; images lazy-load; geolocation is requested only on explicit user action.
 
 ---
 
