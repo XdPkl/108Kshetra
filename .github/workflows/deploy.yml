@@ -29,7 +29,10 @@ jobs:
         run: npm ci
       - name: Build for GitHub Pages
         working-directory: app
-        run: npm run build
+        run: |
+          npm run build
+          # SPA fallback: serve index.html for deep links (e.g. /kshetram/srirangam)
+          cp dist/index.html dist/404.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
