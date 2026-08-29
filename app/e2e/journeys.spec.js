@@ -6,7 +6,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Home page (TC-02, TC-03, TC-11)', () => {
   test('shows hero, stats, featured kshetrams and navigation', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('');
     await expect(page.getByRole('heading', { name: /108 divya kshetrams/i })).toBeVisible();
     await expect(page.getByText(/Nalayira Divya Prabandham/i).first()).toBeVisible();
     await expect(page.locator('.stat-band__value').first()).toHaveText('108');
@@ -19,13 +19,13 @@ test.describe('Home page (TC-02, TC-03, TC-11)', () => {
 
 test.describe('Browse (TC-04..TC-07)', () => {
   test('lists all 108 kshetrams with the result count', async ({ page }) => {
-    await page.goto('/kshetrams');
+    await page.goto('kshetrams');
     await expect(page.getByText(/showing 108 of 108 kshetrams/i)).toBeVisible();
     expect(await page.locator('.kshetram-card').count()).toBe(108);
   });
 
   test('search narrows results (TC-05)', async ({ page }) => {
-    await page.goto('/kshetrams');
+    await page.goto('kshetrams');
     await page.getByLabel(/search kshetrams/i).fill('kanchipuram');
     await expect(page.locator('.result-count')).not.toHaveText('Showing 108 of 108 kshetrams');
     const cards = page.locator('.kshetram-card');
@@ -33,13 +33,13 @@ test.describe('Browse (TC-04..TC-07)', () => {
   });
 
   test('state filter and combined search (TC-06)', async ({ page }) => {
-    await page.goto('/kshetrams');
+    await page.goto('kshetrams');
     await page.getByLabel(/^State$/i).selectOption('Kerala');
     await expect(page.getByText(/showing 11 of 108 kshetrams/i)).toBeVisible();
   });
 
   test('empty state and reset (TC-07)', async ({ page }) => {
-    await page.goto('/kshetrams');
+    await page.goto('kshetrams');
     await page.getByLabel(/search kshetrams/i).fill('atlantis');
     await expect(page.getByText(/no kshetrams found/i)).toBeVisible();
     await page.getByRole('button', { name: /clear all filters/i }).click();
@@ -49,7 +49,7 @@ test.describe('Browse (TC-04..TC-07)', () => {
 
 test.describe('Kshetram detail (TC-08, TC-09)', () => {
   test('shows all sections with a safe map link', async ({ page }) => {
-    await page.goto('/kshetram/srirangam');
+    await page.goto('kshetram/srirangam');
     await expect(page.getByRole('heading', { name: /srirangam/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /presiding deity/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /location/i })).toBeVisible();
@@ -61,7 +61,7 @@ test.describe('Kshetram detail (TC-08, TC-09)', () => {
   });
 
   test('unknown id shows the not-found state', async ({ page }) => {
-    await page.goto('/kshetram/unknown-id');
+    await page.goto('kshetram/unknown-id');
     await expect(page.getByText(/this kshetram was not found/i)).toBeVisible();
     await expect(page.getByRole('link', { name: /back to browse/i })).toBeVisible();
   });
@@ -69,7 +69,7 @@ test.describe('Kshetram detail (TC-08, TC-09)', () => {
 
 test.describe('Azhwars (TC-10)', () => {
   test('lists twelve azhwars and pre-filters browse from the more link', async ({ page }) => {
-    await page.goto('/azhwars');
+    await page.goto('azhwars');
     expect(await page.locator('.azhwar-card').count()).toBe(12);
     const more = page.locator('.chip--more').first();
     await more.click();
@@ -80,7 +80,7 @@ test.describe('Azhwars (TC-10)', () => {
 
 test.describe('Unknown routes (TC-12)', () => {
   test('renders the page-not-found state without crashing', async ({ page }) => {
-    await page.goto('/nonexistent');
+    await page.goto('nonexistent');
     await expect(page.getByText(/page not found/i)).toBeVisible();
   });
 });
