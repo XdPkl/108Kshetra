@@ -160,3 +160,7 @@
 ---
 
 *End of Document — USD-108K-002 v1.0*
+
+## 5. JIRA Synchronization Record
+
+Synced 2026-08-29 to https://dtrprasanna.atlassian.net project **DTRPR108K** (33 issues: 7 epics DTRPR108K-1..7, 26 stories DTRPR108K-8..26, each linked to its epic with acceptance criteria in the description).
