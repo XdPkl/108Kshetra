@@ -61,3 +61,35 @@
 ---
 
 *End of Document — TER-108K-009 v1.0*
+
+---
+
+## Version 1.1 — Detail Enrichment V2 Execution (2026-08-29)
+
+Scope: EP-DTL2 (US-DTL-03..13, FR-60..70).
+
+| Suite | Result | Detail |
+|---|---|---|
+| Static analysis (oxlint) | **Pass** | 0 errors, 0 warnings (58 files) |
+| Unit/Component | **Pass** | 8 suites, **78/78 tests** |
+| Coverage | **Pass** | 94.9% statements · 81.3% branches · 95.7% functions · 96.0% lines |
+| Build | **Pass** | gzip bundle within budget |
+| E2E (Playwright) | **Pass** | **12/12 journeys** (5 new V2 cases) |
+| CI + Deploy | **Pass** | Both pipelines green; live site verified |
+
+### Defect Log (V2)
+
+| ID | Severity | Phase Found | Description | Disposition |
+|---|---|---|---|---|
+| D-03 | Major | Unit (Gate A) | WikiThumb caused an infinite re-render (setState-in-effect reset) | **Fixed** — module-level cache + async-only state updates |
+| D-04 | Minor | Unit (Gate A) | Coverage gate failed at 69.4% branches before V2 component tests were added | **Fixed** — added detailV2.test.jsx (12 cases incl. geolocation mocks); branches 81.3% |
+| D-05 | Minor | Deployment | Deep links (e.g. /kshetram/srirangam) returned 404 on GitHub Pages | **Fixed** — 404.html SPA fallback in deploy workflow; content verified live (Pages still emits a 404 status code — known limitation of the platform, browser rendering is correct) |
+
+### Data caveats (recorded per PO transparency)
+
+- Coordinates are approximate (~0.01°) — sufficient for 50 km proximity and indicative straight-line distance.
+- Timings are indicative and labelled "please confirm with the temple office".
+- Pasuram Tamil text is quoted only where verified; other temples show reference + meaning + listen link.
+- Photos are sourced live from the Wikipedia REST API (CC BY-SA, credited); shrines without articles show a decorative placeholder.
+
+**Open Critical/Major defects: 0 → Gate C PASSED (V2).**
