@@ -24,6 +24,7 @@
 | Coverage | **Pass** | 98.4% statements · 82.7% branches · 98.4% functions · 99.0% lines (threshold 80%) |
 | Build | **Pass** | 298.8 kB raw / **89.6 kB gzipped** (< 300 kB budget) |
 | E2E (Playwright, Chromium) | **Pass** | **9/9 journeys** passed (TC-02..TC-12) |
+| CI (GitHub Actions, Linux) | **Pass** | Run 33238689903: lint ✓, unit+coverage ✓, build ✓, E2E ✓ |
 
 ## 2. E2E Case Results
 
@@ -46,6 +47,7 @@
 | ID | Severity | Phase Found | Description | Disposition |
 |---|---|---|---|---|
 | D-01 | Minor | System (E2E) | Three E2E assertions used substring regexes matching the constant "108", producing false failures/ambiguity | **Fixed** — assertions rewritten against exact count text; suite re-run green |
+| D-02 | Major | CI (first pipeline run) | Vitest on Linux discovered `e2e/journeys.spec.js` (Playwright spec) and the suite failed in CI though green locally | **Fixed** — Vitest `exclude: ['e2e/**']`; commit `104416f`; CI run 33238689903 fully green |
 | CR-01..CR-05 | Major/Minor | Code review | See CRR-108K-006 | **All closed** before system testing (Gate B) |
 
 **Open Critical/Major defects: 0** → **Gate C PASSED — approved for delivery.**
