@@ -93,3 +93,51 @@ Scope: EP-DTL2 (US-DTL-03..13, FR-60..70).
 - Photos are sourced live from the Wikipedia REST API (CC BY-SA, credited); shrines without articles show a decorative placeholder.
 
 **Open Critical/Major defects: 0 → Gate C PASSED (V2).**
+
+---
+
+## Version 1.2 — Release 1: Yatra Toolkit + Detail V3 Execution (2026-08-30)
+
+Scope: EP-YTRK, EP-YMAP, EP-YTRP, EP-DTL3, EP-ABT, EP-NAV (US-NAV-02), EP-ENG (US-ENG-08) — FR-71..87 (USD/SRS v1.2). Gated delivery: Gate 1 (requirements) and Gate 2 (wireframes) approved by the PO on 2026-08-30; Gate 3 (development + unit testing) approved 2026-08-30.
+
+| Suite | Result | Detail |
+|---|---|---|
+| Static analysis (oxlint) | **Pass** | 0 errors, 5 accepted warnings (92 files) — see CRR v1.1 CR-06 |
+| Unit/Component (Vitest + RTL) | **Pass** | 14 suites, **129/129 tests** (51 new for V3) |
+| Coverage (Gate A) | **Pass** | 91.0% statements · 82.4% branches · 90.0% functions · 93.1% lines (threshold 80%) |
+| Build (TC-QA-03) | **Pass** | Initial chunk **123.8 kB gzip**; Leaflet isolated in lazy chunks (44.9 kB gzip + MapPage 1.5 kB + MiniMapInner 0.4 kB) — NFR-01/NFR-11 |
+| Code review (Gate B) | **Closed** | CRR-108K-006 v1.1: CR-06..10 dispositioned |
+| E2E (Playwright, Chromium) | **Pass** | **17/17 journeys** — 12 legacy (TC-02..12, TC-08 updated to V3 headings) + 5 new (TC-13..17) |
+| CI (GitHub Actions, Linux) | **Pass** | Run 33291022994: lint/unit/build ✓, E2E ✓ |
+| Deploy + Live verification | **Pass** | Run 33291023015 success (commit `7dfac03`); live bundle hash `index-D5Y2N-Oz.js` matches local build; V3 features verified in the served bundle; deep-link SPA fallback still renders (Pages 404 status limitation persists, rendering correct) |
+
+### E2E Case Results (V3, e2e/yatra.spec.js)
+
+| Case | Description | Result |
+|---|---|---|
+| TC-13 | Visited flow: mark → progress banner → visit-status filter → confirm-guarded reset | Pass |
+| TC-14 | Map: plotted desams, region chip filtering, popup → detail page | Pass |
+| TC-15 | Trip: add 3 stops → nav count → region/route views → order route → share URL → restore from shared link | Pass |
+| TC-16 | Detail V3: shrine-template headings, word-by-word pasuram, "not yet documented" fallbacks | Pass |
+| TC-17 | Nav "Kshetra Tours", hero CTA "Azhwars", About page | Pass |
+
+### Defect Log (V3)
+
+| ID | Severity | Phase Found | Description | Disposition |
+|---|---|---|---|---|
+| D-06 | Minor | Unit (Gate A) | jsdom 30 environment lacks `localStorage`; store tests failed on first run | **Fixed** — in-memory localStorage polyfill in the shared test setup |
+| D-07 | Minor | E2E | Two legacy/new journey assertions referenced V2 heading names and a mis-keyed kshetram slug (`uthamar-koil`) | **Fixed** — journeys aligned with UXD v1.2 section names; slug corrected to `uthamar-kovil` |
+| CR-06..CR-10 | Minor | Code review (Gate B) | See CRR-108K-006 v1.1 | **All dispositioned** before system testing |
+
+**Open Critical/Major defects: 0 → Gate C PASSED (V3 R1).**
+
+### Known Limitations / Notes (V3)
+
+1. The shrine content template is fully populated only for Srirangam (the PO sample); all other kshetrams render existing V2 enrichment and show "Not yet documented yet." for absent template blocks — content backlog, extendable data-only (NFR-05).
+2. Mangalasasanam per-Azhwar count chips link to `/azhwars` until the R2 Azhwar detail routes (US-AZW-02) exist.
+3. GitHub Pages deep links continue to return an HTTP 404 status while rendering correctly (platform limitation, see D-05 in v1.1).
+4. Trip/map/visited state is browser-local only (FR-71) — clearing site data resets it; a disabled-storage browser degrades to session-only state.
+
+---
+
+*End of Addendum — TER-108K-009 v1.2*
