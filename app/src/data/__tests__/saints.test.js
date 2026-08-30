@@ -72,6 +72,12 @@ describe('Azhwar enrichment integrity (UT-AZW-04, FR-91)', () => {
     expect(poigai.visuals.iconography.posture).toBeTruthy();
     expect(poigai.sources.length).toBeGreaterThan(0);
   });
+
+  it('carries the original verse script for every Azhwar (35/35 dossier coverage)', () => {
+    for (const a of azhwars) {
+      expect(a.verse?.tamil, `${a.id} verse script`).toBeTruthy();
+    }
+  });
 });
 
 describe('Acharya dataset integrity (UT-ACH-01, FR-92)', () => {

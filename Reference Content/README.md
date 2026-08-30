@@ -9,7 +9,7 @@ and `app/src/data/acharyas.js`. They are **not** deployed — GitHub Pages serve
 | File | Batch | Personalities covered |
 |---|---|---|
 | `ALWAR B1.pdf` (+ `.docx` companion) | 1 — Early Azhwars | Poigai, Bhoothath, Pey, Thirumazhisai |
-| `Alwar B2.pdf` — **no DOCX companion** | 2 — Core Azhwars | Nammazhwar, Madhurakavi, Kulasekhara |
+| `Alwar B2.pdf` (+ `.docx` companion) | 2 — Core Azhwars | Nammazhwar, Madhurakavi, Kulasekhara |
 | `Alwar B3.pdf` (+ `.docx` companion) | 3 — Later Azhwars | Periyazhwar, Andal, Thondaradippodi, Thiruppaan, Thirumangai |
 | `Alwar B4.pdf` (+ `.docx` companion) | 4 — Foundational Lineage | Nathamuni, Uyyakondar, Manakkal Nambi, Yamunacharya, Periya Nambi, Thirukachi Nambigal |
 | `Alwar B5.pdf` (+ `.docx` companion) | 5 — Ramanuja Era | Ramanuja, Koorathazhwan, Mudaliyandan, Embar |
@@ -20,11 +20,10 @@ Totals: **35 personalities — 12 Azhwars + 23 Acharyas.** The DOCX companions a
 extraction source (clean text flow + verse original script); the PDFs carry the same content with
 extraction artifacts and a blank verse-script text layer.
 
-**Population status (2026-08-30):** all 35 personalities are populated on the site. Verse original
-script recovered for **32 of 35** — Nammazhwar, Madhurakavi and Kulasekhara (batch 2) await the
-missing `Alwar B2.docx`; their verse blocks show transliteration with an explicit original-script
-pending marker. Per the PO's correction, Poigai Azhwar's amsam is **Panchajanya** (the dossier's
-"Kaumodaki" stands corrected).
+**Population status (2026-08-30):** all 35 personalities are populated on the site, and the verse
+original script is present for **35 of 35** — the batch-2 DOCX (`Alwar B2.docx`, uploaded the same
+day) completed the set. Per the PO's correction, Poigai Azhwar's amsam is **Panchajanya** (the
+dossier's "Kaumodaki" stands corrected).
 
 ## Per-saint section template used in the dossiers
 
@@ -36,7 +35,7 @@ pending marker. Per the PO's correction, Poigai Azhwar's amsam is **Panchajanya*
 
 ## Known extraction caveats
 
-- **Verse original script:** the PDF text layer lost the Tamil script for every batch, and Devanagari is absent throughout (Sanskrit verses are given in Tamil script with visarga marks). The DOCX companions retain the script; only batch 2's DOCX is missing, so its three saints show an original-script pending marker on the site.
+- **Verse original script:** the PDF text layer lost the Tamil script for every batch, and Devanagari is absent throughout (Sanskrit verses are given in Tamil script with visarga marks). The DOCX companions retain the script for all seven batches.
 - The same three archival links repeat for every saint; there are no per-saint reference lists.
 - The PDFs contain mid-word line-break artifacts in table cells (e.g. "Thirukadalmall ai"); the DOCX companions were used as the primary extraction source precisely to avoid these.
 - Section 5.2 content is literal search-engine query strings (naming Velukkudi Krishnan, Karunakarachariar, Ananthapadmanabhachariar) — they populate the site's `visuals.videoSearches` chips.

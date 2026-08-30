@@ -703,6 +703,7 @@ export const AZHWAR_DETAILS = {
     ],
     verse: {
       work: "Tiruvaymoli, Decad 1.1, Pasuram 1 (Uyarvara Uyarsulum)",
+      tamil: "உயர்வர உயர்நலம் உடையவன் எவனவன்\nமயர்வற மதிநலம் அருளினன் எவனவன்\nஅயர்வறும் அமரர்கள் அதிபதி எவனவன்\nதுயரறு சுடரடி தொழுதெழு என்மனனே",
       wordMeanings: [
         ["Uyar nalam", "highest glorious attributes/goodness"],
         ["Udaiyavan", "He who possesses"],
@@ -824,6 +825,7 @@ export const AZHWAR_DETAILS = {
     associatedDesams: ["alwar-thirunagari"],
     verse: {
       work: "Kanninun Siruthambu, Pasuram 2 (Devu Matrariyen)",
+      tamil: "தேவு மற்றறியேன் குருகூர்நம்பி\nபாவின் இன்னிசை பாடித்திரிவேனே\nமேவி நன்மணம் மேல்வர நோக்கியே\nநாவினாய் உய்யநான் கண்டு கொண்டெனே",
       wordMeanings: [
         ["Matrariyen", "I know no other"],
         ["Kurugur Nambi", "The Lord/Leader of Thirukkurugur (Nammalwar)"],
@@ -946,6 +948,7 @@ export const AZHWAR_DETAILS = {
     associatedDesams: ["srirangam", "tirupati", "thirukkannapuram", "thiruvithuvakodu", "chidambaram", "ayodhya"],
     verse: {
       work: "Perumal Thirumozhi, Decad 4, Pasuram 9 (Padiyay Kidanthu)",
+      tamil: "செடியாய வல்வினைகள் தீர்க்கும் திருமாலே\nஅடியார்வ் என் உள்ளத்து அசையாது இருப்பானே\nபடியாய்க் கிடந்து உன் பவளவாய் காண்பேனே\nஅடியார் உம் தேவரும் அல்லாரும் ஏத்தும்\nவேங்கடத்து என் அப்பானே !",
       wordMeanings: [
         ["Valvinaigal", "strong past karmas/sins"],
         ["Theerkkum", "who eradicates/destroys"],
