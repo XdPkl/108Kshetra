@@ -117,7 +117,7 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page.getByText(/Sreesailesa-dayaapaatram/i)).toBeVisible();
 
     // Scaffolded acharya shows the visible pending marker
-    await page.goto('acharya/nathamuni');
+    await page.goto('acharya/yamunacharya');
     await expect(page.getByText(/\[Content pending — to be provided\]/i).first()).toBeVisible();
   });
 });

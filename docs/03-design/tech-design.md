@@ -20,6 +20,7 @@
 |---|---|---|---|
 | 0.1 | 2026-08-29 | Dev Team | Draft architecture and data model |
 | 1.0 | 2026-08-29 | Dev Team | Baseline: architecture, testing architecture, CI/CD, coding standards reference |
+| 1.1 | 2026-08-30 | Dev Team | Saint template v3.1 (dossier-aligned): optional `timeline`, headed `lifeHistory` blocks, `legend`, `birthplace.district`, `preservation`, `works[].language`, structured `visuals.iconography`, `verse.commentary`, original-script pending marker, `sources` on both saint pages; `Reference Content/` folder for PO dossiers |
 
 ---
 
@@ -141,7 +142,7 @@ A static Single-Page Application (SPA): React 18 + Vite, client-side routing via
  */
 ```
 
-**Azhwar record** (`src/data/azhwars.js`): `{ id, name, tamilName, period, pasuramCount, note, kshetramIds[] }` — chronologically ordered (Poigai, Bhoothath, Pey, Thirumazhisai, Nammazhwar, Madhurakavi, Kulasekhara, Periyazhwar, Andal, Thondaradippodi, Thiruppaan, Thirumangai).
+**Azhwar records** (`src/data/azhwars.js` base index `{ id, name, tamilName, period, pasuramCount, note, work }` + `src/data/azhwar-details.js` enrichment) — chronologically ordered (Poigai, Bhoothath, Pey, Thirumazhisai, Nammazhwar, Madhurakavi, Kulasekhara, Periyazhwar, Andal, Thondaradippodi, Thiruppaan, Thirumangai). Acharya records live in `src/data/acharyas.js` (parampara order). The saint template v3.1 enrichment shape (both saints, all fields optional) is documented in the dataset headers and UXD §21: `timeline [{when?, event}]`, `lifeHistory` items as string or `{heading, paragraphs[]}`, `legend {title?, text}`, `birthplace.district`, `preservation`, `works[].language`, `verse.commentary [{heading, text}]` with absent `verse.tamil` rendering an original-script pending marker, `visuals.iconography` as string or `{posture, mudras, garments, idol}`, and `sources[]` on both pages. PO dossiers are archived in `Reference Content/` (repo root, not deployed).
 
 **Data Access API** (`src/data/api.js`): `getAllKshetrams()`, `getKshetramById(id)`, `getFeaturedKshetrams()`, `getAllAzhwars()`, `getAzhwarById(id)`, plus filter-option builders `getFilterOptions()` (derived — adding data automatically extends filters).
 

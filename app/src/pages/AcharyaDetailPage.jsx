@@ -7,10 +7,13 @@ import { Link, useParams } from 'react-router-dom';
 import { getAcharyaById, getAllAcharyas, getKshetramById } from '../data/api.js';
 import Badge from '../components/Badge.jsx';
 import EmptyState from '../components/EmptyState.jsx';
-import NotDocumented from '../components/detail/NotDocumented.jsx';
 import Identification from '../components/saint/Identification.jsx';
-import SaintVerse from '../components/saint/SaintVerse.jsx';
+import SaintLegend from '../components/saint/SaintLegend.jsx';
 import SaintMedia from '../components/saint/SaintMedia.jsx';
+import SaintNarrative from '../components/saint/SaintNarrative.jsx';
+import SaintSources from '../components/saint/SaintSources.jsx';
+import SaintTimeline from '../components/saint/SaintTimeline.jsx';
+import SaintVerse from '../components/saint/SaintVerse.jsx';
 import PendingContent from '../components/saint/PendingContent.jsx';
 
 /** Resolves an acharya id to {id, name} for guru/sishya chips. */
@@ -51,7 +54,7 @@ export default function AcharyaDetailPage() {
           <h1>{acharya.name}</h1>
           <div className="detail__badges">
             <Badge>{acharya.era}</Badge>
-            {acharya.birthMonth ? <Badge>{acharya.birthMonth} · {acharya.birthStar}</Badge> : null}
+            {acharya.birthMonth ? <Badge>{acharya.birthMonth} · {acharya.birthStar}{acharya.tithi ? ` · ${acharya.tithi}` : ''}</Badge> : null}
           </div>
         </div>
       </div>
@@ -64,9 +67,14 @@ export default function AcharyaDetailPage() {
             {
               label: 'Birthplace',
               value: acharya.birthplace
-                ? (birthplaceLink
-                  ? <>{acharya.birthplace.name} — <Link to={`/kshetram/${birthplaceLink}`}>view kshetram</Link></>
-                  : acharya.birthplace.name)
+                ? (
+                  <>
+                    {birthplaceLink
+                      ? <>{acharya.birthplace.name} — <Link to={`/kshetram/${birthplaceLink}`}>view kshetram</Link></>
+                      : acharya.birthplace.name}
+                    {acharya.birthplace.district ? <span className="detail__subline">{acharya.birthplace.district}</span> : null}
+                  </>
+                )
                 : null,
             },
             {
@@ -81,8 +89,14 @@ export default function AcharyaDetailPage() {
 
       <section className="detail__section detail__section--full">
         <h2>Life History &amp; Miracles</h2>
+        <SaintTimeline timeline={acharya.timeline} />
         {Array.isArray(acharya.lifeHistory) && acharya.lifeHistory.length > 0
-          ? acharya.lifeHistory.map((p) => <p className="puranam" key={p.slice(0, 24)}>{p}</p>)
+          ? (
+            <>
+              <SaintNarrative items={acharya.lifeHistory} />
+              <SaintLegend legend={acharya.legend} />
+            </>
+          )
           : <PendingContent />}
       </section>
 
@@ -92,10 +106,15 @@ export default function AcharyaDetailPage() {
           <>
             {Array.isArray(acharya.works) && acharya.works.length > 0 ? (
               <ul className="saint-works">
-                {acharya.works.map((w) => <li key={w.name ?? w}>{w.name ?? w}</li>)}
+                {acharya.works.map((w) => (
+                  <li key={w.name ?? w}>{w.name ?? w}{w.language ? ` — ${w.language}` : ''}</li>
+                ))}
               </ul>
             ) : null}
             {acharya.worksSummary ? <p className="saint-works-summary">{acharya.worksSummary}</p> : null}
+            {acharya.preservation ? (
+              <p className="acharya-preservation"><strong>Sampradaya preservation:</strong> {acharya.preservation}</p>
+            ) : null}
             {acharya.philosophicalTheme ? (
               <p className="acharya-theme">✦ {acharya.philosophicalTheme}</p>
             ) : null}
@@ -138,11 +157,7 @@ export default function AcharyaDetailPage() {
 
       <section className="detail__section detail__section--full">
         <h2>Sources</h2>
-        {Array.isArray(acharya.sources) && acharya.sources.length > 0 ? (
-          <ul className="saint-works">
-            {acharya.sources.map((s) => <li key={s}>{s}</li>)}
-          </ul>
-        ) : <PendingContent />}
+        <SaintSources sources={acharya.sources} fallback={<PendingContent />} />
       </section>
     </div>
   );

@@ -17,15 +17,21 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90)', () => {
     expect(screen.getByRole('heading', { name: /poigai azhwar/i })).toBeInTheDocument();
     expect(screen.getByText(/1 of 12 in chronological order/i)).toBeInTheDocument();
     expect(screen.getByText(/Sarovara Yogi · Kasara Yogi/i)).toBeInTheDocument();
-    expect(screen.getByText(/Aippasi \(Ashvin\/Kartika\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Aippasi \(Ashvin\/Kartika transition\)/i)).toBeInTheDocument();
     const birthplace = screen.getByText(/Thiruvekka \(Kanchipuram\)/i);
     expect(birthplace).toBeInTheDocument();
+    expect(screen.getByText(/Kanchipuram District, Tamil Nadu/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /view kshetram/i })).toHaveAttribute('href', '/kshetram/thiruvekka');
-    expect(screen.getByText(/Panchajanya/i)).toBeInTheDocument();
+    expect(screen.getByText(/Kaumodaki/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /life history & miracles/i })).toBeInTheDocument();
-    expect(screen.getByText(/Thirukkovilur/)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /chronological life timeline/i })).toBeInTheDocument();
+    expect(screen.getByText(/Dehali of Thirukoilur/i)).toBeInTheDocument();
     expect(screen.getByText(/Mudhal Thiruvanthathi \(100 pasurams\)/i)).toBeInTheDocument();
     expect(screen.getByText(/Word-by-word meaning/i)).toBeInTheDocument();
+    expect(screen.getByText(/Theological commentary/i)).toBeInTheDocument();
+    expect(screen.getByText(/Sampradaya preservation/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /sources/i })).toBeInTheDocument();
+    expect(screen.getAllByText(/Project Madurai Texts/i).length).toBeGreaterThanOrEqual(2);
   });
 
   it('shows derived desam links and chronological prev/next navigation', () => {
@@ -84,8 +90,21 @@ describe('AcharyaDetailPage (UT-ACH-03, FR-94)', () => {
     expect(screen.getByRole('link', { name: 'Koorathazhwan' })).toHaveAttribute('href', '/acharya/koorathazhwan');
   });
 
-  it('renders visible pending markers for scaffolded acharyas (FR-94)', () => {
+  it('renders the Nathamuni dossier with the original-script verse pending marker', () => {
     renderAt('/acharya/nathamuni');
+    expect(screen.getByRole('heading', { level: 1, name: /nathamuni/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /chronological life timeline/i })).toBeInTheDocument();
+    expect(screen.getByText(/Cuddalore District, Tamil Nadu/i)).toBeInTheDocument();
+    expect(screen.getByText(/Re-discovery of Dravida Vedam/i)).toBeInTheDocument();
+    expect(screen.getByText(/Theological commentary/i)).toBeInTheDocument();
+    expect(screen.getByText(/Original verse text pending — to be provided/i)).toBeInTheDocument();
+    expect(screen.queryByText(/\[Content pending — to be provided\]/i)).not.toBeInTheDocument();
+    const guruSection = screen.getByText(/Sishyas:/i);
+    expect(guruSection).toBeInTheDocument();
+  });
+
+  it('renders visible pending markers for scaffolded acharyas (FR-94)', () => {
+    renderAt('/acharya/yamunacharya');
     expect(screen.getAllByText(/\[Content pending — to be provided\]/i).length).toBeGreaterThanOrEqual(3);
   });
 

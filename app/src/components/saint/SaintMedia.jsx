@@ -1,10 +1,34 @@
 /**
  * SaintMedia — iconography, listening chips and digital texts shared by
- * the saint templates (FR-90/94).
+ * the saint templates (FR-90/94). Iconography may be a single string or a
+ * structured dossier block {posture?, mudras?, garments?, idol?}.
  * @param {object} props
  * @param {object} [props.visuals] - {iconography?, videoSearches?, digitalTexts?}
  */
 import NotDocumented from '../detail/NotDocumented.jsx';
+
+const ICONOGRAPHY_LABELS = [
+  ['posture', 'Physical posture (asana)'],
+  ['mudras', 'Hand gestures (mudras)'],
+  ['garments', 'Garments & embellishments'],
+  ['idol', 'Avathara sthalam idol'],
+];
+
+function Iconography({ iconography }) {
+  if (typeof iconography === 'string') return <p>{iconography}</p>;
+  return (
+    <dl className="saint-iconography">
+      {ICONOGRAPHY_LABELS.map(([key, label]) => (
+        iconography[key] ? (
+          <div key={key}>
+            <dt>{label}</dt>
+            <dd>{iconography[key]}</dd>
+          </div>
+        ) : null
+      ))}
+    </dl>
+  );
+}
 
 export default function SaintMedia({ visuals }) {
   const hasAny = visuals
@@ -16,7 +40,7 @@ export default function SaintMedia({ visuals }) {
       {visuals.iconography ? (
         <div>
           <h3>Iconography</h3>
-          <p>{visuals.iconography}</p>
+          <Iconography iconography={visuals.iconography} />
         </div>
       ) : null}
       {Array.isArray(visuals.videoSearches) && visuals.videoSearches.length > 0 ? (

@@ -6,9 +6,16 @@
  * PO supplies final text.
  *
  * Shape: id, name, tamilName, eraGroup, era, role (one-line index role),
- * titles?, birthMonth?, birthStar?, birthplace? {name, kshetramId?},
- * amsam?, amsamAcharyaId?, lifeHistory? [], worksSummary?, works? [],
- * philosophicalTheme?, associatedDesams? [], verse?, visuals?,
+ * titles?, birthMonth?, birthStar?, tithi?, birthplace? {name, district?, kshetramId?},
+ * amsam?, amsamAcharyaId?, timeline? [{when?, event}],
+ * lifeHistory? (string | {heading, paragraphs[]}) [],
+ * legend? {title?, text}, worksSummary?, works? [{name, language?}],
+ * preservation?, philosophicalTheme?, associatedDesams? [],
+ * verse? {work?, tamil?, transliteration, meaning?, wordMeanings?, significance?,
+ *         commentary? [{heading, text}], audio?} — absent `tamil` renders the
+ *         original-script pending marker (see Reference Content caveats),
+ * visuals? {iconography? (string | {posture, mudras, garments, idol}),
+ *           videoSearches [], digitalTexts []},
  * guru? / sishyas? (acharya ids), sources? []
  */
 export const acharyas = [
@@ -17,13 +24,117 @@ export const acharyas = [
     name: 'Nathamuni',
     tamilName: 'நாதமுனி',
     eraGroup: 'Purvacharyas — the early masters',
-    era: 'c. 9th–10th century CE',
+    era: 'c. 823–951 CE',
     role: 'Recovered and arranged the Nalayira Divya Prabandham; first teacher of the Sri Vaishnava lineage.',
-    titles: ['Sri Vaishnava Kulapati', 'Ranganatha Munigal'],
-    birthplace: { name: 'Viranarayana Puram (Kattumannarkoil)' },
+    titles: ['Ranganatha Muni', 'Veera Narayanapura Piran', 'Sadhu Janapriya', 'Founder of the Sri Vaishnava Acharya Lineage'],
+    birthMonth: 'Aani (Jyeshtha)',
+    birthStar: 'Anusham (Anuradha)',
+    tithi: 'Sukla Paksha Saptami',
+    birthplace: { name: 'Veera Narayanapuram (Kattumannarkoil)', district: 'Cuddalore District, Tamil Nadu' },
+    amsam: 'Gaja Mukha (divine attendant) — Adisesha aspect',
     sishyas: ['yamunacharya'],
-    lifeHistory: null,
-    sources: null,
+    associatedDesams: ['srirangam', 'kumbakonam', 'alwar-thirunagari'],
+    timeline: [
+      { when: 'Birth & scholarship', event: 'Born into an illustrious Bhagavata family at Veera Narayanapuram, mastering the Sanskrit Vedas, Shastras and Ashtanga Yoga' },
+      { when: 'The decad mystery', event: 'Hearing visiting pilgrims recite ten pasurams (Aravamudhe) of Nammazhwar concluding "these ten out of one thousand" — and realising the rest were lost' },
+      { when: 'Pilgrimage', event: 'Travelling to Alwarthirunagari (Thirukkurugur) and meeting Parankusa Dasa, a disciple of Madhurakavi Azhwar' },
+      { when: 'Yogic realisation', event: 'Reciting the Kanninun Siruthambu 12,000 times under the sacred tamarind tree (Thirupuli), entering yoga samadhi and receiving the direct vision of Nammazhwar' },
+      { when: 'Recovery of Dravida Vedam', event: 'Receiving the complete 4,000-verse Naalayira Divya Prabandham with its esoteric meanings directly from Nammazhwar' },
+      { when: 'Devaganam', event: 'Setting the 4,000 verses to divine musical notes and appointing his nephews (Melaiyagatthu Azhwan and Keezhaiyagatthu Azhwan) to chant them at Srirangam' },
+      { when: 'Yogic departure', event: 'Attaining mukthi in a state of supreme devotional trance upon beholding a hunting party as Rama, Sita and Lakshmana' },
+    ],
+    lifeHistory: [
+      {
+        heading: 'Early Years & Spiritual Awakening',
+        paragraphs: [
+          'Sri Nathamuni was born at Veera Narayanapuram (Kattumannarkoil) to Ishvara Bhatta. Educated in Vedic literature, logic and Ashtanga Yoga, he spent his youth performing temple service at Veera Narayanapuram, deeply devoted to the Lord Mannanar (Veera Narayana Perumal).',
+        ],
+      },
+      {
+        heading: 'Core Seva / Kainkaryam',
+        paragraphs: [
+          'The recovery, collation and musical codification of the entire Naalayira Divya Prabandham; establishing the Arayar Sevai tradition at Srirangam; and writing fundamental philosophical treatises on Visishtadvaita epistemology.',
+        ],
+      },
+      {
+        heading: 'Miracles & Historical Events',
+        paragraphs: [
+          '1. The quest for the lost hymns: A group of pilgrims from Kumbakonam visiting the Veera Narayanapuram temple recited ten sweet Tamil pasurams ending with Aravamudhe from Nammazhwar\u2019s Thiruvaymozhi. Captivated, Nathamuni asked for the remaining verses of the set of 1,000 mentioned in the concluding verse; the pilgrims knew only those ten. Determined to recover the lost treasure of the Azhwars, Nathamuni travelled south to Kumbakonam and eventually to Alwarthirunagari (Thirukkurugur).',
+          '2. The direct revelation from Nammazhwar: At Alwarthirunagari, Nathamuni met Parankusa Dasa, who taught him the Kanninun Siruthambu — Madhurakavi Azhwar\u2019s eleven verses in praise of Nammazhwar. Nathamuni sat beneath the sacred tamarind tree (Thirupuli) where Nammazhwar had sat centuries earlier, entered Ashtanga Yoga samadhi and chanted the Kanninun Siruthambu 12,000 times with unbroken devotion. Moved by his resolve, Nammazhwar appeared in a divine vision and imparted not just the 1,102 verses of Thiruvaymozhi but all 4,000 verses of the twelve Azhwars, with their secret interpretations (Rahasya Arthas).',
+          '3. Instituting Devaganam & Arayar Sevai: Returning to Srirangam, Nathamuni classified the 4,000 verses into four parts (Mudhal Ayiram, Iyarpa, Thiruvaymozhi, Thirumozhi) and set them to celestial musical scales (Devaganam). He instructed his nephews to perform these verses with music and sacred dance before Lord Ranganatha — giving birth to the Arayar Sevai tradition preserved at Srirangam, Srivilliputhur and Alwarthirunagari.',
+          '4. The hunter vision & mukthi: In his elderly years, while residing near Gangaikonda Cholapuram, a local ruler passed by on a hunt with his wife, brother and a dog. Nathamuni\u2019s yogic mind perceived them as Lord Rama, Sita, Lakshmana and Hanuman; he ran after them in a trance of divine love. When they vanished from sight he collapsed in the agony of separation and breathed his last, ascending directly to Paramapadam.',
+        ],
+      },
+      {
+        heading: 'Guru-Disciple Dynamics',
+        paragraphs: [
+          'Nathamuni received direct jnana-upadesha from Nammazhwar in yoga samadhi. He was the Acharya of Uyyakondar (Pundarikaksha) and of Kurukai Kavalappan, to whom he entrusted the science of yoga; through Uyyakondar\u2019s line the lineage flows to Yamunacharya.',
+        ],
+      },
+      {
+        heading: 'Attainment of Paramapadam',
+        paragraphs: [
+          'He attained mukthi at Gangaikonda Cholapuram through divine absorption in Lord Rama, in the yogic trance narrated in the hunter-vision episode.',
+        ],
+      },
+    ],
+    legend: {
+      title: 'Sthala Puranam & Legend Highlight — the re-discovery of Dravida Vedam',
+      text: 'Sri Nathamuni\u2019s yogic recovery of the Naalayira Divya Prabandham beneath the Thirupuli tree saved the Tamil Veda from permanent extinction. Without his intervention the devotional legacy of the Azhwars would have been lost to history; his work re-established Tamil as a sacred scriptural language equal to Sanskrit in temple liturgy.',
+    },
+    worksSummary: '2 major Sanskrit texts and the complete structural classification of the 4,000 Tamil pasurams',
+    works: [
+      { name: 'Nyaya Tattva', language: 'Sanskrit' },
+      { name: 'Yoga Rahasya', language: 'Sanskrit' },
+      { name: 'Codification of the Naalayira Divya Prabandham into four structural books' },
+    ],
+    preservation: 'The bridge between the era of the Azhwars (the seers) and the era of the Acharyas (the systematisers). He integrated the Tamil Dravida Veda with the Sanskrit Upanishadic heritage, establishing the Ubhaya Vedanta tradition; the Nyaya Tattva survives through citations in Vedanta Desika\u2019s Nyaya Siddhanjana.',
+    philosophicalTheme: 'Ubhaya-Vedanta Samanvaya (harmony of the Sanskrit and Tamil scriptures) and yoga-assisted prapatti.',
+    verse: {
+      work: 'Invocation to Sri Nathamuni (thaniyan composed by Uyyakondar)',
+      transliteration: 'Namo \u2019chintyad bhuthad bhutha-aklishta jnana vairagya rasaye / Nathaya munaye \u2019gadha bhagavad bhakti sindhave',
+      wordMeanings: [
+        ['Namo', 'Prostrations/salutations'],
+        ['Achintya', 'Inconceivable'],
+        ['Adbhutha adbhuta', 'Marvel of marvels'],
+        ['Aklishta', 'Effortless/unblemished'],
+        ['Jnana', 'Spiritual wisdom'],
+        ['Vairagya', 'Dispassion'],
+        ['Rasaye', 'Treasure-house/ocean'],
+        ['Nathaya munaye', 'To the sage Nathamuni'],
+        ['Agadha', 'Unfathomable'],
+        ['Bhagavad bhakti', 'Devotion to the Lord'],
+        ['Sindhave', 'Who is an ocean'],
+      ],
+      commentary: [
+        { heading: 'Esoteric Meaning (Swaroopa Jnanam)', text: 'This invocation (thaniyan) offers prostrations to Sri Nathamuni, describing him as an unfathomable ocean of love for God (Bhagavad Bhakti Sindhu). He possesses effortless wisdom (Aklishta Jnana) and total dispassion (Vairagya), standing as an inconceivable spiritual marvel who revived the Sri Vaishnava sampradaya.' },
+        { heading: 'Visishtadvaita Alignment', text: 'It highlights the essential qualifications of an Acharya in Visishtadvaita: jnana (correct knowledge of Tattva, Hita and Purushartha) coupled with vairagya (dispassion toward material attractions) and deep bhakti (love for Sriman Narayana).' },
+        { heading: 'Commentarial Insights', text: 'Vedanta Desika notes that without Nathamuni\u2019s unblemished wisdom (Aklishta Jnana), the stream of Ubhaya Vedanta would not have reached later Acharyas such as Yamunacharya and Ramanuja. His status as a Muni (reflective sage) marks the formal beginning of systemic Sri Vaishnava scholarship.' },
+      ],
+    },
+    visuals: {
+      iconography: {
+        posture: 'Seated in Padmasana in deep yogic contemplation (yoga samadhi).',
+        mudras: 'Right hand held in Jnana Mudra at chest level, left hand resting on the lap in meditative pose.',
+        garments: 'Simple white ascetic vestment bearing the sacred thread (Yajnopavitam), adorned with Urdhva Pundra (tilak) marks across twelve parts of the body and Tulasi seed garlands.',
+        idol: 'At Veera Narayanapuram (Kattumannarkoil), Sri Nathamuni\u2019s Moolavar shrine depicts him as a luminous yogic sage seated in contemplative trance, symbolising his retrieval of the Dravida Veda.',
+      },
+      videoSearches: [
+        'Sri Nathamuni Life History and Naalayiram Recovery Velukkudi Krishnan',
+        'Nathamuni Nyaya Tattva and Yoga Rahasya Lecture Karunakarachariar',
+        'Nathamuni Vaibhavam and Arayar Sevai Ananthapadmanabhachariar',
+      ],
+      digitalTexts: [
+        'Dravida Veda Repository — dravidaveda.org',
+        'Project Madurai Texts — projectmadurai.org',
+        'Koyil Archival Library — koyil.org',
+      ],
+    },
+    sources: [
+      'Dravida Veda Repository — dravidaveda.org',
+      'Project Madurai Texts — projectmadurai.org',
+      'Koyil Archival Library — koyil.org',
+    ],
   },
   {
     id: 'yamunacharya',

@@ -8,55 +8,132 @@
  *
  * Shape (all optional):
  *  order, epithets[], birthMonth, birthStar, tithi?,
- *  birthplace {name, kshetramId?}, amsam?,
+ *  birthplace {name, district?, kshetramId?}, amsam?,
  *  era {academic?, contemporaries?} (base `period` remains the display era),
- *  lifeHistory [], works [{name, pasurams?}], bhaktiBhava?,
+ *  timeline? [{when?, event}] (dossier §2.1 chronological life timeline),
+ *  lifeHistory (string | {heading, paragraphs[]}) [],
+ *  legend? {title?, text} (dossier §2.2 sthala puranam highlight),
+ *  works [{name, pasurams?, language?}], preservation?, bhaktiBhava?,
  *  associatedDesams [kshetramId],
- *  verse {work?, tamil, transliteration, meaning?, wordMeanings?, significance?, audio?},
- *  visuals {iconography?, videoSearches [], digitalTexts []},
- *  photos [{src?|wiki?, alt, credit?}] (max 2)
+ *  verse {work?, tamil?, transliteration, meaning?, wordMeanings?, significance?,
+ *         commentary? [{heading, text}], audio?} — absent `tamil` renders the
+ *         original-script pending marker (see Reference Content caveats),
+ *  visuals {iconography? (string | {posture, mudras, garments, idol}),
+ *           videoSearches [], digitalTexts []},
+ *  sources? [], photos [{src?|wiki?, alt, credit?}] (max 2)
  */
 export const AZHWAR_DETAILS = {
   poigai: {
     order: 1,
-    epithets: ['Sarovara Yogi', 'Kasara Yogi', 'Ayonisambhava'],
-    birthMonth: 'Aippasi (Ashvin/Kartika)',
-    birthStar: 'Thiruvonam (Shravana)',
-    tithi: 'Navami',
-    birthplace: { name: 'Thiruvekka (Kanchipuram) — born in a golden lotus in the temple pond of Sri Yathothakari Perumal', kshetramId: 'thiruvekka' },
-    amsam: "Lord Vishnu's holy conch, Panchajanya",
-    era: { academic: '5th–6th century CE', contemporaries: 'Pallava rulers' },
-    lifeHistory: [
-      'Born non-womb (Ayonisambhava) inside a golden lotus blooming in the pond (Poigai) of Thiruvekka, Poigai Azhwar showed complete indifference to worldly existence from childhood. Driven purely by divine love, he wandered from shrine to shrine.',
-      'His defining life event occurred in Thirukkovilur. During a torrential downpour, Poigai took shelter in the narrow corridor of a small hermitage that could barely fit one sitting person. Bhoothath Azhwar arrived — there was room for one to sit, two to stand — and then Pey Azhwar, so three stood together. In the pitch darkness a fourth presence was felt among them: the Supreme Lord himself, come to share their shelter. To visualise him, Poigai lit a lamp of poetic devotion — the Mudhal Thiruvanthathi.',
-      'He attained eternal service (Paramapadam) by merging into the divine light of the Lord.',
+    epithets: ['Sarovara Yogi', 'Kasara Yogi', 'Ayonisambhava', 'Sarovara Muni', 'Poigaiyar'],
+    birthMonth: 'Aippasi (Ashvin/Kartika transition)',
+    birthStar: 'Thiruvonam (Sravanam)',
+    tithi: 'Sukla Paksha Navami',
+    birthplace: {
+      name: 'Thiruvekka (Kanchipuram) — born in a golden lotus in the temple pond of Sri Yathothakari Perumal',
+      district: 'Kanchipuram District, Tamil Nadu',
+      kshetramId: 'thiruvekka',
+    },
+    amsam: 'Kaumodaki — the divine mace (gada) of Lord Sriman Narayana',
+    era: { academic: '5th–6th century CE', contemporaries: 'Bhoothath Azhwar, Pey Azhwar and the Pallava rulers of Kanchi' },
+    timeline: [
+      { when: 'Birth', event: 'Ayoni Sambhava — discovered inside a fresh golden lotus in the temple tank (Sardhotha Poigai) of Tiruvekka, Kanchipuram' },
+      { when: 'Realisation', event: 'Natural enlightenment (Ayathna Jnana) free from embryonic contamination; direct contemplation of Para Vasudeva' },
+      { when: 'The divine encounter', event: 'Meeting Bhoothath and Pey Azhwar in the dark corridor (Dehali) of Thirukoilur during a torrential storm' },
+      { when: 'Composition', event: 'Lighting the Jnana Deepam — the lamp of knowledge — through the first verse of the Mudhal Thiruvanthadhi' },
+      { when: 'Wanderings & mukthi', event: 'Travelling the Divya Desams of North and South India spreading Visishtadvaita precursor tenets, before merging into the divine radiance of the Lord' },
     ],
-    works: [{ name: 'Mudhal Thiruvanthathi', pasurams: 100 }],
-    bhaktiBhava: 'Jnana-Bhakti — illumination of the mind through wisdom and devotion; he initiated the Tamil Prabandhic tradition.',
-    associatedDesams: ['thiruvekka', 'thirukkovilur', 'kanchi-varadaraja', 'tirupati'],
+    lifeHistory: [
+      {
+        heading: 'Early Years & Spiritual Awakening',
+        paragraphs: [
+          'Unlike ordinary mortals subject to Garbha Vasam (confinement in a womb), Poigai Azhwar was an Ayoni Sambhava — one not born of a womb. He manifested spontaneously on a divine golden lotus blossoming in the pond adjacent to the Tiruvekka Yathothkari Perumal Temple in Kanchipuram.',
+          'Blessed with Ayathna Jnana (effortless divine knowledge) from the instant of his manifestation, he required no earthly guru to instruct him in the Vedas, Upanishads or Agamas. He spent his early years immersed in intense yogic trance (samadhi) along the banks of the sacred water bodies of Kanchipuram.',
+        ],
+      },
+      {
+        heading: 'Core Seva / Kainkaryam',
+        paragraphs: [
+          'His primary kainkaryam was mental and vocal (Manasa and Vachika) — weaving garlands of Tamil verse (Thamizh Maalai) to elucidate the esoteric truths of the Sanskrit Vedas. He traversed the length and breadth of Tamilakam, visiting holy shrines without establishing permanent residence, living as an ascetic completely detached from secular affairs.',
+        ],
+      },
+      {
+        heading: 'Miracles & Historical Events',
+        paragraphs: [
+          'The central event in the life of Poigai Azhwar — and the foundational moment of the Azhwar prabandha tradition — is the divine encounter at Thirukkovilur (Thirukkovilur Dehali Anubhavam). Seeking shelter from a fierce, thunderous storm, Poigai Azhwar entered the narrow front corridor (Dehali) of a small residence in Thirukkovilur. The space was barely large enough for one person to lie down. Shortly thereafter Bhoothath Azhwar arrived seeking refuge; Poigai welcomed him, remarking, "One person can lie down; two can sit." Moments later Pey Azhwar arrived, and they adjusted once more — "Two can sit; three can stand."',
+          'As the three saints stood together in pitch darkness, an overwhelming, invisible fourth presence pressed tightly against them. Recognising the supernatural weight and divine fragrance, Poigai Azhwar realised that Sriman Narayana himself had entered the corridor to enjoy the company of his highest devotees. To reveal this unseen guest, Poigai Azhwar lit the material universe as a lamp using the power of verse.',
+        ],
+      },
+      {
+        heading: 'Guru-Disciple Dynamics',
+        paragraphs: [
+          'Poigai Azhwar recognised Sriman Narayana as his sole ultimate Acharya (Narayana Parabrahma). He functioned as an early guru-figure to Thirumazhisai Azhwar, who was deeply influenced by the three Mudhal Azhwars during his spiritual transition from various philosophical systems back to Vaishnavism.',
+        ],
+      },
+      {
+        heading: 'Attainment of Paramapadam',
+        paragraphs: [
+          'Having fulfilled his divine mission of initiating the Dravida Veda era, Poigai Azhwar absorbed his physical form into the supreme light (Param Jyothi) of Sriman Narayana, concluding his earthly manifestation alongside Bhoothath and Pey Azhwar.',
+        ],
+      },
+    ],
+    legend: {
+      title: 'Sthala Puranam & Legend Highlight — the miraculous Dehali of Thirukoilur',
+      text: 'The narrow corridor (Dehali) of Thirukoilur remains the spiritual birthplace of Sri Vaishnava devotional literature. When Sriman Narayana pressed against the three Mudhal Azhwars in total darkness, it was not out of constraint but Saulabhya (divine accessibility) — the Supreme Lord seeking closeness with his devotees. The lighting of the lamp of wisdom by Poigai Azhwar transformed the dark room into an illumination of the entire cosmos.',
+    },
+    works: [{ name: 'Mudhal Thiruvanthathi', pasurams: 100, language: 'Tamil (Iyalpa / Nerisai Venba meter)' }],
+    preservation: 'Pioneered the Dravida Veda tradition by proving that high philosophical truths (Vedanta) can be fully articulated in the vernacular Tamil language. He set the precedent for using poetic meter as a tool for contemplative bhakti-yoga; his verses served as a primary foundation for later commentators such as Periyavachan Pillai and Nampillai.',
+    bhaktiBhava: 'Jnana-Garbha Bhakti — devotion rooted in profound intellectual and cosmological awareness. His philosophy highlights Karanatvam (Sriman Narayana as the cosmic Cause) and Saulabhya (his supreme accessibility).',
+    associatedDesams: ['thiruvekka', 'thirukkovilur', 'tirupati'],
     verse: {
       work: 'Mudhal Thiruvanthathi 1',
-      tamil: 'வையந் தகளியா வார்கடலே நெய்யாக\nவெய்ய கதிரோன் விளக்காக, - செய்ய\nசுடராழி யானடிக்கே சூட்டினேன் சொல்மாலை\nஇடராழி நீங்குகவே என்று.',
-      transliteration: 'Vaiyam thagaliye vaarkadale neyyaaga / Veyya kadiron vilakkaaga, - seyya / Sudaraazhi yaanadikke soottinen solmaalai / Idaraazhi neengugave endru.',
+      tamil: 'வையந் தகளியா வார்கடலே நெய்யாக\nவெய்ய கதிரோன் விளக்காக - செய்ய\nசுடராழியான் அடிக்கே சூட்டினேன் சொன்ன மாலை\nஇடராழி நீங்குகவே யென்று',
+      transliteration: 'Vaiyam thagaliyaga var kadale neyyaga / Veyya kadiron vilakkaga - seyya / Sudarazhiyan adikke suttinen sonna maalai / Idarazhi neengugave yendru',
       wordMeanings: [
-        ['Vaiyam', 'Earth'],
-        ['Thagali', 'Lamp bowl'],
-        ['Vaarkadal', 'Surging ocean'],
-        ['Ney', 'Ghee'],
-        ['Veyya Kadiron', 'Hot-rayed Sun'],
-        ['Vilakku', 'Flame/Lamp'],
-        ['Seyya Sudaraazhi', 'Lord holding the radiant discus'],
-        ['Adikke', 'At His feet'],
-        ['Soottinen Solmaalai', 'Offered this garland of words'],
-        ['Idaraazhi Neengugave', 'May the ocean of sorrow vanish'],
+        ['Vaiyam', 'Earth/Universe'],
+        ['Thagaliyaga', 'As the lamp bowl'],
+        ['Var kadale', 'Expanding ocean'],
+        ['Neyyaga', 'As the ghee'],
+        ['Veyya kadiron', 'Hot/radiant sun'],
+        ['Vilakkaga', 'As the burning wick/blaze'],
+        ['Seyya', 'Red/luminous'],
+        ['Sudar azhiyan', 'Lord holding the glowing Discus'],
+        ['Adikke', 'At His divine feet'],
+        ['Suttinen', 'I have offered/adorned'],
+        ['Sonna maalai', 'Garland of words (verses)'],
+        ['Idar azhi', 'Ocean of miseries/samsara'],
+        ['Neengugave yendru', 'So that it may be eradicated entirely'],
       ],
       significance: 'Poigai lights an external lamp using the universe itself — earth as bowl, ocean as ghee, sun as flame — establishing that all of cosmic reality points entirely toward Narayana.',
+      commentary: [
+        { heading: 'Esoteric Meaning (Swaroopa Jnanam)', text: 'Poigai Azhwar constructs a cosmic lamp to dispel both the physical darkness in the corridor of Thirukoilur and the spiritual darkness (Ajnana) in human minds. The Earth represents the container of human experience, the oceans symbolise the boundless oil of love, and the Sun represents the concentrated light of intellect.' },
+        { heading: 'Visishtadvaita Alignment', text: 'The verse establishes Sriman Narayana as the Koyil (abode) and ultimate master of the cosmos (Seshin). By addressing the Lord as Sudarazhiyan (the wielder of the Chakrathazhwar/Discus), he identifies the Supreme Being (Para Tattva) who actively removes obstacles (Virodhi Nivarana) for the Jiva.' },
+        { heading: 'Commentarial Insights', text: 'Periyavachan Pillai in his commentary highlights that this verse demonstrates Paroksha Jnana (indirect knowledge elevated through devotion). The garland of words (Sonna Maalai) offered at the Lord\u2019s feet is non-different from flower garlands, establishing the doctrine that linguistic praise composed with devotion is an essential form of kainkaryam.' },
+      ],
     },
     visuals: {
-      iconography: 'Seated in Anjali Mudra (folded hands), wearing a simple ascetic garment and Thiruman Kaappu.',
-      videoSearches: ['Velukkudi Krishnan Mudhal Thiruvanthathi Upanyasam'],
-      digitalTexts: ['Project Madurai — Nalayira Divya Prabandham'],
+      iconography: {
+        posture: 'Seated in Ardha Padmasana (half-lotus posture) or standing in Anjali Mudra within the Thirukoilur triad representation.',
+        mudras: 'Jnana Mudra (index finger touching thumb, signifying the union of Jiva and Paramatma) on the right hand, with the left hand resting on the lap or folded in prayer (Anjali).',
+        garments: 'Simple white ascetic loincloth (Vesti), prominent Urdhva Pundra (holy white clay marks) on twelve places of the body, adorned with sacred Tulasi beads and a lotus-seed garland.',
+        idol: 'At the Tiruvekka shrine in Kanchipuram, Poigai Azhwar\u2019s Moolavar idol depicts him in a contemplative, meditative pose next to the temple tank, radiating serene Sattvic intensity.',
+      },
+      videoSearches: [
+        'Poigai Azhwar Mudhal Thiruvanthadhi Upanyasam Velukkudi Krishnan',
+        'Mudhal Azhwargal Vaibhavam Karunakarachariar',
+        'Thirukoilur Dehali Anubhavam Ananthapadmanabhachariar',
+      ],
+      digitalTexts: [
+        'Dravida Veda Repository — dravidaveda.org',
+        'Project Madurai Texts — projectmadurai.org',
+        'Koyil Archival Library — koyil.org',
+      ],
     },
+    sources: [
+      'Dravida Veda Repository — dravidaveda.org',
+      'Project Madurai Texts — projectmadurai.org',
+      'Koyil Archival Library — koyil.org',
+    ],
   },
   bhoothath: {
     order: 2,

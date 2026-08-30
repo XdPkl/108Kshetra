@@ -1,16 +1,20 @@
 /**
  * AzhwarDetailPage — the saint template for one Azhwar at /azhwar/:id
- * (US-AZW-02, FR-90): identification, life history, contributions,
- * representative verse, media, derived desam links, prev/next navigation.
+ * (US-AZW-02, FR-90): identification, life timeline & history, contributions,
+ * representative verse, media, desam links, sources, prev/next navigation.
  */
 import { Link, useParams } from 'react-router-dom';
-import { getAzhwarById, getAzhwarNeighbours, getKshetramsByAzhwar } from '../data/api.js';
+import { getAzhwarById, getAzhwarNeighbours, getKshetramById, getKshetramsByAzhwar } from '../data/api.js';
 import Badge from '../components/Badge.jsx';
 import EmptyState from '../components/EmptyState.jsx';
 import NotDocumented from '../components/detail/NotDocumented.jsx';
 import Identification from '../components/saint/Identification.jsx';
-import SaintVerse from '../components/saint/SaintVerse.jsx';
+import SaintLegend from '../components/saint/SaintLegend.jsx';
 import SaintMedia from '../components/saint/SaintMedia.jsx';
+import SaintNarrative from '../components/saint/SaintNarrative.jsx';
+import SaintSources from '../components/saint/SaintSources.jsx';
+import SaintTimeline from '../components/saint/SaintTimeline.jsx';
+import SaintVerse from '../components/saint/SaintVerse.jsx';
 
 export default function AzhwarDetailPage() {
   const { id } = useParams();
@@ -58,9 +62,14 @@ export default function AzhwarDetailPage() {
             {
               label: 'Birthplace',
               value: azhwar.birthplace
-                ? (birthplaceLink
-                  ? <>{azhwar.birthplace.name} — <Link to={`/kshetram/${birthplaceLink}`}>view kshetram</Link></>
-                  : azhwar.birthplace.name)
+                ? (
+                  <>
+                    {birthplaceLink
+                      ? <>{azhwar.birthplace.name} — <Link to={`/kshetram/${birthplaceLink}`}>view kshetram</Link></>
+                      : azhwar.birthplace.name}
+                    {azhwar.birthplace.district ? <span className="detail__subline">{azhwar.birthplace.district}</span> : null}
+                  </>
+                )
                 : null,
             },
             { label: 'Divine amsam', value: azhwar.amsam },
@@ -76,9 +85,11 @@ export default function AzhwarDetailPage() {
 
       <section className="detail__section detail__section--full">
         <h2>Life History &amp; Miracles</h2>
+        <SaintTimeline timeline={azhwar.timeline} />
         {Array.isArray(azhwar.lifeHistory) && azhwar.lifeHistory.length > 0
-          ? azhwar.lifeHistory.map((p) => <p className="puranam" key={p.slice(0, 24)}>{p}</p>)
+          ? <SaintNarrative items={azhwar.lifeHistory} />
           : <NotDocumented />}
+        <SaintLegend legend={azhwar.legend} />
       </section>
 
       <section className="detail__section detail__section--full">
@@ -89,11 +100,17 @@ export default function AzhwarDetailPage() {
             <dd>
               <ul className="saint-works">
                 {(azhwar.works ?? []).map((w) => (
-                  <li key={w.name}>{w.name}{w.pasurams ? ` (${w.pasurams} pasurams)` : ''}</li>
+                  <li key={w.name}>{w.name}{w.pasurams ? ` (${w.pasurams} pasurams)` : ''}{w.language ? ` — ${w.language}` : ''}</li>
                 ))}
               </ul>
             </dd>
           </div>
+          {azhwar.preservation ? (
+            <div className="detail__profile-item">
+              <dt>Sampradaya preservation</dt>
+              <dd>{azhwar.preservation}</dd>
+            </div>
+          ) : null}
           {azhwar.bhaktiBhava ? (
             <div className="detail__profile-item">
               <dt>Role &amp; bhakti bhava</dt>
@@ -101,6 +118,15 @@ export default function AzhwarDetailPage() {
             </div>
           ) : null}
         </dl>
+        {Array.isArray(azhwar.associatedDesams) && azhwar.associatedDesams.length > 0 ? (
+          <p className="saint-desams">
+            <strong>Associated Divya Desams (Mangalasasanam):</strong>{' '}
+            {azhwar.associatedDesams.map((kid) => {
+              const k = getKshetramById(kid);
+              return k ? <Link key={kid} className="chip" to={`/kshetram/${kid}`}>{k.name}</Link> : null;
+            })}
+          </p>
+        ) : null}
         <p className="saint-desams">
           <strong>Desams glorified ({desams.length}):</strong>{' '}
           {desams.map((k) => (
@@ -120,6 +146,11 @@ export default function AzhwarDetailPage() {
       <section className="detail__section detail__section--full">
         <h2>Visual &amp; Media</h2>
         <SaintMedia visuals={azhwar.visuals} />
+      </section>
+
+      <section className="detail__section detail__section--full">
+        <h2>Sources</h2>
+        <SaintSources sources={azhwar.sources} fallback={<NotDocumented />} />
       </section>
 
       <nav className="saint-prevnext" aria-label="Chronological navigation">

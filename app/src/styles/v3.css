@@ -339,6 +339,28 @@
 .acharya-card__titles { color: var(--color-text-muted); font-size: 0.875rem; margin-bottom: var(--space-1); }
 .azhwar-card__detail-link { text-decoration: none; color: inherit; }
 .azhwar-card__detail-link:hover h2 { color: var(--color-primary); }
+.detail__subline { display: block; color: var(--color-text-muted); font-size: 0.9375rem; margin-top: 0.15rem; }
+.saint-timeline h3 { margin-bottom: var(--space-1); }
+.saint-timeline ol { margin: 0 0 var(--space-2); padding-left: 1.25rem; }
+.saint-timeline li { margin-bottom: 0.3rem; }
+.saint-narrative__block h3 { margin: var(--space-2) 0 var(--space-1); }
+.saint-legend {
+  background: rgba(201, 154, 46, 0.1);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-card);
+  padding: var(--space-2) var(--space-3);
+  margin-top: var(--space-3);
+}
+.saint-legend h3 { margin: 0 0 var(--space-1); }
+.saint-legend p { margin: 0; }
+.pasuram__tamil--pending { color: var(--color-text-muted); font-style: italic; }
+.pasuram__commentary { margin-top: var(--space-2); }
+.pasuram__commentary h5 { margin-bottom: var(--space-1); }
+.pasuram__commentary-item { margin-bottom: var(--space-1); }
+.saint-iconography { margin: 0; }
+.saint-iconography dt { font-weight: 600; margin-top: var(--space-1); }
+.saint-iconography dd { margin: 0; color: var(--color-text-muted); }
+.acharya-preservation { margin: var(--space-2) 0 0; }
 
 /* ---------- Responsive (UXD §6) ---------- */
 @media (max-width: 767px) {

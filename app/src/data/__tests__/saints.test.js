@@ -44,7 +44,33 @@ describe('Azhwar enrichment integrity (UT-AZW-04, FR-91)', () => {
     expect(poigai.epithets).toContain('Sarovara Yogi');
     expect(poigai.birthplace.kshetramId).toBe('thiruvekka');
     expect(poigai.verse.wordMeanings.length).toBeGreaterThanOrEqual(5);
-    expect(poigai.lifeHistory.join(' ')).toContain('Thirukkovilur');
+    expect(JSON.stringify(poigai.lifeHistory)).toContain('Thirukkovilur');
+  });
+
+  it('validates the dossier-era template extensions (saint template v3.1)', () => {
+    for (const a of azhwars) {
+      for (const item of a.timeline ?? []) {
+        expect(typeof item.event).toBe('string');
+        expect(item.event.length).toBeGreaterThan(0);
+      }
+      for (const item of a.lifeHistory ?? []) {
+        if (typeof item !== 'string') {
+          expect(item.heading, `${a.id} narrative heading`).toBeTruthy();
+          expect(Array.isArray(item.paragraphs), `${a.id} narrative paragraphs`).toBe(true);
+        }
+      }
+      if (a.legend) expect(a.legend.text, `${a.id} legend`).toBeTruthy();
+      for (const c of a.verse?.commentary ?? []) {
+        expect(c.heading).toBeTruthy();
+        expect(c.text).toBeTruthy();
+      }
+    }
+    const poigai = azhwars.find((a) => a.id === 'poigai');
+    expect(poigai.timeline.length).toBeGreaterThanOrEqual(5);
+    expect(poigai.birthplace.district).toBeTruthy();
+    expect(poigai.verse.commentary).toHaveLength(3);
+    expect(poigai.visuals.iconography.posture).toBeTruthy();
+    expect(poigai.sources.length).toBeGreaterThan(0);
   });
 });
 
@@ -81,6 +107,19 @@ describe('Acharya dataset integrity (UT-ACH-01, FR-92)', () => {
   it('marks pending biography content explicitly (FR-94 policy)', () => {
     const pending = acharyas.filter((a) => !Array.isArray(a.lifeHistory) || a.lifeHistory.length === 0);
     expect(pending.length).toBeGreaterThan(0); // scaffold entries await PO content
+  });
+
+  it('encodes the Nathamuni dossier (saint template v3.1 proof)', () => {
+    const n = getAcharyaById('nathamuni');
+    expect(n.timeline.length).toBeGreaterThanOrEqual(5);
+    expect(n.birthplace.district).toContain('Cuddalore');
+    expect(n.verse.transliteration).toContain('Namo');
+    expect(n.verse.tamil).toBeUndefined(); // original script pending — renders the marker
+    expect(n.verse.commentary).toHaveLength(3);
+    expect(n.visuals.iconography.posture).toBeTruthy();
+    for (const kid of n.associatedDesams) {
+      expect(getKshetramById(kid), `nathamuni desam ${kid}`).toBeDefined();
+    }
   });
 
   it('fully encodes the Manavala Mamunigal PO sample', () => {

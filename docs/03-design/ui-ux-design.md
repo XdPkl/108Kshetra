@@ -269,6 +269,7 @@ the visitor's browser only (FR-71).
 | Version | Date | Author | Description |
 |---|---|---|---|
 | 1.2 | 2026-08-30 | Dev Team | Wireframes for global nav refresh, progress banner, visited/trip states, Map, Trip, Detail V3, About, Azhwar detail, Acharyas index/detail; edge states |
+| 1.3 | 2026-08-30 | Dev Team | Saint template v3.1 (§21): dossier-aligned extensions — life timeline, headed narrative blocks, sthala-puranam legend callout, birthplace district, sampradaya preservation, work language labels, structured iconography, verse theological commentary, original-script pending marker, sources on both saint pages; Reference Content folder noted |
 
 ### 11. Global Navigation — refresh (FR-79, FR-93)
 
@@ -605,7 +606,8 @@ Detail — the same saint template as §18, plus Guru & Sishyas and Sources:
   - `mangalasasanam: {perAzhwar: [{azhwarId, count}], excerpts: [{azhwarId, work, verse?, tamil, transliteration, wordMeanings: [[word, meaning]], significance?, audio?}]}` — legacy single `pasuram` still supported
   - `festivals: [{name, month}]`, `access: {town?, rail?, airport?, road?}`, `tips: []`, `references: []`
   - `visuals: {descriptions: [], literature: [], videoSearches: []}`
-- **Azhwar dataset (saint template, R2):** `order`, `epithets[]`, `birthMonth`, `birthStar`, `tithi?`, `birthplace?` (kshetram id), `amsam?`, `era: {display, traditional?, academic?, contemporaries?}`, `lifeHistory: []`, `works: [{name, pasurams}]`, `bhaktiBhava?`, `photos: [{src, credit?, alt?}] (up to 2)`, `verse: {work?, tamil, transliteration, wordMeanings: [], significance?}`, `visuals: {iconography?, videoSearches: [], digitalTexts: []}`. Desams glorified remain derived from `Kshetram.azhwars`.
-- **Acharya dataset (saint template, R2):** the Azhwar saint schema plus `guru?` (acharya id), `sishyas: []` (acharya ids), `philosophicalTheme?`, `sources: []`.
+- **Azhwar dataset (saint template v3.1, dossier-aligned):** `order`, `epithets[]`, `birthMonth`, `birthStar`, `tithi?`, `birthplace {name, district?, kshetramId?}`, `amsam?`, `era {academic?, contemporaries?}` (base `period` remains the display era), `timeline? [{when?, event}]`, `lifeHistory: (string | {heading, paragraphs[]})[]`, `legend? {title?, text}` (sthala puranam highlight callout), `works [{name, pasurams?, language?}]`, `preservation?`, `bhaktiBhava?`, `photos: [{src, credit?, alt?}] (up to 2)`, `associatedDesams [kshetramId]` (rendered as Mangalasasanam chips), `verse {work?, tamil?, transliteration, wordMeanings: [], significance?, commentary? [{heading, text}], audio?}` — an absent `tamil` renders the original-script pending marker, `visuals: {iconography? (string | {posture, mudras, garments, idol}), videoSearches: [], digitalTexts: []}`, `sources? []`. Desams glorified remain derived from `Kshetram.azhwars`.
+- **Acharya dataset (saint template v3.1, dossier-aligned):** the Azhwar saint schema plus `guru?` (acharya id), `sishyas: []` (acharya ids), `amsamAcharyaId?`, `worksSummary?`, `philosophicalTheme?`, `sources: []`.
+- **Reference Content:** the Product Owner's dossier PDFs live in `Reference Content/` at the repo root (not deployed); `Reference Content/README.md` maps each batch to saints and records the extraction caveats (Tamil/Devanagari verse script lost in the PDF export — pages carry transliteration only until re-exported text is supplied).
 - **New datasets:** `src/data/about.js` (About / Kshetra Tours / contact copy) — extending content requires data changes only (NFR-05).
 - **Integrity:** tests validate shape and cross-references wherever fields are present; absence is valid and renders the documented fallback notes.
