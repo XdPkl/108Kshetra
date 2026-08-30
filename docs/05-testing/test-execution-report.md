@@ -141,3 +141,46 @@ Scope: EP-YTRK, EP-YMAP, EP-YTRP, EP-DTL3, EP-ABT, EP-NAV (US-NAV-02), EP-ENG (U
 ---
 
 *End of Addendum — TER-108K-009 v1.2*
+
+---
+
+## Version 1.3 — Release 2: Azhwar Detail & Acharyas Execution (2026-08-30)
+
+Scope: EP-AZW2, EP-ACH — US-AZW-02..03, US-ACH-01..03, FR-90..94 (USD/SRS v1.2). Gated delivery: Gate 2 wireframes (UXD v1.2 §18/19, PO samples) approved; Gate 3 (development + unit testing) approved 2026-08-30.
+
+| Suite | Result | Detail |
+|---|---|---|
+| Static analysis (oxlint) | **Pass** | 0 errors, 2 accepted warnings (103 files) — see CRR v1.2 |
+| Unit/Component (Vitest + RTL) | **Pass** | 16 suites, **146/146 tests** (17 new for R2) |
+| Coverage (Gate A) | **Pass** | 91.8% statements · 81.6% branches · 91.2% functions · 93.7% lines (threshold 80%) |
+| Build (TC-QA-03) | **Pass** | Initial chunk **131.8 kB gzip**; Leaflet lazy chunk unchanged — NFR-01/NFR-11 |
+| Code review (Gate B) | **Closed** | CRR-108K-006 v1.2: CR-11..14 dispositioned (incl. two invalid saint→kshetram links caught and corrected, now guarded by UT-ACH-01) |
+| E2E (Playwright, Chromium) | **Pass** | **19/19 journeys** — 17 existing + TC-18/19 (saint templates, chronological nav, parampara index, pending markers) |
+| CI (GitHub Actions, Linux) | **Pass** | Run 33291734960: lint/unit/build ✓, E2E ✓ |
+| Deploy + Live verification | **Pass** | Run 33291734917 success (commit `—`, TER v1.2 → R2 commit); live bundle hash `index-B8rMrI69.js` matches local build; Acharyas nav, acharya dataset and pending-content strings verified in the served bundle |
+
+### E2E Case Results (R2, e2e/yatra.spec.js)
+
+| Case | Description | Result |
+|---|---|---|
+| TC-18 | Azhwar detail: saint template (identification, verse, kshetram link), chronological prev/next navigation | Pass |
+| TC-19 | Acharyas index by parampara era; Manavala Mamunigal detail (sample); Nathamuni pending markers | Pass |
+
+### Defect Log (R2)
+
+| ID | Severity | Phase Found | Description | Disposition |
+|---|---|---|---|---|
+| D-08 | Minor | Code review (Gate B) | Initial acharya draft linked birthplaces not present in the 108 dataset (Sriperumbudur, Melkote) | **Fixed** — associations corrected; saint→kshetram link integrity test added (UT-ACH-01) so such links fail the build in future |
+| CR-11..CR-14 | Minor | Code review (Gate B) | See CRR-108K-006 v1.2 | **All dispositioned** before system testing |
+
+**Open Critical/Major defects: 0 → Gate C PASSED (V3 R2).**
+
+### Known Limitations / Notes (R2)
+
+1. Traditional granular fields (amsam, birth star) are present only where well-established; differing traditions are left absent rather than guessed — PO may supply data-only.
+2. Acharya biographies other than Manavala Mamunigal render the visible "[Content pending — to be provided]" marker until the PO's text is added (data-only change).
+3. Representative verses are quoted where verified (Poigai per PO sample); other Azhwars currently show the documented fallback.
+
+---
+
+*End of Addendum — TER-108K-009 v1.3*
