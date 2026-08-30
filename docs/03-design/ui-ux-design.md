@@ -270,6 +270,7 @@ the visitor's browser only (FR-71).
 |---|---|---|---|
 | 1.2 | 2026-08-30 | Dev Team | Wireframes for global nav refresh, progress banner, visited/trip states, Map, Trip, Detail V3, About, Azhwar detail, Acharyas index/detail; edge states |
 | 1.3 | 2026-08-30 | Dev Team | Saint template v3.1 (§21): dossier-aligned extensions — life timeline, headed narrative blocks, sthala-puranam legend callout, birthplace district, sampradaya preservation, work language labels, structured iconography, verse theological commentary, original-script pending marker, sources on both saint pages; Reference Content folder noted |
+| 1.4 | 2026-08-30 | Dev Team | Dossier bulk population: all 35 saint pages fully populated; verse original script present for 32/35 (batch-2 DOCX missing → pending marker on Nammazhwar, Madhurakavi, Kulasekhara); Acharyas index grows to 23 records across the three parampara eras; Poigai amsam corrected to Panchajanya per PO |
 
 ### 11. Global Navigation — refresh (FR-79, FR-93)
 

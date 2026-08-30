@@ -113,11 +113,13 @@ test.describe('V3 yatra toolkit', () => {
     await page.getByRole('link', { name: /Sri Manavala Mamunigal/i }).click();
     await expect(page).toHaveURL(/acharya\/manavala-mamunigal$/);
     await expect(page.getByRole('heading', { name: /life history & miracles/i })).toBeVisible();
-    await expect(page.getByText(/Eedu 36000 Padi/i)).toBeVisible();
+    await expect(page.getByText(/Eedu 36000 Padi/i).first()).toBeVisible();
     await expect(page.getByText(/Sreesailesa-dayaapaatram/i)).toBeVisible();
 
-    // Scaffolded acharya shows the visible pending marker
+    // Dossier-populated acharya renders the full template without pending markers
     await page.goto('acharya/yamunacharya');
-    await expect(page.getByText(/\[Content pending — to be provided\]/i).first()).toBeVisible();
+    await expect(page.getByRole('heading', { name: /chronological life timeline/i })).toBeVisible();
+    await expect(page.getByText(/Na Dharma Nishto/i).first()).toBeVisible();
+    await expect(page.getByText(/\[Content pending — to be provided\]/i)).toHaveCount(0);
   });
 });

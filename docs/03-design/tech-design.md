@@ -21,6 +21,7 @@
 | 0.1 | 2026-08-29 | Dev Team | Draft architecture and data model |
 | 1.0 | 2026-08-29 | Dev Team | Baseline: architecture, testing architecture, CI/CD, coding standards reference |
 | 1.1 | 2026-08-30 | Dev Team | Saint template v3.1 (dossier-aligned): optional `timeline`, headed `lifeHistory` blocks, `legend`, `birthplace.district`, `preservation`, `works[].language`, structured `visuals.iconography`, `verse.commentary`, original-script pending marker, `sources` on both saint pages; `Reference Content/` folder for PO dossiers |
+| 1.2 | 2026-08-30 | Dev Team | Dossier bulk population: all 12 Azhwars + 23 Acharyas (15 new records) fully populated from the PO dossiers; verse original script recovered for 32/35 (batch-2 DOCX missing → pending marker); PO correction — Poigai amsam is Panchajanya |
 
 ---
 

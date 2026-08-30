@@ -104,9 +104,9 @@ describe('Acharya dataset integrity (UT-ACH-01, FR-92)', () => {
     }
   });
 
-  it('marks pending biography content explicitly (FR-94 policy)', () => {
+  it('populates biography content for every acharya (dossier bulk, FR-94)', () => {
     const pending = acharyas.filter((a) => !Array.isArray(a.lifeHistory) || a.lifeHistory.length === 0);
-    expect(pending.length).toBeGreaterThan(0); // scaffold entries await PO content
+    expect(pending).toEqual([]); // the 2026-08-30 dossier upload filled all 23 records
   });
 
   it('encodes the Nathamuni dossier (saint template v3.1 proof)', () => {
@@ -114,7 +114,7 @@ describe('Acharya dataset integrity (UT-ACH-01, FR-92)', () => {
     expect(n.timeline.length).toBeGreaterThanOrEqual(5);
     expect(n.birthplace.district).toContain('Cuddalore');
     expect(n.verse.transliteration).toContain('Namo');
-    expect(n.verse.tamil).toBeUndefined(); // original script pending — renders the marker
+    expect(n.verse.tamil).toContain('நமோ'); // Sanskrit thaniyan, Tamil script (B4 DOCX)
     expect(n.verse.commentary).toHaveLength(3);
     expect(n.visuals.iconography.posture).toBeTruthy();
     for (const kid of n.associatedDesams) {

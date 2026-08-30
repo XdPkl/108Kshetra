@@ -22,7 +22,7 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90)', () => {
     expect(birthplace).toBeInTheDocument();
     expect(screen.getByText(/Kanchipuram District, Tamil Nadu/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /view kshetram/i })).toHaveAttribute('href', '/kshetram/thiruvekka');
-    expect(screen.getByText(/Kaumodaki/i)).toBeInTheDocument();
+    expect(screen.getByText(/Panchajanya/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /life history & miracles/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /chronological life timeline/i })).toBeInTheDocument();
     expect(screen.getByText(/Dehali of Thirukoilur/i)).toBeInTheDocument();
@@ -42,10 +42,13 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90)', () => {
     expect(screen.getByText(/← All Azhwars/i)).toBeInTheDocument();
   });
 
-  it('shows not-documented fallbacks and prev navigation mid-list', () => {
+  it('renders the dossier-populated Nammazhwar with prev/next navigation', () => {
     renderAt('/azhwar/nammazhwar');
     expect(screen.getByRole('heading', { name: /nammazhwar/i })).toBeInTheDocument();
-    expect(screen.getAllByText(/not yet documented yet\./i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByRole('heading', { name: /chronological life timeline/i })).toBeInTheDocument();
+    expect(screen.getAllByText(/Prapanna Jana Kootastha/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText(/Theological commentary/i)).toBeInTheDocument();
+    expect(screen.queryByText(/not yet documented yet\./i)).not.toBeInTheDocument();
     expect(screen.getByRole('link', { name: /previous: thirumazhisai azhwar/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /next: madhurakavi azhwar/i })).toBeInTheDocument();
   });
@@ -73,13 +76,14 @@ describe('AcharyaDetailPage (UT-ACH-03, FR-94)', () => {
     renderAt('/acharya/manavala-mamunigal');
     expect(screen.getByRole('heading', { name: /sri manavala mamunigal/i })).toBeInTheDocument();
     expect(screen.getByText(/Yatheendra Pravana/i)).toBeInTheDocument();
-    expect(screen.getByText(/Alwarthirunagari \(Thoothukudi District, Tamil Nadu\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Azhwar Thirunagari \(Thirukkurugur\)/i)).toBeInTheDocument();
     const amsamLink = screen.getByRole('link', { name: /Sri Ramanujacharya/i });
     expect(amsamLink).toHaveAttribute('href', '/acharya/ramanuja');
-    expect(screen.getByText(/Eedu 36000 Padi/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Eedu 36000 Padi/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText(/19 works/i)).toBeInTheDocument();
     expect(screen.getByText(/Sreesailesa-dayaapaatram/i)).toBeInTheDocument();
-    expect(screen.getAllByText(/Koyil\.org — Sri Manavala Mamunigal/i).length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText(/Koyil\.org — Sri Manavala Mamunigal/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText(/Koyil Archival Library/i)).toBeInTheDocument();
   });
 
   it('shows guru and sishya cross-links where present', () => {
@@ -90,22 +94,28 @@ describe('AcharyaDetailPage (UT-ACH-03, FR-94)', () => {
     expect(screen.getByRole('link', { name: 'Koorathazhwan' })).toHaveAttribute('href', '/acharya/koorathazhwan');
   });
 
-  it('renders the Nathamuni dossier with the original-script verse pending marker', () => {
+  it('renders the Nathamuni dossier with Sanskrit-thanivan verse in Tamil script', () => {
     renderAt('/acharya/nathamuni');
     expect(screen.getByRole('heading', { level: 1, name: /nathamuni/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /chronological life timeline/i })).toBeInTheDocument();
     expect(screen.getByText(/Cuddalore District, Tamil Nadu/i)).toBeInTheDocument();
     expect(screen.getByText(/Re-discovery of Dravida Vedam/i)).toBeInTheDocument();
     expect(screen.getByText(/Theological commentary/i)).toBeInTheDocument();
-    expect(screen.getByText(/Original verse text pending — to be provided/i)).toBeInTheDocument();
+    expect(screen.getByText(/நமோऽசிந்த்யாத்புதாத்புடாக்லிஷ்டஜ்ஞானவைராக்யராசயே/i)).toBeInTheDocument();
     expect(screen.queryByText(/\[Content pending — to be provided\]/i)).not.toBeInTheDocument();
     const guruSection = screen.getByText(/Sishyas:/i);
     expect(guruSection).toBeInTheDocument();
   });
 
-  it('renders visible pending markers for scaffolded acharyas (FR-94)', () => {
+  it('renders the dossier-populated Yamunacharya without pending markers (FR-94)', () => {
     renderAt('/acharya/yamunacharya');
-    expect(screen.getAllByText(/\[Content pending — to be provided\]/i).length).toBeGreaterThanOrEqual(3);
+    expect(screen.getByRole('heading', { level: 1, name: /yamunacharya/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /chronological life timeline/i })).toBeInTheDocument();
+    expect(screen.getAllByText(/Na Dharma Nishto/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText(/Theological commentary/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Nathamuni' })).toHaveAttribute('href', '/acharya/nathamuni');
+    expect(screen.queryByText(/\[Content pending — to be provided\]/i)).not.toBeInTheDocument();
+    expect(screen.getAllByText(/Project Madurai Texts/i).length).toBeGreaterThanOrEqual(2);
   });
 
   it('handles unknown acharya ids gracefully', () => {
