@@ -20,7 +20,7 @@ export default function PuranamHistory({ kshetram }) {
   const legend = Array.isArray(p?.legend) ? p.legend : legacyText ? [legacyText] : null;
   const literature = Array.isArray(p?.literature) ? p.literature : null;
 
-  if (!legend && !literature && !SUBSECTIONS.some(([key]) => p?.[key])) {
+  if (!legend && !literature && !p?.prathyaksham && !SUBSECTIONS.some(([key]) => p?.[key])) {
     return (
       <section id="puranam" className="detail__section detail__section--full">
         <h2>Sthala Puranam &amp; History</h2>
@@ -36,6 +36,12 @@ export default function PuranamHistory({ kshetram }) {
         <div className="puranam__legend">
           <h3>Origin legend &amp; miracles</h3>
           {legend.map((para) => <p className="puranam" key={para.slice(0, 24)}>{para}</p>)}
+        </div>
+      ) : null}
+      {p?.prathyaksham ? (
+        <div>
+          <h3>Prathyaksham</h3>
+          <p className="puranam">{p.prathyaksham}</p>
         </div>
       ) : null}
       {kshetram.significance ? (

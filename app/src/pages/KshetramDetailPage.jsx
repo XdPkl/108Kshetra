@@ -130,7 +130,7 @@ export default function KshetramDetailPage() {
         <h2>Azhwars Who Glorified</h2>
         <ul className="detail__azhwar-list">
           {azhwarNames.map((a) => (
-            <li key={a.id}><Link to="/azhwars">{a.name}</Link></li>
+            <li key={a.id}><Link to={`/azhwar/${a.id}`}>{a.name}</Link></li>
           ))}
         </ul>
       </section>

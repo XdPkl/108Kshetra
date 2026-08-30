@@ -32,7 +32,7 @@ function PhotoStrip({ photos, column, onOpenPhoto }) {
           onClick={() => onOpenPhoto(photos, i)}
           aria-label={`View ${column} photo ${i + 1}`}
         >
-          <WikiThumb title={photo.wiki ?? null} alt={photo.alt ?? `${column} photo`} />
+          <WikiThumb title={photo.wiki ?? null} alt={photo.alt ?? `${column} photo`} src={photo.src ?? null} />
         </button>
       ))}
     </div>
@@ -50,6 +50,13 @@ function DeityColumn({ title, deity, legacy, fallbackWiki, onOpenPhoto }) {
   }
   const d = deity ?? {};
   const photos = photosFor(deity, fallbackWiki, `${title} at this kshetram`);
+  const thaayars = Array.isArray(d.thaayar)
+    ? d.thaayar
+    : d.thaayar
+      ? [d.thaayar]
+      : legacy?.thaayarName
+        ? [{ name: legacy.thaayarName }]
+        : [];
   return (
     <div className="deity-column">
       <h3>{title}</h3>
@@ -72,13 +79,17 @@ function DeityColumn({ title, deity, legacy, fallbackWiki, onOpenPhoto }) {
         <p className="deity-column__form">{legacy?.form ?? ''}</p>
       ) : null}
       {d.etymology ? <p className="deity-column__etymology">{d.etymology}</p> : null}
-      {(d.thaayar || legacy?.thaayarName) && (
+      {thaayars.length > 0 ? (
         <div className="deity-column__thaayar">
-          <h4>Thaayar</h4>
-          <p>{d.thaayar?.name ?? legacy?.thaayarName}</p>
-          {d.thaayar?.legend ? <p className="deity-column__legend">{d.thaayar.legend}</p> : null}
+          <h4>{thaayars.length > 1 ? 'Thaayars' : 'Thaayar'}</h4>
+          {thaayars.map((t) => (
+            <div key={t.name}>
+              <p>{t.name}</p>
+              {t.legend ? <p className="deity-column__legend">{t.legend}</p> : null}
+            </div>
+          ))}
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

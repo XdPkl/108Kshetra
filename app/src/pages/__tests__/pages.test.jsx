@@ -124,6 +124,16 @@ describe('KshetramDetailPage (UT-DTL-01..04, V3 UT-DTL-14..17)', () => {
     expect(screen.getAllByText(/247 pasurams/i).length).toBeGreaterThan(0);
   });
 
+  it('links the Azhwars-Who-Glorified list to the per-Azhwar detail pages', () => {
+    renderAt('/kshetram/srirangam');
+    const listSection = screen.getByRole('heading', { name: /azhwars who glorified/i }).closest('section');
+    const links = [...listSection.querySelectorAll('a')];
+    expect(links.length).toBeGreaterThanOrEqual(10);
+    for (const link of links) {
+      expect(link.getAttribute('href')).toMatch(/^\/azhwar\/[a-z-]+$/);
+    }
+  });
+
   it('hides timings/nearby/distance for celestial desams', () => {
     renderAt('/kshetram/paramapadam');
     expect(screen.getByText(/celestial realm/i)).toBeInTheDocument();
