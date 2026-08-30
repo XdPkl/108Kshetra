@@ -25,10 +25,12 @@ export default function AzhwarsPage() {
           const more = desams.length - chips.length;
           return (
             <article className="azhwar-card" key={azhwar.id}>
-              <div className="azhwar-card__head">
-                <span lang="ta">{azhwar.tamilName}</span>
-                <h2>{azhwar.name}</h2>
-              </div>
+              <Link to={`/azhwar/${azhwar.id}`} className="azhwar-card__detail-link">
+                <div className="azhwar-card__head">
+                  <span lang="ta">{azhwar.tamilName}</span>
+                  <h2>{azhwar.name}</h2>
+                </div>
+              </Link>
               <p className="azhwar-card__meta">
                 {azhwar.period} · {azhwar.pasuramCount.toLocaleString('en-IN')} pasurams
               </p>

@@ -11,6 +11,9 @@ import HomePage from './pages/HomePage.jsx';
 import BrowsePage from './pages/BrowsePage.jsx';
 import KshetramDetailPage from './pages/KshetramDetailPage.jsx';
 import AzhwarsPage from './pages/AzhwarsPage.jsx';
+import AzhwarDetailPage from './pages/AzhwarDetailPage.jsx';
+import AcharyasPage from './pages/AcharyasPage.jsx';
+import AcharyaDetailPage from './pages/AcharyaDetailPage.jsx';
 import TripPage from './pages/TripPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import EmptyState from './components/EmptyState.jsx';
@@ -35,6 +38,9 @@ export default function App() {
           <Route path="/kshetrams" element={<BrowsePage />} />
           <Route path="/kshetram/:id" element={<KshetramDetailPage />} />
           <Route path="/azhwars" element={<AzhwarsPage />} />
+          <Route path="/azhwar/:id" element={<AzhwarDetailPage />} />
+          <Route path="/acharyas" element={<AcharyasPage />} />
+          <Route path="/acharya/:id" element={<AcharyaDetailPage />} />
           <Route
             path="/map"
             element={(

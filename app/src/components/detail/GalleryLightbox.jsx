@@ -15,11 +15,7 @@ import { fetchWikiImage } from '../../utils/wikiImage.js';
 function usePhotoSource(photo) {
   const [resolved, setResolved] = useState(() => (photo?.src ? photo.src : null));
   useEffect(() => {
-    if (!photo) return undefined;
-    if (photo.src) {
-      setResolved(photo.src);
-      return undefined;
-    }
+    if (!photo || photo.src) return undefined;
     let cancelled = false;
     fetchWikiImage(photo.wiki ?? null).then((img) => {
       if (!cancelled) setResolved(img.src);
@@ -77,7 +73,7 @@ export default function GalleryLightbox({ photos, index, onClose, onNavigate }) 
             ‹
           </button>
         ) : null}
-        <LightboxImage photo={photo} />
+        <LightboxImage key={index} photo={photo} />
         {count > 1 ? (
           <button
             type="button"

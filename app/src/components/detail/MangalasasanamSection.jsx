@@ -6,6 +6,7 @@
  * @param {object} props
  * @param {Kshetram & object} props.kshetram - enriched record
  */
+import { Link } from 'react-router-dom';
 import { getAzhwarById } from '../../data/api.js';
 import PasuramSection from '../PasuramSection.jsx';
 import NotDocumented from './NotDocumented.jsx';
@@ -83,9 +84,14 @@ export default function MangalasasanamSection({ kshetram }) {
           {m.perAzhwar.map(([azhwarId, count]) => {
             const azhwar = getAzhwarById(azhwarId);
             return (
-              <a key={azhwarId} className="chip" href="/azhwars" title={`${azhwar?.name ?? azhwarId}: ${count} pasurams`}>
+              <Link
+                key={azhwarId}
+                className="chip"
+                to={`/azhwar/${azhwarId}`}
+                title={`${azhwar?.name ?? azhwarId}: ${count} pasurams`}
+              >
                 {azhwar?.name ?? azhwarId} {count}
-              </a>
+              </Link>
             );
           })}
         </p>

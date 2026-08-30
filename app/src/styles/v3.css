@@ -314,6 +314,32 @@
 }
 .lightbox__credit, .lightbox__count { color: rgba(245, 236, 223, 0.75); font-size: 0.875rem; }
 
+/* ---------- Saint pages: Azhwar & Acharya detail (UXD §18/19) ---------- */
+.saint-page__order { color: var(--color-text-muted); font-size: 0.875rem; }
+.saint-identification { margin-bottom: var(--space-2); }
+.saint-works { margin: 0; padding-left: 1.1rem; }
+.saint-works-summary { color: var(--color-text-muted); margin-top: var(--space-1); }
+.acharya-theme {
+  background: rgba(201, 154, 46, 0.14);
+  border-radius: var(--radius-card);
+  padding: var(--space-2);
+}
+.saint-desams { display: flex; flex-wrap: wrap; gap: var(--space-1); align-items: center; margin-top: var(--space-2); }
+.saint-desams strong { width: 100%; }
+.saint-prevnext {
+  display: flex; justify-content: space-between; gap: var(--space-2);
+  margin: var(--space-4) 0;
+}
+.pending-content { color: var(--color-text-muted); }
+.saint-index__group h2 { border-bottom: 2px solid var(--color-accent); padding-bottom: 0.15rem; }
+.acharya-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-3); margin: var(--space-2) 0 var(--space-4); }
+.acharya-card { margin: 0; }
+.acharya-card__link { text-decoration: none; color: inherit; display: block; }
+.acharya-card__link:hover h3 { color: var(--color-primary); }
+.acharya-card__titles { color: var(--color-text-muted); font-size: 0.875rem; margin-bottom: var(--space-1); }
+.azhwar-card__detail-link { text-decoration: none; color: inherit; }
+.azhwar-card__detail-link:hover h2 { color: var(--color-primary); }
+
 /* ---------- Responsive (UXD §6) ---------- */
 @media (max-width: 767px) {
   .deity-columns, .visit-info, .pasuram__words { grid-template-columns: 1fr; }

@@ -13,7 +13,7 @@ import TripControls from '../../components/TripControls.jsx';
 import RegionLegend from '../../components/RegionLegend.jsx';
 import KshetramCard from '../../components/KshetramCard.jsx';
 import { resetVisited, toggleVisited } from '../../state/visited.js';
-import { clearTrip, addToTrip } from '../../state/trip.js';
+import { clearTrip } from '../../state/trip.js';
 
 beforeEach(() => {
   window.localStorage.clear();

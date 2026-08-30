@@ -13,6 +13,7 @@ export default function Header() {
     { to: '/map', label: 'Map' },
     { to: '/trip', label: count > 0 ? `Trip · ${count}` : 'Trip' },
     { to: '/azhwars', label: 'Azhwars' },
+    { to: '/acharyas', label: 'Acharyas' },
     { to: '/about', label: 'Kshetra Tours' },
   ];
 

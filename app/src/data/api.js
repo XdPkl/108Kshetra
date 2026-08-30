@@ -5,9 +5,14 @@
 
 import { kshetrams } from './kshetrams.js';
 import { azhwars } from './azhwars.js';
+import { AZHWAR_DETAILS } from './azhwar-details.js';
+import { acharyas } from './acharyas.js';
 import { FEATURED_KSHETRAM_IDS } from './config.js';
 import { uniqueSorted } from '../utils/group.js';
 import { getEnrichment } from './enrichment/index.js';
+
+/** Azhwars merged with their saint-template details (US-AZW-03). */
+const enrichedAzhwars = azhwars.map((a) => ({ ...a, ...(AZHWAR_DETAILS[a.id] ?? {}) }));
 
 /** @returns {Kshetram[]} all 108 kshetrams in traditional order. */
 export function getAllKshetrams() {
@@ -46,17 +51,39 @@ export function getFeaturedKshetrams() {
     .filter(Boolean);
 }
 
-/** @returns {Azhwar[]} all 12 Azhwars in traditional chronological order. */
+/** @returns {Azhwar[]} all 12 Azhwars (enriched) in traditional chronological order. */
 export function getAllAzhwars() {
-  return azhwars;
+  return enrichedAzhwars;
 }
 
 /**
  * @param {string} id - azhwar slug
- * @returns {Azhwar|undefined} the matching record, or undefined
+ * @returns {Azhwar|undefined} the matching enriched record, or undefined
  */
 export function getAzhwarById(id) {
-  return azhwars.find((a) => a.id === id);
+  return enrichedAzhwars.find((a) => a.id === id);
+}
+
+/** @returns {Azhwar[]} the Azhwars preceding and following `id` in chronological order. */
+export function getAzhwarNeighbours(id) {
+  const idx = enrichedAzhwars.findIndex((a) => a.id === id);
+  return {
+    prev: idx > 0 ? enrichedAzhwars[idx - 1] : null,
+    next: idx >= 0 && idx < enrichedAzhwars.length - 1 ? enrichedAzhwars[idx + 1] : null,
+  };
+}
+
+/** @returns {object[]} all Acharyas in parampara order (FR-92). */
+export function getAllAcharyas() {
+  return acharyas;
+}
+
+/**
+ * @param {string} id - acharya slug
+ * @returns {object|undefined} the matching record, or undefined
+ */
+export function getAcharyaById(id) {
+  return acharyas.find((a) => a.id === id);
 }
 
 /**

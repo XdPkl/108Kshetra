@@ -79,11 +79,37 @@ Renumbered: quality-gate cases TC-13..15 → **TC-QA-01..03** (TC-13+ freed for 
 | TC-15 | FR-79..81 | Add 3 desams to trip; nav count; trip page; order route; share → clipboard; clear storage; open shared URL | "Trip · 3"; stops listed; nearest-first notice; shared link restores trip | Pass |
 | TC-16 | FR-82..85 | Open `/kshetram/srirangam` | All shrine-template headings; word-by-word pasuram; "not yet documented" fallbacks | Pass |
 | TC-17 | FR-86/87 | Open `/`; check nav + hero CTA; open Kshetra Tours | Nav "Kshetra Tours"; CTA "Azhwars"; About page renders | Pass |
-| TC-18 | FR-90/91 | (Release 2) Open `/azhwar/:id` | Saint template renders with prev/next navigation | Planned (R2) |
-| TC-19 | FR-92..94 | (Release 2) Open `/acharyas`, `/acharya/:id` | Parampara index + saint template with pending markers | Planned (R2) |
+| TC-18 | FR-90/91 | (Release 2) Open `/azhwar/:id` | Saint template renders with prev/next navigation | Pass |
+| TC-19 | FR-92..94 | (Release 2) Open `/acharyas`, `/acharya/:id` | Parampara index + saint template with pending markers | Pass |
 
 Quality gates re-executed for V3: TC-QA-01 Pass (0 errors; 5 accepted warnings per CRR v1.1 CR-06) · TC-QA-02 Pass (129/129; 91.0/82.4/90.0/93.1) · TC-QA-03 Pass (initial 123.8 kB gzip; Leaflet lazy 44.9 kB).
 
 ---
 
 *End of Addendum — TCS-108K-008 v1.1*
+
+---
+
+## Version 1.2 — Release 2: Azhwar Detail & Acharyas (2026-08-30)
+
+R2 quality gates: TC-QA-01 Pass (0 errors; 2 accepted warnings per CRR v1.2) · TC-QA-02 Pass (**146/146 tests, 16 suites**; 91.8% statements / 81.6% branches / 91.2% functions / 93.7% lines) · TC-QA-03 Pass (initial **131.8 kB gzip**; Leaflet lazy chunk unchanged).
+
+### 6. Unit Cases added (R2)
+
+| ID | FR | Test Case | Expected Result | Executed |
+|---|---|---|---|---|
+| UT-AZW-03 | FR-90 | Azhwar detail page: saint template (identification, history, works, verse with word meanings), derived desam chips, prev/next chronological nav, unknown-id handling | Template renders per PO sample; navigation correct | Pass (UT) |
+| UT-AZW-04 | FR-91 | Azhwar enrichment integrity: 12 records in order, birthplace/associated-desam links resolve, works totals within documented counts, Poigai sample structure | All links valid; sample fully encoded | Pass (UT) |
+| UT-ACH-01 | FR-92 | Acharya dataset integrity: unique ids, required fields, guru/sishya/desam links resolve, pending-content policy | Links valid; pending content explicitly marked | Pass (UT) |
+| UT-ACH-02/03 | FR-93/94 | Acharyas index grouped by parampara era; Acharya detail with Manavala Mamunigal PO sample, guru/sishya cross-links, sources, pending markers | Index and template render; links resolve | Pass (UT) |
+
+### 7. E2E Cases executed (R2) — e2e/yatra.spec.js
+
+| ID | FR | Steps | Expected Result | Executed |
+|---|---|---|---|---|
+| TC-18 | FR-90/91 | Open `/azhwars` → click Poigai Azhwar → check identification/verse/kshetram link → next navigation | Saint template renders; URL updates; prev/next correct | Pass |
+| TC-19 | FR-92..94 | Open `/acharyas` → open Sri Manavala Mamunigal → check history/verse; open Nathamuni → pending markers | Index groups; sample detail renders; pending content visible | Pass |
+
+---
+
+*End of Addendum — TCS-108K-008 v1.2*

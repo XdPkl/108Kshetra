@@ -125,3 +125,54 @@ lines; 0 lint errors).
 ---
 
 *End of Addendum — CRR-108K-006 v1.1*
+
+---
+
+## Version 1.2 — Release 2 (Azhwar Detail & Acharyas) Review
+
+### Revision History (addendum)
+
+| Version | Date | Description |
+|---|---|---|
+| 1.2 | 2026-08-30 | R2 review per gated process; findings CR-11..14 logged and dispositioned |
+
+### 8. Review Summary (R2)
+
+Review performed against the CSG §11 checklist after Gate A (146/146 unit tests,
+16 suites; coverage 91.8/81.6/91.2/93.7; 0 lint errors). Scope: `azhwar-details.js`,
+`acharyas.js`, api additions, saint components/pages, routes/nav, tests.
+
+| # | Check | Verdict |
+|---|---|---|
+| 1 | Naming & file organization (`saint/` shared components) | Pass |
+| 2 | JSDoc on all exports | Pass |
+| 3 | Layering — saints accessed only via `api.js` | Pass |
+| 4 | Reusability (Identification/SaintVerse/SaintMedia shared by both templates) | Pass |
+| 5 | Accessibility (links, landmarks, pending markers as text) | Pass |
+| 6 | Security (external listen/text links `noopener noreferrer`) | Pass |
+| 7 | Performance (no new runtime deps; initial bundle 131.8 kB gzip) | Pass |
+| 8 | Tests meaningful & passing; coverage ≥ 80% | Pass |
+| 9 | Files ≤ 300 lines (largest new file ~230 lines) | Pass |
+| 10 | Findings dispositioned | Pass after CR-11..14 |
+
+### 9. Findings Log (addendum)
+
+| ID | Severity | Location | Finding | Disposition |
+|---|---|---|---|---|
+| CR-11 | Minor | `src/data/azhwar-details.js` | Granular traditional fields (amsam, birth star) omitted for a few Azhwars where traditions differ | **Accepted:** file header documents the deliberate-absence policy; pages show "not yet documented" — PO can supply data-only |
+| CR-12 | Minor | `src/data/acharyas.js` | Scaffolded acharyas carry pending biographies | **Accepted:** per agreed scaffold policy (US-ACH-01); pending marker renders visibly |
+| CR-13 | Minor | `src/data/acharyas.js` (initial draft) | Two invalid kshetram associations (Sriperumbudur/Melkote are not Divya Desams in the dataset) | **Reworked:** corrected to valid links; integrity tests (UT-ACH-01) now guard all saint→kshetram links |
+| CR-14 | Minor | `src/components/detail/GalleryLightbox.jsx` | Synchronous setState inside effect for `src`-type photos | **Reworked:** derive from props with keyed remount; lint warnings reduced to the accepted TripPage class |
+
+### 10. Rework Verification (R2 re-review, 2026-08-30)
+
+- `npm run lint` → **0 errors** (103 files; 2 accepted warnings)
+- `npm test -- --coverage` → **16 suites, 146/146 passed**; thresholds met
+- `npm run build` → succeeds; initial chunk **131.8 kB gzip**; lazy Leaflet chunk unchanged
+- E2E: **19/19 journeys** (17 existing + TC-18/19)
+
+**Gate B decision (R2): CLOSED — code approved to proceed to system/E2E testing.**
+
+---
+
+*End of Addendum — CRR-108K-006 v1.2*

@@ -90,4 +90,34 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page).toHaveURL(/about$/);
     await expect(page.getByRole('heading', { name: /about us — kshetra tours/i })).toBeVisible();
   });
+
+  test('TC-18: azhwar detail page renders the saint template with navigation', async ({ page }) => {
+    await page.goto('azhwars');
+    await page.getByRole('link', { name: /poigai azhwar/i }).click();
+    await expect(page).toHaveURL(/azhwar\/poigai$/);
+    await expect(page.getByRole('heading', { name: /identification/i })).toBeVisible();
+    await expect(page.getByText(/Sarovara Yogi · Kasara Yogi/i)).toBeVisible();
+    await expect(page.getByRole('link', { name: /view kshetram/i })).toBeVisible();
+    await expect(page.getByText(/word-by-word meaning/i)).toBeVisible();
+
+    // Chronological prev/next navigation
+    await page.getByRole('link', { name: /next: bhoothathazhwar/i }).click();
+    await expect(page).toHaveURL(/azhwar\/bhoothath$/);
+    await expect(page.getByRole('link', { name: /previous: poigai azhwar/i })).toBeVisible();
+  });
+
+  test('TC-19: acharyas index and acharya detail with pending markers', async ({ page }) => {
+    await page.goto('acharyas');
+    await expect(page.getByRole('heading', { name: /the acharyas/i })).toBeVisible();
+    await expect(page.getByText(/The age of Ramanuja/i)).toBeVisible();
+    await page.getByRole('link', { name: /Sri Manavala Mamunigal/i }).click();
+    await expect(page).toHaveURL(/acharya\/manavala-mamunigal$/);
+    await expect(page.getByRole('heading', { name: /life history & miracles/i })).toBeVisible();
+    await expect(page.getByText(/Eedu 36000 Padi/i)).toBeVisible();
+    await expect(page.getByText(/Sreesailesa-dayaapaatram/i)).toBeVisible();
+
+    // Scaffolded acharya shows the visible pending marker
+    await page.goto('acharya/nathamuni');
+    await expect(page.getByText(/\[Content pending — to be provided\]/i).first()).toBeVisible();
+  });
 });

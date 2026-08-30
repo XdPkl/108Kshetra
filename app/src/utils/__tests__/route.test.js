@@ -22,7 +22,7 @@ describe('orderNearestFirst (UT-RTE-01)', () => {
   });
 
   it('reports legs and total distance', () => {
-    const { ordered, legs, totalKm } = orderNearestFirst([A, B, C]);
+    const { legs, totalKm } = orderNearestFirst([A, B, C]);
     expect(legs[0]).toBeNull();
     expect(legs[1]).toBeGreaterThan(0);
     expect(legs[2]).toBeGreaterThan(legs[1]); // C→B is farther than A→C
