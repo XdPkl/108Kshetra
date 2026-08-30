@@ -115,8 +115,8 @@ describe('KshetramDetailPage (UT-DTL-01..04, V3 UT-DTL-14..17)', () => {
     expect(screen.getAllByText(/Word-by-word meaning/i).length).toBeGreaterThanOrEqual(2);
     expect(screen.getAllByRole('link', { name: /listen/i }).length).toBeGreaterThanOrEqual(2);
     // Legacy single-pasuram display still works where no template exists
-    renderAt('/kshetram/kanchi-varadaraja');
-    expect(screen.getAllByText(/Vaazhiye Kacchi/i).length).toBeGreaterThan(0);
+    renderAt('/kshetram/thiruvekka');
+    expect(screen.getAllByText(/sonna vannam seitha/i).length).toBeGreaterThan(0);
   });
 
   it('shows the pasuram count badge only when documented', () => {
@@ -136,7 +136,7 @@ describe('KshetramDetailPage (UT-DTL-01..04, V3 UT-DTL-14..17)', () => {
 
   it('hides timings/nearby/distance for celestial desams', () => {
     renderAt('/kshetram/paramapadam');
-    expect(screen.getByText(/celestial realm/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/celestial realm/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.queryByRole('heading', { name: /temple timings/i })).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /distance from me/i })).not.toBeInTheDocument();
   });

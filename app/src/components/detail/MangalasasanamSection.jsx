@@ -24,7 +24,8 @@ function Excerpt({ excerpt }) {
   return (
     <article className="pasuram-excerpt">
       <h4>
-        {azhwar ? azhwar.name : excerpt.azhwarId} — {excerpt.work}
+        {azhwar ? azhwar.name : excerpt.azhwarId}
+        {excerpt.work ? ` — ${excerpt.work}` : ' — representative pasuram'}
         {excerpt.verse ? ` (${excerpt.verse})` : ''}
       </h4>
       <blockquote className="pasuram">
@@ -88,7 +89,7 @@ export default function MangalasasanamSection({ kshetram }) {
                 key={azhwarId}
                 className="chip"
                 to={`/azhwar/${azhwarId}`}
-                title={`${azhwar?.name ?? azhwarId}: ${count} pasurams`}
+                title={`${azhwar?.name ?? azhwarId}: ${count ?? '—'} pasurams`}
               >
                 {azhwar?.name ?? azhwarId} {count}
               </Link>

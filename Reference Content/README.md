@@ -25,6 +25,13 @@ Uniform per-desam section template:
 The serial numbering matches the site's regional grouping (verified: #1 Srirangam, #2 Uraiyur,
 #3 Uthamar Koil, #4 Koviladi, #5 Thiruvellarai …).
 
+**Population status (2026-08-30):** dossier content is populated for **93 of the 108 site
+kshetrams** via `app/src/data/enrichment/dossiers.js` (deduplicated: dossier serials #37/#38,
+#72/#93, #78/#89, #85/#95, #103/#104 describe the same temple twice — the richer entry is used).
+- Skipped dossier serials (no corresponding site kshetram or unresolved circuit entries): **#40, #54, #57, #58, #87 (Thirukachoor is not a Divya Desam), #90, #94, #106**.
+- Site kshetrams with no usable dossier entry (keep their V2 enrichment): **Thiruvekka, Uppiliappan, Thiruvazhundur, Kandiyur, Thirumogur, Thirukkulandai, Thiruppuliangudi, Thiruneermalai, Thiruputkuzhi, Thirunindravur, Thiruvidanthai, Sholinghur, Ayodhya, Naimisaranyam** — candidate follow-ups for the PO.
+- Three photographs embedded in `Divya Desams 86 - 90.docx` were extracted to `app/public/photos/` (desams #86, #88, #89; #87/#90 dropped with their serials).
+
 ## Azhwar & Acharya dossiers (7 batches, 35 personalities)
 
 | File | Batch | Personalities covered |

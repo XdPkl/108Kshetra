@@ -10,6 +10,7 @@ import { TIRUNANGUR_DETAILS } from './tirunangur.js';
 import { NADU_NADU_DETAILS, PANDYA_DETAILS } from './pandya.js';
 import { MALAI_DETAILS, VADA_DETAILS, CELESTIAL_DETAILS } from './malai-vada.js';
 import { TEMPLATES } from './templates.js';
+import { DOSSIER_TEMPLATES } from './dossiers.js';
 
 /** @type {Record<string, {coords?: [number, number]} & object>} */
 export const ENRICHMENT = {
@@ -26,7 +27,7 @@ export const ENRICHMENT = {
 /** Attaches coordinates and any shrine template to each enriched record. */
 export function getEnrichment(id) {
   const details = ENRICHMENT[id];
-  const template = TEMPLATES[id];
+  const template = TEMPLATES[id] ?? DOSSIER_TEMPLATES[id];
   if (!details && !template) return undefined;
   return { ...details, ...template, coords: COORDS[id] ?? null };
 }

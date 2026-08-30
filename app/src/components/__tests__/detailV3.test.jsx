@@ -19,7 +19,7 @@ import SectionNav from '../../components/detail/SectionNav.jsx';
 import GalleryLightbox from '../../components/detail/GalleryLightbox.jsx';
 
 const srirangam = getEnrichedKshetramById('srirangam');
-const triplicane = getEnrichedKshetramById('triplicane'); // legacy V2 data only
+const thiruvekka = getEnrichedKshetramById('thiruvekka'); // legacy V2 data only (no dossier template)
 
 describe('ShrineProfile (UT-DTL-06, FR-83)', () => {
   it('renders the full profile grid for templated shrines', () => {
@@ -32,9 +32,9 @@ describe('ShrineProfile (UT-DTL-06, FR-83)', () => {
   });
 
   it('falls back to base record rows and hides the serial chip when absent', () => {
-    render(<ShrineProfile kshetram={triplicane} />);
+    render(<ShrineProfile kshetram={thiruvekka} />);
     expect(screen.queryByText(/Divya Desam #/)).not.toBeInTheDocument();
-    expect(screen.getAllByText(/Triplicane|Chennai/).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Yathothakari|Kanchipuram/).length).toBeGreaterThan(0);
   });
 });
 
@@ -52,9 +52,9 @@ describe('DeityBreakdown (UT-DTL-06, FR-83/85)', () => {
   });
 
   it('falls back to legacy V2 deity fields and shows placeholders when no photos exist', () => {
-    render(<DeityBreakdown kshetram={triplicane} onOpenPhoto={() => {}} />);
-    expect(screen.getAllByText(/Venkatakrishnan|Parthasarathy/i).length).toBeGreaterThan(0);
-    expect(screen.getByText(/Rukmani/i)).toBeInTheDocument();
+    render(<DeityBreakdown kshetram={thiruvekka} onOpenPhoto={() => {}} />);
+    expect(screen.getAllByText(/Yathothakari|Sonna Vannam/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Komala Valli/i)).toBeInTheDocument();
   });
 
   it('opens the lightbox via a photo strip button', async () => {
@@ -77,8 +77,8 @@ describe('PuranamHistory (FR-83)', () => {
   });
 
   it('falls back to the legacy puranam paragraph and significance', () => {
-    render(<PuranamHistory kshetram={triplicane} />);
-    expect(screen.getAllByText(/charioteer of Arjuna/i).length).toBeGreaterThanOrEqual(1);
+    render(<PuranamHistory kshetram={thiruvekka} />);
+    expect(screen.getAllByText(/Saraswati/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByRole('heading', { name: /significance/i })).toBeInTheDocument();
   });
 });
@@ -94,8 +94,8 @@ describe('MangalasasanamSection (FR-83/64/65)', () => {
   });
 
   it('falls back to the legacy pasuram blockquote', () => {
-    render(<MangalasasanamSection kshetram={triplicane} />);
-    expect(screen.getByText(/charioteer/i)).toBeInTheDocument();
+    render(<MangalasasanamSection kshetram={thiruvekka} />);
+    expect(screen.getAllByText(/sonna vannam seitha/i).length).toBeGreaterThanOrEqual(1);
   });
 });
 
@@ -108,7 +108,7 @@ describe('VisitInfoSection (FR-83)', () => {
 
   it('renders festivals, access, tips and references when documented', () => {
     const rich = {
-      ...triplicane,
+      ...thiruvekka,
       timings: { morning: ['07:00', '12:00'], evening: ['16:00', '20:00'], notes: 'Brahmotsavam special' },
       festivals: [{ name: 'Panguni Brahmotsavam', month: 'Mar/Apr' }],
       access: { town: 'Chennai', rail: 'Triplicane', airport: 'MAA', road: 'Off Anna Salai' },
@@ -127,7 +127,7 @@ describe('VisitInfoSection (FR-83)', () => {
 describe('MangalasasanamSection branches', () => {
   it('omits the total when undocumented and renders excerpts without audio links', () => {
     const minimal = {
-      ...triplicane,
+      ...thiruvekka,
       pasuramCount: 0,
       pasuram: null,
       mangalasasanam: {
@@ -155,7 +155,7 @@ describe('VisualsMedia (FR-83)', () => {
   });
 
   it('shows the fallback when no media exists', () => {
-    render(<VisualsMedia kshetram={{ ...triplicane, visuals: undefined }} />);
+    render(<VisualsMedia kshetram={{ ...thiruvekka, visuals: undefined }} />);
     expect(screen.getByText(/not yet documented yet\./i)).toBeInTheDocument();
   });
 });

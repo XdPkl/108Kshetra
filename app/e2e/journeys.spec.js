@@ -78,7 +78,7 @@ test.describe('Kshetram detail (TC-08, TC-09, V2)', () => {
 
   test('celestial desam hides earthly features', async ({ page }) => {
     await page.goto('kshetram/paramapadam');
-    await expect(page.getByText(/celestial realm/i)).toBeVisible();
+    await expect(page.getByText(/celestial realm/i).first()).toBeVisible();
     await expect(page.getByRole('button', { name: /distance from me/i })).toHaveCount(0);
   });
 
