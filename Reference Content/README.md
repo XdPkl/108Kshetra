@@ -1,10 +1,31 @@
-# Reference Content — Azhwars & Acharyas Dossiers
+# Reference Content — Azhwars, Acharyas & Divya Desams Dossiers
 
-Product Owner–supplied source content for the saint pages (Azhwar detail, Acharya detail).
-These files are the authoritative reference for populating `app/src/data/azhwar-details.js`
-and `app/src/data/acharyas.js`. They are **not** deployed — GitHub Pages serves only `app/dist`.
+Product Owner–supplied source content for the saint pages (Azhwar detail, Acharya detail) and the
+Divya Desam shrine pages. These files are the authoritative reference for populating
+`app/src/data/azhwar-details.js`, `app/src/data/acharyas.js` and the kshetram shrine templates
+(`app/src/data/enrichment/`). They are **not** deployed — GitHub Pages serves only `app/dist`.
 
-## Files
+## Divya Desam dossiers (23 files, serials #1–#108 — complete, no gaps)
+
+| Files | Desams | Notes |
+|---|---|---|
+| `DivyaDesams-1-5.docx` | #1–#5 | Format A (ALL-CAPS headings); Devanagari present |
+| `Divya Desam 6 - 10.docx` … `Divya Desams 82 - 85.docx` | #6–#85 | Format B (title-case headings); some profile fields merged onto one line (e.g. "Sanctum Tower & Water Body") |
+| `Divya Desams 86 - 90.docx` | #86–#90 | Contains 6 embedded PNG photographs (~10MB) |
+| `Divya Desams 91 - 95.docx` … `Divya Desams 107 - 108.docx` | #91–#108 | Format B; no Devanagari in #86–#108 (Sanskrit names in transliteration only) |
+
+Uniform per-desam section template:
+
+1. **Basic Shrine Profile** — Serial Number, Shrine Name, Traditional Region, Geographic Location, Vimanam, Theertham, Sthala Vriksham, Posture & Orientation.
+2. **Deities & Consorts Breakdown** — Moolavar/Urchavar (Tamil + Sanskrit + transliteration), Etymology, Moolavar/Urchavar Thaayars with legends, Garbhagriha setup.
+3. **Complete Sthala Puranam, Miracles & Historic Milestones** — Origin legend, Prathyaksham, Historical Timeline & Epigraphy, Invasions & Preservation, Cultural Milestones, Literature References.
+4. **Pasuram Details & Azhwar Mangalasasanam** — Total pasurams, per-Azhwar counts, Representative Pasuram Excerpts (Tamil script + English Transliteration + Word-by-Word Meaning + Theological Significance).
+5. **Visuals & Media References** — Visual References (Rajagopuram/Moolavar form/Thaayar form/Urchavar form), Literature references, Recommended YouTube search queries.
+
+The serial numbering matches the site's regional grouping (verified: #1 Srirangam, #2 Uraiyur,
+#3 Uthamar Koil, #4 Koviladi, #5 Thiruvellarai …).
+
+## Azhwar & Acharya dossiers (7 batches, 35 personalities)
 
 | File | Batch | Personalities covered |
 |---|---|---|
