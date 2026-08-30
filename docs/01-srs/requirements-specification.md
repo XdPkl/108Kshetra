@@ -23,6 +23,7 @@
 | 0.1 | 2026-08-29 | Dev Team | Initial draft — purpose, scope, glossary |
 | 1.0 | 2026-08-29 | Dev Team | Baseline: full FR/NFR set, constraints, traceability matrix; approved for design |
 | 1.1 | 2026-08-29 | Dev Team | Added §3.7 Detail Enrichment (FR-60..68): deities with media, timings, nearby desams, pasuram display & audio, sthala puranam, geolocation distance |
+| 1.2 | 2026-08-30 | Dev Team | V3 program: added §3.9 Yatra Toolkit (FR-71..81), §3.10 Detail V3 (FR-82..85), §3.11 Site Info & Wording (FR-86..87), §3.12 Content Expansion R2 (FR-90..94), NFR-11, traceability addendum. Revised at Gate 2 per PO sample documents (Srirangam shrine, Poigai Azhwar, Sri Manavala Mamunigal): FR-83/87/90/92/94 follow the shrine/saint content templates; nav label "Kshetra Tours" |
 
 ### Approvals
 
@@ -255,3 +256,90 @@ The product is accepted when:
 | FR-70 | Detail pages shall offer a Print action backed by a dedicated print stylesheet (nav/footer/controls hidden, sections expanded) suitable for PDF export. | S |
 
 Product Owner decisions recorded: distance = straight-line (Haversine) plus Google Maps directions link; pasuram audio = curated external links; photos = Wikimedia-sourced where available with decorative placeholders otherwise.
+
+---
+
+## 3.9 Yatra Toolkit (V3 — Release 1)
+
+| ID | Requirement | Priority |
+|---|---|---|
+| FR-71 | The application shall persist each visitor's visited/trip state in browser localStorage only; no such data shall be transmitted to any server. | M |
+| FR-72 | The detail page shall offer a toggle to mark/unmark a kshetram as visited, and kshetram cards shall visually badge visited kshetrams. | M |
+| FR-73 | The Home and Browse pages shall display darshan progress ("X of 108 visited") via an accessible progress indicator that updates immediately. | M |
+| FR-74 | The Browse page shall offer a visited-status filter (All / Visited / Not yet visited) combined (AND) with the existing filters. | M |
+| FR-75 | The application shall offer an explicit reset of all visited marks, guarded by a confirmation. | S |
+| FR-76 | A `/map` route shall render an interactive map (Leaflet with OpenStreetMap tiles, attribution visible) plotting every kshetram that has coordinates; the map code shall load in a lazy route-level chunk. Kshetrams without coordinates (celestial) are excluded. | M |
+| FR-77 | Map markers shall be color-coded by region with a legend; each marker opens a popup with the kshetram name (English and Tamil) and a link to its detail page; visited kshetrams shall be visually distinct. | M |
+| FR-78 | The map shall offer an opt-in "my location" control using browser geolocation with graceful handling of denial or unsupported devices, and region filter chips. | S |
+| FR-79 | The application shall maintain a personal trip list: desams can be added/removed from the detail page, map popups and card actions; duplicates are prevented; the trip persists locally. | M |
+| FR-80 | A `/trip` route shall list trip stops grouped by region with straight-line distances between consecutive stops, offer a nearest-neighbour "order my route" action from the first stop, per-stop removal, trip clearing, and a guiding empty state. | M |
+| FR-81 | The trip page shall support sharing via a URL query parameter encoding the stops (clipboard fallback offered), a print-friendly layout, and restoring the trip when a shared URL is opened. | S |
+
+## 3.10 Kshetram Detail V3 (V3 — Release 1)
+
+| ID | Requirement | Priority |
+|---|---|---|
+| FR-82 | The detail page shall integrate the yatra toolkit: visited toggle, add-to/remove-from-trip control, and a location mini-map (lazy-loaded). Celestial desams hide all earthly widgets. | M |
+| FR-83 | The detail page shall render the full shrine content template wherever documented: Basic Shrine Profile (serial number, Vimanam, Theertham, Sthala Vriksham, sanctum posture & orientation), a Moolavar/Urchavar deity breakdown with names in Tamil/Sanskrit/transliteration, etymology and Thaayar legends, Sthala Puranam with history subsections (origin legend & miracles, prathyaksham, timeline & epigraphy, invasions & preservation, cultural milestones, literature references), a Mangalasasanam summary (total and per-Azhwar pasuram counts) with representative excerpts (Tamil, transliteration, word-by-word meaning, theological significance), pilgrim information (timings, festivals, how to reach, stay & darshan tips, references) and Visuals & Media (visual markers, recommended listening, digital texts). Undocumented items show an explicit "not yet documented" note rather than a blank section. | M |
+| FR-84 | The detail page shall follow the UXD v1.2 refreshed layout (section hierarchy, in-page section navigation on long pages); the print stylesheet shall cover all new sections. | S |
+| FR-85 | The deity gallery shall offer a lightbox with alt text, licence credits and keyboard support (Esc to close, arrow keys to move); where sourced, multiple photos per deity are offered. | S |
+
+## 3.11 Site Information & Wording (V3 — Release 1)
+
+| ID | Requirement | Priority |
+|---|---|---|
+| FR-86 | The Home hero call-to-action for the Azhwars section shall read "Azhwars". | S |
+| FR-87 | An `/about` route ("About Us — Kshetra Tours", navigated under the label "Kshetra Tours") shall present the site's purpose, the Kshetra Tours initiative and contact information; its content shall be data-driven so it can be updated without UI-code change. | M |
+
+## 3.12 Content Expansion (V3 — Release 2)
+
+| ID | Requirement | Priority |
+|---|---|---|
+| FR-90 | Each Azhwar shall have a detail page at `/azhwar/:id` following the saint content template: Identification (titles & aliases, Tamil birth month/star/tithi, birthplace linked to its kshetram page where applicable, divine amsam, era with contemporary kings), Life History & Miracles, Contributions (works with pasuram counts, role & bhakti bhava, associated desams), a Representative Verse (Tamil, transliteration, word-by-word meaning, significance), Visuals & Media, all desams glorified (derived from the dataset), and prev/next chronological navigation; unknown ids follow the FR-33 pattern. | M |
+| FR-91 | The Azhwar dataset shall be extended (birthplace, biography, works with pasuram counts), verified by data-integrity tests including Azhwar↔Kshetram cross-references. | M |
+| FR-92 | An Acharya dataset shall be added following the saint content template (id, name, Tamil name, order within the parampara, titles & aliases, birth month/star, birthplace, divine amsam, era, life history, works, representative verse with word meanings, associated desams, philosophical theme, guru/sishya links, visuals & media, sources) with unique ids and valid internal links enforced by tests; content not yet provided shall be explicitly marked. | M |
+| FR-93 | An `/acharyas` page shall list the Acharyas grouped by era/parampara, with an "Acharyas" navigation entry alongside "Azhwars". | M |
+| FR-94 | Each Acharya shall have a detail page at `/acharya/:id` following the same saint template as FR-90, plus Guru & Sishyas links and a Sources section; content not yet provided shall be explicitly marked "[Content pending — to be provided]". | M |
+
+---
+
+## 4.1 Non-Functional Requirements addendum (V3)
+
+| ID | Category | Requirement | Priority |
+|---|---|---|---|
+| NFR-11 | Performance | Route-level code splitting: the map bundle (Leaflet) and other heavy widgets load in lazy chunks; the initial gzipped JS bundle remains within the NFR-01 budget. | M |
+
+---
+
+## 5.1 Traceability Matrix addendum (V3)
+
+Test-case IDs TC-13.. are assigned in the updated test-design artefacts at Gate 4; unit IDs follow the same convention as the baseline.
+
+| FR | User Story | Unit Test(s) | E2E Test Case(s) |
+|---|---|---|---|
+| FR-71 | US-TRK-01 | UT-TRK-01..02 | TC-13 |
+| FR-72 | US-TRK-02 | UT-TRK-03 | TC-13 |
+| FR-73 | US-TRK-03 | UT-TRK-04 | TC-13 |
+| FR-74 | US-TRK-04 | UT-FLT-05 | TC-13 |
+| FR-75 | US-TRK-05 | UT-TRK-05 | TC-13 |
+| FR-76 | US-MAP-01 | UT-MAP-01 | TC-14 |
+| FR-77 | US-MAP-02 | UT-MAP-02 | TC-14 |
+| FR-78 | US-MAP-03 | UT-MAP-03 | TC-14 |
+| FR-79 | US-TRP-01 | UT-TRP-01 | TC-15 |
+| FR-80 | US-TRP-02 | UT-TRP-02, UT-RTE-01 | TC-15 |
+| FR-81 | US-TRP-03 | UT-TRP-03 | TC-15 |
+| FR-82 | US-DTL-14 | UT-DTL-05 | TC-16 |
+| FR-83 | US-DTL-15 | UT-DTL-06 | TC-16 |
+| FR-84 | US-DTL-16 | UT-DTL-07 | TC-16 |
+| FR-85 | US-DTL-17 | UT-DTL-08 | TC-16 |
+| FR-86 | US-NAV-02 | UT-NAV-04 | TC-17 |
+| FR-87 | US-ABT-01 | UT-ABT-01 | TC-17 |
+| FR-90 | US-AZW-02 | UT-AZW-03 | TC-18 |
+| FR-91 | US-AZW-03 | UT-AZW-04 | TC-18 |
+| FR-92 | US-ACH-01 | UT-ACH-01 | TC-19 |
+| FR-93 | US-ACH-02 | UT-ACH-02 | TC-19 |
+| FR-94 | US-ACH-03 | UT-ACH-03 | TC-19 |
+
+---
+
+*Feasibility study for administrator content management (Release 3 candidate): see `docs/06-feasibility/admin-content-feasibility.md`.*

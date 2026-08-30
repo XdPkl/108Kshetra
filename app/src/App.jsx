@@ -1,6 +1,9 @@
 /**
- * App — router and page shell (FR-50).
+ * App — router and page shell (FR-50). The map route (Leaflet) is
+ * lazy-loaded so the initial bundle stays within the NFR-01 budget
+ * (NFR-11 route-level code splitting).
  */
+import { Suspense, lazy } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
@@ -8,7 +11,19 @@ import HomePage from './pages/HomePage.jsx';
 import BrowsePage from './pages/BrowsePage.jsx';
 import KshetramDetailPage from './pages/KshetramDetailPage.jsx';
 import AzhwarsPage from './pages/AzhwarsPage.jsx';
+import TripPage from './pages/TripPage.jsx';
+import AboutPage from './pages/AboutPage.jsx';
 import EmptyState from './components/EmptyState.jsx';
+
+const MapPage = lazy(() => import('./pages/MapPage.jsx'));
+
+function RouteFallback() {
+  return (
+    <div className="page route-fallback" role="status">
+      Loading map…
+    </div>
+  );
+}
 
 export default function App() {
   return (
@@ -20,6 +35,16 @@ export default function App() {
           <Route path="/kshetrams" element={<BrowsePage />} />
           <Route path="/kshetram/:id" element={<KshetramDetailPage />} />
           <Route path="/azhwars" element={<AzhwarsPage />} />
+          <Route
+            path="/map"
+            element={(
+              <Suspense fallback={<RouteFallback />}>
+                <MapPage />
+              </Suspense>
+            )}
+          />
+          <Route path="/trip" element={<TripPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route
             path="*"
             element={(

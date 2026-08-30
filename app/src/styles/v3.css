@@ -1,0 +1,332 @@
+/*
+ * V3 styles — yatra toolkit, shrine template, map, trip, lightbox
+ * (UXD-108K-005 v1.2 §11–21). Tokens come from tokens.css.
+ */
+
+/* ---------- Progress banner (FR-73) ---------- */
+.progress-banner {
+  background: var(--color-surface);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-3);
+  margin: var(--space-3) 0;
+}
+.progress-banner__label { margin: 0 0 var(--space-2); }
+.progress-banner__track {
+  height: 0.75rem;
+  border-radius: var(--radius-pill);
+  background: rgba(201, 154, 46, 0.25);
+  overflow: hidden;
+}
+.progress-banner__fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-pill);
+  transition: width 0.3s ease;
+}
+.progress-banner__reset {
+  margin-top: var(--space-2);
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.875rem;
+}
+
+/* ---------- Visited badge & trip/visited buttons (FR-72/79) ---------- */
+.visited-badge {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.1rem 0.55rem;
+  border-radius: var(--radius-pill);
+}
+.btn-visited.is-active,
+.btn-trip.is-active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+/* ---------- Card actions row (outside the card link) ---------- */
+.kshetram-card { position: relative; }
+.kshetram-card--visited { border-color: var(--color-accent); }
+.kshetram-card__actions {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  right: var(--space-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-1);
+  z-index: 1;
+}
+.kshetram-card__link { padding-top: var(--space-5); }
+
+/* ---------- Header: six-item nav (UXD §11) ---------- */
+.site-nav ul {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--space-3);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+}
+.site-nav li { scroll-snap-align: start; white-space: nowrap; }
+.site-footer__privacy { font-size: 0.875rem; opacity: 0.85; }
+
+/* ---------- Detail template (UXD §16) ---------- */
+.detail__serial {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.1rem 0.6rem;
+  border-radius: var(--radius-pill);
+  margin-left: var(--space-2);
+  vertical-align: middle;
+}
+.detail__serial--hero { margin: 0 0 var(--space-1); }
+.detail__head-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+.section-nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--color-bg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  padding: var(--space-2) 0;
+  margin-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-accent);
+}
+.section-nav__chip {
+  font-size: 0.875rem;
+  padding: 0.15rem 0.7rem;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+.section-nav__chip:hover { background: var(--color-accent); color: #fff; }
+
+.detail__profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-2);
+  margin: 0;
+}
+.detail__profile-item {
+  background: var(--color-surface);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-card);
+  padding: var(--space-2);
+}
+.detail__profile-item dt {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.detail__profile-item dd { margin: 0.15rem 0 0; }
+
+.deity-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+.deity-column {
+  background: var(--color-surface);
+  border-top: 3px solid var(--color-accent);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-3);
+}
+.deity-column h3 { margin-top: 0; }
+.deity-column__names { font-weight: 600; margin-bottom: 0; }
+.deity-column__form { color: var(--color-text-muted); font-style: italic; }
+.deity-column__thaayar h4 { margin-bottom: 0.15rem; }
+.deity-column__legend { color: var(--color-text-muted); }
+.deity-sanctum-note {
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-card);
+}
+.photo-strip { display: flex; gap: var(--space-1); align-items: flex-start; flex-wrap: wrap; }
+.photo-strip__item {
+  border: none; background: none; padding: 0; cursor: zoom-in; width: 33%;
+}
+.photo-strip__item--lead { width: 100%; }
+.photo-strip__item .deity-photo { margin: 0; width: 100%; }
+.photo-strip__item img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-card); }
+
+.puranam__legend h3, #puranam h3, .visit-info__block h3, .visuals-media h3 { margin-bottom: 0.25rem; }
+.puranam__literature { margin-top: 0.25rem; }
+
+.mangalasasanam__summary { margin-bottom: var(--space-2); }
+.pasuram-excerpt { margin-bottom: var(--space-3); }
+.pasuram-excerpt h4 { margin-bottom: 0.25rem; }
+.pasuram__tamil { white-space: pre-line; font-size: 1.125rem; }
+.pasuram__words { margin: 0 0 var(--space-2); display: grid; grid-template-columns: 1fr 1fr; gap: 0.15rem var(--space-3); }
+.pasuram__word dt { font-weight: 600; }
+.pasuram__word dd { margin: 0; color: var(--color-text-muted); }
+.pasuram__significance {
+  background: rgba(201, 154, 46, 0.14);
+  border-radius: var(--radius-card);
+  padding: var(--space-2);
+}
+
+.visit-info { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+.visit-info__block {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-3);
+}
+.visit-info__block h3 { margin-top: 0; }
+.visit-info__access dt {
+  float: left; clear: left; width: 5.5rem;
+  color: var(--color-text-muted); font-size: 0.875rem;
+}
+.visit-info__access dd { margin: 0 0 0.25rem 6rem; }
+
+.visuals-media__chips { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+.detail__nodata { color: var(--color-text-muted); font-style: italic; margin: 0.25rem 0; }
+
+/* ---------- Map page (UXD §14) ---------- */
+.map-page__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-2); flex-wrap: wrap; }
+.map-page__hint { color: var(--color-text-muted); }
+.map-page__chips, .region-legend { display: flex; flex-wrap: wrap; gap: var(--space-1); margin: var(--space-2) 0; }
+.region-chip {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  border: 1px solid var(--color-accent);
+  background: var(--color-surface);
+  border-radius: var(--radius-pill);
+  padding: 0.15rem 0.7rem;
+  font: inherit; font-size: 0.875rem;
+  cursor: pointer;
+}
+.region-chip.is-active { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+.region-chip__dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; display: inline-block; }
+.map-page__frame { height: 480px; border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--color-accent); }
+.map-page__leaflet { height: 100%; }
+.region-legend__item { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.875rem; margin-right: var(--space-2); }
+.region-legend__dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; display: inline-block; }
+.region-legend__dot--visited {
+  background: radial-gradient(circle, var(--color-accent) 40%, transparent 45%);
+  border: 2px solid var(--color-accent);
+}
+.map-popup__tamil { margin: 0; color: var(--color-text-muted); }
+.map-popup__name { margin: 0.1rem 0 0.4rem; font-weight: 600; }
+.map-popup__actions { display: flex; gap: var(--space-1); }
+
+/* ---------- Mini-map (detail location) ---------- */
+.mini-map { height: 260px; border-radius: var(--radius-card); margin: var(--space-2) 0; }
+.mini-map--loading { display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); }
+
+/* ---------- Trip page (UXD §15) ---------- */
+.trip-page__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-2); flex-wrap: wrap; }
+.trip-page__actions { display: flex; gap: var(--space-1); }
+.trip-page__meta { color: var(--color-text-muted); }
+.trip-page__notice {
+  background: rgba(201, 154, 46, 0.16);
+  border-radius: var(--radius-card);
+  padding: var(--space-2);
+}
+.trip-page__notice-dismiss {
+  background: none; border: none; color: var(--color-primary);
+  text-decoration: underline; cursor: pointer; font: inherit;
+}
+.trip-page__viewtoggle { display: flex; align-items: center; gap: var(--space-1); flex-wrap: wrap; margin-bottom: var(--space-3); }
+.trip-page__order { margin-left: auto; }
+.trip-group { margin-bottom: var(--space-3); }
+.trip-group__region {
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.15rem;
+}
+.trip-list { list-style: none; padding: 0; margin: var(--space-2) 0; }
+.trip-stop {
+  display: flex; align-items: baseline; gap: var(--space-2);
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-1);
+}
+.trip-stop__index { color: var(--color-text-muted); }
+.trip-stop__tamil { margin-right: 0.25rem; }
+.trip-stop__place { color: var(--color-text-muted); }
+.trip-stop__remove {
+  margin-left: auto;
+  background: none; border: none; cursor: pointer;
+  color: var(--color-danger); font: inherit; font-size: 0.875rem;
+}
+.trip-leg {
+  list-style: none;
+  color: var(--color-text-muted);
+  padding-left: var(--space-4);
+  margin: -0.35rem 0 0.15rem;
+  font-size: 0.875rem;
+}
+.route-fallback { color: var(--color-text-muted); }
+
+/* ---------- About page (UXD §17) ---------- */
+.about-page__list { margin-top: 0.25rem; }
+.about-page__contact dt { float: left; clear: left; width: 4.5rem; color: var(--color-text-muted); }
+.about-page__contact dd { margin: 0 0 0.25rem 5rem; }
+
+/* ---------- Lightbox (FR-85) ---------- */
+.lightbox {
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(20, 12, 6, 0.88);
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--space-3);
+}
+.lightbox__inner {
+  position: relative; max-width: min(900px, 94vw); margin: 0;
+}
+.lightbox__inner img { max-width: 100%; max-height: 78vh; display: block; border-radius: var(--radius-card); }
+.lightbox__close {
+  position: absolute; top: -0.5rem; right: -0.5rem;
+  background: var(--color-surface); border: none;
+  border-radius: 50%; width: 2.2rem; height: 2.2rem;
+  font-size: 1rem; cursor: pointer;
+}
+.lightbox__caption {
+  color: #f5ecdf; display: flex; gap: var(--space-3);
+  flex-wrap: wrap; justify-content: space-between; margin-top: 0.5rem;
+}
+.lightbox__credit, .lightbox__count { color: rgba(245, 236, 223, 0.75); font-size: 0.875rem; }
+
+/* ---------- Responsive (UXD §6) ---------- */
+@media (max-width: 767px) {
+  .deity-columns, .visit-info, .pasuram__words { grid-template-columns: 1fr; }
+  .trip-page__order { margin-left: 0; }
+  .detail__head-actions { justify-content: flex-start; }
+}
+
+/* ---------- Print (FR-70/84) ---------- */
+@media print {
+  .site-header, .site-footer, .page-actions, .section-nav,
+  .progress-banner__reset, .trip-page__actions, .trip-page__viewtoggle,
+  .trip-stop__remove, .btn, .region-chip, .map-page__chips,
+  .map-page__frame, .mini-map, .photo-strip, .lightbox { display: none !important; }
+  .kshetram-card__actions { display: none !important; }
+  .detail__section { break-inside: avoid; }
+}

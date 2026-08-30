@@ -73,3 +73,55 @@ Post-rework run on 2026-08-29:
 ---
 
 *End of Document — CRR-108K-006 v1.0*
+
+---
+
+## Version 1.1 — Release 1 (V3 Yatra Toolkit + Detail V3) Review
+
+### Revision History (addendum)
+
+| Version | Date | Description |
+|---|---|---|
+| 1.1 | 2026-08-30 | Release 1 review per gated process; findings CR-06..10 logged and dispositioned |
+
+### 5. Review Summary (R1)
+
+Review performed against the CSG §11 checklist after Gate A (129/129 unit tests,
+14 suites; coverage 91.0% statements / 82.4% branches / 90.0% functions / 93.1%
+lines; 0 lint errors).
+
+| # | Check | Verdict |
+|---|---|---|
+| 1 | Naming & file organization (`state/`, `detail/` modules) | Pass |
+| 2 | JSDoc on all exports | Pass |
+| 3 | Layering — UI state in `src/state`, data only via `api.js` | Pass |
+| 4 | Reusability (VisitedBadge/TripControls shared by cards, detail, map) | Pass |
+| 5 | Accessibility (aria-pressed toggles, progressbar role, dialog lightbox) | Pass |
+| 6 | Security (YouTube/archive links `noopener noreferrer`; no storage transmission) | Pass |
+| 7 | Performance (lazy Leaflet chunk; initial bundle 123.8 kB gzip vs 300 kB budget) | Pass |
+| 8 | Tests meaningful & passing; coverage ≥ 80% | Pass |
+| 9 | Files ≤ 300 lines (largest new file: KshetramDetailPage ~160 lines) | Pass |
+| 10 | Findings dispositioned | Pass after CR-06..10 |
+
+### 6. Findings Log (addendum)
+
+| ID | Severity | Location | Finding | Disposition |
+|---|---|---|---|---|
+| CR-06 | Minor | `src/pages/TripPage.jsx` | oxlint `set-state-in-effect` warnings (5) on the shared-link restore effect | **Accepted:** the effect synchronises with an external system (the URL) and applies once per param via a ref guard; documented in review. Gate remains 0 errors |
+| CR-07 | Minor | `src/components/detail/MangalasasanamSection.jsx` | Per-Azhwar count chips link to `/azhwars` because `/azhwar/:id` routes arrive in Release 2 (US-AZW-02) | **Accepted:** tracked as R2 work; no broken links |
+| CR-08 | Minor | `src/components/DeityGallery.jsx` | Superseded by `DeityBreakdown` (V3 photo strips) — dead code | **Reworked:** file deleted; legacy E2E journey updated to the approved V3 heading names (UXD v1.2 §16) |
+| CR-09 | Minor | `src/components/ProgressBanner.jsx` | Unreachable zero-count guard inside `onReset` (reset button hidden at 0) | **Reworked:** guard removed |
+| CR-10 | Minor | `src/pages/KshetramDetailPage.jsx` | Initial edit shipped a malformed `NearbyDesams` prop | **Reworked:** restored `getAllKshetramsEnriched()`; nearby-desam journey re-verified |
+
+### 7. Rework Verification (R1 re-review, 2026-08-30)
+
+- `npm run lint` → **0 errors** (92 files; 5 accepted warnings per CR-06)
+- `npm test -- --coverage` → **14 suites, 129/129 passed**; thresholds met (all ≥ 80%)
+- `npm run build` → succeeds; **initial chunk 123.8 kB gzip** (Leaflet isolated in a 44.9 kB gzip lazy chunk + 1.5 kB MapPage / 0.4 kB MiniMapInner) — NFR-01/NFR-11 satisfied
+- E2E smoke: **17/17 journeys pass** (12 legacy incl. updated TC-08 headings + 5 new TC-13..17); formal execution report due at Gate 4
+
+**Gate B decision (R1): CLOSED — code approved to proceed to system/E2E testing.**
+
+---
+
+*End of Addendum — CRR-108K-006 v1.1*

@@ -27,6 +27,10 @@ export default function SearchFilterBar({
     { name: 'deityForm', label: 'Deity Form', options: deityFormOptions },
     { name: 'azhwar', label: 'Azhwar', options: azhwarOptions },
   ];
+  const visitOptions = [
+    { value: 'visited', label: 'Visited' },
+    { value: 'unvisited', label: 'Not yet visited' },
+  ];
 
   return (
     <div className="search-filter-bar">
@@ -55,6 +59,19 @@ export default function SearchFilterBar({
           </select>
         </div>
       ))}
+      <div className="search-filter-bar__select">
+        <label htmlFor="filter-visited">Visit status</label>
+        <select
+          id="filter-visited"
+          value={filters.visited}
+          onChange={(e) => onFilterChange('visited', e.target.value)}
+        >
+          <option value="">All kshetrams</option>
+          {visitOptions.map((o) => (
+            <option key={o.value} value={o.value}>{o.label}</option>
+          ))}
+        </select>
+      </div>
       {showReset ? (
         <button type="button" className="btn btn--outline" onClick={onReset}>
           Clear all

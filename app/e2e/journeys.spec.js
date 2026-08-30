@@ -52,8 +52,8 @@ test.describe('Kshetram detail (TC-08, TC-09, V2)', () => {
     await page.goto('kshetram/srirangam');
     await expect(page.getByRole('heading', { name: /srirangam/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /temple timings/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /presiding deities/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /mangalasasanam pasuram/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /deities & consorts/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /^mangalasasanam$/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /sthala puranam/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /nearby divya desams/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /significance/i })).toBeVisible();

@@ -28,7 +28,9 @@ describe('HomePage (UT-HOME-01..03)', () => {
   it('offers navigation to Browse and Azhwars', () => {
     renderAt('/');
     expect(screen.getByRole('link', { name: /explore the 108/i })).toHaveAttribute('href', '/kshetrams');
-    expect(screen.getAllByRole('link', { name: /meet the azhwars/i }).length).toBeGreaterThan(0);
+    // FR-86: the hero CTA reads "Azhwars" (header nav + teaser also link there)
+    expect(screen.getAllByRole('link', { name: /^azhwars$/i }).length).toBeGreaterThan(0);
+    expect(screen.queryByRole('link', { name: /meet the azhwars/i })).not.toBeInTheDocument();
   });
 });
 
@@ -64,16 +66,17 @@ describe('BrowsePage (UT-BRW-01..04)', () => {
   });
 });
 
-describe('KshetramDetailPage (UT-DTL-01..04, V2 UT-DTL-03..13)', () => {
-  it('renders all V2 sections of the kshetram record', () => {
+describe('KshetramDetailPage (UT-DTL-01..04, V3 UT-DTL-14..17)', () => {
+  it('renders all shrine-template sections of the kshetram record', () => {
     renderAt('/kshetram/srirangam');
     expect(screen.getByRole('heading', { name: /srirangam/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /temple timings/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /presiding deities/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /mangalasasanam pasuram/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /sthala puranam/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /location/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /significance/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /basic shrine profile/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /deities & consorts/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /sthala puranam & history/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^mangalasasanam$/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /visit info/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /^location$/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /visuals & media/i })).toBeInTheDocument();
     expect(screen.getAllByText(/Ranganathan/).length).toBeGreaterThan(0);
   });
 
@@ -105,17 +108,20 @@ describe('KshetramDetailPage (UT-DTL-01..04, V2 UT-DTL-03..13)', () => {
     for (const link of links) expect(link).toHaveAttribute('href', expect.stringContaining('/kshetram/'));
   });
 
-  it('shows the pasuram with attribution and listen link (FR-64/65)', () => {
+  it('shows template pasuram excerpts with word-by-word meaning and listen links (FR-64/65/83)', () => {
     renderAt('/kshetram/srirangam');
-    expect(screen.getByText(/பாயும் ஒளி விளக்கும்/)).toBeInTheDocument();
-    expect(screen.getByText(/Thiruppalliyezhuchchi 1/)).toBeInTheDocument();
-    const listen = screen.getByRole('link', { name: /listen/i });
-    expect(listen).toHaveAttribute('rel', 'noopener noreferrer');
+    // Full template (PO sample): two representative excerpts
+    expect(screen.getByRole('heading', { name: /Thondaradippodi Azhwar — Thirumaalai/i })).toBeInTheDocument();
+    expect(screen.getAllByText(/Word-by-word meaning/i).length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByRole('link', { name: /listen/i }).length).toBeGreaterThanOrEqual(2);
+    // Legacy single-pasuram display still works where no template exists
+    renderAt('/kshetram/kanchi-varadaraja');
+    expect(screen.getAllByText(/Vaazhiye Kacchi/i).length).toBeGreaterThan(0);
   });
 
   it('shows the pasuram count badge only when documented', () => {
     renderAt('/kshetram/srirangam');
-    expect(screen.getByText(/247 pasurams/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/247 pasurams/i).length).toBeGreaterThan(0);
   });
 
   it('hides timings/nearby/distance for celestial desams', () => {

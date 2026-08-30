@@ -1,5 +1,6 @@
 /**
- * Footer — attribution and content disclaimer (FR-51).
+ * Footer — attribution and content disclaimer (FR-51), plus the
+ * local-storage privacy note for the yatra toolkit (FR-71).
  */
 export default function Footer() {
   return (
@@ -10,6 +11,10 @@ export default function Footer() {
       </p>
       <p>
         Content is provided in good faith for devotional and educational purposes.
+      </p>
+      <p className="site-footer__privacy">
+        Your visited marks and trip are stored only in your browser — never sent
+        to any server.
       </p>
     </footer>
   );

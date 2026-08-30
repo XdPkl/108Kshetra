@@ -28,11 +28,13 @@ export function matchesSearch(k, searchTerm, azhwars) {
  * Returns kshetrams matching every active filter (AND semantics).
  * @param {Kshetram[]} kshetrams - full dataset
  * @param {Azhwar[]} azhwars - azhwar dataset for search resolution
- * @param {{search: string, state: string, deityForm: string, region: string, azhwar: string}} filters
+ * @param {{search: string, state: string, deityForm: string, region: string, azhwar: string,
+ *          visited: ''|'visited'|'unvisited'}} filters
  *        active filters; empty string means "not active"
+ * @param {string[]} [visitedIds] - the visitor's visited kshetram ids (FR-74)
  * @returns {Kshetram[]} filtered subset (new array; input untouched)
  */
-export function filterKshetrams(kshetrams, azhwars, filters) {
+export function filterKshetrams(kshetrams, azhwars, filters, visitedIds = []) {
   return kshetrams.filter((k) => {
     if (!matchesSearch(k, filters.search, azhwars)) return false;
     if (filters.state && k.state !== filters.state) return false;
@@ -40,6 +42,8 @@ export function filterKshetrams(kshetrams, azhwars, filters) {
     if (filters.region && k.region !== filters.region) return false;
     // AND-composition is intentional: multiple filters narrow together (FR-22)
     if (filters.azhwar && !k.azhwars.includes(filters.azhwar)) return false;
+    if (filters.visited === 'visited' && !visitedIds.includes(k.id)) return false;
+    if (filters.visited === 'unvisited' && visitedIds.includes(k.id)) return false;
     return true;
   });
 }

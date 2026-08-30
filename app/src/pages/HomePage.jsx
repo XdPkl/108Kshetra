@@ -6,6 +6,7 @@ import { getFeaturedKshetrams } from '../data/api.js';
 import { SITE_STATS } from '../data/config.js';
 import KshetramCard from '../components/KshetramCard.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
+import ProgressBanner from '../components/ProgressBanner.jsx';
 
 export default function HomePage() {
   const featured = getFeaturedKshetrams();
@@ -21,7 +22,7 @@ export default function HomePage() {
         </p>
         <div className="hero__actions">
           <Link className="btn btn--primary" to="/kshetrams">Explore the 108 Kshetrams</Link>
-          <Link className="btn btn--outline" to="/azhwars">Meet the Azhwars</Link>
+          <Link className="btn btn--outline" to="/azhwars">Azhwars</Link>
         </div>
       </section>
 
@@ -39,6 +40,8 @@ export default function HomePage() {
           <span className="stat-band__label">Pasurams</span>
         </div>
       </section>
+
+      <ProgressBanner total={SITE_STATS.kshetramCount} />
 
       <section>
         <SectionHeading

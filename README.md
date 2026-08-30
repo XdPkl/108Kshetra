@@ -53,6 +53,7 @@ app/     React application (source, tests, E2E)
 | Test Plan | `docs/05-testing/test-plan.md` |
 | Test Cases | `docs/05-testing/test-cases.md` |
 | Test Execution Report | `docs/05-testing/test-execution-report.md` |
+| Feasibility: Admin Content Management | `docs/06-feasibility/admin-content-feasibility.md` |
 
 ## Disclaimer
 

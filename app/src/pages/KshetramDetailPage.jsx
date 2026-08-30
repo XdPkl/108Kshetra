@@ -1,37 +1,37 @@
 /**
- * KshetramDetailPage — enriched page for one kshetram at /kshetram/:id
- * (FR-30..33, FR-60..70): deity gallery, timings, pasuram, puranam,
- * location with nearby desams and distance, share/print actions.
+ * KshetramDetailPage — Detail V3 for one kshetram at /kshetram/:id
+ * (FR-30..33, FR-60..87): shrine content template (profile, deity
+ * breakdown, puranam & history, mangalasasanam, visit info, location,
+ * visuals & media) with yatra hooks — visited toggle, trip control and a
+ * lazy mini-map — plus share/print actions and a gallery lightbox.
  */
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getEnrichedKshetramById, getAllKshetramsEnriched, getAzhwarById } from '../data/api.js';
 import { MAPS_URL_TEMPLATE } from '../data/config.js';
 import Badge from '../components/Badge.jsx';
 import EmptyState from '../components/EmptyState.jsx';
-import DeityGallery from '../components/DeityGallery.jsx';
 import NearbyDesams from '../components/NearbyDesams.jsx';
-import PasuramSection from '../components/PasuramSection.jsx';
 import DistanceFromMe from '../components/DistanceFromMe.jsx';
 import PageActions from '../components/PageActions.jsx';
+import VisitedToggle from '../components/VisitedToggle.jsx';
+import TripControls from '../components/TripControls.jsx';
+import MiniMap from '../components/MiniMap.jsx';
+import SectionNav from '../components/detail/SectionNav.jsx';
+import ShrineProfile from '../components/detail/ShrineProfile.jsx';
+import DeityBreakdown from '../components/detail/DeityBreakdown.jsx';
+import PuranamHistory from '../components/detail/PuranamHistory.jsx';
+import MangalasasanamSection from '../components/detail/MangalasasanamSection.jsx';
+import VisitInfoSection from '../components/detail/VisitInfoSection.jsx';
+import VisualsMedia from '../components/detail/VisualsMedia.jsx';
+import GalleryLightbox from '../components/detail/GalleryLightbox.jsx';
 
 const CELESTIAL_NOTE = 'A celestial realm beyond earthly maps, timings and distances.';
-
-/** Renders one deity/devotee line (name + Tamil name) or nothing. */
-function DeityLine({ label, d }) {
-  if (!d) return null;
-  return (
-    <dl className="detail__pair">
-      <dt>{label}</dt>
-      <dd>
-        <span lang="ta">{d.tamilName}</span> · {d.name}
-      </dd>
-    </dl>
-  );
-}
 
 export default function KshetramDetailPage() {
   const { id } = useParams();
   const kshetram = getEnrichedKshetramById(id);
+  const [lightbox, setLightbox] = useState({ photos: null, index: null });
 
   if (!kshetram) {
     return (
@@ -45,13 +45,26 @@ export default function KshetramDetailPage() {
     );
   }
 
-  const { timings, coords, puranam, pasuram } = kshetram;
+  const { coords } = kshetram;
+  const celestial = !coords && !kshetram.timings && kshetram.state === 'Celestial';
   const azhwarNames = kshetram.azhwars
     .map((azhwarId) => getAzhwarById(azhwarId))
     .filter(Boolean);
   const mapHref = kshetram.mapQuery
     ? `${MAPS_URL_TEMPLATE}${encodeURIComponent(kshetram.mapQuery)}`
     : '';
+
+  const sections = [
+    { id: 'profile', label: 'Profile' },
+    { id: 'deities', label: 'Deities' },
+    { id: 'puranam', label: 'Puranam' },
+    { id: 'mangalasasanam', label: 'Mangalasasanam' },
+    ...(celestial ? [] : [{ id: 'visit', label: 'Visit Info' }]),
+    ...(celestial ? [] : [{ id: 'location', label: 'Location' }]),
+    { id: 'media', label: 'Media' },
+  ];
+
+  const openPhoto = (photos, index) => setLightbox({ photos, index });
 
   return (
     <div className="page detail">
@@ -60,6 +73,9 @@ export default function KshetramDetailPage() {
       </p>
       <div className="detail__head">
         <div>
+          {kshetram.serial ? (
+            <p className="detail__serial detail__serial--hero">Divya Desam #{kshetram.serial}</p>
+          ) : null}
           <p className="detail__tamil" lang="ta">{kshetram.tamilName}</p>
           <h1>{kshetram.name}</h1>
           <div className="detail__badges">
@@ -68,62 +84,66 @@ export default function KshetramDetailPage() {
             {kshetram.pasuramCount > 0 ? <Badge>{kshetram.pasuramCount} pasurams</Badge> : null}
           </div>
         </div>
-        <PageActions />
+        <div className="detail__head-actions">
+          {!celestial ? (
+            <>
+              <VisitedToggle id={kshetram.id} />
+              <TripControls id={kshetram.id} />
+            </>
+          ) : null}
+          <PageActions />
+        </div>
       </div>
 
-      {timings ? (
-        <section className="detail__section detail__section--full timings" aria-label="Temple timings">
-          <h2>Temple Timings</h2>
-          <p className="timings__sessions">
-            🕉 Morning {timings.morning[0]} – {timings.morning[1]}
-            {timings.evening ? ` · Evening ${timings.evening[0]} – ${timings.evening[1]}` : ''}
-          </p>
-          {timings.notes ? <p className="timings__notes">{timings.notes}</p> : null}
-          <p className="timings__note">Indicative timings — please confirm with the temple office.</p>
-        </section>
-      ) : (
-        <p className="detail__map-note">{CELESTIAL_NOTE}</p>
-      )}
+      <SectionNav sections={sections} />
 
-      <DeityGallery kshetram={kshetram} />
+      {celestial ? <p className="detail__map-note">{CELESTIAL_NOTE}</p> : null}
 
-      <PasuramSection pasuram={pasuram} />
+      <ShrineProfile kshetram={kshetram} />
 
-      {puranam ? (
-        <section className="detail__section detail__section--full">
-          <h2>Sthala Puranam</h2>
-          <p className="puranam">{puranam}</p>
+      <DeityBreakdown kshetram={kshetram} onOpenPhoto={openPhoto} />
+
+      <PuranamHistory kshetram={kshetram} />
+
+      <MangalasasanamSection kshetram={kshetram} />
+
+      {!celestial ? <VisitInfoSection kshetram={kshetram} /> : null}
+
+      {!celestial ? (
+        <section id="location" className="detail__section detail__section--full">
+          <h2>Location</h2>
+          <p>{kshetram.place} · {kshetram.state}</p>
+          {mapHref ? (
+            <a className="detail__map-link" href={mapHref} target="_blank" rel="noopener noreferrer">
+              View on Google Maps ↗
+            </a>
+          ) : null}
+          {coords ? <MiniMap coords={coords} label={kshetram.name} /> : null}
+          <DistanceFromMe coords={coords} mapQuery={kshetram.mapQuery} />
+          <NearbyDesams coords={coords} kshetrams={getAllKshetramsEnriched()} />
         </section>
       ) : null}
 
-      <section className="detail__section detail__section--full">
-        <h2>Significance</h2>
-        <p>{kshetram.significance}</p>
-      </section>
+      <VisualsMedia kshetram={kshetram} />
 
       <section className="detail__section detail__section--full">
-        <h2>Location</h2>
-        <p>{kshetram.place} · {kshetram.state}</p>
-        {mapHref ? (
-          <a className="detail__map-link" href={mapHref} target="_blank" rel="noopener noreferrer">
-            View on Google Maps ↗
-          </a>
-        ) : null}
-        <DistanceFromMe coords={coords} mapQuery={kshetram.mapQuery} />
-        <NearbyDesams coords={coords} kshetrams={getAllKshetramsEnriched()} />
-      </section>
-
-      <section className="detail__section detail__section--full">
-        <h2>Mangalasasanam</h2>
+        <h2>Azhwars Who Glorified</h2>
         <ul className="detail__azhwar-list">
           {azhwarNames.map((a) => (
             <li key={a.id}><Link to="/azhwars">{a.name}</Link></li>
           ))}
         </ul>
-        <DeityLine label="Moolavar" d={kshetram.moolavar} />
-        <DeityLine label="Thaayar" d={kshetram.thaayar} />
-        <DeityLine label="Urchavar" d={kshetram.urchavar} />
       </section>
+
+      <GalleryLightbox
+        photos={lightbox.photos}
+        index={lightbox.index}
+        onClose={() => setLightbox({ photos: null, index: null })}
+        onNavigate={(delta) => setLightbox((prev) => ({
+          photos: prev.photos,
+          index: (prev.index + delta + prev.photos.length) % prev.photos.length,
+        }))}
+      />
     </div>
   );
 }

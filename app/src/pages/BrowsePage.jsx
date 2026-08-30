@@ -5,22 +5,24 @@
 import { useKshetrams } from '../hooks/useKshetrams.js';
 import { useKshetramFilters } from '../hooks/useKshetramFilters.js';
 import { getFilterOptions } from '../data/api.js';
+import { SITE_STATS } from '../data/config.js';
 import KshetramCard from '../components/KshetramCard.jsx';
 import SearchFilterBar from '../components/SearchFilterBar.jsx';
 import EmptyState from '../components/EmptyState.jsx';
+import ProgressBanner from '../components/ProgressBanner.jsx';
 
 export default function BrowsePage() {
   const { kshetrams, azhwars } = useKshetrams();
   const { filters, setFilter, clearFilters, results, hasActiveFilters } =
     useKshetramFilters(kshetrams, azhwars);
   const options = getFilterOptions();
-
   const toOptions = (values) => values.map((v) => ({ value: v, label: v }));
   const azhwarOptions = azhwars.map((a) => ({ value: a.id, label: a.name }));
 
   return (
     <div className="page">
       <h1>Explore the Divya Kshetrams</h1>
+      <ProgressBanner total={SITE_STATS.kshetramCount} />
       <SearchFilterBar
         filters={filters}
         onFilterChange={setFilter}
