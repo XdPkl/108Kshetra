@@ -7106,7 +7106,14 @@ export const DOSSIER_TEMPLATES = {
     "thaayar": {
      "name": "நேர்உறை மங்காதேவி தாயார் / நிலத்திங்கள் துண்ட நாச்சியார் (Neruverai Mangadevi Thayar)",
      "legend": "Seated in dedicated reverence inside the small sub-shrine facing West"
-    }
+    },
+    "photos": [
+     {
+      "src": `${import.meta.env.BASE_URL}photos/desam-89.jpg`,
+      "alt": "THIRU NILATHINGAL THUNDAM — dossier photograph",
+      "credit": "Product Owner dossier (Divya Desams 86-90)"
+     }
+    ]
    },
    "urchavar": {
     "names": {
@@ -7825,7 +7832,7 @@ export const DOSSIER_TEMPLATES = {
     },
     "photos": [
      {
-      "src": `${import.meta.env.BASE_URL}__BASE_URL__photos/desam-86.jpg`,
+      "src": `${import.meta.env.BASE_URL}photos/desam-86.jpg`,
       "alt": "THIRUVALLUR — dossier photograph",
       "credit": "Product Owner dossier (Divya Desams 86-90)"
      }
@@ -7936,7 +7943,7 @@ export const DOSSIER_TEMPLATES = {
     },
     "photos": [
      {
-      "src": `${import.meta.env.BASE_URL}__BASE_URL__photos/desam-88.jpg`,
+      "src": `${import.meta.env.BASE_URL}photos/desam-88.jpg`,
       "alt": "THIRUKADALMALLAI — dossier photograph",
       "credit": "Product Owner dossier (Divya Desams 86-90)"
      }

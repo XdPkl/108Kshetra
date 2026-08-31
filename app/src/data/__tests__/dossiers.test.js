@@ -5,7 +5,8 @@
  */
 import { describe, it, expect } from 'vitest';
 import { DOSSIER_TEMPLATES } from '../../data/enrichment/dossiers.js';
-import { ENRICHMENT } from '../../data/enrichment/index.js';
+import { ENRICHMENT, getEnrichment } from '../../data/enrichment/index.js';
+import { TEMPLATES } from '../../data/enrichment/templates.js';
 import { getAllKshetrams, getAllAzhwars } from '../../data/api.js';
 
 describe('Divya Desam dossier templates (dossier population)', () => {
@@ -54,6 +55,30 @@ describe('Divya Desam dossier templates (dossier population)', () => {
     for (const id of ['thiruvekka', 'uppiliappan', 'thirumogur', 'kandiyur']) {
       expect(ENRICHMENT[id], `${id} V2 fallback`).toBeTruthy();
       expect(DOSSIER_TEMPLATES[id], `${id} has no dossier`).toBeUndefined();
+    }
+  });
+
+  it('serves Srirangam full-depth shrine content via the approved sample template', () => {
+    expect(TEMPLATES.srirangam?.serial).toBe(1);
+    const enriched = getEnrichment('srirangam');
+    expect(enriched?.deities?.moolavar, 'srirangam moolavar').toBeTruthy();
+    expect(enriched?.puranam?.legend?.length, 'srirangam legend').toBeGreaterThan(0);
+    expect(enriched?.mangalasasanam?.perAzhwar, 'srirangam 11 azhwars').toHaveLength(11);
+    expect(enriched?.visuals?.descriptions?.length, 'srirangam visuals').toBeGreaterThan(0);
+  });
+
+  it('resolves every template photo src under the site base URL', () => {
+    const base = import.meta.env.BASE_URL;
+    for (const [id, t] of Object.entries({ ...TEMPLATES, ...DOSSIER_TEMPLATES })) {
+      for (const deity of [t.deities?.moolavar, t.deities?.urchavar]) {
+        for (const photo of deity?.photos ?? []) {
+          if (!photo.src) continue; // wiki-backed photos resolve by title instead
+          expect(photo.src, `${id} placeholder marker`).not.toContain('__BASE_URL__');
+          expect(photo.src, `${id} src under base`).toMatch(
+            new RegExp(`^${base}photos/[\\w.-]+\\.jpg$`)
+          );
+        }
+      }
     }
   });
 });

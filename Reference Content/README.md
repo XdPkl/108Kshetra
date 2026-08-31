@@ -25,12 +25,16 @@ Uniform per-desam section template:
 The serial numbering matches the site's regional grouping (verified: #1 Srirangam, #2 Uraiyur,
 #3 Uthamar Koil, #4 Koviladi, #5 Thiruvellarai …).
 
-**Population status (2026-08-30):** dossier content is populated for **93 of the 108 site
-kshetrams** via `app/src/data/enrichment/dossiers.js` (deduplicated: dossier serials #37/#38,
-#72/#93, #78/#89, #85/#95, #103/#104 describe the same temple twice — the richer entry is used).
+**Population status (2026-08-31):** full-depth shrine content is populated for **94 of the
+108 site kshetrams** — 93 via `app/src/data/enrichment/dossiers.js`, plus **Srirangam (#1)**,
+whose shrine lives in the PO-approved sample template (`app/src/data/enrichment/templates.js`,
+US-DTL-15), which the enrichment merge (`getEnrichment`) prefers over the dossier set —
+Srirangam therefore has no entry in `dossiers.js` by design, not by omission
+(deduplicated: dossier serials #37/#38, #72/#93, #78/#89, #85/#95, #103/#104 describe the
+same temple twice — the richer entry is used).
 - Skipped dossier serials (no corresponding site kshetram or unresolved circuit entries): **#40, #54, #57, #58, #87 (Thirukachoor is not a Divya Desam), #90, #94, #106**.
 - Site kshetrams with no usable dossier entry (keep their V2 enrichment): **Thiruvekka, Uppiliappan, Thiruvazhundur, Kandiyur, Thirumogur, Thirukkulandai, Thiruppuliangudi, Thiruneermalai, Thiruputkuzhi, Thirunindravur, Thiruvidanthai, Sholinghur, Ayodhya, Naimisaranyam** — candidate follow-ups for the PO.
-- Three photographs embedded in `Divya Desams 86 - 90.docx` were extracted to `app/public/photos/` (desams #86, #88, #89; #87/#90 dropped with their serials).
+- Three photographs embedded in `Divya Desams 86 - 90.docx` were extracted to `app/public/photos/` (desams #86, #88, #89; #87/#90 dropped with their serials). All three are wired into shrine templates: #86 Thiruvallur and #88 Mahabalipuram directly, and #89 Thiru Nilathingal Thundam — whose dossier content is covered under serial #78 (the #78/#89 duplicate pair).
 
 ## Azhwar & Acharya dossiers (7 batches, 35 personalities)
 
