@@ -4,3 +4,4 @@ app/dist/
 app/test-results/
 app/playwright-report/
 app/coverage/
+.env.local

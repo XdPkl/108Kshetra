@@ -385,39 +385,39 @@ Visited/trip data remains in the visitor's browser only (no transmission); the m
 
 ---
 
-## JIRA Synchronization Record (v1.2)
+## JIRA Synchronization Record (v1.3)
 
-Sync of the V3 backlog to https://dtrprasanna.atlassian.net project **DTRPR108K** was attempted on 2026-08-30, but **no JIRA API credentials are available in the delivery environment**, so the issues could not be created automatically. Per the agreed fallback, the ready-to-create list below covers all V3 issues (7 epics + 23 stories); descriptions carry the story text and acceptance criteria from this addendum. Once created, append the issue keys to the table. US-NAV-02 and US-ENG-08 link to the existing EP-NAV and EP-ENG epics (DTRPR108K-2, DTRPR108K-7).
+The V3 backlog was synced to https://dtrprasanna.atlassian.net project **DTRPR108K** on **2026-08-31** via the Jira REST API: **7 epics + 23 stories created (DTRPR108K-39 … DTRPR108K-68)**. Descriptions carry the story text, acceptance criteria and story points from this addendum; every issue carries labels `divya-kshetra` and `v3`. US-NAV-02 and US-ENG-08 are linked to the existing EP-NAV and EP-ENG epics (DTRPR108K-2, DTRPR108K-7). A first attempt on 2026-08-30 failed for lack of API credentials in the delivery environment (v1.2). As the V3 program is already delivered (TER v1.3, live verified), the 23 stories were transitioned to **Done** at creation, matching the V1/V2 convention; the epics remain **To Do**, as with all existing epics.
 
-| Type | Summary | Links to |
-|---|---|---|
-| Epic | EP-YTRK — Darshan Progress Tracker | — |
-| Story | US-TRK-01 — Visited store (localStorage) | EP-YTRK |
-| Story | US-TRK-02 — Mark-visited actions & badges | EP-YTRK |
-| Story | US-TRK-03 — Darshan progress banner | EP-YTRK |
-| Story | US-TRK-04 — Visited-status filter | EP-YTRK |
-| Story | US-TRK-05 — Reset progress | EP-YTRK |
-| Epic | EP-YMAP — Interactive Map | — |
-| Story | US-MAP-01 — Map page | EP-YMAP |
-| Story | US-MAP-02 — Markers, legend & popups | EP-YMAP |
-| Story | US-MAP-03 — My location & region chips | EP-YMAP |
-| Epic | EP-YTRP — Trip Planner | — |
-| Story | US-TRP-01 — Trip store & add/remove | EP-YTRP |
-| Story | US-TRP-02 — Trip page | EP-YTRP |
-| Story | US-TRP-03 — Share & print trip | EP-YTRP |
-| Epic | EP-DTL3 — Kshetram Detail V3 | — |
-| Story | US-DTL-14 — Yatra hooks on detail | EP-DTL3 |
-| Story | US-DTL-15 — Pilgrim information sections | EP-DTL3 |
-| Story | US-DTL-16 — Layout & visual refresh | EP-DTL3 |
-| Story | US-DTL-17 — Gallery & media upgrade | EP-DTL3 |
-| Epic | EP-ABT — About Us — Kshetra Tours | — |
-| Story | US-ABT-01 — About page | EP-ABT |
-| Story | US-NAV-02 — CTA wording | EP-NAV |
-| Story | US-ENG-08 — E2E for yatra flows | EP-ENG |
-| Epic | EP-AZW2 — Azhwar Detail Pages | — |
-| Story | US-AZW-02 — Azhwar detail page | EP-AZW2 |
-| Story | US-AZW-03 — Azhwar data enrichment | EP-AZW2 |
-| Epic | EP-ACH — Acharyas | — |
-| Story | US-ACH-01 — Acharya dataset | EP-ACH |
-| Story | US-ACH-02 — Acharyas index page | EP-ACH |
-| Story | US-ACH-03 — Acharya detail page | EP-ACH |
+| Type | Summary | Links to | Jira key |
+|---|---|---|---|
+| Epic | EP-YTRK — Darshan Progress Tracker | — | DTRPR108K-39 |
+| Story | US-TRK-01 — Visited store (localStorage) | EP-YTRK | DTRPR108K-46 |
+| Story | US-TRK-02 — Mark-visited actions & badges | EP-YTRK | DTRPR108K-47 |
+| Story | US-TRK-03 — Darshan progress banner | EP-YTRK | DTRPR108K-48 |
+| Story | US-TRK-04 — Visited-status filter | EP-YTRK | DTRPR108K-49 |
+| Story | US-TRK-05 — Reset progress | EP-YTRK | DTRPR108K-50 |
+| Epic | EP-YMAP — Interactive Map | — | DTRPR108K-40 |
+| Story | US-MAP-01 — Map page | EP-YMAP | DTRPR108K-51 |
+| Story | US-MAP-02 — Markers, legend & popups | EP-YMAP | DTRPR108K-52 |
+| Story | US-MAP-03 — My location & region chips | EP-YMAP | DTRPR108K-53 |
+| Epic | EP-YTRP — Trip Planner | — | DTRPR108K-41 |
+| Story | US-TRP-01 — Trip store & add/remove | EP-YTRP | DTRPR108K-54 |
+| Story | US-TRP-02 — Trip page | EP-YTRP | DTRPR108K-55 |
+| Story | US-TRP-03 — Share & print trip | EP-YTRP | DTRPR108K-56 |
+| Epic | EP-DTL3 — Kshetram Detail V3 | — | DTRPR108K-42 |
+| Story | US-DTL-14 — Yatra hooks on detail | EP-DTL3 | DTRPR108K-57 |
+| Story | US-DTL-15 — Pilgrim information sections | EP-DTL3 | DTRPR108K-58 |
+| Story | US-DTL-16 — Layout & visual refresh | EP-DTL3 | DTRPR108K-59 |
+| Story | US-DTL-17 — Gallery & media upgrade | EP-DTL3 | DTRPR108K-60 |
+| Epic | EP-ABT — About Us — Kshetra Tours | — | DTRPR108K-43 |
+| Story | US-ABT-01 — About page | EP-ABT | DTRPR108K-61 |
+| Story | US-NAV-02 — CTA wording | EP-NAV | DTRPR108K-62 |
+| Story | US-ENG-08 — E2E for yatra flows | EP-ENG | DTRPR108K-63 |
+| Epic | EP-AZW2 — Azhwar Detail Pages | — | DTRPR108K-44 |
+| Story | US-AZW-02 — Azhwar detail page | EP-AZW2 | DTRPR108K-64 |
+| Story | US-AZW-03 — Azhwar data enrichment | EP-AZW2 | DTRPR108K-65 |
+| Epic | EP-ACH — Acharyas | — | DTRPR108K-45 |
+| Story | US-ACH-01 — Acharya dataset | EP-ACH | DTRPR108K-66 |
+| Story | US-ACH-02 — Acharyas index page | EP-ACH | DTRPR108K-67 |
+| Story | US-ACH-03 — Acharya detail page | EP-ACH | DTRPR108K-68 |
