@@ -183,4 +183,46 @@ Scope: EP-AZW2, EP-ACH — US-AZW-02..03, US-ACH-01..03, FR-90..94 (USD/SRS v1.2
 
 ---
 
-*End of Addendum — TER-108K-009 v1.3*
+## Version 1.4 — Divya Desam Dossier Population & Content Maintenance (2026-08-31)
+
+Scope: content population rounds after R2 — Divya Desam dossiers #1–#108 curated to 93 shrine templates, 12 Azhwars + 23 Acharyas fully populated from the PO dossiers with all 35 representative verses (commits `1c211a4`, `ef81d87`, `8c6e36b`, `84d7819`, `82f0c1c`); content maintenance — dossier photo repairs, photo wiring, docs clarification (commits `22fa11f`, `3fd7f4a`); two post-delivery PO enhancements — US-TRP-04 (trip route map on the Trip page) and US-MAP-04 (marker hover tooltips on the Map page), refining FR-80/FR-77 journeys without new FRs. Enhancement stories are recorded in the user-stories addendum; their Jira creation is pending a fresh API token (the original token was revoked after the v1.3 sync).
+
+| Suite | Result | Detail |
+|---|---|---|
+| Static analysis (oxlint) | **Pass** | 0 errors, 1 accepted warning (113 files) — see CRR v1.3 |
+| Unit/Component (Vitest + RTL) | **Pass** | 19 suites, **180/180 tests** (3 new for the enhancements: trip route map, celestial-only map suppression, marker tooltips) |
+| Coverage (Gate A) | **Pass** | 92.5% statements · 82.8% branches · 91.8% functions · 94.1% lines (threshold 80%) |
+| Build (TC-QA-03) | **Pass** | Initial chunk **331.6 kB gzip** (growth vs v1.3's 131.8 kB is the dossier content dataset — 93 full shrine templates); Leaflet remains a lazy chunk **44.9 kB gzip**; the new TripMap follows the MiniMap lazy split — NFR-01/NFR-11 |
+| Code review (Gate B) | **Closed** | CRR-108K-006 v1.3: CR-15..18 dispositioned (photo src defects reworked; acharya guru/sishya pending accepted per policy) |
+| E2E (Playwright, Chromium) | **Pass** | **19/19 journeys** — TC-14 extended (hover tooltip visible), TC-15 extended (route map renders 3 markers + dashed polyline) |
+| CI (GitHub Actions, Linux) | **Pass** | Run 33350286416: lint/unit/build ✓, E2E ✓ (actions/checkout & setup-node bumped v4→v5, clearing the Node 20 deprecation warning) |
+| Deploy + Live verification | **Pass** | Run 33350286293 success; all three dossier photographs verified **HTTP 200** on the live site (`photos/desam-86|88|89.jpg` — 86/88 repaired, 89 newly wired) |
+
+### E2E Case Results (maintenance + enhancements, e2e/yatra.spec.js)
+
+| Case | Description | Result |
+|---|---|---|
+| TC-14 (ext) | Map journey gains a hover-tooltip assertion: hovering a marker shows `.leaflet-tooltip` with the desam name; popup flow unchanged | Pass |
+| TC-15 (ext) | Trip journey gains a route-map assertion: `.trip-map` renders with 3 `.leaflet-interactive` elements (markers + dashed polyline); order/share-restore flow unchanged | Pass |
+
+### Defect Log (content population + maintenance)
+
+| ID | Severity | Phase Found | Description | Disposition |
+|---|---|---|---|---|
+| D-09 | Major | Live-site verification | Dossier photo srcs for desam-86 (Thiruvallur) and desam-88 (Mahabalipuram) contained a leftover `__BASE_URL__` placeholder — broken images on the deployed site | **Fixed** — srcs corrected; data-integrity test now asserts every template photo src resolves under the site base URL with no placeholder |
+| D-10 | Minor | Content audit | desam-89 dossier photograph was extracted to `public/photos/` but referenced by no template (its dossier content is covered under duplicate serial #78) | **Fixed** — wired into Thiru Nilathingal Thundam's Moolavar photo strip |
+| D-11 | Minor | Documentation review | Reference Content README stated "93 of the 108" without explaining Srirangam's (#1) absence from `dossiers.js` — its full-depth shrine lives in the PO-approved sample template preferred by the enrichment merge | **Clarified** — README records 94/108 full-depth, the deliberate omission, and the wired photo set |
+| CR-15..CR-18 | Minor | Code review (Gate B) | See CRR-108K-006 v1.3 | **All dispositioned** before system testing |
+
+**Open Critical/Major defects: 0 → Gate C PASSED (content population + maintenance + enhancements).**
+
+### Known Limitations / Notes (content population + maintenance)
+
+1. 14 site kshetrams remain on V2 region enrichment (Thiruvekka, Uppiliappan, Thiruvazhundur, Kandiyur, Thirumogur, Thirukkulandai, Thiruppuliangudi, Thiruneermalai, Thiruputkuzhi, Thirunindravur, Thiruvidanthai, Sholinghur, Ayodhya, Naimisaranyam) — PO dossiers for them were not supplied; flagged as candidate follow-ups in `Reference Content/README.md`.
+2. Acharya detail pages render the "Guru & Sishyas" pending marker for Engalazhwan and Vedanta Desika: the dossier names their guru/sishya (Thirukkurugai Piran Pillan, Nadadur Ammal, Kidambi Appullar), but those personalities are outside the 23-entry acharya dataset and chip links must resolve to dataset ids (UT-ACH-01). Adding entries is a PO decision; the relations are present in the biographical narrative meanwhile (CR-18).
+3. Dossier photographs exist only for desams #86/#88/#89 (the only DOCX with embedded images); all other kshetrams use wiki-backed or placeholder visuals.
+4. V3 R2-era notes resolved this round: all 35 saint verses now carry original script (supersedes v1.3 note 3); acharya biographies fully populated except the accepted Guru & Sishyas chips above (supersedes v1.3 note 2).
+
+---
+
+*End of Addendum — TER-108K-009 v1.4*

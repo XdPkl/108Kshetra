@@ -112,4 +112,25 @@ R2 quality gates: TC-QA-01 Pass (0 errors; 2 accepted warnings per CRR v1.2) · 
 
 ---
 
-*End of Addendum — TCS-108K-008 v1.2*
+## Version 1.3 — Content Maintenance & Enhancements (2026-08-31)
+
+Quality gates: TC-QA-01 Pass (0 errors; 1 accepted warning per CRR v1.3) · TC-QA-02 Pass (**180/180 tests, 19 suites**; 92.5% statements / 82.8% branches / 91.8% functions / 94.1% lines) · TC-QA-03 Pass (initial **331.6 kB gzip**, dossier dataset growth tracked in TER v1.4; Leaflet lazy chunk 44.9 kB gzip). Execution recorded in TER v1.4.
+
+### 8. Unit Cases added (maintenance + enhancements)
+
+| ID | FR | Test Case | Expected Result | Executed |
+|---|---|---|---|---|
+| UT-TRP-04 | FR-80 (enh. US-TRP-04) | Trip route map: 3-stop trip renders the lazy map with 3 markers, a polyline and numbered tooltips; celestial-only trip renders no map | Map mirrors trip order; suppressed without coords | Pass (UT) |
+| UT-MAP-04 | FR-77 (enh. US-MAP-04) | Map page tooltips: one tooltip per plotted marker carrying the desam name; visited note only when marked | Tooltip count equals marker count | Pass (UT) |
+| UT-DOS-01 | FR-83 | Dossier template integrity additions: Srirangam full-depth coverage via the preferred sample template (11-azhwar mangalasasanam); every template photo src resolves under the site base URL with no placeholder | Coverage holds; photo srcs valid | Pass (UT) |
+
+### 9. E2E Cases extended (maintenance + enhancements) — e2e/yatra.spec.js
+
+| ID | FR | Steps | Expected Result | Executed |
+|---|---|---|---|---|
+| TC-14 (ext) | FR-77/78 | Existing map journey + hover a marker | `.leaflet-tooltip` visible with the desam name; popup flow unchanged | Pass |
+| TC-15 (ext) | FR-80/81 | Existing trip journey + open `/trip` | `.trip-map` renders 3 markers + dashed polyline; order/share-restore unchanged | Pass |
+
+---
+
+*End of Addendum — TCS-108K-008 v1.3*

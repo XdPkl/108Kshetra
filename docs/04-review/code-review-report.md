@@ -175,4 +175,54 @@ Review performed against the CSG §11 checklist after Gate A (146/146 unit tests
 
 ---
 
-*End of Addendum — CRR-108K-006 v1.2*
+## Version 1.3 — Content Population & Maintenance Review
+
+### Revision History (addendum)
+
+| Version | Date | Description |
+|---|---|---|
+| 1.3 | 2026-08-31 | Content maintenance + post-delivery enhancements review; findings CR-15..18 logged and dispositioned |
+
+### 11. Review Summary (content population + maintenance)
+
+Review performed against the CSG §11 checklist over the content-maintenance diff set: dossier photo
+repairs (`dossiers.js`), the new lazy Trip route-map components (`TripMap.jsx`/`TripMapInner.jsx`),
+Map page hover tooltips, trip/map test extensions, CI workflow action bumps and the stale-comment
+fix (`azhwar-details.js`). The two PO enhancements deliberately reuse established patterns: the
+TripMap clones the MiniMap lazy split (NFR-11 — Leaflet stays out of the TripPage bundle) and
+tooltips are non-interactive so marker clicks/popups and keyboard paths are untouched.
+
+| # | Check | Verdict |
+|---|---|---|
+| 1 | Naming & file organization (`TripMap`/`TripMapInner` pair) | Pass |
+| 2 | JSDoc on all exports | Pass |
+| 3 | Layering — data via `api.js`; Leaflet only in lazy chunks | Pass |
+| 4 | Reusability (MiniMap pattern reused; no duplicated Leaflet glue) | Pass |
+| 5 | Accessibility (tooltips `interactive={false}`; popups remain the keyboard/AT path; print hides maps) | Pass |
+| 6 | Security (OSM tiles + attribution as before; no new external calls) | Pass |
+| 7 | Performance (main bundle +0.2 kB gzip for both features; Leaflet lazy chunk 44.9 kB) | Pass |
+| 8 | Tests meaningful & passing; coverage ≥ 80% | Pass |
+| 9 | Files ≤ 300 lines (largest new file ~95 lines) | Pass |
+| 10 | Findings dispositioned | Pass after CR-15..18 |
+
+### 12. Findings Log (addendum)
+
+| ID | Severity | Location | Finding | Disposition |
+|---|---|---|---|---|
+| CR-15 | Major | `src/data/enrichment/dossiers.js` (desam-86/88) | Dossier photo srcs carried an unresolved `__BASE_URL__` placeholder — broken images in production | **Reworked:** srcs corrected; new data-integrity test asserts every template photo src resolves under the base URL with no placeholder (TER D-09) |
+| CR-16 | Minor | `src/data/enrichment/dossiers.js` | desam-89 dossier photograph extracted but referenced by no template | **Reworked:** wired into Thiru Nilathingal Thundam's Moolavar photos (serial #78, the #78/#89 duplicate pair) (TER D-10) |
+| CR-17 | Minor | `Reference Content/README.md` | Population status "93 of the 108" obscured that Srirangam (#1) is covered by the preferred sample template | **Reworked:** README records 94/108 full-depth and the deliberate omission (TER D-11) |
+| CR-18 | Minor | `src/data/acharyas.js` | Engalazhwan and Vedanta Desika render the Guru & Sishyas pending marker; the dossier names their guru/sishya but those personalities are outside the 23-entry dataset | **Accepted:** per US-ACH-01 pending-content policy — chip links must resolve to dataset ids (UT-ACH-01); adding entries is a PO decision; relations remain in the narrative text |
+
+### 13. Rework Verification (re-review, 2026-08-31)
+
+- `npm run lint` → **0 errors** (113 files; 1 accepted warning)
+- `npm run test:coverage` → **19 suites, 180/180 passed**; 92.5/82.8/91.8/94.1 — thresholds met
+- `npm run build` → succeeds; initial chunk **331.6 kB gzip** (dossier dataset growth, tracked in TER v1.4); Leaflet lazy chunk **44.9 kB gzip**
+- E2E: **19/19 journeys** (TC-14/TC-15 extended for tooltip and trip-map assertions)
+
+**Gate B decision (content population + maintenance): CLOSED — code approved for delivery.**
+
+---
+
+*End of Addendum — CRR-108K-006 v1.3*

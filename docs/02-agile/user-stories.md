@@ -421,3 +421,27 @@ The V3 backlog was synced to https://dtrprasanna.atlassian.net project **DTRPR10
 | Story | US-ACH-01 — Acharya dataset | EP-ACH | DTRPR108K-66 |
 | Story | US-ACH-02 — Acharyas index page | EP-ACH | DTRPR108K-67 |
 | Story | US-ACH-03 — Acharya detail page | EP-ACH | DTRPR108K-68 |
+
+---
+
+## Post-Delivery Enhancements (2026-08-31)
+
+Two enhancements requested by the PO after the V3 delivery, implemented and executed the same day
+(TER v1.4, CRR v1.3, TCS v1.3). Both refine existing FR journeys without introducing new FRs.
+
+| Type | Summary | Links to | Points | Jira key |
+|---|---|---|---|---|
+| Story | US-TRP-04 — Trip route map | EP-YTRP | 3 | DTRPR108K-69 |
+| Story | US-MAP-04 — Marker hover tooltips | EP-YMAP | 2 | DTRPR108K-70 |
+
+**US-TRP-04 — Trip route map** (3 pts, Priority 2) — *FR-80 enhancement*
+> As a pilgrim, I want my trip plan drawn on a map so that I can see the geographic shape of my yatra route.
+- **Given** the `/trip` page with stops that have coordinates, **when** it renders, **then** a route-map section shows each earthly stop as a marker joined by a dashed polyline in the selected ordering, with hover tooltips carrying the stop number, name and inbound leg distance, and the map fitted to the route; a trip of only celestial desams renders no map; Print output is unchanged (map hidden).
+
+**US-MAP-04 — Marker hover tooltips** (2 pts, Priority 2) — *FR-77 enhancement*
+> As a visitor, I want a tooltip when hovering a map marker so that I can identify a desam without opening its popup.
+- **Given** the `/map` page, **when** I hover any plotted marker, **then** a tooltip shows the desam's Tamil and English name (with a visited note when marked); tooltips appear and disappear with region-chip filtering; marker clicks and popups remain unchanged (tooltips are non-interactive).
+
+*Jira note:* both stories were created on 2026-08-31 under EP-YTRP (`DTRPR108K-41`) and
+EP-YMAP (`DTRPR108K-40`) and transitioned to **Done**, matching the delivered state (a fresh
+API token was required — the original was revoked after the v1.3 sync).
