@@ -6,7 +6,7 @@
  * Populated from the Product Owner's dossier batches 1-3 (Reference Content/),
  * per the PO's 2026-08-30 corrections: Poigai Azhwar's amsam is Panchajanya
  * (dossier's Kaumodaki stands corrected). Verse original-script text comes
- * from the DOCX companions; batch-2 saints await the DOCX (script pending).
+ * from the DOCX companions (all 12 Azhwars, 35/35 dossier verses complete).
  *
  * Shape (all optional):
  *  order, epithets[], birthMonth, birthStar, tithi?,

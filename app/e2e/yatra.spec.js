@@ -25,11 +25,15 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page.getByText(/0 of 108 kshetrams visited/i)).toBeVisible();
   });
 
-  test('TC-14: map renders desams, filters by region and opens a popup page', async ({ page }) => {
+  test('TC-14: map renders desams, tooltips on hover, filters by region and opens a popup page', async ({ page }) => {
     await page.goto('map');
     await expect(page.getByRole('heading', { name: /map of the divya desams/i })).toBeVisible();
     const markers = page.locator('.leaflet-interactive');
     await expect(markers.first()).toBeVisible();
+
+    // Hovering a marker shows a tooltip with the desam name (US-MAP-04)
+    await markers.first().hover();
+    await expect(page.locator('.leaflet-tooltip').last()).toBeVisible();
 
     // Region chip narrows the plotted markers
     const before = await markers.count();
@@ -55,6 +59,10 @@ test.describe('V3 yatra toolkit', () => {
     await page.getByRole('link', { name: /trip · 3/i }).click();
     await expect(page).toHaveURL(/trip$/);
     await expect(page.getByText(/3 stops/i)).toBeVisible();
+
+    // The plan is drawn on a route map: 3 markers + 1 dashed polyline (US-TRP-04)
+    await expect(page.locator('.trip-map')).toBeVisible();
+    await expect(page.locator('.trip-map .leaflet-interactive')).toHaveCount(4);
 
     await page.getByRole('button', { name: /order my route/i }).click();
     await expect(page.getByText(/nearest-first/i)).toBeVisible();

@@ -1,9 +1,10 @@
 /**
  * TripPage — the personal yatra planner (FR-80/81). Stops are listed
  * grouped by region (default) or in nearest-first route order, with
- * straight-line leg distances. Supports "Order my route" (FR-80), stop
- * removal, clearing, share via URL with clipboard fallback, print, and
- * restoring a trip from a shared /trip?t=… link.
+ * straight-line leg distances, and the plan is drawn on a route map
+ * (US-TRP-04). Supports "Order my route" (FR-80), stop removal, clearing,
+ * share via URL with clipboard fallback, print, and restoring a trip from
+ * a shared /trip?t=… link.
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -12,6 +13,7 @@ import { useTrip } from '../hooks/useTrip.js';
 import { orderNearestFirst, legsFor, sumLegs } from '../utils/route.js';
 import { decodeTrip, encodeTrip } from '../state/trip.js';
 import EmptyState from '../components/EmptyState.jsx';
+import TripMap from '../components/TripMap.jsx';
 
 /** @returns {Map<string, Kshetram>} id → enriched record (coords included). */
 function useKshetramIndex() {
@@ -50,6 +52,12 @@ export default function TripPage() {
 
   const orderedStops = route.ordered;
   const orderedLegs = route.legs;
+
+  // The map mirrors the selected ordering: route order on the route view,
+  // current trip order on the region view.
+  const mapStops = view === 'route' ? orderedStops : stops;
+  const mapLegs = view === 'route' ? orderedLegs : legs;
+  const hasMapStops = mapStops.some((k) => Array.isArray(k.coords));
 
   const onOrder = () => {
     setTrip(orderedStops.map((k) => k.id));
@@ -142,6 +150,12 @@ export default function TripPage() {
           ⤓ Order my route — nearest first
         </button>
       </div>
+
+      {hasMapStops ? (
+        <section className="trip-page__map" aria-label="Your trip plan on a map">
+          <TripMap stops={mapStops} legs={mapLegs} />
+        </section>
+      ) : null}
 
       {view === 'region' ? (
         <RegionGroups stops={stops} onRemove={removeFromTrip} />

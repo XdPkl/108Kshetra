@@ -2,12 +2,12 @@
  * MapPage — interactive map of every earthly Divya Desam (FR-76..78).
  * Lazy-loaded route chunk (NFR-11): Leaflet + OpenStreetMap tiles with
  * visible attribution. Region-colored markers with a legend, region filter
- * chips, visited styling, opt-in "my location", and popups linking to the
- * detail page with a trip action.
+ * chips, visited styling, hover tooltips (US-MAP-04), opt-in "my location",
+ * and popups linking to the detail page with a trip action.
  */
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, CircleMarker, Popup, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { getAllKshetramsEnriched } from '../data/api.js';
 import { buildRegionColors } from '../utils/regionColors.js';
@@ -107,6 +107,13 @@ export default function MapPage() {
                   fillOpacity: 0.9,
                 }}
               >
+                <Tooltip direction="top" offset={[0, -6]} interactive={false}>
+                  <span className="map-tooltip__tamil" lang="ta">{k.tamilName}</span>
+                  <span className="map-tooltip__name">
+                    {k.name}
+                    {visited ? ' · ✓ visited' : ''}
+                  </span>
+                </Tooltip>
                 <Popup>
                   <div className="map-popup">
                     <p className="map-popup__tamil" lang="ta">{k.tamilName}</p>

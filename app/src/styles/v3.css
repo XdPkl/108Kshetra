@@ -244,6 +244,10 @@
 .trip-page__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-2); flex-wrap: wrap; }
 .trip-page__actions { display: flex; gap: var(--space-1); }
 .trip-page__meta { color: var(--color-text-muted); }
+.trip-map { height: 340px; border-radius: var(--radius-card); margin: var(--space-2) 0; border: 1px solid var(--color-accent); }
+.trip-map--loading { display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); }
+.map-tooltip__tamil { display: block; color: var(--color-text-muted); font-size: 0.8125rem; }
+.map-tooltip__name { display: block; font-weight: 600; }
 .trip-page__notice {
   background: rgba(201, 154, 46, 0.16);
   border-radius: var(--radius-card);
@@ -374,7 +378,7 @@
   .site-header, .site-footer, .page-actions, .section-nav,
   .progress-banner__reset, .trip-page__actions, .trip-page__viewtoggle,
   .trip-stop__remove, .btn, .region-chip, .map-page__chips,
-  .map-page__frame, .mini-map, .photo-strip, .lightbox { display: none !important; }
+  .map-page__frame, .mini-map, .trip-page__map, .photo-strip, .lightbox { display: none !important; }
   .kshetram-card__actions { display: none !important; }
   .detail__section { break-inside: avoid; }
 }

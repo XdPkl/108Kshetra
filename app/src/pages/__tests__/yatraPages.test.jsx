@@ -14,6 +14,8 @@ vi.mock('react-leaflet', () => ({
   TileLayer: () => null,
   CircleMarker: ({ children }) => <div data-testid="map-marker">{children}</div>,
   Popup: ({ children }) => <div>{children}</div>,
+  Tooltip: ({ children }) => <div data-testid="map-tooltip">{children}</div>,
+  Polyline: () => <div data-testid="map-polyline" />,
 }));
 
 import MapPage from '../../pages/MapPage.jsx';
@@ -74,6 +76,26 @@ describe('TripPage (UT-TRP-02/03, FR-80/81)', () => {
     expect(await screen.findByText(/trip loaded from a shared link/i)).toBeInTheDocument();
     expect(screen.getByText(metaMatching(/2 stops/))).toBeInTheDocument();
   });
+
+  it('draws the trip plan on a route map with numbered tooltips (US-TRP-04)', async () => {
+    addToTrip('srirangam');
+    addToTrip('tirupati');
+    addToTrip('uthamar-kovil');
+    renderAt('/trip', <TripPage />);
+    const frame = await screen.findByRole('region', { name: /your trip plan on a map/i });
+    expect(within(frame).getAllByTestId('map-marker')).toHaveLength(3);
+    expect(within(frame).getByTestId('map-polyline')).toBeInTheDocument();
+    const tooltips = within(frame).getAllByTestId('map-tooltip');
+    expect(tooltips).toHaveLength(3);
+    expect(tooltips.map((t) => t.textContent).join(' ')).toMatch(/^1\. .*2\. .*3\. /);
+  });
+
+  it('hides the trip map when no stop has coordinates (celestial-only trip)', async () => {
+    addToTrip('paramapadam');
+    renderAt('/trip', <TripPage />);
+    expect(screen.getByText(metaMatching(/1 stop/))).toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: /your trip plan on a map/i })).not.toBeInTheDocument();
+  });
 });
 
 describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
@@ -98,6 +120,16 @@ describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
     expect(after).toBeLessThan(before);
     expect(after).toBeGreaterThan(0);
     expect(screen.getAllByText(chipLabel).length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('shows a hover tooltip for every plotted marker (US-MAP-04)', () => {
+    renderAt('/map', <MapPage />);
+    const markers = screen.getAllByTestId('map-marker');
+    const tooltips = screen.getAllByTestId('map-tooltip');
+    expect(tooltips.length).toBe(markers.length);
+    expect(tooltips.some((t) => /Srirangam/.test(t.textContent))).toBe(true);
+    // nothing is marked visited yet, so no tooltip carries the visited note
+    expect(tooltips.every((t) => !/visited/.test(t.textContent))).toBe(true);
   });
 
   it('handles missing geolocation gracefully (FR-78)', async () => {
