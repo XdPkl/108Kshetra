@@ -614,3 +614,40 @@ Detail — the same saint template as §18, plus Guru & Sishyas and Sources:
 - **Reference Content:** the Product Owner's dossier PDFs live in `Reference Content/` at the repo root (not deployed); `Reference Content/README.md` maps each batch to saints and records the extraction caveats (Tamil/Devanagari verse script lost in the PDF export — pages carry transliteration only until re-exported text is supplied).
 - **New datasets:** `src/data/about.js` (About / Kshetra Tours / contact copy) — extending content requires data changes only (NFR-05).
 - **Integrity:** tests validate shape and cross-references wherever fields are present; absence is valid and renders the documented fallback notes.
+
+---
+
+## Version 1.3 — Heritage Luxe visual uplift (UXD addendum, look & feel only)
+
+Pure presentation refresh of every surface. **No functionality, copy, routes, components' logic, DOM contracts (class names, aria semantics, labels) or print behaviour changed** — the §2/§3–21 wireframes remain authoritative for structure; this addendum governs the visual language. Implemented across `tokens.css`, `base.css`, `layout.css`, `v3.css` (+ the brand SVG in `Header.jsx`).
+
+### 22. Updated design tokens (still the single source of truth in `tokens.css`)
+
+| Token | v1.3 value | Change |
+|---|---|---|
+| `--color-bg` | `#FAF2E3` warm ivory | deepened from `#FDF8F0`; carries layered saffron/gold radial washes + SVG grain |
+| `--color-surface` | `#FFFDF7` warm white | was `#FFFFFF` |
+| `--color-text` / `--color-text-muted` | `#332417` / `#66523D` | deepened; body contrast on ivory > 10:1, muted ≥ 5.6:1 (NFR-03 holds) |
+| `--color-primary-deep` `#571F00`, `--color-primary-soft` `#D95F0E` | new | footer/dark panels; saffron gradient highlight |
+| `--color-accent-soft` `#E2C47C`, `--color-accent-deep` `#96731F`, `--color-gold-ink` `#4A3005` | new | gold gradient stops; readable ink on gold fills |
+| `--color-surface-sunk` `#F6EBD6`, `--color-gold-wash` | new | inset panel tint; callout wash |
+| `--gradient-gold` / `--gradient-saffron` / `--gradient-rule` | new | gold-foil beams & pills; saffron CTA fill; fading rules |
+| `--font-display-1/2/3` | `clamp(...)` | fluid editorial display sizes (hero ≈ 4.5rem max, page h1 ≈ 2.6rem, section h2 ≈ 1.65rem) |
+| `--text-eyebrow` 0.72rem | new | small-caps labels |
+| `--radius-card` 12px, `--radius-lg` 18px | updated/new | softer panels |
+| `--shadow-1/2/3`, `--shadow-gold` | new (3-level elevation; `--shadow-card` aliases level 2) | replaces single card shadow |
+| `--dur-fast/med`, `--ease-out` | 160/280ms | motion tokens; all animation guarded by `prefers-reduced-motion` |
+
+Fonts unchanged (Cormorant Garamond / Mukta Malar); weight set extended to Cormorant 500–700 + italics, Mukta Malar 400–700. Gold remains decorative-only; gold fills carry `--color-gold-ink` text (≥ 7:1).
+
+### 23. Heritage Luxe visual language (per surface)
+
+- **Ground & shell:** textured ivory body (radial saffron/gold washes + grain); sticky glass header (`backdrop-filter`) with a symmetric gold hairline — reverts to static on detail/saint pages, which keep their own sticky section-nav (never two stacked fixed bars); footer as a dark-saffron panel under a gold rule.
+- **Brand:** gopuram-silhouette SVG mark (aria-hidden) beside the wordmark; nav links as pills with a gold underline sweep (`--active` class contract unchanged).
+- **Hero:** framed "temple plate" — double gold frame, gopuram-arch watermark (inline SVG data-URI), saffron-gradient display headline, ornament row, pill CTAs. Stat band becomes three elevated cards with saffron-gradient Cormorant numerals and small-caps labels.
+- **Cards & panels (kshetram, azhwar/acharya, detail sections, about):** warm-white panels, 18px radii, animated gold gradient beam on the top edge (grows on hover), hover lift + deeper shadow; visited cards gain a gold ring (`--shadow-gold`).
+- **Editorial details:** section headings with gold rules; pasuram verse panels as parchment cards with a large ❝ ornament and serif-italic transliteration; saint timelines as a gold route with ringed milestones; profile items as gold-barred tint cells; eyebrow-style small-caps labels on dt/labels.
+- **Yatra toolkit:** progress banner with saffron-gradient fill + sheen and a gold spine; trip stops as itinerary rows with gold number medallions, dashed gold route segments and ↓ km legs; region chips as tinted pills (active = saffron gradient); map frames rounded with gold hairlines and dressed Leaflet popup/tooltip chrome; legend in a floating panel.
+- **Lightbox:** dark stage, framed image, round prev/next controls (previously unstyled), gold-ringed close.
+- **Buttons/badges/chips:** pill shapes throughout; primary = saffron gradient with hover lift; outline = saffron ghost; active visited/trip states = gold gradient with dark ink (replacing white-on-gold, a contrast improvement); dashed "+N more" chips.
+- **Print:** both `@media print` blocks preserved and extended (new ornaments/decorative chrome hidden; shadows removed); print button behaviour untouched.

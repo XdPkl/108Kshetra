@@ -1,16 +1,30 @@
 /*
- * Design tokens — the single source of truth for theme values (UXD-108K-005 §2).
+ * Design tokens — the single source of truth for theme values (UXD-108K-005 §2,
+ * Heritage Luxe uplift v1.3). Existing token names are preserved; new tokens
+ * extend the palette rather than replacing it.
  */
 :root {
-  /* Color palette — traditional temple theme */
+  /* Color palette — traditional temple theme, heritage luxe */
   --color-primary: #b34700;        /* deep saffron */
   --color-primary-dark: #7a2e00;
+  --color-primary-deep: #571f00;   /* footer & dark panels */
+  --color-primary-soft: #d95f0e;   /* saffron highlight (gradients) */
   --color-accent: #c99a2e;         /* temple gold (decorative only) */
-  --color-bg: #fdf8f0;             /* warm cream */
-  --color-surface: #ffffff;
-  --color-text: #3a2a1e;           /* deep brown */
-  --color-text-muted: #6b5a4a;
+  --color-accent-soft: #e2c47c;    /* light gold — gradient ends, rules */
+  --color-accent-deep: #96731f;    /* deep gold — gradient ends, Tamil accents */
+  --color-gold-ink: #4a3005;       /* readable ink on gold fills */
+  --color-bg: #faf2e3;             /* warm ivory */
+  --color-surface: #fffdf7;        /* warm white card */
+  --color-surface-sunk: #f6ebd6;   /* inset panel tint */
+  --color-text: #332417;           /* deep brown ink */
+  --color-text-muted: #66523d;
   --color-danger: #a32020;
+  --color-gold-wash: rgba(201, 154, 46, 0.12);
+
+  /* Gradients */
+  --gradient-gold: linear-gradient(120deg, var(--color-accent-soft), var(--color-accent) 45%, var(--color-accent-deep));
+  --gradient-saffron: linear-gradient(160deg, var(--color-primary-soft), var(--color-primary) 55%, #8f3500);
+  --gradient-rule: linear-gradient(90deg, var(--color-accent), rgba(201, 154, 46, 0));
 
   /* Typography */
   --font-display: "Cormorant Garamond", Georgia, serif;
@@ -21,6 +35,10 @@
   --font-size-xl: 1.5rem;
   --font-size-2xl: 2rem;
   --font-size-3xl: 3rem;
+  --text-eyebrow: 0.72rem;                                 /* small-caps labels */
+  --font-display-1: clamp(2.75rem, 4.5vw + 1.25rem, 4.5rem); /* hero display */
+  --font-display-2: clamp(1.95rem, 1.5vw + 1.4rem, 2.6rem);  /* page h1 */
+  --font-display-3: clamp(1.4rem, 0.6vw + 1.2rem, 1.65rem);  /* section h2 */
 
   /* Spacing scale (rem) */
   --space-1: 0.25rem;
@@ -29,10 +47,21 @@
   --space-4: 1.5rem;
   --space-5: 2rem;
   --space-6: 3rem;
+  --space-7: 4.5rem;
 
   /* Shape & elevation */
-  --radius-card: 10px;
+  --radius-card: 12px;
+  --radius-lg: 18px;
   --radius-pill: 999px;
-  --shadow-card: 0 2px 8px rgba(58, 42, 30, 0.1);
+  --shadow-1: 0 1px 2px rgba(51, 36, 23, 0.06), 0 1px 3px rgba(51, 36, 23, 0.08);
+  --shadow-2: 0 2px 4px rgba(51, 36, 23, 0.06), 0 10px 26px rgba(51, 36, 23, 0.1);
+  --shadow-3: 0 4px 10px rgba(51, 36, 23, 0.1), 0 22px 48px rgba(51, 36, 23, 0.16);
+  --shadow-card: var(--shadow-2);
+  --shadow-gold: 0 0 0 1px rgba(201, 154, 46, 0.45), 0 2px 4px rgba(51, 36, 23, 0.06);
   --content-max: 1200px;
+
+  /* Motion */
+  --dur-fast: 160ms;
+  --dur-med: 280ms;
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
 }

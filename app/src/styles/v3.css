@@ -1,29 +1,51 @@
 /*
  * V3 styles — yatra toolkit, shrine template, map, trip, lightbox
- * (UXD-108K-005 v1.2 §11–21). Tokens come from tokens.css.
+ * (UXD-108K-005 v1.2 §11–21, Heritage Luxe uplift v1.3).
+ * Tokens come from tokens.css.
  */
 
 /* ---------- Progress banner (FR-73) ---------- */
 .progress-banner {
+  position: relative;
+  overflow: hidden;
   background: var(--color-surface);
-  border: 1px solid var(--color-accent);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
-  padding: var(--space-3);
-  margin: var(--space-3) 0;
+  border: 1px solid rgba(201, 154, 46, 0.45);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-4);
+  margin: var(--space-4) 0;
+}
+.progress-banner::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gradient-gold);
 }
 .progress-banner__label { margin: 0 0 var(--space-2); }
 .progress-banner__track {
-  height: 0.75rem;
+  height: 0.8rem;
   border-radius: var(--radius-pill);
-  background: rgba(201, 154, 46, 0.25);
+  background: var(--color-surface-sunk);
+  box-shadow: inset 0 1px 3px rgba(51, 36, 23, 0.15);
   overflow: hidden;
 }
 .progress-banner__fill {
+  position: relative;
   height: 100%;
-  background: var(--color-primary);
+  background-color: var(--color-primary);
+  background-image: var(--gradient-saffron);
   border-radius: var(--radius-pill);
-  transition: width 0.3s ease;
+  transition: width var(--dur-med) var(--ease-out);
+}
+.progress-banner__fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
 }
 .progress-banner__reset {
   margin-top: var(--space-2);
@@ -35,65 +57,65 @@
   font: inherit;
   font-size: 0.875rem;
 }
+.progress-banner__reset:hover { color: var(--color-primary); }
 
 /* ---------- Visited badge & trip/visited buttons (FR-72/79) ---------- */
 .visited-badge {
   display: inline-block;
-  background: var(--color-accent);
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.1rem 0.55rem;
+  background-color: var(--color-accent);
+  background-image: var(--gradient-gold);
+  color: var(--color-gold-ink);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.16rem 0.6rem;
   border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-1);
+  white-space: nowrap;
 }
 .btn-visited.is-active,
 .btn-trip.is-active {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: #fff;
+  background-color: var(--color-accent);
+  background-image: var(--gradient-gold);
+  border-color: var(--color-accent-deep);
+  color: var(--color-gold-ink);
+  font-weight: 700;
 }
-
-/* ---------- Card actions row (outside the card link) ---------- */
-.kshetram-card { position: relative; }
-.kshetram-card--visited { border-color: var(--color-accent); }
-.kshetram-card__actions {
-  position: absolute;
-  top: var(--space-2);
-  left: var(--space-2);
-  right: var(--space-2);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-1);
-  z-index: 1;
+/* Compact ghost controls floating over cards */
+.kshetram-card__actions .btn {
+  padding: 0.14rem 0.6rem;
+  font-size: 0.75rem;
+  background-color: rgba(255, 253, 247, 0.92);
+  box-shadow: var(--shadow-1);
 }
-.kshetram-card__link { padding-top: var(--space-5); }
-
-/* ---------- Header: six-item nav (UXD §11) ---------- */
-.site-nav ul {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: var(--space-3);
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
+.kshetram-card__actions .btn--outline {
+  border-color: rgba(201, 154, 46, 0.6);
+  color: var(--color-primary-dark);
 }
-.site-nav li { scroll-snap-align: start; white-space: nowrap; }
-.site-footer__privacy { font-size: 0.875rem; opacity: 0.85; }
+.kshetram-card--visited {
+  border-color: rgba(201, 154, 46, 0.9);
+  box-shadow: var(--shadow-gold);
+}
 
 /* ---------- Detail template (UXD §16) ---------- */
 .detail__serial {
   display: inline-block;
-  background: var(--color-accent);
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 0.1rem 0.6rem;
+  background-color: var(--color-accent);
+  background-image: var(--gradient-gold);
+  color: var(--color-gold-ink);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.7rem;
   border-radius: var(--radius-pill);
   margin-left: var(--space-2);
   vertical-align: middle;
+  box-shadow: var(--shadow-1);
+  white-space: nowrap;
 }
-.detail__serial--hero { margin: 0 0 var(--space-1); }
+.detail__serial--hero { margin: 0 0 var(--space-2); }
 .detail__head-actions {
   display: flex;
   flex-wrap: wrap;
@@ -104,25 +126,37 @@
 .section-nav {
   position: sticky;
   top: 0;
-  z-index: 5;
-  background: var(--color-bg);
+  z-index: 10;
+  background: rgba(250, 242, 227, 0.92);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-1);
   padding: var(--space-2) 0;
-  margin-bottom: var(--space-2);
-  border-bottom: 1px solid var(--color-accent);
+  margin-bottom: var(--space-3);
+  border-bottom: 1px solid rgba(201, 154, 46, 0.45);
 }
 .section-nav__chip {
-  font-size: 0.875rem;
-  padding: 0.15rem 0.7rem;
-  border: 1px solid var(--color-accent);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.2rem 0.8rem;
+  border: 1px solid rgba(201, 154, 46, 0.5);
   border-radius: var(--radius-pill);
   text-decoration: none;
   color: var(--color-text);
   background: var(--color-surface);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
 }
-.section-nav__chip:hover { background: var(--color-accent); color: #fff; }
+.section-nav__chip:hover {
+  background-color: var(--color-accent);
+  background-image: var(--gradient-gold);
+  border-color: var(--color-accent-deep);
+  color: var(--color-gold-ink);
+}
 
 .detail__profile-grid {
   display: grid;
@@ -131,18 +165,19 @@
   margin: 0;
 }
 .detail__profile-item {
-  background: var(--color-surface);
+  background: rgba(201, 154, 46, 0.08);
   border-left: 3px solid var(--color-accent);
-  border-radius: var(--radius-card);
-  padding: var(--space-2);
+  border-radius: 10px;
+  padding: var(--space-2) var(--space-3);
 }
 .detail__profile-item dt {
-  font-size: 0.8125rem;
+  font-size: var(--text-eyebrow);
+  font-weight: 700;
   color: var(--color-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
 }
-.detail__profile-item dd { margin: 0.15rem 0 0; }
+.detail__profile-item dd { margin: 0.15rem 0 0; font-weight: 500; }
 
 .deity-columns {
   display: grid;
@@ -150,11 +185,23 @@
   gap: var(--space-3);
 }
 .deity-column {
+  position: relative;
   background: var(--color-surface);
-  border-top: 3px solid var(--color-accent);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
-  padding: var(--space-3);
+  border: 1px solid rgba(201, 154, 46, 0.4);
+  border-top: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-4) var(--space-3) var(--space-3);
+  overflow: hidden;
+}
+.deity-column::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-gold);
 }
 .deity-column h3 { margin-top: 0; }
 .deity-column__names { font-weight: 600; margin-bottom: 0; }
@@ -164,39 +211,53 @@
 .deity-sanctum-note {
   margin-top: var(--space-3);
   padding: var(--space-2) var(--space-3);
-  background: var(--color-surface);
+  background: rgba(201, 154, 46, 0.1);
   border-left: 3px solid var(--color-accent);
-  border-radius: var(--radius-card);
+  border-radius: 10px;
 }
 .photo-strip { display: flex; gap: var(--space-1); align-items: flex-start; flex-wrap: wrap; }
 .photo-strip__item {
-  border: none; background: none; padding: 0; cursor: zoom-in; width: 33%;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: zoom-in;
+  width: 33%;
+  border-radius: var(--radius-card);
+  overflow: hidden;
 }
 .photo-strip__item--lead { width: 100%; }
-.photo-strip__item .deity-photo { margin: 0; width: 100%; }
-.photo-strip__item img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-card); }
+.photo-strip__item .deity-photo { margin: 0; width: 100%; border-top: none; }
+.photo-strip__item img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-card);
+  transition: transform var(--dur-med) var(--ease-out);
+}
+.photo-strip__item:hover img { transform: scale(1.045); }
 
 .puranam__legend h3, #puranam h3, .visit-info__block h3, .visuals-media h3 { margin-bottom: 0.25rem; }
 .puranam__literature { margin-top: 0.25rem; }
 
 .mangalasasanam__summary { margin-bottom: var(--space-2); }
 .pasuram-excerpt { margin-bottom: var(--space-3); }
-.pasuram-excerpt h4 { margin-bottom: 0.25rem; }
-.pasuram__tamil { white-space: pre-line; font-size: 1.125rem; }
+.pasuram-excerpt h4 { margin-bottom: 0.35rem; font-size: 1.05rem; }
+.pasuram__tamil { white-space: pre-line; font-size: 1.2rem; color: var(--color-primary-dark); font-weight: 500; }
 .pasuram__words { margin: 0 0 var(--space-2); display: grid; grid-template-columns: 1fr 1fr; gap: 0.15rem var(--space-3); }
 .pasuram__word dt { font-weight: 600; }
 .pasuram__word dd { margin: 0; color: var(--color-text-muted); }
 .pasuram__significance {
-  background: rgba(201, 154, 46, 0.14);
-  border-radius: var(--radius-card);
-  padding: var(--space-2);
+  background: rgba(201, 154, 46, 0.16);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 10px;
+  padding: var(--space-2) var(--space-3);
 }
 
 .visit-info { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
 .visit-info__block {
-  background: var(--color-surface);
+  background: var(--color-surface-sunk);
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
   padding: var(--space-3);
 }
 .visit-info__block h3 { margin-top: 0; }
@@ -210,111 +271,372 @@
 .detail__nodata { color: var(--color-text-muted); font-style: italic; margin: 0.25rem 0; }
 
 /* ---------- Map page (UXD §14) ---------- */
-.map-page__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-2); flex-wrap: wrap; }
+.map-page__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.map-page__head h1 { margin-bottom: 0; }
 .map-page__hint { color: var(--color-text-muted); }
-.map-page__chips, .region-legend { display: flex; flex-wrap: wrap; gap: var(--space-1); margin: var(--space-2) 0; }
+.map-page__chips, .region-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-2) 0;
+}
 .region-chip {
-  display: inline-flex; align-items: center; gap: 0.35rem;
-  border: 1px solid var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid rgba(201, 154, 46, 0.5);
   background: var(--color-surface);
   border-radius: var(--radius-pill);
-  padding: 0.15rem 0.7rem;
-  font: inherit; font-size: 0.875rem;
+  padding: 0.24rem 0.85rem;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
+  box-shadow: var(--shadow-1);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
 }
-.region-chip.is-active { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
-.region-chip__dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; display: inline-block; }
-.map-page__frame { height: 480px; border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--color-accent); }
+.region-chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+.region-chip.is-active {
+  background-color: var(--color-primary);
+  background-image: var(--gradient-saffron);
+  border-color: var(--color-primary-dark);
+  color: #fff;
+}
+.region-chip.is-active .region-chip__dot { box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7); }
+.region-chip__dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.map-page__frame {
+  position: relative;
+  isolation: isolate;
+  height: 480px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(201, 154, 46, 0.55);
+  box-shadow: var(--shadow-2);
+}
 .map-page__leaflet { height: 100%; }
-.region-legend__item { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.875rem; margin-right: var(--space-2); }
-.region-legend__dot { width: 0.7rem; height: 0.7rem; border-radius: 50%; display: inline-block; }
+.region-legend {
+  margin: var(--space-3) 0 0;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid rgba(201, 154, 46, 0.4);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+}
+.region-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+}
+.region-legend__dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: inset 0 0 0 1px rgba(51, 36, 23, 0.2);
+}
 .region-legend__dot--visited {
   background: radial-gradient(circle, var(--color-accent) 40%, transparent 45%);
   border: 2px solid var(--color-accent);
 }
 .map-popup__tamil { margin: 0; color: var(--color-text-muted); }
-.map-popup__name { margin: 0.1rem 0 0.4rem; font-weight: 600; }
+.map-popup__name { margin: 0.1rem 0 0.4rem; font-weight: 600; font-family: var(--font-display); font-size: 1.1rem; }
 .map-popup__actions { display: flex; gap: var(--space-1); }
 
-/* ---------- Mini-map (detail location) ---------- */
-.mini-map { height: 260px; border-radius: var(--radius-card); margin: var(--space-2) 0; }
-.mini-map--loading { display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); }
+/* Leaflet chrome, dressed to match */
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(201, 154, 46, 0.45);
+  box-shadow: var(--shadow-2);
+  color: var(--color-text);
+}
+.leaflet-popup-content { margin: 0.7rem 0.9rem; line-height: 1.5; }
+.leaflet-tooltip {
+  border: 1px solid rgba(201, 154, 46, 0.5);
+  border-radius: 10px;
+  box-shadow: var(--shadow-1);
+  background: rgba(255, 253, 247, 0.97);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+.leaflet-tooltip-top::before { border-top-color: rgba(201, 154, 46, 0.5); }
+.leaflet-bar a { color: var(--color-primary-dark); }
 
-/* ---------- Trip page (UXD §15) ---------- */
-.trip-page__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-2); flex-wrap: wrap; }
+/* ---------- Mini-map (detail location) ---------- */
+.mini-map {
+  position: relative;
+  isolation: isolate;
+  height: 260px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(201, 154, 46, 0.5);
+  box-shadow: var(--shadow-1);
+  margin: var(--space-3) 0;
+}
+.mini-map--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Trip page (UXD §15): the yatra itinerary ---------- */
+.trip-page__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.trip-page__head h1 { margin-bottom: 0; }
 .trip-page__actions { display: flex; gap: var(--space-1); }
 .trip-page__meta { color: var(--color-text-muted); }
-.trip-map { height: 340px; border-radius: var(--radius-card); margin: var(--space-2) 0; border: 1px solid var(--color-accent); }
-.trip-map--loading { display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); }
+.trip-page__map { margin: var(--space-2) 0; }
+.trip-map {
+  position: relative;
+  isolation: isolate;
+  height: 340px;
+  border-radius: var(--radius-lg);
+  margin: var(--space-2) 0;
+  border: 1px solid rgba(201, 154, 46, 0.55);
+  box-shadow: var(--shadow-2);
+}
+.trip-map--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+}
 .map-tooltip__tamil { display: block; color: var(--color-text-muted); font-size: 0.8125rem; }
 .map-tooltip__name { display: block; font-weight: 600; }
 .trip-page__notice {
   background: rgba(201, 154, 46, 0.16);
-  border-radius: var(--radius-card);
-  padding: var(--space-2);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 10px;
+  padding: var(--space-2) var(--space-3);
 }
 .trip-page__notice-dismiss {
-  background: none; border: none; color: var(--color-primary);
-  text-decoration: underline; cursor: pointer; font: inherit;
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
 }
-.trip-page__viewtoggle { display: flex; align-items: center; gap: var(--space-1); flex-wrap: wrap; margin-bottom: var(--space-3); }
+.trip-page__viewtoggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+  margin: var(--space-3) 0;
+}
 .trip-page__order { margin-left: auto; }
-.trip-group { margin-bottom: var(--space-3); }
+.trip-group { margin-bottom: var(--space-4); }
 .trip-group__region {
-  border-bottom: 2px solid var(--color-accent);
-  padding-bottom: 0.15rem;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg, var(--color-accent), rgba(201, 154, 46, 0)) 1;
+  padding-bottom: 0.3rem;
 }
 .trip-list { list-style: none; padding: 0; margin: var(--space-2) 0; }
 .trip-stop {
-  display: flex; align-items: baseline; gap: var(--space-2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   background: var(--color-surface);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(201, 154, 46, 0.35);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
   padding: var(--space-2) var(--space-3);
-  margin-bottom: var(--space-1);
+  margin-bottom: var(--space-2);
+  transition: box-shadow var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
 }
-.trip-stop__index { color: var(--color-text-muted); }
-.trip-stop__tamil { margin-right: 0.25rem; }
+.trip-stop:hover { border-color: rgba(201, 154, 46, 0.7); box-shadow: var(--shadow-2); }
+/* Connector segment linking a stop to the next item on the route */
+.trip-stop::after {
+  content: "";
+  position: absolute;
+  left: 1.9rem;
+  bottom: -0.75rem;
+  width: 2px;
+  height: 0.6rem;
+  background: rgba(201, 154, 46, 0.65);
+}
+.trip-stop:last-child::after { display: none; }
+.trip-stop__index {
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  background-image: var(--gradient-gold);
+  color: var(--color-gold-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: var(--shadow-1);
+}
+.trip-stop__tamil { margin-right: 0.25rem; color: var(--color-accent-deep); }
 .trip-stop__place { color: var(--color-text-muted); }
 .trip-stop__remove {
   margin-left: auto;
-  background: none; border: none; cursor: pointer;
-  color: var(--color-danger); font: inherit; font-size: 0.875rem;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-danger);
+  font: inherit;
+  font-size: 0.875rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 8px;
 }
+.trip-stop__remove:hover { background: rgba(163, 32, 32, 0.08); }
 .trip-leg {
+  position: relative;
   list-style: none;
   color: var(--color-text-muted);
-  padding-left: var(--space-4);
-  margin: -0.35rem 0 0.15rem;
-  font-size: 0.875rem;
+  padding-left: 3.7rem;
+  margin: -0.55rem 0 0.4rem;
+  font-size: 0.8125rem;
 }
+/* Dashed gold stretch of route between the two stops */
+.trip-leg::before {
+  content: "";
+  position: absolute;
+  left: 1.9rem;
+  top: -0.1rem;
+  bottom: -0.1rem;
+  width: 2px;
+  background: repeating-linear-gradient(180deg, rgba(201, 154, 46, 0.7) 0 4px, transparent 4px 8px);
+}
+.trip-leg::first-letter { color: var(--color-accent-deep); }
 .route-fallback { color: var(--color-text-muted); }
 
 /* ---------- About page (UXD §17) ---------- */
+.about-page > section {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid rgba(201, 154, 46, 0.4);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-4);
+  margin: var(--space-3) 0;
+  overflow: hidden;
+}
+.about-page > section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-gold);
+}
+.about-page h2 {
+  margin: 0 0 var(--space-2);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid rgba(201, 154, 46, 0.35);
+}
 .about-page__list { margin-top: 0.25rem; }
-.about-page__contact dt { float: left; clear: left; width: 4.5rem; color: var(--color-text-muted); }
-.about-page__contact dd { margin: 0 0 0.25rem 5rem; }
+.about-page__contact dt {
+  float: left; clear: left; width: 4.5rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-eyebrow);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-top: 0.2rem;
+}
+.about-page__contact dd { margin: 0 0 0.35rem 5rem; font-weight: 500; }
 
 /* ---------- Lightbox (FR-85) ---------- */
 .lightbox {
-  position: fixed; inset: 0; z-index: 50;
-  background: rgba(20, 12, 6, 0.88);
-  display: flex; align-items: center; justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(20, 12, 6, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: var(--space-3);
 }
-.lightbox__inner {
-  position: relative; max-width: min(900px, 94vw); margin: 0;
+.lightbox__inner { position: relative; max-width: min(900px, 94vw); margin: 0; }
+.lightbox__inner img {
+  max-width: 100%;
+  max-height: 78vh;
+  display: block;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(201, 154, 46, 0.4);
+  box-shadow: var(--shadow-3);
 }
-.lightbox__inner img { max-width: 100%; max-height: 78vh; display: block; border-radius: var(--radius-card); }
 .lightbox__close {
-  position: absolute; top: -0.5rem; right: -0.5rem;
-  background: var(--color-surface); border: none;
-  border-radius: 50%; width: 2.2rem; height: 2.2rem;
-  font-size: 1rem; cursor: pointer;
+  position: absolute;
+  top: -0.7rem;
+  right: -0.7rem;
+  z-index: 2;
+  background: var(--color-surface);
+  border: 1px solid rgba(201, 154, 46, 0.5);
+  border-radius: 50%;
+  width: 2.3rem;
+  height: 2.3rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--color-primary-dark);
+  box-shadow: var(--shadow-2);
+  transition: transform var(--dur-fast) var(--ease-out);
 }
+.lightbox__close:hover { transform: scale(1.08); }
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid rgba(201, 154, 46, 0.5);
+  border-radius: 50%;
+  background: rgba(255, 253, 247, 0.92);
+  color: var(--color-primary-dark);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 0 0.2rem 0.2rem;
+  box-shadow: var(--shadow-2);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+.lightbox__nav:hover { background: var(--color-surface); }
+.lightbox__nav--prev { left: -3.4rem; }
+.lightbox__nav--next { right: -3.4rem; }
 .lightbox__caption {
-  color: #f5ecdf; display: flex; gap: var(--space-3);
-  flex-wrap: wrap; justify-content: space-between; margin-top: 0.5rem;
+  color: #f5ecdf;
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 0.6rem;
 }
 .lightbox__credit, .lightbox__count { color: rgba(245, 236, 223, 0.75); font-size: 0.875rem; }
 
@@ -322,48 +644,126 @@
 .saint-page__order { color: var(--color-text-muted); font-size: 0.875rem; }
 .saint-identification { margin-bottom: var(--space-2); }
 .saint-works { margin: 0; padding-left: 1.1rem; }
+.saint-works li { margin-bottom: 0.15rem; }
 .saint-works-summary { color: var(--color-text-muted); margin-top: var(--space-1); }
 .acharya-theme {
   background: rgba(201, 154, 46, 0.14);
-  border-radius: var(--radius-card);
-  padding: var(--space-2);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 10px;
+  padding: var(--space-2) var(--space-3);
 }
-.saint-desams { display: flex; flex-wrap: wrap; gap: var(--space-1); align-items: center; margin-top: var(--space-2); }
+.saint-desams {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  align-items: center;
+  margin-top: var(--space-2);
+}
 .saint-desams strong { width: 100%; }
 .saint-prevnext {
-  display: flex; justify-content: space-between; gap: var(--space-2);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
   margin: var(--space-4) 0;
 }
 .pending-content { color: var(--color-text-muted); }
-.saint-index__group h2 { border-bottom: 2px solid var(--color-accent); padding-bottom: 0.15rem; }
-.acharya-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-3); margin: var(--space-2) 0 var(--space-4); }
+.saint-index__group { margin-top: var(--space-5); }
+.saint-index__group h2 {
+  display: inline-block;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg, var(--color-accent), rgba(201, 154, 46, 0)) 1;
+  padding-bottom: 0.3rem;
+  margin-bottom: var(--space-3);
+}
+.acharya-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin: var(--space-2) 0 var(--space-4);
+}
 .acharya-card { margin: 0; }
 .acharya-card__link { text-decoration: none; color: inherit; display: block; }
 .acharya-card__link:hover h3 { color: var(--color-primary); }
-.acharya-card__titles { color: var(--color-text-muted); font-size: 0.875rem; margin-bottom: var(--space-1); }
+.acharya-card__titles {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: var(--space-1);
+}
 .azhwar-card__detail-link { text-decoration: none; color: inherit; }
 .azhwar-card__detail-link:hover h2 { color: var(--color-primary); }
-.detail__subline { display: block; color: var(--color-text-muted); font-size: 0.9375rem; margin-top: 0.15rem; }
-.saint-timeline h3 { margin-bottom: var(--space-1); }
-.saint-timeline ol { margin: 0 0 var(--space-2); padding-left: 1.25rem; }
-.saint-timeline li { margin-bottom: 0.3rem; }
+.detail__subline {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  margin-top: 0.15rem;
+}
+
+/* Timeline as a gold route with ringed milestones */
+.saint-timeline h3 { margin-bottom: var(--space-2); }
+.saint-timeline ol {
+  list-style: none;
+  margin: 0 0 var(--space-3);
+  padding: 0.2rem 0 0.2rem 1.4rem;
+  position: relative;
+}
+.saint-timeline ol::before {
+  content: "";
+  position: absolute;
+  left: 0.4rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  background: linear-gradient(180deg, var(--color-accent), rgba(201, 154, 46, 0.15));
+}
+.saint-timeline li {
+  position: relative;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+.saint-timeline li::before {
+  content: "";
+  position: absolute;
+  left: -1.2rem;
+  top: 0.45rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--color-accent);
+}
 .saint-narrative__block h3 { margin: var(--space-2) 0 var(--space-1); }
 .saint-legend {
-  background: rgba(201, 154, 46, 0.1);
-  border-left: 3px solid var(--color-accent);
-  border-radius: var(--radius-card);
-  padding: var(--space-2) var(--space-3);
+  position: relative;
+  background:
+    radial-gradient(130% 130% at 0% 0%, rgba(201, 154, 46, 0.16), transparent 55%),
+    var(--color-surface-sunk);
+  border: 1px solid rgba(201, 154, 46, 0.45);
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
   margin-top: var(--space-3);
 }
 .saint-legend h3 { margin: 0 0 var(--space-1); }
 .saint-legend p { margin: 0; }
-.pasuram__tamil--pending { color: var(--color-text-muted); font-style: italic; }
+.pasuram__tamil--pending {
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-weight: 400;
+}
 .pasuram__commentary { margin-top: var(--space-2); }
 .pasuram__commentary h5 { margin-bottom: var(--space-1); }
 .pasuram__commentary-item { margin-bottom: var(--space-1); }
 .saint-iconography { margin: 0; }
-.saint-iconography dt { font-weight: 600; margin-top: var(--space-1); }
-.saint-iconography dd { margin: 0; color: var(--color-text-muted); }
+.saint-iconography dt {
+  font-weight: 600;
+  margin-top: var(--space-1);
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+.saint-iconography dd { margin: 0; color: var(--color-text); }
 .acharya-preservation { margin: var(--space-2) 0 0; }
 
 /* ---------- Responsive (UXD §6) ---------- */
@@ -371,6 +771,9 @@
   .deity-columns, .visit-info, .pasuram__words { grid-template-columns: 1fr; }
   .trip-page__order { margin-left: 0; }
   .detail__head-actions { justify-content: flex-start; }
+  .lightbox__nav--prev { left: 0.6rem; }
+  .lightbox__nav--next { right: 0.6rem; }
+  .trip-leg { padding-left: 3.2rem; }
 }
 
 /* ---------- Print (FR-70/84) ---------- */
@@ -380,5 +783,8 @@
   .trip-stop__remove, .btn, .region-chip, .map-page__chips,
   .map-page__frame, .mini-map, .trip-page__map, .photo-strip, .lightbox { display: none !important; }
   .kshetram-card__actions { display: none !important; }
+  .region-legend, .trip-stop::after, .trip-leg::before,
+  .progress-banner::before, .detail__section::before { display: none !important; }
+  .trip-stop, .trip-page__notice, .saint-legend, .pasuram { box-shadow: none; }
   .detail__section { break-inside: avoid; }
 }

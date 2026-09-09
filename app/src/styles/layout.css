@@ -1,5 +1,7 @@
 /*
  * Layout and component styles (UXD-108K-005 §3–4).
+ * Heritage Luxe uplift: glass header with gold hairline, editorial hero
+ * with gopuram watermark, elevated stat cards and gold-beam panels.
  */
 .app-shell {
   min-height: 100vh;
@@ -11,14 +13,58 @@
 .page {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: var(--space-4);
+  padding: var(--space-5) var(--space-4) var(--space-6);
 }
-.page__lead { color: var(--color-text-muted); }
+.page__lead {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+  max-width: 46rem;
+}
 
-/* Header */
+/* Shared section heading (SectionHeading component) */
+.section-heading { margin-top: var(--space-5); }
+.section-heading h2 {
+  position: relative;
+  padding-bottom: 0.55rem;
+  margin: 0;
+}
+.section-heading h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 4.5rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--gradient-gold);
+}
+.section-heading__lead {
+  color: var(--color-text-muted);
+  margin: 0.7rem 0 0;
+  max-width: 44rem;
+}
+
+/* ---------- Header: glass bar with gold hairline ---------- */
 .site-header {
-  border-bottom: 3px solid var(--color-accent);
-  background: var(--color-surface);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(250, 242, 227, 0.88);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201, 154, 46, 0.35);
+}
+/* The detail & saint templates keep their own sticky section-nav, so the
+   header reverts to static there to avoid two stacked fixed bars. */
+html:has(.detail) .site-header,
+html:has(.saint-page) .site-header {
+  position: relative;
+}
+.site-header::after {
+  content: "";
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent) 18%, var(--color-accent) 82%, transparent);
 }
 .site-header__inner {
   max-width: var(--content-max);
@@ -31,47 +77,146 @@
   flex-wrap: wrap;
 }
 .site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   font-family: var(--font-display);
-  font-size: var(--font-size-xl);
+  font-size: 1.45rem;
   font-weight: 700;
   color: var(--color-primary-dark);
   text-decoration: none;
+  white-space: nowrap;
+}
+.site-header__mark {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  fill: var(--color-accent);
+  filter: drop-shadow(0 1px 1px rgba(51, 36, 23, 0.25));
+}
+.site-header__mark .mark-door { fill: var(--color-accent-deep); }
+.site-nav {
+  min-width: 0;
+  max-width: 100%;
 }
 .site-nav ul {
   display: flex;
-  gap: var(--space-3);
+  flex-wrap: nowrap;
+  gap: var(--space-1);
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 var(--space-1) var(--space-1);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 154, 46, 0.55) transparent;
 }
+.site-nav li { scroll-snap-align: start; white-space: nowrap; }
 .site-nav__link {
+  position: relative;
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-pill);
   text-decoration: none;
   color: var(--color-text);
-  padding: var(--space-1) var(--space-2);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
 }
+.site-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.12rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gradient-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+.site-nav__link:hover {
+  color: var(--color-primary);
+  background: rgba(179, 71, 0, 0.06);
+}
+.site-nav__link:hover::after { transform: scaleX(1); }
 .site-nav__link--active {
   color: var(--color-primary);
   font-weight: 700;
-  border-bottom: 2px solid var(--color-accent);
+  background: rgba(179, 71, 0, 0.07);
 }
+.site-nav__link--active::after { transform: scaleX(1); }
 
-/* Footer */
+/* ---------- Footer: dark saffron panel under a gold rule ---------- */
 .site-footer {
-  background: var(--color-primary-dark);
-  color: var(--color-bg);
+  position: relative;
+  margin-top: var(--space-7);
+  padding: var(--space-5) var(--space-3) var(--space-4);
+  background:
+    radial-gradient(620px 200px at 50% 0, rgba(226, 196, 124, 0.16), transparent 72%),
+    var(--color-primary-deep);
+  color: #f7ecd9;
   text-align: center;
-  padding: var(--space-3);
   font-size: var(--font-size-sm);
 }
-.site-footer p { margin: var(--space-1) 0; }
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-accent) 18%, var(--color-accent) 82%, transparent);
+}
+.site-footer p { margin: var(--space-1) auto; max-width: 46rem; }
 
-/* Hero */
-.hero { text-align: center; padding: var(--space-6) var(--space-3); }
-.hero__ornament { color: var(--color-accent); letter-spacing: 0.5em; }
-.hero h1 { font-size: var(--font-size-3xl); margin: var(--space-2) 0; }
+/* ---------- Hero: framed temple plate with gopuram watermark ---------- */
+.hero {
+  position: relative;
+  text-align: center;
+  margin-top: var(--space-2);
+  padding: var(--space-6) var(--space-4) var(--space-7);
+  border: 1px solid rgba(201, 154, 46, 0.5);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160' fill='none' stroke='%23c99a2e' stroke-opacity='0.32' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M40 160 V85 Q40 38 120 30 Q200 38 200 85 V160'/%3E%3Cpath d='M58 160 V92 Q58 56 120 48 Q182 56 182 92 V160'/%3E%3Cpath d='M120 30 V13'/%3E%3Ccircle cx='120' cy='9' r='3.5'/%3E%3Cpath d='M96 160 V112 Q96 96 120 94 Q144 96 144 112 V160'/%3E%3Cpath d='M70 80 H86 M154 80 H170 M64 100 H74 M166 100 H176'/%3E%3C/svg%3E"),
+    radial-gradient(120% 90% at 50% 0%, rgba(201, 154, 46, 0.15), transparent 56%),
+    linear-gradient(180deg, var(--color-surface) 0%, #fdf5e6 100%);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center 112%, center top, center;
+  background-size: min(26rem, 78%) auto, auto, auto;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(201, 154, 46, 0.38);
+  border-radius: calc(var(--radius-lg) - 6px);
+  pointer-events: none;
+}
+.hero__ornament {
+  margin: 0 0 var(--space-3);
+  color: var(--color-accent);
+  letter-spacing: 0.6em;
+  text-indent: 0.6em;
+  font-size: 0.95rem;
+}
+.hero h1 {
+  max-width: 16ch;
+  margin: 0 auto var(--space-3);
+  font-size: var(--font-display-1);
+  font-weight: 600;
+  line-height: 1.05;
+  background-image: linear-gradient(175deg, var(--color-primary-dark) 25%, var(--color-primary) 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .hero__intro {
-  max-width: 42rem;
-  margin: 0 auto var(--space-4);
+  max-width: 44rem;
+  margin: 0 auto var(--space-5);
   color: var(--color-text-muted);
   font-size: var(--font-size-lg);
 }
@@ -82,99 +227,193 @@
   flex-wrap: wrap;
 }
 
-/* Stat band */
+/* ---------- Stat band: three elevated numerals ---------- */
 .stat-band {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-6);
-  flex-wrap: wrap;
-  padding: var(--space-4);
-  background: rgba(201, 154, 46, 0.12);
-  border-top: 1px solid var(--color-accent);
-  border-bottom: 1px solid var(--color-accent);
-}
-.stat-band__item { text-align: center; }
-.stat-band__value {
-  display: block;
-  font-family: var(--font-display);
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: var(--color-primary-dark);
-}
-.stat-band__label { color: var(--color-text-muted); }
-
-/* Card grid + kshetram card */
-.card-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-3);
+  max-width: 22rem;
+  margin: var(--space-4) auto 0;
+}
+.stat-band__item {
+  position: relative;
+  text-align: center;
+  padding: var(--space-4) var(--space-3) var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid rgba(201, 154, 46, 0.45);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+}
+.stat-band__item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18%;
+  right: 18%;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--gradient-gold);
+}
+.stat-band__value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 2vw + 1.4rem, 3rem);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+  background-image: var(--gradient-saffron);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.stat-band__label {
+  color: var(--color-text-muted);
+  font-size: var(--text-eyebrow);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+/* ---------- Card grid + kshetram card ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
   margin-top: var(--space-3);
 }
 .kshetram-card {
+  position: relative;
+  overflow: hidden;
   background: var(--color-surface);
-  border: 1px solid rgba(201, 154, 46, 0.5);
-  border-top: 3px solid var(--color-accent);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  border: 1px solid rgba(201, 154, 46, 0.45);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+.kshetram-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-gold);
+  transform: scaleX(0.35);
+  transform-origin: left;
+  transition: transform var(--dur-med) var(--ease-out);
+  z-index: 2;
 }
 .kshetram-card:hover {
-  border-color: var(--color-primary);
-  box-shadow: 0 4px 14px rgba(58, 42, 30, 0.16);
+  transform: translateY(-3px);
+  border-color: rgba(201, 154, 46, 0.8);
+  box-shadow: var(--shadow-2);
 }
+.kshetram-card:hover::before { transform: scaleX(1); }
 .kshetram-card__link {
   display: block;
-  padding: var(--space-3);
+  padding: var(--space-4) var(--space-3) var(--space-3);
+  padding-top: var(--space-5);
   color: inherit;
   text-decoration: none;
 }
-.kshetram-card__tamil { margin: 0; color: var(--color-text-muted); }
-.kshetram-card__name { margin: var(--space-1) 0; font-size: var(--font-size-xl); }
+.kshetram-card__tamil {
+  margin: 0;
+  color: var(--color-accent-deep);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+.kshetram-card__name { margin: 0.15rem 0 0.4rem; font-size: 1.4rem; transition: color var(--dur-fast) var(--ease-out); }
+.kshetram-card__link:hover .kshetram-card__name { color: var(--color-primary); }
 .kshetram-card__place { margin: 0; font-size: var(--font-size-sm); color: var(--color-text-muted); }
 .kshetram-card__badges {
   display: flex;
   gap: var(--space-2);
   flex-wrap: wrap;
-  margin-top: var(--space-2);
+  margin-top: var(--space-3);
 }
 
-/* Search & filter bar */
+/* ---------- Search & filter bar: unified toolbar ---------- */
 .search-filter-bar {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-3);
   background: var(--color-surface);
-  border: 1px solid rgba(201, 154, 46, 0.5);
-  border-radius: var(--radius-card);
-  padding: var(--space-3);
+  border: 1px solid rgba(201, 154, 46, 0.45);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-4);
   margin: var(--space-3) 0;
 }
+.search-filter-bar__search { position: relative; }
 .search-filter-bar__search input,
 .search-filter-bar__select select {
   width: 100%;
-  padding: var(--space-2);
-  border: 1px solid var(--color-text-muted);
-  border-radius: var(--radius-card);
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgba(102, 82, 61, 0.4);
+  border-radius: 10px;
   font-family: var(--font-body);
   font-size: var(--font-size-md);
   background: var(--color-bg);
   color: var(--color-text);
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+.search-filter-bar__search input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%2366523d' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='9' cy='9' r='5.5'/%3E%3Cpath d='M13.5 13.5 17 17'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 0.65rem center;
+  background-size: 1rem;
+  padding-left: 2.1rem;
+}
+.search-filter-bar__search input:focus,
+.search-filter-bar__select select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(201, 154, 46, 0.25);
+  outline: none;
 }
 .search-filter-bar label {
   display: block;
-  font-size: var(--font-size-sm);
+  font-size: var(--text-eyebrow);
+  font-weight: 700;
   color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   margin-bottom: var(--space-1);
 }
-.result-count { color: var(--color-text-muted); }
+.result-count { color: var(--color-text-muted); font-size: 0.9375rem; }
 
-/* Empty state */
-.empty-state { text-align: center; padding: var(--space-6) var(--space-3); }
+/* ---------- Empty state: dashed devanagari-style panel ---------- */
+.empty-state {
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+  background: var(--color-surface);
+  border: 1px dashed rgba(201, 154, 46, 0.6);
+  border-radius: var(--radius-lg);
+  max-width: 36rem;
+  margin: var(--space-4) auto;
+}
 .empty-state__title { color: var(--color-danger); }
+.empty-state__message { color: var(--color-text-muted); }
+.empty-state__action { margin-top: var(--space-3); }
+.empty-state__actions {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-/* Detail page */
-.detail__back { margin-top: 0; }
-.detail__tamil { color: var(--color-text-muted); margin: 0; font-size: var(--font-size-lg); }
+/* ---------- Detail page ---------- */
+.detail__back { margin: 0 0 var(--space-2); font-size: 0.9375rem; }
+.detail__back a { color: var(--color-text-muted); text-decoration: none; }
+.detail__back a:hover { color: var(--color-primary); }
+.detail__tamil {
+  color: var(--color-accent-deep);
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
 .detail__badges {
   display: flex;
   gap: var(--space-2);
@@ -187,37 +426,103 @@
   gap: var(--space-3);
 }
 .detail__section {
+  position: relative;
   background: var(--color-surface);
-  border: 1px solid rgba(201, 154, 46, 0.5);
-  border-top: 3px solid var(--color-accent);
-  border-radius: var(--radius-card);
-  padding: var(--space-3);
+  border: 1px solid rgba(201, 154, 46, 0.4);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-4);
+  margin-top: var(--space-3);
 }
-.detail__section h2 { margin-top: 0; }
-.detail__section dt { font-weight: 700; color: var(--color-text-muted); margin-top: var(--space-2); }
+.detail__section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--gradient-gold);
+}
+.detail__section h2 {
+  margin: 0 0 var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid rgba(201, 154, 46, 0.35);
+}
+.detail__section dt {
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin-top: var(--space-2);
+}
 .detail__section dd { margin: 0; }
-.detail__map-link { display: inline-block; margin-top: var(--space-3); }
+.detail__section .detail__section {
+  background: var(--color-surface-sunk);
+  box-shadow: none;
+}
+.detail__map-link { display: inline-block; margin-top: var(--space-3); font-weight: 600; }
 .detail__map-note { color: var(--color-text-muted); font-style: italic; }
 .detail__azhwar-list { margin: var(--space-2) 0 0; padding-left: var(--space-4); }
+.detail__azhwar-list li { margin-bottom: 0.2rem; }
 
-/* Azhwars */
-.azhwar-teaser { text-align: center; padding: var(--space-5) 0; }
+/* ---------- Azhwars ---------- */
+.azhwar-teaser {
+  text-align: center;
+  padding: var(--space-6) var(--space-3);
+  margin-top: var(--space-5);
+  background:
+    radial-gradient(80% 120% at 50% 0%, rgba(201, 154, 46, 0.14), transparent 60%),
+    var(--color-surface);
+  border: 1px solid rgba(201, 154, 46, 0.4);
+  border-radius: var(--radius-lg);
+}
 .azhwar-list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-3);
+  gap: 1.25rem;
   margin-top: var(--space-3);
 }
 .azhwar-card {
+  position: relative;
+  overflow: hidden;
   background: var(--color-surface);
-  border: 1px solid rgba(201, 154, 46, 0.5);
-  border-top: 3px solid var(--color-accent);
-  border-radius: var(--radius-card);
-  padding: var(--space-3);
+  border: 1px solid rgba(201, 154, 46, 0.4);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-4);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
 }
-.azhwar-card__head span { color: var(--color-text-muted); }
-.azhwar-card__head h2 { display: inline; margin-left: var(--space-2); }
-.azhwar-card__meta { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+.azhwar-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-gold);
+  transform: scaleX(0.35);
+  transform-origin: left;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+.azhwar-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(201, 154, 46, 0.75);
+  box-shadow: var(--shadow-2);
+}
+.azhwar-card:hover::before { transform: scaleX(1); }
+.azhwar-card__head span {
+  color: var(--color-accent-deep);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+.azhwar-card__head h2 { display: inline; margin-left: var(--space-2); font-size: 1.35rem; }
+.azhwar-card__meta {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
 .azhwar-card__work { color: var(--color-text-muted); }
 .azhwar-card__desams {
   display: flex;
@@ -227,10 +532,14 @@
   margin-top: var(--space-2);
 }
 
-/* Responsive (mobile-first) */
+/* ---------- Responsive (mobile-first) ---------- */
 @media (min-width: 640px) {
   .card-grid { grid-template-columns: repeat(2, 1fr); }
   .azhwar-list { grid-template-columns: repeat(2, 1fr); }
+  .stat-band {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 54rem;
+  }
 }
 @media (min-width: 1024px) {
   .card-grid { grid-template-columns: repeat(4, 1fr); }
@@ -239,7 +548,7 @@
   .search-filter-bar { grid-template-columns: 2fr repeat(4, 1fr) auto; align-items: end; }
 }
 
-/* Detail V2 — hero band, deity gallery, pasuram, nearby, actions */
+/* ---------- Detail V2 — hero band, deity gallery, pasuram, nearby ---------- */
 .detail__head {
   display: flex;
   justify-content: space-between;
@@ -248,7 +557,7 @@
   flex-wrap: wrap;
 }
 .page-actions { display: flex; gap: var(--space-2); }
-.btn--small { padding: var(--space-1) var(--space-2); font-size: var(--font-size-sm); }
+.btn--small { padding: 0.3rem 0.9rem; font-size: var(--font-size-sm); }
 
 .timings__sessions { font-weight: 600; }
 .timings__notes { color: var(--color-text-muted); margin: var(--space-1) 0; }
@@ -265,8 +574,8 @@
   margin-top: var(--space-3);
 }
 .deity-card {
-  background: var(--color-bg);
-  border: 1px solid rgba(201, 154, 46, 0.5);
+  background: var(--color-surface-sunk);
+  border: 1px solid rgba(201, 154, 46, 0.35);
   border-radius: var(--radius-card);
   padding: var(--space-3);
 }
@@ -286,8 +595,10 @@
   align-items: center;
   justify-content: center;
   aspect-ratio: 4 / 3;
-  background: linear-gradient(160deg, #fdf3e0, #f3e2c4);
-  color: var(--color-accent);
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(201, 154, 46, 0.22), transparent 62%),
+    linear-gradient(160deg, #fdf3e0, #f0ddba);
+  color: rgba(150, 115, 31, 0.85);
   font-size: var(--font-size-3xl);
 }
 .deity-photo__credit {
@@ -296,26 +607,58 @@
   padding: var(--space-1) var(--space-2);
 }
 
+/* ---------- Pasuram: ornamental verse panel ---------- */
 .pasuram {
+  position: relative;
   margin: var(--space-3) 0 0;
-  padding: var(--space-3);
-  background: var(--color-bg);
-  border-left: 4px solid var(--color-accent);
-  border-radius: var(--radius-card);
+  padding: 2.6rem var(--space-4) var(--space-3);
+  background:
+    radial-gradient(140% 100% at 50% 0%, rgba(201, 154, 46, 0.13), transparent 58%),
+    var(--color-surface-sunk);
+  border: 1px solid rgba(201, 154, 46, 0.45);
+  border-radius: var(--radius-lg);
+}
+.pasuram::before {
+  content: "❝";
+  position: absolute;
+  top: 0.55rem;
+  left: 1rem;
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: rgba(201, 154, 46, 0.55);
 }
 .pasuram__tamil { font-size: var(--font-size-lg); margin: 0 0 var(--space-2); }
-.pasuram__transliteration { color: var(--color-text-muted); margin: 0 0 var(--space-2); }
+.pasuram__transliteration {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--color-text);
+  margin: 0 0 var(--space-2);
+}
 .pasuram__meaning { margin: 0 0 var(--space-2); }
 .pasuram__attribution { color: var(--color-text-muted); font-size: var(--font-size-sm); }
-.pasuram__listen { margin-left: var(--space-2); }
+.pasuram__listen { margin-left: var(--space-2); font-weight: 600; }
 
 .puranam { white-space: pre-line; }
-.nearby__radius { font-size: var(--font-size-sm); color: var(--color-text-muted); font-family: var(--font-body); }
+.nearby__radius {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-weight: 400;
+}
 .nearby__list { margin: var(--space-2) 0; padding-left: var(--space-4); }
+.nearby__list li { margin-bottom: 0.2rem; }
 .nearby__km { color: var(--color-text-muted); }
-.distance { margin-top: var(--space-3); display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; }
+.distance {
+  margin-top: var(--space-3);
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  flex-wrap: wrap;
+}
 .distance__result { margin: 0; font-weight: 600; }
 .distance__error { margin: 0; color: var(--color-danger); font-size: var(--font-size-sm); }
+.distance__directions { font-weight: 600; }
 .detail__pair { margin: var(--space-2) 0 0; }
 .detail__pair dt { font-weight: 700; color: var(--color-text-muted); }
 
@@ -323,10 +666,13 @@
   .deity-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Print stylesheet (FR-70) */
+/* ---------- Print stylesheet (FR-70) ---------- */
 @media print {
   .site-header, .site-footer, .page-actions, .distance, .detail__back { display: none; }
   body { background: #fff; }
+  .hero, .stat-band__item, .kshetram-card, .detail__section, .azhwar-card,
+  .search-filter-bar, .empty-state, .section-heading h2::after { box-shadow: none; }
+  .hero { border: none; background: none; padding-left: 0; padding-right: 0; }
   .detail__section { border: none; break-inside: avoid; }
   .detail__head { justify-content: flex-start; }
   h1 { font-size: 18pt; }

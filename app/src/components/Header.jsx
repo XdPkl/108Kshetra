@@ -21,7 +21,15 @@ export default function Header() {
     <header className="site-header">
       <div className="site-header__inner">
         <Link to="/" className="site-header__brand">
-          <span aria-hidden="true">◆</span> 108 Divya Kshetrams
+          <svg className="site-header__mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="2.2" r="1.3" />
+            <path d="M9.6 4.7h4.8l-.5 3H10.1l-.5-3z" />
+            <path d="M7.4 8.3h9.2l-.6 3.6H8l-.6-3.6z" />
+            <path d="M5 12.5h14l-.8 4.1H5.8L5 12.5z" />
+            <path d="M3.4 17.2h17.2v3.6H3.4z" />
+            <path className="mark-door" d="M11.2 17.9h1.6v2.9h-1.6z" />
+          </svg>
+          108 Divya Kshetrams
         </Link>
         <nav aria-label="Primary" className="site-nav">
           <ul>
