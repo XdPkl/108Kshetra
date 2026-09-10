@@ -108,4 +108,21 @@ describe('Identification', () => {
     const { container } = render(<Identification rows={[{ label: 'A', value: null }, { label: 'B', value: '' }]} />);
     expect(container).toBeEmptyDOMElement();
   });
+
+  it('renders the portrait image and stacked rows when provided (UXD v1.5)', () => {
+    render(
+      <Identification
+        rows={[{ label: 'Era', value: '6th–7th century CE' }]}
+        portrait={{ src: '/photos/saint-poigai.jpg', alt: 'Poigai Azhwar painting' }}
+      />,
+    );
+    expect(screen.getByAltText('Poigai Azhwar painting')).toHaveAttribute('src', '/photos/saint-poigai.jpg');
+    expect(screen.getByText('Era')).toBeInTheDocument();
+    expect(screen.getByText('6th–7th century CE')).toBeInTheDocument();
+  });
+
+  it('renders the placeholder portrait when no source exists', () => {
+    render(<Identification rows={[{ label: 'Era', value: '—' }]} portrait={{ alt: 'Saint portrait' }} />);
+    expect(screen.getByLabelText('Saint portrait')).toHaveTextContent('◆');
+  });
 });

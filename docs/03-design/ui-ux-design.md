@@ -675,3 +675,13 @@ UT-HOME-01/02, TC-02/03/11 (home block) and TC-17 no longer assert the stat band
 ### 26. v1.4.1 — hero artwork swap (same day follow-up)
 
 Per the PO's follow-up, the hero watermark is replaced with a second supplied pencil sketch — Garuda, Sudarshana Chakra, Shankha and Hanuman in a row (`app/src/assets/hero-emblems-sketch.jpg`, paper normalized to white in processing) — zoomed to fill the entire hero panel (`background-size: cover`, vertical mask fade, multiply blend at 15% opacity). On narrow screens the drawing's centre crop fills the hero. The Adisesha sketch asset is removed.
+
+### 27. v1.5 — Saint template uplift (Azhwar & Acharya detail, PO request 2026-09-10)
+
+Look-and-feel revision of the shared saint template; all content, links and data contracts unchanged. Supersedes the §18/§19 identification-grid and media wireframes.
+
+- **Identification:** portrait on the left (framed, 4:5, offset inner hairline), identification details stacked one below the other on the right as hairline-separated rows with small-caps labels. Portrait source: the saint's `photos[0]` (PO-supplied painting — Poigai Azhwar demo `photos/saint-poigai.jpg`); saints without a supplied painting render the branded gold ◆ placeholder panel. New optional `photos? [{src, alt, credit?}]` field on both saint schemas (mirrors the v1.2 shape).
+- **Contributions:** hand-drawn-style inline SVG glyphs (open book — works; shield — sampradaya preservation; diya flame — bhakti bhava / philosophical theme; map pin — desam rows) introduce each contribution cell and chip-row label.
+- **Representative Verse:** verse block centered inside a minimal double gold frame (outer hairline + inset line, centered ❝ ornament); word-by-word meanings and commentary centered as narrow readable columns.
+- **Visual & Media:** two-column top row — Iconography | Recommended listening — with Digital texts full-width below. Recommended listening renders each video search as a YouTube-style card (red play badge, query title, "Search on YouTube ↗" hint) with the same search URLs and `rel="noopener noreferrer"`.
+- **General:** saint page polish (glyph-tinted labels, framed panels, refined spacing) within the existing Heritage Luxe language.

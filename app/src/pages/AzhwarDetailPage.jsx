@@ -8,6 +8,7 @@ import { getAzhwarById, getAzhwarNeighbours, getKshetramById, getKshetramsByAzhw
 import Badge from '../components/Badge.jsx';
 import EmptyState from '../components/EmptyState.jsx';
 import NotDocumented from '../components/detail/NotDocumented.jsx';
+import SaintGlyph from '../components/saint/SaintGlyph.jsx';
 import Identification from '../components/saint/Identification.jsx';
 import SaintLegend from '../components/saint/SaintLegend.jsx';
 import SaintMedia from '../components/saint/SaintMedia.jsx';
@@ -80,6 +81,11 @@ export default function AzhwarDetailPage() {
                 : azhwar.period,
             },
           ]}
+          portrait={{
+            src: azhwar.photos?.[0]?.src ?? null,
+            wiki: null,
+            alt: azhwar.photos?.[0]?.alt ?? `${azhwar.name} portrait`,
+          }}
         />
       </section>
 
@@ -96,7 +102,7 @@ export default function AzhwarDetailPage() {
         <h2>Contributions</h2>
         <dl className="detail__profile-grid">
           <div className="detail__profile-item">
-            <dt>Works</dt>
+            <dt><SaintGlyph kind="works" /> Works</dt>
             <dd>
               <ul className="saint-works">
                 {(azhwar.works ?? []).map((w) => (
@@ -107,20 +113,20 @@ export default function AzhwarDetailPage() {
           </div>
           {azhwar.preservation ? (
             <div className="detail__profile-item">
-              <dt>Sampradaya preservation</dt>
+              <dt><SaintGlyph kind="preservation" /> Sampradaya preservation</dt>
               <dd>{azhwar.preservation}</dd>
             </div>
           ) : null}
           {azhwar.bhaktiBhava ? (
             <div className="detail__profile-item">
-              <dt>Role &amp; bhakti bhava</dt>
+              <dt><SaintGlyph kind="bhakti" /> Role &amp; bhakti bhava</dt>
               <dd>{azhwar.bhaktiBhava}</dd>
             </div>
           ) : null}
         </dl>
         {Array.isArray(azhwar.associatedDesams) && azhwar.associatedDesams.length > 0 ? (
           <p className="saint-desams">
-            <strong>Associated Divya Desams (Mangalasasanam):</strong>{' '}
+            <strong><SaintGlyph kind="desams" /> Associated Divya Desams (Mangalasasanam):</strong>{' '}
             {azhwar.associatedDesams.map((kid) => {
               const k = getKshetramById(kid);
               return k ? <Link key={kid} className="chip" to={`/kshetram/${kid}`}>{k.name}</Link> : null;
@@ -128,7 +134,7 @@ export default function AzhwarDetailPage() {
           </p>
         ) : null}
         <p className="saint-desams">
-          <strong>Desams glorified ({desams.length}):</strong>{' '}
+          <strong><SaintGlyph kind="desams" /> Desams glorified ({desams.length}):</strong>{' '}
           {desams.map((k) => (
             <Link key={k.id} className="chip" to={`/kshetram/${k.id}`}>{k.name}</Link>
           ))}

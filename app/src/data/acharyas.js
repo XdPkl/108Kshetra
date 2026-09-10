@@ -15,7 +15,8 @@
  * visuals? {iconography? (string | {posture, mudras, garments, idol}),
  *           videoSearches [], digitalTexts []},
  * guru? / sishyas? (acharya ids), sources? [],
- * wiki? (Wikipedia article title — drives the featured-strip thumbnail via WikiThumb)
+ * wiki? (Wikipedia article title — drives the featured-strip thumbnail via WikiThumb),
+ * photos? [{src, alt, credit?}] (up to 2 — the Identification portrait; src under BASE_URL)
  */
 export const acharyas = [
   {

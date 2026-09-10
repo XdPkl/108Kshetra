@@ -98,10 +98,10 @@ R2 quality gates: TC-QA-01 Pass (0 errors; 2 accepted warnings per CRR v1.2) · 
 
 | ID | FR | Test Case | Expected Result | Executed |
 |---|---|---|---|---|
-| UT-AZW-03 | FR-90 | Azhwar detail page: saint template (identification, history, works, verse with word meanings), derived desam chips, prev/next chronological nav, unknown-id handling | Template renders per PO sample; navigation correct | Pass (UT) |
+| UT-AZW-03 | FR-90 | Azhwar detail page: saint template (portrait identification, history, iconised works, framed verse with word meanings, YouTube listening cards), derived desam chips, prev/next chronological nav, unknown-id handling (UXD v1.5) | Template renders per PO sample; navigation correct | Pass (UT) |
 | UT-AZW-04 | FR-91 | Azhwar enrichment integrity: 12 records in order, birthplace/associated-desam links resolve, works totals within documented counts, Poigai sample structure | All links valid; sample fully encoded | Pass (UT) |
 | UT-ACH-01 | FR-92 | Acharya dataset integrity: unique ids, required fields, guru/sishya/desam links resolve, pending-content policy | Links valid; pending content explicitly marked | Pass (UT) |
-| UT-ACH-02/03 | FR-93/94 | Acharyas index grouped by parampara era; Acharya detail with Manavala Mamunigal PO sample, guru/sishya cross-links, sources, pending markers | Index and template render; links resolve | Pass (UT) |
+| UT-ACH-02/03 | FR-93/94 | Acharyas index grouped by parampara era; Acharya detail (portrait identification, iconised contributions, framed verse, 2-col media) with Manavala Mamunigal PO sample, guru/sishya cross-links, sources, pending markers (UXD v1.5) | Index and template render; links resolve | Pass (UT) |
 
 ### 7. E2E Cases executed (R2) — e2e/yatra.spec.js
 

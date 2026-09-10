@@ -34,6 +34,19 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90)', () => {
     expect(screen.getAllByText(/Project Madurai Texts/i).length).toBeGreaterThanOrEqual(2);
   });
 
+  it('shows the identification portrait, contribution icons and listening cards (UXD v1.5)', () => {
+    renderAt('/azhwar/poigai');
+    // PO-supplied painting as the identification portrait
+    expect(screen.getByAltText(/painting of poigai azhwar/i)).toHaveAttribute('src', expect.stringContaining('photos/saint-poigai.jpg'));
+    // Video searches render as YouTube listen cards
+    expect(screen.getAllByRole('link', { name: /search on youtube/i }).length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('renders the placeholder portrait for saints without a supplied photo', () => {
+    renderAt('/azhwar/nammazhwar');
+    expect(screen.getByLabelText(/nammazhwar portrait/i)).toHaveTextContent('◆');
+  });
+
   it('shows derived desam links and chronological prev/next navigation', () => {
     renderAt('/azhwar/poigai');
     const main = screen.getByRole('main');

@@ -261,3 +261,26 @@ Two rounds: (1) the Heritage Luxe visual uplift of every surface (UXD v1.3 — t
 ---
 
 *End of Addendum — TER-108K-009 v1.5*
+
+---
+
+## Version 1.6 — Saint Template Uplift Execution (2026-09-10)
+
+### Scope
+
+PO-requested saint page revisions (UXD v1.5 §27) applied to both Azhwar and Acharya detail templates: portrait-based Identification (Poigai painting as the PO demo), iconised Contributions, centered Representative Verse in a double gold frame, and a restructured Visual & Media section (iconography | YouTube-style listening cards on top, digital texts full-width below).
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors (1 documented-accepted warning, TripPage) |
+| Unit tests (Vitest) | 185/185 pass; coverage above the 80% gate |
+| Production build | Clean (saint portrait bundled under public/photos) |
+| E2E (Playwright, Chromium) | 19/19 pass |
+| Visual acceptance | Judge-reviewed screenshots of /azhwar/poigai, /azhwar/nammazhwar (placeholder portrait) and /acharya/manavala-mamunigal at desktop + mobile — pass |
+
+### Notes
+
+1. New unit coverage: Identification portrait rendering (supplied src + placeholder fallback), Poigai portrait/listening-card page assertions.
+2. Saint portraits await PO artwork for the remaining saints; the placeholder panel keeps the layout intentional meanwhile.

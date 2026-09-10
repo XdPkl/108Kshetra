@@ -640,18 +640,71 @@
 }
 .lightbox__credit, .lightbox__count { color: rgba(245, 236, 223, 0.75); font-size: 0.875rem; }
 
-/* ---------- Saint pages: Azhwar & Acharya detail (UXD §18/19) ---------- */
+/* ---------- Saint pages: Azhwar & Acharya detail (UXD §18/19, v1.5 §27) ---------- */
 .saint-page__order { color: var(--color-text-muted); font-size: 0.875rem; }
-.saint-identification { margin-bottom: var(--space-2); }
+
+/* Identification: portrait left, details stacked right */
+.saint-id {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) 1fr;
+  gap: var(--space-4);
+  align-items: start;
+}
+.saint-id__portrait { position: relative; margin: 0; }
+.saint-id__portrait .deity-photo,
+.saint-id__portrait .deity-photo--placeholder {
+  border-top: none;
+  border: 1px solid rgba(201, 154, 46, 0.55);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--color-surface-sunk);
+  box-shadow: var(--shadow-1);
+}
+.saint-id__portrait .deity-photo img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  display: block;
+}
+.saint-id__portrait .deity-photo--placeholder { font-size: 2.6rem; }
+.saint-id__portrait::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(255, 253, 247, 0.55);
+  border-radius: calc(var(--radius-card) - 5px);
+  pointer-events: none;
+}
+.saint-id__details { margin: 0; }
+.saint-id__row { padding: var(--space-2) 0; border-bottom: 1px solid rgba(201, 154, 46, 0.28); }
+.saint-id__row:first-child { padding-top: 0.35rem; }
+.saint-id__row:last-child { border-bottom: none; padding-bottom: 0; }
+.saint-id__row dt {
+  font-size: var(--text-eyebrow);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--color-accent-deep);
+}
+.saint-id__row dd { margin: 0.2rem 0 0; }
+
+/* Contribution glyphs */
+.saint-glyph { width: 1.05rem; height: 1.05rem; flex: none; color: var(--color-accent-deep); }
+.detail__profile-item dt { display: flex; align-items: center; gap: 0.45rem; }
+.saint-desams strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+  color: var(--color-primary-dark);
+}
+.acharya-works { grid-column: 1 / -1; }
+
 .saint-works { margin: 0; padding-left: 1.1rem; }
 .saint-works li { margin-bottom: 0.15rem; }
 .saint-works-summary { color: var(--color-text-muted); margin-top: var(--space-1); }
-.acharya-theme {
-  background: rgba(201, 154, 46, 0.14);
-  border-left: 3px solid var(--color-accent);
-  border-radius: 10px;
-  padding: var(--space-2) var(--space-3);
-}
 .saint-desams {
   display: flex;
   flex-wrap: wrap;
@@ -764,7 +817,100 @@
   color: var(--color-text-muted);
 }
 .saint-iconography dd { margin: 0; color: var(--color-text); }
-.acharya-preservation { margin: var(--space-2) 0 0; }
+
+/* Visual & Media: iconography | listening on top, texts full-width below */
+.saint-media__top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  align-items: start;
+}
+.saint-media__col h3 { margin-top: 0; }
+.saint-media__bottom {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(201, 154, 46, 0.3);
+}
+.saint-media__texts {
+  margin: 0;
+  padding: var(--space-3) var(--space-3) var(--space-3) 2.2rem;
+  background: var(--color-surface-sunk);
+  border-radius: var(--radius-card);
+}
+.listen-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.listen-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.6rem 0.85rem;
+  background: var(--color-surface);
+  border: 1px solid rgba(201, 154, 46, 0.45);
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: var(--shadow-1);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+.listen-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(201, 154, 46, 0.85);
+  box-shadow: var(--shadow-2);
+}
+.listen-card__badge { width: 2.4rem; height: 1.7rem; flex: none; border-radius: 5px; }
+.listen-card__body { display: flex; flex-direction: column; min-width: 0; }
+.listen-card__title {
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+.listen-card__hint { font-size: 0.8125rem; color: var(--color-primary); font-weight: 500; }
+
+/* Representative verse: centered within a minimal double gold frame */
+.saint-page .pasuram {
+  text-align: center;
+  border: 1px solid rgba(201, 154, 46, 0.55);
+  border-radius: var(--radius-lg);
+  padding: 2.8rem var(--space-4) var(--space-4);
+}
+.saint-page .pasuram::before {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.saint-page .pasuram::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(201, 154, 46, 0.32);
+  border-radius: calc(var(--radius-lg) - 5px);
+  pointer-events: none;
+}
+.saint-page .pasuram__tamil { font-size: 1.3rem; }
+.saint-page .pasuram__transliteration { font-size: 1.2rem; }
+.saint-page .pasuram__words {
+  max-width: 30rem;
+  margin-inline: auto;
+  text-align: left;
+}
+.saint-page .pasuram__commentary {
+  max-width: 42rem;
+  margin-inline: auto;
+  text-align: left;
+}
+.saint-page .pasuram__significance {
+  display: inline-block;
+  max-width: 42rem;
+  text-align: left;
+}
 
 /* ---------- Responsive (UXD §6) ---------- */
 @media (max-width: 767px) {
@@ -774,6 +920,9 @@
   .lightbox__nav--prev { left: 0.6rem; }
   .lightbox__nav--next { right: 0.6rem; }
   .trip-leg { padding-left: 3.2rem; }
+  .saint-id { grid-template-columns: 1fr; }
+  .saint-id__portrait { max-width: 300px; }
+  .saint-media__top { grid-template-columns: 1fr; }
 }
 
 /* ---------- Print (FR-70/84) ---------- */

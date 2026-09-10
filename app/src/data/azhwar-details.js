@@ -10,6 +10,8 @@
  *
  * Shape (all optional):
  *  wiki? (Wikipedia article title — drives the featured-strip thumbnail via WikiThumb),
+ *  photos? [{src, alt, credit?}] (up to 2 — the Identification portrait; src is a
+ *          site-absolute path under BASE_URL, e.g. `${import.meta.env.BASE_URL}photos/…`),
  *  order, epithets[], birthMonth, birthStar, tithi?,
  *  birthplace {name, district?, kshetramId?}, amsam?,
  *  era {academic?, contemporaries?} (base `period` remains the display era),
@@ -26,6 +28,13 @@
 export const AZHWAR_DETAILS = {
   poigai: {
     wiki: "Poigai Alvar",
+    photos: [
+      {
+        src: `${import.meta.env.BASE_URL}photos/saint-poigai.jpg`,
+        alt: "Painting of Poigai Azhwar with joined palms",
+        credit: "Painting supplied by the Product Owner",
+      },
+    ],
     order: 1,
     epithets: ["Sarovara Yogi", "Kasara Yogi", "Ayonisambhava", "Sarovara Muni", "Poigaiyar"],
     birthMonth: "Aippasi (Ashvin/Kartika transition)",

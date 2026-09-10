@@ -15,6 +15,7 @@ import SaintSources from '../components/saint/SaintSources.jsx';
 import SaintTimeline from '../components/saint/SaintTimeline.jsx';
 import SaintVerse from '../components/saint/SaintVerse.jsx';
 import PendingContent from '../components/saint/PendingContent.jsx';
+import SaintGlyph from '../components/saint/SaintGlyph.jsx';
 
 /** Resolves an acharya id to {id, name} for guru/sishya chips. */
 function linkFor(id) {
@@ -84,6 +85,11 @@ export default function AcharyaDetailPage() {
                 : acharya.amsam,
             },
           ]}
+          portrait={{
+            src: acharya.photos?.[0]?.src ?? null,
+            wiki: null,
+            alt: acharya.photos?.[0]?.alt ?? `${acharya.name} portrait`,
+          }}
         />
       </section>
 
@@ -105,22 +111,33 @@ export default function AcharyaDetailPage() {
         {acharya.works || acharya.philosophicalTheme || acharya.associatedDesams ? (
           <>
             {Array.isArray(acharya.works) && acharya.works.length > 0 ? (
-              <ul className="saint-works">
-                {acharya.works.map((w) => (
-                  <li key={w.name ?? w}>{w.name ?? w}{w.language ? ` — ${w.language}` : ''}</li>
-                ))}
-              </ul>
+              <div className="detail__profile-item acharya-works">
+                <dt><SaintGlyph kind="works" /> Works</dt>
+                <dd>
+                  <ul className="saint-works">
+                    {acharya.works.map((w) => (
+                      <li key={w.name ?? w}>{w.name ?? w}{w.language ? ` — ${w.language}` : ''}</li>
+                    ))}
+                  </ul>
+                  {acharya.worksSummary ? <p className="saint-works-summary">{acharya.worksSummary}</p> : null}
+                </dd>
+              </div>
             ) : null}
-            {acharya.worksSummary ? <p className="saint-works-summary">{acharya.worksSummary}</p> : null}
             {acharya.preservation ? (
-              <p className="acharya-preservation"><strong>Sampradaya preservation:</strong> {acharya.preservation}</p>
+              <div className="detail__profile-item">
+                <dt><SaintGlyph kind="preservation" /> Sampradaya preservation</dt>
+                <dd>{acharya.preservation}</dd>
+              </div>
             ) : null}
             {acharya.philosophicalTheme ? (
-              <p className="acharya-theme">✦ {acharya.philosophicalTheme}</p>
+              <div className="detail__profile-item">
+                <dt><SaintGlyph kind="bhakti" /> Philosophical theme</dt>
+                <dd>✦ {acharya.philosophicalTheme}</dd>
+              </div>
             ) : null}
             {Array.isArray(acharya.associatedDesams) && acharya.associatedDesams.length > 0 ? (
               <p className="saint-desams">
-                <strong>Associated Divya Desams:</strong>{' '}
+                <strong><SaintGlyph kind="desams" /> Associated Divya Desams:</strong>{' '}
                 {acharya.associatedDesams.map((kid) => {
                   const k = getKshetramName(kid);
                   return k ? <Link key={kid} className="chip" to={`/kshetram/${kid}`}>{k}</Link> : null;
