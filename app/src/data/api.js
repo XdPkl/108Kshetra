@@ -7,7 +7,7 @@ import { kshetrams } from './kshetrams.js';
 import { azhwars } from './azhwars.js';
 import { AZHWAR_DETAILS } from './azhwar-details.js';
 import { acharyas } from './acharyas.js';
-import { FEATURED_KSHETRAM_IDS } from './config.js';
+import { FEATURED_KSHETRAM_IDS, FEATURED_ACHARYA_IDS } from './config.js';
 import { uniqueSorted } from '../utils/group.js';
 import { getEnrichment } from './enrichment/index.js';
 
@@ -44,10 +44,17 @@ export function getEnrichedKshetramById(id) {
   return { ...kshetram, ...getEnrichment(id) };
 }
 
-/** @returns {Kshetram[]} the curated featured kshetrams (config-driven). */
+/** @returns {(Kshetram & object)[]} the curated featured kshetrams, enriched (config-driven). */
 export function getFeaturedKshetrams() {
   return FEATURED_KSHETRAM_IDS
-    .map((id) => getKshetramById(id))
+    .map((id) => getEnrichedKshetramById(id))
+    .filter(Boolean);
+}
+
+/** @returns {Acharya[]} the curated featured acharyas for the Home darshan strip (config-driven). */
+export function getFeaturedAcharyas() {
+  return FEATURED_ACHARYA_IDS
+    .map((id) => acharyas.find((a) => a.id === id))
     .filter(Boolean);
 }
 

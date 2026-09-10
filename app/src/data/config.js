@@ -18,5 +18,13 @@ export const FEATURED_KSHETRAM_IDS = [
   'srivilliputhur',
 ];
 
+/** Curated featured acharya ids for the Home page darshan strip. */
+export const FEATURED_ACHARYA_IDS = [
+  'nathamuni',
+  'yamunacharya',
+  'pillai-lokacharya',
+  'manavala-mamunigal',
+];
+
 /** Google Maps search URL template (FR-32). */
 export const MAPS_URL_TEMPLATE = 'https://www.google.com/maps/search/';

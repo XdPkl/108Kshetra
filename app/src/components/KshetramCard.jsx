@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import Badge from './Badge.jsx';
 import VisitedBadge from './VisitedBadge.jsx';
 import TripControls from './TripControls.jsx';
+import WikiThumb from './WikiThumb.jsx';
 import { useVisited } from '../hooks/useVisited.js';
 
 export default function KshetramCard({ kshetram }) {
@@ -24,6 +25,9 @@ export default function KshetramCard({ kshetram }) {
       <Link to={`/kshetram/${kshetram.id}`} className="kshetram-card__link">
         <p className="kshetram-card__tamil" lang="ta">{kshetram.tamilName}</p>
         <h3 className="kshetram-card__name">{kshetram.name}</h3>
+        <div className="kshetram-card__thumb">
+          <WikiThumb title={kshetram.wiki ?? null} alt={`${kshetram.name} thumbnail`} />
+        </div>
         <p className="kshetram-card__place">{kshetram.temple}</p>
         <p className="kshetram-card__place">{kshetram.place} · {kshetram.state}</p>
         <div className="kshetram-card__badges">

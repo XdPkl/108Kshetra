@@ -29,7 +29,7 @@ Execution column reflects the run recorded in `test-execution-report.md`.
 | ID | FR | Steps | Expected Result | Executed |
 |---|---|---|---|---|
 | TC-02 | FR-50/52 | Open `/` | Header with brand + Home/Browse/Azhwars; Home active | Pass |
-| TC-03 | FR-10/11/12 | Open `/` | Hero title & intro; stats 108 / 12 / 4,000+; ≥4 featured cards; links to Browse & Azhwars | Pass |
+| TC-03 | FR-10/11/12 | Open `/` | Three-line hero (title, intro, Explore CTA) over sketch watermark; ≥4 featured cards with thumbnails; Azhwar + Acharya darshan strips (v1.4: stats band removed per PO request) | Pass |
 | TC-04 | FR-20 | Open `/kshetrams` | 108 cards; count reads "Showing 108 of 108 kshetrams" | Pass |
 | TC-05 | FR-21/23 | Type "kanchipuram" in search | Grid narrows; count updates and is announced | Pass |
 | TC-06 | FR-22 | Select State = Kerala | Only Kerala kshetrams shown (11); combine with search narrows further | Pass |
@@ -68,7 +68,7 @@ Renumbered: quality-gate cases TC-13..15 → **TC-QA-01..03** (TC-13+ freed for 
 | UT-MAP-01..03 | FR-76..78 | Map renders plotted desams; region chips narrow; geolocation-denial message; legend; lazy mini-map | Markers/legend/chips behave per spec; graceful geolocation fallback | Pass (UT) |
 | UT-DTL-05..08 | FR-82..85 | Shrine template sections, photo strips + lightbox navigation/Esc, mangalasasanam excerpts + word-by-word, visit-info fallbacks, yatra hooks on detail | Template renders documented data; "not yet documented" fallbacks elsewhere | Pass (UT) |
 | UT-ABT-01 | FR-87 | About page sections | Site/tours/contact rendered from data with pending markers | Pass (UT) |
-| UT-NAV-04 | FR-86 | Hero CTA wording | Reads "Azhwars"; no "Meet the Azhwars" | Pass (UT) |
+| UT-NAV-04 | FR-86 | Home CTA wording | "Explore the 108 Kshetrams" + "Azhwar Darshan - Featured"/"Acharya Darshan - Featured" (v1.4); no "Meet the Azhwars" | Pass (UT) |
 
 ### 5. UI / E2E Cases added (Playwright, Chromium) — e2e/yatra.spec.js
 
@@ -78,7 +78,7 @@ Renumbered: quality-gate cases TC-13..15 → **TC-QA-01..03** (TC-13+ freed for 
 | TC-14 | FR-76..78 | Open `/map`; count markers; toggle a region chip; click a marker; open page | Leaflet renders plotted desams; chip narrows; popup links to detail | Pass |
 | TC-15 | FR-79..81 | Add 3 desams to trip; nav count; trip page; order route; share → clipboard; clear storage; open shared URL | "Trip · 3"; stops listed; nearest-first notice; shared link restores trip | Pass |
 | TC-16 | FR-82..85 | Open `/kshetram/srirangam` | All shrine-template headings; word-by-word pasuram; "not yet documented" fallbacks | Pass |
-| TC-17 | FR-86/87 | Open `/`; check nav + hero CTA; open Kshetra Tours | Nav "Kshetra Tours"; CTA "Azhwars"; About page renders | Pass |
+| TC-17 | FR-86/87 | Open `/`; check nav + darshan strips; open Kshetra Tours | Nav "Kshetra Tours"; both darshan-strip CTAs; About page renders (v1.4) | Pass |
 | TC-18 | FR-90/91 | (Release 2) Open `/azhwar/:id` | Saint template renders with prev/next navigation | Pass |
 | TC-19 | FR-92..94 | (Release 2) Open `/acharyas`, `/acharya/:id` | Parampara index + saint template with pending markers | Pass |
 

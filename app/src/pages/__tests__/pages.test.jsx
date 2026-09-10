@@ -13,23 +13,25 @@ function renderAt(url) {
 }
 
 describe('HomePage (UT-HOME-01..03)', () => {
-  it('shows title, intro, stats and featured kshetrams', () => {
+  it('shows the three-line hero and featured kshetrams', () => {
     renderAt('/');
     expect(screen.getByRole('heading', { name: /108 divya kshetrams/i })).toBeInTheDocument();
     expect(screen.getAllByText(/Nalayira Divya Prabandham/i).length).toBeGreaterThan(0);
-    expect(screen.getByText('108')).toBeInTheDocument();
-    expect(screen.getByText('12')).toBeInTheDocument();
-    expect(screen.getByText('4,000+')).toBeInTheDocument();
     // 4 featured kshetram links
     expect(screen.getAllByRole('link', { name: /srirangam|tirumala|kanchipuram|srivilliputhur/i }).length)
       .toBeGreaterThanOrEqual(4);
   });
 
-  it('offers navigation to Browse and Azhwars', () => {
+  it('offers navigation to Browse and the darshan strips', () => {
     renderAt('/');
     expect(screen.getByRole('link', { name: /explore the 108/i })).toHaveAttribute('href', '/kshetrams');
-    // FR-86: the hero CTA reads "Azhwars" (header nav + teaser also link there)
-    expect(screen.getAllByRole('link', { name: /^azhwars$/i }).length).toBeGreaterThan(0);
+    // PO request 2026-09-10: darshan strips replace the hero "Azhwars" CTA
+    expect(screen.getByRole('link', { name: /azhwar darshan - featured/i })).toHaveAttribute('href', '/azhwars');
+    expect(screen.getByRole('link', { name: /acharya darshan - featured/i })).toHaveAttribute('href', '/acharyas');
+    // 4 featured saints per strip, whole-card links with thumbnails
+    expect(screen.getAllByRole('link', { name: /poigai azhwar|bhoothathazhwar/i }).length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByRole('link', { name: /nathamuni|yamunacharya|pillai lokacharya|manavala/i }).length)
+      .toBeGreaterThanOrEqual(4);
     expect(screen.queryByRole('link', { name: /meet the azhwars/i })).not.toBeInTheDocument();
   });
 });

@@ -1,19 +1,35 @@
 /**
- * HomePage — hero, statistics, featured kshetrams and Azhwar teaser (FR-10/11/12).
+ * HomePage — compact hero over the Adisesha sketch watermark, yatra
+ * progress, featured kshetrams and the Azhwar/Acharya darshan strips
+ * (FR-10/11/12, PO request 2026-09-10).
  */
 import { Link } from 'react-router-dom';
-import { getFeaturedKshetrams } from '../data/api.js';
+import { getAllAzhwars, getFeaturedAcharyas, getFeaturedKshetrams } from '../data/api.js';
 import { SITE_STATS } from '../data/config.js';
 import KshetramCard from '../components/KshetramCard.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 import ProgressBanner from '../components/ProgressBanner.jsx';
+import WikiThumb from '../components/WikiThumb.jsx';
+import heroSketch from '../assets/hero-adisesha-sketch.jpg';
+
+/** Featured-strip card: one thumbnail + the saint's names, whole card links. */
+function SaintCard({ saint, base }) {
+  return (
+    <Link className="saint-card" to={`${base}/${saint.id}`}>
+      <WikiThumb title={saint.wiki ?? null} alt={`${saint.name} portrait`} />
+      <span className="saint-card__name">{saint.name}</span>
+      <span className="saint-card__tamil" lang="ta">{saint.tamilName}</span>
+    </Link>
+  );
+}
 
 export default function HomePage() {
   const featured = getFeaturedKshetrams();
+  const featuredAzhwars = getAllAzhwars().slice(0, 4);
+  const featuredAcharyas = getFeaturedAcharyas();
   return (
     <div className="page">
-      <section className="hero">
-        <p className="hero__ornament" aria-hidden="true">◆ ◆ ◆</p>
+      <section className="hero" style={{ '--hero-sketch': `url(${heroSketch})` }}>
         <h1>108 Divya Kshetrams</h1>
         <p className="hero__intro">
           The sacred abodes of Lord Narayana — the 108 Divya Desams glorified by
@@ -22,22 +38,6 @@ export default function HomePage() {
         </p>
         <div className="hero__actions">
           <Link className="btn btn--primary" to="/kshetrams">Explore the 108 Kshetrams</Link>
-          <Link className="btn btn--outline" to="/azhwars">Azhwars</Link>
-        </div>
-      </section>
-
-      <section className="stat-band" aria-label="Key figures">
-        <div className="stat-band__item">
-          <span className="stat-band__value">{SITE_STATS.kshetramCount}</span>
-          <span className="stat-band__label">Kshetrams</span>
-        </div>
-        <div className="stat-band__item">
-          <span className="stat-band__value">{SITE_STATS.azhwarCount}</span>
-          <span className="stat-band__label">Azhwars</span>
-        </div>
-        <div className="stat-band__item">
-          <span className="stat-band__value">{SITE_STATS.pasuramCount.toLocaleString('en-IN')}+</span>
-          <span className="stat-band__label">Pasurams</span>
         </div>
       </section>
 
@@ -53,12 +53,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="azhwar-teaser">
+      <section className="darshan-strip">
         <SectionHeading
           title="The Twelve Azhwars"
           lead="Saint-poets whose hymns sanctified these hills, groves and cities."
         />
-        <Link className="btn btn--outline" to="/azhwars">Discover the Azhwars</Link>
+        <div className="darshan-strip__grid">
+          {featuredAzhwars.map((a) => <SaintCard key={a.id} saint={a} base="/azhwar" />)}
+        </div>
+        <div className="darshan-strip__action">
+          <Link className="btn btn--outline" to="/azhwars">Azhwar Darshan - Featured</Link>
+        </div>
+      </section>
+
+      <section className="darshan-strip">
+        <SectionHeading
+          title="The Acharyas"
+          lead="The guru parampara that received, preserved and expounded the tradition."
+        />
+        <div className="darshan-strip__grid">
+          {featuredAcharyas.map((a) => <SaintCard key={a.id} saint={a} base="/acharya" />)}
+        </div>
+        <div className="darshan-strip__action">
+          <Link className="btn btn--outline" to="/acharyas">Acharya Darshan - Featured</Link>
+        </div>
       </section>
     </div>
   );

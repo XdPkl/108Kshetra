@@ -5,13 +5,14 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Home page (TC-02, TC-03, TC-11)', () => {
-  test('shows hero, stats, featured kshetrams and navigation', async ({ page }) => {
+  test('shows hero, featured kshetrams and navigation', async ({ page }) => {
     await page.goto('');
     await expect(page.getByRole('heading', { name: /108 divya kshetrams/i })).toBeVisible();
     await expect(page.getByText(/Nalayira Divya Prabandham/i).first()).toBeVisible();
-    await expect(page.locator('.stat-band__value').first()).toHaveText('108');
-    await expect(page.getByText('4,000+')).toBeVisible();
+    // PO request 2026-09-10: stats band removed; hero is title + intro + one CTA
+    await expect(page.getByRole('link', { name: /explore the 108 kshetrams/i })).toBeVisible();
     expect(await page.locator('.kshetram-card').count()).toBeGreaterThanOrEqual(4);
+    await expect(page.getByRole('link', { name: /azhwar darshan - featured/i })).toBeVisible();
     await expect(page.getByRole('link', { name: 'Browse' })).toBeVisible();
     await expect(page.locator('footer')).toContainText(/good faith/i);
   });

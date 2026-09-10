@@ -226,3 +226,38 @@ Scope: content population rounds after R2 — Divya Desam dossiers #1–#108 cur
 ---
 
 *End of Addendum — TER-108K-009 v1.4*
+
+---
+
+## Version 1.5 — Heritage Luxe Redesign + Home PO Revisions Execution (2026-09-10)
+
+### Scope
+
+Two rounds: (1) the Heritage Luxe visual uplift of every surface (UXD v1.3 — tokens, shell, hero, cards, detail/saint/map/trip treatments; look-and-feel only), then (2) the PO's home page revisions (UXD v1.4 — three-line hero with Adisesha sketch watermark, stats band removal, kshetram card thumbnails, Azhwar/Acharya darshan strips).
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors (1 documented-accepted `set-state-in-effect` warning, TripPage) |
+| Unit tests (Vitest) | 180/180 pass; coverage 92.5% stmts / 82.9% branch (gate 80%) |
+| Production build | Clean; sketch asset bundled hashed |
+| E2E (Playwright, Chromium) | 19/19 pass (run against the final build) |
+| Visual acceptance | Judge-reviewed full-page screenshots: 11 routes × desktop+mobile (round 1) — one systemic mobile-nav overflow found and fixed (nav now scrolls internally); re-review 11/11 pass. Home/browse re-reviewed after the PO changes: card-row alignment fix and nav scroll-hint verified; all pass |
+
+### Defects found & fixed this round
+
+| ID | Severity | Phase Found | Description | Disposition |
+|---|---|---|---|---|
+| D-12 | Major | Visual review (redesign) | Header nav did not shrink as a flex item on mobile — the rail widened the document to ~570px at 390px viewports (horizontal page overflow on every page) | **Fixed** — `min-width: 0` + internal `overflow-x` scroll on the nav rail; all pages exactly viewport-wide |
+| D-13 | Minor | Visual review (PO changes) | Featured-card thumbnail rows staggered when a kshetram name wrapped to two lines | **Fixed** — card link is a flex column with the thumbnail bottom-anchored; image rows align across grid rows |
+
+### Notes
+
+1. Test-contract updates accompany the PO content changes (stats band and hero "Azhwars" CTA intentionally removed): UT-HOME-01/02, the TC-02/03/11 home block and TC-17 assert the new home composition (see TCS v1.4 rows and UXD v1.4 §25).
+2. Featured-acharya selection uses Wikipedia portrait coverage as the tie-breaker: Ramanuja and Vedanta Desika articles currently expose no lead thumbnail, so the strip features Nathamuni, Yamunacharya, Pillai Lokacharya and Manavala Mamunigal; revisit if the articles gain page images.
+3. Kshetram card thumbnails fetch Wikipedia lead images per title on first view (45 of 108 kshetrams have no `wiki` title and show the documented gold ◆ placeholder) — broader `wiki` coverage remains a PO-owned content follow-up.
+
+---
+
+*End of Addendum — TER-108K-009 v1.5*

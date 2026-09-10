@@ -14,13 +14,15 @@
  *         commentary? [{heading, text}], audio?},
  * visuals? {iconography? (string | {posture, mudras, garments, idol}),
  *           videoSearches [], digitalTexts []},
- * guru? / sishyas? (acharya ids), sources? []
+ * guru? / sishyas? (acharya ids), sources? [],
+ * wiki? (Wikipedia article title — drives the featured-strip thumbnail via WikiThumb)
  */
 export const acharyas = [
   {
     id: "nathamuni",
     name: "Nathamuni",
     tamilName: "நாதமுனி",
+    wiki: "Nathamuni",
     eraGroup: "Purvacharyas — the early masters",
     era: "c. 823–951 CE",
     role: "Recovered and arranged the Nalayira Divya Prabandham; first teacher of the Sri Vaishnava lineage.",
@@ -484,6 +486,7 @@ export const acharyas = [
     id: "yamunacharya",
     name: "Yamunacharya",
     tamilName: "யாமுநாச்சார்யா",
+    wiki: "Yamunacharya",
     eraGroup: "Purvacharyas — the early masters",
     era: "c. 10th–11th century CE",
     role: "Alavandar — consolidated Visishtadvaita doctrine and bequeathed the three great charges to Ramanuja.",
@@ -3070,6 +3073,7 @@ export const acharyas = [
     id: "pillai-lokacharya",
     name: "Pillai Lokacharya",
     tamilName: "பிள்ளை லோகாசாரியார்",
+    wiki: "Pillai Lokacharya",
     eraGroup: "Later acharyas",
     era: "c. 13th–14th century CE",
     role: "Illuminator of the Tenkalai sampradaya; wrote the Ashtadasa Rahasya secrets of prapatti. He protected the Urchavar of Srirangam during the 1323 invasion.",
@@ -3463,6 +3467,7 @@ export const acharyas = [
     id: "manavala-mamunigal",
     name: "Sri Manavala Mamunigal",
     tamilName: "ஸ்ரீ மணவாள மாமுனிகள்",
+    wiki: "Manavala Mamunigal",
     eraGroup: "Later acharyas",
     era: "1370–1443 CE — Vijayanagara Empire era",
     role: "Redeemer of Srirangam and systematiser of the Tenkalai sampradaya; the Lord himself declared him his Acharya.",

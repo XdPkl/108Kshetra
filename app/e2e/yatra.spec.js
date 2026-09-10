@@ -89,10 +89,12 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page.getByText(/not yet documented yet\./i).first()).toBeVisible();
   });
 
-  test('TC-17: nav shows Kshetra Tours, About page renders, hero CTA reads Azhwars', async ({ page }) => {
+  test('TC-17: nav shows Kshetra Tours, darshan strips render, About page opens', async ({ page }) => {
     await page.goto('');
     await expect(page.getByRole('link', { name: 'Kshetra Tours' })).toBeVisible();
-    await expect(page.getByRole('main').getByRole('link', { name: 'Azhwars', exact: true })).toBeVisible();
+    // PO request 2026-09-10: the hero "Azhwars" CTA became the darshan strips
+    await expect(page.getByRole('main').getByRole('link', { name: /azhwar darshan - featured/i })).toBeVisible();
+    await expect(page.getByRole('main').getByRole('link', { name: /acharya darshan - featured/i })).toBeVisible();
 
     await page.getByRole('link', { name: 'Kshetra Tours' }).click();
     await expect(page).toHaveURL(/about$/);

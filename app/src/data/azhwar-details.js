@@ -9,6 +9,7 @@
  * from the DOCX companions (all 12 Azhwars, 35/35 dossier verses complete).
  *
  * Shape (all optional):
+ *  wiki? (Wikipedia article title — drives the featured-strip thumbnail via WikiThumb),
  *  order, epithets[], birthMonth, birthStar, tithi?,
  *  birthplace {name, district?, kshetramId?}, amsam?,
  *  era {academic?, contemporaries?} (base `period` remains the display era),
@@ -24,6 +25,7 @@
  */
 export const AZHWAR_DETAILS = {
   poigai: {
+    wiki: "Poigai Alvar",
     order: 1,
     epithets: ["Sarovara Yogi", "Kasara Yogi", "Ayonisambhava", "Sarovara Muni", "Poigaiyar"],
     birthMonth: "Aippasi (Ashvin/Kartika transition)",
@@ -169,6 +171,7 @@ export const AZHWAR_DETAILS = {
     ]
   },
   bhoothath: {
+    wiki: "Bhoothath Alvar",
     order: 2,
     epithets: ["Mallai Natha", "Bhoothathatthan", "Second Among the Mudhal Azhwars"],
     birthMonth: "Aippasi",
@@ -313,6 +316,7 @@ export const AZHWAR_DETAILS = {
     ]
   },
   pey: {
+    wiki: "Pey Alvar",
     order: 3,
     epithets: ["Mahadahvaya", "Peyar", "Third among the Mudhal Azhwars"],
     birthMonth: "Aippasi",
@@ -456,6 +460,7 @@ export const AZHWAR_DETAILS = {
     ]
   },
   thirumazhisai: {
+    wiki: "Thirumalisai Alvar",
     order: 4,
     epithets: ["Bhaktisara", "Thirumazhisai Piran", "Mazhisai Vendhan", "Urayil Idaiyittar"],
     birthMonth: "Thai (Makaram)",

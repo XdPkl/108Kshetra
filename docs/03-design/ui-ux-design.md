@@ -651,3 +651,23 @@ Fonts unchanged (Cormorant Garamond / Mukta Malar); weight set extended to Cormo
 - **Lightbox:** dark stage, framed image, round prev/next controls (previously unstyled), gold-ringed close.
 - **Buttons/badges/chips:** pill shapes throughout; primary = saffron gradient with hover lift; outline = saffron ghost; active visited/trip states = gold gradient with dark ink (replacing white-on-gold, a contrast improvement); dashed "+N more" chips.
 - **Print:** both `@media print` blocks preserved and extended (new ornaments/decorative chrome hidden; shadows removed); print button behaviour untouched.
+
+---
+
+## Version 1.4 — Home page PO revisions (UXD addendum, 2026-09-10 email)
+
+Product Owner-requested home page changes (HomePage_Changes.pdf). All other pages and templates are unchanged.
+
+### 24. Home page (`/`) — revised composition
+
+- **Hero, three lines only:** `108 Divya Kshetrams` (title) / intro paragraph / single CTA `Explore the 108 Kshetrams`. The secondary "Azhwars" button, the ◆◆◆ ornament row and the gopuram-arch line art are removed. The framed panel is more compact (smaller display size `clamp(2rem … 3rem)`).
+- **Hero watermark:** the PO-supplied pencil sketch of Lord Narayana reclining on Adisesha (`app/src/assets/hero-adisesha-sketch.jpg`, printed from the PO's email) sits behind the hero copy as a very subtle watermark — 13% opacity, multiply blend, radial mask fade. Decorative only.
+- **Stat band removed:** the 108 / 12 / 4,000+ figure cards no longer render on `/` (`SITE_STATS` remains in use for the progress banner and Browse). Page order: hero → progress banner → Featured Kshetrams → Azhwar Darshan strip → Acharya Darshan strip.
+- **Kshetram cards (Home + Browse):** Tamil name → name → one Wikipedia-backed thumbnail (16:10 crop; gold ◆ placeholder when no `wiki` title; credits stay on detail pages) → temple/place lines → deity/region chips. Thumbnails are bottom-anchored (flex column) so image rows align across a grid row even when names wrap.
+- **Darshan strips:** "The Twelve Azhwars" and "The Acharyas" each feature four saint cards — round portrait medallion (WikiThumb), name and Tamil name, whole-card link — followed by CTAs **"Azhwar Darshan - Featured"** and **"Acharya Darshan - Featured"** (replacing "Discover the Azhwars"). Featured saints: first four Azhwars in chronological order (Poigai, Bhoothath, Pey, Thirumazhisai) and `FEATURED_ACHARYA_IDS` (Nathamuni, Yamunacharya, Pillai Lokacharya, Manavala Mamunigal — chosen for Wikipedia portrait coverage; Ramanuja/Vedanta Desika articles currently expose no lead thumbnail).
+- **Data:** optional `wiki` (Wikipedia article title) added to the saint schemas — 4 records in `azhwar-details.js`, 4 in `acharyas.js`; `getFeaturedKshetrams()` now returns enriched records; new `getFeaturedAcharyas()` accessor.
+- **Nav affordance (all pages, ≤767px):** the horizontally scrollable nav rail fades its right edge as a scroll hint; where `animation-timeline: scroll()` is supported the fade lifts when the rail is scrolled to its end.
+
+### 25. Test contracts updated for v1.4
+
+UT-HOME-01/02, TC-02/03/11 (home block) and TC-17 no longer assert the stat band or the hero "Azhwars" CTA; they assert the three-line hero, the featured-card thumbnails and both darshan-strip CTAs. See `docs/05-testing/test-cases.md`.

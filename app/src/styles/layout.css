@@ -111,6 +111,23 @@ html:has(.saint-page) .site-header {
   scrollbar-width: thin;
   scrollbar-color: rgba(201, 154, 46, 0.55) transparent;
 }
+/* Narrow screens: the rail scrolls — fade its right edge as an affordance,
+   lifting the fade once scrolled to the end where supported. */
+@media (max-width: 767px) {
+  .site-nav ul {
+    -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent 100%);
+    mask-image: linear-gradient(90deg, #000 88%, transparent 100%);
+  }
+  @supports (animation-timeline: scroll()) {
+    .site-nav ul {
+      animation: nav-reveal linear both;
+      animation-timeline: scroll(self inline);
+    }
+    @keyframes nav-reveal {
+      to { -webkit-mask-image: none; mask-image: none; }
+    }
+  }
+}
 .site-nav li { scroll-snap-align: start; white-space: nowrap; }
 .site-nav__link {
   position: relative;
@@ -171,23 +188,38 @@ html:has(.saint-page) .site-header {
 }
 .site-footer p { margin: var(--space-1) auto; max-width: 46rem; }
 
-/* ---------- Hero: framed temple plate with gopuram watermark ---------- */
+/* ---------- Hero: compact three-line plate over the Adisesha sketch ---------- */
 .hero {
   position: relative;
   text-align: center;
   margin-top: var(--space-2);
-  padding: var(--space-6) var(--space-4) var(--space-7);
+  padding: var(--space-5) var(--space-4) var(--space-6);
   border: 1px solid rgba(201, 154, 46, 0.5);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-2);
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 160' fill='none' stroke='%23c99a2e' stroke-opacity='0.32' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M40 160 V85 Q40 38 120 30 Q200 38 200 85 V160'/%3E%3Cpath d='M58 160 V92 Q58 56 120 48 Q182 56 182 92 V160'/%3E%3Cpath d='M120 30 V13'/%3E%3Ccircle cx='120' cy='9' r='3.5'/%3E%3Cpath d='M96 160 V112 Q96 96 120 94 Q144 96 144 112 V160'/%3E%3Cpath d='M70 80 H86 M154 80 H170 M64 100 H74 M166 100 H176'/%3E%3C/svg%3E"),
     radial-gradient(120% 90% at 50% 0%, rgba(201, 154, 46, 0.15), transparent 56%),
     linear-gradient(180deg, var(--color-surface) 0%, #fdf5e6 100%);
-  background-repeat: no-repeat, no-repeat, no-repeat;
-  background-position: center 112%, center top, center;
-  background-size: min(26rem, 78%) auto, auto, auto;
+  background-repeat: no-repeat, no-repeat;
+  background-position: center top, center;
+  background-size: auto, auto;
 }
+/* Very subtle pencil-sketch watermark (PO-supplied artwork, 2026-09-10) */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--hero-sketch, none);
+  background-repeat: no-repeat;
+  background-position: center 62%;
+  background-size: min(19rem, 78%) auto;
+  opacity: 0.13;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(72% 72% at 50% 46%, #000 38%, transparent 76%);
+  mask-image: radial-gradient(72% 72% at 50% 46%, #000 38%, transparent 76%);
+  pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
 .hero::before {
   content: "";
   position: absolute;
@@ -195,28 +227,21 @@ html:has(.saint-page) .site-header {
   border: 1px solid rgba(201, 154, 46, 0.38);
   border-radius: calc(var(--radius-lg) - 6px);
   pointer-events: none;
-}
-.hero__ornament {
-  margin: 0 0 var(--space-3);
-  color: var(--color-accent);
-  letter-spacing: 0.6em;
-  text-indent: 0.6em;
-  font-size: 0.95rem;
+  z-index: 2;
 }
 .hero h1 {
-  max-width: 16ch;
-  margin: 0 auto var(--space-3);
-  font-size: var(--font-display-1);
+  margin: 0 auto var(--space-2);
+  font-size: clamp(2rem, 2.2vw + 1.3rem, 3rem);
   font-weight: 600;
-  line-height: 1.05;
+  line-height: 1.08;
   background-image: linear-gradient(175deg, var(--color-primary-dark) 25%, var(--color-primary) 85%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .hero__intro {
-  max-width: 44rem;
-  margin: 0 auto var(--space-5);
+  max-width: 40rem;
+  margin: 0 auto var(--space-4);
   color: var(--color-text-muted);
   font-size: var(--font-size-lg);
 }
@@ -225,53 +250,6 @@ html:has(.saint-page) .site-header {
   gap: var(--space-3);
   justify-content: center;
   flex-wrap: wrap;
-}
-
-/* ---------- Stat band: three elevated numerals ---------- */
-.stat-band {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-3);
-  max-width: 22rem;
-  margin: var(--space-4) auto 0;
-}
-.stat-band__item {
-  position: relative;
-  text-align: center;
-  padding: var(--space-4) var(--space-3) var(--space-3);
-  background: var(--color-surface);
-  border: 1px solid rgba(201, 154, 46, 0.45);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-1);
-}
-.stat-band__item::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 18%;
-  right: 18%;
-  height: 3px;
-  border-radius: 0 0 3px 3px;
-  background: var(--gradient-gold);
-}
-.stat-band__value {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 2vw + 1.4rem, 3rem);
-  font-weight: 700;
-  line-height: 1;
-  margin-bottom: 0.3rem;
-  background-image: var(--gradient-saffron);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.stat-band__label {
-  color: var(--color-text-muted);
-  font-size: var(--text-eyebrow);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
 }
 
 /* ---------- Card grid + kshetram card ---------- */
@@ -313,7 +291,8 @@ html:has(.saint-page) .site-header {
 }
 .kshetram-card:hover::before { transform: scaleX(1); }
 .kshetram-card__link {
-  display: block;
+  display: flex;
+  flex-direction: column;
   padding: var(--space-4) var(--space-3) var(--space-3);
   padding-top: var(--space-5);
   color: inherit;
@@ -328,6 +307,15 @@ html:has(.saint-page) .site-header {
 .kshetram-card__name { margin: 0.15rem 0 0.4rem; font-size: 1.4rem; transition: color var(--dur-fast) var(--ease-out); }
 .kshetram-card__link:hover .kshetram-card__name { color: var(--color-primary); }
 .kshetram-card__place { margin: 0; font-size: var(--font-size-sm); color: var(--color-text-muted); }
+.kshetram-card__thumb { margin: 0.45rem 0 0.65rem; margin-top: auto; padding-top: 0.45rem; }
+.kshetram-card__thumb .deity-photo {
+  border-top: none;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.kshetram-card__thumb .deity-photo img { aspect-ratio: 16 / 10; }
+.kshetram-card__thumb .deity-photo--placeholder { aspect-ratio: 16 / 10; font-size: 1.6rem; }
+.kshetram-card__thumb .deity-photo__credit { display: none; }
 .kshetram-card__badges {
   display: flex;
   gap: var(--space-2);
@@ -464,17 +452,89 @@ html:has(.saint-page) .site-header {
 .detail__azhwar-list { margin: var(--space-2) 0 0; padding-left: var(--space-4); }
 .detail__azhwar-list li { margin-bottom: 0.2rem; }
 
-/* ---------- Azhwars ---------- */
-.azhwar-teaser {
+/* ---------- Darshan strips: featured saints on Home ---------- */
+.darshan-strip {
   text-align: center;
-  padding: var(--space-6) var(--space-3);
   margin-top: var(--space-5);
+  padding: var(--space-5) var(--space-3);
   background:
-    radial-gradient(80% 120% at 50% 0%, rgba(201, 154, 46, 0.14), transparent 60%),
+    radial-gradient(80% 120% at 50% 0%, rgba(201, 154, 46, 0.13), transparent 60%),
     var(--color-surface);
   border: 1px solid rgba(201, 154, 46, 0.4);
   border-radius: var(--radius-lg);
 }
+.darshan-strip .section-heading { margin-top: 0; }
+.darshan-strip .section-heading h2::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.darshan-strip .section-heading__lead { margin-inline: auto; }
+.darshan-strip__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  max-width: 58rem;
+  margin: var(--space-4) auto 0;
+}
+.darshan-strip__action { margin-top: var(--space-4); }
+.saint-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--color-surface);
+  border: 1px solid rgba(201, 154, 46, 0.45);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-4) var(--space-3) var(--space-3);
+  text-decoration: none;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+.saint-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-gold);
+  transform: scaleX(0.35);
+  transform-origin: left;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+.saint-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(201, 154, 46, 0.8);
+  box-shadow: var(--shadow-2);
+}
+.saint-card:hover::before { transform: scaleX(1); }
+/* Round portrait medallion */
+.saint-card .deity-photo,
+.saint-card .deity-photo--placeholder {
+  width: 7.5rem;
+  height: 7.5rem;
+  aspect-ratio: auto;
+  border-top: none;
+  border-radius: 50%;
+}
+.saint-card .deity-photo--placeholder { font-size: 2rem; }
+.saint-card .deity-photo__credit { display: none; }
+.saint-card__name {
+  margin-top: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-primary-dark);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.saint-card:hover .saint-card__name { color: var(--color-primary); }
+.saint-card__tamil { color: var(--color-accent-deep); font-size: 0.9rem; }
+
 .azhwar-list {
   display: grid;
   grid-template-columns: 1fr;
@@ -536,16 +596,13 @@ html:has(.saint-page) .site-header {
 @media (min-width: 640px) {
   .card-grid { grid-template-columns: repeat(2, 1fr); }
   .azhwar-list { grid-template-columns: repeat(2, 1fr); }
-  .stat-band {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 54rem;
-  }
 }
 @media (min-width: 1024px) {
   .card-grid { grid-template-columns: repeat(4, 1fr); }
   .azhwar-list { grid-template-columns: repeat(3, 1fr); }
   .detail__grid { grid-template-columns: repeat(2, 1fr); }
   .search-filter-bar { grid-template-columns: 2fr repeat(4, 1fr) auto; align-items: end; }
+  .darshan-strip__grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* ---------- Detail V2 — hero band, deity gallery, pasuram, nearby ---------- */
@@ -670,7 +727,7 @@ html:has(.saint-page) .site-header {
 @media print {
   .site-header, .site-footer, .page-actions, .distance, .detail__back { display: none; }
   body { background: #fff; }
-  .hero, .stat-band__item, .kshetram-card, .detail__section, .azhwar-card,
+  .hero, .kshetram-card, .detail__section, .azhwar-card,
   .search-filter-bar, .empty-state, .section-heading h2::after { box-shadow: none; }
   .hero { border: none; background: none; padding-left: 0; padding-right: 0; }
   .detail__section { border: none; break-inside: avoid; }
