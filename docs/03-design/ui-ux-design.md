@@ -671,3 +671,7 @@ Product Owner-requested home page changes (HomePage_Changes.pdf). All other page
 ### 25. Test contracts updated for v1.4
 
 UT-HOME-01/02, TC-02/03/11 (home block) and TC-17 no longer assert the stat band or the hero "Azhwars" CTA; they assert the three-line hero, the featured-card thumbnails and both darshan-strip CTAs. See `docs/05-testing/test-cases.md`.
+
+### 26. v1.4.1 — hero artwork swap (same day follow-up)
+
+Per the PO's follow-up, the hero watermark is replaced with a second supplied pencil sketch — Garuda, Sudarshana Chakra, Shankha and Hanuman in a row (`app/src/assets/hero-emblems-sketch.jpg`, paper normalized to white in processing) — zoomed to fill the entire hero panel (`background-size: cover`, vertical mask fade, multiply blend at 15% opacity). On narrow screens the drawing's centre crop fills the hero. The Adisesha sketch asset is removed.

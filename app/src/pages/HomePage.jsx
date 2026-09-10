@@ -10,7 +10,7 @@ import KshetramCard from '../components/KshetramCard.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 import ProgressBanner from '../components/ProgressBanner.jsx';
 import WikiThumb from '../components/WikiThumb.jsx';
-import heroSketch from '../assets/hero-adisesha-sketch.jpg';
+import heroSketch from '../assets/hero-emblems-sketch.jpg';
 
 /** Featured-strip card: one thumbnail + the saint's names, whole card links. */
 function SaintCard({ saint, base }) {

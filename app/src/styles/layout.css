@@ -204,19 +204,21 @@ html:has(.saint-page) .site-header {
   background-position: center top, center;
   background-size: auto, auto;
 }
-/* Very subtle pencil-sketch watermark (PO-supplied artwork, 2026-09-10) */
+/* Very subtle pencil-sketch watermark — Garuda, Chakra, Shankha and Hanuman
+   (PO-supplied artwork, 2026-09-10), zoomed to fill the panel and blended
+   into the ivory ground */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
   background-image: var(--hero-sketch, none);
   background-repeat: no-repeat;
-  background-position: center 62%;
-  background-size: min(19rem, 78%) auto;
-  opacity: 0.13;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.15;
   mix-blend-mode: multiply;
-  -webkit-mask-image: radial-gradient(72% 72% at 50% 46%, #000 38%, transparent 76%);
-  mask-image: radial-gradient(72% 72% at 50% 46%, #000 38%, transparent 76%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 82%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 82%, transparent 100%);
   pointer-events: none;
 }
 .hero > * { position: relative; z-index: 1; }
