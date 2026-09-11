@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Acharyas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { display: ['"Cormorant Garamond"','Georgia','serif'], body: ['"Mukta Malar"','"Segoe UI"','Arial','sans-serif'] },
+      colors: { ivory:'#FAF2E3', cream:'#FFFDF7', sunk:'#F6EBD6', ink:'#332417', muted:'#66523D', saffron:'#B34700', flame:'#D95F0E', safdeep:'#7A2E00', safdark:'#571F00', gold:'#C99A2E', goldsoft:'#E2C47C', golddeep:'#96731F', goldink:'#4A3005', hairline:'#E3D2AE' }
+    } } }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Mukta+Malar:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style> .font-display { letter-spacing: 0.005em; } </style>
+</head>
+<body class="bg-ivory text-ink font-body antialiased">
+
+  <!-- ============ SITE HEADER ============ -->
+  <header class="sticky top-0 z-50 bg-ivory/90 backdrop-blur border-b border-hairline">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4">
+      <a href="home.html" class="flex items-center gap-2.5 shrink-0">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#C99A2E" aria-hidden="true"><circle cx="12" cy="2.2" r="1.3"/><path d="M9.6 4.7h4.8l-.5 3H10.1l-.5-3z"/><path d="M7.4 8.3h9.2l-.6 3.6H8l-.6-3.6z"/><path d="M5 12.5h14l-.8 4.1H5.8L5 12.5z"/><path d="M3.4 17.2h17.2v3.6H3.4z"/><path fill="#96731F" d="M11.2 17.9h1.6v2.9h-1.6z"/></svg>
+        <span class="font-display text-[1.3rem] font-bold text-safdeep leading-none whitespace-nowrap">108 Divya Kshetrams</span>
+      </a>
+      <nav class="flex items-center gap-0.5 sm:gap-1 overflow-x-auto text-sm text-ink">
+        <a href="home.html" data-nav="home" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Home</a>
+        <a href="explore.html" data-nav="explore" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Browse</a>
+        <a href="map.html" data-nav="map" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Map</a>
+        <a href="trip.html" data-nav="trip" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Trip <span class="ml-1 inline-flex items-center justify-center min-w-[1.15rem] h-[1.15rem] px-1 text-[0.68rem] font-bold bg-gold text-goldink rounded-full">3</span></a>
+        <a href="azhwars.html" data-nav="azhwars" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Azhwars</a>
+        <a href="acharyas.html" data-nav="acharyas" class="px-3 py-1.5 rounded-full bg-saffron/10 text-saffron font-semibold whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Acharyas</a>
+        <a href="about.html" data-nav="about" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Kshetra Tours</a>
+      </nav>
+    </div>
+    <div class="h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+  </header>
+
+  
+<main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+  <header class="pb-6 border-b border-hairline">
+    <span class="text-xs font-bold uppercase tracking-[0.14em] text-saffron">Guru Parampara</span>
+    <h1 class="font-display text-4xl sm:text-5xl font-semibold text-safdeep tracking-tight mt-1">The Acharyas</h1>
+    <p class="mt-2 text-muted max-w-3xl">The acharyas of the guru parampara — the teachers who received, preserved and expounded the Sri Vaishnava tradition after the Azhwars.</p>
+  </header>
+  <section class="mt-10">
+      <h2 class="font-display text-3xl font-semibold text-safdeep inline-block border-b-2 border-gold pb-1.5">Purvacharyas — the early masters</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+              <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/NathamuniAalavandar.jpg/330px-NathamuniAalavandar.jpg" alt="Nathamuni portrait" loading="lazy" class="w-20 h-20 mx-auto rounded-full object-cover border-2 border-gold shadow-sm">
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">Nathamuni</h2>
+          <p class="text-xs text-golddeep" lang="ta">நாதமுனி</p>
+          <p class="text-[11px] text-muted mt-0.5">c. 823–951 CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">Recovered the Nalayira Divya Prabandham; first teacher of the lineage</p>
+    </a>
+      <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <span class="w-20 h-20 mx-auto rounded-full bg-sunk border-2 border-gold shadow-sm flex items-center justify-center text-2xl text-golddeep/80" aria-label="Uyyakondar portrait placeholder">◆</span>
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">Uyyakondar</h2>
+          <p class="text-xs text-golddeep" lang="ta">உய்யக்கொண்டார்</p>
+          <p class="text-[11px] text-muted mt-0.5">c. 10th century CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">Pupil of Nathamuni; strengthened the emerging tradition</p>
+    </a>
+      <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <span class="w-20 h-20 mx-auto rounded-full bg-sunk border-2 border-gold shadow-sm flex items-center justify-center text-2xl text-golddeep/80" aria-label="Manakkal Nambi portrait placeholder">◆</span>
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">Manakkal Nambi</h2>
+          <p class="text-xs text-golddeep" lang="ta">மணக்காள் நம்பி</p>
+          <p class="text-[11px] text-muted mt-0.5">c. 10th century CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">Guardian of the acharya line; teacher of Alavandar</p>
+    </a>
+      <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Aalavandar.jpg" alt="Yamunacharya portrait" loading="lazy" class="w-20 h-20 mx-auto rounded-full object-cover border-2 border-gold shadow-sm">
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">Yamunacharya</h2>
+          <p class="text-xs text-golddeep" lang="ta">யாமுநாச்சார்யா</p>
+          <p class="text-[11px] text-muted mt-0.5">c. 916–1041 CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">Alavandar — codified Visishtadvaita before Ramanuja</p>
+    </a>
+      <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <span class="w-20 h-20 mx-auto rounded-full bg-sunk border-2 border-gold shadow-sm flex items-center justify-center text-2xl text-golddeep/80" aria-label="Periya Nambi portrait placeholder">◆</span>
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">Periya Nambi</h2>
+          <p class="text-xs text-golddeep" lang="ta">பெரிய நம்பி</p>
+          <p class="text-[11px] text-muted mt-0.5">c. 11th century CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">Closest disciple of Alavandar; Ramanuja's first teacher</p>
+    </a>
+      <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <span class="w-20 h-20 mx-auto rounded-full bg-sunk border-2 border-gold shadow-sm flex items-center justify-center text-2xl text-golddeep/80" aria-label="Thirukachi Nambigal portrait placeholder">◆</span>
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">Thirukachi Nambigal</h2>
+          <p class="text-xs text-golddeep" lang="ta">திருக்கச்சி நம்பிகள்</p>
+          <p class="text-[11px] text-muted mt-0.5">c. 11th century CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">Kanchipuram saint who served the Lord of Varadharaja</p>
+    </a>
+      </div>
+    </section>
+<section class="mt-10">
+      <h2 class="font-display text-3xl font-semibold text-safdeep inline-block border-b-2 border-gold pb-1.5">The age of Ramanuja</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+              <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <span class="w-20 h-20 mx-auto rounded-full bg-sunk border-2 border-gold shadow-sm flex items-center justify-center text-2xl text-golddeep/80" aria-label="Ramanuja portrait placeholder">◆</span>
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">Ramanuja</h2>
+          <p class="text-xs text-golddeep" lang="ta">ராமானுஜர்</p>
+          <p class="text-[11px] text-muted mt-0.5">1017–1137 CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">Bhashyakara — the systematiser of Visishtadvaita</p>
+    </a>
+      <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <span class="w-20 h-20 mx-auto rounded-full bg-sunk border-2 border-gold shadow-sm flex items-center justify-center text-2xl text-golddeep/80" aria-label="Koorathazhwan portrait placeholder">◆</span>
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">Koorathazhwan</h2>
+          <p class="text-xs text-golddeep" lang="ta">கூரத்தாழ்வான்</p>
+          <p class="text-[11px] text-muted mt-0.5">c. 1020–1137 CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">Ramanuja's right hand; lost his eyes for the guru</p>
+    </a>
+      <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <span class="w-20 h-20 mx-auto rounded-full bg-sunk border-2 border-gold shadow-sm flex items-center justify-center text-2xl text-golddeep/80" aria-label="Mudaliyandan portrait placeholder">◆</span>
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">Mudaliyandan</h2>
+          <p class="text-xs text-golddeep" lang="ta">முதலியாண்டான்</p>
+          <p class="text-[11px] text-muted mt-0.5">c. 11th century CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">First among Ramanuja's simhasanadhipathis</p>
+    </a>
+      <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <span class="w-20 h-20 mx-auto rounded-full bg-sunk border-2 border-gold shadow-sm flex items-center justify-center text-2xl text-golddeep/80" aria-label="Embar portrait placeholder">◆</span>
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">Embar</h2>
+          <p class="text-xs text-golddeep" lang="ta">எம்பார்</p>
+          <p class="text-[11px] text-muted mt-0.5">c. 11th century CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">Ramanuja's cousin-disciple, the lamp of the madam</p>
+    </a>
+      </div>
+    </section>
+<section class="mt-10">
+      <h2 class="font-display text-3xl font-semibold text-safdeep inline-block border-b-2 border-gold pb-1.5">Later acharyas</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+              <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <span class="w-20 h-20 mx-auto rounded-full bg-sunk border-2 border-gold shadow-sm flex items-center justify-center text-2xl text-golddeep/80" aria-label="Vedanta Desika portrait placeholder">◆</span>
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">Vedanta Desika</h2>
+          <p class="text-xs text-golddeep" lang="ta">வேதாந்த தேசிகன்</p>
+          <p class="text-[11px] text-muted mt-0.5">1268–1369 CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">Kavitarkika Simham — lion among poets and logicians</p>
+    </a>
+      <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <span class="w-20 h-20 mx-auto rounded-full bg-sunk border-2 border-gold shadow-sm flex items-center justify-center text-2xl text-golddeep/80" aria-label="Pillai Lokacharya portrait placeholder">◆</span>
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">Pillai Lokacharya</h2>
+          <p class="text-xs text-golddeep" lang="ta">பிள்ளை லோகாசாரியார்</p>
+          <p class="text-[11px] text-muted mt-0.5">c. 1205–1311 CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">Author of the eighteen Rahasya granthas</p>
+    </a>
+      <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <span class="w-20 h-20 mx-auto rounded-full bg-sunk border-2 border-gold shadow-sm flex items-center justify-center text-2xl text-golddeep/80" aria-label="Sri Manavala Mamunigal portrait placeholder">◆</span>
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">Sri Manavala Mamunigal</h2>
+          <p class="text-xs text-golddeep" lang="ta">ஸ்ரீ மணவாள மாமுனிகள்</p>
+          <p class="text-[11px] text-muted mt-0.5">1370–1443 CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">Accepted by the Lord of Srirangam as his own teacher</p>
+    </a>
+      <a href="acharya-detail.html" class="group bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all relative p-5">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep origin-left scale-x-30 group-hover:scale-x-100 transition-transform"></div>
+      <div class="flex items-center gap-4">
+        <span class="w-20 h-20 mx-auto rounded-full bg-sunk border-2 border-gold shadow-sm flex items-center justify-center text-2xl text-golddeep/80" aria-label="P.B. Anna portrait placeholder">◆</span>
+        <div>
+          <h2 class="font-display text-2xl font-semibold text-safdeep leading-tight group-hover:text-saffron transition-colors">P.B. Anna</h2>
+          <p class="text-xs text-golddeep" lang="ta">பி.பி. அண்ணா</p>
+          <p class="text-[11px] text-muted mt-0.5">1848–1909 CE</p>
+        </div>
+      </div>
+      <p class="text-xs text-muted mt-3 leading-relaxed">Modern revivalist of the parampara</p>
+    </a>
+      </div>
+    </section>
+</main>
+<!-- ============ FOOTER ============ -->
+  <footer class="mt-16 bg-safdark text-[#F7ECD9]">
+    <div class="h-[3px] bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    <div class="max-w-6xl mx-auto px-6 py-9 text-center text-sm space-y-1.5">
+      <p>Compiled with reverence from the Nalayira Divya Prabandham tradition and standard published lists of the 108 Divya Desams.</p>
+      <p>Content is provided in good faith for devotional and educational purposes.</p>
+      <p class="text-[#F7ECD9]/70 text-xs">Your visited marks and trip are stored only in your browser — never sent to any server.</p>
+    </div>
+  </footer>
+
+  
+</body>
+</html>

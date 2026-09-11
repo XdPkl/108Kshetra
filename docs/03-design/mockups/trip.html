@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Yatra — Trip Planner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { display: ['"Cormorant Garamond"','Georgia','serif'], body: ['"Mukta Malar"','"Segoe UI"','Arial','sans-serif'] },
+      colors: { ivory:'#FAF2E3', cream:'#FFFDF7', sunk:'#F6EBD6', ink:'#332417', muted:'#66523D', saffron:'#B34700', flame:'#D95F0E', safdeep:'#7A2E00', safdark:'#571F00', gold:'#C99A2E', goldsoft:'#E2C47C', golddeep:'#96731F', goldink:'#4A3005', hairline:'#E3D2AE' }
+    } } }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Mukta+Malar:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style> .font-display { letter-spacing: 0.005em; } </style>
+</head>
+<body class="bg-ivory text-ink font-body antialiased">
+
+  <!-- ============ SITE HEADER ============ -->
+  <header class="sticky top-0 z-50 bg-ivory/90 backdrop-blur border-b border-hairline">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4">
+      <a href="home.html" class="flex items-center gap-2.5 shrink-0">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#C99A2E" aria-hidden="true"><circle cx="12" cy="2.2" r="1.3"/><path d="M9.6 4.7h4.8l-.5 3H10.1l-.5-3z"/><path d="M7.4 8.3h9.2l-.6 3.6H8l-.6-3.6z"/><path d="M5 12.5h14l-.8 4.1H5.8L5 12.5z"/><path d="M3.4 17.2h17.2v3.6H3.4z"/><path fill="#96731F" d="M11.2 17.9h1.6v2.9h-1.6z"/></svg>
+        <span class="font-display text-[1.3rem] font-bold text-safdeep leading-none whitespace-nowrap">108 Divya Kshetrams</span>
+      </a>
+      <nav class="flex items-center gap-0.5 sm:gap-1 overflow-x-auto text-sm text-ink">
+        <a href="home.html" data-nav="home" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Home</a>
+        <a href="explore.html" data-nav="explore" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Browse</a>
+        <a href="map.html" data-nav="map" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Map</a>
+        <a href="trip.html" data-nav="trip" class="px-3 py-1.5 rounded-full bg-saffron/10 text-saffron font-semibold whitespace-nowrap">Trip <span class="ml-1 inline-flex items-center justify-center min-w-[1.15rem] h-[1.15rem] px-1 text-[0.68rem] font-bold bg-gold text-goldink rounded-full">3</span></a>
+        <a href="azhwars.html" data-nav="azhwars" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Azhwars</a>
+        <a href="acharyas.html" data-nav="acharyas" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Acharyas</a>
+        <a href="about.html" data-nav="about" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Kshetra Tours</a>
+      </nav>
+    </div>
+    <div class="h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+  </header>
+
+  
+<style>
+    .region-chip { display:inline-flex; align-items:center; padding:0.32rem 0.85rem; border-radius:9999px;
+      border:1px solid rgba(201,154,46,.55); background:#FFFDF7; font-size:0.8125rem; font-weight:500;
+      box-shadow:0 1px 2px rgba(51,36,23,.06); cursor:pointer; transition:all .16s cubic-bezier(.22,.61,.36,1); }
+    .region-chip:hover { border-color:#B34700; color:#B34700; transform:translateY(-1px); }
+    .region-chip.is-active { background-image:linear-gradient(160deg,#D95F0E,#B34700 55%,#8F3500); border-color:#7A2E00; color:#FFFDF7; }
+    .trip-index { width:2.25rem; height:2.25rem; border-radius:9999px; display:flex; align-items:center; justify-content:center;
+      background-image:linear-gradient(150deg,#E2C47C,#C99A2E 55%,#96731F); color:#4A3005; font-weight:700; font-size:0.85rem;
+      box-shadow:0 1px 3px rgba(51,36,23,.25); flex-shrink:0; }
+    @media print {
+      .no-print { display:none !important; }
+      .trip-map { display:none !important; }
+      body { background:#FFFFFF; }
+    }
+  </style>
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+  <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-hairline">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-[0.14em] text-saffron">Your personal yatra</span>
+      <h1 class="font-display text-4xl sm:text-5xl font-semibold text-safdeep tracking-tight leading-tight mt-1">My Yatra — Trip Planner</h1>
+      <p class="mt-2 text-sm text-muted">3 stops · about 1,040 km in current order (straight-line) · Distances are straight-line — road distance varies.</p>
+    </div>
+    <div class="flex flex-wrap gap-2 no-print self-start lg:self-auto shrink-0">
+      <button type="button" class="px-4 py-2 rounded-full border border-gold/60 bg-cream text-sm font-semibold text-safdeep shadow-sm hover:bg-gold/15 hover:border-gold transition-colors">🔗 Share</button>
+      <button type="button" onclick="window.print()" class="px-4 py-2 rounded-full border border-gold/60 bg-cream text-sm font-semibold text-safdeep shadow-sm hover:bg-gold/15 hover:border-gold transition-colors">🖨 Print</button>
+      <button type="button" class="px-4 py-2 rounded-full border border-gold/60 bg-cream text-sm font-semibold text-safdeep shadow-sm hover:bg-gold/15 hover:border-gold transition-colors">Clear</button>
+    </div>
+  </header>
+
+  <!-- Nearest-first notice -->
+  <div id="routeNotice" class="mt-6 bg-gold/15 border-l-4 border-gold rounded-r-xl p-3 flex items-center justify-between gap-3 text-sm text-goldink">
+    <span><strong>Route ordered nearest-first</strong> — Srirangam → Thiruvengadam → Srivilliputhur.</span>
+    <button type="button" id="dismissNotice" class="no-print text-xs font-bold uppercase tracking-wider text-golddeep hover:text-safdeep px-2 py-1 rounded transition-colors shrink-0">Dismiss ✕</button>
+  </div>
+
+  <!-- View toggle -->
+  <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 no-print">
+    <div class="flex flex-wrap gap-2" role="group" aria-label="Choose list view">
+      <button type="button" data-view="region" class="region-chip is-active">By region</button>
+      <button type="button" data-view="route" class="region-chip">Route order</button>
+    </div>
+    <button type="button" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-flame via-saffron to-safdeep text-cream text-sm font-bold shadow hover:shadow-md hover:brightness-110 transition-all">⤓ Order my route — nearest first</button>
+  </div>
+
+  <!-- Route map -->
+  <div class="trip-map mt-6 rounded-2xl overflow-hidden border border-gold/55 shadow h-72 bg-sunk">
+    <iframe title="Route map of the yatra stops" src="https://www.openstreetmap.org/export/embed.html?bbox=74.0%2C6.5%2C81.5%2C14.5&amp;layer=mapnik" class="w-full h-full border-0" loading="lazy"></iframe>
+  </div>
+
+  <!-- LIST A · By region -->
+  <div id="viewRegion" class="mt-8 space-y-7">
+    <section>
+      <h2 class="font-display text-2xl font-semibold text-safdeep inline-block border-b-2 border-gold pb-1.5">Chola Nadu</h2>
+      <div class="mt-4 space-y-3">
+        <div class="bg-cream border border-gold/40 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+          <span class="trip-index">1</span>
+          <div class="flex-1 min-w-0">
+            <p class="text-xs text-golddeep font-medium" lang="ta">திருவரங்கம்</p>
+            <a href="kshetram-detail.html" class="font-display text-lg font-semibold text-safdeep hover:text-saffron transition-colors leading-tight block">Srirangam</a>
+            <p class="text-xs text-muted">Sri Ranganathaswamy Temple</p>
+          </div>
+          <button type="button" class="no-print text-sm font-bold text-[#A32020] hover:bg-[#A32020]/10 rounded-full px-3 py-1.5 transition-colors shrink-0" title="Remove from trip" aria-label="Remove Srirangam from trip">✕</button>
+        </div>
+        <div class="flex items-center gap-2 pl-4 text-xs font-semibold text-muted">
+          <span class="h-6 border-l-2 border-dashed border-gold/70" aria-hidden="true"></span><span class="text-saffron" aria-hidden="true">↓</span> 470 km
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2 class="font-display text-2xl font-semibold text-safdeep inline-block border-b-2 border-gold pb-1.5">Vada Nadu</h2>
+      <div class="mt-4 space-y-3">
+        <div class="bg-cream border border-gold/40 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+          <span class="trip-index">2</span>
+          <div class="flex-1 min-w-0">
+            <p class="text-xs text-golddeep font-medium" lang="ta">திருவேங்கடம்</p>
+            <a href="kshetram-detail.html" class="font-display text-lg font-semibold text-safdeep hover:text-saffron transition-colors leading-tight block">Thiruvengadam (Tirumala)</a>
+            <p class="text-xs text-muted">Sri Venkateswara Swamy Temple</p>
+          </div>
+          <button type="button" class="no-print text-sm font-bold text-[#A32020] hover:bg-[#A32020]/10 rounded-full px-3 py-1.5 transition-colors shrink-0" title="Remove from trip" aria-label="Remove Thiruvengadam from trip">✕</button>
+        </div>
+        <div class="flex items-center gap-2 pl-4 text-xs font-semibold text-muted">
+          <span class="h-6 border-l-2 border-dashed border-gold/70" aria-hidden="true"></span><span class="text-saffron" aria-hidden="true">↓</span> 310 km
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2 class="font-display text-2xl font-semibold text-safdeep inline-block border-b-2 border-gold pb-1.5">Pandiya Nadu</h2>
+      <div class="mt-4">
+        <div class="bg-cream border border-gold/40 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+          <span class="trip-index">3</span>
+          <div class="flex-1 min-w-0">
+            <p class="text-xs text-golddeep font-medium" lang="ta">ஶ்ரீவில்லிபுத்தூர்</p>
+            <a href="kshetram-detail.html" class="font-display text-lg font-semibold text-safdeep hover:text-saffron transition-colors leading-tight block">Srivilliputhur</a>
+            <p class="text-xs text-muted">Sri Vadapatrasayi (Andal) Temple</p>
+          </div>
+          <button type="button" class="no-print text-sm font-bold text-[#A32020] hover:bg-[#A32020]/10 rounded-full px-3 py-1.5 transition-colors shrink-0" title="Remove from trip" aria-label="Remove Srivilliputhur from trip">✕</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- LIST B · Route order (hidden initially) -->
+  <div id="viewRoute" class="mt-8 space-y-3 hidden">
+    <div class="bg-cream border border-gold/40 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+      <span class="trip-index">1</span>
+      <div class="flex-1 min-w-0">
+        <p class="text-xs text-golddeep font-medium" lang="ta">திருவேங்கடம்</p>
+        <a href="kshetram-detail.html" class="font-display text-lg font-semibold text-safdeep hover:text-saffron transition-colors leading-tight block">Thiruvengadam (Tirumala)</a>
+        <p class="text-xs text-muted">Sri Venkateswara Swamy Temple</p>
+      </div>
+      <button type="button" class="no-print text-sm font-bold text-[#A32020] hover:bg-[#A32020]/10 rounded-full px-3 py-1.5 transition-colors shrink-0" title="Remove from trip" aria-label="Remove Thiruvengadam from trip">✕</button>
+    </div>
+    <div class="flex items-center gap-2 pl-4 text-xs font-semibold text-muted">
+      <span class="h-6 border-l-2 border-dashed border-gold/70" aria-hidden="true"></span><span class="text-saffron" aria-hidden="true">↓</span> 470 km
+    </div>
+    <div class="bg-cream border border-gold/40 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+      <span class="trip-index">2</span>
+      <div class="flex-1 min-w-0">
+        <p class="text-xs text-golddeep font-medium" lang="ta">ஶ்ரீவில்லிபுத்தூர்</p>
+        <a href="kshetram-detail.html" class="font-display text-lg font-semibold text-safdeep hover:text-saffron transition-colors leading-tight block">Srivilliputhur</a>
+        <p class="text-xs text-muted">Sri Vadapatrasayi (Andal) Temple</p>
+      </div>
+      <button type="button" class="no-print text-sm font-bold text-[#A32020] hover:bg-[#A32020]/10 rounded-full px-3 py-1.5 transition-colors shrink-0" title="Remove from trip" aria-label="Remove Srivilliputhur from trip">✕</button>
+    </div>
+    <div class="flex items-center gap-2 pl-4 text-xs font-semibold text-muted">
+      <span class="h-6 border-l-2 border-dashed border-gold/70" aria-hidden="true"></span><span class="text-saffron" aria-hidden="true">↓</span> 310 km
+    </div>
+    <div class="bg-cream border border-gold/40 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+      <span class="trip-index">3</span>
+      <div class="flex-1 min-w-0">
+        <p class="text-xs text-golddeep font-medium" lang="ta">திருவரங்கம்</p>
+        <a href="kshetram-detail.html" class="font-display text-lg font-semibold text-safdeep hover:text-saffron transition-colors leading-tight block">Srirangam</a>
+        <p class="text-xs text-muted">Sri Ranganathaswamy Temple</p>
+      </div>
+      <button type="button" class="no-print text-sm font-bold text-[#A32020] hover:bg-[#A32020]/10 rounded-full px-3 py-1.5 transition-colors shrink-0" title="Remove from trip" aria-label="Remove Srirangam from trip">✕</button>
+    </div>
+  </div>
+
+  <!-- Print note -->
+  <div class="mt-8 bg-cream border border-gold/40 rounded-2xl p-4 text-sm text-muted flex items-start gap-2.5">
+    <span aria-hidden="true">🖨</span>
+    <span>This itinerary is print-ready — the print stylesheet hides buttons and maps.</span>
+  </div>
+</main>
+
+<script>
+  (function () {
+    const viewBtns = document.querySelectorAll('[data-view]');
+    const views = { region: document.getElementById('viewRegion'), route: document.getElementById('viewRoute') };
+    viewBtns.forEach((btn) => btn.addEventListener('click', () => {
+      viewBtns.forEach((b) => b.classList.toggle('is-active', b === btn));
+      views.region.classList.toggle('hidden', btn.dataset.view !== 'region');
+      views.route.classList.toggle('hidden', btn.dataset.view !== 'route');
+    }));
+    document.getElementById('dismissNotice').addEventListener('click', () => {
+      document.getElementById('routeNotice').remove();
+    });
+  })();
+</script>
+
+<!-- ============ FOOTER ============ -->
+  <footer class="mt-16 bg-safdark text-[#F7ECD9]">
+    <div class="h-[3px] bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    <div class="max-w-6xl mx-auto px-6 py-9 text-center text-sm space-y-1.5">
+      <p>Compiled with reverence from the Nalayira Divya Prabandham tradition and standard published lists of the 108 Divya Desams.</p>
+      <p>Content is provided in good faith for devotional and educational purposes.</p>
+      <p class="text-[#F7ECD9]/70 text-xs">Your visited marks and trip are stored only in your browser — never sent to any server.</p>
+    </div>
+  </footer>
+
+  
+</body>
+</html>

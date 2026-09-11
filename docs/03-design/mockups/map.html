@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map of the Divya Desams</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { display: ['"Cormorant Garamond"','Georgia','serif'], body: ['"Mukta Malar"','"Segoe UI"','Arial','sans-serif'] },
+      colors: { ivory:'#FAF2E3', cream:'#FFFDF7', sunk:'#F6EBD6', ink:'#332417', muted:'#66523D', saffron:'#B34700', flame:'#D95F0E', safdeep:'#7A2E00', safdark:'#571F00', gold:'#C99A2E', goldsoft:'#E2C47C', golddeep:'#96731F', goldink:'#4A3005', hairline:'#E3D2AE' }
+    } } }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Mukta+Malar:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style> .font-display { letter-spacing: 0.005em; } </style>
+</head>
+<body class="bg-ivory text-ink font-body antialiased">
+
+  <!-- ============ SITE HEADER ============ -->
+  <header class="sticky top-0 z-50 bg-ivory/90 backdrop-blur border-b border-hairline">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4">
+      <a href="home.html" class="flex items-center gap-2.5 shrink-0">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#C99A2E" aria-hidden="true"><circle cx="12" cy="2.2" r="1.3"/><path d="M9.6 4.7h4.8l-.5 3H10.1l-.5-3z"/><path d="M7.4 8.3h9.2l-.6 3.6H8l-.6-3.6z"/><path d="M5 12.5h14l-.8 4.1H5.8L5 12.5z"/><path d="M3.4 17.2h17.2v3.6H3.4z"/><path fill="#96731F" d="M11.2 17.9h1.6v2.9h-1.6z"/></svg>
+        <span class="font-display text-[1.3rem] font-bold text-safdeep leading-none whitespace-nowrap">108 Divya Kshetrams</span>
+      </a>
+      <nav class="flex items-center gap-0.5 sm:gap-1 overflow-x-auto text-sm text-ink">
+        <a href="home.html" data-nav="home" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Home</a>
+        <a href="explore.html" data-nav="explore" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Browse</a>
+        <a href="map.html" data-nav="map" class="px-3 py-1.5 rounded-full bg-saffron/10 text-saffron font-semibold whitespace-nowrap">Map</a>
+        <a href="trip.html" data-nav="trip" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Trip <span class="ml-1 inline-flex items-center justify-center min-w-[1.15rem] h-[1.15rem] px-1 text-[0.68rem] font-bold bg-gold text-goldink rounded-full">3</span></a>
+        <a href="azhwars.html" data-nav="azhwars" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Azhwars</a>
+        <a href="acharyas.html" data-nav="acharyas" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Acharyas</a>
+        <a href="about.html" data-nav="about" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Kshetra Tours</a>
+      </nav>
+    </div>
+    <div class="h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+  </header>
+
+  
+<style>
+    .region-chip { display:inline-flex; align-items:center; padding:0.32rem 0.85rem; border-radius:9999px;
+      border:1px solid rgba(201,154,46,.55); background:#FFFDF7; font-size:0.8125rem; font-weight:500;
+      box-shadow:0 1px 2px rgba(51,36,23,.06); cursor:pointer; transition:all .16s cubic-bezier(.22,.61,.36,1); }
+    .region-chip:hover { border-color:#B34700; color:#B34700; transform:translateY(-1px); }
+    .region-chip.is-active { background-image:linear-gradient(160deg,#D95F0E,#B34700 55%,#8F3500); border-color:#7A2E00; color:#FFFDF7; }
+    .region-dot { width:0.5rem; height:0.5rem; border-radius:9999px; display:inline-block; margin-right:0.375rem; flex-shrink:0; }
+  </style>
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+  <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-hairline">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-[0.14em] text-saffron">Every abode on the ground</span>
+      <h1 class="font-display text-4xl sm:text-5xl font-semibold text-safdeep tracking-tight leading-tight mt-1">Map of the Divya Desams</h1>
+      <p id="mapHint" class="mt-2 text-sm text-muted" aria-live="polite">108 of 108 desams shown · visited desams carry a gold ring</p>
+    </div>
+    <button type="button" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-gold/60 bg-cream text-sm font-semibold text-safdeep shadow-sm hover:bg-gold/15 hover:border-gold transition-colors self-start lg:self-auto shrink-0">
+      📍 Show my location
+    </button>
+  </header>
+
+  <!-- Region filter chips -->
+  <div class="mt-6 flex flex-wrap gap-2" role="group" aria-label="Filter map by region">
+    <button type="button" data-region="all" data-count="108" class="region-chip is-active"><span class="region-dot" style="background:#332417" aria-hidden="true"></span>All</button>
+    <button type="button" data-region="Thondai Nadu" data-count="22" class="region-chip"><span class="region-dot" style="background:#D95F0E" aria-hidden="true"></span>Thondai Nadu</button>
+    <button type="button" data-region="Chola Nadu" data-count="40" class="region-chip"><span class="region-dot" style="background:#B34700" aria-hidden="true"></span>Chola Nadu</button>
+    <button type="button" data-region="Pandiya Nadu" data-count="18" class="region-chip"><span class="region-dot" style="background:#C99A2E" aria-hidden="true"></span>Pandiya Nadu</button>
+    <button type="button" data-region="Vada Nadu" data-count="13" class="region-chip"><span class="region-dot" style="background:#96731F" aria-hidden="true"></span>Vada Nadu</button>
+    <button type="button" data-region="Nadu Nadu" data-count="2" class="region-chip"><span class="region-dot" style="background:#7A2E00" aria-hidden="true"></span>Nadu Nadu</button>
+    <button type="button" data-region="Malai Nadu" data-count="13" class="region-chip"><span class="region-dot" style="background:#2F6B3A" aria-hidden="true"></span>Malai Nadu</button>
+  </div>
+
+  <!-- Map frame -->
+  <div class="mt-6 rounded-2xl overflow-hidden border border-gold/55 shadow h-[480px] bg-sunk">
+    <iframe title="Map of the 108 Divya Desams across South India" src="https://www.openstreetmap.org/export/embed.html?bbox=74.0%2C6.5%2C81.5%2C14.5&amp;layer=mapnik" class="w-full h-full border-0" loading="lazy"></iframe>
+  </div>
+
+  <!-- Legend -->
+  <div class="mt-4 bg-cream border border-gold/45 rounded-2xl p-4 shadow-sm">
+    <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-medium text-muted">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-golddeep">Legend</span>
+      <span class="inline-flex items-center"><span class="region-dot" style="background:#D95F0E" aria-hidden="true"></span>Thondai Nadu</span>
+      <span class="inline-flex items-center"><span class="region-dot" style="background:#B34700" aria-hidden="true"></span>Chola Nadu</span>
+      <span class="inline-flex items-center"><span class="region-dot" style="background:#C99A2E" aria-hidden="true"></span>Pandiya Nadu</span>
+      <span class="inline-flex items-center"><span class="region-dot" style="background:#96731F" aria-hidden="true"></span>Vada Nadu</span>
+      <span class="inline-flex items-center"><span class="region-dot" style="background:#7A2E00" aria-hidden="true"></span>Nadu Nadu</span>
+      <span class="inline-flex items-center"><span class="region-dot" style="background:#2F6B3A" aria-hidden="true"></span>Malai Nadu</span>
+      <span class="inline-flex items-center"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background:#332417; box-shadow:0 0 0 2px #FFFDF7, 0 0 0 4px #C99A2E" aria-hidden="true"></span><span class="ml-1.5">Visited</span></span>
+    </div>
+  </div>
+</main>
+
+<script>
+  (function () {
+    const chips = document.querySelectorAll('.region-chip');
+    const hint = document.getElementById('mapHint');
+    const allChip = document.querySelector('[data-region="all"]');
+    function shownCount() {
+      const active = Array.from(chips).filter((c) => c.classList.contains('is-active') && c.dataset.region !== 'all');
+      if (!active.length) return 108;
+      return active.reduce((sum, c) => sum + Number(c.dataset.count), 0);
+    }
+    function updateHint() {
+      hint.textContent = shownCount() + ' of 108 desams shown · visited desams carry a gold ring';
+    }
+    chips.forEach((ch) => ch.addEventListener('click', () => {
+      if (ch.dataset.region === 'all') {
+        chips.forEach((c) => c.classList.remove('is-active'));
+        ch.classList.add('is-active');
+      } else {
+        allChip.classList.remove('is-active');
+        ch.classList.toggle('is-active');
+        if (!Array.from(chips).some((c) => c.classList.contains('is-active'))) allChip.classList.add('is-active');
+      }
+      updateHint();
+    }));
+    updateHint();
+  })();
+</script>
+
+<!-- ============ FOOTER ============ -->
+  <footer class="mt-16 bg-safdark text-[#F7ECD9]">
+    <div class="h-[3px] bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    <div class="max-w-6xl mx-auto px-6 py-9 text-center text-sm space-y-1.5">
+      <p>Compiled with reverence from the Nalayira Divya Prabandham tradition and standard published lists of the 108 Divya Desams.</p>
+      <p>Content is provided in good faith for devotional and educational purposes.</p>
+      <p class="text-[#F7ECD9]/70 text-xs">Your visited marks and trip are stored only in your browser — never sent to any server.</p>
+    </div>
+  </footer>
+
+  
+</body>
+</html>

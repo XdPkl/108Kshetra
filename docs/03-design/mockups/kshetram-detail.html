@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Srirangam — Divya Desam #1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { display: ['"Cormorant Garamond"','Georgia','serif'], body: ['"Mukta Malar"','"Segoe UI"','Arial','sans-serif'] },
+      colors: { ivory:'#FAF2E3', cream:'#FFFDF7', sunk:'#F6EBD6', ink:'#332417', muted:'#66523D', saffron:'#B34700', flame:'#D95F0E', safdeep:'#7A2E00', safdark:'#571F00', gold:'#C99A2E', goldsoft:'#E2C47C', golddeep:'#96731F', goldink:'#4A3005', hairline:'#E3D2AE' }
+    } } }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Mukta+Malar:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .spy-link { padding:0.35rem 0.85rem; border-radius:9999px; font-size:0.78rem; font-weight:500; border:1px solid rgba(201,154,46,.5); background:#FFFDF7; color:#332417; transition:all .16s; text-decoration:none; }
+    .spy-link:hover { border-color:#B34700; color:#B34700; }
+    .spy-link.spy-active { background-image:linear-gradient(120deg,#E2C47C,#C99A2E 45%,#96731F); border-color:#96731F; color:#4A3005; font-weight:700; }
+    .chip-link { display:inline-block; padding:0.16rem 0.75rem; margin:0.15rem 0.1rem; border-radius:9999px; background:#FFFDF7; border:1px solid rgba(201,154,46,.5); color:#7A2E00; font-size:0.78rem; font-weight:500; text-decoration:none; box-shadow:0 1px 2px rgba(51,36,23,.06); transition:all .16s; }
+    .chip-link:hover { border-color:#B34700; color:#B34700; transform:translateY(-1px); }
+  </style>
+</head>
+<body class="bg-ivory text-ink font-body antialiased">
+
+  <header class="sticky top-0 z-50 bg-ivory/90 backdrop-blur border-b border-hairline">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4">
+      <a href="home.html" class="flex items-center gap-2.5 shrink-0">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#C99A2E" aria-hidden="true"><circle cx="12" cy="2.2" r="1.3"/><path d="M9.6 4.7h4.8l-.5 3H10.1l-.5-3z"/><path d="M7.4 8.3h9.2l-.6 3.6H8l-.6-3.6z"/><path d="M5 12.5h14l-.8 4.1H5.8L5 12.5z"/><path d="M3.4 17.2h17.2v3.6H3.4z"/><path fill="#96731F" d="M11.2 17.9h1.6v2.9h-1.6z"/></svg>
+        <span class="font-display text-[1.3rem] font-bold text-safdeep leading-none whitespace-nowrap">108 Divya Kshetrams</span>
+      </a>
+      <nav class="flex items-center gap-0.5 sm:gap-1 overflow-x-auto text-sm text-ink">
+        <a href="home.html" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Home</a>
+        <a href="explore.html" class="px-3 py-1.5 rounded-full bg-saffron/10 text-saffron font-semibold whitespace-nowrap">Browse</a>
+        <a href="map.html" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Map</a>
+        <a href="trip.html" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Trip <span class="ml-1 inline-flex items-center justify-center min-w-[1.15rem] h-[1.15rem] px-1 text-[0.68rem] font-bold bg-gold text-goldink rounded-full">3</span></a>
+        <a href="azhwars.html" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Azhwars</a>
+        <a href="acharyas.html" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Acharyas</a>
+        <a href="about.html" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Kshetra Tours</a>
+      </nav>
+    </div>
+    <div class="h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+    <p class="text-sm mb-3"><a href="explore.html" class="text-muted hover:text-saffron transition-colors">← Back to all kshetrams</a></p>
+
+    <!-- Page head -->
+    <div class="flex flex-col lg:flex-row justify-between gap-4 flex-wrap">
+      <div>
+        <span class="inline-block px-3 py-1 rounded-full text-[0.7rem] font-bold uppercase tracking-[0.08em] bg-gradient-to-b from-goldsoft to-gold text-goldink shadow-sm">Divya Desam #1</span>
+        <p class="text-xl text-golddeep font-medium mt-2" lang="ta">திருவரங்கம்</p>
+        <h1 class="font-display text-4xl sm:text-5xl font-semibold text-safdeep leading-tight">Srirangam</h1>
+        <div class="flex flex-wrap gap-2 mt-3">
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-gold/10 border border-gold/55 text-ink">Chola Nadu</span>
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-gold/10 border border-gold/55 text-ink">Kidandan — Reclining</span>
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-gold/10 border border-gold/55 text-ink">247 pasurams</span>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2 items-start justify-start lg:justify-end">
+        <button class="px-3.5 py-2 rounded-full text-xs font-bold bg-gradient-to-b from-goldsoft to-gold text-goldink border border-golddeep shadow-sm">✓ Visited</button>
+        <button class="px-3.5 py-2 rounded-full text-xs font-bold bg-gradient-to-b from-goldsoft to-gold text-goldink border border-golddeep shadow-sm">✓ In trip</button>
+        <button class="px-3.5 py-2 rounded-full text-xs font-semibold border border-saffron/60 text-safdeep hover:bg-saffron/10 transition-colors">↗ Share</button>
+        <button class="px-3.5 py-2 rounded-full text-xs font-semibold border border-saffron/60 text-safdeep hover:bg-saffron/10 transition-colors">🖨 Print</button>
+      </div>
+    </div>
+
+    <!-- Scroll-spy section nav -->
+    <nav class="sticky top-[4.2rem] z-30 mt-5 py-2 rounded-xl bg-ivory/90 backdrop-blur border-b border-gold/45 flex flex-wrap gap-1.5" aria-label="Page sections">
+      <a href="#profile" class="spy-link spy-active">Profile</a>
+      <a href="#deities" class="spy-link">Deities</a>
+      <a href="#puranam" class="spy-link">Puranam</a>
+      <a href="#mangalasasanam" class="spy-link">Mangalasasanam</a>
+      <a href="#visit" class="spy-link">Visit Info</a>
+      <a href="#location" class="spy-link">Location</a>
+      <a href="#media" class="spy-link">Media</a>
+    </nav>
+
+    <!-- PROFILE -->
+    <section id="profile" data-spy class="mt-6 bg-cream rounded-2xl border border-gold/40 shadow-sm p-6 sm:p-8 relative overflow-hidden scroll-mt-36">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep"></div>
+      <div class="border-b border-[#F0E3C6] pb-3 mb-6 flex items-center justify-between flex-wrap gap-2">
+        <h2 class="font-display text-2xl sm:text-[1.7rem] font-semibold text-safdeep">Basic Shrine Profile</h2>
+        <span class="px-3 py-1 rounded-full text-[0.7rem] font-bold uppercase tracking-wider bg-gradient-to-b from-goldsoft to-gold text-goldink shadow-sm">Divya Desam #1</span>
+      </div>
+      <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="p-4 bg-ivory rounded-xl border border-gold/35 border-l-4 border-l-gold"><dt class="text-[0.7rem] font-bold uppercase tracking-[0.09em] text-muted">Region</dt><dd class="text-sm mt-1 font-medium">Chola Nadu — the Kaveri delta island</dd></div>
+        <div class="p-4 bg-ivory rounded-xl border border-gold/35 border-l-4 border-l-gold"><dt class="text-[0.7rem] font-bold uppercase tracking-[0.09em] text-muted">Geographic location</dt><dd class="text-sm mt-1 font-medium">Srirangam island, Trichy · Tamil Nadu</dd></div>
+        <div class="p-4 bg-ivory rounded-xl border border-gold/35 border-l-4 border-l-gold"><dt class="text-[0.7rem] font-bold uppercase tracking-[0.09em] text-muted">Sanctum tower (Vimanam)</dt><dd class="text-sm mt-1 font-medium">Sriranga Vimanam — shaped like the sacred syllable Om</dd></div>
+        <div class="p-4 bg-ivory rounded-xl border border-gold/35 border-l-4 border-l-gold"><dt class="text-[0.7rem] font-bold uppercase tracking-[0.09em] text-muted">Sacred water (Theertham)</dt><dd class="text-sm mt-1 font-medium">Chandra Pushkarini, with eight sub-theerthams</dd></div>
+        <div class="p-4 bg-ivory rounded-xl border border-gold/35 border-l-4 border-l-gold"><dt class="text-[0.7rem] font-bold uppercase tracking-[0.09em] text-muted">Sthala Vriksham</dt><dd class="text-sm mt-1 font-medium">Punnai tree (Calophyllum inophyllum)</dd></div>
+        <div class="p-4 bg-ivory rounded-xl border border-gold/35 border-l-4 border-l-gold"><dt class="text-[0.7rem] font-bold uppercase tracking-[0.09em] text-muted">Sanctum posture</dt><dd class="text-sm mt-1 font-medium">Kidantha Thirukkolam — reclining on Adisesha</dd></div>
+        <div class="p-4 bg-ivory rounded-xl border border-gold/35 border-l-4 border-l-gold sm:col-span-2 lg:col-span-3"><dt class="text-[0.7rem] font-bold uppercase tracking-[0.09em] text-muted">Orientation</dt><dd class="text-sm mt-1 font-medium">Facing South — towards Lanka, blessing King Vibhishana as promised</dd></div>
+      </dl>
+    </section>
+
+    <!-- DEITIES -->
+    <section id="deities" data-spy class="mt-6 bg-cream rounded-2xl border border-gold/40 shadow-sm p-6 sm:p-8 relative overflow-hidden scroll-mt-36">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep"></div>
+      <div class="border-b border-[#F0E3C6] pb-3 mb-6">
+        <h2 class="font-display text-2xl sm:text-[1.7rem] font-semibold text-safdeep">Deities &amp; Consorts</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-5 rounded-2xl border border-gold/40 bg-ivory relative overflow-hidden">
+          <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft to-gold"></div>
+          <h3 class="font-display text-2xl font-semibold text-safdeep">Moolavar</h3>
+          <div class="mt-3 rounded-xl overflow-hidden border border-gold/45">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Ranganathaswamy_temple_tiruchirappalli.jpg/330px-Ranganathaswamy_temple_tiruchirappalli.jpg" alt="Srirangam temple" loading="lazy" class="w-full aspect-video object-cover">
+            <p class="text-[0.65rem] text-muted px-2 py-1 bg-sunk">Photo: Ranganathaswamy Temple — Wikipedia (CC BY-SA)</p>
+          </div>
+          <p class="mt-3 text-sm font-semibold" lang="ta">ஸ்ரீ ரங்கநாதன் / பெரிய பெருமாள் <span class="font-normal text-muted">· Sri Ranganathan / Periya Perumal</span></p>
+          <p class="text-xs text-muted italic mt-0.5">Kidandan — reclining on Adisesha, facing south</p>
+        </div>
+        <div class="p-5 rounded-2xl border border-gold/40 bg-ivory relative overflow-hidden">
+          <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft to-gold"></div>
+          <h3 class="font-display text-2xl font-semibold text-safdeep">Urchavar</h3>
+          <div class="mt-3 rounded-xl overflow-hidden border border-gold/45 bg-sunk aspect-video flex items-center justify-center">
+            <span class="text-5xl text-golddeep/60" aria-label="Urchavar photo placeholder">◆</span>
+          </div>
+          <p class="mt-3 text-sm font-semibold" lang="ta">நம்பெருமாள் <span class="font-normal text-muted">· Namperumal</span></p>
+          <div class="mt-3 pt-3 border-t border-[#EBDDBE]">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-safdeep">Thaayar</h4>
+            <p class="text-sm mt-1 font-medium" lang="ta">திருவரங்கநாச்சியார் <span class="font-normal text-muted">· Ranganayaki Thaayar</span></p>
+            <p class="text-xs text-muted mt-1 leading-relaxed">Worshipped in a completely separate, dedicated temple complex within the inner prakaram — her independent authority as the Divine Consort preserved.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PURANAM -->
+    <section id="puranam" data-spy class="mt-6 bg-cream rounded-2xl border border-gold/40 shadow-sm p-6 sm:p-8 relative overflow-hidden scroll-mt-36">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep"></div>
+      <div class="border-b border-[#F0E3C6] pb-3 mb-6">
+        <h2 class="font-display text-2xl sm:text-[1.7rem] font-semibold text-safdeep">Sthala Puranam &amp; History</h2>
+      </div>
+      <article class="space-y-3 text-sm leading-relaxed">
+        <h3 class="font-display text-xl font-semibold text-safdeep">Origin legend &amp; miracles</h3>
+        <p>Rama gifted Vibhishana this image of Ranganatha as he returned to Lanka; set down at the Kaveri island it took root there — the self-manifested first among the 108, sung by eleven Azhwars and the seat of the Sri Vaishnava lineage.</p>
+      </article>
+      <div class="mt-5 p-5 rounded-r-xl border border-gold/40 border-l-4 border-l-golddeep bg-ivory">
+        <span class="text-[0.7rem] uppercase font-bold tracking-wider text-golddeep">Significance</span>
+        <p class="text-sm mt-1 leading-relaxed">The foremost of all 108 Divya Desams — the huge island temple of Lord Ranganatha reclining on Adisesha, sung by eleven of the twelve Azhwars.</p>
+      </div>
+    </section>
+
+    <!-- MANGALASASANAM -->
+    <section id="mangalasasanam" data-spy class="mt-6 bg-cream rounded-2xl border border-gold/40 shadow-sm p-6 sm:p-8 relative overflow-hidden scroll-mt-36">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep"></div>
+      <div class="border-b border-[#F0E3C6] pb-3 mb-6">
+        <h2 class="font-display text-2xl sm:text-[1.7rem] font-semibold text-safdeep">Mangalasasanam</h2>
+      </div>
+      <p class="text-sm mb-5"><strong>247 pasurams</strong> · 11 Azhwars:
+        <a href="azhwar-detail.html" class="chip-link">Poigai Azhwar</a><a href="azhwar-detail.html" class="chip-link">Bhoothathazhwar</a><a href="azhwar-detail.html" class="chip-link">Peyazhwar</a><a href="azhwar-detail.html" class="chip-link">Thirumazhisai Azhwar</a><a href="azhwar-detail.html" class="chip-link">Nammazhwar</a><a href="azhwar-detail.html" class="chip-link">Kulasekhara Azhwar</a><a href="azhwar-detail.html" class="chip-link">Periyazhwar</a><a href="azhwar-detail.html" class="chip-link">Andal</a><a href="azhwar-detail.html" class="chip-link">Thondaradippodi Azhwar</a><a href="azhwar-detail.html" class="chip-link">Thiruppaan Azhwar</a><a href="azhwar-detail.html" class="chip-link">Thirumangai Azhwar</a>
+      </p>
+      <div class="relative rounded-2xl border border-gold/55 bg-sunk px-6 py-8 text-center">
+        <div class="absolute inset-2 border border-gold/30 rounded-xl pointer-events-none"></div>
+        <span class="absolute top-3 left-1/2 -translate-x-1/2 font-display text-4xl leading-none text-gold/70" aria-hidden="true">❝</span>
+        <h3 class="font-display text-xl font-semibold text-safdeep">Thiruppalliyezhuchchi 1 · Thondaradippodi Azhwar</h3>
+        <p class="mt-2 font-display text-2xl sm:text-[1.7rem] leading-relaxed text-[#4A2408] font-medium" lang="ta">பாயும் ஒளி விளக்கும் பத்தருள் திருப்பள்ளியெழுச்சி<br>பாயும் பொன் விளக்கும் பண்மொழியால் பள்ளியெழுந்தருளாயே</p>
+        <p class="mt-4 pt-4 border-t border-gold/30 font-display italic text-lg text-ink">Paayum oli vilakkum paththarul thiruppalliyezhuchchi — paayum pon vilakkum pannmozhiaal palliyezhundharulaaye</p>
+        <p class="mt-3 max-w-2xl mx-auto text-sm leading-relaxed">Awake, O Lord of Srirangam — waken from your rest amid the glowing lamps and the sweet music of your devotees.</p>
+        <div class="mt-4">
+          <a href="#" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-ivory hover:bg-gold/20 border border-gold/60 text-xs font-bold uppercase tracking-wider text-safdeep transition-colors">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Listen to Recitation
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT INFO -->
+    <section id="visit" data-spy class="mt-6 bg-cream rounded-2xl border border-gold/40 shadow-sm p-6 sm:p-8 relative overflow-hidden scroll-mt-36">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep"></div>
+      <div class="border-b border-[#F0E3C6] pb-3 mb-6">
+        <h2 class="font-display text-2xl sm:text-[1.7rem] font-semibold text-safdeep">Visit Info</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-5 bg-ivory rounded-xl border border-gold/35">
+          <h3 class="font-display text-xl font-semibold text-safdeep">Temple Timings</h3>
+          <p class="text-sm font-semibold mt-2">🕉 Morning 06:15 – 13:00 · Evening 15:30 – 21:00</p>
+          <p class="text-xs text-muted mt-1">Vishwaroopa darshan 06:15–07:00; Ekadasi special</p>
+          <p class="text-xs text-muted italic mt-2">Indicative timings — please confirm with the temple office.</p>
+        </div>
+        <div class="p-5 bg-ivory rounded-xl border border-gold/35">
+          <h3 class="font-display text-xl font-semibold text-safdeep">How to Reach</h3>
+          <dl class="text-sm mt-2 space-y-1">
+            <div class="flex"><dt class="w-16 shrink-0 text-xs text-muted uppercase tracking-wider pt-0.5">Town</dt><dd>Srirangam island, Trichy</dd></div>
+            <div class="flex"><dt class="w-16 shrink-0 text-xs text-muted uppercase tracking-wider pt-0.5">Rail</dt><dd>Trichy Junction</dd></div>
+            <div class="flex"><dt class="w-16 shrink-0 text-xs text-muted uppercase tracking-wider pt-0.5">Airport</dt><dd>Trichy International</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCATION -->
+    <section id="location" data-spy class="mt-6 bg-cream rounded-2xl border border-gold/40 shadow-sm p-6 sm:p-8 relative overflow-hidden scroll-mt-36">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep"></div>
+      <div class="border-b border-[#F0E3C6] pb-3 mb-6">
+        <h2 class="font-display text-2xl sm:text-[1.7rem] font-semibold text-safdeep">Location</h2>
+      </div>
+      <div class="flex flex-wrap gap-3 items-center mb-4">
+        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-saffron hover:text-safdeep transition-colors">View on Google Maps ↗</a>
+        <button class="px-3.5 py-2 rounded-full text-xs font-semibold border border-saffron/60 text-safdeep hover:bg-saffron/10 transition-colors">📍 Distance from me</button>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-gold/55 shadow-sm h-72">
+        <iframe title="Map of Srirangam" class="w-full h-full" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=78.62%2C10.82%2C78.75%2C10.91&amp;layer=mapnik"></iframe>
+      </div>
+      <div class="mt-5">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-safdeep">Nearby Divya Desams <span class="font-normal text-muted normal-case">within 50 km</span></h3>
+        <ul class="mt-2 grid sm:grid-cols-2 gap-x-6 text-sm">
+          <li><a href="kshetram-detail.html" class="text-saffron hover:text-safdeep transition-colors">Uraiyur</a> <span class="text-muted">— 9 km</span></li>
+          <li><a href="kshetram-detail.html" class="text-saffron hover:text-safdeep transition-colors">Thiruvellarai</a> <span class="text-muted">— 22 km</span></li>
+          <li><a href="kshetram-detail.html" class="text-saffron hover:text-safdeep transition-colors">Uthamar Kovil</a> <span class="text-muted">— 7 km</span></li>
+          <li><a href="kshetram-detail.html" class="text-saffron hover:text-safdeep transition-colors">Anbil</a> <span class="text-muted">— 18 km</span></li>
+        </ul>
+        <p class="text-xs text-muted italic mt-2">Distances are straight-line and approximate.</p>
+      </div>
+    </section>
+
+    <!-- MEDIA -->
+    <section id="media" data-spy class="mt-6 bg-cream rounded-2xl border border-gold/40 shadow-sm p-6 sm:p-8 relative overflow-hidden scroll-mt-36">
+      <div class="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-goldsoft via-gold to-golddeep"></div>
+      <div class="border-b border-[#F0E3C6] pb-3 mb-6">
+        <h2 class="font-display text-2xl sm:text-[1.7rem] font-semibold text-safdeep">Visual &amp; Media</h2>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-safdeep mb-3">Recommended listening</h3>
+          <div class="space-y-2.5">
+            <a href="#" class="group flex items-center gap-3 p-3 bg-ivory hover:bg-cream rounded-xl border border-gold/45 hover:border-golddeep transition-all">
+              <span class="w-9 h-9 rounded-lg bg-[#FEE2E2] text-[#C4302B] flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+              </span>
+              <span class="flex-1 min-w-0">
+                <span class="block text-xs font-bold group-hover:text-saffron transition-colors">Thiruppalliyezhuchchi Recitation</span>
+                <span class="block text-[11px] text-muted">Pasuram recitation search</span>
+              </span>
+              <span class="text-saffron group-hover:translate-x-0.5 transition-transform">↗</span>
+            </a>
+            <a href="#" class="group flex items-center gap-3 p-3 bg-ivory hover:bg-cream rounded-xl border border-gold/45 hover:border-golddeep transition-all">
+              <span class="w-9 h-9 rounded-lg bg-[#FEE2E2] text-[#C4302B] flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+              </span>
+              <span class="flex-1 min-w-0">
+                <span class="block text-xs font-bold group-hover:text-saffron transition-colors">Srirangam Ranganatha Vaibhavam</span>
+                <span class="block text-[11px] text-muted">Upanyasam search</span>
+              </span>
+              <span class="text-saffron group-hover:translate-x-0.5 transition-transform">↗</span>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-safdeep mb-3">Azhwars who glorified this kshetram</h3>
+          <div class="flex flex-wrap gap-2">
+            <a href="azhwar-detail.html" class="chip-link">Poigai Azhwar</a><a href="azhwar-detail.html" class="chip-link">Bhoothathazhwar</a><a href="azhwar-detail.html" class="chip-link">Peyazhwar</a><a href="azhwar-detail.html" class="chip-link">Thirumazhisai Azhwar</a><a href="azhwar-detail.html" class="chip-link">Nammazhwar</a><a href="azhwar-detail.html" class="chip-link">Kulasekhara Azhwar</a><a href="azhwar-detail.html" class="chip-link">Periyazhwar</a><a href="azhwar-detail.html" class="chip-link">Andal</a><a href="azhwar-detail.html" class="chip-link">Thondaradippodi Azhwar</a><a href="azhwar-detail.html" class="chip-link">Thiruppaan Azhwar</a><a href="azhwar-detail.html" class="chip-link">Thirumangai Azhwar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-16 bg-safdark text-[#F7ECD9]">
+    <div class="h-[3px] bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    <div class="max-w-6xl mx-auto px-6 py-9 text-center text-sm space-y-1.5">
+      <p>Compiled with reverence from the Nalayira Divya Prabandham tradition and standard published lists of the 108 Divya Desams.</p>
+      <p>Content is provided in good faith for devotional and educational purposes.</p>
+      <p class="text-[#F7ECD9]/70 text-xs">Your visited marks and trip are stored only in your browser — never sent to any server.</p>
+    </div>
+  </footer>
+
+  <script>
+    const links = document.querySelectorAll('.spy-link');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          links.forEach((l) => l.classList.toggle('spy-active', l.getAttribute('href') === '#' + e.target.id));
+        }
+      });
+    }, { rootMargin: '-30% 0px -55% 0px' });
+    document.querySelectorAll('[data-spy]').forEach((s) => obs.observe(s));
+  </script>
+</body>
+</html>

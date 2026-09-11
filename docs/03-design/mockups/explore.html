@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore the Divya Kshetrams</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      fontFamily: { display: ['"Cormorant Garamond"','Georgia','serif'], body: ['"Mukta Malar"','"Segoe UI"','Arial','sans-serif'] },
+      colors: { ivory:'#FAF2E3', cream:'#FFFDF7', sunk:'#F6EBD6', ink:'#332417', muted:'#66523D', saffron:'#B34700', flame:'#D95F0E', safdeep:'#7A2E00', safdark:'#571F00', gold:'#C99A2E', goldsoft:'#E2C47C', golddeep:'#96731F', goldink:'#4A3005', hairline:'#E3D2AE' }
+    } } }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Mukta+Malar:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style> .font-display { letter-spacing: 0.005em; } </style>
+</head>
+<body class="bg-ivory text-ink font-body antialiased">
+
+  <!-- ============ SITE HEADER ============ -->
+  <header class="sticky top-0 z-50 bg-ivory/90 backdrop-blur border-b border-hairline">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4">
+      <a href="home.html" class="flex items-center gap-2.5 shrink-0">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#C99A2E" aria-hidden="true"><circle cx="12" cy="2.2" r="1.3"/><path d="M9.6 4.7h4.8l-.5 3H10.1l-.5-3z"/><path d="M7.4 8.3h9.2l-.6 3.6H8l-.6-3.6z"/><path d="M5 12.5h14l-.8 4.1H5.8L5 12.5z"/><path d="M3.4 17.2h17.2v3.6H3.4z"/><path fill="#96731F" d="M11.2 17.9h1.6v2.9h-1.6z"/></svg>
+        <span class="font-display text-[1.3rem] font-bold text-safdeep leading-none whitespace-nowrap">108 Divya Kshetrams</span>
+      </a>
+      <nav class="flex items-center gap-0.5 sm:gap-1 overflow-x-auto text-sm text-ink">
+        <a href="home.html" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Home</a>
+        <a href="explore.html" class="px-3 py-1.5 rounded-full bg-saffron/10 text-saffron font-semibold whitespace-nowrap">Browse</a>
+        <a href="map.html" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Map</a>
+        <a href="trip.html" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Trip <span class="ml-1 inline-flex items-center justify-center min-w-[1.15rem] h-[1.15rem] px-1 text-[0.68rem] font-bold bg-gold text-goldink rounded-full">3</span></a>
+        <a href="azhwars.html" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Azhwars</a>
+        <a href="acharyas.html" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Acharyas</a>
+        <a href="about.html" class="px-3 py-1.5 rounded-full whitespace-nowrap hover:bg-saffron/10 hover:text-saffron transition-colors">Kshetra Tours</a>
+      </nav>
+    </div>
+    <div class="h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+  </header>
+
+  
+<style>
+    .region-chip { display:inline-flex; align-items:center; padding:0.32rem 0.85rem; border-radius:9999px;
+      border:1px solid rgba(201,154,46,.55); background:#FFFDF7; font-size:0.8125rem; font-weight:500;
+      box-shadow:0 1px 2px rgba(51,36,23,.06); cursor:pointer; transition:all .16s cubic-bezier(.22,.61,.36,1); }
+    .region-chip:hover { border-color:#B34700; color:#B34700; transform:translateY(-1px); }
+    .region-chip.is-active { background-image:linear-gradient(160deg,#D95F0E,#B34700 55%,#8F3500); border-color:#7A2E00; color:#FFFDF7; }
+  </style>
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+  <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-hairline">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-[0.14em] text-saffron">Nalayira Divya Prabandham Series</span>
+      <h1 class="font-display text-4xl sm:text-5xl font-semibold text-safdeep tracking-tight leading-tight mt-1">Explore the Divya Kshetrams</h1>
+    </div>
+    <div class="bg-cream p-5 rounded-2xl border border-gold/45 shadow-sm w-full lg:w-80 shrink-0">
+      <div class="flex items-center justify-between text-xs mb-2.5">
+        <span class="font-semibold text-safdeep flex items-center gap-2">
+          <svg class="w-4 h-4 text-saffron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          Your Yatra Progress
+        </span>
+        <span class="text-muted"><strong class="text-saffron">2</strong> / 108 Visited</span>
+      </div>
+      <div class="w-full bg-sunk rounded-full h-2 overflow-hidden">
+        <div class="bg-gradient-to-r from-flame to-saffron h-2 rounded-full transition-all duration-700" style="width:2%"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search & Filter Toolbar -->
+  <div class="mt-8 bg-cream p-5 rounded-2xl border border-gold/45 shadow-sm space-y-4">
+    <div class="relative">
+      <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-golddeep">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      </span>
+      <input id="searchBox" type="text" placeholder="Search by Kshetram name, region, deity, or Azhwar…"
+             class="w-full pl-10 pr-4 py-3 bg-ivory border border-gold/60 rounded-xl text-sm placeholder-golddeep/60 focus:outline-none focus:ring-2 focus:ring-saffron/50 focus:bg-cream transition-all">
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 pt-1">
+      <div>
+        <label class="block text-[11px] font-bold uppercase tracking-wider text-golddeep mb-1.5">State</label>
+        <select class="w-full px-3 py-2.5 bg-ivory border border-gold/60 rounded-xl text-xs font-medium focus:ring-2 focus:ring-saffron/50 focus:outline-none"><option>All States</option><option>Tamil Nadu</option><option>Andhra Pradesh</option><option>Kerala</option></select>
+      </div>
+      <div>
+        <label class="block text-[11px] font-bold uppercase tracking-wider text-golddeep mb-1.5">Region (Nadu)</label>
+        <select class="w-full px-3 py-2.5 bg-ivory border border-gold/60 rounded-xl text-xs font-medium focus:ring-2 focus:ring-saffron/50 focus:outline-none"><option>All Regions</option><option>Thondai Nadu</option><option>Chola Nadu</option><option>Pandiya Nadu</option><option>Vada Nadu</option></select>
+      </div>
+      <div>
+        <label class="block text-[11px] font-bold uppercase tracking-wider text-golddeep mb-1.5">Deity Form</label>
+        <select class="w-full px-3 py-2.5 bg-ivory border border-gold/60 rounded-xl text-xs font-medium focus:ring-2 focus:ring-saffron/50 focus:outline-none"><option>All Forms</option><option>Nindran — Standing</option><option>Kidandan — Reclining</option><option>Irundhan — Seated</option></select>
+      </div>
+      <div>
+        <label class="block text-[11px] font-bold uppercase tracking-wider text-golddeep mb-1.5">Azhwar</label>
+        <select class="w-full px-3 py-2.5 bg-ivory border border-gold/60 rounded-xl text-xs font-medium focus:ring-2 focus:ring-saffron/50 focus:outline-none"><option>All Azhwars</option><option>Poigai Azhwar</option><option>Nammazhwar</option><option>Thirumangai Azhwar</option></select>
+      </div>
+      <div>
+        <label class="block text-[11px] font-bold uppercase tracking-wider text-golddeep mb-1.5">Visit Status</label>
+        <select class="w-full px-3 py-2.5 bg-ivory border border-gold/60 rounded-xl text-xs font-medium focus:ring-2 focus:ring-saffron/50 focus:outline-none"><option>All Kshetrams</option><option>Visited</option><option>Not yet visited</option></select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick region chips + count -->
+  <div class="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div class="flex flex-wrap gap-2" role="group" aria-label="Filter by region">
+      <button data-region="all" class="region-chip is-active">All</button>
+      <button data-region="Thondai Nadu" class="region-chip">Thondai Nadu</button>
+      <button data-region="Chola Nadu" class="region-chip">Chola Nadu</button>
+      <button data-region="Pandiya Nadu" class="region-chip">Pandiya Nadu</button>
+      <button data-region="Vada Nadu" class="region-chip">Vada Nadu</button>
+    </div>
+    <p class="text-sm text-muted" aria-live="polite">Showing <strong id="count" class="text-ink">8</strong> of <strong class="text-ink">108</strong> kshetrams</p>
+  </div>
+
+  <!-- Cards grid (sample of 108) -->
+  <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+    <a href="kshetram-detail.html" data-region="Chola Nadu" data-search="திருவரங்கம் srirangam kaveri island sri ranganathaswamy temple srirangam, trichy · tamil nadu chola nadu ranganatha" class="group relative bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all flex flex-col">
+          <span class="absolute top-3 left-3 z-10 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[0.68rem] font-bold uppercase tracking-wider bg-gradient-to-b from-goldsoft to-gold text-goldink shadow">✓ Visited</span><button class="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-lg bg-cream/95 text-[11px] font-bold text-safdeep border border-gold/60 shadow-sm hover:bg-gold/20 transition-colors">✓ In trip</button>
+          <div class="relative h-40 overflow-hidden border-b border-hairline"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Ranganathaswamy_temple_tiruchirappalli.jpg/330px-Ranganathaswamy_temple_tiruchirappalli.jpg" alt="Srirangam Temple" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"><span class="absolute bottom-2 left-3 text-[11px] font-semibold text-cream bg-safdark/70 backdrop-blur px-2 py-0.5 rounded">DD #1</span></div>
+          <div class="p-5 flex-1">
+            <span class="text-sm text-golddeep font-medium" lang="ta">திருவரங்கம்</span>
+            <h3 class="font-display text-[1.4rem] font-semibold text-safdeep leading-snug group-hover:text-saffron transition-colors">Srirangam</h3>
+            <p class="text-[11px] text-muted">Kaveri island</p>
+            <div class="mt-2 pt-2 border-t border-[#F0E3C6]">
+              <p class="text-xs font-semibold">Sri Ranganathaswamy Temple</p>
+              <p class="text-[11px] text-muted">Srirangam, Trichy · Tamil Nadu</p>
+            </div>
+          </div>
+          <div class="px-5 pb-5 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-safdeep border border-gold/50 rounded-md">Ranganatha</span>
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-muted border border-gold/50 rounded-md">Chola Nadu</span>
+          </div>
+        </a>
+    <a href="kshetram-detail.html" data-region="Vada Nadu" data-search="திருவேங்கடம் thiruvengadam (tirumala) the sacred hill sri venkateswara swamy temple tirumala, tirupati · andhra pradesh vada nadu srinivasa" class="group relative bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all flex flex-col">
+          <button class="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-lg bg-cream/95 text-[11px] font-bold text-safdeep border border-gold/60 shadow-sm hover:bg-gold/20 transition-colors">✓ In trip</button>
+          <div class="relative h-40 overflow-hidden border-b border-hairline"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Tirumala_090615.jpg/330px-Tirumala_090615.jpg" alt="Thiruvengadam (Tirumala) Temple" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"><span class="absolute bottom-2 left-3 text-[11px] font-semibold text-cream bg-safdark/70 backdrop-blur px-2 py-0.5 rounded">DD #96</span></div>
+          <div class="p-5 flex-1">
+            <span class="text-sm text-golddeep font-medium" lang="ta">திருவேங்கடம்</span>
+            <h3 class="font-display text-[1.4rem] font-semibold text-safdeep leading-snug group-hover:text-saffron transition-colors">Thiruvengadam (Tirumala)</h3>
+            <p class="text-[11px] text-muted">The sacred hill</p>
+            <div class="mt-2 pt-2 border-t border-[#F0E3C6]">
+              <p class="text-xs font-semibold">Sri Venkateswara Swamy Temple</p>
+              <p class="text-[11px] text-muted">Tirumala, Tirupati · Andhra Pradesh</p>
+            </div>
+          </div>
+          <div class="px-5 pb-5 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-safdeep border border-gold/50 rounded-md">Srinivasa</span>
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-muted border border-gold/50 rounded-md">Vada Nadu</span>
+          </div>
+        </a>
+    <a href="kshetram-detail.html" data-region="Thondai Nadu" data-search="திருக்கச்சி ஏகம்பன் thirukkachi (kanchipuram — atthigiri) kanchipuram sri varadharaja perumal temple kanchipuram · tamil nadu thondai nadu varadharaja" class="group relative bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all flex flex-col">
+          
+          <div class="relative h-40 overflow-hidden border-b border-hairline"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Varadharaja_Perumal_Temple_8.jpg/330px-Varadharaja_Perumal_Temple_8.jpg" alt="Thirukkachi (Kanchipuram — Atthigiri) Temple" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"><span class="absolute bottom-2 left-3 text-[11px] font-semibold text-cream bg-safdark/70 backdrop-blur px-2 py-0.5 rounded">DD #72</span></div>
+          <div class="p-5 flex-1">
+            <span class="text-sm text-golddeep font-medium" lang="ta">திருக்கச்சி ஏகம்பன்</span>
+            <h3 class="font-display text-[1.4rem] font-semibold text-safdeep leading-snug group-hover:text-saffron transition-colors">Thirukkachi (Kanchipuram — Atthigiri)</h3>
+            <p class="text-[11px] text-muted">Kanchipuram</p>
+            <div class="mt-2 pt-2 border-t border-[#F0E3C6]">
+              <p class="text-xs font-semibold">Sri Varadharaja Perumal Temple</p>
+              <p class="text-[11px] text-muted">Kanchipuram · Tamil Nadu</p>
+            </div>
+          </div>
+          <div class="px-5 pb-5 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-safdeep border border-gold/50 rounded-md">Varadharaja</span>
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-muted border border-gold/50 rounded-md">Thondai Nadu</span>
+          </div>
+        </a>
+    <a href="kshetram-detail.html" data-region="Pandiya Nadu" data-search="ஶ்ரீவில்லிபுத்தூர் srivilliputhur home of andal sri vadapatrasayi (andal) temple srivilliputhur, virudhunagar · tamil nadu pandiya nadu vatapatrasayi" class="group relative bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all flex flex-col">
+          
+          <div class="relative h-40 overflow-hidden border-b border-hairline bg-sunk"><span class="absolute inset-0 flex items-center justify-center text-4xl text-golddeep/70" aria-label="Srivilliputhur photo placeholder">◆</span><span class="absolute bottom-2 left-3 text-[11px] font-semibold text-cream bg-safdark/70 backdrop-blur px-2 py-0.5 rounded">DD #47</span></div>
+          <div class="p-5 flex-1">
+            <span class="text-sm text-golddeep font-medium" lang="ta">ஶ்ரீவில்லிபுத்தூர்</span>
+            <h3 class="font-display text-[1.4rem] font-semibold text-safdeep leading-snug group-hover:text-saffron transition-colors">Srivilliputhur</h3>
+            <p class="text-[11px] text-muted">Home of Andal</p>
+            <div class="mt-2 pt-2 border-t border-[#F0E3C6]">
+              <p class="text-xs font-semibold">Sri Vadapatrasayi (Andal) Temple</p>
+              <p class="text-[11px] text-muted">Srivilliputhur, Virudhunagar · Tamil Nadu</p>
+            </div>
+          </div>
+          <div class="px-5 pb-5 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-safdeep border border-gold/50 rounded-md">Vatapatrasayi</span>
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-muted border border-gold/50 rounded-md">Pandiya Nadu</span>
+          </div>
+        </a>
+    <a href="kshetram-detail.html" data-region="Thondai Nadu" data-search="திருவல்லிக்கேணி thiruvallikkeni (triplicane) sri parthasarathy temple chennai · tamil nadu thondai nadu parthasarathy" class="group relative bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all flex flex-col">
+          
+          <div class="relative h-40 overflow-hidden border-b border-hairline bg-sunk"><span class="absolute inset-0 flex items-center justify-center text-4xl text-golddeep/70" aria-label="Thiruvallikkeni photo placeholder">◆</span></div>
+          <div class="p-5 flex-1">
+            <span class="text-sm text-golddeep font-medium" lang="ta">திருவல்லிக்கேணி</span>
+            <h3 class="font-display text-[1.4rem] font-semibold text-safdeep leading-snug group-hover:text-saffron transition-colors">Thiruvallikkeni</h3>
+            <p class="text-[11px] text-muted">(Triplicane)</p>
+            <div class="mt-2 pt-2 border-t border-[#F0E3C6]">
+              <p class="text-xs font-semibold">Sri Parthasarathy Temple</p>
+              <p class="text-[11px] text-muted">Chennai · Tamil Nadu</p>
+            </div>
+          </div>
+          <div class="px-5 pb-5 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-safdeep border border-gold/50 rounded-md">Parthasarathy</span>
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-muted border border-gold/50 rounded-md">Thondai Nadu</span>
+          </div>
+        </a>
+    <a href="kshetram-detail.html" data-region="Thondai Nadu" data-search="திருநீர்மலை thiruneermalai chennai outskirts sri neervanna perumal temple chennai · tamil nadu thondai nadu neervannan" class="group relative bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all flex flex-col">
+          
+          <div class="relative h-40 overflow-hidden border-b border-hairline bg-sunk"><span class="absolute inset-0 flex items-center justify-center text-4xl text-golddeep/70" aria-label="Thiruneermalai photo placeholder">◆</span></div>
+          <div class="p-5 flex-1">
+            <span class="text-sm text-golddeep font-medium" lang="ta">திருநீர்மலை</span>
+            <h3 class="font-display text-[1.4rem] font-semibold text-safdeep leading-snug group-hover:text-saffron transition-colors">Thiruneermalai</h3>
+            <p class="text-[11px] text-muted">Chennai outskirts</p>
+            <div class="mt-2 pt-2 border-t border-[#F0E3C6]">
+              <p class="text-xs font-semibold">Sri Neervanna Perumal Temple</p>
+              <p class="text-[11px] text-muted">Chennai · Tamil Nadu</p>
+            </div>
+          </div>
+          <div class="px-5 pb-5 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-safdeep border border-gold/50 rounded-md">Neervannan</span>
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-muted border border-gold/50 rounded-md">Thondai Nadu</span>
+          </div>
+        </a>
+    <a href="kshetram-detail.html" data-region="Chola Nadu" data-search="உறையூர் uraiyur ancient chola capital sri azhagiya manavala perumal temple tiruchirappalli · tamil nadu chola nadu azhagiya manavalan" class="group relative bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all flex flex-col">
+          
+          <div class="relative h-40 overflow-hidden border-b border-hairline bg-sunk"><span class="absolute inset-0 flex items-center justify-center text-4xl text-golddeep/70" aria-label="Uraiyur photo placeholder">◆</span><span class="absolute bottom-2 left-3 text-[11px] font-semibold text-cream bg-safdark/70 backdrop-blur px-2 py-0.5 rounded">DD #2</span></div>
+          <div class="p-5 flex-1">
+            <span class="text-sm text-golddeep font-medium" lang="ta">உறையூர்</span>
+            <h3 class="font-display text-[1.4rem] font-semibold text-safdeep leading-snug group-hover:text-saffron transition-colors">Uraiyur</h3>
+            <p class="text-[11px] text-muted">Ancient Chola capital</p>
+            <div class="mt-2 pt-2 border-t border-[#F0E3C6]">
+              <p class="text-xs font-semibold">Sri Azhagiya Manavala Perumal Temple</p>
+              <p class="text-[11px] text-muted">Tiruchirappalli · Tamil Nadu</p>
+            </div>
+          </div>
+          <div class="px-5 pb-5 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-safdeep border border-gold/50 rounded-md">Azhagiya Manavalan</span>
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-muted border border-gold/50 rounded-md">Chola Nadu</span>
+          </div>
+        </a>
+    <a href="kshetram-detail.html" data-region="Chola Nadu" data-search="திருவெள்ளரை thiruvellarai the white hill sri pundarikakshan perumal temple thiruvellarai, trichy · tamil nadu chola nadu pundarikakshan" class="group relative bg-cream rounded-2xl border border-gold/45 overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 hover:border-gold transition-all flex flex-col">
+          
+          <div class="relative h-40 overflow-hidden border-b border-hairline bg-sunk"><span class="absolute inset-0 flex items-center justify-center text-4xl text-golddeep/70" aria-label="Thiruvellarai photo placeholder">◆</span><span class="absolute bottom-2 left-3 text-[11px] font-semibold text-cream bg-safdark/70 backdrop-blur px-2 py-0.5 rounded">DD #5</span></div>
+          <div class="p-5 flex-1">
+            <span class="text-sm text-golddeep font-medium" lang="ta">திருவெள்ளரை</span>
+            <h3 class="font-display text-[1.4rem] font-semibold text-safdeep leading-snug group-hover:text-saffron transition-colors">Thiruvellarai</h3>
+            <p class="text-[11px] text-muted">The white hill</p>
+            <div class="mt-2 pt-2 border-t border-[#F0E3C6]">
+              <p class="text-xs font-semibold">Sri Pundarikakshan Perumal Temple</p>
+              <p class="text-[11px] text-muted">Thiruvellarai, Trichy · Tamil Nadu</p>
+            </div>
+          </div>
+          <div class="px-5 pb-5 flex flex-wrap gap-1.5">
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-safdeep border border-gold/50 rounded-md">Pundarikakshan</span>
+            <span class="px-2 py-0.5 text-[11px] font-medium bg-ivory text-muted border border-gold/50 rounded-md">Chola Nadu</span>
+          </div>
+        </a>
+  </div>
+  <p class="mt-8 text-center text-xs text-muted">Sample of 8 — the live site lists all 108 in this grid.</p>
+</main>
+
+<script>
+  const chips = document.querySelectorAll('.region-chip');
+  const cards = document.querySelectorAll('#grid > a');
+  const count = document.getElementById('count');
+  const search = document.getElementById('searchBox');
+  let active = 'all';
+  function apply() {
+    const q = search.value.trim().toLowerCase();
+    let n = 0;
+    cards.forEach(c => {
+      const okR = active === 'all' || c.dataset.region === active;
+      const okQ = !q || c.dataset.search.includes(q);
+      const show = okR && okQ;
+      c.style.display = show ? '' : 'none';
+      if (show) n++;
+    });
+    count.textContent = n;
+  }
+  chips.forEach(ch => ch.addEventListener('click', () => {
+    chips.forEach(c => c.classList.remove('is-active'));
+    ch.classList.add('is-active');
+    active = ch.dataset.region;
+    apply();
+  }));
+  search.addEventListener('input', apply);
+</script>
+
+<!-- ============ FOOTER ============ -->
+  <footer class="mt-16 bg-safdark text-[#F7ECD9]">
+    <div class="h-[3px] bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+    <div class="max-w-6xl mx-auto px-6 py-9 text-center text-sm space-y-1.5">
+      <p>Compiled with reverence from the Nalayira Divya Prabandham tradition and standard published lists of the 108 Divya Desams.</p>
+      <p>Content is provided in good faith for devotional and educational purposes.</p>
+      <p class="text-[#F7ECD9]/70 text-xs">Your visited marks and trip are stored only in your browser — never sent to any server.</p>
+    </div>
+  </footer>
+
+  
+</body>
+</html>
