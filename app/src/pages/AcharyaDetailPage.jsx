@@ -16,6 +16,7 @@ import SaintTimeline from '../components/saint/SaintTimeline.jsx';
 import SaintVerse from '../components/saint/SaintVerse.jsx';
 import PendingContent from '../components/saint/PendingContent.jsx';
 import SaintGlyph from '../components/saint/SaintGlyph.jsx';
+import SectionNav from '../components/detail/SectionNav.jsx';
 
 /** Resolves an acharya id to {id, name} for guru/sishya chips. */
 function linkFor(id) {
@@ -51,6 +52,7 @@ export default function AcharyaDetailPage() {
       </p>
       <div className="detail__head">
         <div>
+          <span className="eyebrow">{acharya.eraGroup ?? 'Guru Parampara'}</span>
           <p className="detail__tamil" lang="ta">{acharya.tamilName}</p>
           <h1>{acharya.name}</h1>
           <div className="detail__badges">
@@ -60,7 +62,19 @@ export default function AcharyaDetailPage() {
         </div>
       </div>
 
-      <section className="detail__section detail__section--full">
+      <SectionNav
+        sections={[
+          { id: 'identification', label: 'Identification' },
+          { id: 'history', label: 'Life & Miracles' },
+          { id: 'contributions', label: 'Contributions' },
+          { id: 'verse', label: 'Representative Verse' },
+          { id: 'gurusishyas', label: 'Guru & Sishyas' },
+          { id: 'media', label: 'Media' },
+          { id: 'sources', label: 'Sources' },
+        ]}
+      />
+
+      <section id="identification" className="detail__section detail__section--full">
         <h2>Identification</h2>
         <Identification
           rows={[
@@ -93,7 +107,7 @@ export default function AcharyaDetailPage() {
         />
       </section>
 
-      <section className="detail__section detail__section--full">
+      <section id="history" className="detail__section detail__section--full">
         <h2>Life History &amp; Miracles</h2>
         <SaintTimeline timeline={acharya.timeline} />
         {Array.isArray(acharya.lifeHistory) && acharya.lifeHistory.length > 0
@@ -106,7 +120,7 @@ export default function AcharyaDetailPage() {
           : <PendingContent />}
       </section>
 
-      <section className="detail__section detail__section--full">
+      <section id="contributions" className="detail__section detail__section--full">
         <h2>Contributions</h2>
         {acharya.works || acharya.philosophicalTheme || acharya.associatedDesams ? (
           <>
@@ -148,12 +162,12 @@ export default function AcharyaDetailPage() {
         ) : <PendingContent />}
       </section>
 
-      <section className="detail__section detail__section--full">
+      <section id="verse" className="detail__section detail__section--full">
         <h2>Representative Verse</h2>
         {acharya.verse ? <SaintVerse verse={acharya.verse} /> : <PendingContent />}
       </section>
 
-      <section className="detail__section detail__section--full">
+      <section id="gurusishyas" className="detail__section detail__section--full">
         <h2>Guru &amp; Sishyas</h2>
         {guru || sishyas.length > 0 ? (
           <p className="saint-desams">
@@ -167,12 +181,12 @@ export default function AcharyaDetailPage() {
         ) : <PendingContent />}
       </section>
 
-      <section className="detail__section detail__section--full">
+      <section id="media" className="detail__section detail__section--full">
         <h2>Visuals &amp; Media</h2>
         <SaintMedia visuals={acharya.visuals} />
       </section>
 
-      <section className="detail__section detail__section--full">
+      <section id="sources" className="detail__section detail__section--full">
         <h2>Sources</h2>
         <SaintSources sources={acharya.sources} fallback={<PendingContent />} />
       </section>

@@ -23,8 +23,10 @@
 
 /* Shared section heading (SectionHeading component) */
 .section-heading { margin-top: var(--space-5); }
+.section-heading .eyebrow { margin-bottom: 0.15rem; }
 .section-heading h2 {
   position: relative;
+  display: inline-block;
   padding-bottom: 0.55rem;
   margin: 0;
 }
@@ -222,6 +224,7 @@ html:has(.saint-page) .site-header {
   pointer-events: none;
 }
 .hero > * { position: relative; z-index: 1; }
+.hero__eyebrow { margin: 0 0 0.2rem; letter-spacing: 0.18em; }
 .hero::before {
   content: "";
   position: absolute;
@@ -309,7 +312,22 @@ html:has(.saint-page) .site-header {
 .kshetram-card__name { margin: 0.15rem 0 0.4rem; font-size: 1.4rem; transition: color var(--dur-fast) var(--ease-out); }
 .kshetram-card__link:hover .kshetram-card__name { color: var(--color-primary); }
 .kshetram-card__place { margin: 0; font-size: var(--font-size-sm); color: var(--color-text-muted); }
-.kshetram-card__thumb { margin: 0.45rem 0 0.65rem; margin-top: auto; padding-top: 0.45rem; }
+.kshetram-card__thumb { margin: 0.45rem 0 0.65rem; margin-top: auto; padding-top: 0.45rem; position: relative; }
+.kshetram-card__serial {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.6rem;
+  z-index: 1;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--color-surface);
+  background: rgba(87, 31, 0, 0.72);
+  backdrop-filter: blur(2px);
+  padding: 0.08rem 0.5rem;
+  border-radius: 6px;
+}
+.kshetram-card__thumb .deity-photo--placeholder { position: relative; }
 .kshetram-card__thumb .deity-photo {
   border-top: none;
   border-radius: var(--radius-card);
@@ -373,6 +391,19 @@ html:has(.saint-page) .site-header {
   margin-bottom: var(--space-1);
 }
 .result-count { color: var(--color-text-muted); font-size: 0.9375rem; }
+
+/* Quick region chips + count row (Browse, UXD v2 mocks) */
+.browse-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid rgba(201, 154, 46, 0.3);
+}
+.browse-chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 
 /* ---------- Empty state: dashed devanagari-style panel ---------- */
 .empty-state {

@@ -9,6 +9,7 @@ import Badge from '../components/Badge.jsx';
 import EmptyState from '../components/EmptyState.jsx';
 import NotDocumented from '../components/detail/NotDocumented.jsx';
 import SaintGlyph from '../components/saint/SaintGlyph.jsx';
+import SectionNav from '../components/detail/SectionNav.jsx';
 import Identification from '../components/saint/Identification.jsx';
 import SaintLegend from '../components/saint/SaintLegend.jsx';
 import SaintMedia from '../components/saint/SaintMedia.jsx';
@@ -45,6 +46,7 @@ export default function AzhwarDetailPage() {
       </p>
       <div className="detail__head">
         <div>
+          <span className="eyebrow">Sri Vaishnava Sampradaya{azhwar.order ? ` · Azhwar ${azhwar.order} of 12` : ''}</span>
           <p className="detail__tamil" lang="ta">{azhwar.tamilName}</p>
           <h1>{azhwar.name}</h1>
           <div className="detail__badges">
@@ -55,7 +57,18 @@ export default function AzhwarDetailPage() {
         </div>
       </div>
 
-      <section className="detail__section detail__section--full">
+      <SectionNav
+        sections={[
+          { id: 'identification', label: 'Identification' },
+          { id: 'history', label: 'Life & Miracles' },
+          { id: 'contributions', label: 'Contributions' },
+          { id: 'verse', label: 'Representative Verse' },
+          { id: 'media', label: 'Media' },
+          { id: 'sources', label: 'Sources' },
+        ]}
+      />
+
+      <section id="identification" className="detail__section detail__section--full">
         <h2>Identification</h2>
         <Identification
           rows={[
@@ -89,7 +102,7 @@ export default function AzhwarDetailPage() {
         />
       </section>
 
-      <section className="detail__section detail__section--full">
+      <section id="history" className="detail__section detail__section--full">
         <h2>Life History &amp; Miracles</h2>
         <SaintTimeline timeline={azhwar.timeline} />
         {Array.isArray(azhwar.lifeHistory) && azhwar.lifeHistory.length > 0
@@ -98,7 +111,7 @@ export default function AzhwarDetailPage() {
         <SaintLegend legend={azhwar.legend} />
       </section>
 
-      <section className="detail__section detail__section--full">
+      <section id="contributions" className="detail__section detail__section--full">
         <h2>Contributions</h2>
         <dl className="detail__profile-grid">
           <div className="detail__profile-item">
@@ -144,17 +157,17 @@ export default function AzhwarDetailPage() {
         </p>
       </section>
 
-      <section className="detail__section detail__section--full">
+      <section id="verse" className="detail__section detail__section--full">
         <h2>Representative Verse</h2>
         {azhwar.verse ? <SaintVerse verse={azhwar.verse} /> : <NotDocumented />}
       </section>
 
-      <section className="detail__section detail__section--full">
+      <section id="media" className="detail__section detail__section--full">
         <h2>Visual &amp; Media</h2>
         <SaintMedia visuals={azhwar.visuals} />
       </section>
 
-      <section className="detail__section detail__section--full">
+      <section id="sources" className="detail__section detail__section--full">
         <h2>Sources</h2>
         <SaintSources sources={azhwar.sources} fallback={<NotDocumented />} />
       </section>

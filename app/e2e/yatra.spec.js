@@ -106,7 +106,7 @@ test.describe('V3 yatra toolkit', () => {
     await page.getByRole('link', { name: /poigai azhwar/i }).click();
     await expect(page).toHaveURL(/azhwar\/poigai$/);
     await expect(page.getByRole('heading', { name: /identification/i })).toBeVisible();
-    await expect(page.getByText(/Sarovara Yogi · Kasara Yogi/i)).toBeVisible();
+    await expect(page.getByText('Sarovara Yogi')).toBeVisible();
     await expect(page.getByRole('link', { name: /view kshetram/i })).toBeVisible();
     await expect(page.getByText(/word-by-word meaning/i)).toBeVisible();
 

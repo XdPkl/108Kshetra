@@ -16,7 +16,9 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90)', () => {
     renderAt('/azhwar/poigai');
     expect(screen.getByRole('heading', { name: /poigai azhwar/i })).toBeInTheDocument();
     expect(screen.getByText(/1 of 12 in chronological order/i)).toBeInTheDocument();
-    expect(screen.getByText(/Sarovara Yogi · Kasara Yogi/i)).toBeInTheDocument();
+    // UXD v2: aliases render as chips rather than one joined string
+    expect(screen.getByText('Sarovara Yogi')).toBeInTheDocument();
+    expect(screen.getByText('Kasara Yogi')).toBeInTheDocument();
     expect(screen.getByText(/Aippasi \(Ashvin\/Kartika transition\)/i)).toBeInTheDocument();
     const birthplace = screen.getByText(/Thiruvekka \(Kanchipuram\)/i);
     expect(birthplace).toBeInTheDocument();

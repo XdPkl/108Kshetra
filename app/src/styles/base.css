@@ -22,6 +22,16 @@ body {
 
 ::selection { background: rgba(201, 154, 46, 0.35); }
 
+/* Small-caps section label (UXD v2 mocks) */
+.eyebrow {
+  display: block;
+  font-size: var(--text-eyebrow);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-primary);
+}
+
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   color: var(--color-primary-dark);

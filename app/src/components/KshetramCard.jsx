@@ -27,6 +27,7 @@ export default function KshetramCard({ kshetram }) {
         <h3 className="kshetram-card__name">{kshetram.name}</h3>
         <div className="kshetram-card__thumb">
           <WikiThumb title={kshetram.wiki ?? null} alt={`${kshetram.name} thumbnail`} />
+          {kshetram.serial ? <span className="kshetram-card__serial">DD #{kshetram.serial}</span> : null}
         </div>
         <p className="kshetram-card__place">{kshetram.temple}</p>
         <p className="kshetram-card__place">{kshetram.place} · {kshetram.state}</p>

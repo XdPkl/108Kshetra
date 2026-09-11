@@ -16,7 +16,11 @@ import heroSketch from '../assets/hero-emblems-sketch.jpg';
 function SaintCard({ saint, base }) {
   return (
     <Link className="saint-card" to={`${base}/${saint.id}`}>
-      <WikiThumb title={saint.wiki ?? null} alt={`${saint.name} portrait`} />
+      <WikiThumb
+        title={saint.wiki ?? null}
+        src={saint.photos?.[0]?.src ?? null}
+        alt={`${saint.name} portrait`}
+      />
       <span className="saint-card__name">{saint.name}</span>
       <span className="saint-card__tamil" lang="ta">{saint.tamilName}</span>
     </Link>
@@ -30,6 +34,7 @@ export default function HomePage() {
   return (
     <div className="page">
       <section className="hero" style={{ '--hero-sketch': `url(${heroSketch})` }}>
+        <p className="eyebrow hero__eyebrow">Nalayira Divya Prabandham</p>
         <h1>108 Divya Kshetrams</h1>
         <p className="hero__intro">
           The sacred abodes of Lord Narayana — the 108 Divya Desams glorified by
@@ -45,6 +50,7 @@ export default function HomePage() {
 
       <section>
         <SectionHeading
+          eyebrow="Begin your journey"
           title="Featured Kshetrams"
           lead="Begin your journey at the most celebrated of the 108 abodes."
         />
@@ -55,6 +61,7 @@ export default function HomePage() {
 
       <section className="darshan-strip">
         <SectionHeading
+          eyebrow="Saint-poets of the Tamil Veda"
           title="The Twelve Azhwars"
           lead="Saint-poets whose hymns sanctified these hills, groves and cities."
         />
@@ -68,6 +75,7 @@ export default function HomePage() {
 
       <section className="darshan-strip">
         <SectionHeading
+          eyebrow="The guru parampara"
           title="The Acharyas"
           lead="The guru parampara that received, preserved and expounded the tradition."
         />

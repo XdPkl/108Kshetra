@@ -151,11 +151,16 @@ describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
 });
 
 describe('AboutPage (UT-ABT-01, FR-87)', () => {
-  it('renders site, tours and contact sections with pending markers', () => {
+  it('renders site, tours and contact sections from the approved PO content', () => {
     renderAt('/about', <AboutPage />);
     expect(screen.getByRole('heading', { name: /about us — kshetra tours/i })).toBeInTheDocument();
     expect(screen.getByText(/about this site/i)).toBeInTheDocument();
-    expect(screen.getAllByText(/\[to be provided\]/i).length).toBeGreaterThanOrEqual(4);
-    expect(screen.getByText('Email')).toBeInTheDocument();
+    // PO-approved mock content (docs/03-design/mockups/about.html)
+    expect(screen.getByText(/kshetra insights/i)).toBeInTheDocument();
+    expect(screen.getByText(/interactive yatra planner/i)).toBeInTheDocument();
+    expect(screen.getByText(/regional circuit itineraries/i)).toBeInTheDocument();
+    expect(screen.getByText(/contact@kshetratours\.org/i)).toBeInTheDocument();
+    expect(screen.getByText(/email us/i)).toBeInTheDocument();
+    expect(screen.queryByText(/\[to be provided\]/i)).not.toBeInTheDocument();
   });
 });

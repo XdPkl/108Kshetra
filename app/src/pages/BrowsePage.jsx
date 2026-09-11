@@ -33,9 +33,32 @@ export default function BrowsePage() {
         deityFormOptions={toOptions(options.deityForms)}
         azhwarOptions={azhwarOptions}
       />
-      <p className="result-count" aria-live="polite">
-        Showing {results.length} of {kshetrams.length} kshetrams
-      </p>
+      <div className="browse-filter-row">
+        <div className="browse-chips" role="group" aria-label="Quick filter by region">
+          <button
+            type="button"
+            className={`region-chip${filters.region === '' ? ' is-active' : ''}`}
+            aria-pressed={filters.region === ''}
+            onClick={() => setFilter('region', '')}
+          >
+            All regions
+          </button>
+          {options.regions.map((r) => (
+            <button
+              key={r}
+              type="button"
+              className={`region-chip${filters.region === r ? ' is-active' : ''}`}
+              aria-pressed={filters.region === r}
+              onClick={() => setFilter('region', filters.region === r ? '' : r)}
+            >
+              {r}
+            </button>
+          ))}
+        </div>
+        <p className="result-count" aria-live="polite">
+          Showing {results.length} of {kshetrams.length} kshetrams
+        </p>
+      </div>
       {results.length === 0 ? (
         <EmptyState
           title="No kshetrams found"

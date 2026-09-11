@@ -284,3 +284,26 @@ PO-requested saint page revisions (UXD v1.5 §27) applied to both Azhwar and Ach
 
 1. New unit coverage: Identification portrait rendering (supplied src + placeholder fallback), Poigai portrait/listening-card page assertions.
 2. Saint portraits await PO artwork for the remaining saints; the placeholder panel keeps the layout intentional meanwhile.
+
+---
+
+## Version 1.7 — v2 Design Language Rollout Execution (2026-09-10)
+
+### Scope
+
+PO-approved rollout of the mock design language across the live site (UXD v2 §28): eyebrows, DD serial badges, card overlays, Browse region chips, scroll-spy section navs, saint alias chips + definition cards, verse chips/cards, maximized hero sketch, restructured About page with approved PO content.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors (1 documented-accepted warning, TripPage) |
+| Unit tests (Vitest) | 184/184 pass; coverage 90.7% (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | 19/19 pass |
+| Visual acceptance | Judge-reviewed home/browse/detail/about/trip screenshots; two portrait findings fixed (Poigai strip portrait now uses the PO painting; medallion load timing was a capture artifact) |
+
+### Notes
+
+1. Test-contract updates: alias chips replace the joined epithets string (UT-AZW-03, TC-18); About asserts approved PO content instead of pending markers (UT-ABT-01).
+2. Manavala Mamunigal's Guru row remains absent by data (Thiruvaimozhi Pillai is outside the 23-entry acharya dataset) — documented PO decision pending; Sishyas renders P.B. Anna.
