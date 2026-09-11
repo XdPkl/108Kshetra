@@ -75,6 +75,7 @@ export default function AcharyaDetailPage() {
       />
 
       <section id="identification" className="detail__section detail__section--full">
+        <span className="eyebrow">Biographical profile</span>
         <h2>Identification</h2>
         <Identification
           rows={[
@@ -108,19 +109,27 @@ export default function AcharyaDetailPage() {
       </section>
 
       <section id="history" className="detail__section detail__section--full">
+        <span className="eyebrow">Hagiography</span>
         <h2>Life History &amp; Miracles</h2>
-        <SaintTimeline timeline={acharya.timeline} />
-        {Array.isArray(acharya.lifeHistory) && acharya.lifeHistory.length > 0
-          ? (
-            <>
-              <SaintNarrative items={acharya.lifeHistory} />
-              <SaintLegend legend={acharya.legend} />
-            </>
-          )
-          : <PendingContent />}
+        <div className="saint-history">
+          <div className="saint-history__main">
+            {Array.isArray(acharya.lifeHistory) && acharya.lifeHistory.length > 0
+              ? (
+                <>
+                  <SaintNarrative items={acharya.lifeHistory} />
+                  <SaintLegend legend={acharya.legend} />
+                </>
+              )
+              : <PendingContent />}
+          </div>
+          <aside className="saint-history__lifeline">
+            <SaintTimeline timeline={acharya.timeline} />
+          </aside>
+        </div>
       </section>
 
       <section id="contributions" className="detail__section detail__section--full">
+        <span className="eyebrow">Theological impact</span>
         <h2>Contributions</h2>
         {acharya.works || acharya.philosophicalTheme || acharya.associatedDesams ? (
           <>
@@ -163,11 +172,13 @@ export default function AcharyaDetailPage() {
       </section>
 
       <section id="verse" className="detail__section detail__section--full">
+        <span className="eyebrow">From the Prabandham</span>
         <h2>Representative Verse</h2>
         {acharya.verse ? <SaintVerse verse={acharya.verse} /> : <PendingContent />}
       </section>
 
       <section id="gurusishyas" className="detail__section detail__section--full">
+        <span className="eyebrow">The lineage</span>
         <h2>Guru &amp; Sishyas</h2>
         {guru || sishyas.length > 0 ? (
           <p className="saint-desams">
@@ -182,6 +193,7 @@ export default function AcharyaDetailPage() {
       </section>
 
       <section id="media" className="detail__section detail__section--full">
+        <span className="eyebrow">Multimedia &amp; archives</span>
         <h2>Visuals &amp; Media</h2>
         <SaintMedia visuals={acharya.visuals} />
       </section>

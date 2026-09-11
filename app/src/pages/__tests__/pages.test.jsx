@@ -52,6 +52,15 @@ describe('BrowsePage (UT-BRW-01..04)', () => {
     expect(screen.getAllByRole('article').length).toBeGreaterThan(0);
   });
 
+  it('sorts kshetrams by name via the sort control (UXD v2)', async () => {
+    const user = userEvent.setup();
+    renderAt('/kshetrams');
+    await user.selectOptions(screen.getByLabelText('Sort by'), 'az');
+    const names = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent);
+    const sorted = [...names].sort((a, b) => a.localeCompare(b));
+    expect(names).toEqual(sorted);
+  });
+
   it('shows the empty state and restores all 108 after reset (UT-BRW-03/04)', async () => {
     const user = userEvent.setup();
     renderAt('/kshetrams');

@@ -69,6 +69,7 @@ export default function AzhwarDetailPage() {
       />
 
       <section id="identification" className="detail__section detail__section--full">
+        <span className="eyebrow">Biographical profile</span>
         <h2>Identification</h2>
         <Identification
           rows={[
@@ -103,15 +104,23 @@ export default function AzhwarDetailPage() {
       </section>
 
       <section id="history" className="detail__section detail__section--full">
+        <span className="eyebrow">Hagiography</span>
         <h2>Life History &amp; Miracles</h2>
-        <SaintTimeline timeline={azhwar.timeline} />
-        {Array.isArray(azhwar.lifeHistory) && azhwar.lifeHistory.length > 0
-          ? <SaintNarrative items={azhwar.lifeHistory} />
-          : <NotDocumented />}
-        <SaintLegend legend={azhwar.legend} />
+        <div className="saint-history">
+          <div className="saint-history__main">
+            {Array.isArray(azhwar.lifeHistory) && azhwar.lifeHistory.length > 0
+              ? <SaintNarrative items={azhwar.lifeHistory} />
+              : <NotDocumented />}
+            <SaintLegend legend={azhwar.legend} />
+          </div>
+          <aside className="saint-history__lifeline">
+            <SaintTimeline timeline={azhwar.timeline} />
+          </aside>
+        </div>
       </section>
 
       <section id="contributions" className="detail__section detail__section--full">
+        <span className="eyebrow">Theological impact</span>
         <h2>Contributions</h2>
         <dl className="detail__profile-grid">
           <div className="detail__profile-item">
@@ -158,11 +167,13 @@ export default function AzhwarDetailPage() {
       </section>
 
       <section id="verse" className="detail__section detail__section--full">
+        <span className="eyebrow">From the Prabandham</span>
         <h2>Representative Verse</h2>
         {azhwar.verse ? <SaintVerse verse={azhwar.verse} /> : <NotDocumented />}
       </section>
 
       <section id="media" className="detail__section detail__section--full">
+        <span className="eyebrow">Multimedia &amp; archives</span>
         <h2>Visual &amp; Media</h2>
         <SaintMedia visuals={azhwar.visuals} />
       </section>

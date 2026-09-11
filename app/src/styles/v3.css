@@ -914,6 +914,33 @@
 }
 
 /* Timeline as a gold route with ringed milestones */
+.detail__section .eyebrow { display: block; margin-bottom: 0.15rem; }
+
+/* Saint Life History: narrative left, chronological lifeline right (UXD v2) */
+.saint-history {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: var(--space-5);
+  align-items: start;
+  margin-top: var(--space-2);
+}
+.saint-history__lifeline {
+  background: var(--color-ivory);
+  border: 1px solid rgba(201, 154, 46, 0.4);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+.trip-page__printnote {
+  margin-top: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface-sunk);
+  border-radius: var(--radius-card);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+@media (max-width: 1023px) {
+  .saint-history { grid-template-columns: 1fr; }
+}
 .saint-timeline h3 { margin-bottom: var(--space-2); }
 .saint-timeline ol {
   list-style: none;

@@ -3,10 +3,11 @@
  * (FR-73/75). Data never leaves the browser; reset confirms first.
  * @param {object} props
  * @param {number} props.total - total earthly kshetrams (108)
+ * @param {boolean} [props.compact] - compact card variant (Browse header)
  */
 import { useVisited } from '../hooks/useVisited.js';
 
-export default function ProgressBanner({ total }) {
+export default function ProgressBanner({ total, compact = false }) {
   const { count, resetVisited } = useVisited();
   const percent = total > 0 ? Math.round((count / total) * 100) : 0;
 
@@ -17,7 +18,10 @@ export default function ProgressBanner({ total }) {
   };
 
   return (
-    <section className="progress-banner" aria-label="Darshan progress">
+    <section
+      className={`progress-banner${compact ? ' progress-banner--compact' : ''}`}
+      aria-label="Darshan progress"
+    >
       <p className="progress-banner__label">
         <span aria-hidden="true">🙏</span> Your yatra — <strong>{count}</strong> of{' '}
         {total} kshetrams visited

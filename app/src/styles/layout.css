@@ -404,6 +404,34 @@ html:has(.saint-page) .site-header {
   border-bottom: 1px solid rgba(201, 154, 46, 0.3);
 }
 .browse-chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.browse-sort { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: var(--color-text-muted); }
+.browse-sort select {
+  padding: 0.35rem 0.6rem;
+  border: 1px solid rgba(201, 154, 46, 0.55);
+  border-radius: 10px;
+  background: var(--color-surface);
+  color: var(--color-safdeep);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+/* Browse header: title left, compact yatra tracker right (UXD v2 mocks) */
+.browse-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(201, 154, 46, 0.35);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+.browse-head h1 { margin: 0.2rem 0 0; }
+.progress-banner--compact { width: 100%; max-width: 22rem; margin: 0; padding: var(--space-3) var(--space-4); }
+@media (max-width: 767px) {
+  .progress-banner--compact { max-width: none; }
+}
 
 /* ---------- Empty state: dashed devanagari-style panel ---------- */
 .empty-state {

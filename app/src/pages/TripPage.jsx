@@ -172,6 +172,8 @@ export default function TripPage() {
           ))}
         </ol>
       )}
+
+      <p className="trip-page__printnote">🖨 This itinerary is print-ready — the print stylesheet hides buttons and maps.</p>
     </div>
   );
 }
