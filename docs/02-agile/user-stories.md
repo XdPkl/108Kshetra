@@ -123,7 +123,7 @@
 - **Given** the running app, **when** `npm run e2e` runs, **then** journeys (home → browse → search → detail → azhwars; empty state; bad route) pass on Chromium.
 
 **US-ENG-03 — Lint/format standards enforcement** (2 pts, Priority 1) — *NFR-04*
-> As the team, we want ESLint + Prettier enforced so that code style stays uniform.
+> As the team, we want static analysis (Oxlint) enforced so that code style stays uniform.
 - **Given** any commit, **when** lint runs, **then** there are zero errors.
 
 **US-ENG-04 — CI pipeline** (3 pts, Priority 1) — *NFR-09*
@@ -445,3 +445,19 @@ Two enhancements requested by the PO after the V3 delivery, implemented and exec
 *Jira note:* both stories were created on 2026-08-31 under EP-YTRP (`DTRPR108K-41`) and
 EP-YMAP (`DTRPR108K-40`) and transitioned to **Done**, matching the delivered state (a fresh
 API token was required — the original was revoked after the v1.3 sync).
+
+---
+
+## Post-Delivery Enhancement (2026-09-11) — UXD v2 Mock Parity
+
+One behavioral addition from the PO-approved v2 design language rollout (UXD §28/§29); implemented
+and executed the same day (TER v1.8, TCS v1.4). The remaining v2 changes are presentation-layer
+restructurings of existing FR journeys and are documented in `docs/03-design/ui-ux-design.md`.
+
+| Type | Summary | Links to | Points | Jira key |
+|---|---|---|---|---|
+| Story | US-BRW-05 — Browse sort control | EP-BRW | 2 | — (Jira sync pending a fresh API token) |
+
+**US-BRW-05 — Browse sort control** (2 pts, Priority 2) — *FR-20 enhancement*
+> As a visitor, I want to order the kshetram list by name so that I can look up a desam alphabetically as well as in the traditional serial order.
+- **Given** the `/kshetrams` page, **when** I choose an option from the `Sort by` control, **then** the grid re-orders (Traditional order = desam-serial default; Name A–Z / Name Z–A locale-aware); search, region/visit filters and reset compose with the selected ordering, and the count keeps reflecting the filtered set.

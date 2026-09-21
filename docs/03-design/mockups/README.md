@@ -46,7 +46,9 @@ they are not part of the app build.
 
 ## Status
 
-Awaiting Product Owner approval. After approval the React app is re-skinned to
-match (stylesheets + page structure + the interactive behaviors demonstrated
-here), keeping the existing test contracts updated as the approved design
-requires.
+Approved by the Product Owner (2026-09-10). The React app has been re-skinned to
+match — the v2 design language rollout (UXD §28) plus the mock-parity additions
+(UXD §28.1: Browse header yatra tracker + sort control, saint Life History 7/5
+split with the Chronological Lifeline rail, section eyebrows, trip print-ready
+note). These mocks are retained as the design-of-record reference for the
+implemented site.

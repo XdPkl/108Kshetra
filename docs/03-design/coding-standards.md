@@ -17,7 +17,7 @@
 
 ## 1. Purpose
 
-This guide defines the mandatory coding standards for the project so that every contributor produces consistent, maintainable, reusable code. It is enforced by ESLint/Prettier (automated) and the code-review checklist (manual, Gate B).
+This guide defines the mandatory coding standards for the project so that every contributor produces consistent, maintainable, reusable code. It is enforced by Oxlint (automated) and the code-review checklist (manual, Gate B).
 
 ## 2. General Principles
 
@@ -98,7 +98,7 @@ Refactoring is a scheduled Gate-B activity. Triggers requiring refactor:
 - prop drilling deeper than 2 levels (compose at page level),
 - failing lint with suppressions used (remove suppression, fix cause).
 
-Suppression policy: `eslint-disable` requires an inline reason and a linked TODO; unused suppressions are review findings.
+Suppression policy: an Oxlint disable directive (e.g. `// oxlint-disable-next-line`) requires an inline reason and a linked TODO; unused suppressions are review findings.
 
 ## 10. Git Standards
 

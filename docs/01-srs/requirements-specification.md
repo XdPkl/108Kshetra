@@ -196,7 +196,7 @@ Media constraints: photos must carry attribution per their licence; audio must l
 | NFR-01 | Performance | First contentful paint of the built SPA under 2s on a mid-range device; bundle (gzipped) under 300 KB excluding fonts. | M |
 | NFR-02 | Compatibility | Application functions on Chrome, Edge, Firefox, Safari (last two major versions), desktop and mobile viewports (≥320px). | M |
 | NFR-03 | Accessibility | WCAG 2.1 AA: semantic landmarks, keyboard navigability, visible focus, alt text, contrast ratio ≥ 4.5:1 for body text. | M |
-| NFR-04 | Maintainability | Layered architecture (presentation → hooks → data); reusable components/hooks/utilities with JSDoc; files ≤ 300 lines; ESLint/Prettier enforced with zero errors. | M |
+| NFR-04 | Maintainability | Layered architecture (presentation → hooks → data); reusable components/hooks/utilities with JSDoc; files ≤ 300 lines; static analysis (Oxlint) enforced with zero errors. | M |
 | NFR-05 | Scalability | Adding a 109th kshetram, a new field, or a new filter dimension shall require data/config changes only, with no UI code change. | M |
 | NFR-06 | Testability | ≥ 80% unit test coverage of components/hooks/utils; automated unit and E2E suites runnable via single npm scripts. | M |
 | NFR-07 | Reliability | No runtime crash on any route or data state; invalid route ids handled gracefully (FR-33). | M |

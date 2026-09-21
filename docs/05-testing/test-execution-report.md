@@ -307,3 +307,26 @@ PO-approved rollout of the mock design language across the live site (UXD v2 §2
 
 1. Test-contract updates: alias chips replace the joined epithets string (UT-AZW-03, TC-18); About asserts approved PO content instead of pending markers (UT-ABT-01).
 2. Manavala Mamunigal's Guru row remains absent by data (Thiruvaimozhi Pillai is outside the 23-entry acharya dataset) — documented PO decision pending; Sishyas renders P.B. Anna.
+
+---
+
+## Version 1.8 — Mock-Parity Additions Execution (2026-09-11)
+
+### Scope
+
+Closing UXD v2.1 additions (§29) to reach full parity with the approved mocks: Browse header with compact yatra tracker, live result count and sort control (Traditional order / Name A–Z / Name Z–A); saint Life History as a 7/5 split with the Chronological Lifeline rail aside; section eyebrows across the saint templates; trip print-ready note. Content and data contracts unchanged.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors (1 documented-accepted warning, TripPage.jsx set-state-in-effect) |
+| Unit tests (Vitest) | **185/185 pass (19 suites)**; coverage 90.6% statements / 81.4% branches / 90.5% functions / 92.2% lines (gate 80%) |
+| Production build | Clean (pre-existing chunk-size advisory only) |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Visual acceptance | Not separately re-run for this styling-only increment; affected surfaces were judge-reviewed at v1.7 and are covered by the updated unit/E2E journeys |
+
+### Notes
+
+1. New unit case **UT-BRW-05** (sort control orders card headings A–Z; Traditional default) — recorded in TCS v1.4 §10. Contract updates recorded in place: UT-AZW-03/TC-18 (alias chips + definition cards, Life History 7/5 split with Lifeline rail), UT-ABT-01 (About asserts PO-approved copy), TC-04 (browse header tracker/quick-chips/sort).
+2. `ProgressBanner` gains a `compact` variant for the Browse header; the Home progress banner is unchanged. Filters and sorting compose; reset behaviour unaffected (UT-BRW-03/04 still green).

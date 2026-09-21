@@ -30,7 +30,7 @@ Execution column reflects the run recorded in `test-execution-report.md`.
 |---|---|---|---|---|
 | TC-02 | FR-50/52 | Open `/` | Header with brand + Home/Browse/Azhwars; Home active | Pass |
 | TC-03 | FR-10/11/12 | Open `/` | Three-line hero (title, intro, Explore CTA) over sketch watermark; ≥4 featured cards with thumbnails; Azhwar + Acharya darshan strips (v1.4: stats band removed per PO request) | Pass |
-| TC-04 | FR-20 | Open `/kshetrams` | 108 cards; count reads "Showing 108 of 108 kshetrams" | Pass |
+| TC-04 | FR-20 | Open `/kshetrams` | 108 cards; count reads "Showing 108 of 108 kshetrams"; browse header carries eyebrow, compact yatra tracker, region quick-chips and the Sort by control (v2) | Pass |
 | TC-05 | FR-21/23 | Type "kanchipuram" in search | Grid narrows; count updates and is announced | Pass |
 | TC-06 | FR-22 | Select State = Kerala | Only Kerala kshetrams shown (11); combine with search narrows further | Pass |
 | TC-07 | FR-24/25 | Search "atlantis" | Empty state with "Clear all filters"; clicking restores 108 | Pass |
@@ -67,7 +67,7 @@ Renumbered: quality-gate cases TC-13..15 → **TC-QA-01..03** (TC-13+ freed for 
 | UT-RTE-01 | FR-80 | Nearest-neighbour ordering with coordinate-less stops | Ordered nearest-first; null legs for missing coords; total correct | Pass (UT) |
 | UT-MAP-01..03 | FR-76..78 | Map renders plotted desams; region chips narrow; geolocation-denial message; legend; lazy mini-map | Markers/legend/chips behave per spec; graceful geolocation fallback | Pass (UT) |
 | UT-DTL-05..08 | FR-82..85 | Shrine template sections, photo strips + lightbox navigation/Esc, mangalasasanam excerpts + word-by-word, visit-info fallbacks, yatra hooks on detail | Template renders documented data; "not yet documented" fallbacks elsewhere | Pass (UT) |
-| UT-ABT-01 | FR-87 | About page sections | Site/tours/contact rendered from data with pending markers | Pass (UT) |
+| UT-ABT-01 | FR-87 | About page sections | Site/tours/contact rendered from the PO-approved copy — feature grid, numbered tour highlights, contact cards with copy-to-clipboard; no pending markers (v2) | Pass (UT) |
 | UT-NAV-04 | FR-86 | Home CTA wording | "Explore the 108 Kshetrams" + "Azhwar Darshan - Featured"/"Acharya Darshan - Featured" (v1.4); no "Meet the Azhwars" | Pass (UT) |
 
 ### 5. UI / E2E Cases added (Playwright, Chromium) — e2e/yatra.spec.js
@@ -98,7 +98,7 @@ R2 quality gates: TC-QA-01 Pass (0 errors; 2 accepted warnings per CRR v1.2) · 
 
 | ID | FR | Test Case | Expected Result | Executed |
 |---|---|---|---|---|
-| UT-AZW-03 | FR-90 | Azhwar detail page: saint template (portrait identification, history, iconised works, framed verse with word meanings, YouTube listening cards), derived desam chips, prev/next chronological nav, unknown-id handling (UXD v1.5) | Template renders per PO sample; navigation correct | Pass (UT) |
+| UT-AZW-03 | FR-90 | Azhwar detail page: saint template (portrait identification with alias chips + definition cards, 7/5 Life History split with Chronological Lifeline rail, iconised works, framed verse with word-meaning chips + commentary cards, YouTube listening cards), derived desam chips, prev/next chronological nav, unknown-id handling (UXD v1.5, v2) | Template renders per PO sample; alias chips resolve; navigation correct | Pass (UT) |
 | UT-AZW-04 | FR-91 | Azhwar enrichment integrity: 12 records in order, birthplace/associated-desam links resolve, works totals within documented counts, Poigai sample structure | All links valid; sample fully encoded | Pass (UT) |
 | UT-ACH-01 | FR-92 | Acharya dataset integrity: unique ids, required fields, guru/sishya/desam links resolve, pending-content policy | Links valid; pending content explicitly marked | Pass (UT) |
 | UT-ACH-02/03 | FR-93/94 | Acharyas index grouped by parampara era; Acharya detail (portrait identification, iconised contributions, framed verse, 2-col media) with Manavala Mamunigal PO sample, guru/sishya cross-links, sources, pending markers (UXD v1.5) | Index and template render; links resolve | Pass (UT) |
@@ -107,7 +107,7 @@ R2 quality gates: TC-QA-01 Pass (0 errors; 2 accepted warnings per CRR v1.2) · 
 
 | ID | FR | Steps | Expected Result | Executed |
 |---|---|---|---|---|
-| TC-18 | FR-90/91 | Open `/azhwars` → click Poigai Azhwar → check identification/verse/kshetram link → next navigation | Saint template renders; URL updates; prev/next correct | Pass |
+| TC-18 | FR-90/91 | Open `/azhwars` → click Poigai Azhwar → check identification/verse/kshetram link → next navigation | Saint template renders with alias chips (v2 replaces joined-epithets assertion); URL updates; prev/next correct | Pass |
 | TC-19 | FR-92..94 | Open `/acharyas` → open Sri Manavala Mamunigal → check history/verse; open Nathamuni → pending markers | Index groups; sample detail renders; pending content visible | Pass |
 
 ---
@@ -133,4 +133,18 @@ Quality gates: TC-QA-01 Pass (0 errors; 1 accepted warning per CRR v1.3) · TC-Q
 
 ---
 
-*End of Addendum — TCS-108K-008 v1.3*
+## Version 1.4 — UXD v2 Rollout & Mock-Parity Contract Updates (2026-09-11)
+
+Quality gates: TC-QA-01 Pass (0 errors; 1 accepted warning per CRR v1.3) · TC-QA-02 Pass (**185/185 tests, 19 suites**; 90.6% statements / 81.4% branches / 90.5% functions / 92.2% lines) · TC-QA-03 Pass (clean build) · E2E **19/19**. Execution recorded in TER v1.7 (v2 rollout) and TER v1.8 (mock-parity run).
+
+Contract updates recorded **in place** (per the v1.4/v1.5 convention): UT-AZW-03 and TC-18 (alias chips + definition cards, Life History 7/5 split with Chronological Lifeline rail), UT-ABT-01 (About asserts PO-approved copy), TC-04 (browse header tracker/quick-chips/sort).
+
+### 10. Unit Cases added (UXD v2 mock-parity)
+
+| ID | FR | Test Case | Expected Result | Executed |
+|---|---|---|---|---|
+| UT-BRW-05 | FR-20 (UXD v2) | Browse sort control: select "Name A–Z" from the `Sort by` control | Card headings render in ascending locale-aware order; Traditional order still the default | Pass (UT) |
+
+---
+
+*End of Addendum — TCS-108K-008 v1.4*

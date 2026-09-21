@@ -689,3 +689,13 @@ Look-and-feel revision of the shared saint template; all content, links and data
 ### 28. v2 — PO-approved design language rollout (2026-09-10)
 
 Following PO approval of the interactive mockups (docs/03-design/mockups/, current fonts + palette), the site adopts the mock layout patterns across all pages: eyebrow labels above headings (home hero, SectionHeading, saint/Acharya page heads, about), "DD #N" serial badges on kshetram card thumbnails, ✓ Visited / Trip overlay buttons on card images, quick region filter chips + right-aligned result count on Browse, scroll-spy section navs (kshetram detail + the saint templates, which gain section anchors), alias chips + definition cards in saint Identification, word-by-word meaning chips and commentary cards in verse blocks, the maximized emblems-sketch hero watermark, and the restructured About page (feature grid, numbered tour highlights, contact cards with copy-to-clipboard). About page content updated to the PO-approved mock copy (pending markers replaced); Srirangam-adjacent improvements: featured-strip portraits prefer a saint's supplied painting over its wiki thumbnail (Poigai Azhwar).
+
+### 29. v2.1 — Mock-parity additions (2026-09-11)
+
+Closing additions to bring the implemented site to full parity with the approved mocks (browse header, saint history layout, trip note). All content contracts unchanged.
+
+- **Browse (`/kshetrams`) header:** page head restructured as a two-column header — left carries the eyebrow `Nalayira Divya Prabandham Series` above the `Explore the Divya Kshetrams` title; right carries a **compact yatra tracker** (`ProgressBanner` gains a `compact` card variant). A live result count (`Showing N of 108 kshetrams`) and a **sort control** (`Sort by` labelled select: Traditional order / Name A–Z / Name Z–A) sit above the filter bar; Traditional preserves the desam-serial order, the name sorts are locale-aware and reset is unaffected. Filters and sort compose.
+- **Saint Life History (Azhwar & Acharya detail):** the section becomes a **7/5 split** — Life History narrative (with Legend) as the main column and the existing `SaintTimeline` moved into a **Chronological Lifeline rail** aside on the right, so biography and dates read side by side instead of stacked.
+- **Section eyebrows across the saint templates:** small-caps eyebrows above each saint section — Biographical profile, Hagiography, Theological impact, From the Prabandham, Multimedia & archives.
+- **Trip print-ready note:** a reassurance line under the trip toolkit — "This itinerary is print-ready — the print stylesheet hides buttons and maps" (print CSS itself unchanged).
+- **Tests:** new unit case UT-BRW-05 (sort control orders the card headings A–Z); 185 unit / 19 e2e green.

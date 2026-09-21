@@ -23,25 +23,26 @@
 | 1.1 | 2026-08-30 | Dev Team | Saint template v3.1 (dossier-aligned): optional `timeline`, headed `lifeHistory` blocks, `legend`, `birthplace.district`, `preservation`, `works[].language`, structured `visuals.iconography`, `verse.commentary`, original-script pending marker, `sources` on both saint pages; `Reference Content/` folder for PO dossiers |
 | 1.3 | 2026-08-30 | Dev Team | Divya Desam dossier population: `enrichment/dossiers.js` adds 93 full shrine templates keyed to dossier serials; V2 enrichment preserved underneath; multi-Thaayar, Prathyaksham and src-photo layout support |
 | 1.2 | 2026-08-30 | Dev Team | Dossier bulk population: all 12 Azhwars + 23 Acharyas (15 new records) fully populated from the PO dossiers; verse original script recovered for 32/35 (batch-2 DOCX missing → pending marker); PO correction — Poigai amsam is Panchajanya |
+| 1.4 | 2026-09-11 | Dev Team | Stack versions made current: React 19, React Router 7, Vite 8 (Rolldown); static analysis is Oxlint (`.oxlintrc.json`) — ESLint/Prettier references corrected |
 
 ---
 
 ## 1. System Overview
 
-A static Single-Page Application (SPA): React 18 + Vite, client-side routing via React Router 6. All content ships as versioned ES-module datasets. No backend, no runtime database. Build output (`dist/`) is deployable to any static host.
+A static Single-Page Application (SPA): React 19 + Vite, client-side routing via React Router 7. All content ships as versioned ES-module datasets. No backend, no runtime database. Build output (`dist/`) is deployable to any static host.
 
 ### 1.1 Technology Stack
 
 | Layer | Technology | Rationale |
 |---|---|---|
-| UI framework | React 18 (functional components + hooks only) | Component reuse, ecosystem |
-| Build | Vite 5 | Fast dev/build, native ESM |
-| Routing | React Router 6 | Standard SPA routing |
+| UI framework | React 19 (functional components + hooks only) | Component reuse, ecosystem |
+| Build | Vite 8 (Rolldown) | Fast dev/build, native ESM |
+| Routing | React Router 7 | Standard SPA routing |
 | Language | JavaScript (ES2022, ES modules) | Zero type-tooling overhead for a data-driven static site; JSDoc provides type documentation |
 | Styling | Vanilla CSS with design tokens (custom properties), CSS modules not required | Small footprint, themable |
 | Unit testing | Vitest + React Testing Library + jsdom | Vite-native, fast, behavior-focused |
 | E2E testing | Playwright (Chromium; FF/WebKit available) | Reliable, multi-browser, CI-ready |
-| Static quality | ESLint (eslint-plugin-react-hooks, react, a11y) + Prettier | Enforced standards |
+| Static quality | Oxlint (`.oxlintrc.json`; react/hooks + a11y rules) | Enforced standards |
 | CI/CD | GitHub Actions | Pipeline as code |
 | Hosting | GitHub Pages (static) | Free, CI-deployable |
 
@@ -116,7 +117,7 @@ A static Single-Page Application (SPA): React 18 + Vite, client-side routing via
 │  ├─ App.jsx                   router + layout
 │  └─ main.jsx
 ├─ .github/workflows/ci.yml
-├─ eslint.config.js
+├─ .oxlintrc.json
 ├─ vite.config.js
 └─ package.json
 ```
@@ -190,7 +191,7 @@ Component reuse map (reusable artifacts per US-ENG-05):
 
 | Level | Tool | Environment | Command |
 |---|---|---|---|
-| Static | ESLint + Prettier | Node | `npm run lint` |
+| Static | Oxlint | Node | `npm run lint` |
 | Unit/Component | Vitest + RTL + jsdom + @testing-library/jest-dom | jsdom | `npm test` |
 | E2E | Playwright Test | real Chromium headless against Vite preview | `npm run e2e` |
 
