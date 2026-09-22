@@ -1,0 +1,153 @@
+/*
+ * Zip-parity token layer (UXD v3.0) — Tailwind v4 theme + custom classes ported
+ * verbatim from the approved source export's index.css. Coexists with the legacy
+ * hand-CSS files, which are retired page by page as layouts are ported.
+ */
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-cinzel: "Cinzel", "Cormorant Garamond", serif;
+  --font-body: "Mukta Malar", "Segoe UI", Arial, sans-serif;
+
+  --color-ivory: #FAF2E3;
+  --color-cream: #FFFDF7;
+  --color-sunk: #F6EBD6;
+  --color-ink: #332417;
+  --color-muted: #66523D;
+  --color-saffron: #B34700;
+  --color-flame: #D95F0E;
+  --color-safdeep: #7A2E00;
+  --color-safdark: #571F00;
+  --color-gold: #C99A2E;
+  --color-goldsoft: #E2C47C;
+  --color-golddeep: #96731F;
+  --color-goldink: #4A3005;
+  --color-hairline: #E3D2AE;
+  --color-vermilion: #A6261D;
+  --color-sandal: #EEDCC0;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.005em;
+  }
+}
+
+.region-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.32rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(201, 154, 46, 0.55);
+  background: #FFFDF7;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(51, 36, 23, 0.06);
+  cursor: pointer;
+  transition: all 0.16s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.region-chip:hover {
+  border-color: #B34700;
+  color: #B34700;
+  transform: translateY(-1px);
+}
+
+.region-chip.is-active {
+  background-image: linear-gradient(160deg, #D95F0E, #B34700 55%, #8F3500);
+  border-color: #7A2E00;
+  color: #FFFDF7;
+}
+
+.region-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  display: inline-block;
+  margin-right: 0.375rem;
+  flex-shrink: 0;
+}
+
+.trip-index {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(150deg, #E2C47C, #C99A2E 55%, #96731F);
+  color: #4A3005;
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: 0 1px 3px rgba(51, 36, 23, 0.25);
+  flex-shrink: 0;
+}
+
+.spy-link {
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  border: 1px solid rgba(201, 154, 46, 0.5);
+  background: #FFFDF7;
+  color: #332417;
+  transition: all 0.16s ease;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.spy-link:hover {
+  border-color: #B34700;
+  color: #B34700;
+}
+
+.spy-link.spy-active {
+  background-image: linear-gradient(120deg, #E2C47C, #C99A2E 45%, #96731F);
+  border-color: #96731F;
+  color: #4A3005;
+  font-weight: 700;
+}
+
+.chip-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.16rem 0.75rem;
+  margin: 0.15rem 0.1rem;
+  border-radius: 9999px;
+  background: #FFFDF7;
+  border: 1px solid rgba(201, 154, 46, 0.5);
+  color: #7A2E00;
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(51, 36, 23, 0.06);
+  transition: all 0.16s ease;
+  cursor: pointer;
+}
+
+.chip-link:hover {
+  border-color: #B34700;
+  color: #B34700;
+  transform: translateY(-1px);
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .trip-map {
+    display: none !important;
+  }
+  body {
+    background: #FFFFFF !important;
+  }
+}

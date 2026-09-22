@@ -54,9 +54,9 @@ test.describe('V3 yatra toolkit', () => {
       await page.goto(`kshetram/${id}`);
       await page.getByRole('button', { name: /add to trip/i }).click();
     }
-    await expect(page.getByRole('link', { name: /trip · 3/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /my yatra 3/i })).toBeVisible();
 
-    await page.getByRole('link', { name: /trip · 3/i }).click();
+    await page.getByRole('link', { name: /my yatra 3/i }).click();
     await expect(page).toHaveURL(/trip$/);
     await expect(page.getByText(/3 stops/i)).toBeVisible();
 
@@ -91,12 +91,12 @@ test.describe('V3 yatra toolkit', () => {
 
   test('TC-17: nav shows Kshetra Tours, darshan strips render, About page opens', async ({ page }) => {
     await page.goto('');
-    await expect(page.getByRole('link', { name: 'Kshetra Tours' })).toBeVisible();
+    await expect(page.getByRole('link', { name: /kshetra tours/i })).toBeVisible();
     // PO request 2026-09-10: the hero "Azhwars" CTA became the darshan strips
     await expect(page.getByRole('main').getByRole('link', { name: /azhwar darshan - featured/i })).toBeVisible();
     await expect(page.getByRole('main').getByRole('link', { name: /acharya darshan - featured/i })).toBeVisible();
 
-    await page.getByRole('link', { name: 'Kshetra Tours' }).click();
+    await page.getByRole('link', { name: /kshetra tours/i }).click();
     await expect(page).toHaveURL(/about$/);
     await expect(page.getByRole('heading', { name: /about us — kshetra tours/i })).toBeVisible();
   });

@@ -1,9 +1,10 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
 
-// https://vite.dev/config/
+// https://vite.dev/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   // GitHub Pages serves the project at /108Kshetra/; override with VITE_BASE for other hosts
   base: process.env.VITE_BASE ?? '/108Kshetra/',
   test: {

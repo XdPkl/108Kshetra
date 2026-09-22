@@ -27,15 +27,17 @@ export const EMPTY_FILTERS = {
 export function useKshetramFilters(kshetrams, azhwars) {
   const [searchParams] = useSearchParams();
   const azhwarParam = searchParams.get('azhwar') ?? '';
-  const [filters, setFilters] = useState({ ...EMPTY_FILTERS, azhwar: azhwarParam });
-  const [prevParam, setPrevParam] = useState(azhwarParam);
+  const regionParam = searchParams.get('region') ?? '';
+  const [filters, setFilters] = useState({ ...EMPTY_FILTERS, azhwar: azhwarParam, region: regionParam });
+  const [prevParams, setPrevParams] = useState({ azhwar: azhwarParam, region: regionParam });
   const { visitedIds } = useVisited();
 
-  // ?azhwar=<id> seeds the azhwar filter on navigation (FR-41) —
-  // derived during render (no effect) so no extra render pass is needed
-  if (prevParam !== azhwarParam) {
-    setPrevParam(azhwarParam);
-    setFilters((prev) => ({ ...prev, azhwar: azhwarParam }));
+  // ?azhwar=<id> / ?region=<name> seed their filters on navigation (FR-41;
+  // region deep-links from the header mega-dropdown, UXD v3.0) — derived
+  // during render (no effect) so no extra render pass is needed
+  if (prevParams.azhwar !== azhwarParam || prevParams.region !== regionParam) {
+    setPrevParams({ azhwar: azhwarParam, region: regionParam });
+    setFilters((prev) => ({ ...prev, azhwar: azhwarParam, region: regionParam }));
   }
 
   const setFilter = useCallback((name, value) => {

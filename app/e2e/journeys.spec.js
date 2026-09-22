@@ -13,7 +13,7 @@ test.describe('Home page (TC-02, TC-03, TC-11)', () => {
     await expect(page.getByRole('link', { name: /explore the 108 kshetrams/i })).toBeVisible();
     expect(await page.locator('.kshetram-card').count()).toBeGreaterThanOrEqual(4);
     await expect(page.getByRole('link', { name: /azhwar darshan - featured/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Browse' })).toBeVisible();
+    await expect(page.getByRole('link', { name: '108 Temples' })).toBeVisible();
     await expect(page.locator('footer')).toContainText(/good faith/i);
   });
 });

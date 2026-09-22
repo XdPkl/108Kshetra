@@ -93,13 +93,13 @@ describe('Header', () => {
   it('renders brand and nav links', () => {
     render(<MemoryRouter initialEntries={['/']}><Header /></MemoryRouter>);
     expect(screen.getByRole('link', { name: /108 divya kshetrams/i })).toHaveAttribute('href', '/');
-    expect(screen.getByRole('link', { name: 'Browse' })).toHaveAttribute('href', '/kshetrams');
+    expect(screen.getByRole('link', { name: '108 Temples' })).toHaveAttribute('href', '/kshetrams');
     expect(screen.getByRole('link', { name: 'Azhwars' })).toHaveAttribute('href', '/azhwars');
   });
 
   it('marks the active route (UT-NAV-03)', () => {
     render(<MemoryRouter initialEntries={['/kshetrams']}><Header /></MemoryRouter>);
-    const browse = screen.getByRole('link', { name: 'Browse' });
+    const browse = screen.getByRole('link', { name: '108 Temples' });
     expect(browse.className).toMatch(/active/);
   });
 });
