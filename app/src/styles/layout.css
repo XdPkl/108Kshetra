@@ -179,11 +179,6 @@
   flex-wrap: wrap;
   margin: var(--space-2) 0 var(--space-4);
 }
-.detail__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-3);
-}
 .detail__section {
   position: relative;
   background: var(--color-surface);
@@ -218,10 +213,6 @@
   background: var(--color-surface-sunk);
   box-shadow: none;
 }
-.detail__map-link { display: inline-block; margin-top: var(--space-3); font-weight: 600; }
-.detail__map-note { color: var(--color-text-muted); font-style: italic; }
-.detail__azhwar-list { margin: var(--space-2) 0 0; padding-left: var(--space-4); }
-.detail__azhwar-list li { margin-bottom: 0.2rem; }
 
 
 .azhwar-list {
@@ -311,13 +302,6 @@
   font-size: var(--font-size-sm);
   font-style: italic;
 }
-
-.deity-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-3);
-  margin-top: var(--space-3);
-}
 .deity-card {
   background: var(--color-surface-sunk);
   border: 1px solid rgba(201, 154, 46, 0.35);
@@ -385,25 +369,6 @@
 .pasuram__listen { margin-left: var(--space-2); font-weight: 600; }
 
 .puranam { white-space: pre-line; }
-.nearby__radius {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  font-family: var(--font-body);
-  font-weight: 400;
-}
-.nearby__list { margin: var(--space-2) 0; padding-left: var(--space-4); }
-.nearby__list li { margin-bottom: 0.2rem; }
-.nearby__km { color: var(--color-text-muted); }
-.distance {
-  margin-top: var(--space-3);
-  display: flex;
-  gap: var(--space-3);
-  align-items: center;
-  flex-wrap: wrap;
-}
-.distance__result { margin: 0; font-weight: 600; }
-.distance__error { margin: 0; color: var(--color-danger); font-size: var(--font-size-sm); }
-.distance__directions { font-weight: 600; }
 .detail__pair { margin: var(--space-2) 0 0; }
 .detail__pair dt { font-weight: 700; color: var(--color-text-muted); }
 

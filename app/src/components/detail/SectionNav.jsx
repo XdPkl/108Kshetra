@@ -1,8 +1,8 @@
 /**
  * SectionNav — sticky in-page anchor chips for detail templates (FR-84),
- * with scroll-spy: the chip of the section currently in view fills with the
- * temple-gold gradient (UXD v2 mocks). Scroll/resize based so it works in
- * every environment.
+ * zip-parity spy pills (UXD v3.0 Gate 3): the chip of the section currently
+ * in view fills with the temple-gold gradient. Scroll/resize based so it
+ * works in every environment.
  * @param {object} props
  * @param {{id: string, label: string}[]} props.sections - rendered sections in order
  */
@@ -37,11 +37,14 @@ export default function SectionNav({ sections }) {
 
   if (!sections?.length) return null;
   return (
-    <nav className="section-nav" aria-label="Page sections">
+    <nav
+      className="sticky top-[4.2rem] z-30 py-2 px-1 rounded-xl bg-[#FAF2E3]/95 backdrop-blur-md border-b border-[#C99A2E]/45 flex flex-wrap gap-1.5 no-print"
+      aria-label="Page sections"
+    >
       {sections.map(({ id, label }) => (
         <a
           key={id}
-          className={`section-nav__chip${activeId === id ? ' is-active' : ''}`}
+          className={`spy-link${activeId === id ? ' spy-active' : ''}`}
           href={`#${id}`}
           aria-current={activeId === id ? 'true' : undefined}
         >

@@ -115,47 +115,12 @@
   box-shadow: var(--shadow-1);
   white-space: nowrap;
 }
-.detail__serial--hero { margin: 0 0 var(--space-2); }
 .detail__head-actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
   align-items: flex-start;
   justify-content: flex-end;
-}
-.section-nav {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: rgba(250, 242, 227, 0.92);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1);
-  padding: var(--space-2) 0;
-  margin-bottom: var(--space-3);
-  border-bottom: 1px solid rgba(201, 154, 46, 0.45);
-}
-.section-nav__chip {
-  font-size: 0.8125rem;
-  font-weight: 500;
-  padding: 0.2rem 0.8rem;
-  border: 1px solid rgba(201, 154, 46, 0.5);
-  border-radius: var(--radius-pill);
-  text-decoration: none;
-  color: var(--color-text);
-  background: var(--color-surface);
-  transition:
-    background-color var(--dur-fast) var(--ease-out),
-    color var(--dur-fast) var(--ease-out),
-    border-color var(--dur-fast) var(--ease-out);
-}
-.section-nav__chip:hover {
-  background-color: var(--color-accent);
-  background-image: var(--gradient-gold);
-  border-color: var(--color-accent-deep);
-  color: var(--color-gold-ink);
 }
 /* Scroll-spy: the section currently in view fills with temple gold */
 .section-nav__chip.is-active {
@@ -186,36 +151,6 @@
   letter-spacing: 0.08em;
 }
 .detail__profile-item dd { margin: 0.15rem 0 0; font-weight: 500; }
-
-.deity-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-3);
-}
-.deity-column {
-  position: relative;
-  background: var(--color-surface);
-  border: 1px solid rgba(201, 154, 46, 0.4);
-  border-top: none;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-1);
-  padding: var(--space-4) var(--space-3) var(--space-3);
-  overflow: hidden;
-}
-.deity-column::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--gradient-gold);
-}
-.deity-column h3 { margin-top: 0; }
-.deity-column__names { font-weight: 600; margin-bottom: 0; }
-.deity-column__form { color: var(--color-text-muted); font-style: italic; }
-.deity-column__thaayar h4 { margin-bottom: 0.15rem; }
-.deity-column__legend { color: var(--color-text-muted); }
 .deity-sanctum-note {
   margin-top: var(--space-3);
   padding: var(--space-2) var(--space-3);
@@ -223,32 +158,9 @@
   border-left: 3px solid var(--color-accent);
   border-radius: 10px;
 }
-.photo-strip { display: flex; gap: var(--space-1); align-items: flex-start; flex-wrap: wrap; }
-.photo-strip__item {
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: zoom-in;
-  width: 33%;
-  border-radius: var(--radius-card);
-  overflow: hidden;
-}
-.photo-strip__item--lead { width: 100%; }
-.photo-strip__item .deity-photo { margin: 0; width: 100%; border-top: none; }
-.photo-strip__item img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  display: block;
-  border-radius: var(--radius-card);
-  transition: transform var(--dur-med) var(--ease-out);
-}
-.photo-strip__item:hover img { transform: scale(1.045); }
 
 .puranam__legend h3, #puranam h3, .visit-info__block h3, .visuals-media h3 { margin-bottom: 0.25rem; }
 .puranam__literature { margin-top: 0.25rem; }
-
-.mangalasasanam__summary { margin-bottom: var(--space-2); }
 .pasuram-excerpt { margin-bottom: var(--space-3); }
 .pasuram-excerpt h4 { margin-bottom: 0.35rem; font-size: 1.05rem; }
 .pasuram__tamil { white-space: pre-line; font-size: 1.2rem; color: var(--color-primary-dark); font-weight: 500; }
@@ -299,21 +211,6 @@
   border-radius: 10px;
   padding: var(--space-2) var(--space-3);
 }
-
-.visit-info { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
-.visit-info__block {
-  background: var(--color-surface-sunk);
-  border-radius: var(--radius-card);
-  padding: var(--space-3);
-}
-.visit-info__block h3 { margin-top: 0; }
-.visit-info__access dt {
-  float: left; clear: left; width: 5.5rem;
-  color: var(--color-text-muted); font-size: 0.875rem;
-}
-.visit-info__access dd { margin: 0 0 0.25rem 6rem; }
-
-.visuals-media__chips { display: flex; flex-wrap: wrap; gap: var(--space-1); }
 .detail__nodata { color: var(--color-text-muted); font-style: italic; margin: 0.25rem 0; }
 
 /* ---------- Map page (UXD §14) ---------- */

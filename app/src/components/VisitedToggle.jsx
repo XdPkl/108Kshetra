@@ -1,6 +1,7 @@
 /**
  * VisitedToggle — accessible mark-as-visited control for the detail page
- * (FR-72). Persists via the visited store; reflects current state.
+ * (FR-72) in zip-parity pill styling (UXD v3.0 Gate 3). Persists via the
+ * visited store; reflects current state.
  * @param {object} props
  * @param {string} props.id - kshetram slug
  */
@@ -12,7 +13,11 @@ export default function VisitedToggle({ id }) {
   return (
     <button
       type="button"
-      className={visited ? 'btn btn--small btn-visited is-active' : 'btn btn--outline btn--small btn-visited'}
+      className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all shadow-xs ${
+        visited
+          ? 'bg-gradient-to-b from-[#E2C47C] to-[#C99A2E] text-[#4A3005] border border-[#96731F]'
+          : 'border border-[#B34700]/60 text-[#7A2E00] hover:bg-[#B34700]/10 bg-[#FFFDF7]'
+      }`}
       aria-pressed={visited}
       onClick={() => toggleVisited(id)}
     >
