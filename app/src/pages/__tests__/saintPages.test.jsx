@@ -81,8 +81,12 @@ describe('AcharyasPage (UT-ACH-02, FR-93)', () => {
     expect(screen.getByText(/Purvacharyas — the early masters/i)).toBeInTheDocument();
     expect(screen.getByText(/The age of Ramanuja/i)).toBeInTheDocument();
     expect(screen.getByText(/Later acharyas/i)).toBeInTheDocument();
-    const link = screen.getByRole('link', { name: /Sri Manavala Mamunigal/i });
-    expect(link).toHaveAttribute('href', '/acharya/manavala-mamunigal');
+    // href-targeted: role text of other acharyas (e.g. Thiruvaimozhi Pillai's
+    // "Acharya of Sri Manavala Mamunigal…") also matches a loose name query
+    const link = screen
+      .getAllByRole('link')
+      .find((el) => el.getAttribute('href') === '/acharya/manavala-mamunigal');
+    expect(link).toBeDefined();
   });
 });
 
@@ -131,6 +135,26 @@ describe('AcharyaDetailPage (UT-ACH-03, FR-94)', () => {
     expect(screen.getByRole('link', { name: 'Nathamuni' })).toHaveAttribute('href', '/acharya/nathamuni');
     expect(screen.queryByText(/\[Content pending — to be provided\]/i)).not.toBeInTheDocument();
     expect(screen.getAllByText(/Project Madurai Texts/i).length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('renders resolving guru/sishya chips for the CR-18 acharyas', () => {
+    renderAt('/acharya/engalazhwan');
+    expect(screen.getByText(/Guru:/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Thirukkurugai Piran Pillan' })).toHaveAttribute('href', '/acharya/thirukkurugai-piran-pillan');
+    expect(screen.getByRole('link', { name: 'Nadadur Ammal' })).toHaveAttribute('href', '/acharya/nadadur-ammal');
+    expect(screen.queryByText(/\[Content pending — to be provided\]/i)).not.toBeInTheDocument();
+    renderAt('/acharya/vedanta-desika');
+    expect(screen.getByRole('link', { name: 'Kidambi Appullar' })).toHaveAttribute('href', '/acharya/kidambi-appullar');
+    renderAt('/acharya/manavala-mamunigal');
+    expect(screen.getByRole('link', { name: 'Thiruvaimozhi Pillai' })).toHaveAttribute('href', '/acharya/thiruvaimozhi-pillai');
+  });
+
+  it('renders a scaffolded lineage acharya with the pending-dossier marker', () => {
+    renderAt('/acharya/nadadur-ammal');
+    expect(screen.getByRole('heading', { level: 1, name: /nadadur ammal/i })).toBeInTheDocument();
+    expect(screen.getByText(/Guru:/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Engalazhwan' })).toHaveAttribute('href', '/acharya/engalazhwan');
+    expect(screen.getAllByText(/\[Content pending — to be provided\]/i).length).toBeGreaterThanOrEqual(1);
   });
 
   it('handles unknown acharya ids gracefully', () => {

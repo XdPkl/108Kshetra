@@ -448,16 +448,22 @@ API token was required — the original was revoked after the v1.3 sync).
 
 ---
 
-## Post-Delivery Enhancement (2026-09-11) — UXD v2 Mock Parity
+## Post-Delivery Enhancements (2026-09-11) — UXD v2 Mock Parity & PO Decisions
 
-One behavioral addition from the PO-approved v2 design language rollout (UXD §28/§29); implemented
-and executed the same day (TER v1.8, TCS v1.4). The remaining v2 changes are presentation-layer
-restructurings of existing FR journeys and are documented in `docs/03-design/ui-ux-design.md`.
+Two post-delivery additions: one behavioral piece of the PO-approved v2 design language rollout
+(UXD §28/§29; TER v1.8, TCS v1.4) and one PO decision on the acharya dataset (TER v1.9, TCS v1.5).
+Remaining v2 changes are presentation-layer restructurings of existing FR journeys, documented in
+`docs/03-design/ui-ux-design.md`.
 
 | Type | Summary | Links to | Points | Jira key |
 |---|---|---|---|---|
 | Story | US-BRW-05 — Browse sort control | EP-BRW | 2 | — (Jira sync pending a fresh API token) |
+| Story | US-ACH-04 — Acharya parampara expansion | EP-ACH | 2 | — (Jira sync pending a fresh API token) |
 
 **US-BRW-05 — Browse sort control** (2 pts, Priority 2) — *FR-20 enhancement*
 > As a visitor, I want to order the kshetram list by name so that I can look up a desam alphabetically as well as in the traditional serial order.
 - **Given** the `/kshetrams` page, **when** I choose an option from the `Sort by` control, **then** the grid re-orders (Traditional order = desam-serial default; Name A–Z / Name Z–A locale-aware); search, region/visit filters and reset compose with the selected ordering, and the count keeps reflecting the filtered set.
+
+**US-ACH-04 — Acharya parampara expansion** (2 pts, Priority 2) — *FR-92 enhancement*
+> As a devotee, I want the Guru & Sishyas chips on the Engalazhwan, Vedanta Desika and Manavala Mamunigal pages to resolve so that the guru parampara reads unbroken across the Acharya pages.
+- **Given** the PO decision (2026-09-11, resolving CR-18) to expand the acharya dataset beyond the original 23 entries, **when** the dataset gains the four lineage acharyas named in the dossiers — Thirukkurugai Piran Pillan, Nadadur Ammal, Kidambi Appullar and Thiruvaimozhi Pillai — **then** the Guru & Sishyas rows on those three pages render resolving chips instead of the pending marker; the four new entries render the visible pending marker for their own dossiers until PO text arrives (US-ACH-01 policy); every chip link resolves to a dataset id (UT-ACH-01/UT-ACH-04).

@@ -1170,6 +1170,17 @@ export const acharyas = [
     ]
   },
   {
+    id: "thirukkurugai-piran-pillan",
+    name: "Thirukkurugai Piran Pillan",
+    tamilName: "திருக்குறுகைப் பிரான் பிள்ளை",
+    eraGroup: "The age of Ramanuja",
+    era: "12th century CE",
+    role: "Ramanuja's spiritual son and the first acharya of Engalazhwan, through whom the Sri Bhashya and 6000 Padi teaching lineage flowed.",
+    titles: ["Thirukkurugai Piran Pillan", "Pillan", "Ramanuja's Spiritual Son"],
+    guru: "ramanuja",
+    sishyas: ["engalazhwan"]
+  },
+  {
     id: "koorathazhwan",
     name: "Koorathazhwan",
     tamilName: "கூரத்தாழ்வான்",
@@ -2476,7 +2487,8 @@ export const acharyas = [
       district: "Tiruchirappalli District, Tamil Nadu, India"
     },
     amsam: "Sacred Lotus / Scholarly aspect",
-    sishyas: [],
+    guru: "thirukkurugai-piran-pillan",
+    sishyas: ["nadadur-ammal"],
     associatedDesams: ["thiruvellarai", "srirangam", "kanchi-varadaraja"],
     timeline: [
       {
@@ -2598,6 +2610,17 @@ export const acharyas = [
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
     ]
+  },
+  {
+    id: "nadadur-ammal",
+    name: "Nadadur Ammal",
+    tamilName: "நடாதூர் அம்மாள்",
+    eraGroup: "Later acharyas",
+    era: "13th century CE",
+    role: "Sri Bhashya acharya of Kanchipuram in Engalazhwan's lineage, who blessed the young Vedanta Desika with the prophecy that he would establish Vedanta.",
+    titles: ["Nadadur Ammal", "Nadadoor Ammal"],
+    guru: "engalazhwan",
+    sishyas: []
   },
   {
     id: "nampillai",
@@ -3232,6 +3255,16 @@ export const acharyas = [
     ]
   },
   {
+    id: "kidambi-appullar",
+    name: "Kidambi Appullar",
+    tamilName: "கிடாம்பி ஆப்பூல்லார்",
+    eraGroup: "Later acharyas",
+    era: "13th century CE",
+    role: "Acharya of Sri Vedanta Desika, under whom Venkatanatha completed his mastery of the Vedic sciences, logic and arts by age twenty.",
+    titles: ["Kidambi Appullar", "Appullar", "Vatsya Varadacharya"],
+    sishyas: ["vedanta-desika"]
+  },
+  {
     id: "vedanta-desika",
     name: "Vedanta Desika",
     tamilName: "வேதாந்த தேசிகர்",
@@ -3255,6 +3288,8 @@ export const acharyas = [
       district: "Kanchipuram District, Tamil Nadu, India"
     },
     amsam: "Ghanta (The Divine Sacred Bell of Lord Venkateswara of Tirumala)",
+    guru: "kidambi-appullar",
+    sishyas: [],
     associatedDesams: ["kanchi-varadaraja", "tirupati", "srirangam"],
     timeline: [
       {
@@ -3465,6 +3500,17 @@ export const acharyas = [
     ]
   },
   {
+    id: "thiruvaimozhi-pillai",
+    name: "Thiruvaimozhi Pillai",
+    tamilName: "திருவாய்மொழிப் பிள்ளை",
+    eraGroup: "Later acharyas",
+    era: "14th century CE",
+    role: "Acharya of Sri Manavala Mamunigal at Azhwar Thirunagari, who commissioned his disciple to restore Srirangam and propagate the Tiruvaymoli and Eedu commentaries.",
+    titles: ["Thiruvaimozhi Pillai", "Thiruvaymozhi Pillai"],
+    sishyas: ["manavala-mamunigal"],
+    associatedDesams: ["alwar-thirunagari"]
+  },
+  {
     id: "manavala-mamunigal",
     name: "Sri Manavala Mamunigal",
     tamilName: "ஸ்ரீ மணவாள மாமுனிகள்",
@@ -3494,6 +3540,7 @@ export const acharyas = [
     },
     amsam: "Adisesha — regarded as the re-incarnation of Sri Ramanuja",
     amsamAcharyaId: "ramanuja",
+    guru: "thiruvaimozhi-pillai",
     sishyas: ["p-b-anna"],
     associatedDesams: ["srirangam", "kanchi-varadaraja", "nanguneri"],
     timeline: [

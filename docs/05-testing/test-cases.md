@@ -147,4 +147,16 @@ Contract updates recorded **in place** (per the v1.4/v1.5 convention): UT-AZW-03
 
 ---
 
-*End of Addendum — TCS-108K-008 v1.4*
+## Version 1.5 — Acharya Parampara Expansion (2026-09-11)
+
+PO decision resolving CR-18: the acharya dataset grows 23 → 27 with the four lineage acharyas the dossiers name — Thirukkurugai Piran Pillan, Nadadur Ammal, Kidambi Appullar, Thiruvaimozhi Pillai — so the Guru & Sishyas chips on Engalazhwan, Vedanta Desika and Manavala Mamunigal resolve. The four new entries are scaffolds whose own dossiers render the visible pending marker (US-ACH-01 policy); the pending-content assertion now pins exactly that scaffold set. Quality gates: TC-QA-01 Pass (0 errors; 1 accepted warning) · TC-QA-02 Pass (**188/188 tests, 19 suites**; gate 80%) · TC-QA-03 Pass · E2E **19/19**. Execution recorded in TER v1.9.
+
+### 11. Unit Cases added (acharya expansion)
+
+| ID | FR | Test Case | Expected Result | Executed |
+|---|---|---|---|---|
+| UT-ACH-04 | FR-92 (enh. US-ACH-04) | Dataset grows 23 → 27; pending-lifeHistory set equals exactly the four scaffolded ids; CR-18 wiring resolves (Engalazhwan guru/sishya, Vedanta Desika guru, Manavala Mamunigal guru); Engalazhwan page renders resolving Guru & Sishyas chips with no pending marker; scaffold page (Nadadur Ammal) renders with the pending-dossier marker | Chips resolve to dataset ids; scaffolds render visibly pending | Pass (UT) |
+
+---
+
+*End of Addendum — TCS-108K-008 v1.5*

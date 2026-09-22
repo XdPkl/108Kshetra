@@ -110,9 +110,26 @@ describe('Acharya dataset integrity (UT-ACH-01, FR-92)', () => {
     }
   });
 
-  it('populates biography content for every acharya (dossier bulk, FR-94)', () => {
+  it('populates biography content for every dossier acharya (dossier bulk, FR-94)', () => {
     const pending = acharyas.filter((a) => !Array.isArray(a.lifeHistory) || a.lifeHistory.length === 0);
-    expect(pending).toEqual([]); // the 2026-08-30 dossier upload filled all 23 records
+    // The 2026-08-30 dossier upload filled the original 23 records. Per the PO's
+    // 2026-09-11 dataset-expansion decision (CR-18 resolution), four lineage
+    // acharyas were added as scaffolds so guru/sishya chips resolve; their
+    // dedicated dossiers remain pending and render the visible marker.
+    expect(pending.map((a) => a.id).sort()).toEqual([
+      'kidambi-appullar',
+      'nadadur-ammal',
+      'thirukkurugai-piran-pillan',
+      'thiruvaimozhi-pillai',
+    ]);
+  });
+
+  it('resolves the CR-18 lineage wiring (guru/sishya chips, no pending marker)', () => {
+    expect(getAcharyaById('engalazhwan').guru).toBe('thirukkurugai-piran-pillan');
+    expect(getAcharyaById('engalazhwan').sishyas).toContain('nadadur-ammal');
+    expect(getAcharyaById('vedanta-desika').guru).toBe('kidambi-appullar');
+    expect(getAcharyaById('manavala-mamunigal').guru).toBe('thiruvaimozhi-pillai');
+    expect(getAcharyaById('thiruvaimozhi-pillai').sishyas).toContain('manavala-mamunigal');
   });
 
   it('encodes the Nathamuni dossier (saint template v3.1 proof)', () => {

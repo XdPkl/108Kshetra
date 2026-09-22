@@ -330,3 +330,27 @@ Closing UXD v2.1 additions (§29) to reach full parity with the approved mocks: 
 
 1. New unit case **UT-BRW-05** (sort control orders card headings A–Z; Traditional default) — recorded in TCS v1.4 §10. Contract updates recorded in place: UT-AZW-03/TC-18 (alias chips + definition cards, Life History 7/5 split with Lifeline rail), UT-ABT-01 (About asserts PO-approved copy), TC-04 (browse header tracker/quick-chips/sort).
 2. `ProgressBanner` gains a `compact` variant for the Browse header; the Home progress banner is unchanged. Filters and sorting compose; reset behaviour unaffected (UT-BRW-03/04 still green).
+
+---
+
+## Version 1.9 — Acharya Parampara Expansion Execution (2026-09-22)
+
+### Scope
+
+PO decision CR-18 resolved via US-ACH-04 (FR-92 enhancement): the acharya dataset grows 23 → 27 with the four lineage acharyas the dossiers name — Thirukkurugai Piran Pillan, Nadadur Ammal, Kidambi Appullar, Thiruvaimozhi Pillai — so the Guru & Sishyas chips on Engalazhwan, Vedanta Desika and Manavala Mamunigal resolve and the parampara reads unbroken. The four new entries are scaffolds whose own dossiers render the visible pending marker (US-ACH-01 policy). Recorded in TCS v1.5 §11 (UT-ACH-04).
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors (1 documented-accepted warning, TripPage.jsx set-state-in-effect) |
+| Unit tests (Vitest) | **188/188 pass (19 suites)**; coverage 90.7% statements / 81.9% branches / 90.8% functions / 92.3% lines (gate 80%) |
+| Production build | Clean (initial 335.4 kB gzip — pre-existing chunk-size advisory, dossier dataset growth; Leaflet lazy chunk 44.9 kB gzip) |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Visual acceptance | Not separately re-run for this data-layer expansion; index/detail surfaces are covered by UT-ACH-04 and the TC-19 journey |
+
+### Notes
+
+1. New unit case **UT-ACH-04** pins the expansion: dataset 23 → 27; the pending-lifeHistory set equals exactly the four scaffolded ids; CR-18 wiring resolves (Engalazhwan guru/sishya, Vedanta Desika guru, Manavala Mamunigal guru); Engalazhwan renders resolving Guru & Sishyas chips with no pending marker; the Nadadur Ammal scaffold renders the pending-dossier marker.
+2. TC-19's card click was corrected to an ends-with href match (`a[href$=…]`): the exact-match href selector missed the `/108Kshetra/` router basename used by the preview build, and the loose name query stays ambiguous because Thiruvaimozhi Pillai's card role text mentions Manavala Mamunigal.
+3. Gates re-executed in full on 2026-09-22 after the project folder was copied to a new machine location; the Playwright Chromium 1.62.1 browser cache was found empty and reinstalled before the E2E run.

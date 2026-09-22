@@ -120,7 +120,9 @@ test.describe('V3 yatra toolkit', () => {
     await page.goto('acharyas');
     await expect(page.getByRole('heading', { name: /the acharyas/i })).toBeVisible();
     await expect(page.getByText(/The age of Ramanuja/i)).toBeVisible();
-    await page.getByRole('link', { name: /Sri Manavala Mamunigal/i }).click();
+    // href-targeted: other cards' role text (Thiruvaimozhi Pillai) matches a loose name query.
+    // Ends-with match: the preview build serves under the /108Kshetra/ router basename.
+    await page.locator('a[href$="/acharya/manavala-mamunigal"]').click();
     await expect(page).toHaveURL(/acharya\/manavala-mamunigal$/);
     await expect(page.getByRole('heading', { name: /life history & miracles/i })).toBeVisible();
     await expect(page.getByText(/Eedu 36000 Padi/i).first()).toBeVisible();
