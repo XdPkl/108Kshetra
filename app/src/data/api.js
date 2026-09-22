@@ -19,6 +19,14 @@ export function getAllKshetrams() {
   return kshetrams;
 }
 
+/** Traditional Divya Desam serial (1..108) by dataset order (UXD v3.0 cards). */
+const DD_SERIALS = new Map(kshetrams.map((k, i) => [k.id, i + 1]));
+
+/** @param {string} id - kshetram slug @returns {number|undefined} DD serial */
+export function getDDSerial(id) {
+  return DD_SERIALS.get(id);
+}
+
 /** @returns {(Kshetram & object)[]} all kshetrams merged with enrichment data. */
 export function getAllKshetramsEnriched() {
   return kshetrams.map((k) => ({ ...k, ...getEnrichment(k.id) }));

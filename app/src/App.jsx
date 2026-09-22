@@ -32,7 +32,7 @@ export default function App() {
   return (
     <div className="app-shell">
       <Header />
-      <main className="app-main">
+      <main className="app-main max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-10 w-full">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/kshetrams" element={<BrowsePage />} />

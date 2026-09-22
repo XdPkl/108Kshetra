@@ -76,15 +76,16 @@ describe('KshetramCard integration (FR-72/79)', () => {
     deity: 'Ranganatha', region: 'Chola Nadu',
   };
 
-  it('shows the visited badge and a trip button outside the card link', async () => {
+  it('shows the visited badge and a trip button above the card link overlay', async () => {
     const user = userEvent.setup();
     toggleVisited('srirangam');
     render(<MemoryRouter><KshetramCard kshetram={k} /></MemoryRouter>);
     expect(screen.getByText(/visited/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /srirangam/i }))
       .toHaveAttribute('href', '/kshetram/srirangam');
-    await user.click(screen.getByRole('button', { name: /add to trip/i }));
-    expect(screen.getByRole('button', { name: /remove from trip/i })).toBeInTheDocument();
+    // zip card trip toggle (UXD v3.0): '+ Trip' → '✓ In trip'
+    await user.click(screen.getByRole('button', { name: '+ Trip' }));
+    expect(screen.getByRole('button', { name: '✓ In trip' })).toBeInTheDocument();
   });
 });
 
