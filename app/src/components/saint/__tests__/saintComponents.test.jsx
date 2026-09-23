@@ -123,6 +123,7 @@ describe('Identification', () => {
 
   it('renders the placeholder portrait when no source exists', () => {
     render(<Identification rows={[{ label: 'Era', value: '—' }]} portrait={{ alt: 'Saint portrait' }} />);
-    expect(screen.getByLabelText('Saint portrait')).toHaveTextContent('◆');
+    // UXD v3.0: the placeholder became the Thiruman watermark behind the labelled frame
+    expect(screen.getByLabelText('Saint portrait')).toBeInTheDocument();
   });
 });

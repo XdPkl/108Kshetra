@@ -46,7 +46,8 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90)', () => {
 
   it('renders the placeholder portrait for saints without a supplied photo', () => {
     renderAt('/azhwar/nammazhwar');
-    expect(screen.getByLabelText(/nammazhwar portrait/i)).toHaveTextContent('◆');
+    // UXD v3.0: the placeholder became the Thiruman watermark behind the labelled frame
+    expect(screen.getByLabelText(/nammazhwar portrait/i)).toBeInTheDocument();
   });
 
   it('shows derived desam links and chronological prev/next navigation', () => {

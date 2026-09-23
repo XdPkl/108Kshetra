@@ -274,26 +274,6 @@
   border: 1px solid rgba(201, 154, 46, 0.45);
   border-radius: var(--radius-lg);
 }
-.pasuram::before {
-  content: "❝";
-  position: absolute;
-  top: 0.55rem;
-  left: 1rem;
-  font-family: var(--font-display);
-  font-size: 2.4rem;
-  line-height: 1;
-  color: rgba(201, 154, 46, 0.55);
-}
-.pasuram__tamil { font-size: var(--font-size-lg); margin: 0 0 var(--space-2); }
-.pasuram__transliteration {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  color: var(--color-text);
-  margin: 0 0 var(--space-2);
-}
-.pasuram__meaning { margin: 0 0 var(--space-2); }
-.pasuram__attribution { color: var(--color-text-muted); font-size: var(--font-size-sm); }
-.pasuram__listen { margin-left: var(--space-2); font-weight: 600; }
 
 .puranam { white-space: pre-line; }
 .detail__pair { margin: var(--space-2) 0 0; }
