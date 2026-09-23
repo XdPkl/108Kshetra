@@ -16,10 +16,13 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page.getByText(/1 of 108 kshetrams visited/i)).toBeVisible();
 
     await page.goto('kshetrams');
-    await page.getByLabel('Visit status').selectOption('visited');
+    // UXD v3.0: the Visit-status select became the zip's "Show visited only" checkbox
+    await page.getByLabel('Visit status').check();
     await expect(page.getByText(/showing 1 of 108 kshetrams/i)).toBeVisible();
 
-    // Reset clears the marks (native confirm accepted via dialog handler)
+    // Reset clears the marks (native confirm accepted via dialog handler).
+    // UXD v3.0: Browse no longer carries the compact tracker — reset on Home.
+    await page.goto('');
     page.once('dialog', (dialog) => dialog.accept());
     await page.getByRole('button', { name: /reset progress/i }).click();
     await expect(page.getByText(/0 of 108 kshetrams visited/i)).toBeVisible();
