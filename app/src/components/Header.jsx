@@ -20,11 +20,15 @@ import {
   BookOpen,
   ShieldCheck,
   ArrowRight,
+  User,
 } from 'lucide-react';
 import { kshetrams } from '../data/kshetrams.js';
+import { ABOUT } from '../data/about.js';
 import { TempleGopuramIcon, ThirumanIcon, LotusIcon } from './SacredIcons.jsx';
 import { useTrip } from '../hooks/useTrip.js';
 import { useVisited } from '../hooks/useVisited.js';
+
+const CEO_NAME = ABOUT.ceo.name;
 
 /** Region dropdown rows — zip copy, counts computed from the live dataset. */
 const REGION_ROWS = [
@@ -371,6 +375,27 @@ export default function Header() {
 
                 <div className="py-1">
                   <Link
+                    to="/about#ceo-leadership"
+                    onClick={closeAll}
+                    className="w-full px-4 py-2 text-xs flex items-start gap-2.5 text-[#332417] hover:bg-[#FAF2E3] transition-colors group"
+                  >
+                    <div className="p-1 rounded-md bg-[#FAF2E3] border border-[#C99A2E]/40 group-hover:border-[#B34700] text-[#B34700] mt-0.5">
+                      <User className="w-3.5 h-3.5" aria-hidden="true" />
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <span className="font-bold text-[#7A2E00] group-hover:text-[#B34700] flex items-center gap-1.5">
+                        <span>Founder &amp; CEO Desk</span>
+                        <span className="text-[9.5px] bg-[#C99A2E]/20 text-[#7A2E00] px-1.5 py-0.2 rounded font-semibold">
+                          {CEO_NAME}
+                        </span>
+                      </span>
+                      <span className="text-[11px] text-[#66523D]">
+                        Kainkaryam leadership, message &amp; customized consultations
+                      </span>
+                    </div>
+                  </Link>
+
+                  <Link
                     to="/about#guided-yatras"
                     onClick={closeAll}
                     className="w-full px-4 py-2 text-xs flex items-start gap-2.5 text-[#332417] hover:bg-[#FAF2E3] transition-colors group"
@@ -384,6 +409,24 @@ export default function Header() {
                       </span>
                       <span className="text-[11px] text-[#66523D]">
                         Fixed groups, pure madi-catering &amp; senior-friendly pacing
+                      </span>
+                    </div>
+                  </Link>
+
+                  <Link
+                    to="/about#circuits"
+                    onClick={closeAll}
+                    className="w-full px-4 py-2 text-xs flex items-start gap-2.5 text-[#332417] hover:bg-[#FAF2E3] transition-colors group"
+                  >
+                    <div className="p-1 rounded-md bg-[#FAF2E3] border border-[#C99A2E]/40 group-hover:border-[#B34700] text-[#B34700] mt-0.5">
+                      <RouteIcon className="w-3.5 h-3.5" aria-hidden="true" />
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <span className="font-bold text-[#7A2E00] group-hover:text-[#B34700]">
+                        7 Regional Pilgrimage Circuits
+                      </span>
+                      <span className="text-[11px] text-[#66523D]">
+                        Chola, Pandiya, Thondai, Malai, and Vada Nadu itineraries
                       </span>
                     </div>
                   </Link>
@@ -614,6 +657,18 @@ export default function Header() {
 
             <div className="pt-1 space-y-1">
               <Link
+                to="/about#ceo-leadership"
+                onClick={closeAll}
+                className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-semibold text-[#7A2E00] hover:bg-[#FAF2E3]"
+              >
+                <div className="flex items-center gap-2">
+                  <User className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
+                  <span>Founder &amp; CEO Desk</span>
+                </div>
+                <span className="text-[10px] text-[#96731F]">{CEO_NAME}</span>
+              </Link>
+
+              <Link
                 to="/about#guided-yatras"
                 onClick={closeAll}
                 className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-semibold text-[#7A2E00] hover:bg-[#FAF2E3]"
@@ -621,6 +676,30 @@ export default function Header() {
                 <div className="flex items-center gap-2">
                   <Calendar className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
                   <span>Guided Departures &amp; Schedules</span>
+                </div>
+                <ArrowRight className="w-3 h-3 text-[#B34700]" aria-hidden="true" />
+              </Link>
+
+              <Link
+                to="/about#circuits"
+                onClick={closeAll}
+                className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-semibold text-[#7A2E00] hover:bg-[#FAF2E3]"
+              >
+                <div className="flex items-center gap-2">
+                  <RouteIcon className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
+                  <span>7 Regional Pilgrimage Circuits</span>
+                </div>
+                <ArrowRight className="w-3 h-3 text-[#B34700]" aria-hidden="true" />
+              </Link>
+
+              <Link
+                to="/about#sanctum-etiquette"
+                onClick={closeAll}
+                className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-semibold text-[#7A2E00] hover:bg-[#FAF2E3]"
+              >
+                <div className="flex items-center gap-2">
+                  <ThirumanIcon className="w-3 h-4" />
+                  <span>Sanctum Etiquette</span>
                 </div>
                 <ArrowRight className="w-3 h-3 text-[#B34700]" aria-hidden="true" />
               </Link>

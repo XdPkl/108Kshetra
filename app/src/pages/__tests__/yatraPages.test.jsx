@@ -164,4 +164,40 @@ describe('AboutPage (UT-ABT-01, FR-87)', () => {
     expect(screen.getByText(/email us/i)).toBeInTheDocument();
     expect(screen.queryByText(/\[to be provided\]/i)).not.toBeInTheDocument();
   });
+
+  it('renders the CEO desk, 7 circuits and sanctum etiquette (UXD v3.0 Gate 11 addendum)', () => {
+    renderAt('/about', <AboutPage />);
+    // CEO desk
+    expect(screen.getByRole('heading', { name: /founder & chief executive officer/i })).toBeInTheDocument();
+    expect(screen.getAllByText(/sri prasanna venkatesh/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/ceo@kshetratours\.org/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText(/108 divya desams completed/i)).toBeInTheDocument();
+    // 7 circuits, each with an inquire action and a browse-region deep link
+    expect(screen.getByRole('heading', { name: /popular divya desam pilgrimage circuits/i })).toBeInTheDocument();
+    const inquires = screen.getAllByRole('button', { name: /inquire circuit/i });
+    expect(inquires).toHaveLength(7);
+    const regionLinks = screen.getAllByRole('link', { name: /view all .* temples/i });
+    expect(regionLinks).toHaveLength(7);
+    expect(regionLinks[0]).toHaveAttribute('href', '/kshetrams?region=Chola%20Nadu');
+    expect(regionLinks[6]).toHaveAttribute('href', '/kshetrams?region=Celestial');
+    // Etiquette cards
+    expect(screen.getByRole('heading', { name: /sanctum etiquette & parayanam protocols/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /temple sanctum etiquette/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /divya prabandham parayanam/i })).toBeInTheDocument();
+  });
+
+  it('opens the inquiry modal from a circuit, submits, and shows the booking reference', async () => {
+    const user = userEvent.setup();
+    renderAt('/about', <AboutPage />);
+    await user.click(screen.getAllByRole('button', { name: /inquire circuit/i })[0]);
+    const dialog = screen.getByRole('dialog', { name: /request yatra schedule/i });
+    expect(within(dialog).getByLabelText(/devotee \/ pilgrim name/i)).toBeInTheDocument();
+    await user.type(within(dialog).getByLabelText(/devotee \/ pilgrim name/i), 'Ramanuja Dasa');
+    await user.type(within(dialog).getByLabelText(/phone \/ whatsapp/i), '+91 98765 43210');
+    await user.type(within(dialog).getByLabelText(/email address/i), 'devotee@example.com');
+    await user.click(within(dialog).getByRole('button', { name: /submit schedule inquiry/i }));
+    expect(await within(dialog).findByText(/inquiry received/i)).toBeInTheDocument();
+    expect(within(dialog).getByText(/YATRA-\d{4}/)).toBeInTheDocument();
+    expect(within(dialog).getByText(/1\. chola nadu heritage yatra/i)).toBeInTheDocument();
+  });
 });
