@@ -115,13 +115,6 @@
   box-shadow: var(--shadow-1);
   white-space: nowrap;
 }
-.detail__head-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  align-items: flex-start;
-  justify-content: flex-end;
-}
 /* Scroll-spy: the section currently in view fills with temple gold */
 .section-nav__chip.is-active {
   background-color: var(--color-accent);
@@ -130,27 +123,6 @@
   color: var(--color-gold-ink);
   font-weight: 700;
 }
-
-.detail__profile-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--space-2);
-  margin: 0;
-}
-.detail__profile-item {
-  background: rgba(201, 154, 46, 0.08);
-  border-left: 3px solid var(--color-accent);
-  border-radius: 10px;
-  padding: var(--space-2) var(--space-3);
-}
-.detail__profile-item dt {
-  font-size: var(--text-eyebrow);
-  font-weight: 700;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-.detail__profile-item dd { margin: 0.15rem 0 0; font-weight: 500; }
 .deity-sanctum-note {
   margin-top: var(--space-3);
   padding: var(--space-2) var(--space-3);
@@ -175,7 +147,6 @@
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: var(--space-3);
 }
-.detail__nodata { color: var(--color-text-muted); font-style: italic; margin: 0.25rem 0; }
 
 /* ---------- Map page (UXD §14) ---------- */
 .map-page__head {
@@ -412,27 +383,8 @@
 
 /* Contribution glyphs */
 .saint-glyph { width: 1.05rem; height: 1.05rem; flex: none; color: var(--color-accent-deep); }
-.detail__profile-item dt { display: flex; align-items: center; gap: 0.45rem; }
-.saint-desams strong {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  width: 100%;
-  color: var(--color-primary-dark);
-}
 .acharya-works { grid-column: 1 / -1; }
-
-.saint-works { margin: 0; padding-left: 1.1rem; }
-.saint-works li { margin-bottom: 0.15rem; }
 .saint-works-summary { color: var(--color-text-muted); margin-top: var(--space-1); }
-.saint-desams {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1);
-  align-items: center;
-  margin-top: var(--space-2);
-}
-.saint-desams strong { width: 100%; }
 .pending-content { color: var(--color-text-muted); }
 .saint-index__group { margin-top: var(--space-5); }
 .saint-index__group h2 {
@@ -459,12 +411,6 @@
 }
 .azhwar-card__detail-link { text-decoration: none; color: inherit; }
 .azhwar-card__detail-link:hover h2 { color: var(--color-primary); }
-.detail__subline {
-  display: block;
-  color: var(--color-text-muted);
-  font-size: 0.9375rem;
-  margin-top: 0.15rem;
-}
 
 /* Timeline as a gold route with ringed milestones */
 .detail__section .eyebrow { display: block; margin-bottom: 0.15rem; }

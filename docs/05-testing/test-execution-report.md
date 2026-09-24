@@ -354,3 +354,31 @@ PO decision CR-18 resolved via US-ACH-04 (FR-92 enhancement): the acharya datase
 1. New unit case **UT-ACH-04** pins the expansion: dataset 23 → 27; the pending-lifeHistory set equals exactly the four scaffolded ids; CR-18 wiring resolves (Engalazhwan guru/sishya, Vedanta Desika guru, Manavala Mamunigal guru); Engalazhwan renders resolving Guru & Sishyas chips with no pending marker; the Nadadur Ammal scaffold renders the pending-dossier marker.
 2. TC-19's card click was corrected to an ends-with href match (`a[href$=…]`): the exact-match href selector missed the `/108Kshetra/` router basename used by the preview build, and the loose name query stays ambiguous because Thiruvaimozhi Pillai's card role text mentions Manavala Mamunigal.
 3. Gates re-executed in full on 2026-09-22 after the project folder was copied to a new machine location; the Playwright Chromium 1.62.1 browser cache was found empty and reinstalled before the E2E run.
+
+---
+
+## Version 2.0 — v3.0 Zip-Parity Rollout Execution (2026-09-24)
+
+### Scope
+
+PO-approved layout parity with the supplied source export across all 11 surfaces (UXD §30),
+rolled out gate-by-gate with per-page PO screenshot approval: shell, Home, Kshetram detail,
+Browse, Azhwars index/detail, Acharyas index/detail, Map, Trip, About (+ PO addendum: CEO
+desk, 7 circuits, etiquette, inquiry modal). Tailwind v4 foundation; legacy CSS retired per
+gate (≈190 rules total); test contracts updated where zip copy changed labels.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors (4 documented-accepted set-state-in-effect warnings: TripPage, AzhwarDetailPage, useWikiImage, AboutPage) |
+| Unit tests (Vitest) | **205/205 pass (20 suites)** incl. 15 new branch-coverage cases; coverage **90.4% statements / 83.0% branches / 88.1% functions / 91.6% lines** (gate 80%) |
+| Production build | Clean (Tailwind v4 via @tailwindcss/vite; initial 342.5 kB gzip; Leaflet lazy 44.9 kB) |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Visual acceptance | Every gate screenshot-reviewed (docs/03-design/gate-shots/, 26 captures incl. dropdowns, modal, celestial + scaffold variants) |
+
+### Notes
+
+1. Contract updates recorded in TCS v1.6: nav labels (108 Temples / My Yatra / Kshetra Tours regex), card trip toggles (+ Trip / ✓ In trip), Visit-status select → checkbox + reset-on-Home (TC-13), map chip index 1 (leading All chip), saint placeholder ◆ → Thiruman watermark, browse banner copy.
+2. Regression caught by e2e during the About addendum (missing lucide `User` import crashed the header dropdown on hover) — fixed same gate.
+3. Coverage dipped to 77.96% branches mid-close-out; 15 targeted branch tests (v3Branches.test.jsx) restored the gate to 83.0%.

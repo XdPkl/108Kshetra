@@ -699,3 +699,30 @@ Closing additions to bring the implemented site to full parity with the approved
 - **Section eyebrows across the saint templates:** small-caps eyebrows above each saint section — Biographical profile, Hagiography, Theological impact, From the Prabandham, Multimedia & archives.
 - **Trip print-ready note:** a reassurance line under the trip toolkit — "This itinerary is print-ready — the print stylesheet hides buttons and maps" (print CSS itself unchanged).
 - **Tests:** new unit case UT-BRW-05 (sort control orders the card headings A–Z); 185 unit / 19 e2e green.
+
+## 30. v3.0 Zip-Parity Rollout (PO-approved source export, 2026-09-24)
+
+The site's look and feel was rebuilt to match the PO-supplied source export
+(`108-divya-kshetrams-source-code.zip`, AI Studio React/Tailwind export) page by page, with
+per-page PO screenshot approval. **Layout parity only**: our router, complete 108-kshetram +
+27-acharya datasets, localStorage contracts (`kshetra.visited.v1`, `kshetra.trip.v1`), URL
+contracts (`?azhwar=`, `?region=`, `/trip?t=`), hash anchors, a11y semantics, lazy Leaflet
+chunks, celestial handling and print styles are preserved. Tailwind v4 was added
+(`styles/zip.css` token layer — hex-identical to v2 — plus Cinzel); legacy hand-CSS retired
+page by page. Omitted zip-only features (layout-only scope): TTS recitation, Download/Export
+ZIP modal, Google Drive/Firebase, per-stop trip note inputs.
+
+| # | Surface | Zip-parity content |
+|---|---|---|
+| 1 | Shell | Brand tile + micro-eyebrow, icon pill nav, "108 Temples" region mega-dropdown (live counts, `?region=` deep-links), My Yatra count badge, darshan counter, Kshetra Tours split pill + dropdown (CEO desk, yatras, circuits, archive, contact), mobile drawer; footer emblems row + Tamil dedicatory line |
+| 2 | Home | Compact hero card (corner brackets, Sangu–Namam–Chakram watermark, invocation pill, Tamil subtitle), tracker card (gradient bar + inline %), featured cards (DD-serial tags from dataset order, pasuram tags, corner toggles), 2×4 dark-overlay saint tiles |
+| 3 | Kshetram detail | Gradient serial head + pill action rail, gold spy pills, 7 gold-strip section cards (3-col profile tiles, deity cards w/ lightbox, gold-bar significance, ornate verse containers w/ word-meaning chips per excerpt, 5 visit tiles, Leaflet mini-map in gold frame, listening cards), who-glorified chip card |
+| 4 | Browse | Directory banner, filter card (search + sort, region pills w/ counts incl. Vinnulagam (2), Show-visited/Show-in-trip checkboxes + State/Deity form/Azhwar selects + live count), 3-col grid, zip empty state |
+| 5–8 | Saints | Index portrait cards (Thiruman watermark fallback, Avatharam/Star rows, desam chips; acharyas grouped by era with count badges) and dossier templates (breadcrumb + quick prev/next, Thiruman hero + stat chips, lifeline rail, Pada Artham verse grid, commentary cards, iconography tiles) |
+| 9 | Map | Atlas header + status card, region chips w/ dots + counts + All chip, plotted-count badge, legend card, nearest-first list (Focus/Directions) after geolocation |
+| 10 | Trip | Action rail, dismissible notice strip, gradient Order-my-route button, gold trip-index medallions, ↓-km connectors, Darshan Done toggles, remove pills |
+| 11 | About | Banner + 6 anchor chips, archive feature tiles, yatras/contact split w/ copy pills, **CEO desk (photo upload/URL/reset, quote, pillars — PO addendum)**, **7 regional circuits (4 from the zip + Vada Nadu, Nadu Nadu, Vinnulaga completed)**, **sanctum etiquette cards**, **Request-Yatra-Schedule inquiry modal (local YATRA-XXXX reference)** |
+
+**Judgment calls:** sort keeps Traditional/A–Z/Z–A semantics in zip styling; Azhwars-Who-
+Glorified stays its own section (test-pinned single-link container); Browse compact tracker
+dropped per zip (header darshan counter covers it); inquiry modal is local-only like the zip.

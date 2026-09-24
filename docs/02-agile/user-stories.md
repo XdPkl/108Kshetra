@@ -467,3 +467,17 @@ Remaining v2 changes are presentation-layer restructurings of existing FR journe
 **US-ACH-04 — Acharya parampara expansion** (2 pts, Priority 2) — *FR-92 enhancement*
 > As a devotee, I want the Guru & Sishyas chips on the Engalazhwan, Vedanta Desika and Manavala Mamunigal pages to resolve so that the guru parampara reads unbroken across the Acharya pages.
 - **Given** the PO decision (2026-09-11, resolving CR-18) to expand the acharya dataset beyond the original 23 entries, **when** the dataset gains the four lineage acharyas named in the dossiers — Thirukkurugai Piran Pillan, Nadadur Ammal, Kidambi Appullar and Thiruvaimozhi Pillai — **then** the Guru & Sishyas rows on those three pages render resolving chips instead of the pending marker; the four new entries render the visible pending marker for their own dossiers until PO text arrives (US-ACH-01 policy); every chip link resolves to a dataset id (UT-ACH-01/UT-ACH-04).
+
+### Post-Delivery Enhancement (2026-09-24) — UXD v3.0 Zip-Parity Rollout
+
+| Story | US-UXD-03 — Zip-parity look-and-feel rollout | EP-UXD | 8 | — (Jira sync pending a fresh API token) |
+
+**US-UXD-03 — Zip-parity look-and-feel rollout** (8 pts, Priority 1)
+> As the Product Owner, I want every page of the site to match the layout of my supplied
+> source export — approved one page at a time by screenshot — so the site gains the compact
+> hero, mega-dropdown shell, gold-strip section cards, portrait grids, atlas/trip chrome and
+> the Kshetra Tours business sections without losing the site's data, routing or behaviors.
+
+Delivered as 11 approval gates + About addendum (UXD §30; TER v2.0; TCS v1.6). All site
+behaviors, URL/localStorage contracts and the 108/27 datasets preserved; zip-only features
+(TTS, Export/Drive, trip notes) omitted per the layout-only scope decision.

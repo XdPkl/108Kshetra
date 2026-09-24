@@ -15,36 +15,9 @@
   margin: 0 auto;
   padding: var(--space-5) var(--space-4) var(--space-6);
 }
-.page__lead {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-lg);
-  max-width: 46rem;
-}
 
 /* Shared section heading (SectionHeading component) */
 .section-heading { margin-top: var(--space-5); }
-.section-heading .eyebrow { margin-bottom: 0.15rem; }
-.section-heading h2 {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 0.55rem;
-  margin: 0;
-}
-.section-heading h2::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 4.5rem;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--gradient-gold);
-}
-.section-heading__lead {
-  color: var(--color-text-muted);
-  margin: 0.7rem 0 0;
-  max-width: 44rem;
-}
 
 /* ---------- Card grid + kshetram card ---------- */
 .card-grid {
@@ -64,41 +37,6 @@
   box-shadow: var(--shadow-1);
   padding: var(--space-4);
   margin: var(--space-3) 0;
-}
-.search-filter-bar__search { position: relative; }
-.search-filter-bar__search input,
-.search-filter-bar__select select {
-  width: 100%;
-  padding: 0.55rem 0.8rem;
-  border: 1px solid rgba(102, 82, 61, 0.4);
-  border-radius: 10px;
-  font-family: var(--font-body);
-  font-size: var(--font-size-md);
-  background: var(--color-bg);
-  color: var(--color-text);
-  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
-}
-.search-filter-bar__search input {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%2366523d' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='9' cy='9' r='5.5'/%3E%3Cpath d='M13.5 13.5 17 17'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: 0.65rem center;
-  background-size: 1rem;
-  padding-left: 2.1rem;
-}
-.search-filter-bar__search input:focus,
-.search-filter-bar__select select:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(201, 154, 46, 0.25);
-  outline: none;
-}
-.search-filter-bar label {
-  display: block;
-  font-size: var(--text-eyebrow);
-  font-weight: 700;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: var(--space-1);
 }
 
 /* Quick region chips + count row (Browse, UXD v2 mocks) */
@@ -150,54 +88,6 @@
 
 /* ---------- Detail page ---------- */
 .detail__back { margin: 0 0 var(--space-2); font-size: 0.9375rem; }
-.detail__back a { color: var(--color-text-muted); text-decoration: none; }
-.detail__back a:hover { color: var(--color-primary); }
-.detail__tamil {
-  color: var(--color-accent-deep);
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 500;
-}
-.detail__badges {
-  display: flex;
-  gap: var(--space-2);
-  flex-wrap: wrap;
-  margin: var(--space-2) 0 var(--space-4);
-}
-.detail__section {
-  position: relative;
-  background: var(--color-surface);
-  border: 1px solid rgba(201, 154, 46, 0.4);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-1);
-  padding: var(--space-4);
-  margin-top: var(--space-3);
-}
-.detail__section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  border-radius: 3px 3px 0 0;
-  background: var(--gradient-gold);
-}
-.detail__section h2 {
-  margin: 0 0 var(--space-3);
-  padding-bottom: var(--space-2);
-  border-bottom: 1px solid rgba(201, 154, 46, 0.35);
-}
-.detail__section dt {
-  font-weight: 700;
-  color: var(--color-text-muted);
-  margin-top: var(--space-2);
-}
-.detail__section dd { margin: 0; }
-.detail__section .detail__section {
-  background: var(--color-surface-sunk);
-  box-shadow: none;
-}
 
 /* ---------- Responsive (mobile-first) ---------- */
 @media (min-width: 640px) {
@@ -276,8 +166,6 @@
 }
 
 .puranam { white-space: pre-line; }
-.detail__pair { margin: var(--space-2) 0 0; }
-.detail__pair dt { font-weight: 700; color: var(--color-text-muted); }
 
 @media (min-width: 640px) {
   .deity-grid { grid-template-columns: repeat(2, 1fr); }

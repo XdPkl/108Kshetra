@@ -160,3 +160,28 @@ PO decision resolving CR-18: the acharya dataset grows 23 → 27 with the four l
 ---
 
 *End of Addendum — TCS-108K-008 v1.5*
+
+---
+
+## Version 1.6 — v3.0 Zip-Parity Contract Updates (2026-09-24)
+
+Layout parity per UXD §30 (all 11 surfaces + About addendum). Behavioral contracts unchanged;
+these copy/control contracts moved with the zip:
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-NAV-01/03 | Nav labels | Browse → **108 Temples**; Trip · N → **My Yatra** + gold count badge; Kshetra Tours name matched by regex (Guided Yatras chip) |
+| UT-YAT-05 | Card trip toggles | Add/Remove to trip → **+ Trip / ✓ In trip** (detail keeps + Add to trip) |
+| TC-13 | Visit-status control | Select → **"Show visited only" checkbox** (aria-label Visit status); reset now on Home (Browse tracker dropped per zip) |
+| UT-MAP-02 | Map chip row | Leading **All regions (108)** chip → region chip index 1 in tests |
+| UT-AZW/SAIN T | Portrait placeholder | ◆ glyph → **Thiruman watermark** behind the labelled frame (asserted via aria-label) |
+| UT-BRW-01 | Banner copy | "Explore the Divya Kshetrams" → "Browse the 108 Divya Desams" (Complete Sacred Directory eyebrow) |
+| UT-ABT-02/03 | NEW | About addendum: CEO desk / 7 circuits / etiquette sections; inquiry modal open→submit→YATRA-XXXX reference |
+
+New suites: **v3Branches.test.jsx** (15 branch cases: tracker %, spy bottom-activation, header
+dropdowns/drawer/Escape, browse status+region filters, map locate+nearest list, CEO photo
+URL/reset, modal open/Escape/dismiss). Quality gates: TC-QA-01 Pass (0 errors; 4 accepted
+warnings) · TC-QA-02 Pass (**205/205 tests, 20 suites**; 90.4/83.0/88.1/91.6) · TC-QA-03 Pass
+(342.5 kB gzip initial; Leaflet lazy unchanged) · E2E **19/19**. Execution recorded in TER v2.0.
+
+*End of Addendum — TCS-108K-008 v1.6*
