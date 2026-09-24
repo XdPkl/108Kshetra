@@ -113,7 +113,8 @@ describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
     renderAt('/map', <MapPage />);
     const before = screen.getAllByTestId('map-marker').length;
     const group = screen.getByRole('group', { name: /filter by region/i });
-    const chip = within(group).getAllByRole('button')[0];
+    // UXD v3.0: the chip row gained a leading "All regions" chip — index 1 is a region
+    const chip = within(group).getAllByRole('button')[1];
     const chipLabel = chip.textContent;
     await user.click(chip);
     const after = screen.getAllByTestId('map-marker').length;
