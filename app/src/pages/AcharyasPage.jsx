@@ -10,6 +10,7 @@ import { getAllAcharyas, getAcharyaById } from '../data/api.js';
 import { groupBy } from '../utils/group.js';
 import { useWikiImage } from '../hooks/useWikiImage.js';
 import { ThirumanIcon } from '../components/SacredIcons.jsx';
+import { SITE_COPY } from '../data/siteCopy.js';
 
 function AcharyaCard({ acharya }) {
   const image = useWikiImage(acharya.wiki ?? null, acharya.photos?.[0]?.src ?? null);
@@ -84,15 +85,13 @@ export default function AcharyasPage() {
       {/* Header banner */}
       <div className="border-b border-[#E3D2AE] pb-4">
         <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">
-          The Guru Parampara
+          {SITE_COPY.acharyasPage.eyebrow}
         </span>
         <h1 className="font-display text-3xl font-semibold text-[#7A2E00] mt-0.5">
-          The Acharyas
+          {SITE_COPY.acharyasPage.title}
         </h1>
         <p className="text-sm text-[#66523D] mt-1 max-w-2xl">
-          The acharyas of the guru parampara — the teachers who received,
-          preserved and expounded the Sri Vaishnava tradition after the Azhwars,
-          in addition to the twelve saint-poets.
+          {SITE_COPY.acharyasPage.lead}
         </p>
       </div>
 

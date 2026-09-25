@@ -4,8 +4,10 @@
  * local-storage privacy note (FR-51/71).
  */
 import { ThirumanIcon, ShankaIcon, ChakraIcon, LotusIcon } from './SacredIcons.jsx';
+import { SITE_COPY } from '../data/siteCopy.js';
 
 export default function Footer() {
+  const { footer } = SITE_COPY;
   return (
     <footer className="site-footer mt-16 bg-[#571F00] text-[#F7ECD9]">
       {/* Top golden hairline accent */}
@@ -21,26 +23,25 @@ export default function Footer() {
 
         {/* Traditional Tamil dedicatory prayer */}
         <p className="font-display text-base text-[#E2C47C]" lang="ta">
-          சர்வம் ஸ்ரீமந் நாராயண சரணாரவிந்தார்ப்பணமஸ்து
+          {footer.prayer}
         </p>
 
         <div className="space-y-1.5 pt-1 text-[#F7ECD9]/90 max-w-3xl mx-auto leading-relaxed">
           <p>
-            Compiled with reverence from the Nalayira Divya Prabandham tradition and
-            standard published lists of the 108 Divya Desams.
+            {footer.compiledNote}
           </p>
           <p>
-            Content is provided in good faith for devotional and educational purposes.
+            {footer.goodFaithNote}
           </p>
           <p className="text-[#F7ECD9]/70 text-xs pt-1">
-            Your visited marks and trip are stored only in your browser — never sent to any server.
+            {footer.privacyNote}
           </p>
         </div>
 
         {/* Sacred footer mark */}
         <div className="pt-3 border-t border-[#7A2E00]/60 flex items-center justify-center gap-2 text-xs text-[#E2C47C]/70">
           <LotusIcon className="w-3.5 h-3.5" />
-          <span>108 Divya Desams • Sri Ramanuja Dasa</span>
+          <span>{footer.mark}</span>
           <LotusIcon className="w-3.5 h-3.5" />
         </div>
       </div>

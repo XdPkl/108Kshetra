@@ -184,4 +184,19 @@ URL/reset, modal open/Escape/dismiss). Quality gates: TC-QA-01 Pass (0 errors; 4
 warnings) · TC-QA-02 Pass (**205/205 tests, 20 suites**; 90.4/83.0/88.1/91.6) · TC-QA-03 Pass
 (342.5 kB gzip initial; Leaflet lazy unchanged) · E2E **19/19**. Execution recorded in TER v2.0.
 
-*End of Addendum — TCS-108K-008 v1.6*
+## Version 1.7 — Sanity CMS Content Pipeline (2026-09-25)
+
+US-CMS-01. Content moved to `app/src/data/content/*.json` behind unchanged module
+shims; new contracts:
+
+| ID | Case | Contract |
+|---|---|---|
+| UT-CMS-01 | Data conversion lossless | All 4 data suites (integrity/enrichment/dossiers/saints) pass unchanged against the JSON-backed shims — 108/12/27/93-record invariants intact |
+| UT-CMS-02 | Photo src storage | Dossier photo `src` now site-relative (`photos/x.jpg`) or absolute https; pinned regex updated; `assetUrl()` prefixes BASE_URL for relative paths and passes http/data/blob through |
+| UT-CMS-03 | assetUrl unit cases | 3 cases: BASE_URL prefix (+leading-slash normalization), absolute/inline passthrough, nullish passthrough |
+| UT-CMS-04 | Round-trip (offline) | `studio/scripts/verify-roundtrip.mjs --local`: app JSON → CMS shapes → simulated GROQ → app JSON — all 11 files canonically equal |
+| UT-CMS-05 | Sync self-test (fixture) | `app/scripts/sync-content.mjs --fixture scripts/__fixtures__/sync-response.json --check` exits 0 with zero content diffs (key-order-only writes normalized 2026-09-25) |
+| UT-CMS-06 | Sanity schema | `sanity schema validate` — 0 errors / 0 warnings (150 documents: kshetram/azhwar/acharya + about/siteCopy/config singletons) |
+| UT-CMS-07 | Site-copy extraction | Hero, page banners, About chrome, inquiry-modal copy, header dropdown/drawer copy and footer moved verbatim to `site-copy.json`; all 19 e2e + page suites still pin the same strings |
+
+*End of Addendum — TCS-108K-008 v1.7*

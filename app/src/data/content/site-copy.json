@@ -1,0 +1,275 @@
+{
+  "hero": {
+    "invocation": "ஸ்ரீமதே ராமானுஜாய நமஃ",
+    "eyebrow": "Nalayira Divya Prabandham",
+    "title": "108 Divya Kshetrams",
+    "subtitle": "ஆழ்வார்களால் மங்களாசாசனம் செய்யப்பட்ட நூற்றெட்டு திவ்ய தேசங்கள்",
+    "description": "The sacred abodes of Lord Narayana — the 108 Divya Desams glorified by the twelve Azhwars in the four thousand verses of the Nalayira Divya Prabandham, the Tamil Veda.",
+    "cta": "Explore the 108 Kshetrams"
+  },
+  "home": {
+    "featured": {
+      "eyebrow": "Begin your journey",
+      "title": "Featured Kshetrams",
+      "lead": "The most celebrated of the 108 abodes — hover a card to plan your visit.",
+      "viewAll": "View all 108 Kshetrams →"
+    },
+    "azhwarStrip": {
+      "eyebrow": "Saint-poets of the Tamil Veda",
+      "title": "The Twelve Azhwars",
+      "lead": "Whose hymns sanctified these hills, groves and cities.",
+      "ctaLabel": "Azhwar Darshan - Featured"
+    },
+    "acharyaStrip": {
+      "eyebrow": "The guru parampara",
+      "title": "The Acharyas",
+      "lead": "Teachers who received, preserved and expounded the tradition.",
+      "ctaLabel": "Acharya Darshan - Featured"
+    }
+  },
+  "browse": {
+    "eyebrow": "Complete Sacred Directory",
+    "title": "Browse the 108 Divya Desams",
+    "lead": "Search, filter by sacred region, mark visited darshans, and curate your personal yatra pilgrimage route."
+  },
+  "map": {
+    "eyebrow": "Interactive Pilgrimage Atlas",
+    "title": "Map of the Divya Desams"
+  },
+  "trip": {
+    "title": "My Yatra — Trip Planner",
+    "emptyTitle": "Your trip is empty",
+    "emptyMessage": "Add desams from any kshetram page, card or map popup to start planning your yatra."
+  },
+  "azhwarsPage": {
+    "eyebrow": "The Twelve Saint-Poets",
+    "title": "The Twelve Azhwars",
+    "titleTamil": "(பன்னிரு ஆழ்வார்கள்)",
+    "lead": "The twelve Azhwars (\"those immersed in the ocean of divine love\") whose sacred hymns canonized the 108 Divya Desams — listed in traditional chronological order."
+  },
+  "acharyasPage": {
+    "eyebrow": "The Guru Parampara",
+    "title": "The Acharyas",
+    "lead": "The acharyas of the guru parampara — the teachers who received, preserved and expounded the Sri Vaishnava tradition after the Azhwars, in addition to the twelve saint-poets."
+  },
+  "about": {
+    "banner": {
+      "eyebrow": "Nalayira Divya Prabandham Series",
+      "title": "About Us — Kshetra Tours",
+      "tagline": "A dedicated devotional resource and guided pilgrimage initiative celebrating the 108 Divya Desams glorified in the Tamil Veda."
+    },
+    "anchors": [
+      "Digital Archive",
+      "Guided Yatras",
+      "Leadership & CEO",
+      "Regional Circuits",
+      "Contact",
+      "Sanctum Etiquette"
+    ],
+    "sections": {
+      "archiveEyebrow": "The digital archive",
+      "toursEyebrow": "Guided yatras",
+      "contactEyebrow": "Pilgrim inquiries",
+      "emailLabel": "Email us",
+      "phoneLabel": "Phone / WhatsApp",
+      "responseHoursLabel": "Response hours:",
+      "requestSchedule": "Request Yatra Schedule",
+      "ceoEyebrow": "Leadership & Sampradaya Seva",
+      "ceoTitle": "Founder & Chief Executive Officer",
+      "ceoBadge": "Kainkaryam Leadership",
+      "quoteAttribution": "Founder’s Desk, Kshetra Tours",
+      "inquireCeo": "Inquire with CEO’s Office",
+      "directEmailLabel": "Direct Email:",
+      "circuitsEyebrow": "Devotional itineraries",
+      "circuitsTitle": "Popular Divya Desam Pilgrimage Circuits",
+      "circuitsNote": "Organized regionally to minimize travel fatigue and maximize sanctum darshan time.",
+      "keyShrinesLabel": "Key shrines in this circuit:",
+      "viewAllPrefix": "View all",
+      "viewAllSuffix": "temples",
+      "inquireCircuit": "Inquire Circuit",
+      "etiquetteEyebrow": "Yatra guidance & sacred tradition",
+      "etiquetteTitle": "Sanctum Etiquette & Parayanam Protocols",
+      "etiquetteLead": "Essential spiritual guidelines to observe when approaching the sanctums of Lord Narayana across the 108 Divya Desams."
+    },
+    "scheduleModal": {
+      "deskEyebrow": "Pilgrim Service Desk",
+      "title": "Request Yatra Schedule",
+      "labels": {
+        "name": "Devotee / Pilgrim Name *",
+        "phone": "Phone / WhatsApp *",
+        "email": "Email Address *",
+        "circuit": "Preferred Pilgrimage Circuit",
+        "pilgrims": "Number of Pilgrims",
+        "window": "Expected Travel Window",
+        "notes": "Special Requirements (Optional)"
+      },
+      "placeholders": {
+        "name": "e.g. Sriraman / Padmavathi",
+        "phone": "+91 98765 43210",
+        "email": "devotee@example.com",
+        "notes": "e.g. Sattvic prasadam only, senior citizen darshan assistance, wheelchair required..."
+      },
+      "extraCircuitOptions": [
+        "Complete 108 Divya Desam Grand Yatra (Phased Annual Circuit)",
+        "Executive Office / CEO Yatra Consultation",
+        "Festival Yatra Schedule Request (Margazhi, Panguni, Brahmotsavam)",
+        "Upcoming General Yatra Schedule",
+        "Custom Satsang / Family Yatra"
+      ],
+      "pilgrimOptions": [
+        {
+          "value": "1",
+          "label": "1 Person (Solo Devotee)"
+        },
+        {
+          "value": "2",
+          "label": "2 Persons (Couple / Companions)"
+        },
+        {
+          "value": "3-5",
+          "label": "3–5 Persons (Family Group)"
+        },
+        {
+          "value": "6-12",
+          "label": "6–12 Persons (Extended Family)"
+        },
+        {
+          "value": "15+",
+          "label": "15+ Persons (Satsang / Trust Group)"
+        }
+      ],
+      "travelWindowOptions": [
+        {
+          "value": "Next 30 Days",
+          "label": "Next 30 Days"
+        },
+        {
+          "value": "Next 60 Days",
+          "label": "Next 60 Days"
+        },
+        {
+          "value": "Margazhi Season (Dec-Jan)",
+          "label": "Margazhi Season (Dec–Jan)"
+        },
+        {
+          "value": "Panguni / Chithirai (Mar-May)",
+          "label": "Panguni / Chithirai (Mar–May)"
+        },
+        {
+          "value": "Flexible / Just Planning",
+          "label": "Flexible / Inquiring for Dates"
+        }
+      ],
+      "submit": "Submit Schedule Inquiry",
+      "privacyNote": "We protect your privacy. Your information is used strictly to coordinate temple yatra schedules.",
+      "success": {
+        "eyebrow": "Inquiry Received",
+        "greetingPrefix": "Radhe Krishna,",
+        "greetingFallback": "Devotee",
+        "bodyLead": "Your pilgrimage inquiry has been logged under reference",
+        "bodyTail": ". Our yatra coordinator will share the detailed day-wise itinerary, departure dates, and sattvic stay arrangements via WhatsApp and email within 24 hours.",
+        "summaryLabels": {
+          "circuit": "Selected Circuit:",
+          "devotees": "Devotees:",
+          "window": "Preferred Window:",
+          "contact": "Contact:",
+          "pilgrimsSuffix": "pilgrims"
+        },
+        "done": "Done"
+      }
+    }
+  },
+  "header": {
+    "regionRows": [
+      {
+        "value": "Chola Nadu",
+        "name": "Chola Nadu",
+        "highlight": "Cauvery Delta & Srirangam"
+      },
+      {
+        "value": "Thondai Nadu",
+        "name": "Thondai Nadu",
+        "highlight": "Kanchipuram & Chennai"
+      },
+      {
+        "value": "Pandiya Nadu",
+        "name": "Pandiya Nadu",
+        "highlight": "Madurai & Nava Tirupathi"
+      },
+      {
+        "value": "Malai Nadu",
+        "name": "Malai Nadu",
+        "highlight": "Kerala & Kanyakumari"
+      },
+      {
+        "value": "Nadu Nadu",
+        "name": "Nadu Nadu",
+        "highlight": "Cuddalore & Villupuram"
+      },
+      {
+        "value": "Vada Nadu",
+        "name": "Vada Nadu",
+        "highlight": "Tirupati, Ahobilam, Badrinath"
+      },
+      {
+        "value": "Celestial",
+        "name": "Vinnulaga Thirupathigal",
+        "highlight": "Paramapadham & Milky Ocean"
+      }
+    ],
+    "templesDropdown": {
+      "heading": "The 108 Sacred Abodes",
+      "regionsBadge": "7 Regions",
+      "browseAll": "Browse All 108 Temples",
+      "totalBadge": "108 Total",
+      "filterBy": "Filter by Region:"
+    },
+    "toursDropdown": {
+      "heading": "Kshetra Tours & Pilgrimage Trust",
+      "subtitle": "About the archive, the trust and its guided yatra kainkaryam",
+      "items": [
+        {
+          "title": "Founder & CEO Desk",
+          "subtitle": "Kainkaryam leadership, message & customized consultations"
+        },
+        {
+          "title": "Guided Yatras & Departures",
+          "subtitle": "Fixed groups, pure madi-catering & senior-friendly pacing"
+        },
+        {
+          "title": "7 Regional Pilgrimage Circuits",
+          "subtitle": "Chola, Pandiya, Thondai, Malai, and Vada Nadu itineraries"
+        },
+        {
+          "title": "The Digital Archive",
+          "subtitle": "How the 108 kshetrams and the Prabandham are compiled"
+        }
+      ],
+      "inquire": "Contact & Yatra Inquiries"
+    },
+    "drawer": {
+      "summaryTitle": "108 Divya Kshetrams",
+      "summarySubtitle": "Pilgrim Companion & Tours",
+      "visitedLabel": "/108 Visited",
+      "tripLabel": "in Trip",
+      "shrinesGroup": "Divya Desam Shrines",
+      "plannerGroup": "Pilgrim Route Planner",
+      "lineageGroup": "Guru Parampara (Sacred Lineage)",
+      "toursGroup": "Kshetra Tours (Guided Yatras)",
+      "toursBadge": "Sattvic Travel",
+      "toursOverview": "Kshetra Tours Overview",
+      "toursOverviewSub": "Sampradaya pilgrimage organization",
+      "departures": "Guided Departures & Schedules",
+      "circuits": "7 Regional Pilgrimage Circuits",
+      "etiquette": "Sanctum Etiquette",
+      "inquireDesk": "Book / Inquire with Yatra Desk"
+    }
+  },
+  "footer": {
+    "prayer": "சர்வம் ஸ்ரீமந் நாராயண சரணாரவிந்தார்ப்பணமஸ்து",
+    "compiledNote": "Compiled with reverence from the Nalayira Divya Prabandham tradition and standard published lists of the 108 Divya Desams.",
+    "goodFaithNote": "Content is provided in good faith for devotional and educational purposes.",
+    "privacyNote": "Your visited marks and trip are stored only in your browser — never sent to any server.",
+    "mark": "108 Divya Desams • Sri Ramanuja Dasa"
+  }
+}

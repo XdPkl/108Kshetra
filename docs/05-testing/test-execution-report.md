@@ -382,3 +382,37 @@ gate (≈190 rules total); test contracts updated where zip copy changed labels.
 1. Contract updates recorded in TCS v1.6: nav labels (108 Temples / My Yatra / Kshetra Tours regex), card trip toggles (+ Trip / ✓ In trip), Visit-status select → checkbox + reset-on-Home (TC-13), map chip index 1 (leading All chip), saint placeholder ◆ → Thiruman watermark, browse banner copy.
 2. Regression caught by e2e during the About addendum (missing lucide `User` import crashed the header dropdown on hover) — fixed same gate.
 3. Coverage dipped to 77.96% branches mid-close-out; 15 targeted branch tests (v3Branches.test.jsx) restored the gate to 83.0%.
+
+## TER v2.1 — Sanity CMS Content Pipeline (2026-09-25, US-CMS-01)
+
+Deliverable: admin-editable photos/text via a hosted Sanity Studio (free tier) with a
+git-based publish pipeline; the public site stays a static GitHub Pages build with zero
+runtime dependency on the CMS.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| Data conversion (UT-CMS-01) | 10 JS data modules → `app/src/data/content/*.json` via scripted export (`convert-js-to-json.mjs`, invariants asserted); module shims keep every import path; **204/205 pre-existing tests green before the single planned regex edit** |
+| oxlint | 0 errors (same 4 documented-accepted warnings) |
+| Unit tests (Vitest) | **208/208 pass (21 suites)** — 205 preserved + 3 new assetUrl cases |
+| Coverage | **92.47% statements / 82.9% branches / 88.2% functions / 93.67% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** after the site-copy extraction (strings moved verbatim) |
+| Schema validation (UT-CMS-06) | `sanity schema validate` → 0 errors / 0 warnings |
+| Round-trip proof (UT-CMS-04) | Offline: **11/11 content files lossless** (app JSON → CMS doc shapes → simulated GROQ → app JSON) |
+| Sync self-test (UT-CMS-05) | Fixture replay `--check` → 0 diffs; repo files normalized to sync key order (cosmetic-only rewrite, re-verified 208/208) |
+
+### Notes
+
+1. The one intentional test edit: dossier photo-src regex (BASE_URL-prefixed → site-relative
+   or absolute https), paired with the new `assetUrl()` resolver applied in
+   `useWikiImage` + `GalleryLightbox` + CEO photo.
+2. Late-found data variants mapped during round-trip debugging: azhwar `bhaktiBhava`,
+   saint-verse `translit`/`significance`/`meaning` variants, and azhwar `lifeHistory`
+   (initially unmapped) — all now carried 1:1.
+3. Live-project verification (`npm run verify` against the real Sanity project) is the one
+   remaining gate, by design it needs the PO's account — see the setup checklist in
+   `studio/README.md`; watch item: celestial-desam `timings: null` storage fidelity.
+4. CI additions: `.github/workflows/content-sync.yml` (repository_dispatch/workflow_dispatch,
+   contents:write, concurrency-serialized; commits only after lint+tests+build pass).

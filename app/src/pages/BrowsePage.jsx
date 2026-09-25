@@ -13,6 +13,7 @@ import { getFilterOptions } from '../data/api.js';
 import { useVisited } from '../hooks/useVisited.js';
 import { useTrip } from '../hooks/useTrip.js';
 import KshetramCard from '../components/KshetramCard.jsx';
+import { SITE_COPY } from '../data/siteCopy.js';
 import { Search } from 'lucide-react';
 
 const SORTERS = {
@@ -57,13 +58,13 @@ export default function BrowsePage() {
       {/* Header banner */}
       <div className="border-b border-[#E3D2AE] pb-4">
         <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">
-          Complete Sacred Directory
+          {SITE_COPY.browse.eyebrow}
         </span>
         <h1 className="font-display text-3xl font-semibold text-[#7A2E00] mt-0.5">
-          Browse the 108 Divya Desams
+          {SITE_COPY.browse.title}
         </h1>
         <p className="text-sm text-[#66523D] mt-1">
-          Search, filter by sacred region, mark visited darshans, and curate your personal yatra pilgrimage route.
+          {SITE_COPY.browse.lead}
         </p>
       </div>
 

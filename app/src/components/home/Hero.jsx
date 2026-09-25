@@ -7,8 +7,10 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { ThirumanIcon, ChakraIcon, ShankaIcon, DeepamIcon } from '../SacredIcons.jsx';
+import { SITE_COPY } from '../../data/siteCopy.js';
 
 export default function Hero() {
+  const { hero } = SITE_COPY;
   return (
     <section className="relative overflow-hidden text-center px-4 sm:px-6 py-6 sm:py-7 rounded-2xl border border-[#C99A2E]/50 shadow-xs bg-[#FFFDF7]">
       {/* Traditional Temple Corner Embellishments */}
@@ -48,7 +50,7 @@ export default function Hero() {
           <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#FAF2E3] border border-[#E3D2AE]">
             <ThirumanIcon className="w-3 h-4" />
             <span className="text-[10px] sm:text-[11px] font-semibold text-[#7A2E00] tracking-wider" lang="ta">
-              ஸ்ரீமதே ராமானுஜாய நமஃ
+              {hero.invocation}
             </span>
           </div>
           <DeepamIcon className="w-4 h-4 hidden sm:block" />
@@ -56,24 +58,22 @@ export default function Hero() {
 
         {/* Eyebrow Label */}
         <span className="inline-block text-[11px] font-bold uppercase tracking-[0.16em] text-[#B34700]">
-          Nalayira Divya Prabandham
+          {hero.eyebrow}
         </span>
 
         {/* Hero Title */}
         <h1 className="font-display text-3xl sm:text-5xl lg:text-5xl font-bold mt-0.5 leading-[1.1] bg-gradient-to-b from-[#7A2E00] to-[#B34700] bg-clip-text text-transparent">
-          108 Divya Kshetrams
+          {hero.title}
         </h1>
 
         {/* Classical Tamil Subtitle */}
         <p className="mt-0.5 text-xs sm:text-sm font-semibold text-[#96731F]" lang="ta">
-          ஆழ்வார்களால் மங்களாசாசனம் செய்யப்பட்ட நூற்றெட்டு திவ்ய தேசங்கள்
+          {hero.subtitle}
         </p>
 
         {/* Compact Description */}
         <p className="max-w-xl mx-auto mt-2 text-xs sm:text-sm text-[#66523D] leading-relaxed">
-          The sacred abodes of Lord Narayana — the 108 Divya Desams glorified by
-          the twelve Azhwars in the four thousand verses of the Nalayira Divya
-          Prabandham, the Tamil Veda.
+          {hero.description}
         </p>
 
         {/* Primary CTA Button */}
@@ -82,7 +82,7 @@ export default function Hero() {
             to="/kshetrams"
             className="inline-flex items-center gap-2 px-6 py-2 sm:py-2.5 rounded-full bg-gradient-to-b from-[#D95F0E] to-[#B34700] text-[#FFFDF7] text-xs sm:text-sm font-semibold shadow-xs hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all"
           >
-            <span>Explore the 108 Kshetrams</span>
+            <span>{hero.cta}</span>
             <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>
         </div>

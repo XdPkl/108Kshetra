@@ -481,3 +481,32 @@ Remaining v2 changes are presentation-layer restructurings of existing FR journe
 Delivered as 11 approval gates + About addendum (UXD §30; TER v2.0; TCS v1.6). All site
 behaviors, URL/localStorage contracts and the 108/27 datasets preserved; zip-only features
 (TTS, Export/Drive, trip notes) omitted per the layout-only scope decision.
+
+### Post-Delivery Enhancement (2026-09-25) — Sanity CMS Content Maintenance
+
+| Story | US-CMS-01 — Admin-editable photos & text via hosted CMS | EP-CMS | 8 | — (Jira sync pending a fresh API token) |
+
+**US-CMS-01 — Admin-editable photos & text via hosted CMS** (8 pts, Priority 1)
+> As the Product Owner, I want my designated editors (2–3 invited emails, Google login —
+> no GitHub accounts) to change every site photo and text passage in a friendly web editor,
+> so the live site updates in ~2 minutes without a developer — while the existing test
+> suite blocks any structurally broken edit from ever deploying.
+
+- **Given** the app's datasets converted to JSON under `app/src/data/content/` (consumed via
+  thin shims, so all imports/tests are unchanged), **and** a Sanity Studio
+  (`studio/`, free Community plan) whose schemas mirror those JSON shapes 1:1, **when** an
+  invited editor publishes a change, **then** the Sanity webhook triggers the GitHub
+  "Content sync" action, which pulls the content via one GROQ query, runs
+  lint → 205 unit tests (80% gates) → build, and only on full green commits the JSON to
+  `main` — tripping the existing Pages deploy; failed tests leave the live site untouched
+  (rollback = `git revert`).
+- Photos become Sanity image assets served from the Sanity CDN with on-the-fly sizing
+  (card 640 / portrait 800 / lightbox 1280, `auto=format`); Wikipedia-title fallbacks and
+  the site-relative `photos/` path storage remain; the CEO portrait gains a CMS default
+  (`about.ceo.photoUrl`) beneath the existing localStorage personal override.
+- Losslessness proven offline by `studio/scripts/verify-roundtrip.mjs --local`
+  (app JSON → CMS doc shapes → simulated GROQ → app JSON: all 11 files byte-equivalent
+  canonically) and by the CI-side fixture self-test
+  (`app/scripts/sync-content.mjs --fixture … --check`).
+- Delivered as US-CMS-01 (TCS v1.7; TER v2.1). One-time PO setup checklist
+  (account, import, invites, webhook) documented in `studio/README.md`.

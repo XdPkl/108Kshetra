@@ -1,0 +1,3237 @@
+{
+  "triplicane": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "21:00"
+      ],
+      "notes": "Grand Brahmotsavam in Panguni"
+    },
+    "wiki": "Parthasarathy Temple, Triplicane",
+    "moolavar": {
+      "name": "Venkatakrishnan (Parthasarathy)",
+      "tamilName": "வெங்கடகிருஷ்ணன்",
+      "form": "Nindran — standing, with moustache showing the charioteer aspect"
+    },
+    "thaayar": {
+      "name": "Rukmani (Nilamangai Thaayar)",
+      "tamilName": "நீளமங்கையார்"
+    },
+    "urchavar": {
+      "name": "Parthasarathy",
+      "tamilName": "பார்த்தசாரதி"
+    },
+    "puranam": "Krishna here serves as Parthasarathy, the charioteer of Arjuna in the Kurukshetra war; the Moolavar still bears the marks of Bhishma’s arrows, and he refused to take up weapons, honouring his vow.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 2-8",
+      "work": "Periya Thirumozhi",
+      "meaning": "Thirumangai Azhwar hails the Lord of Thiruvallikkeni who bore the Pandavas’ burden as their charioteer."
+    }
+  },
+  "thiruneermalai": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:30"
+      ],
+      "notes": "Hill shrine has steps — darshan by climb"
+    },
+    "wiki": "Neervanna Perumal temple, Thiruneermalai",
+    "moolavar": {
+      "name": "Neervannan",
+      "tamilName": "நீர்வண்ணன்",
+      "form": "Nindran — standing at the hill shrine"
+    },
+    "thaayar": {
+      "name": "Kadalvalli Nachiyar",
+      "tamilName": "கடல்வல்லி நாச்சியார்"
+    },
+    "urchavar": {
+      "name": "Ranganathan",
+      "tamilName": "ரங்கநாதன்"
+    },
+    "puranam": "Thirumangai Azhwar waited six months at this water-hill for darshan; the Lord then revealed himself to him in four forms — standing, seated, reclining and walking.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 2-9",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar sings of Neervannan of the sacred hill surrounded by holy waters."
+    }
+  },
+  "kanchi-varadaraja": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "11:00"
+      ],
+      "evening": [
+        "16:00",
+        "20:30"
+      ],
+      "notes": "Athi Varadar rises from the Anantha Saras tank once in 40 years"
+    },
+    "wiki": "Varadharaja Perumal Temple, Kanchipuram",
+    "moolavar": {
+      "name": "Varadharaja (Devaraja)",
+      "tamilName": "வரதராஜ பெருமாள்",
+      "form": "Nindran — standing on the Athigiri hill"
+    },
+    "thaayar": {
+      "name": "Perundevi Thaayar",
+      "tamilName": "பெருந்தேவி தாயார்"
+    },
+    "urchavar": {
+      "name": "Athi Varadar",
+      "tamilName": "அத்தி வரதர்"
+    },
+    "puranam": "Brahma worshipped the Lord at the Athigiri hill here; the Athi Varadar image, carved from the heartwood of an athi fig tree, emerges from the temple tank every forty years in a festival drawing millions.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 2-9 (Vaazhiye Kacchi)",
+      "work": "Periya Thirumozhi",
+      "meaning": "Long live Kanchi, long live the jewel-hued Lord of Hastigiri — those who praise him find their days and lives ever flourishing.",
+      "tamil": "வாழியே கச்சி வாழியே ஹஸ்திகிரி மணிவண்ணன் வாழ்த்துவார் வாழ்வும் நாளும் வளர்ந்தோங்கும்",
+      "transliteration": "Vaazhiye Kacchi vaazhiye Hasthigiri manivannan — vaazhththuvaar vaazhvum naalum valarngaum"
+    }
+  },
+  "thiruvekka": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "20:00"
+      ],
+      "notes": ""
+    },
+    "wiki": "Yathothkari Perumal Temple",
+    "moolavar": {
+      "name": "Yathothakari (Sonna Vannam Seitha Perumal)",
+      "tamilName": "சொன்ன வண்ணம் செய்த பெருமாள்",
+      "form": "Kidandan — reclining"
+    },
+    "thaayar": {
+      "name": "Komala Valli Thaayar",
+      "tamilName": "கொமளவல்லி தாயார்"
+    },
+    "urchavar": {
+      "name": "Vegasetu",
+      "tamilName": "வேகவானன்"
+    },
+    "puranam": "When the haughty Saraswati tried to drown the area with the Vegavati river in flood, the Lord lay down as a dam across her course — and when Thirumazhisai Azhwar commanded, he rolled up like a mat and followed his devotee out of Kanchi.",
+    "pasuram": {
+      "azhwarId": "thirumazhisai",
+      "reference": "Naanmugan Thiruvandadi",
+      "work": "Naanmugan Thiruvandadi",
+      "meaning": "The Lord who did exactly as his devotee said — \"sonna vannam seitha\" — earning this kshetram its name."
+    }
+  },
+  "ashtabujam": {
+    "timings": {
+      "morning": [
+        "06:30",
+        "11:30"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": ""
+    },
+    "wiki": "Ashtabujakaram",
+    "moolavar": {
+      "name": "Aadhikesava (Ashtabhuja Perumal)",
+      "tamilName": "அஷ்டபுஜ பெருமாள்",
+      "form": "Nindran — standing with eight arms holding eight weapons"
+    },
+    "thaayar": {
+      "name": "Alar Mel Mangai (Amritavalli)",
+      "tamilName": "ஆலர்மேல்மங்கை"
+    },
+    "urchavar": null,
+    "puranam": "Gajendra the elephant king worshipped here; the Lord appeared with eight arms to shelter him, a form he keeps to this day.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 2-8",
+      "work": "Periya Thirumozhi",
+      "meaning": "The eight-armed Lord of Thiru Ashtabujam who wields the conch, discus, bow and mace together."
+    }
+  },
+  "thiruooragam": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "11:30"
+      ],
+      "evening": [
+        "16:00",
+        "20:00"
+      ],
+      "notes": "Part of the single Ulagalantha Perumal complex"
+    },
+    "wiki": "Ulagalantha Perumal Temple, Kanchipuram",
+    "moolavar": {
+      "name": "Ulagalantha Perumal (Trivikrama)",
+      "tamilName": "உலகளந்த பெருமாள்",
+      "form": "Nindran — the giant form of Vamana’s third stride"
+    },
+    "thaayar": {
+      "name": "Amirthavalli Thaayar",
+      "tamilName": "அமிர்தவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Mahabali, humbled by Vamana’s three strides that measured all the worlds, is said to hold the Lord’s raised foot here even now — Adisesha (Ooragam) himself forms the shrine’s serpent legend.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi (Ooragaththuullan)",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar worships the one who measured the three worlds yet rests tiny in the devotee’s heart."
+    }
+  },
+  "thiruneeragam": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "11:30"
+      ],
+      "evening": [
+        "16:00",
+        "20:00"
+      ],
+      "notes": "Shrine within the Ulagalantha Perumal complex"
+    },
+    "moolavar": {
+      "name": "Jagadeeshwarar",
+      "tamilName": "ஜெகதீஸ்வரர்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "The water-principle (neer) of the sacred deluge is worshipped here — the Lord who preserved the waters of creation within the Ulagalantha complex.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "Praise to Neeragathan, the Lord of the holy waters of Kanchi."
+    }
+  },
+  "thirukkaragam": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "11:30"
+      ],
+      "evening": [
+        "16:00",
+        "20:00"
+      ],
+      "notes": "Shrine within the Ulagalantha Perumal complex"
+    },
+    "moolavar": {
+      "name": "Karunakaran",
+      "tamilName": "கருணாகரன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "The Lord here is the very ocean of mercy — Karunakaran — who receives the worship once offered by the celestials at Kanchi.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The merciful Lord of Kaaragam who forgives every failing of the devotee."
+    }
+  },
+  "thirukkarvanam": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "11:30"
+      ],
+      "evening": [
+        "16:00",
+        "20:00"
+      ],
+      "notes": "Shrine within the Ulagalantha Perumal complex"
+    },
+    "moolavar": {
+      "name": "Kaarvaanan (Neelamega Perumal)",
+      "tamilName": "கார்வானன்",
+      "form": "Nindran — standing, cloud-hued"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "The rain-cloud hue of the Lord here is worshipped as the giver of the season’s rains to the groves of Kanchi.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The cloud-hued Lord of Kaarvaanam who showers grace like the first rain."
+    }
+  },
+  "parameswara-vinnagaram": {
+    "timings": {
+      "morning": [
+        "07:30",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "19:30"
+      ],
+      "notes": "Pallava-era structure"
+    },
+    "wiki": "Vaikunda Perumal Temple, Kanchipuram",
+    "moolavar": {
+      "name": "Vaikundanathan",
+      "tamilName": "வைகுந்தநாதன்",
+      "form": "Irundhan — seated, with reclining and standing forms on the upper tiers"
+    },
+    "thaayar": {
+      "name": "Anjilai valli Thaayar",
+      "tamilName": "அஞ்சிலைவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Built by the Pallava king Nandivarman II, whose coronation the Lord is said to have blessed; the three-tier sanctum shows him seated, reclining and standing.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The seated Lord of Parameswara Vinnagaram, the Paramapada that grants moksha."
+    }
+  },
+  "pavalavannam": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "11:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Pavalavannan",
+      "tamilName": "பவளவண்ணன்",
+      "form": "Nindran — standing, coral-hued"
+    },
+    "thaayar": {
+      "name": "Pavalavalli Thaayar",
+      "tamilName": "பவளவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "The coral-hued Lord emerged from the sacrificial fire of the sages here, glowing like polished ruby (pavalam).",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The ruby-hued Lord of Thiruppaavalavannam who glows in the devotee’s heart."
+    }
+  },
+  "thiruppadagam": {
+    "timings": {
+      "morning": [
+        "06:30",
+        "11:30"
+      ],
+      "evening": [
+        "16:30",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "wiki": "Pandava Thoothar Perumal Temple",
+    "moolavar": {
+      "name": "Pandava Thoodhar (Krishna)",
+      "tamilName": "பாண்டவ தூதன்",
+      "form": "Irundhan — seated in the giant vishvaroopa form of the divine messenger"
+    },
+    "thaayar": {
+      "name": "Rukmini (Padmagandhini)",
+      "tamilName": "பத்மகந்தி"
+    },
+    "urchavar": null,
+    "puranam": "Krishna came as the Pandavas’ messenger (thoodhar) to Duryodhana’s court; here he reveals that towering vishvaroopa form, seated in majesty.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar marvels that the Lord who measured worlds consented to serve as a messenger."
+    }
+  },
+  "nilathingal-thundam": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "20:30"
+      ],
+      "notes": "Within the Ekambaranathar temple complex"
+    },
+    "moolavar": {
+      "name": "Nilathingal Thundathan",
+      "tamilName": "நீலத்திங்கள் துண்டத்தான்",
+      "form": "Nindran — standing, moon-hued"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Within Shiva’s Ekambaranathar temple, Vishnu is worshipped as the cool quarter of the moon that once cooled the burning serpent-fire of Kanchi’s legend.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The moon-hued Lord within the ancient Ekambara grove."
+    }
+  },
+  "thirukkalvanoor": {
+    "timings": {
+      "morning": [
+        "05:30",
+        "12:30"
+      ],
+      "evening": [
+        "16:00",
+        "21:00"
+      ],
+      "notes": "Within the Kamakshi Amman temple complex"
+    },
+    "moolavar": {
+      "name": "Aadhi Varaha Perumal",
+      "tamilName": "ஆதி வராஹ பெருமாள்",
+      "form": "Nindran — standing, facing south"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "The primordial Varaha shrine stands behind the Kamakshi Amman sanctum — the \"Kalvan\" (divine thief) who steals the devotee’s heart with his glance.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Lord of Kalvanoor who takes the devotee’s heart as his own dwelling."
+    }
+  },
+  "thiruvelukkai": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "11:00"
+      ],
+      "evening": [
+        "16:30",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "wiki": "Azhagiya Singar Temple, Kanchipuram",
+    "moolavar": {
+      "name": "Azhagiya Singar (Yoga Narasimha)",
+      "tamilName": "அழகிய சிங்கர்",
+      "form": "Irundhan — seated in yoga"
+    },
+    "thaayar": {
+      "name": "Amruthavalli Thaayar",
+      "tamilName": "அமிர்தவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Narasimha, still blazing after Hiranya’s end, was cooled by the prayer of the celestials here and seated himself in serene yoga — the beautiful lion of the Velukkai grove.",
+    "pasuram": {
+      "azhwarId": "thirumazhisai",
+      "reference": "Naanmugan Thiruvandadi",
+      "work": "Naanmugan Thiruvandadi",
+      "meaning": "The fierce-yet-graceful Lord of Velukkai who guards Kanchi in seated yoga."
+    }
+  },
+  "thiruthanka": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "11:30"
+      ],
+      "evening": [
+        "16:00",
+        "20:00"
+      ],
+      "notes": ""
+    },
+    "wiki": "Deepa Prakasar Perumal temple",
+    "moolavar": {
+      "name": "Deepa Prakasar (Vilakkoli Perumal)",
+      "tamilName": "விளக்கொளி பெருமாள்",
+      "form": "Nindran — standing, facing west"
+    },
+    "thaayar": {
+      "name": "Maragathavalli Thaayar",
+      "tamilName": "மரகதவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "When Saraswati’s darkness swallowed Kanchi, the Lord appeared as the lamp of all light (deepa prakasa) that ended the age of delusion — the shrine of Poigai Azhwar’s first lamp-verse.",
+    "pasuram": {
+      "azhwarId": "poigai",
+      "reference": "Mudhal Thiruvandadi 1",
+      "work": "Mudhal Thiruvandadi",
+      "meaning": "With the world as the lamp, the seas as the ghee, and the blazing sun as its flame, the Azhwar lit his first lamp of devotion — at this kshetram of the lamp-lord.",
+      "tamil": "வையம் தகளியா வார்கடலே நெய்யாக வையக் கதிரோன் விளக்கென வித்தது சுடரே",
+      "transliteration": "Vaiyam thagaliyaa vaarkadalai neyyaaga vaiyak kadhiron vilakkena viththadhu sudare"
+    }
+  },
+  "thiruputkuzhi": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "11:30"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": ""
+    },
+    "wiki": "Vijayaraghava Perumal temple",
+    "moolavar": {
+      "name": "Vijayaraghava",
+      "tamilName": "விஜயராகவன்",
+      "form": "Nindran — standing, holding Jatayu"
+    },
+    "thaayar": {
+      "name": "Maragathavalli Thaayar",
+      "tamilName": "மரகதவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Rama performed the burial of the eagle Jatayu here, digging the pit (putkuzhi) with his own hands — the shrine of his compassion for a fallen devotee.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Lord of Putkuzhi who gave even a bird the honour of a devotee’s passing."
+    }
+  },
+  "tiruvallur": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "21:00"
+      ],
+      "notes": "Known as Vaidya Veeraraghava — prayers for healing"
+    },
+    "wiki": "Veeraraghava Perumal temple, Tiruvallur",
+    "moolavar": {
+      "name": "Vaidya Veeraraghava",
+      "tamilName": "வைத்திய வீரராகவன்",
+      "form": "Kidandan — reclining, right hand raised in healing"
+    },
+    "thaayar": {
+      "name": "Kanakavalli Thaayar",
+      "tamilName": "கனகவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Salihotra the sage offered his devotion in a leech-infested tank here; the Lord rose as a wounded old man whom the sage tended — and healed him, earning the name Vaidya, the divine physician of Tiruvallur.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The healer of Tiruvallur who cures the illness of samsara itself."
+    }
+  },
+  "thirunindravur": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "11:30"
+      ],
+      "evening": [
+        "16:30",
+        "20:30"
+      ],
+      "notes": ""
+    },
+    "wiki": "Bhaktavatsala Perumal Temple, Thirunindravur",
+    "moolavar": {
+      "name": "Bhaktavatsala (Bhaktajanesha)",
+      "tamilName": "பக்தவத்சலன்",
+      "form": "Nindran — standing, facing east"
+    },
+    "thaayar": {
+      "name": "Ennai Petra Thaayar",
+      "tamilName": "என்னைப் பெற்ற தாயார்"
+    },
+    "urchavar": null,
+    "puranam": "On his way to Venkatam, the Lord was stopped by his devotee’s devotion and stayed — \"nindraan\" — at this village; the Thaayar here is called \"Ennai Petra Thaayar\", the mother who holds her children.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Lord who stood still for love of his devotee at Thirunindravur."
+    }
+  },
+  "thiruvidanthai": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "11:30"
+      ],
+      "evening": [
+        "16:30",
+        "19:30"
+      ],
+      "notes": "Popular for marriage blessings"
+    },
+    "wiki": "Nithya Kalyana Perumal temple",
+    "moolavar": {
+      "name": "Nithyakalyana (Aadalmaiyappan)",
+      "tamilName": "நித்திய கல்யாண பெருமாள்",
+      "form": "Nindran — standing with Bhoomidevi on his shoulder"
+    },
+    "thaayar": {
+      "name": "Komalavalli Thaayar",
+      "tamilName": "கொமளவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "The Lord of the shore married 360 maidens of the fishermen’s folk in a single year and held them all as one in his form — ever- wed (nithya kalyana) for the sake of his devotees.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The ever-wed Lord of Vidandai by the Kadal-mallai shore."
+    }
+  },
+  "mahabalipuram": {
+    "timings": {
+      "morning": [
+        "06:30",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "20:30"
+      ],
+      "notes": ""
+    },
+    "wiki": "Sthalasayana Perumal Temple, Mahabalipuram",
+    "moolavar": {
+      "name": "Sthala Sayana Perumal",
+      "tamilName": "ஸ்தல சயன பெருமாள்",
+      "form": "Kidandan — reclining on the shore floor"
+    },
+    "thaayar": {
+      "name": "Nilamangai Thaayar",
+      "tamilName": "நீளமங்கை"
+    },
+    "urchavar": null,
+    "puranam": "Praised as the birthplace of Bhoothathazhwar, this shore-shrine is where a devotee-king learned that the Lord rests wherever his devotee rests — and so he reclines by the sea itself.",
+    "pasuram": {
+      "azhwarId": "bhoothath",
+      "reference": "Irandam Thiruvandadi",
+      "work": "Irandam Thiruvandadi",
+      "meaning": "The Azhwar born at Kadalmallai sings of the Lord who reclines amid the sounding waves."
+    }
+  },
+  "sholinghur": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "13:00"
+      ],
+      "evening": [
+        "15:30",
+        "20:00"
+      ],
+      "notes": "Yoga Anjaneyar hill shrine nearby"
+    },
+    "wiki": "Yoga Narasimha Temple, Sholinghur",
+    "moolavar": {
+      "name": "Yoga Narasimha (Akkarakani)",
+      "tamilName": "யோக நரசிம்மர்",
+      "form": "Irundhan — seated in yoga on the hill"
+    },
+    "thaayar": {
+      "name": "Amirthavalli Thaayar",
+      "tamilName": "அமிர்தவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Seven eternal rishis are said to be in meditation on this hill since ages past; Narasimha sits in yoga here, the wish-granting gem (akkarakani) of the devotees.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The yoga-seated Narasimha of Kadigai, where even a moment of devotion bears endless fruit."
+    }
+  },
+  "srirangam": {
+    "timings": {
+      "morning": [
+        "06:15",
+        "13:00"
+      ],
+      "evening": [
+        "15:30",
+        "21:00"
+      ],
+      "notes": "Vishwaroopa darshan 06:15–07:00; Ekadasi special"
+    },
+    "wiki": "Ranganathaswamy Temple, Srirangam",
+    "moolavar": {
+      "name": "Ranganathan (Nam Perumal)",
+      "tamilName": "நம்பெருமாள்",
+      "form": "Kidandan — reclining on Adisesha, facing south"
+    },
+    "thaayar": {
+      "name": "Ranganayaki",
+      "tamilName": "திருவரங்கநாச்சியார்"
+    },
+    "urchavar": {
+      "name": "Namperumal",
+      "tamilName": "நம்பெருமாள்"
+    },
+    "puranam": "Rama gifted Vibhishana this image of Ranganatha as he returned to Lanka; set down at the Kaveri island it took root there — the self-manifested first among the 108, sung by eleven Azhwars and the seat of the Sri Vaishnava lineage.",
+    "pasuram": {
+      "azhwarId": "thondaradippodi",
+      "reference": "Thiruppalliyezhuchchi 1",
+      "work": "Thiruppalliyezhuchchi",
+      "meaning": "Awake, O Lord of Srirangam — waken from your rest amid the glowing lamps and the sweet music of your devotees.",
+      "tamil": "பாயும் ஒளி விளக்கும் பத்தருள் திருப்பள்ளியெழுச்சி பாயும் பொன் விளக்கும் பண்மொழியால் பள்ளியெழுந்தருளாயே",
+      "transliteration": "Paayum oli vilakkum paththarul thiruppalliyezhuchchi — paayum pon vilakkum pannmozhiaal palliyezhundharulaaye"
+    }
+  },
+  "uraiyur": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": "Goddess-led temple — Nachiyar receives first honours"
+    },
+    "wiki": "Azagiya Manavala Perumal Temple",
+    "moolavar": {
+      "name": "Azhagiya Manavalan",
+      "tamilName": "அழகிய மணவாளன்",
+      "form": "Nindran — standing, the beautiful bridegroom"
+    },
+    "thaayar": {
+      "name": "Kamalavalli Nachiyar",
+      "tamilName": "கமலவல்லி நாச்சியார்"
+    },
+    "urchavar": null,
+    "puranam": "A Chola princess’s devotion won the Lord himself as bridegroom here; to this day the Nachiyar leads all processions and first honours, for the groom came to her city.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar hails the wedding-lord of ancient Uraiyur, the Chola capital."
+    }
+  },
+  "uthamar-kovil": {
+    "timings": {
+      "morning": [
+        "07:30",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "20:00"
+      ],
+      "notes": "Shiva, Brahma and Vishnu worshipped together here"
+    },
+    "wiki": "Uthamar Kovil",
+    "moolavar": {
+      "name": "Purushothaman",
+      "tamilName": "புருஷோத்தமன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Pooranavalli Thaayar",
+      "tamilName": "பூரணவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Brahma’s lost worship was restored here; the unique shrine holds Vishnu as Purushothaman with Shiva and Brahma beside him — the Trimurti in one courtyard.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 5-6",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar serves the Lord of Karambanoor where all three gods stand together."
+    }
+  },
+  "thiruvellarai": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "13:00"
+      ],
+      "evening": [
+        "15:30",
+        "20:00"
+      ],
+      "notes": "White hill (vellai — white); Marutha vahanam festival"
+    },
+    "wiki": "Pundarikakshan Perumal temple",
+    "moolavar": {
+      "name": "Pundarikakshan",
+      "tamilName": "புண்டரீகாட்சன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Shenbagavalli (Pankayavalli)",
+      "tamilName": "செண்பகவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "The white hill of Thiruvellarai is said to be older than Srirangam itself; sage Markandeya worshipped the lotus-eyed (Pundarikaksha) Lord here, and the temple’s Persian-style entrance towers are unique in Tamil Nadu.",
+    "pasuram": {
+      "azhwarId": "poigai",
+      "reference": "Mudhal Thiruvandadi",
+      "work": "Mudhal Thiruvandadi",
+      "meaning": "The lotus-eyed Lord of the white hill who receives the first Azhwar’s praise."
+    }
+  },
+  "anbil": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Sundararajan (Vadivazhagiya Nambi)",
+      "tamilName": "வடிவழகிய நம்பி",
+      "form": "Kidandan — reclining"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Sage Valmiki is said to have worshipped here; the beautiful (vadhivazhagiya) Lord reclines facing the Kollidam’s flowing waters at Anbil.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Naanmugan Thiruvandadi 36",
+      "work": "Naanmugan Thiruvandadi",
+      "meaning": "Thirumazhisai’s verse embraces the reclining beauty of Anbil."
+    }
+  },
+  "koviladi": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": "On the Kollidam south bank"
+    },
+    "moolavar": {
+      "name": "Appakkudathan",
+      "tamilName": "அப்பாக்குடத்தான்",
+      "form": "Kidandan — reclining, holding an appa-pot"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Emperor Sibhi, who gave his own flesh to save a dove, received the Lord’s grace here; the Lord reclines holding the pot of appam — the offering that fed the sage Upamanyu.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 10-8",
+      "work": "Thiruvoimozhi",
+      "meaning": "Nammazhwar numbers Thiruppernagar among the shrines that carry the soul across the flood."
+    }
+  },
+  "kandiyur": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Hara Sabha Vimochana Perumal",
+      "tamilName": "ஹர சப விமோசன பெருமாள்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Brahma’s severed head clung to Shiva’s palm until his curse was undone here — the Lord freed Shiva from the \"hara sabha\" of sin at Kandiyur, beside the Shiva temple where Brahma is also worshipped.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Thirukkurundandakam 19",
+      "work": "Thirukkurundandakam",
+      "meaning": "The liberator at Kandiyur who frees even the gods from their curses."
+    }
+  },
+  "thiruvelliyangudi": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Kola Valvilli Raman",
+      "tamilName": "கோல வள்வில்லி ராமன்",
+      "form": "Nindran — standing with bow"
+    },
+    "thaayar": {
+      "name": "Maragathavalli Thaayar",
+      "tamilName": "மரகதவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Garuda performed penance here and the Lord appeared with the bow of Rama — the rare kshetram where Garuda is honoured as guru, worshipped in a separate sanctum.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 4-10",
+      "work": "Periya Thirumozhi",
+      "meaning": "The bow-bearing Rama of Velliyangudi who blesses through his eagle-lord."
+    }
+  },
+  "aadanoor": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Aandu Alakkum Aiyan",
+      "tamilName": "ஆண்டாளக்கும் ஐயன்",
+      "form": "Kidandan — reclining, measuring the year"
+    },
+    "thaayar": {
+      "name": "Ranganayaki Thaayar",
+      "tamilName": "ரங்கநாயகி"
+    },
+    "urchavar": null,
+    "puranam": "Here the Lord keeps the wheel of time — \"aandu alakkum\", he who measures the year — reclining with his consorts upon the serpent couch.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumadal",
+      "work": "Periya Thirumadal",
+      "meaning": "The Lord who rules the turning year from Aadanoor’s sanctum."
+    }
+  },
+  "kumbakonam": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "12:30"
+      ],
+      "evening": [
+        "16:00",
+        "21:00"
+      ],
+      "notes": "Famous chariot festival (Chithirai)"
+    },
+    "wiki": "Sarangapani temple",
+    "moolavar": {
+      "name": "Aravamudhan (Sarangapani)",
+      "tamilName": "ஆராவமுதன்",
+      "form": "Kidandan — reclining in the vaulted chariot-shaped sanctum (uthanga sayana)"
+    },
+    "thaayar": {
+      "name": "Komala Valli Thaayar",
+      "tamilName": "கொமளவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "When Thirumazhisai Azhwar rose to leave Kumbakonam in sorrow, the Lord began to follow him, half-risen from his couch — and remains in that half-rising posture, the sweet nectar (aravamudhu) of the Kaveri delta.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 5-8-11",
+      "work": "Thiruvoimozhi",
+      "meaning": "The Lord who lies in sweet Kudanthai — seeing him, even the proud fall in swoon of wonder, brighter than lightning to the eye.",
+      "tamil": "இடவாழி வண்குடந்தை கிடந்தான் கைதொழக் கண்டகால் கதிரொன்றின் மின்னியதன் மடியிலார்",
+      "transliteration": "Idavaazhi vankudanthai kidandhaan kai thozhak kandakaal — kadhironrin minniyadhan madiyilaar"
+    }
+  },
+  "pullamboothangudi": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Valvil Raman",
+      "tamilName": "வல்வில் ராமன்",
+      "form": "Kidandan — reclining with bow"
+    },
+    "thaayar": {
+      "name": "Hemambuja Valli Thaayar",
+      "tamilName": "ஹேமாம்புஜவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Rama’s bow-skilled form (val vil) rests here; the kshetram is linked to the legend of Jatayu’s kin and the consolation Rama granted the birds of the Pullabhudangudi grove.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 5-1",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar dwells on the reclining Rama of Pullabhudangudi who grants the deepest wishes."
+    }
+  },
+  "kabisthalam": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "wiki": "Gajendra Varadha Temple",
+    "moolavar": {
+      "name": "Gajendra Varadhan",
+      "tamilName": "கஜேந்திர வரதன்",
+      "form": "Nindran — standing, discus raised for Gajendra"
+    },
+    "thaayar": {
+      "name": "Ramamani Nachiyar",
+      "tamilName": "ராமாமணி நாச்சியார்"
+    },
+    "urchavar": null,
+    "puranam": "The elephant-king Gajendra’s cry of surrender was answered here in an instant — Gajendra Varadha is the emblem of the Lord who runs to the helpless devotee without awaiting perfection.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Lord who flew to the elephant’s rescue at Kapisthalam."
+    }
+  },
+  "thirunandhipuram": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Jagannathan",
+      "tamilName": "ஜகந்நாதன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "The bull (nandhi) of Shiva is said to have turned to worship Vishnu here — hence Nandhipura Vinnagaram, where worshipping once is held to equal the fruit of many pilgrimages.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 5-10",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Lord of Nandhipura, greater than the distant grandeur of other shrines."
+    }
+  },
+  "thirukkoodalur": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Jagathrakshakan (Aaduthurai Perumal)",
+      "tamilName": "ஜகத்தரட்சகன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Padmasini Thaayar",
+      "tamilName": "பத்மாசினி"
+    },
+    "urchavar": null,
+    "puranam": "The gathered (koodal) celestials took shelter of the Lord here when Indra’s elephant was seized — Jagathrakshakan, protector of worlds, stands guard at Koodalur.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 5-2",
+      "work": "Periya Thirumozhi",
+      "meaning": "The protector of Koodalur who shields all who gather under his feet."
+    }
+  },
+  "uppiliappan": {
+    "timings": {
+      "morning": [
+        "06:30",
+        "13:00"
+      ],
+      "evening": [
+        "16:00",
+        "21:00"
+      ],
+      "notes": "Temple kitchen cooks without salt — Prasadam tradition"
+    },
+    "wiki": "Uppiliappan Temple",
+    "moolavar": {
+      "name": "Oppilliappan (Uppiliappan)",
+      "tamilName": "ஒப்பிள்ளியப்பன்",
+      "form": "Nindran — standing, hand raised in precept (upadesa)"
+    },
+    "thaayar": {
+      "name": "Bhoomidevi Nachiyar",
+      "tamilName": "பூமிதேவி நாச்சியார்"
+    },
+    "urchavar": null,
+    "puranam": "The Lord wooed Bhoomidevi in a sage’s hermitage here insisting every dish be salt-free — \"uppu illa appan\" — symbolising that he accepts our offering however imperfect, as a groom accepts the bride’s people.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 6-3",
+      "work": "Thiruvoimozhi",
+      "meaning": "Nammazhwar’s bridal longing — the soul’s wedding to the Lord of Thiruvinnagar."
+    }
+  },
+  "nachiyar-kovil": {
+    "timings": {
+      "morning": [
+        "06:30",
+        "12:30"
+      ],
+      "evening": [
+        "16:00",
+        "20:30"
+      ],
+      "notes": "Nachiyar leads all processions — only temple where the Goddess is honoured first"
+    },
+    "wiki": "Nachiyar Kovil",
+    "moolavar": {
+      "name": "Thirunarayoor Nambi (Srinivasa)",
+      "tamilName": "நம்பி",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Vanjulavalli Thaayar",
+      "tamilName": "வஞ்சுலவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Vanjulavalli, a sage’s daughter, won the Lord as her groom — he granted that she would lead in every honour forever; the temple’s stone chariot (kal garudan) is famed for growing in weight as it is pulled.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 6-4",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar serves the Nambi of Naraiyur where the Goddess leads and the Lord follows her honour."
+    }
+  },
+  "thirucherai": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Sara nathan — with five consorts"
+    },
+    "moolavar": {
+      "name": "Saranathan",
+      "tamilName": "சாரநாதன்",
+      "form": "Nindran — standing with five consorts"
+    },
+    "thaayar": {
+      "name": "Saranyanayaki Thaayar",
+      "tamilName": "சரண்யநாயகி"
+    },
+    "urchavar": null,
+    "puranam": "At the deluge’s end, the Lord alone received the seeds of creation and the Vedas for safekeeping — Saranathan, the refuge; the sage Kasyapa’s five wives serve him here as his five consorts.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 8-6",
+      "work": "Thiruvoimozhi",
+      "meaning": "The refuge of Thirucherai who carries the soul through every dissolution."
+    }
+  },
+  "thirukkannamangai": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:30"
+      ],
+      "notes": "Famed Abhishekam; bee-mandapa (vanamali) legend"
+    },
+    "wiki": "Bhaktavatsala Perumal temple, Thirukannamangai",
+    "moolavar": {
+      "name": "Bhaktavatsala Perumal",
+      "tamilName": "பக்தவத்சல பெருமாள்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Abhishegavalli Thaayar",
+      "tamilName": "அபிஷேகவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "The Goddess herself performed penance here with a thousand lotuses; when one fell short she offered her own eye — the Lord holds her as Abhishegavalli, and bees are said to hum her hymn in the mandapa to this day.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 7-10",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar lingers at Kannamangai where the Goddess’s devotion won the Lord’s tenderness."
+    }
+  },
+  "thanjai-mamanikoil": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": "Three shrines — Neelamegha, Manikundram, Narasimha"
+    },
+    "moolavar": {
+      "name": "Neelameghan",
+      "tamilName": "நீள்மேக பெருமாள்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Sengamalavalli Thaayar",
+      "tamilName": "செங்கமலவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "The three Thanjavur shrines — Neelamegha Perumal, Manikundram and Yoga Narasimha — are counted as one Divya Desam; the demon Tanjan was felled here and the city took his name with the Lord’s blessing.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 2-5",
+      "work": "Periya Thirumozhi",
+      "meaning": "All the Thirumangai verses for Thanjai embrace its three shrines together as one holy place."
+    }
+  },
+  "thiruvazhundur": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Devadirajan (Aamaruviappan)",
+      "tamilName": "தேவாதிராஜன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Sengamalavalli Thaayar",
+      "tamilName": "செங்கமலவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Krishna grazed his cows at this grove (aamaruvi — the cowherd’s Lord); the sage Vedadasa’s devotion here drew the Lord’s promise that his name would echo as the Deva’s king.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The cowherd-king of Thiruvazhundur whose groves echoed with Krishna’s flute."
+    }
+  },
+  "thiruchirupuliyur": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Arulmaakadal",
+      "tamilName": "அருள்மாக்கடல்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Thirumaasathu Thaayar",
+      "tamilName": "திருமாசத்து அம்மான்"
+    },
+    "urchavar": null,
+    "puranam": "Vyagrapada the tiger-footed sage’s devotion here made the Lord an ocean of grace (arul maakadal); worshipped also as Kripasamudra, the sea of compassion.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The ocean of grace at Chirupuliyur whose depth no hymn can sound."
+    }
+  },
+  "thalaichangadu": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Nanmathiyan",
+      "tamilName": "நான்மதியன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "The sun and the moon (nan madhi) are said to worship the Lord here at the delta’s head (thalai) — the village gifted a divine conch to the Chola king’s devotion.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 8-9",
+      "work": "Periya Thirumozhi",
+      "meaning": "The first-shrine Lord of Thalaichangadu whom sun and moon alike serve."
+    }
+  },
+  "thiruindalur": {
+    "timings": {
+      "morning": [
+        "06:30",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "21:00"
+      ],
+      "notes": ""
+    },
+    "wiki": "Parimala Ranganatha Perumal temple",
+    "moolavar": {
+      "name": "Parimala Ranganatha",
+      "tamilName": "பரிமள ரங்கநாதன்",
+      "form": "Kidandan — reclining with head to the south"
+    },
+    "thaayar": {
+      "name": "Parimala Ranganayaki Thaayar",
+      "tamilName": "பரிமள ரங்கநாயகி"
+    },
+    "urchavar": null,
+    "puranam": "The fragrant (parimala) Ranganatha reclines on the Cauvery’s north bank at Mayiladuthurai; the river herself is said to worship him here as she turns to the sea.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 4-9",
+      "work": "Periya Thirumozhi",
+      "meaning": "The fragrance of the Lord of Indaloor that fills the devotee’s heart like garlands of the river."
+    }
+  },
+  "thirukkannapuram": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:30"
+      ],
+      "notes": "Famous for the \"Sowrirajan\" never-shaven tirtha tradition"
+    },
+    "moolavar": {
+      "name": "Sowriraja Perumal (Neelameghan)",
+      "tamilName": "சௌவிராஜ பெருமாள்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Kannapura Nayaki Thaayar",
+      "tamilName": "கண்ணபுரநாயகி"
+    },
+    "urchavar": null,
+    "puranam": "A devotee-priest’s faith was answered when the Lord revealed a tuft (sowri) of hair he was said not to have — Sowrirajan, whose word alone is enough; the \"Muthukulitha\" thirumeni here is famed for instant grace.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 8-1",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar’s decad sings the Lord of Kannapuram whose mere word is the devotee’s rescue.",
+      "tamil": "கண்ணபுரத்து எம் பெருமான்...",
+      "transliteration": "Kannapuraththu em perumaan"
+    }
+  },
+  "thirukkannangudi": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Loganathan (Damodara Narayanan)",
+      "tamilName": "லோகநாதன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Krishna, the butter-thief (Damodara), lingered here for the love of a devotee’s offering — the playful Lord of Kannangudi whose charm the Azhwar likens to his cowherd days.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 9-1",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Damodara of Kannangudi who lets himself be caught by devotion alone."
+    }
+  },
+  "nagapattinam": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:30"
+      ],
+      "notes": ""
+    },
+    "wiki": "Soundararajaperumal Temple, Nagapattinam",
+    "moolavar": {
+      "name": "Soundararajan",
+      "tamilName": "சௌந்தரராஜன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Soundaryanayaki Thaayar",
+      "tamilName": "சௌந்தர்யநாயகி"
+    },
+    "urchavar": null,
+    "puranam": "The beautiful (soundara) Lord of the coastal city of Nagai, whose royal bearing Thirumangai Azhwar describes as beyond the three worlds’ wealth.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 9-2",
+      "work": "Periya Thirumozhi",
+      "meaning": "The beautiful king of Thirunaagai whose beauty outshines every treasure."
+    }
+  },
+  "chidambaram": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "22:00"
+      ],
+      "notes": "Within the Nataraja temple complex — Chitsabha darshan"
+    },
+    "wiki": "Thillai Nataraja Temple, Chidambaram",
+    "moolavar": {
+      "name": "Govindaraja",
+      "tamilName": "கோவிந்தராஜன்",
+      "form": "Kidandan — reclining, facing east, beside the Chitsabha"
+    },
+    "thaayar": {
+      "name": "Pundareekavalli Thaayar",
+      "tamilName": "புண்டரீகவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "At the cosmic dance-floor of Thillai, Vishnu reclines as Govindaraja in the same hall where Shiva dances — the two-fold vision of the One; the shrine was restored under Akbar’s era after long disputes.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 3-2",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar bows to the reclining Lord of Thillai’s golden hall."
+    }
+  },
+  "sirkazhi": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Trivikrama (Thadalan)",
+      "tamilName": "தாடாளன்",
+      "form": "Nindran — standing, the measuring stride"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "In the Kazheesirama Vinnagaram of Sirkazhi, the Lord who strode the three worlds is worshipped; the town is also the birthplace of the child-wonder Thirugnanasambandar, whose meeting with Thirumangai Azhwar here is legend.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 3-4",
+      "work": "Periya Thirumozhi",
+      "meaning": "The three-world measurer of Kazheesirama Vinnagaram, praised as \"Mann alantha thadalan\"."
+    }
+  },
+  "thiruvali-thirunagari": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Twin villages counted as one Desam"
+    },
+    "moolavar": {
+      "name": "Lakshmi Narasimha (Thiruvaali) / Devaraja (Thirunagari)",
+      "tamilName": "லட்சுமி நரசிம்மர்",
+      "form": "Irundhan — seated"
+    },
+    "thaayar": {
+      "name": "Amruthavalli Thaayar",
+      "tamilName": "அமிர்தவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "The pacified Lakshmi Narasimha of Thiruvaali and the Devaraja of Thirunagari — Mahabali is said to worship here as King of the Naga lords; the two villages’ shrines are honoured together in every hymn.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 3-5",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar sings the paired glory of Thiruvaali and Thirunagari where Narasimha rests in peace."
+    }
+  },
+  "thirukavalambadi": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Thirunangur group"
+    },
+    "moolavar": {
+      "name": "Gopala Krishna",
+      "tamilName": "கோபாலகிருஷ்ணன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "The cowherd Krishna of the Kavalan-grove — one of the eleven Thirunangur forms that rose when Shiva danced.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 4-6",
+      "work": "Periya Thirumozhi",
+      "meaning": "The cowherd lord of Kavalambadi whose flute still calls the devotee."
+    }
+  },
+  "arimeya-vinnagaram": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Thirunangur group"
+    },
+    "moolavar": {
+      "name": "Kudamudakoothan",
+      "tamilName": "குடமுடக்கூத்தன்",
+      "form": "Irundhan — seated"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "When Shiva danced with the pot, the Lord appeared here as Kudamudakoothan — the pot-dancer — in his seat at Arimeya Vinnagaram.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 3-8",
+      "work": "Periya Thirumozhi",
+      "meaning": "The pot-dance lord of Arimeya Vinnagaram amid the Thirunangur eleven."
+    }
+  },
+  "vanpurushothamam": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Thirunangur group"
+    },
+    "moolavar": {
+      "name": "Purushothaman",
+      "tamilName": "புருஷோத்தமன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "The supreme Purusha of the Thirunangur grove — worshipped as the first among beings at Vanpurushothamam.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 4-2",
+      "work": "Periya Thirumozhi",
+      "meaning": "The primal Purusha of Thiruvanpurushothamam who precedes all creation."
+    }
+  },
+  "semponseikoil": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Thirunangur group"
+    },
+    "moolavar": {
+      "name": "Perarulaalan",
+      "tamilName": "பேரருளாளன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Rama is said to have worshipped here with gold for Jatayu’s rites — the golden (sempon) shrine of Perarulaalan, the great-graceful one.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 4-3",
+      "work": "Periya Thirumozhi",
+      "meaning": "The great-graceful Lord of Semponseikoil who crowns the humblest offering."
+    }
+  },
+  "manimadakoil": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Thirunangur group"
+    },
+    "moolavar": {
+      "name": "Narayanan",
+      "tamilName": "நாராயணன்",
+      "form": "Irundhan — seated"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "The jewel-pavilion (mani madam) temple where the seated Lord grants audience to the Thirunangur devotee as a king to his court.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 3-8",
+      "work": "Periya Thirumozhi",
+      "meaning": "The seated king of Manimadakoil who receives the devotee as his own."
+    }
+  },
+  "vaikunta-vinnagaram": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Thirunangur group; Garuda seva festival"
+    },
+    "moolavar": {
+      "name": "Vaikuntanathan",
+      "tamilName": "வைகுந்தநாதன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Vaikunta on earth among the Thirunangur eleven — all eleven deities ride together in the famed Garuda seva festival that draws the delta’s faithful.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 3-9",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Vaikuntanathan of Thirunangur who brings heaven to the Kaveri’s sands."
+    }
+  },
+  "devanartogai": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Thirunangur group"
+    },
+    "moolavar": {
+      "name": "Deivanayagan",
+      "tamilName": "தெய்வநாயகன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Where the assembled (thogai) Devas worshipped — Deivanayagan, leader of the celestial host, among the eleven of Thirunangur.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 4-1",
+      "work": "Periya Thirumozhi",
+      "meaning": "The lord of the assembled Devas at Thirudevanartogai."
+    }
+  },
+  "thetriyambalam": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Thirunangur group"
+    },
+    "moolavar": {
+      "name": "Seganmaal Ranganatha",
+      "tamilName": "செங்காமல் ரங்கநாதன்",
+      "form": "Kidandan — reclining"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "The red-hued (segnmaal) Ranganatha who reclines eternally at Thiruthetriyambalam — the shrine of vows within the Thirunangur ring.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 4-4",
+      "work": "Periya Thirumozhi",
+      "meaning": "The reclining red-hued Lord of Thetriyambalam who never abandons his vow to the devotee."
+    }
+  },
+  "manikkoodam": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Thirunangur group"
+    },
+    "moolavar": {
+      "name": "Varadharajan",
+      "tamilName": "வரதராஜன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "The boon-giver of the jewel-court (mani koodam) — Varadharajan among the Thirunangur eleven.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 4-5",
+      "work": "Periya Thirumozhi",
+      "meaning": "The boon-giving Varadharaja of Manikkoodam."
+    }
+  },
+  "vellakulam": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Annan Kovil — \"elder brother of Venkatam\""
+    },
+    "moolavar": {
+      "name": "Srinivasan (Annan)",
+      "tamilName": "அண்ணன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "The white-tank shrine honoured as the elder brother (annan) of Tirupati Srinivasa — worshipping here is held to bear the fruit of the Seven Hills.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 4-7",
+      "work": "Periya Thirumozhi",
+      "meaning": "The elder-brother Srinivasa of Vellakulam, equal to Venkatam’s Lord."
+    }
+  },
+  "parthanpalli": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Thirunangur group"
+    },
+    "moolavar": {
+      "name": "Thamaraiyal Kelvan",
+      "tamilName": "தாமரையாள் கேள்வன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Arjuna (Parthan) worshipped here after the war’s grief; the Lord who belongs to the lotus-eyed (thamaraiyal kelvan) received his offering at Parthanpalli.",
+    "pasuram": {
+      "azhwarId": "poigai",
+      "reference": "Mudhal Thiruvandadi 67",
+      "work": "Mudhal Thiruvandadi",
+      "meaning": "Poigai Azhwar’s verse for the lotus-eyed one’s lord at Parthanpalli."
+    }
+  },
+  "thiruvahindrapuram": {
+    "timings": {
+      "morning": [
+        "07:30",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": ""
+    },
+    "wiki": "Devanathaswamy temple",
+    "moolavar": {
+      "name": "Deivanathan (Aadhivaraha)",
+      "tamilName": "தேவநாதன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Hemasenavalli Thaayar",
+      "tamilName": "ஹேமசேனாவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Adisesha himself bore this hill (Oushadagiri) so its healing herbs could serve the world; Indra’s worship made the Lord its Deivanathan, and the great acharya Vedanta Desika — born near here — poured his hymns on the Lord of the hill.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 3-1",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar’s decad for Deivanathan of the serpent-borne healing hill."
+    }
+  },
+  "thirukkovilur": {
+    "timings": {
+      "morning": [
+        "07:30",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": ""
+    },
+    "wiki": "Trivikrama Temple, Tirukoyilur",
+    "moolavar": {
+      "name": "Trivikrama (Ulagalantha Perumal)",
+      "tamilName": "உலகளந்த பெருமாள்",
+      "form": "Nindran — standing with raised foot"
+    },
+    "thaayar": {
+      "name": "Poongovalai Nachiyar",
+      "tamilName": "பூங்கோவள் நாச்சியார்"
+    },
+    "urchavar": null,
+    "puranam": "The first three Azhwars — Poigai, Bhoothath and Pey — met by chance in a pilgrim’s narrow shelter here on a stormy night, and their three lamps of devotion lit the first Tamil hymns of the Prabandham at this Vamana kshetram.",
+    "pasuram": {
+      "azhwarId": "poigai",
+      "reference": "Mudhal Thiruvandadi (sung here)",
+      "work": "Mudhal Thiruvandadi",
+      "meaning": "The mudhal Azhwars’ meeting at Thirukkovilur kindled the first verses of Tamil devotion."
+    }
+  },
+  "thirukkurungudi": {
+    "timings": {
+      "morning": [
+        "06:30",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "20:00"
+      ],
+      "notes": "Five forms of the Lord worshipped in one complex"
+    },
+    "wiki": "Nindra Nambi Perumal temple",
+    "moolavar": {
+      "name": "Nindra Nambi (Vaamana)",
+      "tamilName": "நின்ற நம்பி",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Azhagiyavalli Thaayar",
+      "tamilName": "அழகியவல்லி"
+    },
+    "urchavar": {
+      "name": "Kurungudi Nambi",
+      "tamilName": "குறுங்குடி நம்பி"
+    },
+    "puranam": "The Lord himself came as a disciple to Vaishnava teachers here, learning the sacred texts at their feet — Nambi of Kurungudi, at the Mahendragiri foothills, who appears in five forms across the village.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 5-5",
+      "work": "Thiruvoimozhi",
+      "meaning": "Nammazhwar’s bridal verses for the Nambi of Kurungudi who accepts the soul as his own."
+    }
+  },
+  "nanguneri": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": "Eternal lamp (nondi vilakku) tradition"
+    },
+    "wiki": "Vanamamalai Perumal temple",
+    "moolavar": {
+      "name": "Thothadrinathan (Deivanayagan)",
+      "tamilName": "தோத்தாத்திரிநாதன்",
+      "form": "Irundhan — seated on Adisesha"
+    },
+    "thaayar": {
+      "name": "Thirukkurungudi Nachiyar (Poonkodi Naachiyaar)",
+      "tamilName": "பூங்கொடி நாச்சியார்"
+    },
+    "urchavar": null,
+    "puranam": "The banyan (vanamamalai) of the celestials shaded this seat of the Lord; the great lamp of Nanguneri, tended by the Vanamamalai mutt lineage, has burned without cease for centuries.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 5-7",
+      "work": "Thiruvoimozhi",
+      "meaning": "The ever-lit Lord of Thiruvaraamangai whom the Vedas themselves praise without end."
+    }
+  },
+  "alwar-thirunagari": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "20:30"
+      ],
+      "notes": "Birthplace of Nammazhwar; Garuda seva in Vaikasi"
+    },
+    "wiki": "Adinathar Temple, Alwarthirunagari",
+    "moolavar": {
+      "name": "Aadhinathan (Polindu Nindra Piran)",
+      "tamilName": "ஆதிநாதன்",
+      "form": "Nindran — standing under the aged tamarind tree"
+    },
+    "thaayar": {
+      "name": "Adhinayaki (Thirukkurukoor Nayaki)",
+      "tamilName": "திருக்குறுகூர் நாச்சியார்"
+    },
+    "urchavar": {
+      "name": "Nammazhwar’s Lord (Thirukkurukoor Nambi)",
+      "tamilName": "திருக்குறுகூர் நம்பி"
+    },
+    "puranam": "The tamarind tree here neither sleeps nor bears sour fruit, legend says, since Nammazhwar sat beneath it in unbroken meditation from his birth; the Lord served as his teacher and the village became the holiest seat of the Prabandham.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 4-10",
+      "work": "Thiruvoimozhi",
+      "meaning": "In his own hymns Nammazhwar sings the Lord of his birth-grove who taught him all wisdom."
+    }
+  },
+  "thirukkolur": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Vaithamanidhi Perumal",
+      "tamilName": "வைத்த மாநிதி",
+      "form": "Kidandan — reclining with arm as pillow"
+    },
+    "thaayar": {
+      "name": "Kolurvalli Thaayar",
+      "tamilName": "கொளுர்வல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Kubera’s treasury (maanidhi) was kept here; a maid’s innocent complaint — \"I brought nothing and gained nothing\" — became the Lord’s teaching of surrender, and he stays as the stored-treasure of the helpless.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 6-7",
+      "work": "Thiruvoimozhi",
+      "meaning": "The Lord of Kolur who owns every treasure yet asks only the devotee’s heart."
+    }
+  },
+  "thirupperai": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Makara Nedunkuzhai Kathan",
+      "tamilName": "மகர நெடுங்குழைக் காத்தான்",
+      "form": "Kidandan — reclining"
+    },
+    "thaayar": {
+      "name": "Thirupperai Nayaki (KuzhaikadhalvallI)",
+      "tamilName": "குழைகாதல்வல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Bhoomidevi’s prayer won the Lord’s heart here; his earrings shaped like the fish (makara) of the deep are praised by Nammazhwar, and the Thaayar’s beloved (kuzhai kaadhal) form gives the temple its name.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 7-3",
+      "work": "Thiruvoimozhi",
+      "meaning": "The fish-eared beauty of Thirupperai whose glance itself is the ornament of the soul."
+    }
+  },
+  "srivaikuntam": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": "Nava Thirupathi group on the Thamirabarani"
+    },
+    "wiki": "Vaikuntanathar Temple Srivaikuntam",
+    "moolavar": {
+      "name": "Vaikuntanathan (Kallarpiran)",
+      "tamilName": "கல்லர் பிரான்",
+      "form": "Kidandan — reclining"
+    },
+    "thaayar": {
+      "name": "Vaikuntavalli Thaayar",
+      "tamilName": "வைகுந்தவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "The Lord hid as a thief (kallar piran) to protect the celestials’ treasury from the demon here — Vaikunta on earth along the Thamirabarani’s banks, first of the Nava Thirupathi nine.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 9-2",
+      "work": "Thiruvoimozhi",
+      "meaning": "The Vaikuntanathan of Srivaikuntam who guards his devotees’ wealth of devotion."
+    }
+  },
+  "thirukkulandai": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:00"
+      ],
+      "notes": "Nava Thirupathi group"
+    },
+    "moolavar": {
+      "name": "Srinivasan (Makara Nedunkuzhai Kannan)",
+      "tamilName": "ஸ்ரீநிவாசன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Kulandai Nayaki Thaayar",
+      "tamilName": "குலந்தை நாயகி"
+    },
+    "urchavar": null,
+    "puranam": "At Perungulam’s great tank the Lord appeared to the sage Eeswarapaadar’s devotion; Kulandai — the beloved child of the Thamirabarani country — Srinivasa of Thirukkulandai.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 8-2",
+      "work": "Thiruvoimozhi",
+      "meaning": "The Lord of the kulam (tank) village who is himself the child-treasure of the devout."
+    }
+  },
+  "thiruvaragunamangai": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:00"
+      ],
+      "notes": "Nava Thirupathi group"
+    },
+    "moolavar": {
+      "name": "Vijayasanar",
+      "tamilName": "விஜயாசனர்",
+      "form": "Irundhan — seated in victory posture"
+    },
+    "thaayar": {
+      "name": "Kaalzhchi Nayaki Thaayar",
+      "tamilName": "காட்சி நாயகி"
+    },
+    "urchavar": null,
+    "puranam": "The Lord sat here in victory (vijaya asana) after subduing the demon who seized the Vedas — second darshan of the Nava Thirupathi by the Natham lake.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 9-2",
+      "work": "Thiruvoimozhi",
+      "meaning": "The victory-seated Lord of Varagunamangai who wins the devotee’s inner battles."
+    }
+  },
+  "thiruppuliangudi": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:00"
+      ],
+      "notes": "Nava Thirupathi group"
+    },
+    "moolavar": {
+      "name": "Kaisina Vendhan (Bhoomipalar)",
+      "tamilName": "கைசின வேந்தன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Malarmangai Nachiyar",
+      "tamilName": "மலர்மங்கை"
+    },
+    "urchavar": null,
+    "puranam": "The king who burned (kaichina) with the fire of devotion — Kaisina Vendhan of the palmyra (puli) grove, one of the Nava Thirupathi nine.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 9-2",
+      "work": "Thiruvoimozhi",
+      "meaning": "The flame-like king of Thiruppuliangudi whose glow is the devotee’s guide."
+    }
+  },
+  "tholaivillimangalam": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:00"
+      ],
+      "evening": [
+        "17:00",
+        "18:30"
+      ],
+      "notes": "Twin shrines (Irattai Thirupathi) — count as one Desam"
+    },
+    "moolavar": {
+      "name": "Aravindalochanan / Devapiran",
+      "tamilName": "அரவிந்தலோசனன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Karthigai Thaayar",
+      "tamilName": "கார்த்திகை தாயார்"
+    },
+    "urchavar": null,
+    "puranam": "Two shrines — Devapiran and Aravindalochanan — stand on the two banks of the dry riverbed and are worshipped together as the \"twin birthplace\" (Irattai Thirupathi) of the Nava Thirupathi.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 6-5",
+      "work": "Thiruvoimozhi",
+      "meaning": "The lotus-eyed twin lords of Tholaivillimangalam whom one hymn embraces both at once."
+    }
+  },
+  "thiruthangal": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": ""
+    },
+    "wiki": "Ninra Narayana Perumal temple",
+    "moolavar": {
+      "name": "Nindra Narayanan",
+      "tamilName": "நின்ற நாராயணன்",
+      "form": "Nindran — standing, facing west"
+    },
+    "thaayar": {
+      "name": "Aravindavalli Thaayar",
+      "tamilName": "அரவிந்தவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "The Lord stood (nindraan) here awaiting Sridevi’s penance’s fruit at the hill of Thiruthangal — the town where Thirumangai Azhwar’s verses settled like a lamp in the Pandya country.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The standing Narayana of Thiruthangal who waits upon his devotee’s longing."
+    }
+  },
+  "srivilliputhur": {
+    "timings": {
+      "morning": [
+        "06:30",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "21:00"
+      ],
+      "notes": "Temple tower is the emblem of Tamil Nadu; Aadi Puram festival"
+    },
+    "wiki": "Srivilliputhur Andal Temple",
+    "moolavar": {
+      "name": "Vatapatrasayi (Vatapatrasayee)",
+      "tamilName": "வடபத்திர சாயி",
+      "form": "Kidandan — reclining on the banyan leaf"
+    },
+    "thaayar": {
+      "name": "Andal",
+      "tamilName": "ஆண்டாள்"
+    },
+    "urchavar": {
+      "name": "Rangamannar",
+      "tamilName": "ரங்கமன்னார்"
+    },
+    "puranam": "Periyazhwar found the divine child Andal beneath the tulsi here; her Thiruppavai and her wedding into the Lord’s shrine made Srivilliputhur the home of the only woman Azhwar — the town’s tower flies on Tamil Nadu’s seal.",
+    "pasuram": {
+      "azhwarId": "andal",
+      "reference": "Thiruppavai 1",
+      "work": "Thiruppavai",
+      "meaning": "O maidens of the cowherd town — the moonlit month of Margazhi has dawned; come, let us bathe in the vow of the dawn.",
+      "tamil": "மார்கழித் திங்கள் மதிநிறந்தண்ணால் நீராடப் போதுவீர் போதுமினோ நேரிழையீர்",
+      "transliteration": "Maargazhi thingal madhiniRandhu nannaal neeraada podhuveer — podhumino neraizhaiyeer"
+    }
+  },
+  "madurai-koodal": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "21:00"
+      ],
+      "notes": "Three postures in three tiers — standing, seated, reclining"
+    },
+    "wiki": "Koodal Azhagar Temple",
+    "moolavar": {
+      "name": "Koodal Azhagar (Vyamooga Perumal)",
+      "tamilName": "கூடலழகர்",
+      "form": "Nindran — standing, with seated and reclining forms above"
+    },
+    "thaayar": {
+      "name": "Mathuravalli Thaayar",
+      "tamilName": "மதுரவல்லி"
+    },
+    "urchavar": {
+      "name": "Vyamooga Perumal",
+      "tamilName": "வ்யமோக பெருமாள்"
+    },
+    "puranam": "At Madurai’s sangam (koodal) of rivers and scholars, the Azhagar shows three postures in one sanctum-tower — standing, seated and reclining — meeting the devotee at every height of devotion.",
+    "pasuram": {
+      "azhwarId": "periyazhwar",
+      "reference": "Periyazhwar Thirumozhi",
+      "work": "Periyazhwar Thirumozhi",
+      "meaning": "Periyazhwar, born in this city, sings the beautiful Lord of Koodal’s confluence."
+    }
+  },
+  "thirumaliruncholai": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "12:30"
+      ],
+      "evening": [
+        "15:30",
+        "20:00"
+      ],
+      "notes": "Chithirai festival — Azhagar rides to the Vaigai"
+    },
+    "wiki": "Kallalagar temple",
+    "moolavar": {
+      "name": "Kallazhagar (Maayon)",
+      "tamilName": "கற்றழகர்",
+      "form": "Nindran — standing, in the fragrant forest shrine"
+    },
+    "thaayar": {
+      "name": "Kalyanasundaravalli Thaayar",
+      "tamilName": "கல்யாண சுந்தரவல்லி"
+    },
+    "urchavar": {
+      "name": "Kallazhagar (Sundararajan)",
+      "tamilName": "சுந்தரராஜன்"
+    },
+    "puranam": "The beautiful lord of the Alagar hills rides the golden horse to Madurai each Chithirai, halting mid-river at the Vaigai — the beloved Azhagar of the Tamil country’s greatest festival, keeping his word though late.",
+    "pasuram": {
+      "azhwarId": "periyazhwar",
+      "reference": "Periyazhwar Thirumozhi 4-2",
+      "work": "Periyazhwar Thirumozhi",
+      "meaning": "Periyazhwar’s verses sing the deep groves of Maalirunscholai where the dark Lord grazes his devotees like calves."
+    }
+  },
+  "thirumogur": {
+    "timings": {
+      "morning": [
+        "06:30",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "20:00"
+      ],
+      "notes": "Celebrated Chakrathalvar shrine with 154 hands"
+    },
+    "moolavar": {
+      "name": "Kaalameghan (Kalamegha)",
+      "tamilName": "காளமேக பெருமாள்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Mohana Valli Thaayar",
+      "tamilName": "மோகனவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "The Devas sought the nectar here; the Lord appeared as the dark cloud (kala megam) of grace, and his Sudarshana at Mogur — the sixteen-armed, 154-handed Chakrathalvar — is the most celebrated weapon-shrine in the south.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 10-1",
+      "work": "Thiruvoimozhi",
+      "meaning": "Nammazhwar’s decad hails the cloud-hued Lord of Mogur who rained nectar on the Devas."
+    }
+  },
+  "thirupullani": {
+    "timings": {
+      "morning": [
+        "06:30",
+        "12:30"
+      ],
+      "evening": [
+        "16:00",
+        "20:30"
+      ],
+      "notes": "Darbasayana — Rama reclines on darba grass"
+    },
+    "wiki": "Kothandaramaswamy Temple, Thirupullani",
+    "moolavar": {
+      "name": "Adi Jagannatha (Darbasayana Rama)",
+      "tamilName": "ஆதி ஜெகந்நாதன்",
+      "form": "Kidandan — reclining on darba grass"
+    },
+    "thaayar": {
+      "name": "Padmasini Thaayar",
+      "tamilName": "பத்மாசினி"
+    },
+    "urchavar": null,
+    "puranam": "Rama lay on darba grass for three nights here, eyes fixed on the sea, until the ocean-lord surrendered — the kshetram of unwavering resolve, where Vibhishana too found refuge at the shore-shrine of Kothandam.",
+    "pasuram": {
+      "azhwarId": "kulasekhara",
+      "reference": "Perumal Thirumozhi",
+      "work": "Perumal Thirumozhi",
+      "meaning": "Kulasekhara longs to serve the setu-shore of Pullani where Rama lay resolved upon the sea."
+    }
+  },
+  "thirukkoshtiyur": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": "Ashtakshara kshetram — Ramanuja proclaimed the sacred mantra here"
+    },
+    "moolavar": {
+      "name": "Sowmya Narayana (Uraga Mellanayaan)",
+      "tamilName": "சௌம்ய நாராயணன்",
+      "form": "Irundhan — seated (ashtanga vimana), with reclining and standing forms above"
+    },
+    "thaayar": {
+      "name": "Thirumamagal Thaayar",
+      "tamilName": "திருமாமகள்"
+    },
+    "urchavar": null,
+    "puranam": "Defying his guru’s threat of hell, Ramanuja climbed this temple’s tiered vimana and proclaimed the Ashtakshara mantra to all the world — \"join me at Koshtiyur and be saved\"; the three-tier sanctum holds the Lord seated, reclining and standing.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi 9-10",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar serves the three-formed Lord of Koshtiyur who holds the assembly of devotees in his heart."
+    }
+  },
+  "thirumeyyam": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:30",
+        "20:00"
+      ],
+      "notes": "Rock-cut cave shrines of the Pallava-Pandya era"
+    },
+    "wiki": "Sathyamurthi Perumal Temple, Thirumayam",
+    "moolavar": {
+      "name": "Sathyagiri Nathan (Sathyamurthi)",
+      "tamilName": "சத்தியகிரி நாதன்",
+      "form": "Nindran — standing; giant rock-cut Anantasayana beside"
+    },
+    "thaayar": {
+      "name": "Ujvana Nayaki (Velaankanni Nachiyar)",
+      "tamilName": "உஜ்ஜவன நாயகி"
+    },
+    "urchavar": null,
+    "puranam": "On the hill of truth (mey — sathya) the Pandya king cut the Lord from living rock: the vast reclining Anantasayana carved in a single cave remains among the largest rock-cut Vishnus in India.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Lord of the truth-hill at Meyyam who keeps his word to the rock-steady devotee."
+    }
+  },
+  "thiruvananthapuram": {
+    "timings": {
+      "morning": [
+        "03:30",
+        "19:30"
+      ],
+      "evening": [
+        "18:30",
+        "19:30"
+      ],
+      "notes": "Darshan through three doors; Arattu festival of the royal family"
+    },
+    "wiki": "Padmanabhaswamy Temple",
+    "moolavar": {
+      "name": "Anantha Padmanabha (Panguni Naayakan)",
+      "tamilName": "பத்மநாபன்",
+      "form": "Kidandan — reclining through three doors (Siva, Vishnu, Brahma aspects)"
+    },
+    "thaayar": {
+      "name": "Hari (Lakshmi) & Bhoomidevi seated beside",
+      "tamilName": "ஹரி லட்சுமி சமேதர்"
+    },
+    "urchavar": null,
+    "puranam": "A sage-child (Vilvamangalathu Swamiyar) heard the Lord as a mischievous boy and chased him into an ilinja tree that split to reveal the reclining colossus — Padmanabha of the Anantha hills, whose vaults made the shrine famed as the richest temple on earth.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 10-2",
+      "work": "Thiruvoimozhi",
+      "meaning": "Nammazhwar sings the Lord of Malayala’s hills who reclines at Thiruvananthapuram in eternal ease."
+    }
+  },
+  "thiruvanparisaram": {
+    "timings": {
+      "morning": [
+        "05:00",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "20:00"
+      ],
+      "notes": ""
+    },
+    "wiki": "Thiruvazhmarban Temple",
+    "moolavar": {
+      "name": "Thiruvazhmarban (Kuralappan)",
+      "tamilName": "திருவழ்மார்பன்",
+      "form": "Nindran — standing, Lakshmi at his chest"
+    },
+    "thaayar": {
+      "name": "Kamalavalli Nachiyar",
+      "tamilName": "கமலவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "The Lord whose chest (marbu) bears Lakshmi (thiru) — the Nanjil country’s refuge, where Nathamuni’s lineage and the Cherakolloor kings worshipped in turn.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 8-3",
+      "work": "Thiruvoimozhi",
+      "meaning": "The Lord who carries Lakshmi at his heart, ruling the Parisaram grove."
+    }
+  },
+  "thirukkatkarai": {
+    "timings": {
+      "morning": [
+        "05:30",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "20:00"
+      ],
+      "notes": "Onam festival origin shrine"
+    },
+    "wiki": "Thrikkakara Temple",
+    "moolavar": {
+      "name": "Vamana (Kaatkarai Appan)",
+      "tamilName": "வாமனன்",
+      "form": "Nindran — standing in the dwarf-brahmin form"
+    },
+    "thaayar": {
+      "name": "Poornaseni Thaayar",
+      "tamilName": "பூர்ணசேனை"
+    },
+    "urchavar": null,
+    "puranam": "Mahabali’s kingdom covered Kerala when Vamana asked for three paces of land here — the Onam festival itself is this kshetram’s celebration, with the Onathappan image worshipped in every home of Kerala.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 9-6",
+      "work": "Thiruvoimozhi",
+      "meaning": "The Vamana of Kaatkarai who measured worlds for love of a devotee’s word."
+    }
+  },
+  "thirumoozhikkalam": {
+    "timings": {
+      "morning": [
+        "05:00",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "wiki": "Thirumoozhikkulam Lakshmana Perumal Temple",
+    "moolavar": {
+      "name": "Moozhikkalathan (Srikantan)",
+      "tamilName": "மூழிக்களத்தான்",
+      "form": "Nindran — standing, with Lakshmana and Bharata beside"
+    },
+    "thaayar": {
+      "name": "Madhuraveni (Sengamalavalli)",
+      "tamilName": "மதுரவேணி"
+    },
+    "urchavar": null,
+    "puranam": "Sage Hema’s penance here was answered when the Lord spoke sweet wisdom (moozhikkai — the counsel of the mantra); Rama’s brothers stand with him in this Rama-shrine of Kerala.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 9-8",
+      "work": "Thiruvoimozhi",
+      "meaning": "The counsel-giving Lord of Moozhikkalam who guides the seeker’s questions."
+    }
+  },
+  "thiruppuliyur": {
+    "timings": {
+      "morning": [
+        "04:30",
+        "11:30"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "One of the five Vishnu shrines of Chengannur"
+    },
+    "wiki": "Puliyoorkavil Sree Krishna Swamy Temple",
+    "moolavar": {
+      "name": "Maayapiran (Purushothaman)",
+      "tamilName": "மாயப்பிரான்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Poruvelkodi Nachiyar",
+      "tamilName": "பொருவேல்கொடி"
+    },
+    "urchavar": null,
+    "puranam": "Sage Pundareeka’s tapas at the tiger-grove (puli) drew the wonder-working (maaya) Lord here — Puliyur of the Pamba’s banks.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 8-9",
+      "work": "Thiruvoimozhi",
+      "meaning": "The wonder-lord of Thiruppuliyur whom the Azhwar holds as his own child."
+    }
+  },
+  "thiruchengundrur": {
+    "timings": {
+      "morning": [
+        "03:30",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "20:00"
+      ],
+      "notes": ""
+    },
+    "wiki": "Chengannur Mahadeva Temple",
+    "moolavar": {
+      "name": "Imayavarappan (Devadevan)",
+      "tamilName": "இமயவரப்பன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Seenivalar Nachiyar",
+      "tamilName": "சீனிவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Even the Himalaya’s lord (imayavarappan) worshipped here — Yudhishthira is said to have consecrated this shrine after the war, in the red-hill (chengunroor) town by the Pamba.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 8-4",
+      "work": "Thiruvoimozhi",
+      "meaning": "The Lord whom even the mountains worship, seated in Chengunroor’s heart."
+    }
+  },
+  "thirunavai": {
+    "timings": {
+      "morning": [
+        "05:00",
+        "11:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Bharathapuzha bali-rituals for ancestors"
+    },
+    "wiki": "Navamukunda Perumal temple, Thirunavaya",
+    "moolavar": {
+      "name": "Navamukundan",
+      "tamilName": "நாவாய் முகுந்தன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Malar Mangai Nachiyar",
+      "tamilName": "மலர்மங்கை"
+    },
+    "urchavar": null,
+    "puranam": "Nine yogis (navamukundam) were freed from a serpent-curse by the Lord’s grace at this Bharathapuzha ghat — Kerala’s holiest ground for the ancestor-rites performed on its banks.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 9-8",
+      "work": "Thiruvoimozhi",
+      "meaning": "The nine-sage Lord of Thirunavai who frees every lineage that remembers him."
+    }
+  },
+  "thiruvalla": {
+    "timings": {
+      "morning": [
+        "04:30",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "20:00"
+      ],
+      "notes": "Garuda icon in seated worship; stone flag-post unique in Kerala"
+    },
+    "wiki": "Sreevallabha Temple",
+    "moolavar": {
+      "name": "Sreevallabhan (Kolapiran)",
+      "tamilName": "ஸ்ரீவல்லபன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Vathsala (Konnayil Thaayar)",
+      "tamilName": "கொன்னயில் தாயார்"
+    },
+    "urchavar": null,
+    "puranam": "Durvasa’s disciple was saved here by the Lord’s grace and the mighty Garuda himself is worshipped in a seated shrine — the black-stone flagpost of Thiruvalla has stood sentinel over the Vallabha shrine for a thousand years.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Kolapiran of Thiruvalla whom Garuda serves with folded wings."
+    }
+  },
+  "thiruvanvandoor": {
+    "timings": {
+      "morning": [
+        "05:00",
+        "11:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:00"
+      ],
+      "notes": ""
+    },
+    "wiki": "Pambanaiappan Temple",
+    "moolavar": {
+      "name": "Paambanaiyappan (Kamalanathan)",
+      "tamilName": "பாம்பணையப்பன்",
+      "form": "Nindran — standing on the serpent couch"
+    },
+    "thaayar": {
+      "name": "Kamalavalli Nachiyar",
+      "tamilName": "கமலவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "The legendary architect Perunchithiranar built this shrine overnight for the serpent-couch (paambanai) Lord — one of the five Pamba-river Vishnu temples.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 6-1",
+      "work": "Thiruvoimozhi",
+      "meaning": "The serpent-couch lord of Vanvandoor whose rest sustains the worlds."
+    }
+  },
+  "thiruvaranvilai": {
+    "timings": {
+      "morning": [
+        "05:00",
+        "11:00"
+      ],
+      "evening": [
+        "17:00",
+        "20:00"
+      ],
+      "notes": "Aranmula boat-race (Uthrattathi Vallamkali) and kannadi (metal mirror) traditions"
+    },
+    "wiki": "Aranmula Parthasarathy Temple",
+    "moolavar": {
+      "name": "Parthasarathy (Aranmula Kannan)",
+      "tamilName": "அரன்முள கண்ணன்",
+      "form": "Nindran — standing as the charioteer"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Arjuna is said to have raised this shrine in thanks after his pilgrimage; the sacred boat-race escorts the Lord’s offerings down the Pamba, and Aranmula’s metal mirrors were born of a temple-work accident of the-visvakarma guilds.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 7-10",
+      "work": "Thiruvoimozhi",
+      "meaning": "The lovely Kannan of Aranmula whom the river carries garlands of song."
+    }
+  },
+  "thiruvattaru": {
+    "timings": {
+      "morning": [
+        "04:30",
+        "12:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:30"
+      ],
+      "notes": "Metal-inlaid reclining image; Otraikkadal mandapam"
+    },
+    "wiki": "Adikesava Perumal temple, Kanyakumari district",
+    "moolavar": {
+      "name": "Aadhikesava Perumal",
+      "tamilName": "ஆதிகேசவன்",
+      "form": "Kidandan — reclining, head to the west"
+    },
+    "thaayar": {
+      "name": "Maragathavalli Thaayar",
+      "tamilName": "மரகதவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "Between the rivers Para and Thaayar, the Lord reclines on Adisesha in a sanctum of metal-inlaid stone; Hanuman is said to guard him facing south — the great Adikesava of the old Travancore country.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 10-6",
+      "work": "Thiruvoimozhi",
+      "meaning": "The primal Kesava of Thiruvattaru whom the twin rivers worship on either bank."
+    }
+  },
+  "thiruvithuvakodu": {
+    "timings": {
+      "morning": [
+        "05:30",
+        "10:30"
+      ],
+      "evening": [
+        "17:00",
+        "18:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Uyyavandan (Abhayapradan)",
+      "tamilName": "உய்யவந்தன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Padmapani Nachiyar",
+      "tamilName": "பத்மபாணி"
+    },
+    "urchavar": null,
+    "puranam": "The refuge-giver (abhaya pradan) of Thiruvithuvakkodu grants the devotee freedom from fear — Bilvamangala’s longing verses found their answer in this Palakkad grove.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 10-10",
+      "work": "Thiruvoimozhi",
+      "meaning": "The Lord of Vithuvakkodu who carries the soul across (uyya) the ocean of birth."
+    }
+  },
+  "thirukkodithanam": {
+    "timings": {
+      "morning": [
+        "05:00",
+        "11:00"
+      ],
+      "evening": [
+        "17:00",
+        "19:00"
+      ],
+      "notes": ""
+    },
+    "wiki": "Thrikodithanam Mahavishnu Temple",
+    "moolavar": {
+      "name": "Athpudha Narayanan (Amrithanathan)",
+      "tamilName": "அத்புத நாராயணன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Sahadeva of the Pandavas planted the temple flag (kodi) here in penance — the flag-shrine (kodi sthanam) where Amrithanathan grants the nectar of devotion.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 8-6",
+      "work": "Thiruvoimozhi",
+      "meaning": "The wonder (athbudha) Narayana of Kodithanam who sweetens the devotee’s path."
+    }
+  },
+  "tirupati": {
+    "timings": {
+      "morning": [
+        "03:00",
+        "01:00"
+      ],
+      "evening": [
+        "12:00",
+        "17:00"
+      ],
+      "notes": "Sarva darshan queues nearly continuous; check TTD for current schedule"
+    },
+    "wiki": "Venkateswara Temple, Tirumala",
+    "moolavar": {
+      "name": "Srinivasa (Venkateswara, Balaji)",
+      "tamilName": "வேங்கடமுடையான்",
+      "form": "Nindran — standing, self-manifested on the Venkata hill"
+    },
+    "thaayar": {
+      "name": "Padmavathi Thaayar (at Tiruchanoor)",
+      "tamilName": "பத்மாவதி தாயார்"
+    },
+    "urchavar": {
+      "name": "Malayappa Swamy",
+      "tamilName": "மலையப்பன்"
+    },
+    "puranam": "In this age the Lord of the Seven Hills grants kalyana-proti worship as in no other shrine — Vishnu who came down as Srinivasa to wed Padmavathi remains on Venkatam until the end of the age, the debt of devotion paid in darshans by millions.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 6-9",
+      "work": "Thiruvoimozhi",
+      "meaning": "Nammazhwar refuses every other refuge, clinging to the Lord of Venkatam who holds the mountain and the hill of the soul."
+    }
+  },
+  "ahobilam": {
+    "timings": {
+      "morning": [
+        "07:00",
+        "12:00"
+      ],
+      "evening": [
+        "15:00",
+        "19:00"
+      ],
+      "notes": "Nine shrines spread through forest — Upper Ahobilam needs a trek"
+    },
+    "wiki": "Ahobilam",
+    "moolavar": {
+      "name": "Nava Narasimha (Ahobila Narasimha)",
+      "tamilName": "அஹோபில நரசிம்ஹர்",
+      "form": "Irundhan — seated, nine forms across the Nallamala forest"
+    },
+    "thaayar": {
+      "name": "Chenchu Lakshmi Thaayar",
+      "tamilName": "செஞ்சு லட்சுமி"
+    },
+    "urchavar": {
+      "name": "Malola Narasimha",
+      "tamilName": "மலோல நரசிம்ஹர்"
+    },
+    "puranam": "Where the pillar of Hiranya’s palace split and Narasimha burst forth — the hill echoes \"aho bilam\" (what a wonder!); nine forms of the Lion are worshipped along the forest ridges, and the Ahobila Mutt’s lineage was founded here by the Lord himself as guru.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The wondrous Lion of Ahobilam whose roar still shakes the Nallamala ridges."
+    }
+  },
+  "ayodhya": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "21:00"
+      ],
+      "notes": ""
+    },
+    "wiki": "Ayodhya",
+    "moolavar": {
+      "name": "Chakkaravarthi Thirumagan (Rama)",
+      "tamilName": "சக்கரவர்த்தி திருமகன்",
+      "form": "Nindran — standing in his birth-city"
+    },
+    "thaayar": {
+      "name": "Sita (Thirumagal)",
+      "tamilName": "சீதா"
+    },
+    "urchavar": null,
+    "puranam": "The Sarayu-banked city of Rama’s birth and reign — Thirumangai Azhwar sang it from afar, never leaving Tamil soil, calling its Lord the king whose very name carries the soul across.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Azhwar’s northern pilgrimage in verse — Ayodhya, city of the Lord who walked as a king among men."
+    }
+  },
+  "naimisaranyam": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "wiki": "Naimisha Forest",
+    "moolavar": {
+      "name": "Devarajan (Hariharaputra aspect — Chakranatha)",
+      "tamilName": "தேவராஜன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": {
+      "name": "Hemavalli Thaayar",
+      "tamilName": "ஹேமவல்லி"
+    },
+    "urchavar": null,
+    "puranam": "The sages gathered (naimisha) at this forest where the Puranas were first narrated; the Lord promised to remain here as the forest itself — the wheel-shaped Chakra tirtha marks where his discus rested.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The Lord who made himself the forest-shrine of Naimisaranya where wisdom was first sung."
+    }
+  },
+  "salagramam": {
+    "timings": {
+      "morning": [
+        "09:30",
+        "13:00"
+      ],
+      "evening": [
+        "14:00",
+        "17:00"
+      ],
+      "notes": "Himalayan shrine — open only in fair months (approx. May–Oct)"
+    },
+    "wiki": "Muktinath",
+    "moolavar": {
+      "name": "Moorthy (Muktinath, Sri Murthy)",
+      "tamilName": "முக்திநாதன்",
+      "form": "Nindran — standing, with 108 bull-mouth water spouts"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "At 3,800 metres beneath the Thorong pass, 108 icy springs pour over the devotee for liberation — Muktinath is the shrine of the saligrama stones themselves, honoured by both Hindu and Buddhist pilgrims as Chumig Gyatsa.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "Thirumangai’s hymn reaches the Himalayan Salagrama where liberation flows in icy water."
+    }
+  },
+  "badari": {
+    "timings": {
+      "morning": [
+        "04:30",
+        "13:00"
+      ],
+      "evening": [
+        "15:00",
+        "21:00"
+      ],
+      "notes": "Closed in winter (approx. Oct–Apr); deity moved to Joshimutt"
+    },
+    "wiki": "Badrinath Temple",
+    "moolavar": {
+      "name": "Badri Narayana (Badri Vishal)",
+      "tamilName": "பத்ரி நாராயணன்",
+      "form": "Irundhan — seated in padmasana under the badri tree"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Nara and Narayana, the sage-twins, performed tapas here; the berry (badri) grove shielded Narayana from the sun — and the Lord remains seated in yoga at the Alaknanda’s source, the north’s supreme abode of liberation.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi (Venkata hill verses)",
+      "work": "Thiruvoimozhi",
+      "meaning": "The Azhwars place Badari and Venkatam as the twin poles of the Lord’s grace on earth."
+    }
+  },
+  "devaprayag": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "19:30"
+      ],
+      "notes": ""
+    },
+    "moolavar": {
+      "name": "Neelameghan (Dandakarunya Perumal)",
+      "tamilName": "நீள்மேகன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Where Alaknanda meets Bhagirathi and the Ganga is born, Rama performed penance after Ravana’s fall at this confluence — the kshetram of the \"divine confluence\" (deva prayag).",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The cloud-hued Lord of the confluence where the Ganga is born of two rivers."
+    }
+  },
+  "joshimutt": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "12:00"
+      ],
+      "evening": [
+        "15:30",
+        "20:00"
+      ],
+      "notes": "Winter seat of Badrinath"
+    },
+    "moolavar": {
+      "name": "Paramapurusha (Narasimha)",
+      "tamilName": "பரமபுருஷன்",
+      "form": "Irundhan — seated"
+    },
+    "thaayar": {
+      "name": "Paramakalyani Thaayar",
+      "tamilName": "பரமகல்யாணி"
+    },
+    "urchavar": null,
+    "puranam": "Adi Sankara established the Jyotirmath seat here; when Badrinath closes under snow, the Lord’s worship continues at this winter throne — the meditation-seat (jyoti) of the Himalaya.",
+    "pasuram": {
+      "azhwarId": "thirumangai",
+      "reference": "Periya Thirumozhi",
+      "work": "Periya Thirumozhi",
+      "meaning": "The seated Paramapurusha of Piridi who keeps the lamp of the north alight."
+    }
+  },
+  "mathura": {
+    "timings": {
+      "morning": [
+        "05:00",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "20:30"
+      ],
+      "notes": ""
+    },
+    "wiki": "Mathura",
+    "moolavar": {
+      "name": "Keshavadeva (Govardhananesan)",
+      "tamilName": "கோவர்த்தனன்",
+      "form": "Nindran — standing"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Krishna’s birth-city on the Yamuna, praised by Periyazhwar who longed to be born there as anything that breathes — the hill nearby is the very Govardhana the Lord lifted on his finger.",
+    "pasuram": {
+      "azhwarId": "periyazhwar",
+      "reference": "Periyazhwar Thirumozhi (Vadamozhi verses)",
+      "work": "Periyazhwar Thirumozhi",
+      "meaning": "Periyazhwar’s northern verses bless every leaf and stone of Krishna’s Mathura."
+    }
+  },
+  "ayarpadi": {
+    "timings": {
+      "morning": [
+        "05:30",
+        "12:00"
+      ],
+      "evening": [
+        "16:00",
+        "20:30"
+      ],
+      "notes": "Vrindavan-Gokul region shrines"
+    },
+    "wiki": "Vrindavan",
+    "moolavar": {
+      "name": "Navamohana Krishna",
+      "tamilName": "நவமோகன்",
+      "form": "Nindran — standing, the eternally enchanting child"
+    },
+    "thaayar": {
+      "name": "Radha (with the gopis)",
+      "tamilName": "ராதை"
+    },
+    "urchavar": null,
+    "puranam": "The cowherd settlement (aaypadi) of Krishna’s childhood — Vrindavan and Gokul — where the Azhwars’ longing fixates on the enchanter (navamohan) of every soul; Andal’s Thiruppavai borrows its very voice from these groves.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi (Aayar kulaththu verses)",
+      "work": "Thiruvoimozhi",
+      "meaning": "Nammazhwar envies the cows and calves of Ayarpadi that felt the Lord’s touch."
+    }
+  },
+  "dwaraka": {
+    "timings": {
+      "morning": [
+        "06:00",
+        "13:00"
+      ],
+      "evening": [
+        "17:00",
+        "21:00"
+      ],
+      "notes": "Flag changes five times daily"
+    },
+    "wiki": "Dwarkadhish Temple",
+    "moolavar": {
+      "name": "Kalyana Narayanan (Dwarakadhish)",
+      "tamilName": "துவாரகைநாதன்",
+      "form": "Nindran — standing as the king of Dwaraka"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Krishna’s golden capital on the western sea — the gateway (dwaraka) city that returned to the waters after his age ended; the flag atop the temple has changed five times a day for centuries, as the king keeps his court.",
+    "pasuram": {
+      "azhwarId": "andal",
+      "reference": "Nachiyar Thirumozhi",
+      "work": "Nachiyar Thirumozhi",
+      "meaning": "Andal’s longing verses name Dwaraka among the cities of her beloved’s reign."
+    }
+  },
+  "thirupparkadal": {
+    "timings": null,
+    "wiki": null,
+    "moolavar": {
+      "name": "Ksheerabdinathan (Ranganatha of the Ocean of Milk)",
+      "tamilName": "பாற்கடல் ரங்கநாதன்",
+      "form": "Kidandan — reclining on Adisesha amid the milky ocean"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "Beyond earthly geography, the Ocean of Milk is where every cosmic age finds the Lord reclining in eternal ease — reached not by road or rail but by contemplation; the Azhwars sang it as the thirteenth month’s pilgrimage.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi (Paarkadal verses)",
+      "work": "Thiruvoimozhi",
+      "meaning": "The Azhwar’s verses ferry the soul to the milky ocean where the Lord awaits every age."
+    }
+  },
+  "paramapadam": {
+    "timings": null,
+    "wiki": null,
+    "moolavar": {
+      "name": "Vaikuntanathan (Paramapadanathan)",
+      "tamilName": "பரமபதநாதன்",
+      "form": "Irundhan — seated in the supreme abode"
+    },
+    "thaayar": null,
+    "urchavar": null,
+    "puranam": "The last of the 108 is not a place but the destination — Vaikunta, the supreme abode from which none returns, granted by the Lord’s own grace to the soul that surrenders.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 10-9",
+      "work": "Thiruvoimozhi",
+      "meaning": "Nammazhwar’s final decad is itself the soul’s departure — the Lord’s abode received as his own."
+    }
+  }
+}

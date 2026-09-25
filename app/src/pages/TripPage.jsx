@@ -16,6 +16,7 @@ import { orderNearestFirst, legsFor, sumLegs } from '../utils/route.js';
 import { decodeTrip, encodeTrip } from '../state/trip.js';
 import EmptyState from '../components/EmptyState.jsx';
 import TripMap from '../components/TripMap.jsx';
+import { SITE_COPY } from '../data/siteCopy.js';
 
 /** @returns {Map<string, Kshetram>} id → enriched record (coords included). */
 function useKshetramIndex() {
@@ -94,10 +95,10 @@ export default function TripPage() {
   if (stops.length === 0) {
     return (
       <div className="max-w-xl mx-auto pt-8">
-        <h1 className="font-display text-3xl font-semibold text-[#7A2E00] mb-4">My Yatra — Trip Planner</h1>
+        <h1 className="font-display text-3xl font-semibold text-[#7A2E00] mb-4">{SITE_COPY.trip.title}</h1>
         <EmptyState
-          title="Your trip is empty"
-          message="Add desams from any kshetram page, card or map popup to start planning your yatra."
+          title={SITE_COPY.trip.emptyTitle}
+          message={SITE_COPY.trip.emptyMessage}
           action={(
             <div className="flex flex-wrap justify-center gap-3 mt-1">
               <Link className="btn btn--primary" to="/kshetrams">Browse desams</Link>

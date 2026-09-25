@@ -8,16 +8,17 @@
  */
 import { useEffect, useState } from 'react';
 import { fetchWikiImage, getCachedWikiImage } from '../utils/wikiImage.js';
+import { assetUrl } from '../utils/assetUrl.js';
 
 export function useWikiImage(title, src = null) {
   const [entry, setEntry] = useState(() => {
-    if (src) return { src, credit: null };
+    if (src) return { src: assetUrl(src), credit: null };
     return getCachedWikiImage(title) || { src: null, credit: null };
   });
 
   useEffect(() => {
     if (src) {
-      setEntry({ src, credit: null });
+      setEntry({ src: assetUrl(src), credit: null });
       return undefined;
     }
     if (!title || getCachedWikiImage(title)) return undefined;

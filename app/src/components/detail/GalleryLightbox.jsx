@@ -10,10 +10,11 @@
  */
 import { useEffect, useState } from 'react';
 import { fetchWikiImage } from '../../utils/wikiImage.js';
+import { assetUrl } from '../../utils/assetUrl.js';
 
 /** Resolves a photo entry to a displayable image (src or cached/fetched wiki thumb). */
 function usePhotoSource(photo) {
-  const [resolved, setResolved] = useState(() => (photo?.src ? photo.src : null));
+  const [resolved, setResolved] = useState(() => (photo?.src ? assetUrl(photo.src) : null));
   useEffect(() => {
     if (!photo || photo.src) return undefined;
     let cancelled = false;

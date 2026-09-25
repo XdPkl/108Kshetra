@@ -15,6 +15,8 @@ import {
   Upload, Camera, Quote, Award, Clock, CheckCircle2, User,
 } from 'lucide-react';
 import { ABOUT } from '../data/about.js';
+import { SITE_COPY } from '../data/siteCopy.js';
+import { assetUrl } from '../utils/assetUrl.js';
 import { ThirumanIcon, DeepamIcon } from '../components/SacredIcons.jsx';
 
 /** Copy-to-clipboard pill with a transient "Copied ✓" acknowledgement. */
@@ -80,7 +82,7 @@ function CeoPhotoCard({ photo, setPhoto }) {
       <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-[#EFE4CC] border border-[#C99A2E]/40 shadow-inner">
         {photo ? (
           <img
-            src={photo}
+            src={assetUrl(photo)}
             alt={`${ceo.name}, CEO of Kshetra Tours`}
             referrerPolicy="no-referrer"
             className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-102"
@@ -167,13 +169,10 @@ function ScheduleModal({ open, onClose, initialCircuit }) {
     setBookingRef(`YATRA-${Math.floor(1000 + Math.random() * 9000)}`);
     setSubmitted(true);
   };
+  const modalCopy = SITE_COPY.about.scheduleModal;
   const circuitOptions = [
     ...ABOUT.circuits.map((c) => `${c.title} (${c.count.replace(' Divya Desams', ' Desams')})`),
-    'Complete 108 Divya Desam Grand Yatra (Phased Annual Circuit)',
-    'Executive Office / CEO Yatra Consultation',
-    'Festival Yatra Schedule Request (Margazhi, Panguni, Brahmotsavam)',
-    'Upcoming General Yatra Schedule',
-    'Custom Satsang / Family Yatra',
+    ...modalCopy.extraCircuitOptions,
   ];
 
   return (
@@ -189,8 +188,8 @@ function ScheduleModal({ open, onClose, initialCircuit }) {
 
         <div className="p-5 sm:p-6 pb-4 border-b border-[#F0E3C6] flex items-center justify-between">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#B34700]">Pilgrim Service Desk</span>
-            <h3 className="font-display text-2xl font-bold text-[#7A2E00]">Request Yatra Schedule</h3>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#B34700]">{modalCopy.deskEyebrow}</span>
+            <h3 className="font-display text-2xl font-bold text-[#7A2E00]">{modalCopy.title}</h3>
           </div>
           <button
             type="button"
@@ -209,57 +208,56 @@ function ScheduleModal({ open, onClose, initialCircuit }) {
                 <Check className="w-8 h-8 stroke-[2.5]" aria-hidden="true" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#96731F]">Inquiry Received</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-[#96731F]">{modalCopy.success.eyebrow}</span>
                 <h4 className="font-display text-2xl font-bold text-[#7A2E00] mt-1">
-                  Radhe Krishna, {formData.name || 'Devotee'}!
+                  {modalCopy.success.greetingPrefix} {formData.name || modalCopy.success.greetingFallback}!
                 </h4>
                 <p className="text-xs text-[#66523D] max-w-sm mx-auto mt-2 leading-relaxed">
-                  Your pilgrimage inquiry has been logged under reference{' '}
+                  {modalCopy.success.bodyLead}{' '}
                   <strong className="text-[#7A2E00] font-mono bg-[#FAF2E3] px-2 py-0.5 rounded border border-[#C99A2E]/40">
                     {bookingRef}
                   </strong>
-                  . Our yatra coordinator will share the detailed day-wise itinerary, departure dates, and sattvic
-                  stay arrangements via WhatsApp and email within 24 hours.
+                  {modalCopy.success.bodyTail}
                 </p>
               </div>
               <div className="bg-[#FAF2E3] p-4 rounded-xl border border-[#C99A2E]/40 text-left text-xs space-y-1.5 max-w-sm mx-auto">
-                <p><strong>Selected Circuit:</strong> {formData.circuit}</p>
-                <p><strong>Devotees:</strong> {formData.pilgrimsCount} pilgrims</p>
-                <p><strong>Preferred Window:</strong> {formData.travelWindow}</p>
-                <p><strong>Contact:</strong> {formData.phone} · {formData.email}</p>
+                <p><strong>{modalCopy.success.summaryLabels.circuit}</strong> {formData.circuit}</p>
+                <p><strong>{modalCopy.success.summaryLabels.devotees}</strong> {formData.pilgrimsCount} {modalCopy.success.summaryLabels.pilgrimsSuffix}</p>
+                <p><strong>{modalCopy.success.summaryLabels.window}</strong> {formData.travelWindow}</p>
+                <p><strong>{modalCopy.success.summaryLabels.contact}</strong> {formData.phone} · {formData.email}</p>
               </div>
               <button
                 type="button"
                 onClick={onClose}
                 className="px-6 py-2.5 rounded-full text-xs font-bold text-[#4A3005] bg-gradient-to-b from-[#E2C47C] to-[#C99A2E] hover:brightness-105 border border-[#96731F] shadow-xs"
               >
-                Done
+                {modalCopy.success.done}
               </button>
             </div>
           ) : (
             <form onSubmit={onSubmit} className="space-y-4">
               <div>
-                <label htmlFor="inq-name" className="block text-xs font-bold text-[#332417] mb-1">Devotee / Pilgrim Name *</label>
-                <input id="inq-name" type="text" required placeholder="e.g. Sriraman / Padmavathi"
+                <label htmlFor="inq-name" className="block text-xs font-bold text-[#332417] mb-1">{modalCopy.labels.name}</label>
+                <input id="inq-name" type="text" required placeholder={modalCopy.placeholders.name}
                   value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className={inputCls} />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label htmlFor="inq-phone" className="block text-xs font-bold text-[#332417] mb-1">Phone / WhatsApp *</label>
-                  <input id="inq-phone" type="tel" required placeholder="+91 98765 43210"
+                  <label htmlFor="inq-phone" className="block text-xs font-bold text-[#332417] mb-1">{modalCopy.labels.phone}</label>
+                  <input id="inq-phone" type="tel" required placeholder={modalCopy.placeholders.phone}
                     value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className={inputCls} />
                 </div>
                 <div>
-                  <label htmlFor="inq-email" className="block text-xs font-bold text-[#332417] mb-1">Email Address *</label>
-                  <input id="inq-email" type="email" required placeholder="devotee@example.com"
+                  <label htmlFor="inq-email" className="block text-xs font-bold text-[#332417] mb-1">{modalCopy.labels.email}</label>
+                  <input id="inq-email" type="email" required placeholder={modalCopy.placeholders.email}
                     value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className={inputCls} />
                 </div>
               </div>
               <div>
-                <label htmlFor="inq-circuit" className="block text-xs font-bold text-[#332417] mb-1">Preferred Pilgrimage Circuit</label>
+                <label htmlFor="inq-circuit" className="block text-xs font-bold text-[#332417] mb-1">{modalCopy.labels.circuit}</label>
                 <select id="inq-circuit" value={formData.circuit}
                   onChange={(e) => setFormData({ ...formData, circuit: e.target.value })}
                   className={inputCls}>
@@ -268,34 +266,26 @@ function ScheduleModal({ open, onClose, initialCircuit }) {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label htmlFor="inq-count" className="block text-xs font-bold text-[#332417] mb-1">Number of Pilgrims</label>
+                  <label htmlFor="inq-count" className="block text-xs font-bold text-[#332417] mb-1">{modalCopy.labels.pilgrims}</label>
                   <select id="inq-count" value={formData.pilgrimsCount}
                     onChange={(e) => setFormData({ ...formData, pilgrimsCount: e.target.value })}
                     className={inputCls}>
-                    <option value="1">1 Person (Solo Devotee)</option>
-                    <option value="2">2 Persons (Couple / Companions)</option>
-                    <option value="3-5">3–5 Persons (Family Group)</option>
-                    <option value="6-12">6–12 Persons (Extended Family)</option>
-                    <option value="15+">15+ Persons (Satsang / Trust Group)</option>
+                    {modalCopy.pilgrimOptions.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="inq-window" className="block text-xs font-bold text-[#332417] mb-1">Expected Travel Window</label>
+                  <label htmlFor="inq-window" className="block text-xs font-bold text-[#332417] mb-1">{modalCopy.labels.window}</label>
                   <select id="inq-window" value={formData.travelWindow}
                     onChange={(e) => setFormData({ ...formData, travelWindow: e.target.value })}
                     className={inputCls}>
-                    <option value="Next 30 Days">Next 30 Days</option>
-                    <option value="Next 60 Days">Next 60 Days</option>
-                    <option value="Margazhi Season (Dec-Jan)">Margazhi Season (Dec–Jan)</option>
-                    <option value="Panguni / Chithirai (Mar-May)">Panguni / Chithirai (Mar–May)</option>
-                    <option value="Flexible / Just Planning">Flexible / Inquiring for Dates</option>
+                    {modalCopy.travelWindowOptions.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
                   </select>
                 </div>
               </div>
               <div>
-                <label htmlFor="inq-notes" className="block text-xs font-bold text-[#332417] mb-1">Special Requirements (Optional)</label>
+                <label htmlFor="inq-notes" className="block text-xs font-bold text-[#332417] mb-1">{modalCopy.labels.notes}</label>
                 <textarea id="inq-notes" rows={2}
-                  placeholder="e.g. Sattvic prasadam only, senior citizen darshan assistance, wheelchair required..."
+                  placeholder={modalCopy.placeholders.notes}
                   value={formData.specialRequests} onChange={(e) => setFormData({ ...formData, specialRequests: e.target.value })}
                   className={inputCls} />
               </div>
@@ -304,10 +294,10 @@ function ScheduleModal({ open, onClose, initialCircuit }) {
                   type="submit"
                   className="w-full py-3 rounded-full text-xs font-bold text-[#FFFDF7] bg-gradient-to-r from-[#D95F0E] via-[#B34700] to-[#7A2E00] hover:brightness-105 shadow-md transition-all"
                 >
-                  Submit Schedule Inquiry
+                  {modalCopy.submit}
                 </button>
                 <p className="text-[11px] text-[#66523D] text-center mt-2">
-                  We protect your privacy. Your information is used strictly to coordinate temple yatra schedules.
+                  {modalCopy.privacyNote}
                 </p>
               </div>
             </form>
@@ -329,7 +319,8 @@ export default function AboutPage() {
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const [modalCircuit, setModalCircuit] = useState(circuits[0] ? `${circuits[0].title} (${circuits[0].count.replace(' Divya Desams', ' Desams')})` : '');
   const [ceoPhoto, setCeoPhoto] = useState(() => {
-    try { return localStorage.getItem('kshetra_ceo_photo') || ''; } catch { return ''; }
+    // A local upload/URL override wins; otherwise the CMS-managed portrait (about.json) shows.
+    try { return localStorage.getItem('kshetra_ceo_photo') || ceo.photoUrl || ''; } catch { return ceo.photoUrl || ''; }
   });
 
   // Scroll to the anchor the header's Kshetra Tours dropdown targeted
@@ -350,22 +341,21 @@ export default function AboutPage() {
       {/* Banner with quick-jump anchors */}
       <header className="border-b border-[#E3D2AE] pb-4">
         <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">
-          Nalayira Divya Prabandham Series
+          {SITE_COPY.about.banner.eyebrow}
         </span>
         <h1 className="font-display text-3xl sm:text-4xl font-semibold text-[#7A2E00] tracking-tight mt-1">
-          About Us — Kshetra Tours
+          {SITE_COPY.about.banner.title}
         </h1>
         <p className="text-sm text-[#66523D] mt-1 max-w-2xl">
-          A dedicated devotional resource and guided pilgrimage initiative celebrating the 108 Divya Desams
-          glorified in the Tamil Veda.
+          {SITE_COPY.about.banner.tagline}
         </p>
         <nav className="flex flex-wrap gap-2 mt-4" aria-label="About sections">
-          <a className={anchorChip} href="#archive"><BookOpen className="w-3.5 h-3.5" aria-hidden="true" /> Digital Archive</a>
-          <a className={anchorChip} href="#guided-yatras"><RouteIcon className="w-3.5 h-3.5" aria-hidden="true" /> Guided Yatras</a>
-          <a className={anchorChip} href="#ceo-leadership"><User className="w-3.5 h-3.5" aria-hidden="true" /> Leadership &amp; CEO</a>
-          <a className={anchorChip} href="#circuits"><MapPin className="w-3.5 h-3.5" aria-hidden="true" /> Regional Circuits</a>
-          <a className={anchorChip} href="#contact-desk"><ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" /> Contact</a>
-          <a className={anchorChip} href="#sanctum-etiquette"><ThirumanIcon className="w-3 h-4" /> Sanctum Etiquette</a>
+          <a className={anchorChip} href="#archive"><BookOpen className="w-3.5 h-3.5" aria-hidden="true" /> {SITE_COPY.about.anchors[0]}</a>
+          <a className={anchorChip} href="#guided-yatras"><RouteIcon className="w-3.5 h-3.5" aria-hidden="true" /> {SITE_COPY.about.anchors[1]}</a>
+          <a className={anchorChip} href="#ceo-leadership"><User className="w-3.5 h-3.5" aria-hidden="true" /> {SITE_COPY.about.anchors[2]}</a>
+          <a className={anchorChip} href="#circuits"><MapPin className="w-3.5 h-3.5" aria-hidden="true" /> {SITE_COPY.about.anchors[3]}</a>
+          <a className={anchorChip} href="#contact-desk"><ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" /> {SITE_COPY.about.anchors[4]}</a>
+          <a className={anchorChip} href="#sanctum-etiquette"><ThirumanIcon className="w-3 h-4" /> {SITE_COPY.about.anchors[5]}</a>
         </nav>
       </header>
 
@@ -373,7 +363,7 @@ export default function AboutPage() {
       <section aria-labelledby="about-site" className={cardShell} id="archive">
         <div className={topStrip} aria-hidden="true" />
         <div className={sectionHead}>
-          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">The digital archive</span>
+          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">{SITE_COPY.about.sections.archiveEyebrow}</span>
           <h2 id="about-site" className="font-display text-2xl sm:text-3xl font-semibold text-[#7A2E00] mt-0.5">
             {site.heading}
           </h2>
@@ -400,7 +390,7 @@ export default function AboutPage() {
         <section aria-labelledby="about-tours" className={cardShell} id="guided-yatras">
           <div className={topStrip} aria-hidden="true" />
           <div className={sectionHead}>
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">Guided yatras</span>
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">{SITE_COPY.about.sections.toursEyebrow}</span>
             <h2 id="about-tours" className="font-display text-2xl sm:text-3xl font-semibold text-[#7A2E00] mt-0.5">
               {tours.heading}
             </h2>
@@ -427,7 +417,7 @@ export default function AboutPage() {
         <section aria-labelledby="about-contact" className={cardShell} id="contact-desk">
           <div className={topStrip} aria-hidden="true" />
           <div className={sectionHead}>
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">Pilgrim inquiries</span>
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">{SITE_COPY.about.sections.contactEyebrow}</span>
             <h2 id="about-contact" className="font-display text-2xl sm:text-3xl font-semibold text-[#7A2E00] mt-0.5">
               {contact.heading}
             </h2>
@@ -435,7 +425,7 @@ export default function AboutPage() {
           <div className="space-y-3">
             <div className="bg-[#FAF2E3] p-4 rounded-xl border border-[#C99A2E]/40 flex items-center justify-between gap-3">
               <div className="min-w-0">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#96731F] block">Email us</span>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#96731F] block">{SITE_COPY.about.sections.emailLabel}</span>
                 <span className="text-sm font-semibold text-[#7A2E00] break-all">{contact.email}</span>
               </div>
               {contact.email && !contact.email.includes('[To be provided') ? (
@@ -444,7 +434,7 @@ export default function AboutPage() {
             </div>
             <div className="bg-[#FAF2E3] p-4 rounded-xl border border-[#C99A2E]/40 flex items-center justify-between gap-3">
               <div className="min-w-0">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#96731F] block">Phone / WhatsApp</span>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#96731F] block">{SITE_COPY.about.sections.phoneLabel}</span>
                 <span className="text-sm font-semibold text-[#7A2E00] break-all">{contact.phone}</span>
               </div>
               {contact.phone && !contact.phone.includes('[To be provided') ? (
@@ -452,14 +442,14 @@ export default function AboutPage() {
               ) : null}
             </div>
             <p className="text-xs text-[#66523D] leading-relaxed pt-1">
-              <strong className="text-[#7A2E00]">Response hours:</strong> {contact.note}
+              <strong className="text-[#7A2E00]">{SITE_COPY.about.sections.responseHoursLabel}</strong> {contact.note}
             </p>
             <button
               type="button"
               onClick={() => openModalWithCircuit('Upcoming General Yatra Schedule')}
               className="w-full py-2.5 rounded-full text-xs font-bold text-[#FFFDF7] bg-gradient-to-r from-[#D95F0E] via-[#B34700] to-[#7A2E00] hover:brightness-105 shadow-md transition-all"
             >
-              Request Yatra Schedule
+              {SITE_COPY.about.sections.requestSchedule}
             </button>
           </div>
         </section>
@@ -470,14 +460,14 @@ export default function AboutPage() {
         <div className={topStrip} aria-hidden="true" />
         <div className={`${sectionHead} flex items-center justify-between flex-wrap gap-2`}>
           <div>
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">Leadership &amp; Sampradaya Seva</span>
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">{SITE_COPY.about.sections.ceoEyebrow}</span>
             <h2 id="about-ceo" className="font-display text-2xl sm:text-3xl font-semibold text-[#7A2E00] mt-0.5">
-              Founder &amp; Chief Executive Officer
+              {SITE_COPY.about.sections.ceoTitle}
             </h2>
           </div>
           <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#FAF2E3] border border-[#C99A2E]/45 text-[#96731F] flex items-center gap-1.5">
             <Award className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
-            <span>Kainkaryam Leadership</span>
+            <span>{SITE_COPY.about.sections.ceoBadge}</span>
           </span>
         </div>
 
@@ -521,7 +511,7 @@ export default function AboutPage() {
               <p className="text-xs sm:text-sm text-[#332417] italic leading-relaxed">{ceo.quote}</p>
               <div className="mt-2.5 flex items-center justify-between text-xs font-bold text-[#7A2E00]">
                 <span>— {ceo.name}</span>
-                <span className="text-[11px] font-normal text-[#66523D]">Founder’s Desk, Kshetra Tours</span>
+                <span className="text-[11px] font-normal text-[#66523D]">{SITE_COPY.about.sections.quoteAttribution}</span>
               </div>
             </div>
 
@@ -548,13 +538,13 @@ export default function AboutPage() {
                 className="px-4 py-2 rounded-full text-xs font-bold text-[#FFFDF7] bg-[#B34700] hover:bg-[#7A2E00] transition-colors shadow-2xs inline-flex items-center gap-1.5"
               >
                 <Mail className="w-3.5 h-3.5" aria-hidden="true" />
-                <span>Inquire with CEO’s Office</span>
+                <span>{SITE_COPY.about.sections.inquireCeo}</span>
               </button>
               <a
                 href={`mailto:${ceo.email}?subject=${encodeURIComponent('Inquiry for Kshetra Tours CEO')}`}
                 className="px-4 py-2 rounded-full text-xs font-bold text-[#7A2E00] bg-[#FAF2E3] hover:bg-[#C99A2E]/20 border border-[#C99A2E]/50 transition-colors inline-flex items-center gap-1.5"
               >
-                <span>Direct Email: {ceo.email}</span>
+                <span>{SITE_COPY.about.sections.directEmailLabel} {ceo.email}</span>
               </a>
             </div>
           </div>
@@ -566,13 +556,13 @@ export default function AboutPage() {
         <div className={topStrip} aria-hidden="true" />
         <div className={`${sectionHead} flex items-center justify-between flex-wrap gap-2`}>
           <div>
-            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">Devotional itineraries</span>
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">{SITE_COPY.about.sections.circuitsEyebrow}</span>
             <h2 id="about-circuits" className="font-display text-2xl sm:text-3xl font-semibold text-[#7A2E00] mt-0.5">
-              Popular Divya Desam Pilgrimage Circuits
+              {SITE_COPY.about.sections.circuitsTitle}
             </h2>
           </div>
           <p className="text-xs text-[#66523D] max-w-sm text-right hidden md:block">
-            Organized regionally to minimize travel fatigue and maximize sanctum darshan time.
+            {SITE_COPY.about.sections.circuitsNote}
           </p>
         </div>
 
@@ -603,7 +593,7 @@ export default function AboutPage() {
                 </div>
                 <div className="mt-3 pt-2.5 border-t border-[#EBDDBE]">
                   <span className="text-[10px] uppercase font-bold tracking-wider text-[#66523D] block mb-1">
-                    Key shrines in this circuit:
+                    {SITE_COPY.about.sections.keyShrinesLabel}
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {c.highlights.map((h) => (
@@ -619,7 +609,7 @@ export default function AboutPage() {
                   to={`/kshetrams?region=${encodeURIComponent(c.region)}`}
                   className="text-xs font-bold text-[#7A2E00] hover:text-[#B34700] transition-colors flex items-center gap-1 group/btn"
                 >
-                  <span>View all {c.region === 'Celestial' ? 'Vinnulaga' : c.region} temples</span>
+                  <span>{SITE_COPY.about.sections.viewAllPrefix} {c.region === 'Celestial' ? 'Vinnulaga' : c.region} {SITE_COPY.about.sections.viewAllSuffix}</span>
                   <span className="group-hover/btn:translate-x-0.5 transition-transform" aria-hidden="true">→</span>
                 </Link>
                 <button
@@ -627,7 +617,7 @@ export default function AboutPage() {
                   onClick={() => openModalWithCircuit(`${c.title} (${c.count.replace(' Divya Desams', ' Desams').replace(' Celestial Abodes', ' Celestial Abodes')})`)}
                   className="px-3 py-1.5 rounded-full text-xs font-bold text-[#4A3005] bg-gradient-to-b from-[#E2C47C] to-[#C99A2E] hover:brightness-105 border border-[#96731F] shadow-2xs transition-all"
                 >
-                  Inquire Circuit
+                  {SITE_COPY.about.sections.inquireCircuit}
                 </button>
               </div>
             </div>
@@ -639,12 +629,12 @@ export default function AboutPage() {
       <section aria-labelledby="about-etiquette" className={cardShell} id="sanctum-etiquette">
         <div className={topStrip} aria-hidden="true" />
         <div className={sectionHead}>
-          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">Yatra guidance &amp; sacred tradition</span>
+          <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">{SITE_COPY.about.sections.etiquetteEyebrow}</span>
           <h2 id="about-etiquette" className="font-display text-2xl sm:text-3xl font-semibold text-[#7A2E00] mt-0.5">
-            Sanctum Etiquette &amp; Parayanam Protocols
+            {SITE_COPY.about.sections.etiquetteTitle}
           </h2>
           <p className="text-xs sm:text-sm text-[#66523D] mt-1 max-w-2xl">
-            Essential spiritual guidelines to observe when approaching the sanctums of Lord Narayana across the 108 Divya Desams.
+            {SITE_COPY.about.sections.etiquetteLead}
           </p>
         </div>
 

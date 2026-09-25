@@ -5,6 +5,7 @@
  */
 import { getAllAzhwars, getFeaturedAcharyas } from '../data/api.js';
 import { SITE_STATS } from '../data/config.js';
+import { SITE_COPY } from '../data/siteCopy.js';
 import Hero from '../components/home/Hero.jsx';
 import YatraProgressTracker from '../components/home/YatraProgressTracker.jsx';
 import FeaturedKshetrams from '../components/home/FeaturedKshetrams.jsx';
@@ -13,6 +14,7 @@ import SaintStrip from '../components/home/SaintStrip.jsx';
 export default function HomePage() {
   const featuredAzhwars = getAllAzhwars().slice(0, 4);
   const featuredAcharyas = getFeaturedAcharyas();
+  const { azhwarStrip, acharyaStrip } = SITE_COPY.home;
   return (
     <>
       <Hero />
@@ -22,22 +24,22 @@ export default function HomePage() {
       <FeaturedKshetrams />
 
       <SaintStrip
-        eyebrow="Saint-poets of the Tamil Veda"
-        title="The Twelve Azhwars"
-        lead="Whose hymns sanctified these hills, groves and cities."
+        eyebrow={azhwarStrip.eyebrow}
+        title={azhwarStrip.title}
+        lead={azhwarStrip.lead}
         saints={featuredAzhwars}
         base="/azhwar"
-        ctaLabel="Azhwar Darshan - Featured"
+        ctaLabel={azhwarStrip.ctaLabel}
         ctaTo="/azhwars"
       />
 
       <SaintStrip
-        eyebrow="The guru parampara"
-        title="The Acharyas"
-        lead="Teachers who received, preserved and expounded the tradition."
+        eyebrow={acharyaStrip.eyebrow}
+        title={acharyaStrip.title}
+        lead={acharyaStrip.lead}
         saints={featuredAcharyas}
         base="/acharya"
-        ctaLabel="Acharya Darshan - Featured"
+        ctaLabel={acharyaStrip.ctaLabel}
         ctaTo="/acharyas"
       />
     </>

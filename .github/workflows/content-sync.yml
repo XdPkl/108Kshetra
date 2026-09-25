@@ -1,0 +1,63 @@
+name: Content sync
+
+# Editorial flow: an editor publishes in Sanity → the Sanity webhook calls
+# repository_dispatch → this workflow pulls the content, runs the full quality
+# gate, and only if everything passes commits the JSON to main — which trips
+# deploy.yml and updates the live site (~2 minutes end to end).
+on:
+  repository_dispatch:
+    types: [content-sync]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: content-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Pull content from Sanity
+        env:
+          SANITY_PROJECT_ID: ${{ vars.SANITY_PROJECT_ID }}
+          SANITY_DATASET: ${{ vars.SANITY_DATASET }}
+          SANITY_READ_TOKEN: ${{ secrets.SANITY_READ_TOKEN }}
+        run: node scripts/sync-content.mjs
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests with coverage gate (80%)
+        run: npm run test:coverage
+
+      - name: Build
+        run: npm run build
+
+      - name: Commit synced content (only when tests pass)
+        run: |
+          git config user.name "kshetra-content-bot"
+          git config user.email "actions@github.com"
+          if git diff --quiet -- src/data/content; then
+            echo "No content changes — nothing to commit."
+          else
+            git add src/data/content
+            git commit -m "chore(content): sync from Sanity CMS"
+            git push
+          fi

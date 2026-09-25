@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { getAllAzhwars, getKshetramsByAzhwar } from '../data/api.js';
 import { useWikiImage } from '../hooks/useWikiImage.js';
 import { ThirumanIcon } from '../components/SacredIcons.jsx';
+import { SITE_COPY } from '../data/siteCopy.js';
 
 /** Number of desam chips shown before the "+N more" link. */
 const CHIP_LIMIT = 4;
@@ -117,15 +118,13 @@ export default function AzhwarsPage() {
       {/* Header banner */}
       <div className="border-b border-[#E3D2AE] pb-4">
         <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">
-          The Twelve Saint-Poets
+          {SITE_COPY.azhwarsPage.eyebrow}
         </span>
         <h1 className="font-display text-3xl font-semibold text-[#7A2E00] mt-0.5">
-          The Twelve Azhwars <span lang="ta" className="text-2xl">(பன்னிரு ஆழ்வார்கள்)</span>
+          {SITE_COPY.azhwarsPage.title} <span lang="ta" className="text-2xl">{SITE_COPY.azhwarsPage.titleTamil}</span>
         </h1>
         <p className="text-sm text-[#66523D] mt-1 max-w-2xl">
-          The twelve Azhwars ("those immersed in the ocean of divine love") whose
-          sacred hymns canonized the 108 Divya Desams — listed in traditional
-          chronological order.
+          {SITE_COPY.azhwarsPage.lead}
         </p>
       </div>
 

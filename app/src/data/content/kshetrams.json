@@ -1,0 +1,1953 @@
+[
+  {
+    "id": "triplicane",
+    "name": "Thiruvallikkeni (Triplicane)",
+    "tamilName": "திருவல்லிக்கேணி",
+    "temple": "Sri Parthasarathy Temple",
+    "place": "Triplicane, Chennai",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Parthasarathy",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai",
+      "pey",
+      "thirumazhisai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The charioteer of Arjuna in the heart of Chennai — Vishnu here bears the scars of the Mahabharata arrows.",
+    "mapQuery": "Parthasarathy Temple Chennai"
+  },
+  {
+    "id": "thiruneermalai",
+    "name": "Thiruneermalai",
+    "tamilName": "திருநீர்மலை",
+    "temple": "Sri Neervanna Perumal Temple",
+    "place": "Thiruneermalai, Chennai",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Neervannan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The hill where the Lord gave darshan in four forms — standing, seated, reclining and walking — in one complex.",
+    "mapQuery": "Neervanna Perumal Temple Thiruneermalai"
+  },
+  {
+    "id": "kanchi-varadaraja",
+    "name": "Thirukkachi (Kanchipuram — Atthigiri)",
+    "tamilName": "திருக்கச்சி ஏகம்பன்",
+    "temple": "Sri Varadharaja Perumal Temple",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Varadharaja",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "poigai",
+      "bhoothath",
+      "pey",
+      "thirumazhisai",
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord of Hastigiri hill — the boon-granting Varadaraja, whose Athi-varadar emerges once in forty years.",
+    "mapQuery": "Varadharaja Perumal Temple Kanchipuram"
+  },
+  {
+    "id": "thiruvekka",
+    "name": "Thiruvekkaa",
+    "tamilName": "திருவேக்கா",
+    "temple": "Sri Yathothakaari Temple",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Yathothakari (Sonna Vannam Seitha Perumal)",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "thirumazhisai",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord who obeyed his devotee Thirumazhisai Azhwar’s word and shifted the shrine — \"as told, so done\".",
+    "mapQuery": "Yathothakaari Temple Kanchipuram"
+  },
+  {
+    "id": "ashtabujam",
+    "name": "Ashtabujagaram",
+    "tamilName": "அஷ்டபுஜகரம்",
+    "temple": "Sri Aadhikesava Perumal Temple",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Aadhikesava",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai",
+      "pey"
+    ],
+    "pasuramCount": 0,
+    "significance": "The eight-armed Vishnu who quelled the arrogance of the demons with his many weapons.",
+    "mapQuery": "Ashtabujakaram Temple Kanchipuram"
+  },
+  {
+    "id": "thiruooragam",
+    "name": "Thiruooragam (Ulagalantha Perumal)",
+    "tamilName": "திருஊரகம்",
+    "temple": "Sri Ulagalantha Perumal Temple",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Ulagalantha Perumal (Trivikrama)",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The colossus of Vamana’s three strides — one foot raised to measure the very universe.",
+    "mapQuery": "Ulagalanda Perumal Temple Kanchipuram"
+  },
+  {
+    "id": "thiruneeragam",
+    "name": "Thiruneeragam",
+    "tamilName": "திருநீரகம்",
+    "temple": "Sri Jagadeeswarar Temple (within Ulagalantha complex)",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Jagadeeswarar",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The water-form Lord within the Ulagalantha temple — worshipped as Neeragam, the essence of the sacred waters.",
+    "mapQuery": "Thiruneeragam Kanchipuram"
+  },
+  {
+    "id": "thirukkaragam",
+    "name": "Thirukkaragam",
+    "tamilName": "திருக்காரகம்",
+    "temple": "Sri Karunakara Perumal Temple",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Karunakaran",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The ocean of mercy (Karunakara) housed within the Ulagalantha Perumal temple complex.",
+    "mapQuery": "Thirukkaragam Kanchipuram"
+  },
+  {
+    "id": "thirukkarvanam",
+    "name": "Thirukkaarvaanam",
+    "tamilName": "திருக்கார்வானம்",
+    "temple": "Sri Thirukkaar Vaanar Temple",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Neelamega Vanan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The cloud-hued Lord of the sacred grove, within the Ulagalantha temple complex of Kanchi.",
+    "mapQuery": "Thirukkarvanam Kanchipuram"
+  },
+  {
+    "id": "parameswara-vinnagaram",
+    "name": "Thiru Parameswara Vinnagaram",
+    "tamilName": "திருபரமேஸ்வர விண்ணகரம்",
+    "temple": "Sri Vaikunda Perumal Temple",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Vaikundanathan",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "thirumangai",
+      "bhoothath",
+      "pey"
+    ],
+    "pasuramCount": 0,
+    "significance": "The three-tiered Pallava masterpiece where Vishnu is seated, reclining and standing — one above the other.",
+    "mapQuery": "Vaikunda Perumal Temple Kanchipuram"
+  },
+  {
+    "id": "pavalavannam",
+    "name": "Thiruppaavalavannam",
+    "tamilName": "திருப்பாவலவண்ணம்",
+    "temple": "Sri Pavala Vannar Temple",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Pavalavannan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The coral-hued Lord who appeared from the fire of the sacrificial rites of the sages.",
+    "mapQuery": "Pavala Vannar Temple Kanchipuram"
+  },
+  {
+    "id": "thiruppadagam",
+    "name": "Thiruppadagam",
+    "tamilName": "திருப்பாதகம்",
+    "temple": "Sri Pandava Thoodhar Temple",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Pandava Thoodhar",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Krishna seated in his giant form as the messenger (thoodhar) of the Pandavas before the great war.",
+    "mapQuery": "Pandava Thoodhar Temple Kanchipuram"
+  },
+  {
+    "id": "nilathingal-thundam",
+    "name": "Thiru Nilathingal Thundam",
+    "tamilName": "திருநீலத்திங்கல் துண்டம்",
+    "temple": "Sri Nilathingal Thundathan Shrine (Ekambaranathar complex)",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Nilathingal Thundathan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Vishnu worshipped inside Shiva’s Ekambaranathar temple — the \"quarter of the moon-hued gem\".",
+    "mapQuery": "Nilathingal Thundam Kanchipuram Ekambaranathar"
+  },
+  {
+    "id": "thirukkalvanoor",
+    "name": "Thirukkalvanoor",
+    "tamilName": "திருக்கள்வனூர்",
+    "temple": "Sri Aadhi Varaha Perumal Shrine (Kamakshi Amman complex)",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Aadhi Varaha",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The primordial Varaha hidden within the Kamakshi Amman temple — the \"thief\" who steals hearts.",
+    "mapQuery": "Adi Varaha Temple Kanchipuram"
+  },
+  {
+    "id": "thiruvelukkai",
+    "name": "Thiruvelukkai",
+    "tamilName": "திருவேளுக்கை",
+    "temple": "Sri Azhagiya Singar Temple",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Yoga Narasimha (Azhagiya Singar)",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "thirumazhisai",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lion-man seated in yoga on the hill of the divine horses, guarding his devotees in fierce love.",
+    "mapQuery": "Azhagiya Singar Temple Kanchipuram"
+  },
+  {
+    "id": "thiruthanka",
+    "name": "Thiruthanka",
+    "tamilName": "திருத்தாண்கா",
+    "temple": "Sri Deepa Prakasar Temple",
+    "place": "Kanchipuram",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Deepa Prakasar",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai",
+      "poigai",
+      "bhoothath",
+      "pey"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord of light — the lamp that dispelled the darkness after the deluge; Poigai Azhwar’s beloved shrine.",
+    "mapQuery": "Deepa Prakasar Temple Kanchipuram"
+  },
+  {
+    "id": "thiruputkuzhi",
+    "name": "Thirupputkuzhi",
+    "tamilName": "திருப்புட்குழி",
+    "temple": "Sri Vijayaraghava Perumal Temple",
+    "place": "Thirupputkuzhi, Kanchipuram district",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Vijayaraghava",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Where Rama performed the last rites for the eagle Jatayu — the Lord holding the bird in tender devotion.",
+    "mapQuery": "Vijayaraghava Perumal Temple Thiruputkuzhi"
+  },
+  {
+    "id": "tiruvallur",
+    "name": "Thiruvallur (Veeraraghava)",
+    "tamilName": "திருவல்லூர்",
+    "temple": "Sri Vaidya Veeraraghava Perumal Temple",
+    "place": "Thiruvallur",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Vaidya Veeraraghava",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The divine physician — the Lord reclines on his serpent bed here healing the ills of his devotees.",
+    "mapQuery": "Vaidya Veeraraghava Temple Thiruvallur"
+  },
+  {
+    "id": "thirunindravur",
+    "name": "Thirunindravur",
+    "tamilName": "திருநிந்திரவூர்",
+    "temple": "Sri Bhaktavatsala Perumal Temple",
+    "place": "Thirunindravur, Chennai",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Bhaktavatsalan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord who was delayed by his devotee’s love and stayed at Nindravur on his way to Tirupati.",
+    "mapQuery": "Bhaktavatsala Temple Thirunindravur"
+  },
+  {
+    "id": "thiruvidanthai",
+    "name": "Thiruvidanthai",
+    "tamilName": "திருவிடந்தை",
+    "temple": "Sri Nithyakalyana Perumal Temple",
+    "place": "Thiruvidandai, Chennai",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Nithyakalyana",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The ever-wedding Lord by the sea who married 360 nymphs in a single day, holding them all as one.",
+    "mapQuery": "Nithyakalyana Perumal Temple Thiruvidandai"
+  },
+  {
+    "id": "mahabalipuram",
+    "name": "Thirukkadalmallai",
+    "tamilName": "திருக்கடல்மல்லை",
+    "temple": "Sri Sthala Sayana Perumal Temple",
+    "place": "Mahabalipuram, Chengalpattu",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Sthala Sayana",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "bhoothath",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord reclines on the shore floor at the Pallava port town — birthplace of Bhoothathazhwar.",
+    "mapQuery": "Sthala Sayana Perumal Temple Mahabalipuram"
+  },
+  {
+    "id": "sholinghur",
+    "name": "Thirukkadigai (Sholinghur)",
+    "tamilName": "திருக்கடிகை",
+    "temple": "Sri Yoga Narasimha Swamy Temple",
+    "place": "Sholinghur, Ranipet",
+    "state": "Tamil Nadu",
+    "region": "Thondai Nadu",
+    "deity": "Yoga Narasimha",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "thirumangai",
+      "poigai",
+      "bhoothath",
+      "pey",
+      "thirumazhisai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The yoga-seated Narasimha on the hill — where seven rishins are said to be in eternal meditation even now.",
+    "mapQuery": "Yoga Narasimha Temple Sholinghur"
+  },
+  {
+    "id": "srirangam",
+    "name": "Srirangam",
+    "tamilName": "திருவரங்கம்",
+    "temple": "Sri Ranganathaswamy Temple",
+    "place": "Srirangam, Trichy",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Ranganatha",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "poigai",
+      "bhoothath",
+      "pey",
+      "thirumazhisai",
+      "nammazhwar",
+      "kulasekhara",
+      "periyazhwar",
+      "andal",
+      "thondaradippodi",
+      "thiruppaan",
+      "thirumangai"
+    ],
+    "pasuramCount": 247,
+    "significance": "The foremost of all 108 Divya Desams — the huge island temple of Lord Ranganatha reclining on Adisesha, sung by eleven of the twelve Azhwars.",
+    "mapQuery": "Ranganathaswamy Temple Srirangam"
+  },
+  {
+    "id": "uraiyur",
+    "name": "Thirukkozhi (Uraiyur)",
+    "tamilName": "திருக்கொளி",
+    "temple": "Sri Azhagiya Manavala Perumal Temple",
+    "place": "Uraiyur, Trichy",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Azhagiya Manavalan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Ancient Chola capital where the Lord appears as the beautiful bridegroom of Kamalavalli Nachiyar.",
+    "mapQuery": "Azhagiya Manavalan Temple Uraiyur Trichy"
+  },
+  {
+    "id": "uthamar-kovil",
+    "name": "Thirukkarambanoor (Uthamar Kovil)",
+    "tamilName": "திருக்கரும்பனூர்",
+    "temple": "Sri Purushothaman Perumal Temple",
+    "place": "Uthamarkoil, Trichy",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Purushothaman",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "One of the rare shrines where the Trimurtis are worshipped together; Vishnu grants the Purushothama blessing here.",
+    "mapQuery": "Uthamar Kovil Trichy"
+  },
+  {
+    "id": "thiruvellarai",
+    "name": "Thiruvellarai",
+    "tamilName": "திருவெள்ளரை",
+    "temple": "Sri Pundarikaksha Perumal Temple",
+    "place": "Thiruvellarai, Trichy",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Pundarikaksha",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "poigai",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "A hill temple older than Srirangam according to tradition, with the rare shrine of Lord in white and dark forms.",
+    "mapQuery": "Pundarikaksha Temple Thiruvellarai"
+  },
+  {
+    "id": "anbil",
+    "name": "Thiru Anbil",
+    "tamilName": "திருவன்பில்",
+    "temple": "Sri Sundararaja Perumal Temple",
+    "place": "Anbil, Trichy",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Sundararaja",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord reclines here facing the Kollidam river, worshipped by sage Valmiki according to tradition.",
+    "mapQuery": "Sundararaja Perumal Temple Anbil"
+  },
+  {
+    "id": "koviladi",
+    "name": "Thirupper Nagar (Koviladi)",
+    "tamilName": "திருப்பேர்நகர்",
+    "temple": "Sri Appakkudathaan Perumal Temple",
+    "place": "Koviladi, Trichy",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Appakkudathan",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "thirumangai",
+      "nammazhwar"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord reclines holding a pot of nectar (appam), blessing Emperor Sibhi according to the sthala purana.",
+    "mapQuery": "Appakkudathaan Temple Koviladi"
+  },
+  {
+    "id": "kandiyur",
+    "name": "Thirukkandiyur",
+    "tamilName": "திருக்கண்டியூர்",
+    "temple": "Sri Hara Saabha Vimochana Perumal Temple",
+    "place": "Kandiyur, Thanjavur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Hara Sabha Vimochana",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Where Shiva was freed from his curse after the Brahma-slaying episode, uniting Vaishnavism and Shaivism in one shrine.",
+    "mapQuery": "Hara Sabha Vimochana Temple Kandiyur"
+  },
+  {
+    "id": "thiruvelliyangudi",
+    "name": "Thiruvelliyangudi",
+    "tamilName": "திருவெள்ளியங்குடி",
+    "temple": "Sri Kola Valvilli Ramar Temple",
+    "place": "Thiruvelliyangudi, Thanjavur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Kola Valvilli Rama",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Lord Rama appears here with his bow, in a rare form granting the vision of the Kalyana Ramar.",
+    "mapQuery": "Kola Valvilli Ramar Temple Thiruvelliyangudi"
+  },
+  {
+    "id": "aadanoor",
+    "name": "Thiru Aadhanoor",
+    "tamilName": "திருஆதனூர்",
+    "temple": "Sri Aandu Alakkum Aiyan Temple",
+    "place": "Aadanoor, Thanjavur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Aandu Alakkum Aiyan",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord reclines on Adisesha measuring the ages of time, guarding the cosmic wheel of the year.",
+    "mapQuery": "Aandu Alakkum Perumal Temple Aadanoor"
+  },
+  {
+    "id": "kumbakonam",
+    "name": "Thirukkudanthai (Kumbakonam)",
+    "tamilName": "திருக்குடந்தை",
+    "temple": "Sri Sarangapani Temple",
+    "place": "Kumbakonam, Thanjavur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Aravamudhan (Sarangapani)",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "thirumazhisai",
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "One of the Pancharanga kshetras; the Lord reclines here rising slightly to hear Thirumazhisai Azhwar’s plea.",
+    "mapQuery": "Sarangapani Temple Kumbakonam"
+  },
+  {
+    "id": "pullamboothangudi",
+    "name": "Thiruppullam Boothangudi",
+    "tamilName": "திருப்புல்லம்பூதங்குடி",
+    "temple": "Sri Valvil Raman Temple",
+    "place": "Thirupullabhudangudi, Thanjavur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Valvil Rama",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Lord Rama stands with bow in hand as the hunter-archer who descended for Maricha’s deliverance.",
+    "mapQuery": "Valvil Raman Temple Pullabhudangudi"
+  },
+  {
+    "id": "kabisthalam",
+    "name": "Thirukkavithalam (Kabisthalam)",
+    "tamilName": "திருக்காவித்தலம்",
+    "temple": "Sri Gajendra Varadha Perumal Temple",
+    "place": "Kabisthalam, Thanjavur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Gajendra Varadha",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai",
+      "andal"
+    ],
+    "pasuramCount": 0,
+    "significance": "Where Lord Vishnu hurried to rescue the elephant Gajendra from the crocodile — the emblem of divine grace.",
+    "mapQuery": "Gajendra Varadha Temple Kabisthalam"
+  },
+  {
+    "id": "thirunandhipuram",
+    "name": "Thirunandhipura Vinnagaram",
+    "tamilName": "திருநந்திபுர விண்ணகரம்",
+    "temple": "Sri Jagannatha Perumal Temple",
+    "place": "Nathan Kovil, Thanjavur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Jagannathan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Worshipping here is said to equal the fruit of worshipping at Tirupati, according to the Azhwar’s hymns.",
+    "mapQuery": "Jagannatha Perumal Temple Nathan Koil Thanjavur"
+  },
+  {
+    "id": "thirukkoodalur",
+    "name": "Thirukkoodalur (Aduthurai)",
+    "tamilName": "திருக்கூடலூர்",
+    "temple": "Sri Aaduthurai Perumal Temple",
+    "place": "Aduthurai, Thanjavur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Jagathrakshakan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Where the Lord protected the Devas who gathered (koodal) in assembly and rescued the elephant of Indra.",
+    "mapQuery": "Jagathrakshaka Temple Aduthurai"
+  },
+  {
+    "id": "uppiliappan",
+    "name": "Thiruvinnagar",
+    "tamilName": "திருவிண்ணகர்",
+    "temple": "Sri Oppilliappan Temple",
+    "place": "Thirunageswaram, Thanjavur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Oppilliappan (Uppiliappan)",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord who accepted food without salt from his consort Bhoomidevi — \"Uppu illa appan\" — granting boons without question.",
+    "mapQuery": "Oppilliappan Temple Thirunageswaram"
+  },
+  {
+    "id": "nachiyar-kovil",
+    "name": "Thirunaraiyur (Nachiyar Kovil)",
+    "tamilName": "திருநறையூர்",
+    "temple": "Sri Srinivasa Perumal Temple",
+    "place": "Nachiyarkovil, Thanjavur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Thirunarayoor Nambi",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The only kshetram where the Goddess leads the worship — the Nachiyar is given first honours in all rituals.",
+    "mapQuery": "Nachiyar Kovil Thirunarayur Temple"
+  },
+  {
+    "id": "thirucherai",
+    "name": "Thirucherai",
+    "tamilName": "திருச்சேரை",
+    "temple": "Sri Saranatha Perumal Temple",
+    "place": "Thirucherai, Thanjavur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Saranathan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai",
+      "nammazhwar"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord with five consorts who preserved the Vedas and seeds of creation at the end of the deluge.",
+    "mapQuery": "Saranatha Perumal Temple Thirucherai"
+  },
+  {
+    "id": "thirukkannamangai",
+    "name": "Thirukkannamangai",
+    "tamilName": "திருக்கண்ணமங்கை",
+    "temple": "Sri Bhaktavatsala Perumal Temple",
+    "place": "Thirukkannamangai, Thiruvarur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Bhaktavatsala",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord consumed the nectar of devotion of the sages — the \"Abode of the Lord of Kannamangai\".",
+    "mapQuery": "Bhaktavatsala Temple Thirukkannamangai"
+  },
+  {
+    "id": "thanjai-mamanikoil",
+    "name": "Thanjai Mamanikoil",
+    "tamilName": "தஞ்சை மாமனிகோயில்",
+    "temple": "Sri Neelamegha Perumal Temple (three shrines)",
+    "place": "Thanjavur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Neelameghan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Three adjacent shrines in Thanjavur — Neelamegha, Manikundran and Narasimhan — counted as one Divya Desam.",
+    "mapQuery": "Neelamegha Perumal Temple Thanjavur"
+  },
+  {
+    "id": "thiruvazhundur",
+    "name": "Thiruvazhundur",
+    "tamilName": "திருவழுந்தூர்",
+    "temple": "Sri Devadiraja Perumal Temple",
+    "place": "Thiruvazhundur, Thanjavur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Devadirajan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Birthplace of the poet Kambar’s patron region; the Lord appears in regal glory as King of the Devas.",
+    "mapQuery": "Devadiraja Temple Thiruvazhundur"
+  },
+  {
+    "id": "thiruchirupuliyur",
+    "name": "Thiruchirupuliyur",
+    "tamilName": "திருச்சிறுபுலியூர்",
+    "temple": "Sri Arulmaakadal Perumal Temple",
+    "place": "Thiruchirupuliyur, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Arulmakadal",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Where the Lord blessed sage Vyagrapadar; the sanctum is said to have been built by divine hands overnight.",
+    "mapQuery": "Arulmakadal Temple Thiruchirupuliyur"
+  },
+  {
+    "id": "thalaichangadu",
+    "name": "Thalaichangadu (Nanmathiyam)",
+    "tamilName": "தலைச்சங்காடு",
+    "temple": "Sri Nanmadhiya Perumal Temple",
+    "place": "Thalachangadu, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Nanmathiyan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord of the Chola-era Chola shrine where a conch was once gifted — the \"head-conch\" village.",
+    "mapQuery": "Nanmathiya Perumal Temple Thalaichangadu"
+  },
+  {
+    "id": "thiruindalur",
+    "name": "Thiruindalur (Mayiladuthurai)",
+    "tamilName": "திருவிந்தளூர்",
+    "temple": "Sri Parimala Ranganathar Temple",
+    "place": "Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Parimala Ranganatha",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The fragrant Ranganatha on the Cauvery’s northern bank, where the river itself is said to worship the Lord.",
+    "mapQuery": "Parimala Ranganathar Temple Mayiladuthurai"
+  },
+  {
+    "id": "thirukkannapuram",
+    "name": "Thirukkannapuram",
+    "tamilName": "திருக்கண்ணபுரம்",
+    "temple": "Sri Neelamegha Perumal Temple",
+    "place": "Thirukkannapuram, Thiruvarur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Sowriraja",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai",
+      "nammazhwar"
+    ],
+    "pasuramCount": 0,
+    "significance": "Sowrirajan who grew a tuft of hair to honor his devotee’s word — renowned for instant grace.",
+    "mapQuery": "Sowriraja Temple Thirukkannapuram"
+  },
+  {
+    "id": "thirukkannangudi",
+    "name": "Thirukkannankudi",
+    "tamilName": "திருக்கண்ணங்குடி",
+    "temple": "Sri Loganatha Perumal Temple",
+    "place": "Thirukkannangudi, Thiruvarur",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Loganathan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord who tried to walk away with his devotee’s butter-offering — Damodara’s playful kshetram.",
+    "mapQuery": "Loganatha Temple Thirukkannangudi"
+  },
+  {
+    "id": "nagapattinam",
+    "name": "Thirunaagai (Nagapattinam)",
+    "tamilName": "திருநாகை",
+    "temple": "Sri Neelamegha Perumal Temple",
+    "place": "Nagapattinam",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Soundararaja",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The beautiful (Soundara) Raja of the coastal town, praised by Thirumangai Azhwar in moving verses.",
+    "mapQuery": "Soundararaja Perumal Temple Nagapattinam"
+  },
+  {
+    "id": "chidambaram",
+    "name": "Chidambaram",
+    "tamilName": "சிதம்பரம்",
+    "temple": "Sri Govindaraja Perumal Temple (in Natarajar complex)",
+    "place": "Chidambaram, Cuddalore",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Govindaraja",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Lord Vishnu reclines within the famed Nataraja temple complex — the vision of Siva and Vishnu as one.",
+    "mapQuery": "Govindaraja Temple Chidambaram"
+  },
+  {
+    "id": "sirkazhi",
+    "name": "Thirukkannalangudi (Sirkazhi)",
+    "tamilName": "திருக்கண்ணங்குடி சீர்காழி",
+    "temple": "Sri Trivikrama Perumal Temple (Kazheesirama Vinnagaram)",
+    "place": "Sirkazhi, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Trivikrama",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai",
+      "poigai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Where Vamana measured the three worlds in one stride — the great Trivikrama shrine of the Kaveri delta.",
+    "mapQuery": "Trivikrama Perumal Temple Sirkazhi"
+  },
+  {
+    "id": "thiruvali-thirunagari",
+    "name": "Thiruvaaali – Thirunagari",
+    "tamilName": "திருவாலி திருநகரி",
+    "temple": "Sri Lakshmi Narasimha / Devaraja Temples",
+    "place": "Thirunangur, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Lakshmi Narasimha",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Two adjacent villages counted as one Desam — the seat of the pacified Lakshmi Narasimha.",
+    "mapQuery": "Thiruvali Thirunagari Temple Sirkazhi"
+  },
+  {
+    "id": "thirukavalambadi",
+    "name": "Thirukavalampaadi",
+    "tamilName": "திருக்காவளம்பாடி",
+    "temple": "Sri Gopala Krishna Perumal Temple",
+    "place": "Thirunangur, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Gopala Krishna",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Krishna of the cowherd settlement in the sacred Thirunangur cluster of eleven Desams.",
+    "mapQuery": "Gopalakrishna Temple Thirunangur"
+  },
+  {
+    "id": "arimeya-vinnagaram",
+    "name": "Thiruarimeya Vinnagaram",
+    "tamilName": "திருஆரிமேய விண்ணகரம்",
+    "temple": "Sri Kudamudakoothan Temple",
+    "place": "Thirunangur, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Kudamudakoothan",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord seated in the rare \"pot-dance\" posture (Kudam Koothan) of the Thirunangar group.",
+    "mapQuery": "Kudamudakoothan Temple Thirunangur"
+  },
+  {
+    "id": "vanpurushothamam",
+    "name": "Thiruvanpurushothamam",
+    "tamilName": "திருவன்புருஷோத்தமம்",
+    "temple": "Sri Purushothama Perumal Temple",
+    "place": "Thirunangur, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Purushothaman",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Supreme Purusha who rode the chariot of the gods in the Mahabharata war, worshipped here.",
+    "mapQuery": "Purushothama Temple Thirunangur"
+  },
+  {
+    "id": "semponseikoil",
+    "name": "Thirusemponseikoil",
+    "tamilName": "திருச்செம்பொன்சேவெளி",
+    "temple": "Sri Perarulaalan Temple",
+    "place": "Thirunangur, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Perarulaalan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The golden-gifted shrine — Rama is said to have worshipped here with gold for the slain Jatayu’s rites.",
+    "mapQuery": "Semponseikoil Thirunangur"
+  },
+  {
+    "id": "manimadakoil",
+    "name": "Thirumanimaadakoil",
+    "tamilName": "திருமணிமாடக்கோயில்",
+    "temple": "Sri Narayana Perumal Temple",
+    "place": "Thirunangur, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Narayanan",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The jewel-pavilion temple of the Thirunangur eleven, seated facing the devotee in royal audience.",
+    "mapQuery": "Manimadakoil Thirunangur"
+  },
+  {
+    "id": "vaikunta-vinnagaram",
+    "name": "Thiruvaikunta Vinnagaram",
+    "tamilName": "திருவைகுந்த விண்ணகரம்",
+    "temple": "Sri Vaikundanatha Temple",
+    "place": "Thirunangur, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Vaikuntanathan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The presiding deity of the Thirunangur festival — eleven Deities ride together in the famed Garuda seva.",
+    "mapQuery": "Vaikunta Vinnagaram Thirunangur"
+  },
+  {
+    "id": "devanartogai",
+    "name": "Thirudevanaartogai",
+    "tamilName": "திருத்தேவநார்தொகை",
+    "temple": "Sri Deivanayaga Perumal Temple",
+    "place": "Thirunangur, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Deivanayagan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Where the assembled Devas (deva-sangam) worshipped Vishnu — the leader of the divine host.",
+    "mapQuery": "Devanartogai Temple Thirunangur"
+  },
+  {
+    "id": "thetriyambalam",
+    "name": "Thiruthetriyaambalam",
+    "tamilName": "திருத்தெற்றியாம்பலம்",
+    "temple": "Sri Seganmaal Ranganatha Temple",
+    "place": "Thirunangur, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Seganmaal Ranganatha",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The reclining Ranganatha who raised his hand in blessing to the celestials — the sanctum of vows.",
+    "mapQuery": "Thetriyambalam Thirunangur"
+  },
+  {
+    "id": "manikkoodam",
+    "name": "Thirumanikkoodam",
+    "tamilName": "திருமணிக்கூடம்",
+    "temple": "Sri Varadharaja Perumal Temple",
+    "place": "Thirunangur, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Varadharajan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The boon-giving Varadaraja of the Thirunangur group, guardian of the jewel-hall.",
+    "mapQuery": "Manikkoodam Temple Thirunangur"
+  },
+  {
+    "id": "vellakulam",
+    "name": "Thiruvellakkulam (Annan Kovil)",
+    "tamilName": "திருவெள்ளக்குளம்",
+    "temple": "Sri Srinivasa Perumal Temple",
+    "place": "Thirunangur, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Srinivasan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The \"elder brother\" (Annan) of Tirupati Srinivasa — a white-tank shrine equal in glory to Venkatam.",
+    "mapQuery": "Annan Kovil Vellakulam Thirunangur"
+  },
+  {
+    "id": "parthanpalli",
+    "name": "Thiruppaarththanpalli",
+    "tamilName": "திருப்பார்த்தன்பள்ளி",
+    "temple": "Sri Thamaraiyal Kelvan Temple",
+    "place": "Thirunangur, Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "region": "Chola Nadu",
+    "deity": "Thamaraiyal Kelvan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Where Arjuna (Parthan) is said to have worshipped — the Lord of the lotus-eyed one.",
+    "mapQuery": "Parthanpalli Temple Thirunangur"
+  },
+  {
+    "id": "thiruvahindrapuram",
+    "name": "Thiruaheendrapuram",
+    "tamilName": "திருஆஹீந்திரபுரம்",
+    "temple": "Sri Devanatha Perumal Temple",
+    "place": "Thiruvahindrapuram, Cuddalore",
+    "state": "Tamil Nadu",
+    "region": "Nadu Nadu",
+    "deity": "Deivanathan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai",
+      "poigai",
+      "pey",
+      "thirumazhisai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord of the Devas carried by Adisesha on the Aushada hill — sanctuary of Indra’s worship.",
+    "mapQuery": "Devanatha Temple Thiruvahindrapuram"
+  },
+  {
+    "id": "thirukkovilur",
+    "name": "Thirukkoviloor",
+    "tamilName": "திருக்கோவிலூர்",
+    "temple": "Sri Trivikrama Perumal Temple",
+    "place": "Tirukkoyilur, Kallakurichi",
+    "state": "Tamil Nadu",
+    "region": "Nadu Nadu",
+    "deity": "Trivikrama",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "poigai",
+      "bhoothath",
+      "pey",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Where the first three Azhwars were sheltered in a single lamp’s light — the Vamana kshetram of the Pennai river.",
+    "mapQuery": "Trivikrama Temple Tirukkoyilur"
+  },
+  {
+    "id": "thirukkurungudi",
+    "name": "Thirukkurungudi",
+    "tamilName": "திருக்குறுங்குடி",
+    "temple": "Sri Nindra Nambi Perumal Temple",
+    "place": "Thirukkurungudi, Tirunelveli",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Nindra Nambi",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The beautiful Nambi of the Mahendragiri foothills — where the Lord himself came as a disciple to Vaishnava teachers.",
+    "mapQuery": "Nindra Nambi Temple Thirukkurungudi"
+  },
+  {
+    "id": "nanguneri",
+    "name": "Thirucheeravaramangai (Nanguneri)",
+    "tamilName": "திருச்சேரவரமங்கை",
+    "temple": "Sri Vanamamalai Perumal Temple",
+    "place": "Nanguneri, Tirunelveli",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Thothadrinathan (Deivanayagan)",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord seated on the Adisesha banyan (vanamamalai) — a great eternal lamp burns here without cease.",
+    "mapQuery": "Vanamamalai Temple Nanguneri"
+  },
+  {
+    "id": "alwar-thirunagari",
+    "name": "Azhwar Thirunagari",
+    "tamilName": "ஆழ்வார் திருநகரி",
+    "temple": "Sri Adhinatha Perumal Temple",
+    "place": "Alwarthirunagari, Thoothukudi",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Aadhinathan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The birthplace of Nammazhwar — the Lord himself is said to serve as the eternal disciple of the great saint.",
+    "mapQuery": "Adhinatha Temple Alwarthirunagari"
+  },
+  {
+    "id": "thirukkolur",
+    "name": "Thirukkolur",
+    "tamilName": "திருக்கோளூர்",
+    "temple": "Sri Vaithamanithi Perumal Temple",
+    "place": "Thirukkolur, Thoothukudi",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Vaithamanithi",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord who \"gives the truth of boons\" — a young girl of this village, Pitchai, is celebrated in tradition.",
+    "mapQuery": "Vaithamanithi Temple Thirukkolur"
+  },
+  {
+    "id": "thirupperai",
+    "name": "Thirupper",
+    "tamilName": "திருப்பேரை",
+    "temple": "Sri Magara Nedungkuzhai Kathar Temple",
+    "place": "Thirupper, Thoothukudi",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Makara Nedunkuzhai Kathan",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord with fish-shaped earrings, adorning Varuna the rain god himself.",
+    "mapQuery": "Magara Nedungkuzhaikathar Temple Thirupperai"
+  },
+  {
+    "id": "srivaikuntam",
+    "name": "Thiruvaikundam (Srivaikuntam)",
+    "tamilName": "திருவைகுண்டம்",
+    "temple": "Sri Vaikuntanatha Perumal Temple",
+    "place": "Srivaikuntam, Thoothukudi",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Vaikuntanathan",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Vaikunta on earth — the Lord reclines here on Adisesha having vanquished the demon for the Vedas.",
+    "mapQuery": "Vaikuntanatha Temple Srivaikuntam"
+  },
+  {
+    "id": "thirukkulandai",
+    "name": "Thirukkulandai (Perungulam)",
+    "tamilName": "திருக்குலந்தை",
+    "temple": "Sri Srinivasa Perumal Temple",
+    "place": "Perungulam, Thoothukudi",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Srinivasan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "One of the Nava Thirupathi nine on the Thamirabarani — Srinivasa of the great tank village.",
+    "mapQuery": "Srinivasa Temple Perungulam Thoothukudi"
+  },
+  {
+    "id": "thiruvaragunamangai",
+    "name": "Thiruvaragunamangai",
+    "tamilName": "திருவரகுணமங்கை",
+    "temple": "Sri Vijayasana Perumal Temple",
+    "place": "Natham, Thoothukudi",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Vijayasan",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord seated in victory posture on the Garuda vahana — one of the Nava Thirupathi cluster.",
+    "mapQuery": "Vijayasana Temple Natham Srivaikuntam"
+  },
+  {
+    "id": "thiruppuliangudi",
+    "name": "Thiruppuliangudi",
+    "tamilName": "திருப்புளியங்குடி",
+    "temple": "Sri Kaaichina Vendhan Temple",
+    "place": "Thiruppuliangudi, Thoothukudi",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Kaisina Vendhan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord who arrived with the fire of devotion — praised as the emitter of Kadir (light) in Nammazhwar’s hymns.",
+    "mapQuery": "Kaisina Vendhan Temple Thiruppuliangudi"
+  },
+  {
+    "id": "tholaivillimangalam",
+    "name": "Thirutholaivillimangalam",
+    "tamilName": "திருத்தொலைவில்லிமங்கலம்",
+    "temple": "Sri Aravindalochna / Srinivasa Temples (Irattai Thirupathi)",
+    "place": "Tholaivillimangalam, Thoothukudi",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Aravindalochanan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The twin temples (Irattai Thirupathi) counted as one Desam — the lotus-eyed Lord and Devapiran.",
+    "mapQuery": "Irattai Tirupati Tholaivillimangalam"
+  },
+  {
+    "id": "thiruthangal",
+    "name": "Thiruthangal",
+    "tamilName": "திருத்தங்கல்",
+    "temple": "Sri Nindra Narayana Perumal Temple",
+    "place": "Thiruthangal, Virudhunagar",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Nindra Narayanan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Standing Narayana beside the great Saneeswara shrine — refuge of the Pandya country’s faithful.",
+    "mapQuery": "Nindra Narayana Temple Thiruthangal"
+  },
+  {
+    "id": "srivilliputhur",
+    "name": "Srivilliputhur",
+    "tamilName": "ஶ்ரீவில்லிபுத்தூர்",
+    "temple": "Sri Vadapatrasayi (Andal) Temple",
+    "place": "Srivilliputhur, Virudhunagar",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Vatapatrasayi",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "periyazhwar",
+      "andal",
+      "thirumangai",
+      "nammazhwar"
+    ],
+    "pasuramCount": 0,
+    "significance": "Birthplace of Andal and Periyazhwar — the Lord reclines on the banyan leaf; the temple tower is Tamil Nadu’s emblem.",
+    "mapQuery": "Andal Temple Srivilliputhur"
+  },
+  {
+    "id": "madurai-koodal",
+    "name": "Thirukkoodal (Madurai)",
+    "tamilName": "திருக்கூடல்",
+    "temple": "Sri Koodal Azhagar Temple",
+    "place": "Madurai",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Koodal Azhagar",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "periyazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The assembly of rivers worships this Azhagar in the Pandya capital of Madurai, in three ascending postures.",
+    "mapQuery": "Koodal Azhagar Temple Madurai"
+  },
+  {
+    "id": "thirumaliruncholai",
+    "name": "Thirumaalirunsolai (Azhagar Kovil)",
+    "tamilName": "திருமாலிருஞ்சோலை",
+    "temple": "Sri Kallazhagar Temple",
+    "place": "Azhagar Kovil, Madurai",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Kallazhagar",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "periyazhwar",
+      "andal",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The handsome Azhagar of the fragrant hills who rides to Madurai each Chithirai for the river goddess.",
+    "mapQuery": "Kallazhagar Temple Alagar Kovil Madurai"
+  },
+  {
+    "id": "thirumogur",
+    "name": "Thirumogur",
+    "tamilName": "திருமோகூர்",
+    "temple": "Sri Kaalamegha Perumal Temple",
+    "place": "Thirumogur, Madurai",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Kaalameghan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "periyazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Home of the celebrated Chakkaram — the rare Sudarshana of Mogur with 154 hands radiating protection.",
+    "mapQuery": "Kaalamegha Perumal Temple Thirumogur"
+  },
+  {
+    "id": "thirupullani",
+    "name": "Thiruppullani (Darbasayana)",
+    "tamilName": "திருப்புல்லாணி",
+    "temple": "Sri Kalyana Jagannatha Perumal Temple",
+    "place": "Pullani, Ramanathapuram",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Kalyana Jagannathan",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "thirumangai",
+      "andal",
+      "kulasekhara"
+    ],
+    "pasuramCount": 0,
+    "significance": "Where Rama lay on darba grass for three days invoking the sea-king — the Adi Jagannatha shrine of the coast.",
+    "mapQuery": "Adi Jagannatha Temple Thirupullani"
+  },
+  {
+    "id": "thirukkoshtiyur",
+    "name": "Thirukkotiyoor",
+    "tamilName": "திருக்கோட்டியூர்",
+    "temple": "Sri Uraga Mellanayaan Temple (Sowmya Narayana)",
+    "place": "Thirukkoshtiyur, Sivaganga",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Uraga Mellanayanan",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "thirumangai",
+      "nammazhwar"
+    ],
+    "pasuramCount": 0,
+    "significance": "The ashtaanga-vimana where Ramanuja proclaimed the sacred names aloud to all — the Ashtakshara kshetram.",
+    "mapQuery": "Sowmya Narayana Perumal Temple Thirukkoshtiyur"
+  },
+  {
+    "id": "thirumeyyam",
+    "name": "Thirumeyyam",
+    "tamilName": "திருமெய்யம்",
+    "temple": "Sri Sathyagiri Natha Perumal Temple",
+    "place": "Thirumayam, Pudukkottai",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Sathyagiri Nathan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The hill-cave shrine of Sathya-moorthi — the Lord of Truth with his giant Anantasayana rock-cut reclining form.",
+    "mapQuery": "Sathyagirinatha Temple Thirumayam"
+  },
+  {
+    "id": "thiruvananthapuram",
+    "name": "Thiruvananthapuram",
+    "tamilName": "திருவனந்தபுரம்",
+    "temple": "Sri Padmanabhaswamy Temple",
+    "place": "Thiruvananthapuram",
+    "state": "Kerala",
+    "region": "Malai Nadu",
+    "deity": "Anantha Padmanabha",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord reclines eternally on Anantha through three doors — the royal shrine of Travancore and its hidden treasures.",
+    "mapQuery": "Padmanabhaswamy Temple Trivandrum"
+  },
+  {
+    "id": "thiruvanparisaram",
+    "name": "Thiruvanparisaram",
+    "tamilName": "திருவன்பரிசாரம்",
+    "temple": "Sri Kuralappa Perumal Temple (Thirupathisaram)",
+    "place": "Thirupathisaram, Kanyakumari",
+    "state": "Tamil Nadu",
+    "region": "Malai Nadu",
+    "deity": "Thiruvazhmarbhan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord whose chest bears Sri — birthplace of the acharya Nathamuni’s lineage shrine of the Nanjil country.",
+    "mapQuery": "Thiruvazhmarban Temple Thirupathisaram"
+  },
+  {
+    "id": "thirukkatkarai",
+    "name": "Thirukkatkarai (Thrikkakara)",
+    "tamilName": "திருக்காட்காரை",
+    "temple": "Sri Katkaraswami Temple",
+    "place": "Thrikkakara, Ernakulam",
+    "state": "Kerala",
+    "region": "Malai Nadu",
+    "deity": "Katkara Appan (Vamana)",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Vamana kshetram of Kerala — the origin of the Onam festival and the sacred Onappookkalam floral offering.",
+    "mapQuery": "Thrikkakara Temple Ernakulam"
+  },
+  {
+    "id": "thirumoozhikkalam",
+    "name": "Thirumoozhikkalam",
+    "tamilName": "திருமூழிக்கலம்",
+    "temple": "Sri Moozhikkalathan Temple",
+    "place": "Moozhikkal, Ernakulam",
+    "state": "Kerala",
+    "region": "Malai Nadu",
+    "deity": "Moozhikkalathan (Sookthinathan)",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Where Hema the sage’s serpent-curse was lifted — the Lord of the sacred mantra-clearing waters.",
+    "mapQuery": "Moozhikkal Temple Ernakulam"
+  },
+  {
+    "id": "thiruppuliyur",
+    "name": "Thiruppuliyur",
+    "tamilName": "திருப்புலியூர்",
+    "temple": "Sri Mayapiran Temple",
+    "place": "Puliyur, Alappuzha",
+    "state": "Kerala",
+    "region": "Malai Nadu",
+    "deity": "Mayapiran",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The wonder-working Lord of the Chera heartland, worshipped by the sages of the Puliyur forest.",
+    "mapQuery": "Mayapiran Temple Puliyur Chengannur"
+  },
+  {
+    "id": "thiruchengundrur",
+    "name": "Thiruchengundrur (Chengannur)",
+    "tamilName": "திருச்செங்குன்றூர்",
+    "temple": "Sri Imayavarappan Temple",
+    "place": "Chengannur, Alappuzha",
+    "state": "Kerala",
+    "region": "Malai Nadu",
+    "deity": "Imayavarappan (Devadevan)",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The hill-temple of the Devas — the railway-age gateway for pilgrims to Sabarimala’s Vishnu shrine.",
+    "mapQuery": "Imayavarappan Temple Chengannur"
+  },
+  {
+    "id": "thirunavai",
+    "name": "Thirunavai",
+    "tamilName": "திருநாவாய்",
+    "temple": "Sri Navamukunda Temple",
+    "place": "Thirunavaya, Malappuram",
+    "state": "Kerala",
+    "region": "Malai Nadu",
+    "deity": "Navamukundan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "On the banks of the Bharathapuzha where Kerala’s ritual offerings for ancestors (bali) are performed.",
+    "mapQuery": "Navamukunda Temple Thirunavaya"
+  },
+  {
+    "id": "thiruvalla",
+    "name": "Thiruvallavazh (Thiruvalla)",
+    "tamilName": "திருவல்லவாழ்",
+    "temple": "Sri Vallabha Temple",
+    "place": "Thiruvalla, Pathanamthitta",
+    "state": "Kerala",
+    "region": "Malai Nadu",
+    "deity": "Kolapiran (Sri Vallabhan)",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The great Vallabha temple with its famed flag-post of black stone — where Garuda himself is said to worship.",
+    "mapQuery": "Sree Vallabha Temple Thiruvalla"
+  },
+  {
+    "id": "thiruvanvandoor",
+    "name": "Thiruvanvandoor",
+    "tamilName": "திருவண்வண்டூர்",
+    "temple": "Sri Paambanaiyappan Temple",
+    "place": "Thiruvanvandoor, Alappuzha",
+    "state": "Kerala",
+    "region": "Malai Nadu",
+    "deity": "Paambanaiyappan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Built by the legendary architect Perunchithiran — the serpent-tank Lord of the Pamba river country.",
+    "mapQuery": "Pambanaiyappan Temple Thiruvanvandoor"
+  },
+  {
+    "id": "thiruvaranvilai",
+    "name": "Thiruvaranvilai (Aranmula)",
+    "tamilName": "திருவாரண்விளை",
+    "temple": "Sri Kuralappan Temple",
+    "place": "Aranmula, Pathanamthitta",
+    "state": "Kerala",
+    "region": "Malai Nadu",
+    "deity": "Kuralappan (Thirukkurralappan)",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Famed for the Aranmula Parthasarathy boat race and the sacred metal mirrors made for the temple.",
+    "mapQuery": "Aranmula Parthasarathy Temple"
+  },
+  {
+    "id": "thiruvattaru",
+    "name": "Thiruvattaru",
+    "tamilName": "திருவட்டாறு",
+    "temple": "Sri Aadhikesava Perumal Temple",
+    "place": "Thiruvattaru, Kanyakumari",
+    "state": "Tamil Nadu",
+    "region": "Malai Nadu",
+    "deity": "Aadhikesava",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord reclines between the rivers Para and Kothai — marble-inlaid Vishnu of the old Travancore country.",
+    "mapQuery": "Adikesava Temple Thiruvattaru"
+  },
+  {
+    "id": "thiruvithuvakodu",
+    "name": "Thiruvithuvakkodu",
+    "tamilName": "திருவித்துவக்கோடு",
+    "temple": "Sri Abhayapradha Perumal Temple",
+    "place": "Thiruvithuvakodu, Palakkad",
+    "state": "Kerala",
+    "region": "Malai Nadu",
+    "deity": "Uyyavandan (Abhayapradan)",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The refuge-granting (Abhayapradha) Lord of Kaladi’s neighbourhood — shield of the surrendered soul.",
+    "mapQuery": "Thiruvithuvakodu Temple Palakkad"
+  },
+  {
+    "id": "thirukkodithanam",
+    "name": "Thirukkodithanam",
+    "tamilName": "திருக்கொடித்தானம்",
+    "temple": "Sri Athpudha Narayana Temple",
+    "place": "Changanassery, Kottayam",
+    "state": "Kerala",
+    "region": "Malai Nadu",
+    "deity": "Athpudha Narayanan (Amritanathan)",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Sahadeva of the Pandavas is said to have worshipped here — the \"flag-planting\" shrine of Kerala legend.",
+    "mapQuery": "Thirukkodithanam Temple Changanassery"
+  },
+  {
+    "id": "tirupati",
+    "name": "Thiruvengadam (Tirumala)",
+    "tamilName": "திருவேங்கடம்",
+    "temple": "Sri Venkateswara Swamy Temple",
+    "place": "Tirumala, Tirupati",
+    "state": "Andhra Pradesh",
+    "region": "Vada Nadu",
+    "deity": "Srinivasa (Venkateswara)",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "poigai",
+      "bhoothath",
+      "pey",
+      "thirumazhisai",
+      "nammazhwar",
+      "kulasekhara",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord of the Seven Hills — the most visited shrine in the world, sung as the boundless Venkata hill by the Azhwars.",
+    "mapQuery": "Venkateswara Temple Tirumala Tirupati"
+  },
+  {
+    "id": "ahobilam",
+    "name": "Thirusingavel Kundram (Ahobilam)",
+    "tamilName": "திருசிங்கவேல் குன்றம்",
+    "temple": "Sri Lakshmi Narasimha Swamy Temple",
+    "place": "Ahobilam, Nandyal",
+    "state": "Andhra Pradesh",
+    "region": "Vada Nadu",
+    "deity": "Nava Narasimha",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The cave-shrine of Ugra Narasimha in the Nallamala hills — nine forms of the Lion-man in one sacred forest.",
+    "mapQuery": "Ahobilam Narasimha Temple"
+  },
+  {
+    "id": "ayodhya",
+    "name": "Thiru Ayodhi",
+    "tamilName": "திரு அயோத்தி",
+    "temple": "Sri Ramar Temple (Kanak Bhavan area)",
+    "place": "Ayodhya, Uttar Pradesh",
+    "state": "Uttar Pradesh",
+    "region": "Vada Nadu",
+    "deity": "Rama (Chakkaravarthi Thirumagan)",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai",
+      "kulasekhara"
+    ],
+    "pasuramCount": 0,
+    "significance": "The birth-city of Rama on the Sarayu — sung from afar by Thirumangai Azhwar who never left Tamil soil.",
+    "mapQuery": "Ram Janmabhoomi Ayodhya"
+  },
+  {
+    "id": "naimisaranyam",
+    "name": "Thiru Naimisaranyam",
+    "tamilName": "திரு நைமிசாரண்யம்",
+    "temple": "Sri Devaraja Perumal Temple",
+    "place": "Nimsar, Sitapur",
+    "state": "Uttar Pradesh",
+    "region": "Vada Nadu",
+    "deity": "Devarajan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The forest where the Puranas were first narrated — Vishnu is present here as the forest itself.",
+    "mapQuery": "Naimisharanya Temple Sitapur"
+  },
+  {
+    "id": "salagramam",
+    "name": "Thiru Salagramam (Muktinath)",
+    "tamilName": "திரு சாளக்கிராமம்",
+    "temple": "Sri Moorthy Perumal Temple",
+    "place": "Muktinath, Mustang",
+    "state": "Nepal",
+    "region": "Vada Nadu",
+    "deity": "Moorthy (Muktinath)",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Himalayan shrine of the sacred saligrama stones — 108 waterspouts of liberation at 3,800 metres.",
+    "mapQuery": "Muktinath Temple Nepal"
+  },
+  {
+    "id": "badari",
+    "name": "Thiruvadhari Ashramam (Badrinath)",
+    "tamilName": "திருவதரி ஆசிரமம்",
+    "temple": "Sri Badrinath Temple",
+    "place": "Badrinath, Uttarakhand",
+    "state": "Uttarakhand",
+    "region": "Vada Nadu",
+    "deity": "Badri Narayana",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "thirumangai",
+      "poigai",
+      "bhoothath",
+      "pey",
+      "thirumazhisai",
+      "nammazhwar",
+      "kulasekhara",
+      "periyazhwar",
+      "andal",
+      "thondaradippodi",
+      "thiruppaan"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Lord seated in yoga under the badri tree in the Garhwal Himalayas — the moksha-giving tapovan of the north.",
+    "mapQuery": "Badrinath Temple"
+  },
+  {
+    "id": "devaprayag",
+    "name": "Thirukkandam (Devaprayag)",
+    "tamilName": "திருக்கண்டம்",
+    "temple": "Sri Neelamegha Perumal Temple",
+    "place": "Devaprayag, Uttarakhand",
+    "state": "Uttarakhand",
+    "region": "Vada Nadu",
+    "deity": "Neelameghan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "Where the Alaknanda and Bhagirathi merge to become the Ganga — Vishnu of the sacred confluence.",
+    "mapQuery": "Raghunath Temple Devaprayag"
+  },
+  {
+    "id": "joshimutt",
+    "name": "Thiruppirudhi (Joshimutt)",
+    "tamilName": "திருப்பிருதி",
+    "temple": "Sri Paramapurusha Perumal Temple",
+    "place": "Joshimath, Uttarakhand",
+    "state": "Uttarakhand",
+    "region": "Vada Nadu",
+    "deity": "Paramapurushan",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The winter seat of Badrinath — where the deity of Badri is worshipped when the Himalayan shrine closes in snow.",
+    "mapQuery": "Joshimath Narasimha Temple"
+  },
+  {
+    "id": "mathura",
+    "name": "Thiru Vadamathura",
+    "tamilName": "திரு வடமதுரை",
+    "temple": "Sri Govardhanesan Temple (Krishna Janmabhoomi area)",
+    "place": "Mathura, Uttar Pradesh",
+    "state": "Uttar Pradesh",
+    "region": "Vada Nadu",
+    "deity": "Govardhanesan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai",
+      "periyazhwar"
+    ],
+    "pasuramCount": 0,
+    "significance": "The birth-city of Krishna on the Yamuna — where the Lord lifted Govardhana hill on his little finger.",
+    "mapQuery": "Krishna Janmabhoomi Mathura"
+  },
+  {
+    "id": "ayarpadi",
+    "name": "Thiruaaypaadi",
+    "tamilName": "திரு ஆய்ப்பாடி",
+    "temple": "Sri Navamohana Krishna Temple (Gokulam/Vrindavan)",
+    "place": "Vrindavan, Uttar Pradesh",
+    "state": "Uttar Pradesh",
+    "region": "Vada Nadu",
+    "deity": "Navamohana Krishna",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai",
+      "andal",
+      "periyazhwar",
+      "nammazhwar"
+    ],
+    "pasuramCount": 0,
+    "significance": "The cowherd settlement of Krishna’s youth — the eternally enchanting Navamohana of the Azhwars’ longing.",
+    "mapQuery": "Vrindavan Mathura"
+  },
+  {
+    "id": "dwaraka",
+    "name": "Thiru Dwaraka",
+    "tamilName": "திரு துவாரகை",
+    "temple": "Sri Dwarakadhish Temple",
+    "place": "Dwarka, Gujarat",
+    "state": "Gujarat",
+    "region": "Vada Nadu",
+    "deity": "Kalyana Narayanan (Dwarakadhish)",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "thirumangai",
+      "andal",
+      "periyazhwar",
+      "nammazhwar",
+      "kulasekhara"
+    ],
+    "pasuramCount": 0,
+    "significance": "Krishna’s golden city by the western sea — the gateway (dwaraka) city that the Arabian waters once swallowed.",
+    "mapQuery": "Dwarkadhish Temple Gujarat"
+  },
+  {
+    "id": "thirupparkadal",
+    "name": "Thiruppaarkadal",
+    "tamilName": "திருப்பாற்கடல்",
+    "temple": "The Ocean of Milk (celestial realm)",
+    "place": "Beyond the material universe",
+    "state": "Celestial",
+    "region": "Celestial",
+    "deity": "Ksheerabdinathan",
+    "deityForm": "Kidandan — Reclining",
+    "azhwars": [
+      "poigai",
+      "bhoothath",
+      "pey",
+      "thirumazhisai",
+      "nammazhwar",
+      "periyazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The Ocean of Milk where Vishnu reclines on Ananta — a Divya Desam beyond earthly geography, reached in contemplation.",
+    "mapQuery": ""
+  },
+  {
+    "id": "paramapadam",
+    "name": "Thirupparamapadham",
+    "tamilName": "திருப்பரமபதம்",
+    "temple": "Vaikuntam (celestial realm)",
+    "place": "Beyond the material universe",
+    "state": "Celestial",
+    "region": "Celestial",
+    "deity": "Vaikuntanathan",
+    "deityForm": "Irundhan — Seated",
+    "azhwars": [
+      "nammazhwar",
+      "poigai",
+      "bhoothath",
+      "pey",
+      "thirumazhisai",
+      "periyazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The supreme abode Vaikuntam itself — the final destination of the liberated soul, the last of the 108.",
+    "mapQuery": ""
+  }
+]

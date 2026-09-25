@@ -67,16 +67,13 @@ describe('Divya Desam dossier templates (dossier population)', () => {
     expect(enriched?.visuals?.descriptions?.length, 'srirangam visuals').toBeGreaterThan(0);
   });
 
-  it('resolves every template photo src under the site base URL', () => {
-    const base = import.meta.env.BASE_URL;
+  it('stores every template photo src as a site-relative path or absolute URL', () => {
     for (const [id, t] of Object.entries({ ...TEMPLATES, ...DOSSIER_TEMPLATES })) {
       for (const deity of [t.deities?.moolavar, t.deities?.urchavar]) {
         for (const photo of deity?.photos ?? []) {
           if (!photo.src) continue; // wiki-backed photos resolve by title instead
           expect(photo.src, `${id} placeholder marker`).not.toContain('__BASE_URL__');
-          expect(photo.src, `${id} src under base`).toMatch(
-            new RegExp(`^${base}photos/[\\w.-]+\\.jpg$`)
-          );
+          expect(photo.src, `${id} resolvable src`).toMatch(/^(photos\/|https:\/\/)/);
         }
       }
     }

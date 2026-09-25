@@ -1,0 +1,20 @@
+{
+  "SITE_STATS": {
+    "kshetramCount": 108,
+    "azhwarCount": 12,
+    "pasuramCount": 4000
+  },
+  "FEATURED_KSHETRAM_IDS": [
+    "srirangam",
+    "tirupati",
+    "kanchi-varadaraja",
+    "srivilliputhur"
+  ],
+  "FEATURED_ACHARYA_IDS": [
+    "nathamuni",
+    "yamunacharya",
+    "pillai-lokacharya",
+    "manavala-mamunigal"
+  ],
+  "MAPS_URL_TEMPLATE": "https://www.google.com/maps/search/"
+}

@@ -1,5 +1,9 @@
 /**
- * Kshetram dataset — aggregates all 108 Divya Desams by region.
+ * Kshetram dataset — the 108 Divya Desams in traditional order.
+ *
+ * Content lives in content/kshetrams.json (editable via the Sanity CMS;
+ * synced by .github/workflows/content-sync.yml). Array order defines the
+ * DD serial numbers (getDDSerial) — do not reorder.
  *
  * @typedef {Object} Kshetram
  * @property {string}  id            Stable lowercase-kebab slug (public URL segment)
@@ -17,29 +21,7 @@
  * @property {string}  mapQuery      Google Maps search string ('' for celestial realms)
  */
 
-import { thondaiKshetrams } from './kshetrams/thondai.js';
-import { thondaiKanchiKshetrams } from './kshetrams/thondai-kanchi.js';
-import { cholaKaveriKshetrams } from './kshetrams/chola-kaveri.js';
-import { cholaThanjavurKshetrams } from './kshetrams/chola-thanjavur.js';
-import { cholaTirunangurKshetrams } from './kshetrams/chola-tirunangur.js';
-import { tirunangurElevenKshetrams } from './kshetrams/tirunangur-eleven.js';
-import { naduNaduKshetrams } from './kshetrams/nadu-nadu.js';
-import { pandyaKshetrams } from './kshetrams/pandya.js';
-import { pandyaMaduraiKshetrams } from './kshetrams/pandya-madurai.js';
-import { malaiKshetrams } from './kshetrams/malai.js';
-import { vadaKshetrams } from './kshetrams/vada.js';
+import kshetrams from './content/kshetrams.json';
 
-/** All 108 Divya Desams, grouped in traditional order. */
-export const kshetrams = [
-  ...thondaiKshetrams,
-  ...thondaiKanchiKshetrams,
-  ...cholaKaveriKshetrams,
-  ...cholaThanjavurKshetrams,
-  ...cholaTirunangurKshetrams,
-  ...tirunangurElevenKshetrams,
-  ...naduNaduKshetrams,
-  ...pandyaKshetrams,
-  ...pandyaMaduraiKshetrams,
-  ...malaiKshetrams,
-  ...vadaKshetrams,
-];
+/** All 108 Divya Desams, in traditional order. */
+export { kshetrams };

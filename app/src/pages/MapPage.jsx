@@ -18,6 +18,7 @@ import { distanceKm } from '../utils/geo.js';
 import RegionLegend from '../components/RegionLegend.jsx';
 import TripControls from '../components/TripControls.jsx';
 import { useVisited } from '../hooks/useVisited.js';
+import { SITE_COPY } from '../data/siteCopy.js';
 
 export default function MapPage() {
   const { visitedIds } = useVisited();
@@ -80,10 +81,10 @@ export default function MapPage() {
       <header className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-5 border-b border-[#E3D2AE]">
         <div>
           <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">
-            Interactive Pilgrimage Atlas
+            {SITE_COPY.map.eyebrow}
           </span>
           <h1 className="font-display text-3xl sm:text-4xl font-semibold text-[#7A2E00] tracking-tight leading-tight mt-1">
-            Map of the Divya Desams
+            {SITE_COPY.map.title}
           </h1>
           <p className="mt-2 text-sm text-[#66523D]" aria-live="polite">
             {geoMessage || `${shown.length} of ${plotted.length} desams shown · visited desams carry a gold ring`}

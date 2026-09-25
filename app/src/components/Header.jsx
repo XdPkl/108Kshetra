@@ -24,22 +24,15 @@ import {
 } from 'lucide-react';
 import { kshetrams } from '../data/kshetrams.js';
 import { ABOUT } from '../data/about.js';
+import { SITE_COPY } from '../data/siteCopy.js';
 import { TempleGopuramIcon, ThirumanIcon, LotusIcon } from './SacredIcons.jsx';
 import { useTrip } from '../hooks/useTrip.js';
 import { useVisited } from '../hooks/useVisited.js';
 
 const CEO_NAME = ABOUT.ceo.name;
 
-/** Region dropdown rows — zip copy, counts computed from the live dataset. */
-const REGION_ROWS = [
-  { value: 'Chola Nadu', name: 'Chola Nadu', highlight: 'Cauvery Delta & Srirangam' },
-  { value: 'Thondai Nadu', name: 'Thondai Nadu', highlight: 'Kanchipuram & Chennai' },
-  { value: 'Pandiya Nadu', name: 'Pandiya Nadu', highlight: 'Madurai & Nava Tirupathi' },
-  { value: 'Malai Nadu', name: 'Malai Nadu', highlight: 'Kerala & Kanyakumari' },
-  { value: 'Nadu Nadu', name: 'Nadu Nadu', highlight: 'Cuddalore & Villupuram' },
-  { value: 'Vada Nadu', name: 'Vada Nadu', highlight: 'Tirupati, Ahobilam, Badrinath' },
-  { value: 'Celestial', name: 'Vinnulaga Thirupathigal', highlight: 'Paramapadham & Milky Ocean' },
-];
+/** Region dropdown rows — names/highlights from site copy, counts computed from the live dataset. */
+const REGION_ROWS = SITE_COPY.header.regionRows;
 
 const pillBase = 'px-2.5 py-1.5 rounded-full font-medium transition-all flex items-center gap-1.5';
 const pillIdle = 'hover:bg-[#B34700]/10 hover:text-[#B34700] text-[#332417]';
@@ -204,10 +197,10 @@ export default function Header() {
                 <div className="px-3.5 py-1.5 border-b border-[#F0E3C6] flex items-center justify-between">
                   <div className="flex items-center gap-1.5 text-xs font-bold text-[#7A2E00]">
                     <Compass className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
-                    <span>The 108 Sacred Abodes</span>
+                    <span>{SITE_COPY.header.templesDropdown.heading}</span>
                   </div>
                   <span className="text-[10px] font-bold bg-[#FAF2E3] text-[#96731F] px-2 py-0.5 rounded-full border border-[#C99A2E]/30">
-                    7 Regions
+                    {SITE_COPY.header.templesDropdown.regionsBadge}
                   </span>
                 </div>
 
@@ -218,17 +211,17 @@ export default function Header() {
                     className="w-full px-3.5 py-2 text-xs flex items-center justify-between text-[#332417] hover:bg-[#FAF2E3] transition-colors font-bold group"
                   >
                     <span className="group-hover:text-[#B34700] flex items-center gap-1.5">
-                      <span>Browse All 108 Temples</span>
+                      <span>{SITE_COPY.header.templesDropdown.browseAll}</span>
                     </span>
                     <span className="text-[11px] font-semibold text-[#96731F] bg-[#FAF2E3] group-hover:bg-[#C99A2E]/20 px-2 py-0.5 rounded-md">
-                      108 Total
+                      {SITE_COPY.header.templesDropdown.totalBadge}
                     </span>
                   </Link>
 
                   <div className="h-[1px] bg-[#F0E3C6] my-1 mx-2" />
 
                   <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#96731F]">
-                    Filter by Region:
+                    {SITE_COPY.header.templesDropdown.filterBy}
                   </div>
 
                   {REGION_ROWS.map((r) => (
@@ -366,10 +359,10 @@ export default function Header() {
                 <div className="px-4 py-2 border-b border-[#F0E3C6]">
                   <div className="flex items-center gap-1.5 text-xs font-bold text-[#7A2E00]">
                     <Award className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
-                    <span>Kshetra Tours &amp; Pilgrimage Trust</span>
+                    <span>{SITE_COPY.header.toursDropdown.heading}</span>
                   </div>
                   <p className="text-[11px] text-[#66523D] mt-0.5">
-                    About the archive, the trust and its guided yatra kainkaryam
+                    {SITE_COPY.header.toursDropdown.subtitle}
                   </p>
                 </div>
 
@@ -384,13 +377,13 @@ export default function Header() {
                     </div>
                     <div className="flex flex-col text-left">
                       <span className="font-bold text-[#7A2E00] group-hover:text-[#B34700] flex items-center gap-1.5">
-                        <span>Founder &amp; CEO Desk</span>
+                        <span>{SITE_COPY.header.toursDropdown.items[0].title}</span>
                         <span className="text-[9.5px] bg-[#C99A2E]/20 text-[#7A2E00] px-1.5 py-0.2 rounded font-semibold">
                           {CEO_NAME}
                         </span>
                       </span>
                       <span className="text-[11px] text-[#66523D]">
-                        Kainkaryam leadership, message &amp; customized consultations
+                        {SITE_COPY.header.toursDropdown.items[0].subtitle}
                       </span>
                     </div>
                   </Link>
@@ -405,10 +398,10 @@ export default function Header() {
                     </div>
                     <div className="flex flex-col text-left">
                       <span className="font-bold text-[#7A2E00] group-hover:text-[#B34700]">
-                        Guided Yatras &amp; Departures
+                        {SITE_COPY.header.toursDropdown.items[1].title}
                       </span>
                       <span className="text-[11px] text-[#66523D]">
-                        Fixed groups, pure madi-catering &amp; senior-friendly pacing
+                        {SITE_COPY.header.toursDropdown.items[1].subtitle}
                       </span>
                     </div>
                   </Link>
@@ -423,10 +416,10 @@ export default function Header() {
                     </div>
                     <div className="flex flex-col text-left">
                       <span className="font-bold text-[#7A2E00] group-hover:text-[#B34700]">
-                        7 Regional Pilgrimage Circuits
+                        {SITE_COPY.header.toursDropdown.items[2].title}
                       </span>
                       <span className="text-[11px] text-[#66523D]">
-                        Chola, Pandiya, Thondai, Malai, and Vada Nadu itineraries
+                        {SITE_COPY.header.toursDropdown.items[2].subtitle}
                       </span>
                     </div>
                   </Link>
@@ -441,10 +434,10 @@ export default function Header() {
                     </div>
                     <div className="flex flex-col text-left">
                       <span className="font-bold text-[#7A2E00] group-hover:text-[#B34700]">
-                        The Digital Archive
+                        {SITE_COPY.header.toursDropdown.items[3].title}
                       </span>
                       <span className="text-[11px] text-[#66523D]">
-                        How the 108 kshetrams and the Prabandham are compiled
+                        {SITE_COPY.header.toursDropdown.items[3].subtitle}
                       </span>
                     </div>
                   </Link>
@@ -459,7 +452,7 @@ export default function Header() {
                   >
                     <span className="flex items-center gap-1.5 group-hover:text-[#B34700]">
                       <ShieldCheck className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
-                      <span>Contact &amp; Yatra Inquiries</span>
+                      <span>{SITE_COPY.header.toursDropdown.inquire}</span>
                     </span>
                     <ArrowRight className="w-3.5 h-3.5 text-[#B34700] transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </Link>
@@ -526,16 +519,16 @@ export default function Header() {
             <div className="flex items-center gap-2">
               <ThirumanIcon className="w-3.5 h-4.5" />
               <div>
-                <p className="font-bold text-[#7A2E00] leading-tight">108 Divya Kshetrams</p>
-                <p className="text-[10px] text-[#66523D]">Pilgrim Companion &amp; Tours</p>
+                <p className="font-bold text-[#7A2E00] leading-tight">{SITE_COPY.header.drawer.summaryTitle}</p>
+                <p className="text-[10px] text-[#66523D]">{SITE_COPY.header.drawer.summarySubtitle}</p>
               </div>
             </div>
             <div className="flex items-center gap-2 text-[11px] font-bold">
               <span className="px-2 py-0.5 rounded-full bg-[#FFFDF7] border border-[#C99A2E]/30 text-[#7A2E00]">
-                {visitedCount}/108 Visited
+                {visitedCount}{SITE_COPY.header.drawer.visitedLabel}
               </span>
               <span className="px-2 py-0.5 rounded-full bg-[#B34700] text-[#FFFDF7]">
-                {tripCount} in Trip
+                {tripCount} {SITE_COPY.header.drawer.tripLabel}
               </span>
             </div>
           </div>
@@ -543,7 +536,7 @@ export default function Header() {
           {/* Group 1: Sacred Shrines */}
           <div className="space-y-1">
             <div className="text-[10px] font-bold uppercase tracking-wider text-[#96731F] px-2 mb-1">
-              Divya Desam Shrines
+              {SITE_COPY.header.drawer.shrinesGroup}
             </div>
 
             <Link to="/" onClick={closeAll} className={`${drawerItem} ${isHomeActive ? drawerActive : drawerIdle}`}>
@@ -588,7 +581,7 @@ export default function Header() {
           {/* Group 2: Personal Yatra Itinerary */}
           <div className="space-y-1">
             <div className="text-[10px] font-bold uppercase tracking-wider text-[#96731F] px-2 mb-1">
-              Pilgrim Route Planner
+              {SITE_COPY.header.drawer.plannerGroup}
             </div>
 
             <Link
@@ -612,7 +605,7 @@ export default function Header() {
           {/* Group 3: Guru Parampara */}
           <div className="space-y-1">
             <div className="text-[10px] font-bold uppercase tracking-wider text-[#96731F] px-2 mb-1">
-              Guru Parampara (Sacred Lineage)
+              {SITE_COPY.header.drawer.lineageGroup}
             </div>
 
             <Link to="/azhwars" onClick={closeAll} className={`${drawerItem} ${isAzhwarsActive ? drawerActive : drawerIdle}`}>
@@ -636,10 +629,10 @@ export default function Header() {
           <div className="space-y-1 p-2.5 rounded-2xl bg-gradient-to-br from-[#FAF2E3] to-[#FFFDF7] border-2 border-[#C99A2E]/50">
             <div className="flex items-center justify-between px-1 mb-1">
               <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#B34700]">
-                Kshetra Tours (Guided Yatras)
+                {SITE_COPY.header.drawer.toursGroup}
               </span>
               <span className="text-[10px] font-bold bg-[#C99A2E]/25 text-[#7A2E00] px-2 py-0.5 rounded-full">
-                Sattvic Travel
+                {SITE_COPY.header.drawer.toursBadge}
               </span>
             </div>
 
@@ -650,8 +643,8 @@ export default function Header() {
             >
               <Award className="w-4 h-4 shrink-0 text-[#B34700]" aria-hidden="true" />
               <div className="flex flex-col text-left">
-                <span>Kshetra Tours Overview</span>
-                <span className="text-[10px] opacity-85">Sampradaya pilgrimage organization</span>
+                <span>{SITE_COPY.header.drawer.toursOverview}</span>
+                <span className="text-[10px] opacity-85">{SITE_COPY.header.drawer.toursOverviewSub}</span>
               </div>
             </Link>
 
@@ -663,7 +656,7 @@ export default function Header() {
               >
                 <div className="flex items-center gap-2">
                   <User className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
-                  <span>Founder &amp; CEO Desk</span>
+                  <span>{SITE_COPY.header.toursDropdown.items[0].title}</span>
                 </div>
                 <span className="text-[10px] text-[#96731F]">{CEO_NAME}</span>
               </Link>
@@ -675,7 +668,7 @@ export default function Header() {
               >
                 <div className="flex items-center gap-2">
                   <Calendar className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
-                  <span>Guided Departures &amp; Schedules</span>
+                  <span>{SITE_COPY.header.drawer.departures}</span>
                 </div>
                 <ArrowRight className="w-3 h-3 text-[#B34700]" aria-hidden="true" />
               </Link>
@@ -687,7 +680,7 @@ export default function Header() {
               >
                 <div className="flex items-center gap-2">
                   <RouteIcon className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
-                  <span>7 Regional Pilgrimage Circuits</span>
+                  <span>{SITE_COPY.header.drawer.circuits}</span>
                 </div>
                 <ArrowRight className="w-3 h-3 text-[#B34700]" aria-hidden="true" />
               </Link>
@@ -699,7 +692,7 @@ export default function Header() {
               >
                 <div className="flex items-center gap-2">
                   <ThirumanIcon className="w-3 h-4" />
-                  <span>Sanctum Etiquette</span>
+                  <span>{SITE_COPY.header.drawer.etiquette}</span>
                 </div>
                 <ArrowRight className="w-3 h-3 text-[#B34700]" aria-hidden="true" />
               </Link>
@@ -711,7 +704,7 @@ export default function Header() {
               >
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
-                  <span>Book / Inquire with Yatra Desk</span>
+                  <span>{SITE_COPY.header.drawer.inquireDesk}</span>
                 </div>
                 <ArrowRight className="w-3 h-3" aria-hidden="true" />
               </Link>
