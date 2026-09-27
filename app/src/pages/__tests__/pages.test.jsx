@@ -16,13 +16,15 @@ describe('HomePage (UT-HOME-01..03)', () => {
   it('shows the three-line hero and featured kshetrams', () => {
     renderAt('/');
     expect(screen.getByRole('heading', { name: /108 divya kshetrams/i })).toBeInTheDocument();
-    // PO round 3 (2026-09-27): the phrase no longer renders as a line anywhere
-    // (exact match — the hero description's body copy still mentions it in a
-    // clamped line, which is fine)
-    expect(screen.queryAllByText('Nalayira Divya Prabandham')).toHaveLength(0);
-    // The yatra tracker counts only the 106 earthly kshetrams (PO 2026-09-25)
-    expect(screen.getAllByText((_, el) => /0 of 106 kshetrams visited/i.test(el?.textContent ?? '')).length)
-      .toBeGreaterThan(0);
+    // 2026-09 refresh: the invocation stack top-right renders the phrase once
+    // (it had been fully removed in PO round 3; the approved mockup brings it
+    // back as a decorative hero element)
+    expect(screen.getAllByText('Nalayira Divya Prabandham')).toHaveLength(1);
+    // The yatra tracker counts only the 106 earthly kshetrams (PO 2026-09-25);
+    // the 2026-09 refresh exposes the count via the progressbar contract
+    const progressbar = screen.getByRole('progressbar');
+    expect(progressbar).toHaveAttribute('aria-valuenow', '0');
+    expect(progressbar).toHaveAttribute('aria-label', '0 of 106 kshetrams visited');
     // 4 featured kshetram links
     expect(screen.getAllByRole('link', { name: /srirangam|tirumala|kanchipuram|srivilliputhur/i }).length)
       .toBeGreaterThanOrEqual(4);
@@ -30,7 +32,8 @@ describe('HomePage (UT-HOME-01..03)', () => {
 
   it('offers navigation to Browse and the darshan strips', () => {
     renderAt('/');
-    expect(screen.getByRole('link', { name: /explore the 108/i })).toHaveAttribute('href', '/kshetrams');
+    // 2026-09 refresh: the CTA label is "Explore Kshetrams" (PO request)
+    expect(screen.getByRole('link', { name: /explore kshetrams/i })).toHaveAttribute('href', '/kshetrams');
     // PO request 2026-09-10: darshan strips replace the hero "Azhwars" CTA
     expect(screen.getByRole('link', { name: /azhwar darshan - featured/i })).toHaveAttribute('href', '/azhwars');
     expect(screen.getByRole('link', { name: /acharya darshan - featured/i })).toHaveAttribute('href', '/acharyas');

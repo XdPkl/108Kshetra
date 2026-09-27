@@ -47,11 +47,12 @@ beforeEach(() => {
   vi.restoreAllMocks();
 });
 
-describe('YatraProgressTracker (UXD v3.0)', () => {
-  it('hides the inline percentage at zero and confirms before reset', async () => {
+describe('YatraProgressTracker (2026-09 refresh)', () => {
+  it('keeps an empty bar at zero and confirms before reset', async () => {
     const user = userEvent.setup();
     const { rerender } = renderAt('/', <YatraProgressTracker total={108} />);
     expect(screen.queryByText('0%')).not.toBeInTheDocument();
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
     const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(false);
     await user.click(screen.getByRole('button', { name: /reset progress/i }));
     expect(confirmSpy).toHaveBeenCalledTimes(1);
@@ -63,7 +64,9 @@ describe('YatraProgressTracker (UXD v3.0)', () => {
         <YatraProgressTracker total={108} />
       </MemoryRouter>,
     );
-    expect(screen.getByText('3%')).toBeInTheDocument();
+    // 2026-09 refresh: the slim bar carries the count via the progressbar
+    // contract (no inline percentage label)
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '3');
     confirmSpy.mockReturnValue(true);
     await user.click(screen.getByRole('button', { name: /reset progress/i }));
     rerender(
@@ -71,8 +74,8 @@ describe('YatraProgressTracker (UXD v3.0)', () => {
         <YatraProgressTracker total={108} />
       </MemoryRouter>,
     );
-    expect(screen.getAllByText((_, el) => /0 of 108 kshetrams visited/i.test(el?.textContent ?? '')).length)
-      .toBeGreaterThan(0);
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-label', '0 of 108 kshetrams visited');
   });
 
   it('scopes the yatra to the 106 earthly kshetrams, ignoring celestial marks (PO 2026-09-25)', () => {
@@ -83,8 +86,7 @@ describe('YatraProgressTracker (UXD v3.0)', () => {
     );
     expect(earthlyIds.size).toBe(106);
     renderAt('/', <YatraProgressTracker total={earthlyIds.size} eligibleIds={earthlyIds} />);
-    expect(screen.getAllByText((_, el) => /1 of 106 kshetrams visited/i.test(el?.textContent ?? '')).length)
-      .toBeGreaterThan(0);
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-label', '1 of 106 kshetrams visited');
   });
 });
 

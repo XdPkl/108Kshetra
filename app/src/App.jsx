@@ -4,7 +4,7 @@
  * (NFR-11 route-level code splitting).
  */
 import { Suspense, lazy } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import HomePage from './pages/HomePage.jsx';
@@ -29,10 +29,15 @@ function RouteFallback() {
 }
 
 export default function App() {
+  // 2026-09 refresh: the Home bands are full-bleed, so the main shell drops
+  // its constrained container + vertical rhythm there (HomePage manages its
+  // own max-w-site columns per band).
+  const { pathname } = useLocation();
+  const isHome = pathname === '/';
   return (
     <div className="app-shell">
       <Header />
-      <main className="app-main max-w-site mx-auto px-4 sm:px-6 py-8 space-y-10 w-full">
+      <main className={isHome ? 'app-main w-full' : 'app-main max-w-site mx-auto px-4 sm:px-6 py-8 space-y-10 w-full'}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/kshetrams" element={<BrowsePage />} />

@@ -1,71 +1,73 @@
 /**
- * Hero — zip-parity compact hero card (UXD v3.0 Gate 2): cream plate with
- * temple-corner brackets, golden inset border, the Garuda–Chakra–Namam–
- * Shankha–Hanuman plaque watermark, invocation pill, eyebrow, gradient title,
- * Tamil subtitle and the explore CTA (FR-10).
- *
- * Round 2 (PO 2026-09-27): banner height halved (310px → ~155px at desktop)
- * and the watermark is now the PO-supplied wooden-plaque motif strip, photo
- * background removed (scripts/make-hero-watermark.mjs), replacing the
- * Sangu–Namam–Chakram SVG trio.
+ * Hero — 2026-09 refresh (PO-approved mockup, docs/03-design/mockups/
+ * refresh-2026-09): full-bleed photographic banner — the PO-supplied temple
+ * corridor artwork (scripts/make-hero-image.mjs), left scrim for legibility,
+ * display headline, Tamil subtitle, one-line description at desktop, gold
+ * explore CTA + map link, and the invocation stack top-right (FR-10).
  */
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Map as MapIcon } from 'lucide-react';
 import { SITE_COPY } from '../../data/siteCopy.js';
-import heroWatermark from '../../assets/hero-plaque-watermark.png';
+import heroImage from '../../assets/hero-sunset-lamps.jpg';
 
 export default function Hero() {
   const { hero } = SITE_COPY;
   return (
-    <section className="relative overflow-hidden text-center px-4 sm:px-6 py-4 rounded-2xl border border-[#C99A2E]/50 shadow-xs bg-[#FFFDF7]">
-      {/* Traditional Temple Corner Embellishments */}
-      <div className="absolute top-2.5 left-2.5 w-6 h-6 border-t-2 border-l-2 border-[#C99A2E]/70 rounded-tl-xs pointer-events-none" aria-hidden="true" />
-      <div className="absolute top-2.5 right-2.5 w-6 h-6 border-t-2 border-r-2 border-[#C99A2E]/70 rounded-tr-xs pointer-events-none" aria-hidden="true" />
-      <div className="absolute bottom-2.5 left-2.5 w-6 h-6 border-b-2 border-l-2 border-[#C99A2E]/70 rounded-bl-xs pointer-events-none" aria-hidden="true" />
-      <div className="absolute bottom-2.5 right-2.5 w-6 h-6 border-b-2 border-r-2 border-[#C99A2E]/70 rounded-br-xs pointer-events-none" aria-hidden="true" />
-
-      {/* Decorative Inner Golden Inset Border */}
-      <div className="absolute inset-2 sm:inset-2.5 border border-[#C99A2E]/30 rounded-xl pointer-events-none" aria-hidden="true" />
-
-      {/* Sacred watermark: the five-motif plaque strip, fully visible and
-          centred in the banner at full height (PO round 3) */}
+    <section className="relative w-full overflow-hidden">
+      {/* PO-supplied artwork; the 20% vertical anchor keeps the gopuram crown
+          fully inside the crop at the 364px banner height */}
       <img
-        src={heroWatermark}
+        src={heroImage}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-auto max-w-none opacity-[0.09]"
+        className="absolute inset-0 h-full w-full object-cover object-[center_20%]"
       />
 
-      <div className="relative z-10 max-w-2xl mx-auto">
-        {/* Hero Title — the ! marks beat the unlayered legacy h1 rule in
-            base.css, which otherwise pins every h1 to --font-display-2 with a
-            16px bottom margin (that override is what kept the banner tall) */}
-        <h1 className="font-display text-2xl! sm:text-3xl! font-bold mb-0! leading-[1.1]! bg-gradient-to-b from-[#7A2E00] to-[#B34700] bg-clip-text text-transparent">
-          {hero.title}
-        </h1>
+      {/* Scrims for text legibility over the photo */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#241105]/85 via-[#2A1408]/40 to-transparent" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#1C0C03]/55 to-transparent" aria-hidden="true" />
 
-        {/* Classical Tamil Subtitle */}
-        <p className="mt-0.5 text-[11px] sm:text-xs font-semibold text-[#96731F]" lang="ta">
-          {hero.subtitle}
-        </p>
+      <div className="relative mx-auto flex min-h-[364px] max-w-site flex-col justify-center px-4 py-12 sm:px-6">
+        <div className="max-w-[900px]">
+          {/* The ! marks beat the unlayered legacy h1 rule in base.css, which
+              otherwise pins every h1 to --font-display-2 + a bottom margin */}
+          <h1 className="font-display text-5xl! sm:text-[64px]! font-semibold leading-[1.04]! mb-0! text-[#FFFDF7]!">
+            {hero.title}
+          </h1>
 
-        {/* Description — PO round 4: shorter copy, single row at desktop,
-            fully visible (no clamp; wraps naturally on phones) */}
-        <p className="max-w-xl mx-auto mt-2.5 text-xs text-[#66523D] leading-relaxed">
-          {hero.description}
-        </p>
+          <p className="mt-4 text-lg leading-relaxed text-[#F0D9A6]" lang="ta">
+            {hero.subtitle}
+          </p>
 
-        {/* Primary CTA Button — gold idiom so the label stands apart from the
-            button fill and from the brown banner title (PO 2026-09-25) */}
-        <div className="mt-4 flex items-center justify-center">
-          <Link
-            to="/kshetrams"
-            className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-gradient-to-b from-[#E2C47C] to-[#C99A2E] text-[#4A3005] text-xs font-bold border border-[#96731F] shadow-xs hover:shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 transition-all"
-          >
-            <span>{hero.cta}</span>
-            <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-          </Link>
+          {/* One line at desktop (PO request), wraps naturally on phones */}
+          <p className="mt-2 font-display text-lg italic leading-snug text-[#FFFDF7]/90 sm:text-[22px] lg:whitespace-nowrap">
+            {hero.description}
+          </p>
+
+          <div className="mt-9 flex flex-wrap items-center gap-7">
+            <Link
+              to="/kshetrams"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-[#E9CF8C] to-[#C99A2E] px-7 py-3.5 text-[15px] font-bold text-[#4A3005]! shadow-lg shadow-[#4A3005]/30 hover:brightness-105 active:scale-[0.98] transition-all"
+            >
+              <span>{hero.cta}</span>
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <Link
+              to="/map"
+              className="inline-flex items-center gap-2 text-[15px] font-semibold text-[#FFFDF7]! underline decoration-[#FFFDF7]/50 underline-offset-[6px] hover:decoration-[#FFFDF7]"
+            >
+              <MapIcon className="h-[18px] w-[18px]" aria-hidden="true" />
+              View map
+            </Link>
+          </div>
         </div>
+      </div>
+
+      {/* Invocation stack, top-right (existing hero copy, previously unrendered) */}
+      <div className="absolute right-8 top-9 hidden text-right md:block">
+        <p className="font-display text-[19px] italic leading-snug text-[#F5E3BC]/95">{hero.eyebrow}</p>
+        <div className="ml-auto mt-2 h-px w-16 bg-[#E2C47C]/60" aria-hidden="true" />
+        <p className="mt-2 text-[15px] leading-snug text-[#F5E3BC]/85" lang="ta">{hero.invocation}</p>
       </div>
     </section>
   );

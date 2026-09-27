@@ -200,3 +200,25 @@ shims; new contracts:
 | UT-CMS-07 | Site-copy extraction | Hero, page banners, About chrome, inquiry-modal copy, header dropdown/drawer copy and footer moved verbatim to `site-copy.json`; all 19 e2e + page suites still pin the same strings |
 
 *End of Addendum — TCS-108K-008 v1.7*
+
+---
+
+## Version 1.8 — Home Page Design Refresh Contract Updates (2026-09-27)
+
+Implementation of the PO-approved home mockup (refresh-2026-09). Layout
+contracts moved with the design; behavioral contracts unchanged:
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-HOME-01 | Nalayira line | Renders **exactly once** on Home (hero invocation stack, top-right) — was asserted absent since PO round 3; reinstated by the approved mockup in a new decorative slot |
+| UT-HOME-01 | Tracker count | "Your yatra — N of 106" headline → progressbar contract: `role="progressbar"`, `aria-valuenow`, `aria-label "N of M kshetrams visited"`; no inline percentage label |
+| UT-HOME-02 | Hero CTA | "Explore the 108 Kshetrams" → **"Explore Kshetrams"** (site-copy.json `hero.cta`, PO request) |
+| TC-02 | Home cards | Home featured grid uses **`.featured-card`** (new large-card anatomy); `.kshetram-card` remains Browse-only |
+| TC-13 | Visited/reset | Home tracker assertions move to the progressbar `aria-label` contract; reset flow unchanged (quiet "Reset progress" under the bar) |
+
+New components: `FeaturedKshetramCard.jsx` (home-only large card).
+Quality gates: TC-QA-01 Pass (0 errors; 5 accepted warnings) · TC-QA-02 Pass
+(**209/209 tests, 21 suites**; 92.08/82.53/87.38/93.41) · TC-QA-03 Pass ·
+E2E **19/19**. Execution recorded in TER v2.9.
+
+*End of Addendum — TCS-108K-008 v1.8*

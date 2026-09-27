@@ -748,3 +748,81 @@ space pressure, and the two split pills do not use the shared `pillBase`
 
 
 
+
+## Version 2.9 — Home Page Design Refresh Execution (2026-09-27)
+
+### Scope
+
+Implementation of the PO-approved home page mockup
+(`docs/03-design/mockups/refresh-2026-09/home.html`, approved this session):
+full-bleed photo hero (364px, PO-supplied temple-corridor artwork),
+"My yatra" tracker row, large featured-kshetram cards, stacked full-width
+Azhwar/Acharya darshan bands (ivory → sandal) with names below the photo
+tiles, and the closing ornament. The main shell drops its constrained
+container on the home route (`App.jsx`) so the bands run edge-to-edge with
+their own `max-w-site` columns; every other route keeps the 1200px column.
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/components/home/Hero.jsx` | Rewritten: full-bleed photo hero — headline, Tamil subtitle, one-line description (lg+), gold "Explore Kshetrams" CTA + "View map" link, invocation stack top-right |
+| `app/src/components/home/YatraProgressTracker.jsx` | Rewritten: ivory band row — "My yatra" heading, big {count} / {total}, slim bar (fill 0 at zero), helper line, gold "Mark a visit" → Browse, quiet "Reset progress" under the bar (kept: e2e TC-13 reset flow) |
+| `app/src/components/home/FeaturedKshetrams.jsx` | Cream band; header eyebrow (vermilion) + 44px display title + right "View all 108 Kshetrams →" link; renders the new large cards |
+| `app/src/components/home/FeaturedKshetramCard.jsx` | NEW home-only large card: h-60 photo, "+ Trip / ✓ In trip", DD #N + "247 Pasurams" tags, Tamil + 28px display name + temple + location, footer "View temple details ↗" / "✓ Mark visited". Browse keeps `KshetramCard` unchanged |
+| `app/src/components/home/SaintStrip.jsx` | Rewritten: full-width band (`tone` ivory/sandal), left text column (eyebrow + gold rule, 40px display title, lead, outline CTA, optional ornament), 4 tiles with names BELOW photos |
+| `app/src/pages/HomePage.jsx` | Stacks the strips full-width (was 50/50 grid), passes eyebrow/title fields to the new anatomy (section label = eyebrow, poetic line = heading), adds the closing ornament |
+| `app/src/App.jsx` | Home route main shell drops `max-w-site`/padding/`space-y-10` so the bands are full-bleed |
+| `app/src/assets/hero-sunset-lamps.jpg` | NEW: PO artwork converted via `scripts/make-hero-image.mjs` (sharp, 2172×724, 195 KB) |
+| `app/src/data/content/site-copy.json` | `hero.cta` → "Explore Kshetrams" (PO request, value-only edit) |
+
+### Copy notes
+
+- Hero CTA label: "Explore the 108 Kshetrams" → **"Explore Kshetrams"** (PO
+  request during mockup review).
+- "Nalayira Divya Prabandham" renders again as the hero invocation stack
+  (top-right decorative slot, together with the invocation line) — it had
+  been removed entirely in PO round 3; the approved mockup reinstates it in
+  this new position. Unit UT-HOME-01 and e2e TC-02 now assert exactly 1
+  occurrence (was 0).
+- Tracker copy: "Your yatra — N of 106 kshetrams visited" headline is replaced
+  by the big count + "Kshetrams visited" + the "N sacred abodes awaiting your
+  darshan" helper line; the count is exposed via the progressbar aria contract.
+
+### Test contract updates
+
+| Suite | Change |
+|---|---|
+| `pages.test.jsx` UT-HOME-01 | Nalayira exact-match count 0 → 1; "0 of 106" text → progressbar `aria-valuenow`/`aria-label` |
+| `pages.test.jsx` UT-HOME-02 | `/explore the 108/` → `/explore kshetrams/` |
+| `v3Branches.test.jsx` tracker | Inline `3%` label → `aria-valuenow: 3`; "N of M kshetrams visited" → progressbar `aria-label`; reset-confirm flow unchanged |
+| `e2e/journeys.spec.js` TC-02 | Nalayira count 1; `/explore kshetrams/`; home cards `.kshetram-card` → `.featured-card` |
+| `e2e/yatra.spec.js` TC-13 | Visited/reset assertions → progressbar `aria-label` contract |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (unchanged set) |
+| Unit tests (Vitest) | **209/209 pass (21 suites)** |
+| Coverage | **92.08% statements / 82.53% branches / 87.38% functions / 93.41% lines** (gate 80%) |
+| Production build | Clean (364 kB gzip initial) |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| CMS round-trip + sync self-test | Offline 11/11 lossless (site-copy value-only edit); fixture regenerated; `sync-content --fixture --check` → 0 diffs |
+| Visual gate (implemented build) | 7/7 renders pass (desktop full + mobile full + hero/yatra/featured/azhwars/acharyas) — `docs/03-design/gate-shots/refresh-home/` |
+
+### Deterministic verification (Playwright, production preview)
+
+| Check | Result |
+|---|---|
+| Hero height | 364px at 1440 / 1920 / 1024 (full-bleed: section width == viewport) |
+| Hero description one line | 1 line at 1440 (right edge 1044px, clear of the invocation stack), 1920, 1024; wraps naturally at 768 / 390 (by design, `lg:whitespace-nowrap`) |
+| No horizontal overflow | `scrollWidth == innerWidth` at 1440 / 1920 / 1024 / 768 / 390 |
+| Gopuram crown fully visible | `object-position: center 20%` — finial complete with ~5% banner height of sky (pixel-scanned on the approved crop candidate) |
+| Bands full-bleed | main width == viewport at all widths; 6 stacked bands (hero, yatra, featured, azhwars, acharyas, ornament) |
+
+### Open flag for PO round 5
+
+"Reset progress" is retained as a quiet text link under the tracker bar — the
+approved mockup omitted it; it was kept to preserve the TC-13 reset flow and
+the user's data control. Drop it on request (one-line removal).
