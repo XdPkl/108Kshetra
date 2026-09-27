@@ -784,6 +784,7 @@
     ]
   },
   "nammazhwar": {
+    "wiki": "Nammalvar",
     "order": 5,
     "epithets": [
       "Shatagopan",
@@ -984,6 +985,7 @@
     ]
   },
   "madhurakavi": {
+    "wiki": "Madhurakavi Alvar",
     "order": 6,
     "epithets": [
       "Madhurakavi Azhwar"
@@ -1327,6 +1329,7 @@
     ]
   },
   "periyazhwar": {
+    "wiki": "Periyalvar",
     "order": 8,
     "epithets": [
       "Vishnuchittan",
@@ -1529,6 +1532,7 @@
     ]
   },
   "andal": {
+    "wiki": "Andal",
     "order": 9,
     "epithets": [
       "Kothai",
@@ -1768,6 +1772,7 @@
     ]
   },
   "thondaradippodi": {
+    "wiki": "Thondaradippodi Alvar",
     "order": 10,
     "epithets": [
       "Vipranarayanan",
@@ -2164,6 +2169,7 @@
     ]
   },
   "thirumangai": {
+    "wiki": "Thirumangai Alvar",
     "order": 12,
     "epithets": [
       "Kaliyan",

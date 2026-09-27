@@ -1,8 +1,12 @@
 /**
  * SaintStrip — zip-parity darshan strip (UXD v3.0 Gate 2): gold-top-hairline
- * cream card with a 2×4 grid of photo tiles (dark gradient overlay, gold top
- * line, Tamil + English name overlay) and a footer CTA link. Shared by the
+ * cream card with a centered row of photo tiles (dark gradient overlay, gold
+ * top line, Tamil + English name overlay) and a footer CTA link. Shared by the
  * Azhwar and Acharya strips on Home.
+ *
+ * Round 2 (PO 2026-09-27): tiles are ~60% smaller (12-up row on desktop) so
+ * the full twelve Azhwars / five featured Acharyas fit without enlarging the
+ * strip; widths come in via the tileWidthClass prop.
  * @param {object} props
  * @param {string} props.eyebrow - small-caps label above the title
  * @param {string} props.title - strip heading
@@ -11,17 +15,18 @@
  * @param {string} props.base - detail route base ('/azhwar' | '/acharya')
  * @param {string} props.ctaLabel - footer CTA text
  * @param {string} props.ctaTo - footer CTA destination
+ * @param {string} props.tileWidthClass - responsive width utilities per tile
  */
 import { Link } from 'react-router-dom';
 import { useWikiImage } from '../../hooks/useWikiImage.js';
 
 /** One photo tile; the whole tile links to the saint's dossier. */
-function SaintTile({ saint, base }) {
+function SaintTile({ saint, base, tileWidthClass }) {
   const image = useWikiImage(saint.wiki ?? null, saint.photos?.[0]?.src ?? null);
   return (
     <Link
       to={`${base}/${saint.id}`}
-      className="group relative aspect-[9/16] w-full rounded-xl border border-[#C99A2E]/50 overflow-hidden shadow-xs hover:shadow-md hover:-translate-y-0.5 hover:border-[#C99A2E] transition-all text-left"
+      className={`group relative aspect-[9/16] ${tileWidthClass} rounded-xl border border-[#C99A2E]/50 overflow-hidden shadow-xs hover:shadow-md hover:-translate-y-0.5 hover:border-[#C99A2E] transition-all text-left`}
     >
       {/* Photo fills the tile */}
       {image.src ? (
@@ -45,11 +50,11 @@ function SaintTile({ saint, base }) {
       <div className="absolute inset-x-0 top-0 h-[2.5px] bg-gradient-to-r from-[#E2C47C] via-[#C99A2E] to-[#96731F] origin-left scale-x-40 group-hover:scale-x-100 transition-transform duration-300 pointer-events-none" />
 
       {/* Overlaid Tamil and English names */}
-      <div className="absolute inset-x-0 bottom-0 p-2 sm:p-2.5 pointer-events-none">
-        <p className="text-[10px] sm:text-[11px] text-[#FFDF78] font-medium leading-none line-clamp-1" lang="ta">
+      <div className="absolute inset-x-0 bottom-0 p-1.5 sm:p-2 pointer-events-none">
+        <p className="text-[9px] sm:text-[10px] text-[#FFDF78] font-medium leading-none line-clamp-1" lang="ta">
           {saint.tamilName}
         </p>
-        <p className="font-display text-sm sm:text-base font-bold text-[#FFFDF7] leading-tight group-hover:text-[#FFDF78] transition-colors line-clamp-1 mt-0.5">
+        <p className="font-display text-[13px] sm:text-sm font-bold text-[#FFFDF7] leading-tight group-hover:text-[#FFDF78] transition-colors line-clamp-1 mt-0.5">
           {saint.name}
         </p>
       </div>
@@ -57,7 +62,7 @@ function SaintTile({ saint, base }) {
   );
 }
 
-export default function SaintStrip({ eyebrow, title, lead, saints, base, ctaLabel, ctaTo }) {
+export default function SaintStrip({ eyebrow, title, lead, saints, base, ctaLabel, ctaTo, tileWidthClass }) {
   return (
     <section className="rounded-2xl border border-[#C99A2E]/40 bg-[#FFFDF7] py-3.5 sm:py-4 px-4 sm:px-6 text-center relative overflow-hidden shadow-xs">
       {/* Golden top hairline gradient */}
@@ -73,9 +78,11 @@ export default function SaintStrip({ eyebrow, title, lead, saints, base, ctaLabe
         {lead}
       </p>
 
-      {/* Photo tiles */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto mt-3">
-        {saints.map((saint) => <SaintTile key={saint.id} saint={saint} base={base} />)}
+      {/* Photo tiles — centered flex row so any saint count sits evenly */}
+      <div className="flex flex-wrap justify-center gap-3 max-w-site mx-auto mt-3">
+        {saints.map((saint) => (
+          <SaintTile key={saint.id} saint={saint} base={base} tileWidthClass={tileWidthClass} />
+        ))}
       </div>
 
       <div className="mt-3 flex justify-center">

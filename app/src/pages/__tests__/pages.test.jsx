@@ -31,10 +31,12 @@ describe('HomePage (UT-HOME-01..03)', () => {
     // PO request 2026-09-10: darshan strips replace the hero "Azhwars" CTA
     expect(screen.getByRole('link', { name: /azhwar darshan - featured/i })).toHaveAttribute('href', '/azhwars');
     expect(screen.getByRole('link', { name: /acharya darshan - featured/i })).toHaveAttribute('href', '/acharyas');
-    // 4 featured saints per strip, whole-card links with thumbnails
+    // PO round 2 (2026-09-27): strips carry all twelve azhwars / five featured
+    // acharyas in smaller tiles, whole-card links with thumbnails
     expect(screen.getAllByRole('link', { name: /poigai azhwar|bhoothathazhwar/i }).length).toBeGreaterThanOrEqual(2);
-    expect(screen.getAllByRole('link', { name: /nathamuni|yamunacharya|pillai lokacharya|manavala/i }).length)
-      .toBeGreaterThanOrEqual(4);
+    expect(screen.getAllByRole('link', { name: /nammazhwar|andal/i }).length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByRole('link', { name: /nathamuni|yamunacharya|ramanujacharya|pillai lokacharya|manavala/i }).length)
+      .toBeGreaterThanOrEqual(5);
     expect(screen.queryByRole('link', { name: /meet the azhwars/i })).not.toBeInTheDocument();
   });
 });

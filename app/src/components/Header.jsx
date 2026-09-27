@@ -34,7 +34,7 @@ const CEO_NAME = ABOUT.ceo.name;
 /** Region dropdown rows — names/highlights from site copy, counts computed from the live dataset. */
 const REGION_ROWS = SITE_COPY.header.regionRows;
 
-const pillBase = 'px-2.5 py-1.5 rounded-full font-medium transition-all flex items-center gap-1.5';
+const pillBase = 'px-2 py-1 rounded-full font-medium transition-all flex items-center gap-1.5';
 const pillIdle = 'hover:bg-[#B34700]/10 hover:text-[#B34700] text-[#332417]';
 const pillActive = 'bg-[#B34700]/12 text-[#7A2E00] font-bold ring-1 ring-[#B34700]/30 shadow-2xs';
 
@@ -138,14 +138,11 @@ export default function Header() {
               </span>
               <ThirumanIcon className="w-3.5 h-4.5 hidden sm:inline-block opacity-85 shrink-0" />
             </div>
-            <span className="text-[9.5px] uppercase font-bold tracking-widest text-[#B34700]/90">
-              Nalayira Divya Prabandham
-            </span>
           </div>
         </Link>
 
         {/* ================= 2. DESKTOP NAVIGATION ================= */}
-        <nav className="hidden lg:flex items-center gap-1 text-[13px] text-[#332417]" aria-label="Primary">
+        <nav className="hidden lg:flex flex-wrap items-center justify-end gap-x-0.5 gap-y-1 text-[19.5px] text-[#332417]" aria-label="Primary">
 
           {/* A. HOME */}
           <NavLink
@@ -170,17 +167,17 @@ export default function Header() {
               <NavLink
                 to="/kshetrams"
                 onClick={closeAll}
-                className={`pl-2.5 pr-1 py-1.5 rounded-l-full font-medium transition-all flex items-center gap-1.5 ${isBrowseActive ? pillActive : pillIdle}`}
+                className={`pl-2 pr-1 py-1 rounded-l-full font-medium transition-all flex items-center gap-1.5 ${isBrowseActive ? pillActive : pillIdle}`}
                 title="Browse All 108 Divya Desams"
               >
                 <Compass className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
-                <span>108 Temples</span>
+                <span>106 Temples</span>
               </NavLink>
 
               <button
                 type="button"
                 onClick={() => setTempleDropdownOpen((prev) => !prev)}
-                className={`pr-2 py-1.5 rounded-r-full font-medium transition-all ${isBrowseActive ? 'bg-[#B34700]/12 text-[#7A2E00] ring-1 ring-[#B34700]/30' : 'hover:bg-[#B34700]/10 hover:text-[#B34700] text-[#332417]'}`}
+                className={`pr-1.5 py-1 rounded-r-full font-medium transition-all ${isBrowseActive ? 'bg-[#B34700]/12 text-[#7A2E00] ring-1 ring-[#B34700]/30' : 'hover:bg-[#B34700]/10 hover:text-[#B34700] text-[#332417]'}`}
                 aria-label="Toggle Regional Temples Dropdown"
                 aria-expanded={templeDropdownOpen}
               >
@@ -191,9 +188,11 @@ export default function Header() {
               </button>
             </div>
 
-            {/* Temples Dropdown Menu */}
+            {/* Temples Dropdown Menu — top-full + pt bridge keeps the hover
+                area contiguous so moving to the items can't close it */}
             {templeDropdownOpen && (
-              <div className="absolute left-0 mt-1 w-72 rounded-2xl bg-[#FFFDF7] border border-[#C99A2E]/40 shadow-xl py-2.5 z-50 text-left">
+              <div className="absolute left-0 top-full w-72 pt-1.5 z-50">
+                <div className="rounded-2xl bg-[#FFFDF7] border border-[#C99A2E]/40 shadow-xl py-2.5 text-left">
                 <div className="px-3.5 py-1.5 border-b border-[#F0E3C6] flex items-center justify-between">
                   <div className="flex items-center gap-1.5 text-xs font-bold text-[#7A2E00]">
                     <Compass className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
@@ -208,7 +207,7 @@ export default function Header() {
                   <Link
                     to="/kshetrams"
                     onClick={closeAll}
-                    className="w-full px-3.5 py-2 text-xs flex items-center justify-between text-[#332417] hover:bg-[#FAF2E3] transition-colors font-bold group"
+                    className="w-full px-3.5 py-2 text-[18px] flex items-center justify-between text-[#332417] hover:bg-[#FAF2E3] transition-colors font-bold group"
                   >
                     <span className="group-hover:text-[#B34700] flex items-center gap-1.5">
                       <span>{SITE_COPY.header.templesDropdown.browseAll}</span>
@@ -229,7 +228,7 @@ export default function Header() {
                       key={r.value}
                       type="button"
                       onClick={() => goRegion(r.value)}
-                      className="w-full px-3.5 py-1.5 text-xs flex items-center justify-between text-[#57422E] hover:bg-[#FAF2E3] hover:text-[#7A2E00] transition-colors group"
+                      className="w-full px-3.5 py-1.5 text-[18px] flex items-center justify-between text-[#57422E] hover:bg-[#FAF2E3] hover:text-[#7A2E00] transition-colors group"
                     >
                       <div className="flex flex-col text-left">
                         <span className="font-semibold group-hover:text-[#B34700]">
@@ -244,6 +243,7 @@ export default function Header() {
                       </span>
                     </button>
                   ))}
+                </div>
                 </div>
               </div>
             )}
@@ -322,7 +322,7 @@ export default function Header() {
               <NavLink
                 to="/about"
                 onClick={closeAll}
-                className="pl-3 pr-1.5 py-1.5 font-bold flex items-center gap-1.5"
+                className="pl-2.5 pr-1 py-1 font-bold flex items-center gap-1.5"
                 title="Kshetra Tours — About the digital archive & pilgrimage trust"
               >
                 <Award
@@ -342,7 +342,7 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setToursDropdownOpen((prev) => !prev)}
-                className="pr-2.5 py-1.5"
+                className="pr-2 py-1"
                 aria-label="Toggle Kshetra Tours Menu"
                 aria-expanded={toursDropdownOpen}
               >
@@ -353,9 +353,10 @@ export default function Header() {
               </button>
             </div>
 
-            {/* Kshetra Tours Dropdown Menu */}
+            {/* Kshetra Tours Dropdown Menu — top-full + pt hover bridge */}
             {toursDropdownOpen && (
-              <div className="absolute right-0 mt-1 w-80 rounded-2xl bg-[#FFFDF7] border border-[#C99A2E]/40 shadow-xl py-2.5 z-50 text-left">
+              <div className="absolute right-0 top-full w-80 pt-1.5 z-50">
+                <div className="rounded-2xl bg-[#FFFDF7] border border-[#C99A2E]/40 shadow-xl py-2.5 text-left">
                 <div className="px-4 py-2 border-b border-[#F0E3C6]">
                   <div className="flex items-center gap-1.5 text-xs font-bold text-[#7A2E00]">
                     <Award className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
@@ -370,13 +371,13 @@ export default function Header() {
                   <Link
                     to="/about#ceo-leadership"
                     onClick={closeAll}
-                    className="w-full px-4 py-2 text-xs flex items-start gap-2.5 text-[#332417] hover:bg-[#FAF2E3] transition-colors group"
+                    className="w-full px-4 py-2 text-[18px] flex items-start gap-2.5 text-[#332417] hover:bg-[#FAF2E3] transition-colors group"
                   >
                     <div className="p-1 rounded-md bg-[#FAF2E3] border border-[#C99A2E]/40 group-hover:border-[#B34700] text-[#B34700] mt-0.5">
                       <User className="w-3.5 h-3.5" aria-hidden="true" />
                     </div>
                     <div className="flex flex-col text-left">
-                      <span className="font-bold text-[#7A2E00] group-hover:text-[#B34700] flex items-center gap-1.5">
+                      <span className="font-bold text-[#7A2E00] group-hover:text-[#B34700] flex flex-wrap items-center gap-1.5">
                         <span>{SITE_COPY.header.toursDropdown.items[0].title}</span>
                         <span className="text-[9.5px] bg-[#C99A2E]/20 text-[#7A2E00] px-1.5 py-0.2 rounded font-semibold">
                           {CEO_NAME}
@@ -391,7 +392,7 @@ export default function Header() {
                   <Link
                     to="/about#guided-yatras"
                     onClick={closeAll}
-                    className="w-full px-4 py-2 text-xs flex items-start gap-2.5 text-[#332417] hover:bg-[#FAF2E3] transition-colors group"
+                    className="w-full px-4 py-2 text-[18px] flex items-start gap-2.5 text-[#332417] hover:bg-[#FAF2E3] transition-colors group"
                   >
                     <div className="p-1 rounded-md bg-[#FAF2E3] border border-[#C99A2E]/40 group-hover:border-[#B34700] text-[#B34700] mt-0.5">
                       <Calendar className="w-3.5 h-3.5" aria-hidden="true" />
@@ -409,7 +410,7 @@ export default function Header() {
                   <Link
                     to="/about#circuits"
                     onClick={closeAll}
-                    className="w-full px-4 py-2 text-xs flex items-start gap-2.5 text-[#332417] hover:bg-[#FAF2E3] transition-colors group"
+                    className="w-full px-4 py-2 text-[18px] flex items-start gap-2.5 text-[#332417] hover:bg-[#FAF2E3] transition-colors group"
                   >
                     <div className="p-1 rounded-md bg-[#FAF2E3] border border-[#C99A2E]/40 group-hover:border-[#B34700] text-[#B34700] mt-0.5">
                       <RouteIcon className="w-3.5 h-3.5" aria-hidden="true" />
@@ -427,7 +428,7 @@ export default function Header() {
                   <Link
                     to="/about#archive"
                     onClick={closeAll}
-                    className="w-full px-4 py-2 text-xs flex items-start gap-2.5 text-[#332417] hover:bg-[#FAF2E3] transition-colors group"
+                    className="w-full px-4 py-2 text-[18px] flex items-start gap-2.5 text-[#332417] hover:bg-[#FAF2E3] transition-colors group"
                   >
                     <div className="p-1 rounded-md bg-[#FAF2E3] border border-[#C99A2E]/40 group-hover:border-[#B34700] text-[#B34700] mt-0.5">
                       <BookOpen className="w-3.5 h-3.5" aria-hidden="true" />
@@ -448,7 +449,7 @@ export default function Header() {
                   <Link
                     to="/about#contact-desk"
                     onClick={closeAll}
-                    className="w-full px-4 py-2 text-xs flex items-center justify-between text-[#7A2E00] hover:bg-[#FAF2E3] font-bold group"
+                    className="w-full px-4 py-2 text-[18px] flex items-center justify-between text-[#7A2E00] hover:bg-[#FAF2E3] font-bold group"
                   >
                     <span className="flex items-center gap-1.5 group-hover:text-[#B34700]">
                       <ShieldCheck className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
@@ -456,6 +457,7 @@ export default function Header() {
                     </span>
                     <ArrowRight className="w-3.5 h-3.5 text-[#B34700] transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </Link>
+                </div>
                 </div>
               </div>
             )}
@@ -465,12 +467,12 @@ export default function Header() {
         {/* ================= 3. RIGHT UTILITIES ================= */}
         <div className="flex items-center gap-2">
 
-          {/* Darshan Counter Pill (md+) */}
+          {/* Darshan Counter Pill (2xl+ — below that the 19.5px nav fills the row) */}
           {visitedCount > 0 && (
             <Link
               to="/"
               onClick={closeAll}
-              className="hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF2E3] border border-[#C99A2E]/50 text-[#7A2E00] text-xs font-semibold hover:border-[#C99A2E] shadow-2xs transition-all"
+              className="hidden 2xl:flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF2E3] border border-[#C99A2E]/50 text-[#7A2E00] text-xs font-semibold hover:border-[#C99A2E] shadow-2xs transition-all"
               title={`${visitedCount} of 108 Divya Desams Visited`}
             >
               <CheckCircle2 className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
@@ -550,7 +552,7 @@ export default function Header() {
             <Link to="/kshetrams" onClick={closeAll} className={`${drawerItem} ${isBrowseActive ? drawerActive : drawerIdle}`}>
               <Compass className="w-4 h-4 text-[#B34700]" aria-hidden="true" />
               <div className="flex flex-col text-left">
-                <span className="font-semibold">108 Temples (Browse All)</span>
+                <span className="font-semibold">106 Temples (Browse All)</span>
                 <span className="text-[10px] text-[#66523D]">Filter by 7 regions, deity &amp; posture</span>
               </div>
             </Link>

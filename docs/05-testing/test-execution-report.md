@@ -507,3 +507,68 @@ edge-flush span, and the one-line leads gain margin (inner width
 3. `app/src/components/Footer.jsx` — footer container `max-w-6xl` →
    `max-w-site` (header intentionally stays `max-w-7xl`).
 
+## Version 2.4 — PO Fix List Round 2 Execution (2026-09-27)
+
+### Scope
+
+PO's second fix list: header brand cleanup, hero banner redesign (half
+height + PO-supplied plaque watermark), nav font size, two dropdown-menu
+behaviour/contrast defects, "106 Temples" relabel, and smaller saint
+strips with expanded rosters.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors; 5 warnings — all pre-existing `set-state-in-effect` in files untouched by this change (count verified identical at parent commit) |
+| Unit tests (Vitest) | **209/209 pass (21 suites)** — label/strip assertions updated to the corrected content |
+| Coverage | **92.5% statements / 83.12% branches / 88.29% functions / 93.69% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| CMS round-trip + sync self-test | Offline 11/11 content files lossless; fixture regenerated after the content edits; `sync-content --fixture --check` → 0 diffs |
+
+### Deterministic verification (Playwright, 1280×720, fonts loaded)
+
+| Item | Evidence |
+|---|---|
+| 1. Nalayira brand eyebrow | absent from the header brand tile (the same phrase also exists as the hero eyebrow ABOVE the hero title — left in place, flagged to the PO) |
+| 2. Hero height | **154.9px vs 310px baseline = exactly 0.50**; invocation pill row removed, description clamped to one line, legacy h1 rule neutralised (see below) |
+| 3. Nav font | 13px → **19.5px** (×1.5); dropdown item labels 12px → 18px |
+| 4. Hover menus | both dropdown panels rebuilt with a `top-full` + `pt-1.5` hover bridge (the old `mt-1` gap was the dead zone); pointer survives 3px-step sweeps to the items; region chip + CEO-desk clicks land |
+| 5. Click contrast | root cause: unlayered `base.css` `a { color: var(--color-primary) }` outranks all layered utilities, forcing saffron onto every nav anchor — white label on the active saffron pill was invisible. Fixed with scoped `.site-header nav a { color: inherit }`; active "Kshetra Tours" label now renders `rgb(255,253,247)` on the dark gradient (measured) |
+| 6. Azhwars strip | **12 tiles** (was 4) at **81×144** (was 215×382); strip 547px → 308px; wiki titles added for Nammazhwar, Madhurakavi, Periyazhwar, Andal, Thondaradippodi, Thirumangai (thumbnails verified against the Wikipedia summary API before commit); Kulasekhara/Thiruppaan keep the ◆ no-photo fallback |
+| 7. Menu label | "108 Temples" → **"106 Temples"** (desktop pill, mobile drawer, and the dropdown's "Browse All 106 Temples" row); dropdown heading "The 108 Sacred Abodes" and directory counts intentionally still 108 (round-1 semantics) |
+| 8. Hero watermark | PO's wooden-plaque photo → `src/assets/hero-plaque-watermark.png` (980×241, transparent, ink #7A2E00) via `app/scripts/make-hero-watermark.mjs` (sharp, one-off, not a dependency): plaque band + artwork rows auto-detected, 4 screw-head dots + 45 speckle components removed, 6 motif components kept (Garuda, Chakra ring + hub, Namam, Shankha, Hanuman); strip spans the full card, vertically centred, 0.09 opacity |
+| 9. Acharyas strip | **5 tiles** (was 4): Sri Ramanujacharya added (wiki title verified, photo resolves) between Yamunacharya and Pillai Lokacharya; same 81×144 tile size, strip 308px |
+
+### Layout consequences (documented)
+
+- Single nav row confirmed at 1280 and 1440 (pills need 921px vs 934px
+  available at 1280). Below ~1100px the nav wraps to two rows (flex-wrap
+  fallback). The Darshan counter pill moved `md:flex` → `2xl:flex` so a
+  non-zero visit count cannot re-trigger wrapping at 1280–1535.
+- The legacy `h1 { font-size: var(--font-display-2); margin: 0 0 … }` rule
+  (unlayered, beats utilities) was silently sizing every h1; the hero title
+  now overrides it with `!` utilities. Other pages' h1s unchanged.
+
+### Changes covered
+
+1. `app/src/components/Header.jsx` — brand eyebrow removed; nav font ×1.5
+   with compacted pill padding; both dropdowns bridged; "106 Temples" labels;
+   Darshan pill gated to 2xl.
+2. `app/src/styles/base.css` — `.site-header nav a { color: inherit }` scoped
+   override of the legacy anchor rule.
+3. `app/src/components/home/Hero.jsx` — half-height banner; plaque watermark
+   image replaces the SVG trio; `!` overrides for the legacy h1 rule.
+4. `app/src/components/home/SaintStrip.jsx` + `app/src/pages/HomePage.jsx` —
+   flex tile row with per-strip responsive widths; all 12 azhwars; 5 acharyas.
+5. Content JSONs (CMS-sync-safe value edits; schema/GROQ untouched) —
+   `azhwar-details.json` (+6 wiki), `acharyas.json` (+1 wiki),
+   `config.json` (FEATURED_ACHARYA_IDS → 5), `site-copy.json`
+   (browseAll → 106).
+6. `app/scripts/make-hero-watermark.mjs` + `app/src/assets/hero-plaque-watermark.png` —
+   one-off asset generator and its output.
+7. Tests updated: components.test.jsx, v3Branches.test.jsx, pages.test.jsx,
+   e2e/journeys.spec.js.
+
+

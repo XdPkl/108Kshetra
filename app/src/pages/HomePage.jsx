@@ -11,7 +11,9 @@ import FeaturedKshetrams from '../components/home/FeaturedKshetrams.jsx';
 import SaintStrip from '../components/home/SaintStrip.jsx';
 
 export default function HomePage() {
-  const featuredAzhwars = getAllAzhwars().slice(0, 4);
+  // Full twelve Azhwars in the strip (PO round 2: smaller tiles, all twelve);
+  // acharyas stay config-curated.
+  const featuredAzhwars = getAllAzhwars();
   const featuredAcharyas = getFeaturedAcharyas();
   const { azhwarStrip, acharyaStrip } = SITE_COPY.home;
   // The yatra counts only the earthly kshetrams — the 2 celestial abodes
@@ -35,6 +37,7 @@ export default function HomePage() {
         base="/azhwar"
         ctaLabel={azhwarStrip.ctaLabel}
         ctaTo="/azhwars"
+        tileWidthClass="w-[calc(50%-6px)] min-[420px]:w-[calc(33.333%-8px)] sm:w-[calc(25%-9px)] lg:w-[calc(8.333%-11px)]"
       />
 
       <SaintStrip
@@ -45,6 +48,7 @@ export default function HomePage() {
         base="/acharya"
         ctaLabel={acharyaStrip.ctaLabel}
         ctaTo="/acharyas"
+        tileWidthClass="w-[calc(50%-6px)] min-[420px]:w-[calc(33.333%-8px)] sm:w-[calc(20%-9.6px)] lg:w-[calc(8.333%-11px)]"
       />
     </>
   );

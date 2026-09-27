@@ -56,6 +56,14 @@ a {
   text-underline-offset: 2px;
 }
 
+/* The header nav colors its labels with utility classes, but the bare rule
+   above is unlayered and outranks every layered utility — it forced saffron
+   onto all nav anchors, leaving the active Kshetra Tours pill's white label
+   unreadable against its own saffron gradient (PO fix list round 2, item 5). */
+.site-header nav a {
+  color: inherit;
+}
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,

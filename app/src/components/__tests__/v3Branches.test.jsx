@@ -123,10 +123,10 @@ describe('Header shell branches (UXD v3.0)', () => {
     // pointer sequence re-trips the mouse-leave handler)
     render(<MemoryRouter><Header /></MemoryRouter>);
     fireEvent.click(screen.getByRole('button', { name: /toggle regional temples dropdown/i }));
-    expect(screen.getByText('Browse All 108 Temples')).toBeInTheDocument();
+    expect(screen.getByText('Browse All 106 Temples')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: /chola nadu/i }));
     fireEvent.keyDown(document, { key: 'Escape' });
-    expect(screen.queryByText('Browse All 108 Temples')).not.toBeInTheDocument();
+    expect(screen.queryByText('Browse All 106 Temples')).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: /toggle navigation menu/i }));
     expect(screen.getByText('Home Sanctuary')).toBeInTheDocument();

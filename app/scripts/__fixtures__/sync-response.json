@@ -15835,6 +15835,7 @@
       "pasuramCount": 1296,
       "note": "The greatest of the Azhwars, born at Azhwar Thirunagari; his Thiruvaymozhi is the Tamil Veda.",
       "work": "Thiruviruththam, Thiruvaasiriyam, Periya Thiruvandhadhi, Thiruvaymozhi",
+      "wiki": "Nammalvar",
       "epithets": [
         "Shatagopan",
         "Maran",
@@ -16048,6 +16049,7 @@
       "pasuramCount": 11,
       "note": "The devoted disciple of Nammazhwar; he sang only of his guru, never directly of any shrine.",
       "work": "Kanninun Siruththaambu",
+      "wiki": "Madhurakavi Alvar",
       "epithets": [
         "Madhurakavi Azhwar"
       ],
@@ -16417,6 +16419,7 @@
       "pasuramCount": 473,
       "note": "Vishnuchitha of Srivilliputhur, foster-father of Andal; he sang the Lord’s childhood as a mother would.",
       "work": "Thiruppallandu, Periyazhwar Thirumozhi",
+      "wiki": "Periyalvar",
       "epithets": [
         "Vishnuchittan",
         "Srivilliputhur Piran",
@@ -16632,6 +16635,7 @@
       "pasuramCount": 173,
       "note": "The only woman Azhwar; the bride of Srirangam Ranganatha who merged into his idol.",
       "work": "Thiruppavai, Nachiyar Thirumozhi",
+      "wiki": "Andal",
       "epithets": [
         "Kothai",
         "Nachiyar",
@@ -16884,6 +16888,7 @@
       "pasuramCount": 55,
       "note": "Vipra Narayana of Srirangam who dedicated his garlands and verses to Ranganatha.",
       "work": "Thirumaalai, Thirupalliyezhuchchi",
+      "wiki": "Thondaradippodi Alvar",
       "epithets": [
         "Vipranarayanan",
         "Bhaktanghri Renu",
@@ -17306,6 +17311,7 @@
       "pasuramCount": 1257,
       "note": "The warrior-saint of Thirukkurungudi who wandered to most of the 108 Desams — the most prolific pilgrim-poet.",
       "work": "Periya Thirumozhi, Thirukkurunthandakam, Thirunedunthandakam, Thirumuzhi (Siriya & Periya Thirumadal)",
+      "wiki": "Thirumangai Alvar",
       "epithets": [
         "Kaliyan",
         "Parakalan",
@@ -18755,6 +18761,7 @@
       "order": 7,
       "name": "Sri Ramanujacharya",
       "tamilName": "ஸ்ரீ ராமானுஜர்",
+      "wiki": "Ramanuja",
       "eraGroup": "The age of Ramanuja",
       "era": "1017–1137 CE",
       "role": "Codified the Visishtadvaita philosophy; wrote the Sri Bhashyam and led the Sri Vaishnava community at Srirangam.",
@@ -22802,7 +22809,7 @@
       "templesDropdown": {
         "heading": "The 108 Sacred Abodes",
         "regionsBadge": "7 Regions",
-        "browseAll": "Browse All 108 Temples",
+        "browseAll": "Browse All 106 Temples",
         "totalBadge": "108 Total",
         "filterBy": "Filter by Region:"
       },
@@ -22870,6 +22877,7 @@
     "featuredAcharyas": [
       "acharya.nathamuni",
       "acharya.yamunacharya",
+      "acharya.ramanuja",
       "acharya.pillai-lokacharya",
       "acharya.manavala-mamunigal"
     ],
