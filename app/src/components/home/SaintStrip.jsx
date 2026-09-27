@@ -26,7 +26,7 @@ function SaintTile({ saint, base }) {
   return (
     <Link
       to={`${base}/${saint.id}`}
-      className="group relative aspect-[9/16] w-[calc(50%-6px)] min-[420px]:w-[calc(33.333%-8px)] sm:w-[calc(16.666%-10px)] rounded-xl border border-[#C99A2E]/50 overflow-hidden shadow-xs hover:shadow-md hover:-translate-y-0.5 hover:border-[#C99A2E] transition-all text-left"
+      className="group relative aspect-[9/16] w-[calc(50%-6px)] min-[480px]:w-[calc(25%-9px)] rounded-xl border border-[#C99A2E]/50 overflow-hidden shadow-xs hover:shadow-md hover:-translate-y-0.5 hover:border-[#C99A2E] transition-all text-left"
     >
       {/* Photo fills the tile */}
       {image.src ? (

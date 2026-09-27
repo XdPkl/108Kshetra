@@ -175,14 +175,14 @@ describe('AboutPage (UT-ABT-01, FR-87)', () => {
     expect(screen.getByText(/1000\+ pilgrims guided/i)).toBeInTheDocument();
     expect(screen.getByText(/#315, creations manchester/i)).toBeInTheDocument();
     expect(screen.queryByText(/sampradaya yatra trustee/i)).not.toBeInTheDocument();
-    // 7 circuits, each with an inquire action and a browse-region deep link
+    // PO round 4: the celestial (Vinnulaga) circuit is removed — 6 remain
     expect(screen.getByRole('heading', { name: /popular divya desam pilgrimage circuits/i })).toBeInTheDocument();
     const inquires = screen.getAllByRole('button', { name: /inquire circuit/i });
-    expect(inquires).toHaveLength(7);
+    expect(inquires).toHaveLength(6);
     const regionLinks = screen.getAllByRole('link', { name: /view all .* temples/i });
-    expect(regionLinks).toHaveLength(7);
+    expect(regionLinks).toHaveLength(6);
     expect(regionLinks[0]).toHaveAttribute('href', '/kshetrams?region=Chola%20Nadu');
-    expect(regionLinks[6]).toHaveAttribute('href', '/kshetrams?region=Celestial');
+    expect(regionLinks[5]).toHaveAttribute('href', '/kshetrams?region=Nadu%20Nadu');
     // Etiquette cards
     expect(screen.getByRole('heading', { name: /sanctum etiquette & parayanam protocols/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /temple sanctum etiquette/i })).toBeInTheDocument();

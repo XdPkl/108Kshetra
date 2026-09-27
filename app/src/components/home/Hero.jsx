@@ -17,7 +17,7 @@ import heroWatermark from '../../assets/hero-plaque-watermark.png';
 export default function Hero() {
   const { hero } = SITE_COPY;
   return (
-    <section className="relative overflow-hidden text-center px-4 sm:px-6 py-2 rounded-2xl border border-[#C99A2E]/50 shadow-xs bg-[#FFFDF7]">
+    <section className="relative overflow-hidden text-center px-4 sm:px-6 py-4 rounded-2xl border border-[#C99A2E]/50 shadow-xs bg-[#FFFDF7]">
       {/* Traditional Temple Corner Embellishments */}
       <div className="absolute top-2.5 left-2.5 w-6 h-6 border-t-2 border-l-2 border-[#C99A2E]/70 rounded-tl-xs pointer-events-none" aria-hidden="true" />
       <div className="absolute top-2.5 right-2.5 w-6 h-6 border-t-2 border-r-2 border-[#C99A2E]/70 rounded-tr-xs pointer-events-none" aria-hidden="true" />
@@ -49,14 +49,15 @@ export default function Hero() {
           {hero.subtitle}
         </p>
 
-        {/* Compact Description */}
-        <p className="max-w-xl mx-auto mt-1 text-xs text-[#66523D] leading-relaxed line-clamp-1">
+        {/* Description — PO round 4: shorter copy, single row at desktop,
+            fully visible (no clamp; wraps naturally on phones) */}
+        <p className="max-w-xl mx-auto mt-2.5 text-xs text-[#66523D] leading-relaxed">
           {hero.description}
         </p>
 
         {/* Primary CTA Button — gold idiom so the label stands apart from the
             button fill and from the brown banner title (PO 2026-09-25) */}
-        <div className="mt-1.5 flex items-center justify-center">
+        <div className="mt-4 flex items-center justify-center">
           <Link
             to="/kshetrams"
             className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-gradient-to-b from-[#E2C47C] to-[#C99A2E] text-[#4A3005] text-xs font-bold border border-[#96731F] shadow-xs hover:shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 transition-all"

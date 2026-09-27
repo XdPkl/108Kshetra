@@ -11,9 +11,8 @@ import FeaturedKshetrams from '../components/home/FeaturedKshetrams.jsx';
 import SaintStrip from '../components/home/SaintStrip.jsx';
 
 export default function HomePage() {
-  // Full twelve Azhwars in the strip (PO round 2: smaller tiles, all twelve);
-  // acharyas stay config-curated.
-  const featuredAzhwars = getAllAzhwars();
+  // PO round 4: one row of 4 tiles per strip (was all twelve / five).
+  const featuredAzhwars = getAllAzhwars().slice(0, 4);
   const featuredAcharyas = getFeaturedAcharyas();
   const { azhwarStrip, acharyaStrip } = SITE_COPY.home;
   // The yatra counts only the earthly kshetrams — the 2 celestial abodes

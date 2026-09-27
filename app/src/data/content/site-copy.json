@@ -4,7 +4,7 @@
     "eyebrow": "Nalayira Divya Prabandham",
     "title": "108 Divya Kshetrams",
     "subtitle": "ஆழ்வார்களால் மங்களாசாசனம் செய்யப்பட்ட நூற்றெட்டு திவ்ய தேசங்கள்",
-    "description": "The sacred abodes of Lord Narayana — the 108 Divya Desams glorified by the twelve Azhwars in the four thousand verses of the Nalayira Divya Prabandham, the Tamil Veda.",
+    "description": "The sacred abodes of Lord Narayana — 108 Divya Desams glorified by the twelve Azhwars",
     "cta": "Explore the 108 Kshetrams"
   },
   "home": {
@@ -78,7 +78,7 @@
       "ceoTitle": "Founder & Chief Executive Officer",
       "ceoBadge": "Kainkaryam Leadership",
       "quoteAttribution": "Founder’s Desk, Kshetra Tours",
-      "inquireCeo": "Inquire with CEO’s Office",
+      "inquireCeo": "Inquire us",
       "directEmailLabel": "Direct Email:",
       "circuitsEyebrow": "Devotional itineraries",
       "circuitsTitle": "Popular Divya Desam Pilgrimage Circuits",
@@ -220,7 +220,7 @@
     "templesDropdown": {
       "heading": "The 108 Sacred Abodes",
       "regionsBadge": "7 Regions",
-      "browseAll": "Browse All 106 Temples",
+      "browseAll": "Browse All 108 Kshetras",
       "totalBadge": "108 Total",
       "filterBy": "Filter by Region:"
     },
@@ -237,7 +237,7 @@
           "subtitle": "Fixed groups, pure madi-catering & senior-friendly pacing"
         },
         {
-          "title": "7 Regional Pilgrimage Circuits",
+          "title": "6 Regional Pilgrimage Circuits",
           "subtitle": "Chola, Pandiya, Thondai, Malai, and Vada Nadu itineraries"
         },
         {
@@ -260,7 +260,7 @@
       "toursOverview": "Kshetra Tours Overview",
       "toursOverviewSub": "Sampradaya pilgrimage organization",
       "departures": "Guided Departures & Schedules",
-      "circuits": "7 Regional Pilgrimage Circuits",
+      "circuits": "6 Regional Pilgrimage Circuits",
       "etiquette": "Sanctum Etiquette",
       "inquireDesk": "Book / Inquire with Yatra Desk"
     }

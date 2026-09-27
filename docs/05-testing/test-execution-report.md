@@ -653,6 +653,66 @@ beat the layered hover utility.
 idiom (idle/active), gold icons, tours pill active-state flip, gold divider,
 mobile trip pill and hamburger recolored. No test changes required.
 
+## Version 2.7 — PO Fix List Round 4 Execution (2026-09-27)
+
+### Scope
+
+Twelve-item round: hard single-row nav, 4-tile strips, About single-line
+copy, "108 Kshetras" relabel, hero +25% with new description, SVG namaste
+icon, About page content removals, and an admin gate on the CEO photo
+controls.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (4 pre-existing + 1 new accepted `set-state-in-effect` from the admin-flag sync effect, which legitimately synchronises localStorage → state) |
+| Unit tests (Vitest) | **209/209 pass (21 suites)** — circuit count 7→6, Kshetras label, admin-gated URL test updated |
+| Coverage | **92.36% statements / 82.85% branches / 88.39% functions / 93.74% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| CMS round-trip + sync self-test | Offline 11/11 lossless; fixture regenerated; `sync-content --fixture --check` → 0 diffs |
+
+### Deterministic verification (Playwright)
+
+| Item | Evidence |
+|---|---|
+| 1. Nav never wraps | `flex-wrap: nowrap` computed at 1024/1152/1280; one row (center-line spread < 4px) at 1024, 1152, 1280, 1440, 1920 with no overflow. Below xl the pills render at 13px (fits 1024: needs 686px of 698px); xl+ keeps 19.5px |
+| 2. Strips | both strips: exactly **4 tiles on one row**, tiles 120×212 |
+| 3. About tagline | single line (height 21.4px, 13px font, `xl:whitespace-nowrap`) |
+| 4. Menu label | "108 Kshetras" (pill, drawer, "Browse All 108 Kshetras") |
+| 5. Hero height | **160.5px vs 160.6 target (= 128.5 × 1.25)** |
+| 6. Hero description | new copy renders one line, no clamp, fully visible |
+| 7. Namaste icon | SVG `NamasteIcon` replaces the 🙏 emoji in the tracker |
+| 8. About eyebrow | "Nalayira Divya Prabandham Series" renders nowhere |
+| 9. Admin gate | upload/URL controls absent by default; visiting `/about?admin=1` persists the flag and reveals them (`?admin=0` revokes) |
+| 10. Vinnulaga circuit | removed (6 circuits; "6 Regional Pilgrimage Circuits" copy) |
+| 11. Inquire copy | "Inquire us" |
+| 12. Etiquette lead | single line (21.4px, 13px font) |
+
+### Admin-gate note
+
+The static site has no account system, so item 9 is implemented as a
+localStorage flag (`kshetra_admin=1`) set by visiting `/about?admin=1` once.
+This hides the controls from ordinary visitors but is not authentication;
+a determined visitor could set the flag themselves. Real role-based control
+arrives with the Sanity CMS setup.
+
+### Changes covered
+
+1. `Header.jsx` — nowrap nav, responsive pill size (13px → 19.5px at xl),
+   "108 Kshetras" labels.
+2. `HomePage.jsx` + `SaintStrip.jsx` + `config.json` — 4-tile strips.
+3. `AboutPage.jsx` — eyebrow removal, tagline/etiquette single-line, admin
+   gate (`isAdminSession` + URL-param sync).
+4. `Hero.jsx` + `site-copy.json` — +25% height, new description.
+5. `SacredIcons.jsx` + `YatraProgressTracker.jsx` — NamasteIcon.
+6. `about.json` — Vinnulaga circuit removed; `site-copy.json` — "Inquire us",
+   "6 Regional Pilgrimage Circuits" (×2).
+7. Tests: components, v3Branches (labels, 6-circuits, inquire regex, admin
+   flag), yatraPages (6 circuits), pages (4-tile strips), e2e journeys.
+
+
 
 
 

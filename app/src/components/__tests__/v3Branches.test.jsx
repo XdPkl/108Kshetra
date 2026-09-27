@@ -123,10 +123,10 @@ describe('Header shell branches (UXD v3.0)', () => {
     // pointer sequence re-trips the mouse-leave handler)
     render(<MemoryRouter><Header /></MemoryRouter>);
     fireEvent.click(screen.getByRole('button', { name: /toggle regional temples dropdown/i }));
-    expect(screen.getByText('Browse All 106 Temples')).toBeInTheDocument();
+    expect(screen.getByText('Browse All 108 Kshetras')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: /chola nadu/i }));
     fireEvent.keyDown(document, { key: 'Escape' });
-    expect(screen.queryByText('Browse All 106 Temples')).not.toBeInTheDocument();
+    expect(screen.queryByText('Browse All 108 Kshetras')).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: /toggle navigation menu/i }));
     expect(screen.getByText('Home Sanctuary')).toBeInTheDocument();
@@ -139,7 +139,7 @@ describe('Header shell branches (UXD v3.0)', () => {
     fireEvent.click(screen.getByRole('button', { name: /toggle kshetra tours menu/i }));
     expect(screen.getByText(/kshetra tours & pilgrimage trust/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /founder & ceo desk/i })).toHaveAttribute('href', '/about#ceo-leadership');
-    expect(screen.getByRole('link', { name: /7 regional pilgrimage circuits/i })).toHaveAttribute('href', '/about#circuits');
+    expect(screen.getByRole('link', { name: /6 regional pilgrimage circuits/i })).toHaveAttribute('href', '/about#circuits');
   });
 });
 
@@ -249,6 +249,8 @@ describe('MapPage extras (UXD v3.0)', () => {
 describe('AboutPage desk branches (UXD v3.0)', () => {
   it('sets and resets the CEO photo via the URL prompt', async () => {
     const user = userEvent.setup();
+    // PO round 4: upload/URL controls are admin-gated — enable the flag
+    localStorage.setItem('kshetra_admin', '1');
     const prompt = vi.spyOn(window, 'prompt').mockReturnValue('https://example.com/ceo.jpg');
     renderAt('/about', <AboutPage />);
     await user.click(screen.getByRole('button', { name: /^url$/i }));
@@ -261,7 +263,7 @@ describe('AboutPage desk branches (UXD v3.0)', () => {
   it('opens the modal from the CEO desk and closes with Escape', async () => {
     const user = userEvent.setup();
     renderAt('/about', <AboutPage />);
-    await user.click(screen.getByRole('button', { name: /inquire with ceo/i }));
+    await user.click(screen.getByRole('button', { name: /inquire us/i }));
     const dialog = screen.getByRole('dialog', { name: /request yatra schedule/i });
     expect(within(dialog).getByDisplayValue(/executive office \/ ceo yatra consultation/i)).toBeInTheDocument();
     await user.keyboard('{Escape}');

@@ -12,6 +12,7 @@
  */
 import { Link } from 'react-router-dom';
 import { useVisited } from '../../hooks/useVisited.js';
+import { NamasteIcon } from '../SacredIcons.jsx';
 
 export default function YatraProgressTracker({ total = 106, eligibleIds }) {
   const { visitedIds, resetVisited } = useVisited();
@@ -36,7 +37,7 @@ export default function YatraProgressTracker({ total = 106, eligibleIds }) {
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <p className="font-medium text-[#332417] flex items-center gap-2">
-          <span aria-hidden="true" className="text-xl">🙏</span>
+          <NamasteIcon className="w-5 h-5 text-[#B34700] shrink-0" />
           <span>
             Your yatra —{' '}
             <strong className="text-[#B34700] text-xl font-bold font-display">

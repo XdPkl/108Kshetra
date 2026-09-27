@@ -34,7 +34,10 @@ const CEO_NAME = ABOUT.ceo.name;
 /** Region dropdown rows — names/highlights from site copy, counts computed from the live dataset. */
 const REGION_ROWS = SITE_COPY.header.regionRows;
 
-const pillBase = 'px-2 py-1 rounded-full font-medium transition-all flex items-center gap-1.5';
+// PO round 4: pills must never wrap to a second row, so below xl (where the
+// 19.5px labels cannot fit beside the brand) they drop to 13px with tighter
+// padding; xl+ keeps the round-2 50% size.
+const pillBase = 'px-1.5 xl:px-2 py-1 rounded-full font-medium transition-all flex items-center gap-1.5 whitespace-nowrap';
 // PO round 3 item 6: the header sits on the deep saffron band, so idle pills
 // are cream and active pills are frosted white with a gold ring. The hover
 // bang beats the unlayered `color: inherit` override in base.css.
@@ -147,7 +150,7 @@ export default function Header() {
         </Link>
 
         {/* ================= 2. DESKTOP NAVIGATION ================= */}
-        <nav className="hidden lg:flex flex-wrap items-center justify-end gap-x-0.5 gap-y-1 text-[19.5px] text-[#FFFDF7]" aria-label="Primary">
+        <nav className="hidden lg:flex flex-nowrap items-center justify-end gap-x-0.5 text-[13px] xl:text-[19.5px] text-[#FFFDF7]" aria-label="Primary">
 
           {/* A. HOME */}
           <NavLink
@@ -176,7 +179,7 @@ export default function Header() {
                 title="Browse All 108 Divya Desams"
               >
                 <Compass className="w-3.5 h-3.5 text-[#E2C47C]" aria-hidden="true" />
-                <span>106 Temples</span>
+                <span>108 Kshetras</span>
               </NavLink>
 
               <button
@@ -557,7 +560,7 @@ export default function Header() {
             <Link to="/kshetrams" onClick={closeAll} className={`${drawerItem} ${isBrowseActive ? drawerActive : drawerIdle}`}>
               <Compass className="w-4 h-4 text-[#B34700]" aria-hidden="true" />
               <div className="flex flex-col text-left">
-                <span className="font-semibold">106 Temples (Browse All)</span>
+                <span className="font-semibold">108 Kshetras (Browse All)</span>
                 <span className="text-[10px] text-[#66523D]">Filter by 7 regions, deity &amp; posture</span>
               </div>
             </Link>

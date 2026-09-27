@@ -43,9 +43,27 @@ function CopyButton({ value }) {
   );
 }
 
+/** PO round 4: the CEO photo upload/URL controls are an admin affordance —
+ * they render only while the kshetra_admin flag is set. Enable by visiting
+ * /about?admin=1 once (persisted in localStorage); /about?admin=0 revokes.
+ * The static site has no account system, so this hides the controls from
+ * ordinary visitors rather than cryptographically barring them. */
+function isAdminSession() {
+  try { return localStorage.getItem('kshetra_admin') === '1'; } catch { return false; }
+}
+
 /** CEO portrait card: photo frame (uploaded, URL or Thiruman placeholder) + controls. */
 function CeoPhotoCard({ photo, setPhoto }) {
   const [error, setError] = useState('');
+  const [adminControls, setAdminControls] = useState(() => isAdminSession());
+  useEffect(() => {
+    try {
+      const flag = new URLSearchParams(window.location.search).get('admin');
+      if (flag === '1') localStorage.setItem('kshetra_admin', '1');
+      if (flag === '0') localStorage.removeItem('kshetra_admin');
+    } catch { /* storage unavailable */ }
+    setAdminControls(isAdminSession());
+  }, []);
   const onUpload = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -103,18 +121,19 @@ function CeoPhotoCard({ photo, setPhoto }) {
         </div>
       </div>
 
-      <div className="mt-3 pt-2.5 border-t border-[#EBDDBE] space-y-2">
-        <div className="flex items-center justify-between text-[11px] text-[#66523D]">
-          <span className="font-semibold flex items-center gap-1">
-            <Camera className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
-            <span>CEO Portrait Photo</span>
-          </span>
-          {photo ? (
-            <button type="button" onClick={onReset} className="text-[10px] font-bold text-[#B34700] hover:underline">
-              Reset Photo
-            </button>
-          ) : null}
-        </div>
+      {adminControls ? (
+        <div className="mt-3 pt-2.5 border-t border-[#EBDDBE] space-y-2">
+          <div className="flex items-center justify-between text-[11px] text-[#66523D]">
+            <span className="font-semibold flex items-center gap-1">
+              <Camera className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
+              <span>CEO Portrait Photo</span>
+            </span>
+            {photo ? (
+              <button type="button" onClick={onReset} className="text-[10px] font-bold text-[#B34700] hover:underline">
+                Reset Photo
+              </button>
+            ) : null}
+          </div>
         <div className="flex items-center gap-2">
           <label
             htmlFor="ceo-photo-upload"
@@ -134,7 +153,8 @@ function CeoPhotoCard({ photo, setPhoto }) {
           </button>
         </div>
         {error ? <p className="text-[10px] text-red-600 font-medium text-center">{error}</p> : null}
-      </div>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -338,15 +358,13 @@ export default function AboutPage() {
 
   return (
     <div className="space-y-6">
-      {/* Banner with quick-jump anchors */}
+      {/* Banner with quick-jump anchors (PO round 4: the "Nalayira Divya
+          Prabandham Series" eyebrow is gone; tagline pinned to one line) */}
       <header className="border-b border-[#E3D2AE] pb-4">
-        <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700]">
-          {SITE_COPY.about.banner.eyebrow}
-        </span>
         <h1 className="font-display text-3xl sm:text-4xl font-semibold text-[#7A2E00] tracking-tight mt-1">
           {SITE_COPY.about.banner.title}
         </h1>
-        <p className="text-sm text-[#66523D] mt-1 max-w-2xl">
+        <p className="text-[13px] text-[#66523D] mt-1 xl:whitespace-nowrap">
           {SITE_COPY.about.banner.tagline}
         </p>
         <nav className="flex flex-wrap gap-2 mt-4" aria-label="About sections">
@@ -629,7 +647,7 @@ export default function AboutPage() {
           <h2 id="about-etiquette" className="font-display text-2xl sm:text-3xl font-semibold text-[#7A2E00] mt-0.5">
             {SITE_COPY.about.sections.etiquetteTitle}
           </h2>
-          <p className="text-xs sm:text-sm text-[#66523D] mt-1 max-w-2xl">
+          <p className="text-[13px] text-[#66523D] mt-1 xl:whitespace-nowrap">
             {SITE_COPY.about.sections.etiquetteLead}
           </p>
         </div>

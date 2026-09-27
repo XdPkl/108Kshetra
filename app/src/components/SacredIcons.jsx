@@ -132,3 +132,23 @@ export function LotusIcon({ className = 'w-5 h-5' }) {
     </svg>
   );
 }
+
+// Folded-hands namaste (PO round 4: replaces the 🙏 emoji in the yatra
+// progress bar) — stylized pressed palms; the finger seams stroke in the
+// cream card color so they cut the silhouette cleanly.
+export function NamasteIcon({ className = 'w-5 h-5' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+      <path
+        d="M12 20.5 L9.8 19.2 C6.8 16.4 6.4 11.8 7.6 7.6 C8.1 5.9 9.3 4.4 10.6 3.4 L11.5 4.6 L12 4 L12.5 4.6 L13.4 3.4 C14.7 4.4 15.9 5.9 16.4 7.6 C17.6 11.8 17.2 16.4 14.2 19.2 Z"
+        fill="currentColor"
+      />
+      <g stroke="#FFFDF7" strokeWidth="0.9" strokeLinecap="round" fill="none">
+        <path d="M9.9 5.6 L9.6 9.8" />
+        <path d="M11.4 5.0 L11.2 9.6" />
+        <path d="M12.6 5.0 L12.8 9.6" />
+        <path d="M14.1 5.6 L14.4 9.8" />
+      </g>
+    </svg>
+  );
+}
