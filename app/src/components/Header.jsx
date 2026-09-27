@@ -35,8 +35,11 @@ const CEO_NAME = ABOUT.ceo.name;
 const REGION_ROWS = SITE_COPY.header.regionRows;
 
 const pillBase = 'px-2 py-1 rounded-full font-medium transition-all flex items-center gap-1.5';
-const pillIdle = 'hover:bg-[#B34700]/10 hover:text-[#B34700] text-[#332417]';
-const pillActive = 'bg-[#B34700]/12 text-[#7A2E00] font-bold ring-1 ring-[#B34700]/30 shadow-2xs';
+// PO round 3 item 6: the header sits on the deep saffron band, so idle pills
+// are cream and active pills are frosted white with a gold ring. The hover
+// bang beats the unlayered `color: inherit` override in base.css.
+const pillIdle = 'hover:bg-[#FFFDF7]/10 hover:text-[#E2C47C]! text-[#FFFDF7]';
+const pillActive = 'bg-[#FFFDF7]/15 text-[#FFFDF7] font-bold ring-1 ring-[#E2C47C]/60 shadow-2xs';
 
 export default function Header() {
   const { count: tripCount } = useTrip();
@@ -111,7 +114,9 @@ export default function Header() {
   const drawerActive = 'bg-[#B34700]/15 text-[#B34700] font-bold';
 
   return (
-    <header className="site-header sticky top-0 z-50 bg-[#FAF2E3]/95 backdrop-blur-md border-b border-[#E3D2AE] shadow-xs">
+    <header className="site-header sticky top-0 z-50 bg-gradient-to-r from-[#7A2E00] to-[#B34700] shadow-md">
+      {/* Gold hairlines crown and foot the full-bleed band (PO round 3 item 6) */}
+      <div className="h-[2px] bg-gradient-to-r from-transparent via-[#E2C47C] to-transparent"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between gap-2 lg:gap-4">
 
         {/* ================= 1. BRAND LOGO & SACRED TITLE ================= */}
@@ -133,7 +138,7 @@ export default function Header() {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
-              <span className="font-display text-[1.28rem] sm:text-[1.38rem] font-bold text-[#7A2E00] leading-none whitespace-nowrap group-hover:text-[#B34700] transition-colors">
+              <span className="font-display text-[1.28rem] sm:text-[1.38rem] font-bold text-[#FFFDF7] leading-none whitespace-nowrap group-hover:text-[#E2C47C] transition-colors">
                 108 Divya Kshetrams
               </span>
               <ThirumanIcon className="w-3.5 h-4.5 hidden sm:inline-block opacity-85 shrink-0" />
@@ -142,7 +147,7 @@ export default function Header() {
         </Link>
 
         {/* ================= 2. DESKTOP NAVIGATION ================= */}
-        <nav className="hidden lg:flex flex-wrap items-center justify-end gap-x-0.5 gap-y-1 text-[19.5px] text-[#332417]" aria-label="Primary">
+        <nav className="hidden lg:flex flex-wrap items-center justify-end gap-x-0.5 gap-y-1 text-[19.5px] text-[#FFFDF7]" aria-label="Primary">
 
           {/* A. HOME */}
           <NavLink
@@ -170,14 +175,14 @@ export default function Header() {
                 className={`pl-2 pr-1 py-1 rounded-l-full font-medium transition-all flex items-center gap-1.5 ${isBrowseActive ? pillActive : pillIdle}`}
                 title="Browse All 108 Divya Desams"
               >
-                <Compass className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
+                <Compass className="w-3.5 h-3.5 text-[#E2C47C]" aria-hidden="true" />
                 <span>106 Temples</span>
               </NavLink>
 
               <button
                 type="button"
                 onClick={() => setTempleDropdownOpen((prev) => !prev)}
-                className={`pr-1.5 py-1 rounded-r-full font-medium transition-all ${isBrowseActive ? 'bg-[#B34700]/12 text-[#7A2E00] ring-1 ring-[#B34700]/30' : 'hover:bg-[#B34700]/10 hover:text-[#B34700] text-[#332417]'}`}
+                className={`pr-1.5 py-1 rounded-r-full font-medium transition-all ${isBrowseActive ? 'bg-[#FFFDF7]/15 text-[#FFFDF7] ring-1 ring-[#E2C47C]/60' : 'hover:bg-[#FFFDF7]/10 hover:text-[#E2C47C]! text-[#FFFDF7]'}`}
                 aria-label="Toggle Regional Temples Dropdown"
                 aria-expanded={templeDropdownOpen}
               >
@@ -256,7 +261,7 @@ export default function Header() {
             className={`${pillBase} ${isMapActive ? pillActive : pillIdle}`}
             title="Interactive Map of all 108 Shrines"
           >
-            <MapPin className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
+            <MapPin className="w-3.5 h-3.5 text-[#E2C47C]" aria-hidden="true" />
             <span>Map</span>
           </NavLink>
 
@@ -267,12 +272,12 @@ export default function Header() {
             className={`${pillBase} ${isTripActive ? pillActive : pillIdle}`}
             title="My Personal Yatra Itinerary"
           >
-            <RouteIcon className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
+            <RouteIcon className="w-3.5 h-3.5 text-[#E2C47C]" aria-hidden="true" />
             <span>My Yatra</span>
             {tripCount > 0 && (
               <span
                 className={`inline-flex items-center justify-center min-w-[1.2rem] h-[1.2rem] px-1 text-[0.7rem] font-bold rounded-full transition-transform ${
-                  isTripActive ? 'bg-[#B34700] text-[#FFFDF7]' : 'bg-[#C99A2E] text-[#4A3005]'
+                  isTripActive ? 'bg-[#FFFDF7] text-[#7A2E00]' : 'bg-[#C99A2E] text-[#4A3005]'
                 }`}
               >
                 {tripCount}
@@ -281,7 +286,7 @@ export default function Header() {
           </NavLink>
 
           {/* GURU PARAMPARA DIVIDER */}
-          <div className="h-4 w-[1px] bg-[#E3D2AE] mx-1" />
+          <div className="h-4 w-[1px] bg-[#C99A2E]/60 mx-1" />
 
           {/* E. 12 AZHWARS */}
           <NavLink
@@ -301,7 +306,7 @@ export default function Header() {
             className={`${pillBase} ${isAcharyasActive ? pillActive : pillIdle}`}
             title="Sri Vaishnava Guru Parampara"
           >
-            <GraduationCap className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
+            <GraduationCap className="w-3.5 h-3.5 text-[#E2C47C]" aria-hidden="true" />
             <span>Acharyas</span>
           </NavLink>
 
@@ -315,8 +320,8 @@ export default function Header() {
             <div
               className={`flex items-center rounded-full border transition-all ${
                 isAboutActive
-                  ? 'bg-gradient-to-r from-[#B34700] via-[#963700] to-[#7A2E00] text-[#FFFDF7] border-[#C99A2E] shadow-sm'
-                  : 'bg-gradient-to-r from-[#FAF2E3] to-[#FFFDF7] hover:border-[#C99A2E] border-[#C99A2E]/50 text-[#7A2E00] shadow-2xs'
+                  ? 'bg-gradient-to-r from-[#E2C47C] to-[#C99A2E] text-[#4A3005] border-[#FFFDF7] shadow-sm'
+                  : 'bg-gradient-to-r from-[#FAF2E3] to-[#FFFDF7] hover:border-[#E2C47C] border-[#C99A2E]/50 text-[#7A2E00] shadow-2xs'
               }`}
             >
               <NavLink
@@ -326,13 +331,13 @@ export default function Header() {
                 title="Kshetra Tours — About the digital archive & pilgrimage trust"
               >
                 <Award
-                  className={`w-3.5 h-3.5 ${isAboutActive ? 'text-[#E2C47C]' : 'text-[#B34700]'}`}
+                  className={`w-3.5 h-3.5 ${isAboutActive ? 'text-[#4A3005]' : 'text-[#B34700]'}`}
                   aria-hidden="true"
                 />
                 <span>Kshetra Tours</span>
                 <span
                   className={`text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded-full tracking-wider ${
-                    isAboutActive ? 'bg-[#FFFDF7]/20 text-[#FFFDF7]' : 'bg-[#C99A2E]/20 text-[#7A2E00]'
+                    isAboutActive ? 'bg-[#7A2E00]/15 text-[#4A3005]' : 'bg-[#C99A2E]/20 text-[#7A2E00]'
                   }`}
                 >
                   Guided Yatras
@@ -347,7 +352,7 @@ export default function Header() {
                 aria-expanded={toursDropdownOpen}
               >
                 <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${toursDropdownOpen ? 'rotate-180' : ''} ${isAboutActive ? 'text-[#E2C47C]' : 'text-[#7A2E00]'}`}
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${toursDropdownOpen ? 'rotate-180' : ''} ${isAboutActive ? 'text-[#4A3005]' : 'text-[#7A2E00]'}`}
                   aria-hidden="true"
                 />
               </button>
@@ -486,10 +491,10 @@ export default function Header() {
           <Link
             to="/trip"
             onClick={closeAll}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#B34700]/10 text-[#7A2E00] text-xs font-semibold lg:hidden"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#FFFDF7]/15 text-[#FFFDF7] text-xs font-semibold lg:hidden"
             title="View Itinerary"
           >
-            <RouteIcon className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
+            <RouteIcon className="w-3.5 h-3.5 text-[#E2C47C]" aria-hidden="true" />
             <span>Trip</span>
             <span className="min-w-[1.1rem] h-[1.1rem] px-1 inline-flex items-center justify-center text-[0.65rem] font-bold bg-[#C99A2E] text-[#4A3005] rounded-full">
               {tripCount}
@@ -500,7 +505,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg text-[#7A2E00] hover:bg-[#B34700]/10 lg:hidden"
+            className="p-2 rounded-lg text-[#FFFDF7] hover:bg-[#FFFDF7]/10 lg:hidden"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
           >

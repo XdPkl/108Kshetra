@@ -610,5 +610,49 @@ band) is gated on PO design approval and is NOT part of this entry.
 4. `app/src/pages/__tests__/pages.test.jsx` + `app/e2e/journeys.spec.js` —
    exact-match absence assertions.
 
+## Version 2.6 — PO Fix List Round 3 (Item 6) Execution (2026-09-27)
+
+### Scope
+
+Full-bleed deep saffron gradient band for the header (menu strip) — design
+approved by the PO from four presented options. The band runs edge-to-end of
+the screen, keeps the sticky behaviour, keeps dropdown panels as cream cards
+so they pop against it, and adapts every label/icon color for contrast.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 4 warnings (pre-existing class) |
+| Unit tests (Vitest) | **209/209 pass (21 suites)** |
+| Coverage | **92.5% statements / 83.12% branches / 88.29% functions / 93.69% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+
+### Deterministic verification (Playwright, 1280×720, fonts loaded)
+
+| Check | Evidence |
+|---|---|
+| Band | `header` background = `linear-gradient(#7A2E00 → #B34700)`, width = viewport (full bleed), gold hairlines crown and foot the band |
+| Brand | title renders `rgb(255,253,247)`, hover `#E2C47C` |
+| Idle pills | labels cream `rgb(255,253,247)`, hover measures `rgb(226,196,124)` (gold) |
+| Active pill | frosted white `bg-[#FFFDF7]/15` + gold ring; active Kshetra Tours pill flips to the gold idiom (`#E2C47C→#C99A2E`, ink label `#4A3005`) because its old dark gradient would vanish against the same-colored band |
+| Dropdowns | panels stay cream `#FFFDF7` — they pop against the band; all panel text colors are explicit (verified) |
+
+### Cascade note
+
+The round-2 scoped override (`.site-header nav a { color: inherit }`) made
+labels inherit the nav's base color, so the nav wrapper moved to
+`text-[#FFFDF7]`; hover colors use the trailing-bang important variant
+(`hover:text-[#E2C47C]!`) because the unlayered inherit rule would otherwise
+beat the layered hover utility.
+
+### Changes covered
+
+`app/src/components/Header.jsx` — band background + hairlines, cream pill
+idiom (idle/active), gold icons, tours pill active-state flip, gold divider,
+mobile trip pill and hamburger recolored. No test changes required.
+
+
 
 
