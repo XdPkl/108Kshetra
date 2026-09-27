@@ -1,12 +1,46 @@
-# HANDOVER — 108 Divya Kshetrams (2026-09-27, end of PO fix-list round 3 session)
+# HANDOVER — 108 Divya Kshetrams (2026-09-27, end of PO fix-list round 4 session)
 
-State: **PO fix list round 3 COMPLETE (items 1–5 then design-approved item 6),
-pushed, CI+Deploy green, live verified.**
-`main` = `78f3ea4` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
-Live: https://xdpkl.github.io/108Kshetra/ (CSS `index-D5wVhnUn.css`; live
-spot-checks: band gradient stops + `e2c47c!important` hover rule present).
-Same day also shipped: 1200px container (`054ebf8`, TER v2.3), round 2
-(`70cc776`, TER v2.4). Working tree clean (untracked `.zcodeignore` — leave).
+State: **PO fix list round 4 COMPLETE, pushed, CI+Deploy green, live verified.**
+`main` = `6d9280e` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
+Live: https://xdpkl.github.io/108Kshetra/ (bundle `index-DP35YQ-z.js`; live
+spot-checks: "108 Kshetras", "Inquire us", kshetra_admin gate, new hero
+description verbatim — the remaining "Vinnulaga Thirupathigal" string in the
+bundle is the temples-dropdown Celestial region row, NOT the removed About
+circuit). Rounds 2/3 same day: `70cc776` (TER v2.4), `5d1697d`+`78f3ea4`
+(TER v2.5/v2.6), container round `054ebf8` (TER v2.3). Working tree clean
+(untracked `.zcodeignore` — leave).
+
+## 1. What this session's round 4 delivered (commit 6d9280e; TER v2.7)
+
+1. **Nav hard single-row**: `flex-nowrap`; pills 13px below xl, 19.5px at xl+
+   (both verified one row at 1024/1152/1280/1440/1920, no overflow; 1024 fits
+   by 12px — needs 686px of 698px, knife-edge, watch if labels change).
+2. **Strips one row of 4**: azhwars slice(0,4), acharyas config cut to
+   nathamuni/yamunacharya/ramanuja/pillai-lokacharya (manavala-mamunigal
+   dropped); tiles 120×212, one row at all sm+ widths (2×2 below 480px).
+3. **About tagline single line** (13px + `xl:whitespace-nowrap`, measured 21.4px).
+4. **"108 Kshetras"** (desktop pill, drawer, "Browse All 108 Kshetras").
+5. **Hero +25%**: 128.5 → **160.5px** (target 160.6).
+6. **Hero description** replaced with the PO's shorter copy — renders one
+   line, no clamp, fully visible.
+7. **NamasteIcon** SVG (almond palms + cream finger seams) replaces the 🙏
+   emoji in the tracker.
+8. **About "Nalayira Divya Prabandham Series" eyebrow removed**.
+9. **CEO photo upload/URL controls admin-gated**: hidden unless
+   localStorage `kshetra_admin=1`; visiting `/about?admin=1` sets it,
+   `?admin=0` revokes. NOT authentication — a determined visitor can flip it;
+   real roles arrive with Sanity.
+10. **Vinnulaga circuit removed** from About (6 circuits; "6 Regional
+    Pilgrimage Circuits" dropdown/drawer copy). NOTE: the temples-dropdown
+    Celestial region row ("Vinnulaga Thirupathigal") intentionally remains —
+    it's a browse filter for the 2 celestial abodes, not the About section.
+11. **"Inquire us"** (was "Inquire with CEO's Office").
+12. **Etiquette lead single line** (same treatment as item 3).
+
+Final verification: **209/209 unit (21 suites) · 19/19 e2e · coverage
+92.36/82.85/88.39/93.74 (gate 80%) · oxlint 0 errors / 5 warnings (4
+pre-existing + 1 new accepted admin-flag sync effect) · build clean · CMS
+round-trip 11/11 lossless + --check 0 diffs.**
 
 ## 1. What this session's round 3 delivered (commits 5d1697d + 08a5d72 + 78f3ea4; TER v2.5/v2.6)
 
