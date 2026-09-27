@@ -1,12 +1,51 @@
-# HANDOVER — 108 Divya Kshetrams (2026-09-27, end of PO fix-list round 2 session)
+# HANDOVER — 108 Divya Kshetrams (2026-09-27, end of PO fix-list round 3 session)
 
-State: **PO fix list round 2 COMPLETE, pushed, CI+Deploy green, live verified.**
-`main` = `70cc776` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
-Live: https://xdpkl.github.io/108Kshetra/ (bundle `index-5q7Q0-wn.js`; live
-spot-checks: "106 Temples" in bundle, `site-header nav a{color:inherit}` in CSS,
-`hero-plaque-watermark-*.png` HTTP 200). Same day also shipped the 1200px
-content container (round: container alignment, commit `054ebf8`, TER v2.3).
-Working tree clean (untracked `.zcodeignore` — leave it).
+State: **PO fix list round 3 COMPLETE (items 1–5 then design-approved item 6),
+pushed, CI+Deploy green, live verified.**
+`main` = `78f3ea4` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
+Live: https://xdpkl.github.io/108Kshetra/ (CSS `index-D5wVhnUn.css`; live
+spot-checks: band gradient stops + `e2c47c!important` hover rule present).
+Same day also shipped: 1200px container (`054ebf8`, TER v2.3), round 2
+(`70cc776`, TER v2.4). Working tree clean (untracked `.zcodeignore` — leave).
+
+## 1. What this session's round 3 delivered (commits 5d1697d + 08a5d72 + 78f3ea4; TER v2.5/v2.6)
+
+1. **Strips 50/50**: Azhwars + Acharyas cards share one row (`lg:grid-cols-2`),
+   each 564px (50% of the 1152px content row), equal stretched heights
+   (406px), CTA pinned to card bottoms.
+2. **Azhwars headline pair** "Saint-poets of the Tamil Veda • The Twelve
+   Azhwars" on ONE row, both spans 15px (was eyebrow 10px above title 24px).
+   Remaining lead ("Whose hymns sanctified…") is the 11px subline.
+3. **Acharyas headline pair** "The Acharyas • Teachers who received,
+   preserved and expounded the tradition." same treatment; subline is the old
+   eyebrow "The guru parampara". Pairs live inside a semantic h2 (the rewrite
+   initially dropped the h2 — caught by measurement).
+4. **Watermark fully visible + centred**: hero img is `h-full w-auto`
+   (514×127 measured fully inside the hero) instead of the cropped full-width
+   frieze. Hero is now 128.5px (the eyebrow removal below shortened it further
+   from 155px).
+5. **NALAYIRA DIVYA PRABANDHAM eyebrow removed from the hero**. Gotcha: the
+   hero DESCRIPTION copy still contains the phrase (invisible under
+   `line-clamp-1`) — the tests therefore use EXACT-text matchers
+   (`queryAllByText('Nalayira Divya Prabandham')`, `getByText(..., {exact: true})`).
+6. **Header band (design APPROVED via options: deep saffron gradient chosen
+   over bright saffron / vermilion / festive gold)**: header =
+   `bg-gradient-to-r from-[#7A2E00] to-[#B34700]`, full-bleed (width = vw,
+   measured), gold hairlines crown+foot, sticky kept, dropdown panels stay
+   cream (pop). Label system: nav base color is now `text-[#FFFDF7]` (the
+   round-2 `color: inherit` override makes pills inherit it), idle pills
+   cream with `hover:text-[#E2C47C]!` gold (TRAILING bang needed — the
+   unlayered inherit rule beats normal layered hover utilities), active =
+   frosted `bg-[#FFFDF7]/15` + gold ring. The Kshetra Tours ACTIVE pill FLIPPED
+   to the gold idiom (`#E2C47C→#C99A2E`, ink `#4A3005` label) — its old dark
+   gradient was identical to the band and would have vanished. Icons gold
+   `#E2C47C`; mobile trip pill + hamburger recolored. NOTE: idle pills changed
+   cream-on-saffron and the active pill changed to gold — PO approved these in
+   the option preview.
+
+Final verification (round 3 cumulative): **209/209 unit (21 suites) · 19/19
+e2e · coverage 92.5/83.12/88.29/93.69 (gate 80%) · oxlint 0 errors / 4
+pre-existing warnings · build clean.**
 
 ## 1. What this session delivered (commit 70cc776, 17 files; TER v2.4)
 
@@ -63,18 +102,19 @@ CMS round-trip 11/11 lossless + sync-content --check 0 diffs.**
 
 ## 2. Open items / likely next requests
 
-- **More PO fix lists** — round 3 is likely (they iterate fast). Proven
+- **More PO fix lists** — round 4 is likely (they iterate fast). Proven
   process: map → measure baseline → fix → re-measure deterministically →
-  gates → TER → commit.
+  gates → TER → commit. For design-gated asks, present options with
+  AskUserQuestion previews FIRST (worked for the header band).
 - **PO Sanity setup** (~20 min) — unchanged; `studio/README.md`. Repo JSON is
-  the `npm run import` source, so round-2 content edits (wiki titles, 5
-  featured acharyas, browseAll 106) flow into Sanity on first import.
-- Photos the PO may supply: Kulasekhara + Thiruppaan strip tiles (currently
-  ◆ fallback — enwiki has no lead images), CEO portrait, Srivilliputhur card,
-  4 scaffold acharya dossiers.
-- Flagged to PO for round 3: hero eyebrow phrase (item 1 scope), hero
-  description is clamped to one line (full text on /kshetrams CTA page),
-  nav 2-row fallback below ~1100px.
+  the `npm run import` source.
+- Photos the PO may supply: Kulasekhara + Thiruppaan strip tiles (◆
+  fallback), CEO portrait, Srivilliputhur card, 4 scaffold acharya dossiers.
+- Small flags from round 3: hero description is clamped to one line; the
+  watermark is centred (~44% of hero width) rather than edge-to-edge (the
+  price of "fully visible" at half height) — if the PO wants the frieze
+  edge-to-edge again at full visibility, the hero needs ~280px height or a
+  wider aspect asset. Nav wraps to 2 rows below ~1100px.
 - Jira sync still pending a fresh API token.
 
 ## 3. Architecture pointers (unchanged map, plus this session)
