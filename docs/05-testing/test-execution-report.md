@@ -712,6 +712,38 @@ arrives with the Sanity CMS setup.
 7. Tests: components, v3Branches (labels, 6-circuits, inquire regex, admin
    flag), yatraPages (6 circuits), pages (4-tile strips), e2e journeys.
 
+## Version 2.8 — Split-Pill Single-Line Fix Execution (2026-09-27)
+
+### Scope
+
+PO follow-up to round-4 item 1: the "108 Kshetras" and "Kshetra Tours
+(Guided Yatras)" pills occasionally folded their labels onto a second line.
+Root cause: with the nav now `flex-nowrap`, flex items compressed under
+space pressure, and the two split pills do not use the shared `pillBase`
+(so they lacked `whitespace-nowrap`).
+
+### Fix
+
+1. `[&>*]:shrink-0 [&>*]:whitespace-nowrap` on the nav — no child may shrink
+   or wrap (labels inherit nowrap).
+2. Reclaimed 14px at the lg band edge: brand↔nav gap `lg:gap-4` → `xl:gap-4`,
+   parampara divider `mx-1` → `mx-0.5`, tours pill `ml-1` → `ml-0.5`.
+
+### Deterministic verification (Playwright, 10 widths: 1024–1920)
+
+| Check | Result |
+|---|---|
+| Single flex row (center-line spread) | pass at all 10 widths |
+| Pill height ÷ font-size ≤ 2.6 (no internal folding) | pass (max 2.42) |
+| Last pill inside the viewport | pass (was −4.6px at 1024, fixed) |
+| "108 Kshetras" all spans single-line | pass at all 10 widths |
+| "Kshetra Tours" all spans single-line | pass at all 10 widths |
+
+### Gates
+
+209/209 unit · 19/19 e2e · oxlint 0 errors / 5 warnings (unchanged) · build clean.
+
+
 
 
 

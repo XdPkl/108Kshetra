@@ -120,7 +120,7 @@ export default function Header() {
     <header className="site-header sticky top-0 z-50 bg-gradient-to-r from-[#7A2E00] to-[#B34700] shadow-md">
       {/* Gold hairlines crown and foot the full-bleed band (PO round 3 item 6) */}
       <div className="h-[2px] bg-gradient-to-r from-transparent via-[#E2C47C] to-transparent"></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between gap-2 lg:gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between gap-2 xl:gap-4">
 
         {/* ================= 1. BRAND LOGO & SACRED TITLE ================= */}
         <Link
@@ -150,7 +150,10 @@ export default function Header() {
         </Link>
 
         {/* ================= 2. DESKTOP NAVIGATION ================= */}
-        <nav className="hidden lg:flex flex-nowrap items-center justify-end gap-x-0.5 text-[13px] xl:text-[19.5px] text-[#FFFDF7]" aria-label="Primary">
+        {/* PO round 4 fix: children never shrink and never wrap — the two
+            split pills ("108 Kshetras", "Kshetra Tours") otherwise compress
+            under space pressure and fold their labels onto a second line */}
+        <nav className="hidden lg:flex flex-nowrap items-center justify-end gap-x-0.5 text-[13px] xl:text-[19.5px] text-[#FFFDF7] [&>*]:shrink-0 [&>*]:whitespace-nowrap" aria-label="Primary">
 
           {/* A. HOME */}
           <NavLink
@@ -289,7 +292,7 @@ export default function Header() {
           </NavLink>
 
           {/* GURU PARAMPARA DIVIDER */}
-          <div className="h-4 w-[1px] bg-[#C99A2E]/60 mx-1" />
+          <div className="h-4 w-[1px] bg-[#C99A2E]/60 mx-0.5" />
 
           {/* E. 12 AZHWARS */}
           <NavLink
@@ -316,7 +319,7 @@ export default function Header() {
           {/* G. KSHETRA TOURS (FLAGSHIP PILL) */}
           <div
             ref={toursDropdownRef}
-            className="relative ml-1"
+            className="relative ml-0.5"
             onMouseEnter={() => setToursDropdownOpen(true)}
             onMouseLeave={() => setToursDropdownOpen(false)}
           >
