@@ -27,22 +27,16 @@ export default function Hero() {
       {/* Decorative Inner Golden Inset Border */}
       <div className="absolute inset-2 sm:inset-2.5 border border-[#C99A2E]/30 rounded-xl pointer-events-none" aria-hidden="true" />
 
-      {/* Sacred watermark: the five-motif plaque strip spans the full banner
-          edge-to-edge and is vertically centred; the card crops it to a frieze
-          band (PO 2026-09-27) */}
+      {/* Sacred watermark: the five-motif plaque strip, fully visible and
+          centred in the banner at full height (PO round 3) */}
       <img
         src={heroWatermark}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-none opacity-[0.09]"
+        className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-auto max-w-none opacity-[0.09]"
       />
 
       <div className="relative z-10 max-w-2xl mx-auto">
-        {/* Eyebrow Label */}
-        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.16em] text-[#B34700]">
-          {hero.eyebrow}
-        </span>
-
         {/* Hero Title — the ! marks beat the unlayered legacy h1 rule in
             base.css, which otherwise pins every h1 to --font-display-2 with a
             16px bottom margin (that override is what kept the banner tall) */}

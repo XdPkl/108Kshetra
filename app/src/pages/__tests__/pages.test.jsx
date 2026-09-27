@@ -16,7 +16,10 @@ describe('HomePage (UT-HOME-01..03)', () => {
   it('shows the three-line hero and featured kshetrams', () => {
     renderAt('/');
     expect(screen.getByRole('heading', { name: /108 divya kshetrams/i })).toBeInTheDocument();
-    expect(screen.getAllByText(/Nalayira Divya Prabandham/i).length).toBeGreaterThan(0);
+    // PO round 3 (2026-09-27): the phrase no longer renders as a line anywhere
+    // (exact match — the hero description's body copy still mentions it in a
+    // clamped line, which is fine)
+    expect(screen.queryAllByText('Nalayira Divya Prabandham')).toHaveLength(0);
     // The yatra tracker counts only the 106 earthly kshetrams (PO 2026-09-25)
     expect(screen.getAllByText((_, el) => /0 of 106 kshetrams visited/i.test(el?.textContent ?? '')).length)
       .toBeGreaterThan(0);

@@ -29,27 +29,28 @@ export default function HomePage() {
 
       <FeaturedKshetrams />
 
-      <SaintStrip
-        eyebrow={azhwarStrip.eyebrow}
-        title={azhwarStrip.title}
-        lead={azhwarStrip.lead}
-        saints={featuredAzhwars}
-        base="/azhwar"
-        ctaLabel={azhwarStrip.ctaLabel}
-        ctaTo="/azhwars"
-        tileWidthClass="w-[calc(50%-6px)] min-[420px]:w-[calc(33.333%-8px)] sm:w-[calc(25%-9px)] lg:w-[calc(8.333%-11px)]"
-      />
+      {/* PO round 3: the two darshan strips share one row, 50/50 on desktop */}
+      <div className="grid gap-6 lg:grid-cols-2 items-stretch">
+        <SaintStrip
+          headlineA={azhwarStrip.eyebrow}
+          headlineB={azhwarStrip.title}
+          subline={azhwarStrip.lead}
+          saints={featuredAzhwars}
+          base="/azhwar"
+          ctaLabel={azhwarStrip.ctaLabel}
+          ctaTo="/azhwars"
+        />
 
-      <SaintStrip
-        eyebrow={acharyaStrip.eyebrow}
-        title={acharyaStrip.title}
-        lead={acharyaStrip.lead}
-        saints={featuredAcharyas}
-        base="/acharya"
-        ctaLabel={acharyaStrip.ctaLabel}
-        ctaTo="/acharyas"
-        tileWidthClass="w-[calc(50%-6px)] min-[420px]:w-[calc(33.333%-8px)] sm:w-[calc(20%-9.6px)] lg:w-[calc(8.333%-11px)]"
-      />
+        <SaintStrip
+          headlineA={acharyaStrip.title}
+          headlineB={acharyaStrip.lead}
+          subline={acharyaStrip.eyebrow}
+          saints={featuredAcharyas}
+          base="/acharya"
+          ctaLabel={acharyaStrip.ctaLabel}
+          ctaTo="/acharyas"
+        />
+      </div>
     </>
   );
 }
