@@ -476,19 +476,15 @@ export default function AboutPage() {
           <div className="lg:col-span-4 flex flex-col items-center">
             <CeoPhotoCard photo={ceoPhoto} setPhoto={setCeoPhoto} />
             <div className="w-full max-w-xs mt-3.5 bg-[#FAF2E3]/70 rounded-xl p-3 border border-[#EBDDBE] text-xs text-[#66523D] space-y-1.5">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-[#B34700] shrink-0" aria-hidden="true" />
-                <span className="truncate">{ceo.base}</span>
+              <div className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-[#B34700] shrink-0 mt-0.5" aria-hidden="true" />
+                <span className="min-w-0 leading-relaxed">{ceo.base}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-[#B34700] shrink-0" aria-hidden="true" />
                 <a href={`mailto:${ceo.email}`} className="text-[#7A2E00] hover:text-[#B34700] font-medium truncate">
                   {ceo.email}
                 </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#B34700] shrink-0" aria-hidden="true" />
-                <span>{ceo.trustee}</span>
               </div>
             </div>
           </div>

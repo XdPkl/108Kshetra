@@ -135,7 +135,7 @@ export const GROQ = `{
   },
   "about": *[_id == "about"][0]{
     site, tours, contact,
-    "ceo": ceo{name, role, org, title, base, email, trustee, quote, bio, pillars,
+    "ceo": ceo{name, role, org, title, base, email, quote, bio, pillars,
       "imageUrl": image.asset->url, photoUrl},
     circuits, etiquette
   },

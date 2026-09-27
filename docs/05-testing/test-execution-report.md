@@ -416,3 +416,49 @@ runtime dependency on the CMS.
    `studio/README.md`; watch item: celestial-desam `timings: null` storage fidelity.
 4. CI additions: `.github/workflows/content-sync.yml` (repository_dispatch/workflow_dispatch,
    contents:write, concurrency-serialized; commits only after lint+tests+build pass).
+
+---
+
+## Version 2.2 — PO Fix List Round 1 Execution (2026-09-25)
+
+### Scope
+
+PO-supplied small-fix list across Home, About and the Azhwars/Acharyas listing
+pages: hero watermark span, hero CTA contrast, 106-kshetram yatra scope,
+9:16 strip tiles, CEO desk content corrections, and one-line page leads.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors (same 4 documented-accepted warnings) |
+| Unit tests (Vitest) | **209/209 pass (21 suites)** — 208 preserved + 1 new earthly-scope tracker case; About CEO assertions updated to the corrected content |
+| Coverage | **92.5% statements / 83.02% branches / 88.29% functions / 93.69% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** — TC-13 tracker assertions updated 108 → 106 |
+| Schema validation | `sanity schema validate` → 0 errors / 0 warnings (trustee field removed from the about schema) |
+| Round-trip + sync self-test | Offline 11/11 content files lossless; fixture regenerated; `sync-content --fixture --check` → 0 diffs |
+
+### Changes covered
+
+1. **Hero (Home)** — the Sangu–Namam–Chakram watermark trio now spans the full
+   banner edge-to-edge with the sketch's intrinsic whitespace cropped away
+   (boxes flush at ±2px, ink scaled past viewBox padding); the primary CTA
+   moved to the site's gold idiom (dark label on gold, bordered) so it is
+   clearly distinguishable from the brown gradient title and self-legible.
+2. **Yatra progress scope (Home)** — the tracker counts only the 106 earthly
+   kshetrams; visited marks on the two celestial abodes (Thiruppaarkadal,
+   Paramapadham) no longer inflate the count. `YatraProgressTracker` gained an
+   `eligibleIds` scope prop; HomePage derives the earthly set from the data.
+3. **Saint strips (Home)** — Azhwar and Acharya photo tiles are 9:16 portrait
+   (measured 215×382), replacing the fixed-height landscape tiles.
+4. **About CEO desk** — name corrected to Ram Gopalan (heading, quote
+   attribution, bio, photo alt); pillar tiles corrected to "106 Divya Desams
+   Completed" and "1000+ Pilgrims Guided" / "Over 100+ guided batches";
+   Direct Email changed to yatra@kshetratours.com; the location line now
+   carries the full Ambattur office address (wraps, no truncation); the
+   "Sampradaya Yatra Trustee" line removed end-to-end (AboutPage,
+   about.json, studio schema, GROQ projection — kept 1:1 so the CMS sync
+   stays diff-free).
+5. **Azhwars / Acharyas pages** — banner lead lines render on a single line
+   on wide viewports (`xl` one-line pin; narrower screens still wrap).

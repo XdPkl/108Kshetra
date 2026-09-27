@@ -13,7 +13,8 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page.getByRole('button', { name: /✓ visited/i })).toHaveAttribute('aria-pressed', 'true');
 
     await page.goto('');
-    await expect(page.getByText(/1 of 108 kshetrams visited/i)).toBeVisible();
+    // Yatra progress counts only the 106 earthly kshetrams (PO 2026-09-25).
+    await expect(page.getByText(/1 of 106 kshetrams visited/i)).toBeVisible();
 
     await page.goto('kshetrams');
     // UXD v3.0: the Visit-status select became the zip's "Show visited only" checkbox
@@ -25,7 +26,7 @@ test.describe('V3 yatra toolkit', () => {
     await page.goto('');
     page.once('dialog', (dialog) => dialog.accept());
     await page.getByRole('button', { name: /reset progress/i }).click();
-    await expect(page.getByText(/0 of 108 kshetrams visited/i)).toBeVisible();
+    await expect(page.getByText(/0 of 106 kshetrams visited/i)).toBeVisible();
   });
 
   test('TC-14: map renders desams, tooltips on hover, filters by region and opens a popup page', async ({ page }) => {

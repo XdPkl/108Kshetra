@@ -17,6 +17,9 @@ describe('HomePage (UT-HOME-01..03)', () => {
     renderAt('/');
     expect(screen.getByRole('heading', { name: /108 divya kshetrams/i })).toBeInTheDocument();
     expect(screen.getAllByText(/Nalayira Divya Prabandham/i).length).toBeGreaterThan(0);
+    // The yatra tracker counts only the 106 earthly kshetrams (PO 2026-09-25)
+    expect(screen.getAllByText((_, el) => /0 of 106 kshetrams visited/i.test(el?.textContent ?? '')).length)
+      .toBeGreaterThan(0);
     // 4 featured kshetram links
     expect(screen.getAllByRole('link', { name: /srirangam|tirumala|kanchipuram|srivilliputhur/i }).length)
       .toBeGreaterThanOrEqual(4);

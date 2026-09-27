@@ -2,18 +2,26 @@
  * YatraProgressTracker — zip-parity tracker card (UXD v3.0 Gate 2): cream
  * card with a gold side accent, count headline, gradient progress bar with
  * inline percentage, reset action (native confirm, FR-73/75) and the
- * "abodes awaiting darshan" helper row.
+ * "abodes awaiting darshan" helper row. The yatra counts only the 106
+ * earthly kshetrams — the two celestial abodes are beyond physical travel
+ * (PO 2026-09-25).
+ * @param {object} props
+ * @param {number} [props.total] - total scoped kshetrams (default 106 earthly)
+ * @param {Set<string>} [props.eligibleIds] - ids that count toward the yatra
+ *   (the earthly kshetrams); when omitted every visited mark counts.
  */
 import { Link } from 'react-router-dom';
 import { useVisited } from '../../hooks/useVisited.js';
 
-export default function YatraProgressTracker({ total = 108 }) {
-  const { count, resetVisited } = useVisited();
+export default function YatraProgressTracker({ total = 106, eligibleIds }) {
+  const { visitedIds, resetVisited } = useVisited();
+  const scopedIds = eligibleIds ? visitedIds.filter((id) => eligibleIds.has(id)) : visitedIds;
+  const count = scopedIds.length;
   const percentage = Math.round((count / total) * 100);
   const fillWidth = Math.max(2, percentage); // show at least a hint of progress if 0
 
   const onReset = () => {
-    if (window.confirm(`Clear all ${count} visited marks? This cannot be undone.`)) {
+    if (window.confirm(`Clear all ${visitedIds.length} visited marks? This cannot be undone.`)) {
       resetVisited();
     }
   };

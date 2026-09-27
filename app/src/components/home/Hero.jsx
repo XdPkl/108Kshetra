@@ -22,24 +22,26 @@ export default function Hero() {
       {/* Decorative Inner Golden Inset Border */}
       <div className="absolute inset-2 sm:inset-2.5 border border-[#C99A2E]/30 rounded-xl pointer-events-none" aria-hidden="true" />
 
-      {/* Sacred Watermark: Sangu, Namam, and Chakram */}
+      {/* Sacred Watermark: Sangu, Namam, and Chakram — spread edge-to-edge so
+          the trio spans the full banner with no empty side margins (PO 2026-09-25) */}
       <div
-        className="absolute inset-0 flex items-center justify-center gap-6 sm:gap-14 md:gap-24 pointer-events-none opacity-[0.09] select-none"
+        className="absolute inset-0 flex items-center justify-between gap-4 sm:gap-10 md:gap-16 px-2 sm:px-6 pointer-events-none opacity-[0.09] select-none"
         aria-hidden="true"
       >
-        {/* Sangu (Panchajanya Shanka) - Left */}
-        <div className="w-20 sm:w-32 md:w-40 h-20 sm:h-32 md:h-40 text-[#7A2E00] -rotate-12 flex items-center justify-center shrink-0">
-          <ShankaIcon className="w-full h-full" />
+        {/* Sangu (Panchajanya Shanka) - Left; ink scaled past its box to crop
+            the sketch's intrinsic whitespace (PO 2026-09-25) */}
+        <div className="w-28 sm:w-48 md:w-72 h-28 sm:h-48 md:h-72 text-[#7A2E00] -rotate-12 flex items-center justify-center shrink-0">
+          <ShankaIcon className="w-full h-full scale-[1.35]" />
         </div>
 
         {/* Namam (Thiruman & Srichoornam) - Center */}
-        <div className="w-16 sm:w-28 md:w-36 h-24 sm:h-36 md:h-48 text-[#7A2E00] flex items-center justify-center shrink-0">
-          <ThirumanIcon className="w-full h-full" />
+        <div className="w-22 sm:w-38 md:w-56 h-28 sm:h-48 md:h-72 text-[#7A2E00] flex items-center justify-center shrink-0">
+          <ThirumanIcon className="w-full h-full scale-[1.25]" />
         </div>
 
         {/* Chakram (Sudarshana Chakra) - Right */}
-        <div className="w-20 sm:w-32 md:w-40 h-20 sm:h-32 md:h-40 text-[#7A2E00] rotate-12 flex items-center justify-center shrink-0">
-          <ChakraIcon className="w-full h-full" />
+        <div className="w-28 sm:w-48 md:w-72 h-28 sm:h-48 md:h-72 text-[#7A2E00] rotate-12 flex items-center justify-center shrink-0">
+          <ChakraIcon className="w-full h-full scale-[1.35]" />
         </div>
       </div>
 
@@ -76,11 +78,12 @@ export default function Hero() {
           {hero.description}
         </p>
 
-        {/* Primary CTA Button */}
+        {/* Primary CTA Button — gold idiom so the label stands apart from the
+            button fill and from the brown banner title (PO 2026-09-25) */}
         <div className="mt-3.5 sm:mt-4 flex items-center justify-center">
           <Link
             to="/kshetrams"
-            className="inline-flex items-center gap-2 px-6 py-2 sm:py-2.5 rounded-full bg-gradient-to-b from-[#D95F0E] to-[#B34700] text-[#FFFDF7] text-xs sm:text-sm font-semibold shadow-xs hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition-all"
+            className="inline-flex items-center gap-2 px-6 py-2 sm:py-2.5 rounded-full bg-gradient-to-b from-[#E2C47C] to-[#C99A2E] text-[#4A3005] text-xs sm:text-sm font-bold border border-[#96731F] shadow-xs hover:shadow-md hover:brightness-105 hover:-translate-y-0.5 active:translate-y-0 transition-all"
           >
             <span>{hero.cta}</span>
             <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />

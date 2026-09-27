@@ -123,7 +123,8 @@ export default function AzhwarsPage() {
         <h1 className="font-display text-3xl font-semibold text-[#7A2E00] mt-0.5">
           {SITE_COPY.azhwarsPage.title} <span lang="ta" className="text-2xl">{SITE_COPY.azhwarsPage.titleTamil}</span>
         </h1>
-        <p className="text-sm text-[#66523D] mt-1 max-w-2xl">
+        {/* PO 2026-09-25: the lead reads as a single line on wide screens */}
+        <p className="text-sm text-[#66523D] mt-1 xl:text-[13px] xl:whitespace-nowrap">
           {SITE_COPY.azhwarsPage.lead}
         </p>
       </div>

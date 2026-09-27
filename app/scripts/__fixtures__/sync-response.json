@@ -270,9 +270,9 @@
       "pasuram": {
         "reference": "Periya Thirumozhi 2-9 (Vaazhiye Kacchi)",
         "work": "Periya Thirumozhi",
+        "meaning": "Long live Kanchi, long live the jewel-hued Lord of Hastigiri — those who praise him find their days and lives ever flourishing.",
         "tamil": "வாழியே கச்சி வாழியே ஹஸ்திகிரி மணிவண்ணன் வாழ்த்துவார் வாழ்வும் நாளும் வளர்ந்தோங்கும்",
         "transliteration": "Vaazhiye Kacchi vaazhiye Hasthigiri manivannan — vaazhththuvaar vaazhvum naalum valarngaum",
-        "meaning": "Long live Kanchi, long live the jewel-hued Lord of Hastigiri — those who praise him find their days and lives ever flourishing.",
         "azhwarId": "azhwar.thirumangai"
       },
       "serial": 72,
@@ -2051,9 +2051,9 @@
       "pasuram": {
         "reference": "Mudhal Thiruvandadi 1",
         "work": "Mudhal Thiruvandadi",
+        "meaning": "With the world as the lamp, the seas as the ghee, and the blazing sun as its flame, the Azhwar lit his first lamp of devotion — at this kshetram of the lamp-lord.",
         "tamil": "வையம் தகளியா வார்கடலே நெய்யாக வையக் கதிரோன் விளக்கென வித்தது சுடரே",
         "transliteration": "Vaiyam thagaliyaa vaarkadalai neyyaaga vaiyak kadhiron vilakkena viththadhu sudare",
-        "meaning": "With the world as the lamp, the seas as the ghee, and the blazing sun as its flame, the Azhwar lit his first lamp of devotion — at this kshetram of the lamp-lord.",
         "azhwarId": "azhwar.poigai"
       },
       "serial": 83,
@@ -2735,9 +2735,9 @@
       "pasuram": {
         "reference": "Thiruppalliyezhuchchi 1",
         "work": "Thiruppalliyezhuchchi",
+        "meaning": "Awake, O Lord of Srirangam — waken from your rest amid the glowing lamps and the sweet music of your devotees.",
         "tamil": "பாயும் ஒளி விளக்கும் பத்தருள் திருப்பள்ளியெழுச்சி பாயும் பொன் விளக்கும் பண்மொழியால் பள்ளியெழுந்தருளாயே",
         "transliteration": "Paayum oli vilakkum paththarul thiruppalliyezhuchchi — paayum pon vilakkum pannmozhiaal palliyezhundharulaaye",
-        "meaning": "Awake, O Lord of Srirangam — waken from your rest amid the glowing lamps and the sweet music of your devotees.",
         "azhwarId": "azhwar.thondaradippodi"
       },
       "serial": 1,
@@ -4148,9 +4148,9 @@
       "pasuram": {
         "reference": "Thiruvoimozhi 5-8-11",
         "work": "Thiruvoimozhi",
+        "meaning": "The Lord who lies in sweet Kudanthai — seeing him, even the proud fall in swoon of wonder, brighter than lightning to the eye.",
         "tamil": "இடவாழி வண்குடந்தை கிடந்தான் கைதொழக் கண்டகால் கதிரொன்றின் மின்னியதன் மடியிலார்",
         "transliteration": "Idavaazhi vankudanthai kidandhaan kai thozhak kandakaal — kadhironrin minniyadhan madiyilaar",
-        "meaning": "The Lord who lies in sweet Kudanthai — seeing him, even the proud fall in swoon of wonder, brighter than lightning to the eye.",
         "azhwarId": "azhwar.nammazhwar"
       },
       "serial": 11,
@@ -6151,9 +6151,9 @@
       "pasuram": {
         "reference": "Periya Thirumozhi 8-1",
         "work": "Periya Thirumozhi",
+        "meaning": "The Azhwar’s decad sings the Lord of Kannapuram whose mere word is the devotee’s rescue.",
         "tamil": "கண்ணபுரத்து எம் பெருமான்...",
         "transliteration": "Kannapuraththu em perumaan",
-        "meaning": "The Azhwar’s decad sings the Lord of Kannapuram whose mere word is the devotee’s rescue.",
         "azhwarId": "azhwar.thirumangai"
       },
       "serial": 18,
@@ -10364,9 +10364,9 @@
       "pasuram": {
         "reference": "Thiruppavai 1",
         "work": "Thiruppavai",
+        "meaning": "O maidens of the cowherd town — the moonlit month of Margazhi has dawned; come, let us bathe in the vow of the dawn.",
         "tamil": "மார்கழித் திங்கள் மதிநிறந்தண்ணால் நீராடப் போதுவீர் போதுமினோ நேரிழையீர்",
         "transliteration": "Maargazhi thingal madhiniRandhu nannaal neeraada podhuveer — podhumino neraizhaiyeer",
-        "meaning": "O maidens of the cowherd town — the moonlit month of Margazhi has dawned; come, let us bathe in the vow of the dawn.",
         "azhwarId": "azhwar.andal"
       },
       "serial": 47,
@@ -22389,26 +22389,25 @@
       "note": "Monday – Saturday, 9:00 AM – 6:00 PM IST. Typical inquiry response time is within 24 hours."
     },
     "ceo": {
-      "name": "Sri Prasanna Venkatesh",
+      "name": "Ram Gopalan",
       "role": "Founder & Chief Executive Officer",
       "org": "Kshetra Tours & Pilgrimage Trust",
       "title": "Divya Desam Yatra Architect & Sampradaya Kainkaryapara",
-      "base": "Srirangam & Chennai, India",
-      "email": "ceo@kshetratours.org",
-      "trustee": "Sampradaya Yatra Trustee",
+      "base": "#315, Creations Manchester, Chelliamman kovil Rd, near Venkateshwara High School, Attipattu, Ambattur, Chennai, Tamil Nadu 600058",
+      "email": "yatra@kshetratours.com",
       "quote": "“Our sacred Divya Desams are not mere destinations of stone and sculpture — they are the living divine residences of Sriman Narayana, eternalized by the celestial tears and ecstatic songs of the Azhwars. When a devotee travels with Kshetra Tours, our singular kainkaryam is to lift away every logistical worry, ensure pristine sattvic nourishment, and cultivate an unhurried atmosphere of prayer so that each darshan touches the soul.”",
       "bio": [
-        "Sri Prasanna Venkatesh founded Kshetra Tours with the sacred vision of establishing an authentic, sampradaya-centered pilgrimage organization dedicated exclusively to the 108 Divya Desams and holy Sri Vaishnava abodes. Having completed the mangalasasanam of all terrestrial Divya Desams multiple times, he brings over eighteen years of firsthand experience navigating sanctum schedules, festival protocols, and comfortable devotional travel logistics.",
+        "Ram Gopalan founded Kshetra Tours with the sacred vision of establishing an authentic, sampradaya-centered pilgrimage organization dedicated exclusively to the 108 Divya Desams and holy Sri Vaishnava abodes. Having completed the mangalasasanam of all terrestrial Divya Desams multiple times, he brings over eighteen years of firsthand experience navigating sanctum schedules, festival protocols, and comfortable devotional travel logistics.",
         "Under his leadership, Kshetra Tours has pioneered pure sattvic catering (madi-samayal without onion or garlic), spacious senior-citizen friendly circuit pacing, and insightful orientation on Nalayira Divya Prabandham pasurams before each temple entry, ensuring that modern pilgrims experience the sacred depth of our ancestral yatra tradition."
       ],
       "pillars": [
         {
-          "title": "108 Divya Desams Completed",
+          "title": "106 Divya Desams Completed",
           "text": "Personal pilgrimage mastery across all 106 terrestrial shrines from Bhooloka Vaikuntam (Srirangam) to Badrinath and Muktinath."
         },
         {
-          "title": "25,000+ Pilgrims Guided",
-          "text": "Over 450+ guided batches conducted across Chola, Thondai, Pandiya, Malai, and Vada Nadu circuits with zero logistical compromises."
+          "title": "1000+ Pilgrims Guided",
+          "text": "Over 100+ guided batches conducted across Chola, Thondai, Pandiya, Malai, and Vada Nadu circuits with zero logistical compromises."
         },
         {
           "title": "Sattvic Prasadam Standard",

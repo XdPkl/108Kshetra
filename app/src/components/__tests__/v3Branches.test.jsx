@@ -31,6 +31,7 @@ import MapPage from '../../pages/MapPage.jsx';
 import AboutPage from '../../pages/AboutPage.jsx';
 import { resetVisited, markVisited } from '../../state/visited.js';
 import { clearTrip, addToTrip } from '../../state/trip.js';
+import { getAllKshetrams } from '../../data/api.js';
 
 const renderAt = (url, node) => render(<MemoryRouter initialEntries={[url]}>{node}</MemoryRouter>);
 
@@ -71,6 +72,18 @@ describe('YatraProgressTracker (UXD v3.0)', () => {
       </MemoryRouter>,
     );
     expect(screen.getAllByText((_, el) => /0 of 108 kshetrams visited/i.test(el?.textContent ?? '')).length)
+      .toBeGreaterThan(0);
+  });
+
+  it('scopes the yatra to the 106 earthly kshetrams, ignoring celestial marks (PO 2026-09-25)', () => {
+    markVisited('srirangam', true);
+    markVisited('thiruparkadal', true); // celestial abode — beyond earthly travel
+    const earthlyIds = new Set(
+      getAllKshetrams().filter((k) => k.region !== 'Celestial').map((k) => k.id),
+    );
+    expect(earthlyIds.size).toBe(106);
+    renderAt('/', <YatraProgressTracker total={earthlyIds.size} eligibleIds={earthlyIds} />);
+    expect(screen.getAllByText((_, el) => /1 of 106 kshetrams visited/i.test(el?.textContent ?? '')).length)
       .toBeGreaterThan(0);
   });
 });

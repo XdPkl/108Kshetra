@@ -167,11 +167,14 @@ describe('AboutPage (UT-ABT-01, FR-87)', () => {
 
   it('renders the CEO desk, 7 circuits and sanctum etiquette (UXD v3.0 Gate 11 addendum)', () => {
     renderAt('/about', <AboutPage />);
-    // CEO desk
+    // CEO desk — corrected PO content (2026-09-25 fix list)
     expect(screen.getByRole('heading', { name: /founder & chief executive officer/i })).toBeInTheDocument();
-    expect(screen.getAllByText(/sri prasanna venkatesh/i).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/ceo@kshetratours\.org/i).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getByText(/108 divya desams completed/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/ram gopalan/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/yatra@kshetratours\.com/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText(/106 divya desams completed/i)).toBeInTheDocument();
+    expect(screen.getByText(/1000\+ pilgrims guided/i)).toBeInTheDocument();
+    expect(screen.getByText(/#315, creations manchester/i)).toBeInTheDocument();
+    expect(screen.queryByText(/sampradaya yatra trustee/i)).not.toBeInTheDocument();
     // 7 circuits, each with an inquire action and a browse-region deep link
     expect(screen.getByRole('heading', { name: /popular divya desam pilgrimage circuits/i })).toBeInTheDocument();
     const inquires = screen.getAllByRole('button', { name: /inquire circuit/i });
