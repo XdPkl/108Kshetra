@@ -571,4 +571,44 @@ strips with expanded rosters.
 7. Tests updated: components.test.jsx, v3Branches.test.jsx, pages.test.jsx,
    e2e/journeys.spec.js.
 
+## Version 2.5 — PO Fix List Round 3 (Items 1–5) Execution (2026-09-27)
+
+### Scope
+
+Home darshan strips restructure (side-by-side 50/50, paired headlines on one
+row), hero watermark made fully visible and centred, and the hero's
+"NALAYIRA DIVYA PRABANDHAM" eyebrow line removed. Item 6 (header colour
+band) is gated on PO design approval and is NOT part of this entry.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 4 warnings (pre-existing class) |
+| Unit tests (Vitest) | **209/209 pass (21 suites)** — Nalayira assertions switched to exact-match (the hero description copy still contains the phrase inside a 1-line clamp, which is intended) |
+| Coverage | **92.5% statements / 83.12% branches / 88.29% functions / 93.69% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+
+### Deterministic verification (Playwright, 1280×720, fonts loaded)
+
+| Item | Evidence |
+|---|---|
+| 1. Strips 50/50 | both cards measure **564px** wide (50% of the 1152px content row), same top, equal stretched heights (406px); 12 azhwar + 5 acharya tiles |
+| 2/3. Headline pairs on one row, same size | "Saint-poets of the Tamil Veda • The Twelve Azhwars" and "The Acharyas • Teachers who received, preserved and expounded the tradition." — both spans **15px**, tops within 3px; the un-paired line renders as an 11px subline; pair wrapped in a semantic h2 |
+| 4. Watermark | renders **514×127 fully inside the 128.5px hero** (no crop), horizontally centred (equal side margins measured) |
+| 5. Hero eyebrow | exact-text "Nalayira Divya Prabandham" renders **0 elements** on Home (unit + e2e) |
+
+### Changes covered
+
+1. `app/src/components/home/SaintStrip.jsx` — headline-pair API (headlineA/
+   headlineB/subline), semantic h2 row, fixed 6-up tile ladder, flex column
+   with CTA pinned to the bottom for equal-height cards.
+2. `app/src/pages/HomePage.jsx` — strips wrapped in `lg:grid-cols-2`.
+3. `app/src/components/home/Hero.jsx` — watermark `h-full w-auto` centred;
+   eyebrow removed (hero drops 155px → 128.5px as a consequence).
+4. `app/src/pages/__tests__/pages.test.jsx` + `app/e2e/journeys.spec.js` —
+   exact-match absence assertions.
+
+
 
