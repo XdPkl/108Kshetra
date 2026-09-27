@@ -1,7 +1,8 @@
 # HANDOVER — 108 Divya Kshetrams (2026-09-27, end of PO fix-list round 4 session)
 
-State: **PO fix list round 4 COMPLETE, pushed, CI+Deploy green, live verified.**
-`main` = `6d9280e` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
+State: **PO fix list round 4 COMPLETE + split-pill single-line fix (`0fef512`,
+TER v2.8), pushed, CI+Deploy green, live verified.**
+`main` = `0fef512` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
 Live: https://xdpkl.github.io/108Kshetra/ (bundle `index-DP35YQ-z.js`; live
 spot-checks: "108 Kshetras", "Inquire us", kshetra_admin gate, new hero
 description verbatim — the remaining "Vinnulaga Thirupathigal" string in the
