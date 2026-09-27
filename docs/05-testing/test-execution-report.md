@@ -462,3 +462,48 @@ pages: hero watermark span, hero CTA contrast, 106-kshetram yatra scope,
    stays diff-free).
 5. **Azhwars / Acharyas pages** — banner lead lines render on a single line
    on wide viewports (`xl` one-line pin; narrower screens still wrap).
+
+## Version 2.3 — Responsive Container Alignment Execution (2026-09-27)
+
+### Scope
+
+Developer-initiated layout alignment with the PO's reference site
+(kshetratours.com): the content column widens from 1152px (`max-w-6xl`) to
+1200px via a named Tailwind v4 container token, matching the reference
+site's `.container` while keeping our mobile-first breakpoint ladder and
+accessible viewport meta (no `user-scalable=0`). No content, CMS, or
+schema changes.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors (same 4 documented-accepted warnings) |
+| Unit tests (Vitest) | **209/209 pass (21 suites)** — no width assertions existed |
+| Coverage | **92.5% statements / 83.02% branches / 88.29% functions / 93.69% lines** (gate 80%) |
+| Production build | Clean — `max-w-site{max-width:var(--container-site)}` verified in emitted CSS |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** at the default 1280×720 viewport |
+
+### Deterministic layout measurements (Playwright `getBoundingClientRect`)
+
+| Check | @1920×1080 | @1440×900 | @1280×720 | @1024×768 |
+|---|---|---|---|---|
+| `main.app-main` width | 1200 (centered) | 1200 (centered) | 1200 (centered) | fluid 1024 |
+| footer container width | 1200 | 1200 | 1200 | fluid 1024 |
+| Home hero card width | 1152 | 1152 | 1152 | — |
+| watermark flush (L/R) | −1.8px | −1.8px | −1.8px | — |
+| Azhwars/Acharyas leads | — | — | 13px, one line, no overflow (1152px avail.) | 14px, wraps normally (`xl` off) |
+
+Round-1 geometry preserved: the wider card keeps the watermark trio's
+edge-flush span, and the one-line leads gain margin (inner width
+1104px → 1152px) while their narrow-viewport wrap behavior is unchanged.
+
+### Changes covered
+
+1. `app/src/styles/zip.css` — `@theme` gains `--container-site: 1200px`
+   (content column) and `--container-wide: 1550px` (wide-banner option,
+   unused for now).
+2. `app/src/App.jsx` — main shell `max-w-6xl` → `max-w-site`.
+3. `app/src/components/Footer.jsx` — footer container `max-w-6xl` →
+   `max-w-site` (header intentionally stays `max-w-7xl`).
+

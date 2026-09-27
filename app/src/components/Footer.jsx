@@ -13,7 +13,7 @@ export default function Footer() {
       {/* Top golden hairline accent */}
       <div className="h-[3px] bg-gradient-to-r from-transparent via-[#C99A2E] to-transparent"></div>
 
-      <div className="max-w-6xl mx-auto px-6 py-10 text-center text-sm space-y-3">
+      <div className="max-w-site mx-auto px-6 py-10 text-center text-sm space-y-3">
         {/* Sacred Emblems Row */}
         <div className="flex items-center justify-center gap-4 py-2">
           <ShankaIcon className="w-5 h-5" />

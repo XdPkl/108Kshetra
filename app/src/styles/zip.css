@@ -26,6 +26,11 @@
   --color-hairline: #E3D2AE;
   --color-vermilion: #A6261D;
   --color-sandal: #EEDCC0;
+
+  /* Named container sizes: 1200px content column (matches kshetratours.com's
+     .container) and 1550px wide-banner option (their .large-container). */
+  --container-site: 1200px;
+  --container-wide: 1550px;
 }
 
 @layer base {
