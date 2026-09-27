@@ -1,9 +1,10 @@
-# HANDOVER — 108 Divya Kshetrams (2026-09-27, end of mega-session: container alignment + PO fix-list rounds 2–4 + split-pill fix)
+# HANDOVER — 108 Divya Kshetrams (2026-09-27, after home page design refresh)
 
 State: **Everything pushed, CI+Deploy green, live verified.**
-`main` = `ea3ed23` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
-Live: https://xdpkl.github.io/108Kshetra/ (bundle `index-DMVadKIa.js` /
-`index-BrbEmBOq.css`). Working tree clean (untracked `.zcodeignore` — leave it).
+`main` = `658faf0` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
+Live: https://xdpkl.github.io/108Kshetra/ (bundle `index-BBCxjov8.js`;
+hero asset `hero-sunset-lamps-Qy3L536Q.jpg` 200). Working tree clean
+(untracked `.zcodeignore` — leave it).
 
 ## 1. What today delivered, in order (all same day, all live)
 
@@ -15,31 +16,45 @@ Live: https://xdpkl.github.io/108Kshetra/ (bundle `index-DMVadKIa.js` /
 | `78f3ea4` | **PO round 3 item 6 (design approved via options)**: full-bleed deep saffron gradient header band (`#7A2E00→#B34700`), gold hairlines, cream pills with gold hover, tours active pill flipped to gold idiom, cream dropdown panels | TER v2.6 |
 | `6d9280e` | **PO round 4** (12 items): nav hard single-row; strips one row of 4 tiles each (120×212); About tagline+etiquette single-line; "108 Kshetras"; hero +25% (160.5px) with new single-row description; SVG NamasteIcon replaces 🙏; About "Series" eyebrow + Vinnulaga circuit removed; "Inquire us"; CEO photo controls admin-gated | TER v2.7 |
 | `0fef512` | **Split-pill single-line fix**: nav children `shrink-0` + `whitespace-nowrap` (split pills compressed under space pressure and folded); 14px reclaimed at the lg edge; verified at 10 widths 1024–1920 | TER v2.8 |
+| `658faf0` | **HOME PAGE DESIGN REFRESH** (PO-approved mockup, iterated this session): full-bleed photo hero 364px (PO artwork `hero-sunset-lamps.jpg` via `make-hero-image.mjs`, "Explore Kshetrams" CTA, one-line description at lg+, invocation stack top-right — Nalayira line back ×1), "My yatra" tracker row (big 0/106, slim bar, gold "Mark a visit" → Browse, quiet Reset kept), large featured cards (`.featured-card`, home-only `FeaturedKshetramCard`; Browse keeps `KshetramCard`), stacked full-width azhwar/acharya bands (ivory→sandal, names BELOW tiles, eyebrow=title / heading=poetic-line mapping), closing ornament; `App.jsx` main drops container on home route for full-bleed bands; mockup + gate shots in `docs/03-design/mockups/refresh-2026-09/` and `docs/03-design/gate-shots/refresh-home/` | **TER v2.9 / TCS v1.8** |
 
 Final gates at handoff: **209/209 unit (21 suites) · 19/19 e2e · coverage
-92.36% stmts / 82.85% branches / 88.39% funcs / 93.74% lines (gate 80%) ·
+92.08% stmts / 82.53% branches / 87.38% funcs / 93.41% lines (gate 80%) ·
 oxlint 0 errors / 5 accepted warnings · build clean · CMS round-trip 11/11
-lossless + `sync-content --fixture --check` 0 diffs.**
+lossless + `sync-content --fixture --check` 0 diffs · visual gate 7/7.**
 
-Current key measurements: hero **160.5px**; strips **4 tiles, one row,
-120×212 each** (side-by-side 564px cards at ≥lg); nav **one row at
-1024–1920** (13px pills below xl, 19.5px at xl+; 1024 fits by ~14px —
-KNIFE-EDGE, re-run the width sweep if any label changes).
+Current key measurements: hero **364px, FULL-BLEED** (photo, crop anchored
+`object-[center_20%]` — gopuram crown fully visible); strips are **stacked
+full-width bands** (ivory azhwars → sandal acharyas), tiles 3:4 with names
+below; featured cards are large (h-60 photo); description **one line at
+≥1024** (wraps below by design); nav **one row at 1024–1920** (unchanged —
+13px pills below xl; KNIFE-EDGE at 1024, re-run the width sweep if any label
+changes). Home route main shell has NO container (full-bleed bands manage
+their own `max-w-site` columns) — every other route keeps the 1200px column.
 
 ## 2. Open items / likely next requests
 
-- **More PO fix lists** — they iterate fast (4 rounds today). Proven process:
-  map → measure baseline → fix → re-measure deterministically → gates → TER →
-  commit → push → CI/live check. For design-gated asks, present options with
-  previews FIRST (worked for the header band; AskUserQuestion).
+- **More PO fix lists** — they iterate fast (4 rounds + a design refresh
+  today). Proven process: map → measure baseline → fix → re-measure
+  deterministically → gates → TER → commit → push → CI/live check. For
+  design-gated asks, build a static HTML mockup first
+  (`docs/03-design/mockups/refresh-2026-09/home.html` is the approved
+  home reference) and iterate via screenshots + visual-judge — worked
+  perfectly for this refresh.
+- **Round-5 flags**: "Reset progress" was kept as a quiet link under the
+  tracker bar (mockup omitted it; kept for TC-13 + user control — one-line
+  removal if PO says drop). The old plaque watermark + hero-plaque asset
+  (`hero-plaque-watermark.png`, `make-hero-watermark.mjs`) are now UNUSED by
+  the hero — candidate for cleanup if the PO confirms. Naming deltas PO
+  image vs dataset ("Thiruvenkatam" vs "Thiruvengadam") remain dataset-owned;
+  card names render dataset values.
 - **PO Sanity setup** (~20 min) — unchanged; `studio/README.md`. Repo JSON is
   the `npm run import` source (all of today's content edits flow in).
 - Photos the PO may supply: Kulasekhara + Thiruppaan strip tiles (◆ fallback
   — no enwiki lead image), CEO portrait (upload controls exist behind the
-  admin flag), Srivilliputhur card, scaffold acharya dossiers.
-- Flags to expect in round 5: watermark is centred (~44% of hero width) not
-  edge-to-edge (the price of "fully visible" at 160px hero); hero description
-  wraps on phones; nav pills drop to 13px below 1280.
+  admin flag), Srivilliputhur card, scaffold acharya dossiers. The refresh's
+  8 saint tiles + 4 featured-card photos still resolve via `useWikiImage` /
+  enrichment (unchanged pipeline).
 - Jira sync still pending a fresh API token. `docs/03-design/mockups-v3/`
   stays deleted (PO decision 2026-09-25).
 
@@ -49,9 +64,15 @@ KNIFE-EDGE, re-run the width sweep if any label changes).
   (`kshetrams.js`, `enrichment/*`, `about.js`, `config.js`, `siteCopy.js`, …)
   preserve old import paths — do not bypass them. UI reaches data ONLY via
   `data/api.js`.
-- Saint strips API since round 3: `SaintStrip({headlineA, headlineB,
-  subline, saints, base, ctaLabel, ctaTo})` — HomePage decides which copy
-  fields pair into the headline row; tile width is fixed inside the component.
+- **Home refresh anatomy (2026-09)**: `Hero.jsx` (full-bleed photo, 364px,
+  `max-w-site` column, `lg:whitespace-nowrap` description), 
+  `YatraProgressTracker.jsx` (ivory band row; count via progressbar aria
+  contract — NO inline % label; fill 0 at zero, else `max(3, pct)`),
+  `FeaturedKshetramCard.jsx` (home-only; class `.featured-card`; Browse keeps
+  `KshetramCard`), `SaintStrip.jsx` (props: `eyebrow, title, lead, saints,
+  base, ctaLabel, ctaTo, tone 'ivory'|'sandal', withDivider` — HomePage maps
+  section label→eyebrow, poetic line→heading). `App.jsx` main drops
+  `max-w-site`/padding/`space-y-10` on `/` so bands run full-bleed.
 - Header: `site-header` band classes on the `<header>` element; nav children
   carry `shrink-0`/`nowrap` via `[&>*]:` variants on the nav; dropdown panels
   are `absolute top-full pt-1.5` wrappers (hover bridge) with cream cards.
@@ -68,18 +89,21 @@ KNIFE-EDGE, re-run the width sweep if any label changes).
 - Photo sizes baked into sync: card 640 / portrait 800 / lightbox 1280,
   `&auto=format`, Sanity CDN. `wiki` title = no-photo fallback; saint photos
   resolve at runtime via `useWikiImage` → REST summary API.
-- Registers/dates: **TER v2.8; TCS v1.7**; US-CMS-01. index.html title/meta
+- Registers/dates: **TER v2.9; TCS v1.8**; US-CMS-01. index.html title/meta
   and primary nav pill labels developer-owned (siteCopy.js header note) —
-  though the PO now drives label text directly (today: "108 Kshetras").
+  though the PO now drives label text directly (today: "Explore Kshetrams").
 
 ## 4. Gotchas (accumulated — ALL still valid)
 
 1. **Unlayered legacy CSS beats every Tailwind utility** (cascade layers).
    Offenders: `base.css a {}` (scoped out of header nav via
-   `.site-header nav a { color: inherit }`), `base.css h1 {}` (defeated with
-   `!` in the hero only — other pages' h1s still legacy-styled). Before
-   fighting a utility that "doesn't work", grep `styles/*.css`. Tailwind v4
-   important = TRAILING bang (`hover:text-[#E2C47C]!`).
+   `.site-header nav a { color: inherit }`; the 2026-09 home sections instead
+   pin link colors with `!` bangs), `base.css h1 {}` (defeated with `!` in
+   the hero only), `base.css h2/h3 {}` (the 2026-09 home headings pin
+   size/color/leading with `!` bangs — other pages' h2/h3 stay
+   legacy-styled). Before fighting a utility that "doesn't work", grep
+   `styles/*.css`. Tailwind v4 important = TRAILING bang
+   (`hover:text-[#E2C47C]!`).
 2. **The `color: inherit` override makes labels climb to the nav's base
    color** — the nav wrapper is now `text-[#FFFDF7]`; dropdown panel text
    must keep its own explicit colors (they do).
