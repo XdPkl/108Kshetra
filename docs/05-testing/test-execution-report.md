@@ -419,7 +419,7 @@ runtime dependency on the CMS.
 
 ---
 
-## Version 2.2 — PO Fix List Round 1 Execution (2026-09-25)
+## Version 2.2 — PO Fix List Round 1 Execution (2026-09-27)
 
 ### Scope
 
