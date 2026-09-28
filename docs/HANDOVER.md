@@ -1,10 +1,13 @@
-# HANDOVER — 108 Divya Kshetrams (2026-09-27, after home page design refresh)
+# HANDOVER — 108 Divya Kshetrams (2026-09-27, end of refresh session)
 
-State: **Everything pushed, CI+Deploy green, live verified.**
-`main` = `658faf0` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
+State: **Everything pushed, CI+Deploy green on `1acd716`, live verified.**
+`main` = `1acd716` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
 Live: https://xdpkl.github.io/108Kshetra/ (bundle `index-BBCxjov8.js`;
 hero asset `hero-sunset-lamps-Qy3L536Q.jpg` 200). Working tree clean
-(untracked `.zcodeignore` — leave it).
+(untracked `.zcodeignore` — leave it). Scratch scripts deleted; no preview
+server lingering on :4173. The refresh session is complete — nothing in
+flight; next context starts fresh on whatever the PO brings (likely more
+page refreshes in the same mockup-first style, or PO round 5).
 
 ## 1. What today delivered, in order (all same day, all live)
 
@@ -121,7 +124,10 @@ their own `max-w-site` columns) — every other route keeps the 1200px column.
    `ensureAlpha().raw()` yields 4 — hardcode CH=4 after ensureAlpha.
 6. **Wikipedia photo verification** via REST summary API
    (`/api/rest_v1/page/summary/<title>`); enwiki has no lead image for
-   Kulasekhara/Thiruppaan Alvar, Vedanta Desika.
+   Kulasekhara/Thiruppaan Alvar, Vedanta Desika. Hotlinking thumbs for
+   mockups: upload.wikimedia.org serves only FIXED widths now (330 / 500 /
+   960 / 1280 / 1920… — 640px returns HTTP 400 "use thumbnail sizes listed");
+   use exactly the `thumbnail.source` the API returns, or bump to 960/1920.
 7. **Exact-match text assertions**: "Nalayira Divya Prabandham" still exists
    in the hero description COPY (clamped to 1 line) — its absence tests use
    `getByText('...', { exact: true })` / exact-string queries, never regex.
