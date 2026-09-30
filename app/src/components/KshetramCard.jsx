@@ -1,6 +1,6 @@
 /**
  * KshetramCard — 2026-09-30 restyle (PO mockup): photo with the trip chip
- * and DD-serial tag (the "Photo coming soon" state shows the gold gopuram
+ * and DD-serial tag (the "Photo coming soon" state shows the PO gopuram illustration instead of the former line-art) — Tamil
  * line-art), Tamil + display name block, hairline, temple/location lines,
  * region pill, and an action row of the solid gold "View temple" action
  * beside "Mark visited". Whole-card navigation overlay so interactive
@@ -14,7 +14,7 @@ import { useVisited } from '../hooks/useVisited.js';
 import { useTrip } from '../hooks/useTrip.js';
 import { useWikiImage } from '../hooks/useWikiImage.js';
 import { getDDSerial } from '../data/api.js';
-import GopuramArt from './GopuramArt.jsx';
+import gopuramIllustration from '../assets/gopuram-illustration.jpg';
 
 export default function KshetramCard({ kshetram }) {
   const { isVisited, toggleVisited } = useVisited();
@@ -65,7 +65,7 @@ export default function KshetramCard({ kshetram }) {
           />
         ) : (
           <>
-            <GopuramArt className="absolute inset-0 m-auto h-[75%] w-[70%] text-[#C99A2E] opacity-55" />
+            <img src={gopuramIllustration} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
             <p className="absolute inset-x-0 bottom-4 text-center text-[13px] font-medium text-[#66523D]/80">
               Photo coming soon
             </p>

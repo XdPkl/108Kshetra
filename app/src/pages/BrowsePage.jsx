@@ -1,6 +1,6 @@
 /**
  * BrowsePage — 2026-09-30 restyle (PO mockup "Explore the 108 Divya Desams"):
- * display header with gopuram line-art + quote, a white panel holding the
+ * display header with the PO gopuram illustration + quote, a white panel holding the
  * search input and region chips, a scope-pill row (All temples / Visited /
  * In my trip) beside a collapsed "More filters" disclosure (state / deity
  * form / azhwar selects), a serif result count with the sort control, and
@@ -14,7 +14,7 @@ import { getFilterOptions } from '../data/api.js';
 import { useVisited } from '../hooks/useVisited.js';
 import { useTrip } from '../hooks/useTrip.js';
 import KshetramCard from '../components/KshetramCard.jsx';
-import GopuramArt from '../components/GopuramArt.jsx';
+import gopuramIllustration from '../assets/gopuram-illustration.jpg';
 import { SITE_COPY } from '../data/siteCopy.js';
 import { Search } from 'lucide-react';
 
@@ -64,7 +64,7 @@ export default function BrowsePage() {
 
   return (
     <div>
-      {/* Display header with gopuram line-art + quote */}
+      {/* Display header with the PO gopuram illustration + quote */}
       <div className="flex items-start justify-between gap-8 pb-8">
         <div>
           <p className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-[#B34700]">
@@ -79,7 +79,12 @@ export default function BrowsePage() {
           </p>
         </div>
         <div className="hidden shrink-0 items-start gap-5 pt-1 lg:flex">
-          <GopuramArt className="h-[108px] w-[180px] text-[#C99A2E] opacity-85" />
+          <img
+            src={gopuramIllustration}
+            alt=""
+            aria-hidden="true"
+            className="h-[100px] w-[216px] rounded-lg object-cover"
+          />
           <figure className="max-w-[220px] text-right">
             <blockquote className="font-display text-[17px] italic leading-snug text-[#7A2E00]">
               &ldquo;{SITE_COPY.browse.quote}&rdquo;

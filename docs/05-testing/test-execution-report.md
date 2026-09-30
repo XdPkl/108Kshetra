@@ -944,3 +944,37 @@ and ◆ fallback (mockup-faithful; detail pages keep everything).
 | Header | Title one line at 1440 (h1 height 54px after the 52px + narrower art-block tightening; 56px wrapped) — quote block visible at lg+ |
 | Card anatomy | 26px display name, hairline, region pill only (deity pill absent), no pasuram tag, DD #1 tag, "Add to trip" chip, "Photo coming soon" placeholder, action row one line (gold `rgb(150,115,31)` button + Mark visited), overlay href intact |
 | Interactions | "Visited (0)" pill → count "0 kshetrams"; "More filters" opens; State=Kerala → "11 kshetrams" |
+
+---
+
+## Version 2.12 — Gopuram Illustration in Explore (2026-09-30, PO follow-up)
+
+### Scope
+
+PO supplied a finished gopuram illustration (soft-ivory panoramic, gold-line
+temple complex with palms) to replace the GopuramArt line-art SVG in the
+browse-card "Photo coming soon" placeholder and in the Explore header's
+top-right art slot (quote retained beside it).
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/assets/gopuram-illustration.jpg` | NEW: PO artwork converted via `scripts/make-hero-image.mjs` (sharp, 1860×846, 77 KB) |
+| `app/src/components/KshetramCard.jsx` | Placeholder now renders the illustration full-bleed (`object-cover`) under the "Photo coming soon" caption; GopuramArt import dropped |
+| `app/src/pages/BrowsePage.jsx` | Header art slot now the illustration (216×100, rounded, decorative `alt=""`); GopuramArt import dropped |
+| `app/src/components/GopuramArt.jsx` | DELETED (no remaining references) |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (unchanged set) |
+| Unit tests (Vitest) | **209/209 pass (21 suites)** |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Visual gate | 2/2 renders pass (header slot + card placeholders) — `docs/03-design/gate-shots/explore-artwork/` |
+
+Deterministic checks: header illustration 216×100 loaded; 108 placeholder
+illustrations render under cards (cards with a real Wikipedia photo still
+show the photo — unchanged pipeline); quote intact; no horizontal overflow.
