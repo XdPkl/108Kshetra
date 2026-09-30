@@ -36,8 +36,8 @@ export default function FeaturedKshetrams() {
           </Link>
         </div>
 
-        {/* Card grid */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Card grid — 2×2 of large horizontal cards (PO mockup 2026-09-30) */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {featured.map((k) => <FeaturedKshetramCard key={k.id} kshetram={k} />)}
         </div>
       </div>

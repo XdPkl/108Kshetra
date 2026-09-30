@@ -826,3 +826,63 @@ their own `max-w-site` columns; every other route keeps the 1200px column.
 "Reset progress" is retained as a quiet text link under the tracker bar — the
 approved mockup omitted it; it was kept to preserve the TC-13 reset flow and
 the user's data control. Drop it on request (one-line removal).
+
+---
+
+## Version 2.10 — Featured Kshetrams Restyle (2026-09-30)
+
+### Scope
+
+Implementation of the PO-approved featured-section mockup (supplied
+2026-09-30): the home "Featured Kshetrams" section moves from a 4-across row
+of vertical photo-top cards to a **2×2 grid of large horizontal cards**
+(photo left, content right). Adds the deity pill and the solid
+"View temple →" action, retitles the lead, and drops the DD-serial/pasuram
+photo tags (PO confirmed removal). Section header, trip chip text, visited
+badge and aria contracts unchanged.
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/components/home/FeaturedKshetrams.jsx` | Grid `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4` → `grid-cols-1 sm:grid-cols-2` (2×2, cards ~564px wide in the 1200px column) |
+| `app/src/components/home/FeaturedKshetramCard.jsx` | Rewritten: horizontal card (`sm:flex-row`), photo column `sm:w-[44%]` full-height (h-56 photo-top stack below `sm`); DD #/Pasuram tags removed (and `getDDSerial` import dropped); gold hairline under the display name; **deity pill** (`kshetram.deity`, cream + gold border); action row `relative z-10` with solid `bg-[#7A2E00]` "View temple →" (span, ArrowRight) + outlined "Mark visited" (hidden when visited); trip chip restyled cream with `ring-[#E3D2AE]` border; `ExternalLink` → `ArrowRight` |
+| `app/src/data/content/site-copy.json` | `home.featured.lead` → "Find your next sacred stop." (value-only edit) |
+| `docs/03-design/gate-shots/featured-restyle/` | NEW: 4 gate shots (1440 / 1920 / 390 / visited state) |
+
+### Defect found & fixed during verification
+
+The "Mark visited" action button was intercepted by the whole-card overlay
+link (`absolute inset-0 z-0`) — it sat in normal flow below the overlay.
+This was latent in the v2.9 card too (the trip chip worked only because it
+carries `z-10`). Fixed by lifting the action row (`relative z-10`).
+Deterministically reproduced via Playwright click-interception timeout.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (unchanged set) |
+| Unit tests (Vitest) | **209/209 pass (21 suites)** — no test-contract changes needed (overlay aria-labels, `.featured-card` count, `+ Trip`/`✓ In trip` pins all survive) |
+| Coverage | **92.07% statements / 82.56% branches / 87.38% functions / 93.40% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| CMS round-trip + sync self-test | Offline 11/11 lossless (site-copy value-only edit); fixture regenerated; `sync-content --fixture --check` → 0 diffs |
+| Visual gate | 4/4 renders pass vs the PO mockup (1440 / 1920 / 390 / visited) — `docs/03-design/gate-shots/featured-restyle/` |
+
+### Deterministic verification (Playwright, production preview)
+
+| Check | Result |
+|---|---|
+| Grid shape | 2 rows × 2 cols at 1280 / 1440 / 1920; cards 564px in the 1200px container; no horizontal overflow |
+| Photo split | Photo column 247px (44%), full card height (307px); content column right |
+| Action row | "View temple" (126px, `rgb(122,46,0)` fill) and "Mark visited" (128px, 1px gold border) on ONE line, ~11px gap — after the px-3.5/gap-2.5 tightening (px-4/gap-3 wrapped at the 263px content width) |
+| Anatomy order | Tamil (gold) → 28px display name → 1px hairline → temple (semibold) → location → deity pill ("Ranganatha") → actions |
+| Photo tags | 0 DD#/Pasuram tags on featured cards (Browse `KshetramCard` keeps its own) |
+| Interactions | Trip toggle `+ Trip` → `✓ In trip` works through the chip; visited toggle works after the z-10 fix; overlay href `/kshetram/srirangam` intact |
+
+### Deltas relayed to PO (dataset-owned, not changed)
+
+Card names render dataset values: "Thiruvengadam (Tirumala)" (mockup shows
+"Thiruvenkatam") — per the standing naming decision. Deity pill labels come
+from `kshetram.deity`.
