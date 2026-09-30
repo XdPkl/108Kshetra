@@ -1106,3 +1106,62 @@ groups with numbered medallions, share-link restore.
 | Search | "kanchipuram" → 1 marker; dropdown "Chola Nadu" narrows (unit-asserted) |
 | Trip merge | Seeded 3 stops: meta "3 stops · about 824 km", Order/Share/Clear present; In-trip scope → dashed polyline + 3 numbered markers; `/trip?t=srirangam` redirects to `/map` and shows the restore notice |
 | Layout | No horizontal overflow at 1440/390; sticky header above map at all scroll positions (isolation verified) |
+
+## Version 2.16 — Plan your Yatra: Matrix + Merged Nav (2026-09-30, PO round 7)
+
+### Scope
+
+PO fix list on the Yatra Atlas: (a) temple cards must list WITHOUT sharing
+location (the old nearest-cards section was GPS-gated and rendered nothing
+before "Show my location"); distances only fill in after locating;
+(b) the cards move OUT of the sidebar into a full-width matrix BELOW the
+map ("remaining cards arranged in row and column"); (c) the header's two
+pills "Map" and "My Yatra" (both → `/map` since v2.15) merge into one item
+labelled **"Plan Yatra"**; (d) the map-marker popup's solid-saffron
+"Open page" button becomes a gold text link **"Show Temple"** (theme gold
+`#96731F`, same as the explore "View temple" gold); (e) the header ornament
+icon left of "Divine Abodes / Timeless Grace" becomes the PO gopuram
+artwork, vertically aligned with the title line; (f) the page title
+"Map of the Divya Desams" → **"Plan your Yatra"** (site copy).
+
+NOTE (flagged decision): the PO said "change the icon to the attached one"
+but no image file reached the repo, so the PO's own gopuram artwork
+(`gopuram-illustration.jpg`, converted in v2.12) is used. Swap on request
+when the intended asset arrives.
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/pages/MapPage.jsx` | `nearest` memo (GPS-gated, slice 12) → `cardList`: all filtered desams always listed; `km` computed only when `me` is set (then nearest-first sort). Card section moved from the sidebar to a full-width `section[aria-label="Temples in view"]` below the map grid — `ul` grid `sm:grid-cols-2 xl:grid-cols-3` with an empty-filter fallback note; the straight-line-distance footnote renders only when GPS is active. `NearestCard` renders the `{km} km away` line conditionally. Popup link: `btn btn--primary btn--small` "Open page" → gold underlined text link "Show Temple" (`text-[#96731F]!`, hover `#7A2E00!` — bangs beat the unlayered `a {}` rule). Header ornament: lotus SVG → `gopuram-illustration.jpg` thumbnail (h-11 w-16 rounded, ring), block re-homed inside the `h1` wrapper (`right-0 top-1/2 -translate-y-1/2`) so it centers on the title line |
+| `app/src/components/Header.jsx` | Desktop nav: "Map" + "My Yatra" NavLinks → one **"Plan Yatra"** NavLink (`/map`, active on `/map`, RouteIcon, live trip badge); unused `MapPin` import removed. Mobile drawer: "Sacred Map" + "My Yatra Route" entries merge into one "Plan Yatra" entry (atlas/distances/itinerary subtitle, badge); the now-empty planner group is removed |
+| `app/src/data/content/site-copy.json` + `scripts/__fixtures__/sync-response.json` | `map.title` → "Plan your Yatra" (generic site-copy transform — no GROQ/schema edits, per US-CMS-01) |
+
+### Test contract updates (lockstep)
+
+| Suite | Change |
+|---|---|
+| `yatraPages.test.jsx` | Heading regex → `/plan your yatra/i`. New test: matrix lists >100 "View temple" cards with NO "km away" before locating; after a mocked `getCurrentPosition`, all cards carry distances (15s timeout — full 108-card render) |
+| `v3Branches.test.jsx` | "MapPage extras": heading → region `Temples in view`; after clearing GPS the cards persist but every "km away" line is gone (15s timeout) |
+| `e2e/yatra.spec.js` | TC-14: heading regex + popup link `/show temple/i`. TC-15: header pill `/plan yatra 3/i` (merged item carries the badge) |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (accepted set) |
+| Unit tests (Vitest) | **212/212 pass (21 suites)** |
+| Coverage | **90.57% statements / 83.34% branches / 84.68% functions / 91.81% lines** (gate 80%) |
+| CMS round-trip | `sync-content --fixture --check` 0 diffs (fixture updated with the title) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** (incl. TC-14 popup → "Show Temple" → detail) |
+| Visual gate | 3/3 renders pass (top / matrix / popup) — `docs/03-design/gate-shots/plan-yatra/` |
+
+### Deterministic verification (Playwright, production preview)
+
+| Check | Result |
+|---|---|
+| Popup link | `textContent` "Show Temple", computed color `rgb(150, 115, 31)` = `#96731F` theme gold |
+| Matrix | 3 columns at 1440, no "km away" text before locating; count reads "106 results" |
+| Nav | Exactly one map-family pill ("Plan Yatra", active) in the desktop header; drawer shows the merged entry |
+| Known capture artifact | At zoom ≥ 9 in embedded/headless captures most CircleMarker paths cull to `d="M0 0"` (Leaflet renderer padding) — verified identical on the v2.15 live build; e2e TC-14 exercises the real click path |

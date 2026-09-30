@@ -234,7 +234,7 @@ describe('BrowsePage status filters (UXD v3.0)', () => {
 });
 
 describe('MapPage extras (UXD v3.0)', () => {
-  it('shows the location card, nearest cards and focus actions after locating', async () => {
+  it('shows the location card and focus actions after locating; cards persist without distances after clearing', async () => {
     const user = userEvent.setup();
     Object.defineProperty(navigator, 'geolocation', {
       value: { getCurrentPosition: (ok) => ok({ coords: { latitude: 10.8624, longitude: 78.6901 } }) },
@@ -243,17 +243,21 @@ describe('MapPage extras (UXD v3.0)', () => {
     renderAt('/map', <MapPage />);
     await user.click(screen.getByRole('button', { name: /show my location/i }));
     expect(await screen.findByText(/your darshan distances are live below/i)).toBeInTheDocument();
-    expect(screen.getByText(/temples in this area/i)).toBeInTheDocument();
-    // 2026-09-30 refresh: nearest rows are cards with the browse action set
+    expect(screen.getByRole('region', { name: /temples in view/i })).toBeInTheDocument();
+    // 2026-09-30 refresh: matrix rows are cards with the browse action set
     expect(screen.getAllByRole('link', { name: /view temple/i }).length).toBeGreaterThan(0);
     expect(screen.getAllByRole('button', { name: /add to trip/i }).length).toBeGreaterThan(0);
     expect(screen.getAllByRole('button', { name: /mark visited/i }).length).toBeGreaterThan(0);
     expect(screen.getByText(/\d+ results/i)).toBeInTheDocument();
     await user.click(screen.getAllByRole('button', { name: /^focus$/i })[0]);
     await user.click(screen.getByRole('button', { name: /clear my location/i }));
-    expect(screen.queryByText(/temples in this area/i)).not.toBeInTheDocument();
+    // PO 2026-09-30: the matrix always lists temples — clearing the GPS
+    // only removes the distance lines, never the cards
+    expect(screen.getByRole('region', { name: /temples in view/i })).toBeInTheDocument();
+    expect(screen.getAllByRole('link', { name: /view temple/i }).length).toBeGreaterThan(0);
+    expect(screen.queryByText(/km away/)).not.toBeInTheDocument();
     delete navigator.geolocation;
-  });
+  }, 15_000);
 });
 
 describe('AboutPage desk branches (UXD v3.0)', () => {

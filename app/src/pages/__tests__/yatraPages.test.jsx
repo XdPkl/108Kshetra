@@ -106,7 +106,7 @@ describe('Trip planner on the merged Yatra Atlas (UT-TRP-02/03, FR-80/81)', () =
 describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
   it('renders the map frame with markers for every plotted desam and a legend', () => {
     renderAt('/map', <MapPage />);
-    expect(screen.getByRole('heading', { name: /map of the divya desams/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /plan your yatra/i })).toBeInTheDocument();
     expect(screen.getByTestId('map-container')).toBeInTheDocument();
     expect(screen.getAllByTestId('map-marker').length).toBeGreaterThan(100);
     expect(screen.getAllByText('Chola Nadu').length).toBeGreaterThanOrEqual(1);
@@ -171,6 +171,25 @@ describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
     await user.click(screen.getByRole('button', { name: /show my location/i }));
     expect(screen.getByText(/location is not supported/i)).toBeInTheDocument();
   });
+
+  it('lists temple cards without distances, then fills distances after locating (PO 2026-09-30)', async () => {
+    const user = userEvent.setup();
+    renderAt('/map', <MapPage />);
+    // The matrix below the map lists every plotted desam BEFORE any location
+    // is shared — cards without the "km away" line
+    const matrix = screen.getByRole('region', { name: /temples in view/i });
+    expect(within(matrix).getAllByRole('link', { name: /view temple/i }).length).toBeGreaterThan(100);
+    expect(within(matrix).queryByText(/km away/)).not.toBeInTheDocument();
+
+    Object.defineProperty(navigator, 'geolocation', {
+      value: { getCurrentPosition: (ok) => ok({ coords: { latitude: 10.8624, longitude: 78.6901 } }) },
+      configurable: true,
+    });
+    await user.click(screen.getByRole('button', { name: /show my location/i }));
+    // Same matrix now carries the straight-line distances, nearest first
+    expect((await within(matrix).findAllByText(/km away/)).length).toBeGreaterThan(100);
+    delete navigator.geolocation;
+  }, 15_000);
 
   it('renders the lazy mini-map inside the mocked Leaflet frame (FR-82, NFR-11)', () => {
     render(

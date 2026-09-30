@@ -1,12 +1,15 @@
 /**
  * MapPage — the merged Yatra Atlas (2026-09-30 PO decision: Map + Trip are
  * one page). The approved atlas look (display header, sidebar search +
- * region dropdown + All/Visited/In-trip scope pills, nearest desam cards,
- * clustered Leaflet map with Fit-all and an on-map legend) carries the trip
- * planner as a full-width section below: notice strip, By region/Route
- * order views, "Order my route — nearest first", Share/Print/Clear rail and
- * the numbered stop lists. When the In-trip scope is active the dashed
- * route polyline + numbered stop tooltips render on the atlas itself.
+ * region dropdown + All/Visited/In-trip scope pills) carries the temple
+ * matrix BELOW the map: every filtered desam as a card in a responsive
+ * grid — listed without distances until the pilgrim shares their location,
+ * then nearest-first with live straight-line km (PO 2026-09-30 round).
+ * The trip planner follows as a full-width section: notice strip, By
+ * region/Route order views, "Order my route — nearest first", Share/Print/
+ * Clear rail and the numbered stop lists. When the In-trip scope is active
+ * the dashed route polyline + numbered stop tooltips render on the atlas
+ * itself.
  * Clusters are hand-rolled (grid in layer space, no plugin): they only form
  * with a live map instance below zoom 9, so jsdom/unit tests and e2e zoomed
  * views see plain CircleMarkers. /trip redirects here (share links keep
@@ -21,6 +24,7 @@ import {
   Plus, Printer, RotateCcw, Share2, Trash2,
 } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
+import gopuramArt from '../assets/gopuram-illustration.jpg';
 import { getAllKshetramsEnriched, getAllAzhwars } from '../data/api.js';
 import { MAPS_URL_TEMPLATE } from '../data/config.js';
 import { buildRegionColors } from '../utils/regionColors.js';
@@ -55,9 +59,11 @@ function clusterIcon(count) {
   });
 }
 
-/** Nearest-first desam card — photo thumb, live distances, and the same
+/** Desam card for the matrix below the atlas — photo thumb and the same
  * action set as the browse cards (View temple / Add to trip / Mark visited)
- * plus the map-specific Focus and Directions actions. */
+ * plus the map-specific Focus and Directions actions. `km` is null until
+ * the pilgrim shares their location (PO 2026-09-30: cards list without
+ * distances first, distances fill in after "Show my location"). */
 function NearestCard({ kshetram: k, km, mapApi }) {
   const { isVisited, toggleVisited } = useVisited();
   const visited = isVisited(k.id);
@@ -76,7 +82,9 @@ function NearestCard({ kshetram: k, km, mapApi }) {
           </Link>
           <p className="truncate text-[12px] text-[#332417]">{k.temple}</p>
           <p className="truncate text-[12px] text-[#66523D]">{k.place}</p>
-          <p className="text-[12px] font-bold text-[#B34700] tabular-nums">{km} km away</p>
+          {km != null ? (
+            <p className="text-[12px] font-bold text-[#B34700] tabular-nums">{km} km away</p>
+          ) : null}
         </div>
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -184,13 +192,13 @@ export default function MapPage() {
     return regionShown;
   }, [regionShown, scope, visitedIds, tripIds]);
 
-  const nearest = useMemo(() => {
-    if (!me) return [];
-    return [...shown]
-      .map((k) => ({ kshetram: k, km: distanceKm(me, k.coords) }))
-      .sort((a, b) => a.km - b.km)
-      .slice(0, 12);
-  }, [me, shown]);
+  // Temple matrix below the atlas: always listed (dataset order until the
+  // pilgrim shares their location, then nearest-first with live distances)
+  const cardList = useMemo(() => {
+    const list = shown.map((k) => ({ kshetram: k, km: me ? distanceKm(me, k.coords) : null }));
+    if (me) list.sort((a, b) => a.km - b.km);
+    return list;
+  }, [shown, me]);
 
   // ---- trip planner (merged from TripPage) ----
   const stops = tripIds.map((id) => kshetramIndex.get(id)).filter(Boolean);
@@ -306,23 +314,29 @@ export default function MapPage() {
 
   return (
     <div>
-      {/* Display header with lotus ornament + location pills */}
+      {/* Display header with gopuram ornament + location pills */}
       <header className="relative pb-6">
-        <div className="hidden items-center gap-2.5 absolute right-0 top-1 lg:flex" aria-hidden="true">
-          <svg viewBox="0 0 24 24" className="h-7 w-7 text-[#C99A2E]" fill="currentColor">
-            <path d="M12 2c2 3 2 5 0 8-2-3-2-5 0-8zm0 8c3 1 5 3 5 7H7c0-4 2-6 5-7zM4 21h16v1H4v-1z" />
-          </svg>
-          <span className="font-display text-[15px] italic leading-tight text-[#96731F]">
-            Divine Abodes<br />Timeless Grace
-          </span>
-        </div>
         <p className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-[#B34700]">
           {SITE_COPY.map.eyebrow}
         </p>
         {/* ! beats the unlayered legacy h1 rule in base.css */}
-        <h1 className="mt-2 font-display text-[44px]! leading-[1.04]! font-semibold text-[#5C1F00]! sm:text-[48px]!">
-          {SITE_COPY.map.title}
-        </h1>
+        <div className="relative">
+          <h1 className="mt-2 font-display text-[44px]! leading-[1.04]! font-semibold text-[#5C1F00]! sm:text-[48px]!">
+            {SITE_COPY.map.title}
+          </h1>
+          {/* PO 2026-09-30: gopuram artwork left of the ornament wordings,
+              vertically centred on the title line */}
+          <div className="hidden lg:flex items-center gap-2.5 absolute right-0 top-1/2 -translate-y-1/2" aria-hidden="true">
+            <img
+              src={gopuramArt}
+              alt=""
+              className="h-11 w-16 shrink-0 rounded-lg object-cover shadow-xs ring-1 ring-[#C99A2E]/40"
+            />
+            <span className="font-display text-[15px] italic leading-tight text-[#96731F]">
+              Divine Abodes<br />Timeless Grace
+            </span>
+          </div>
+        </div>
         <p className="mt-2 text-[15px] text-[#66523D]" aria-live="polite">
           {geoMessage || `${shown.length} of ${plotted.length} desams shown · visited desams carry a gold ring`}
         </p>
@@ -436,24 +450,6 @@ export default function MapPage() {
               In trip ({scopeCounts.trip})
             </button>
           </div>
-
-          {/* Nearest-first cards (after geolocation) */}
-          {me && nearest.length > 0 ? (
-            <section aria-label="Nearest Divya Desams from you">
-              <div className="mb-3 flex items-baseline justify-between gap-3">
-                <h2 className="font-display text-[22px] font-semibold text-[#5C1F00]">
-                  Temples in this area
-                </h2>
-                <span className="text-[12px] font-medium text-[#66523D]">{nearest.length} results</span>
-              </div>
-              <ul className="space-y-3">
-                {nearest.map(({ kshetram: k, km }) => (
-                  <NearestCard key={k.id} kshetram={k} km={km} mapApi={mapApi} />
-                ))}
-              </ul>
-              <p className="text-[11px] text-[#66523D] italic mt-2.5">Distances are straight-line and approximate.</p>
-            </section>
-          ) : null}
         </div>
 
         {/* Map frame with fit-all control + on-map legend (`isolate` keeps
@@ -518,8 +514,13 @@ export default function MapPage() {
                         <p className="map-popup__tamil" lang="ta">{k.tamilName}</p>
                         <p className="map-popup__name">{k.name}</p>
                         <div className="map-popup__actions">
-                          <Link className="btn btn--primary btn--small" to={`/kshetram/${k.id}`}>
-                            Open page
+                          {/* Gold text link (PO 2026-09-30); the ! bangs beat
+                              the unlayered legacy `a { color }` rule */}
+                          <Link
+                            to={`/kshetram/${k.id}`}
+                            className="text-[13px] font-bold text-[#96731F]! underline decoration-[#C99A2E]/70 underline-offset-4 transition-colors hover:text-[#7A2E00]!"
+                          >
+                            Show Temple
                           </Link>
                           <TripControls id={k.id} />
                         </div>
@@ -567,6 +568,31 @@ export default function MapPage() {
           </div>
         </div>
       </div>
+
+      {/* Temple matrix — every filtered desam as a card, in rows and
+          columns (PO 2026-09-30); distances appear once GPS is shared */}
+      <section aria-label="Temples in view" className="mt-8">
+        <div className="mb-3 flex items-baseline justify-between gap-3">
+          <h2 className="font-display text-[22px] font-semibold text-[#5C1F00]">
+            Temples in view
+          </h2>
+          <span className="text-[12px] font-medium text-[#66523D]">{cardList.length} results</span>
+        </div>
+        {cardList.length > 0 ? (
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {cardList.map(({ kshetram: k, km }) => (
+              <NearestCard key={k.id} kshetram={k} km={km} mapApi={mapApi} />
+            ))}
+          </ul>
+        ) : (
+          <p className="rounded-xl border border-[#E3D2AE] bg-[#FFFDF7] p-4 text-sm text-[#66523D]">
+            No temples match the current filters — clear the search or pick another region.
+          </p>
+        )}
+        {me ? (
+          <p className="text-[11px] text-[#66523D] italic mt-2.5">Distances are straight-line and approximate.</p>
+        ) : null}
+      </section>
 
       {/* Region-color legend card */}
       <div className="mt-6 rounded-2xl border border-[#C99A2E]/40 bg-[#FFFDF7] p-4 sm:p-5 shadow-xs">

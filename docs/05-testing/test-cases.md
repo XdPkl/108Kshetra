@@ -222,3 +222,23 @@ Quality gates: TC-QA-01 Pass (0 errors; 5 accepted warnings) · TC-QA-02 Pass
 E2E **19/19**. Execution recorded in TER v2.9.
 
 *End of Addendum — TCS-108K-008 v1.8*
+
+## Version 1.9 — Plan your Yatra Contract Updates (2026-09-30)
+
+PO round-7 changes to the Yatra Atlas (TER v2.16). Data contracts
+unchanged; layout/behavioral contracts moved in lockstep:
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-MAP-01 | Page title | h1 "Map of the Divya Desams" → **"Plan your Yatra"** (`site-copy.json map.title`; fixture updated, round-trip lossless) |
+| UT-MAP-02 | Temple matrix | The card section is no longer GPS-gated: region `aria-label "Temples in view"` lists every filtered desam as a card in a `sm:2/xl:3`-column grid below the map, WITHOUT distance lines; after a mocked `getCurrentPosition`, all cards carry "{km} km away" (nearest-first) |
+| UT-MAP-02 | GPS clear | Clearing location removes only the distance lines — cards persist (was: whole section unmounted) |
+| UT-TRP/TC-14 | Popup CTA | Marker popup "Open page" solid button → gold `#96731F` text link **"Show Temple"** (e2e asserts `/show temple/i`) |
+| TC-02/TC-15 | Nav merge | Header "Map" + "My Yatra" pills → one **"Plan Yatra"** pill (`/map`, active on `/map`, live trip badge); mobile drawer "Sacred Map" + "My Yatra Route" merge likewise (e2e asserts `/plan yatra 3/i`) |
+| UT-MAP-01 | Ornament | Header ornament icon = gopuram artwork thumbnail left of "Divine Abodes / Timeless Grace", vertically centred on the title line |
+
+Quality gates: TC-QA-01 Pass (0 errors; 5 accepted warnings) · TC-QA-02 Pass
+(**212/212 tests, 21 suites**; 90.57/83.34/84.68/91.81) · TC-QA-03 Pass ·
+E2E **19/19**. Execution recorded in TER v2.16.
+
+*End of Addendum — TCS-108K-008 v1.9*

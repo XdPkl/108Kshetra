@@ -10,7 +10,6 @@ import {
   Menu,
   X,
   Compass,
-  MapPin,
   Route as RouteIcon,
   GraduationCap,
   Award,
@@ -259,26 +258,16 @@ export default function Header() {
             )}
           </div>
 
-          {/* C. SACRED MAP */}
+          {/* C. PLAN YATRA (PO 2026-09-30: Map + My Yatra merged into one
+              item — lands on the Yatra Atlas with the live trip badge) */}
           <NavLink
             to="/map"
             onClick={closeAll}
             className={`${pillBase} ${isMapActive ? pillActive : pillIdle}`}
-            title="Interactive Map of all 108 Shrines"
-          >
-            <MapPin className="w-3.5 h-3.5 text-[#E2C47C]" aria-hidden="true" />
-            <span>Map</span>
-          </NavLink>
-
-          {/* D. MY YATRA (LIVE COUNT BADGE — shortcut to the merged Yatra Atlas) */}
-          <NavLink
-            to="/map"
-            onClick={closeAll}
-            className={`${pillBase} ${pillIdle}`}
-            title="My Personal Yatra Itinerary"
+            title="Plan your Yatra — atlas, distances & itinerary"
           >
             <RouteIcon className="w-3.5 h-3.5 text-[#E2C47C]" aria-hidden="true" />
-            <span>My Yatra</span>
+            <span>Plan Yatra</span>
             {tripCount > 0 && (
               <span
                 className="inline-flex items-center justify-center min-w-[1.2rem] h-[1.2rem] px-1 text-[0.7rem] font-bold rounded-full bg-[#C99A2E] text-[#4A3005]"
@@ -579,36 +568,20 @@ export default function Header() {
               ))}
             </div>
 
-            <Link to="/map" onClick={closeAll} className={`${drawerItem} ${isMapActive ? drawerActive : drawerIdle}`}>
-              <MapPin className="w-4 h-4 text-[#B34700]" aria-hidden="true" />
-              <div className="flex flex-col text-left">
-                <span className="font-semibold">Sacred Map</span>
-                <span className="text-[10px] text-[#66523D]">Geographical shrine routing</span>
-              </div>
-            </Link>
-          </div>
-
-          {/* Group 2: Personal Yatra Itinerary */}
-          <div className="space-y-1">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-[#96731F] px-2 mb-1">
-              {SITE_COPY.header.drawer.plannerGroup}
-            </div>
-
-            <Link
-              to="/map"
-              onClick={closeAll}
-              className={`${drawerItem} justify-between ${drawerIdle}`}
-            >
+            {/* PO 2026-09-30: Sacred Map + My Yatra Route merged into one item */}
+            <Link to="/map" onClick={closeAll} className={`${drawerItem} justify-between ${isMapActive ? drawerActive : drawerIdle}`}>
               <div className="flex items-center gap-2.5">
                 <RouteIcon className="w-4 h-4 text-[#B34700]" aria-hidden="true" />
                 <div className="flex flex-col text-left">
-                  <span className="font-semibold">My Yatra Route</span>
-                  <span className="text-[10px] text-[#66523D]">Personal checklist &amp; distances</span>
+                  <span className="font-semibold">Plan Yatra</span>
+                  <span className="text-[10px] text-[#66523D]">Atlas, distances &amp; your itinerary</span>
                 </div>
               </div>
-              <span className="min-w-[1.2rem] h-[1.2rem] px-1.5 inline-flex items-center justify-center text-[0.7rem] font-bold bg-[#C99A2E] text-[#4A3005] rounded-full">
-                {tripCount}
-              </span>
+              {tripCount > 0 && (
+                <span className="min-w-[1.2rem] h-[1.2rem] px-1.5 inline-flex items-center justify-center text-[0.7rem] font-bold bg-[#C99A2E] text-[#4A3005] rounded-full">
+                  {tripCount}
+                </span>
+              )}
             </Link>
           </div>
 

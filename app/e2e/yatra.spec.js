@@ -32,7 +32,7 @@ test.describe('V3 yatra toolkit', () => {
 
   test('TC-14: map renders desams, tooltips on hover, filters by region and opens a popup page', async ({ page }) => {
     await page.goto('map');
-    await expect(page.getByRole('heading', { name: /map of the divya desams/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /plan your yatra/i })).toBeVisible();
     const markers = page.locator('.leaflet-interactive');
     await expect(markers.first()).toBeVisible();
 
@@ -51,10 +51,10 @@ test.describe('V3 yatra toolkit', () => {
     const after = await markers.count();
     expect(after).toBeLessThan(before);
 
-    // Clicking a marker opens a popup with a link to the detail page
+    // Clicking a marker opens a popup with the gold "Show Temple" link
     await markers.first().click();
     await expect(page.locator('.leaflet-popup-content')).toBeVisible();
-    await page.getByRole('link', { name: /open page/i }).click();
+    await page.getByRole('link', { name: /show temple/i }).click();
     await expect(page).toHaveURL(/kshetram\/[a-z-]+$/);
   });
 
@@ -64,10 +64,11 @@ test.describe('V3 yatra toolkit', () => {
       await page.goto(`kshetram/${id}`);
       await page.getByRole('button', { name: /add to trip/i }).click();
     }
-    await expect(page.getByRole('link', { name: /my yatra 3/i })).toBeVisible();
+    // PO 2026-09-30: header Map + My Yatra merged into one "Plan Yatra" pill
+    await expect(page.getByRole('link', { name: /plan yatra 3/i })).toBeVisible();
 
-    // 2026-09-30 merge: My Yatra lands on the Yatra Atlas (/map)
-    await page.getByRole('link', { name: /my yatra 3/i }).click();
+    // The Plan Yatra pill lands on the Yatra Atlas (/map)
+    await page.getByRole('link', { name: /plan yatra 3/i }).click();
     await expect(page).toHaveURL(/map$/);
     await expect(page.getByText(/3 stops/i)).toBeVisible();
 
