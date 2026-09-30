@@ -1012,3 +1012,45 @@ narrower text column. Watermark hidden below lg (unchanged mobile behavior).
 Deterministic checks (Playwright, production preview): watermark 576×290 in
 the right half, bottom edge 21px above the search panel, no horizontal
 overflow, title one line (h1 height 50px).
+
+---
+
+## Version 2.14 — Map Page Refresh (2026-09-30, PO-approved scope)
+
+### Scope
+
+PO supplied a Map-page mockup; after clarification the PO approved:
+**target = Map page** (the snap; not Trip), **scope = look-and-feel +
+light additions** — All/Visited/In-trip scope pills, per-item View temple /
+Add to trip / Mark visited actions on the nearest list, and a Fit-all-temples
+control. Explicitly excluded (PO decision): sidebar search box, cluster
+bubbles, region dropdown. No existing behavior removed: region chips, Show/
+Clear my location, tooltips, popups (Open page + trip toggle), Focus and
+Directions all unchanged.
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/pages/MapPage.jsx` | Rewritten layout: display header (eyebrow, 48px serif title, live count line, lotus "Divine Abodes / Timeless Grace" ornament); two-column `lg:grid-cols-[360px_1fr]` — sidebar with exclusive scope pills (Explore idiom, region-aware counts) + region chips + nearest cards; map column h-640 at lg with **Fit all temples** (`mapApi.fitBounds` over the scoped set, padding 28, maxZoom 12), count badge under it (moved off the Leaflet zoom control after the visual gate caught an overlap), and an on-map legend bar (Temple / Visited / In trip). New `NearestCard` ("Temples in this area · N results"): photo thumb (useWikiImage), serif name, temple/place, km, solid View-temple link, TripControls, Mark-visited toggle (aria-pressed), Focus + Directions. Region legend card retained below |
+| `app/src/pages/__tests__/yatraPages.test.jsx` | NEW: scope-pill narrowing test (visited=1 → 1 marker, trip=1 → 1 marker, All restores); Fit-all safe no-op click with the mocked map |
+| `app/src/components/__tests__/v3Branches.test.jsx` | Lockstep: nearest-list heading "Nearest Divya Desams from you" → "Temples in this area"; new assertions for the card action set (View temple / Add to trip / Mark visited / N results) |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (accepted set) |
+| Unit tests (Vitest) | **211/211 pass (21 suites)** — two tests added |
+| Coverage | **92.16% statements / 83.06% branches / 87.36% functions / 93.40% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** (TC-14 map + TC-15 trip contracts intact) |
+| Visual gate | 2/2 renders pass after fix — first pass failed: the count badge under the Leaflet zoom control was clipped; badge relocated top-right. `docs/03-design/gate-shots/map-refresh/` |
+
+### Deterministic verification (Playwright, production preview)
+
+| Check | Result |
+|---|---|
+| Layout | Sidebar 360px + map 766×638 at 1440; 106 `.leaflet-interactive` markers; OSM tiles loaded; no horizontal overflow |
+| Controls | Fit-all click is a no-op-safe call with real tiles; badge fully clear of the zoom control (badge.left 1138 > zoom.right 573); on-map legend present |
+| Scope pills | Visited/In-trip pills visible; narrowing covered by unit test |

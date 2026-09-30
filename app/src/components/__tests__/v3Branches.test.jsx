@@ -234,7 +234,7 @@ describe('BrowsePage status filters (UXD v3.0)', () => {
 });
 
 describe('MapPage extras (UXD v3.0)', () => {
-  it('shows the location card, nearest list and focus actions after locating', async () => {
+  it('shows the location card, nearest cards and focus actions after locating', async () => {
     const user = userEvent.setup();
     Object.defineProperty(navigator, 'geolocation', {
       value: { getCurrentPosition: (ok) => ok({ coords: { latitude: 10.8624, longitude: 78.6901 } }) },
@@ -243,10 +243,15 @@ describe('MapPage extras (UXD v3.0)', () => {
     renderAt('/map', <MapPage />);
     await user.click(screen.getByRole('button', { name: /show my location/i }));
     expect(await screen.findByText(/your darshan distances are live below/i)).toBeInTheDocument();
-    expect(screen.getByText(/nearest divya desams from you/i)).toBeInTheDocument();
+    expect(screen.getByText(/temples in this area/i)).toBeInTheDocument();
+    // 2026-09-30 refresh: nearest rows are cards with the browse action set
+    expect(screen.getAllByRole('link', { name: /view temple/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole('button', { name: /add to trip/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole('button', { name: /mark visited/i }).length).toBeGreaterThan(0);
+    expect(screen.getByText(/\d+ results/i)).toBeInTheDocument();
     await user.click(screen.getAllByRole('button', { name: /^focus$/i })[0]);
     await user.click(screen.getByRole('button', { name: /clear my location/i }));
-    expect(screen.queryByText(/nearest divya desams from you/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/temples in this area/i)).not.toBeInTheDocument();
     delete navigator.geolocation;
   });
 });

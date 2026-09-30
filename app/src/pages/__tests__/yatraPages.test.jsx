@@ -22,7 +22,7 @@ import MapPage from '../../pages/MapPage.jsx';
 import TripPage from '../../pages/TripPage.jsx';
 import AboutPage from '../../pages/AboutPage.jsx';
 import MiniMapInner from '../../components/MiniMapInner.jsx';
-import { resetVisited } from '../../state/visited.js';
+import { resetVisited, markVisited } from '../../state/visited.js';
 import { clearTrip, addToTrip } from '../../state/trip.js';
 
 function renderAt(url, page) {
@@ -121,6 +121,30 @@ describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
     expect(after).toBeLessThan(before);
     expect(after).toBeGreaterThan(0);
     expect(screen.getAllByText(chipLabel).length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('narrows markers through the All/Visited/In-trip scope pills (2026-09-30 refresh)', async () => {
+    const user = userEvent.setup();
+    markVisited('srirangam', true);
+    addToTrip('tirupati');
+    renderAt('/map', <MapPage />);
+    const all = screen.getAllByTestId('map-marker').length;
+    expect(screen.getByRole('button', { name: `All (${all})` })).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Visited (1)' }));
+    expect(screen.getAllByTestId('map-marker')).toHaveLength(1);
+    await user.click(screen.getByRole('button', { name: 'In trip (1)' }));
+    expect(screen.getAllByTestId('map-marker')).toHaveLength(1);
+    await user.click(screen.getByRole('button', { name: `All (${all})` }));
+    expect(screen.getAllByTestId('map-marker')).toHaveLength(all);
+  });
+
+  it('offers the Fit-all-temples control (2026-09-30 refresh)', async () => {
+    const user = userEvent.setup();
+    renderAt('/map', <MapPage />);
+    // with the react-leaflet mock there is no real map instance; the click
+    // must be a safe no-op rather than a crash
+    await user.click(screen.getByRole('button', { name: /fit all temples/i }));
+    expect(screen.getByRole('button', { name: /fit all temples/i })).toBeInTheDocument();
   });
 
   it('shows a hover tooltip for every plotted marker (US-MAP-04)', () => {
