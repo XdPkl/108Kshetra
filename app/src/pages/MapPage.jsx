@@ -24,7 +24,6 @@ import {
   Plus, Printer, RotateCcw, Share2, Trash2,
 } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
-import gopuramArt from '../assets/gopuram-illustration.jpg';
 import { getAllKshetramsEnriched, getAllAzhwars } from '../data/api.js';
 import { MAPS_URL_TEMPLATE } from '../data/config.js';
 import { buildRegionColors } from '../utils/regionColors.js';
@@ -314,29 +313,16 @@ export default function MapPage() {
 
   return (
     <div>
-      {/* Display header with gopuram ornament + location pills */}
+      {/* Display header + location pills (PO 2026-09-30 round 8: the
+          "Divine Abodes / Timeless Grace" ornament was removed) */}
       <header className="relative pb-6">
         <p className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-[#B34700]">
           {SITE_COPY.map.eyebrow}
         </p>
         {/* ! beats the unlayered legacy h1 rule in base.css */}
-        <div className="relative">
-          <h1 className="mt-2 font-display text-[44px]! leading-[1.04]! font-semibold text-[#5C1F00]! sm:text-[48px]!">
-            {SITE_COPY.map.title}
-          </h1>
-          {/* PO 2026-09-30: gopuram artwork left of the ornament wordings,
-              vertically centred on the title line */}
-          <div className="hidden lg:flex items-center gap-2.5 absolute right-0 top-1/2 -translate-y-1/2" aria-hidden="true">
-            <img
-              src={gopuramArt}
-              alt=""
-              className="h-11 w-16 shrink-0 rounded-lg object-cover shadow-xs ring-1 ring-[#C99A2E]/40"
-            />
-            <span className="font-display text-[15px] italic leading-tight text-[#96731F]">
-              Divine Abodes<br />Timeless Grace
-            </span>
-          </div>
-        </div>
+        <h1 className="mt-2 font-display text-[44px]! leading-[1.04]! font-semibold text-[#5C1F00]! sm:text-[48px]!">
+          {SITE_COPY.map.title}
+        </h1>
         <p className="mt-2 text-[15px] text-[#66523D]" aria-live="polite">
           {geoMessage || `${shown.length} of ${plotted.length} desams shown · visited desams carry a gold ring`}
         </p>
