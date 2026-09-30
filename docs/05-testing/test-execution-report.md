@@ -978,3 +978,37 @@ top-right art slot (quote retained beside it).
 Deterministic checks: header illustration 216×100 loaded; 108 placeholder
 illustrations render under cards (cards with a real Wikipedia photo still
 show the photo — unchanged pipeline); quote intact; no horizontal overflow.
+
+---
+
+## Version 2.13 — Explore Watermark Header (2026-09-30, PO follow-up)
+
+### Scope
+
+PO request: promote the gopuram illustration from the small rounded corner
+thumbnail to a watermark occupying the right half of the page header, above
+the search panel. The image is absolutely positioned (w-1/2, object-contain,
+bottom-right anchored, 80% opacity) with a two-axis mask fading its left and
+bottom edges into the ivory page; the italic quote floats over its sky area;
+the title drops 52px → 48px to keep the PO-approved single line in the
+narrower text column. Watermark hidden below lg (unchanged mobile behavior).
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/pages/BrowsePage.jsx` | Header restructured to a relative 290px-min block: absolute watermark img (`[mask-image:…intersect]`), left text column `max-w-[52%]`, absolute quote figure at top-right |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (accepted set) |
+| Unit tests (Vitest) | **209/209 pass (21 suites)** |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Visual gate | 2/2 renders pass (1440 watermark + 390 mobile) — `docs/03-design/gate-shots/explore-watermark/` |
+
+Deterministic checks (Playwright, production preview): watermark 576×290 in
+the right half, bottom edge 21px above the search panel, no horizontal
+overflow, title one line (h1 height 50px).

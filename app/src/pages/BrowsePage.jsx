@@ -64,39 +64,39 @@ export default function BrowsePage() {
 
   return (
     <div>
-      {/* Display header with the PO gopuram illustration + quote */}
-      <div className="flex items-start justify-between gap-8 pb-8">
-        <div>
+      {/* Display header — PO gopuram illustration as a right-half watermark
+          over the top of the page, fading into the ivory before the search
+          panel; quote floats over the watermark's quiet sky area */}
+      <div className="relative min-h-[290px] pb-6 pt-10">
+        <img
+          src={gopuramIllustration}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 top-0 hidden h-full w-1/2 select-none object-contain object-[right_bottom] opacity-80 [mask-composite:intersect] [mask-image:linear-gradient(to_left,black_72%,transparent),linear-gradient(to_bottom,black_72%,transparent)] lg:block"
+        />
+        <div className="relative max-w-[52%]">
           <p className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-[#B34700]">
             {SITE_COPY.browse.eyebrow}
           </p>
           {/* ! beats the unlayered legacy h1 rule in base.css */}
-          <h1 className="mt-2 font-display text-[44px]! leading-[1.04]! font-semibold text-[#5C1F00]! sm:text-[52px]!">
+          <h1 className="mt-2 font-display text-[44px]! leading-[1.04]! font-semibold text-[#5C1F00]! sm:text-[48px]!">
             {SITE_COPY.browse.title}
           </h1>
           <p className="mt-2 text-[17px] text-[#66523D]">
             {SITE_COPY.browse.lead}
           </p>
         </div>
-        <div className="hidden shrink-0 items-start gap-5 pt-1 lg:flex">
-          <img
-            src={gopuramIllustration}
-            alt=""
-            aria-hidden="true"
-            className="h-[100px] w-[216px] rounded-lg object-cover"
-          />
-          <figure className="max-w-[220px] text-right">
-            <blockquote className="font-display text-[17px] italic leading-snug text-[#7A2E00]">
-              &ldquo;{SITE_COPY.browse.quote}&rdquo;
-            </blockquote>
-            <div className="mt-2 flex items-center justify-end gap-2" aria-hidden="true">
-              <span className="h-px w-10 bg-[#C99A2E]/60" />
-              <svg viewBox="0 0 12 12" className="h-2.5 w-2.5 text-[#C99A2E]" fill="currentColor">
-                <path d="M6 0l1.5 4.5L12 6 7.5 7.5 6 12 4.5 7.5 0 6l4.5-1.5L6 0z" />
-              </svg>
-            </div>
-          </figure>
-        </div>
+        <figure className="absolute right-0 top-10 z-10 hidden max-w-[240px] text-right lg:block">
+          <blockquote className="font-display text-[17px] italic leading-snug text-[#7A2E00]">
+            &ldquo;{SITE_COPY.browse.quote}&rdquo;
+          </blockquote>
+          <div className="mt-2 flex items-center justify-end gap-2" aria-hidden="true">
+            <span className="h-px w-10 bg-[#C99A2E]/60" />
+            <svg viewBox="0 0 12 12" className="h-2.5 w-2.5 text-[#C99A2E]" fill="currentColor">
+              <path d="M6 0l1.5 4.5L12 6 7.5 7.5 6 12 4.5 7.5 0 6l4.5-1.5L6 0z" />
+            </svg>
+          </div>
+        </figure>
       </div>
 
       {/* Search + region chips panel */}
