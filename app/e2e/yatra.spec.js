@@ -70,23 +70,36 @@ test.describe('V3 yatra toolkit', () => {
     // The Plan Yatra pill lands on the Yatra Atlas (/map)
     await page.getByRole('link', { name: /plan yatra 3/i }).click();
     await expect(page).toHaveURL(/map$/);
-    await expect(page.getByText(/3 stops/i)).toBeVisible();
+
+    // PO round 10: the trip planner lives in a modal opened by the big
+    // left-column button
+    const dialog = page.getByRole('dialog', { name: /my yatra/i });
+    await page.getByRole('button', { name: /my yatra — trip planner/i }).click();
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByText(/3 stops/i)).toBeVisible();
+    await dialog.getByRole('button', { name: 'Close' }).click();
+    await expect(dialog).toBeHidden();
 
     // The route renders on the atlas itself once the In-trip scope is active
     await page.getByRole('button', { name: /in trip \(3\)/i }).click();
     await expect(page.locator('.leaflet-interactive')).toHaveCount(4); // 3 markers + 1 polyline
 
-    await page.getByRole('button', { name: /order my route/i }).click();
-    await expect(page.getByText(/nearest-first/i)).toBeVisible();
+    // Route order + share run inside the reopened planner modal
+    await page.getByRole('button', { name: /my yatra — trip planner/i }).click();
+    await dialog.getByRole('button', { name: /order my route/i }).click();
+    await expect(dialog.getByText(/nearest-first/i)).toBeVisible();
 
     // Share (clipboard fallback) produces a restorable URL
-    await page.getByRole('button', { name: /share/i }).click();
+    await dialog.getByRole('button', { name: /share/i }).click();
     const shared = await page.evaluate(() => navigator.clipboard.readText());
     expect(shared).toContain('/map?t=');
     await page.evaluate(() => window.localStorage.clear());
     await page.goto(shared.replace(/https?:\/\/[^/]+\/108Kshetra\//, ''));
-    await expect(page.getByText(/trip loaded from a shared link/i)).toBeVisible();
-    await expect(page.getByText(/3 stops/i)).toBeVisible();
+    // a shared link auto-opens the planner modal with the restore notice
+    const restored = page.getByRole('dialog', { name: /my yatra/i });
+    await expect(restored).toBeVisible();
+    await expect(restored.getByText(/trip loaded from a shared link/i)).toBeVisible();
+    await expect(restored.getByText(/3 stops/i)).toBeVisible();
   });
 
   test('TC-16: detail V3 shows the shrine template sections and yatra hooks', async ({ page }) => {

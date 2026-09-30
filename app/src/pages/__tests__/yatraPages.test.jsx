@@ -45,24 +45,39 @@ beforeEach(() => {
 const metaMatching = (pattern) => (content, el) =>
   el?.classList?.contains('trip-page__meta') && pattern.test(el.textContent);
 
+/** PO round 10: the trip planner lives in a modal opened by the big
+ * left-column button ("My Yatra — Trip Planner"). */
+const openPlanner = async (user) => {
+  await user.click(screen.getByRole('button', { name: /my yatra — trip planner/i }));
+  return screen.getByRole('dialog', { name: /my yatra/i });
+};
+
 describe('Trip planner on the merged Yatra Atlas (UT-TRP-02/03, FR-80/81)', () => {
-  it('shows the guiding empty state in the trip section', () => {
+  it('shows the guiding empty state in the planner modal', async () => {
+    const user = userEvent.setup();
     renderAt('/map', <MapPage />);
-    expect(screen.getByText(/your trip is empty/i)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /browse desams/i })).toHaveAttribute('href', '/kshetrams');
+    const dialog = await openPlanner(user);
+    expect(within(dialog).getByText(/your trip is empty/i)).toBeInTheDocument();
+    expect(within(dialog).getByRole('link', { name: /browse desams/i })).toHaveAttribute('href', '/kshetrams');
     // the "Open map" escape hatch is gone — the atlas IS the map now
     expect(screen.queryByText(/open map/i)).not.toBeInTheDocument();
+    // Escape closes the modal
+    await user.keyboard('{Escape}');
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 
-  it('lists stops grouped by region with remove actions', async () => {
+  it('lists stops grouped by region with remove actions, reflecting live changes', async () => {
     const user = userEvent.setup();
     addToTrip('srirangam');
     addToTrip('uthamar-kovil');
     renderAt('/map', <MapPage />);
-    expect(screen.getByText(metaMatching(/2 stops/))).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /chola nadu/i })).toBeInTheDocument();
-    await user.click(screen.getAllByRole('button', { name: /remove/i })[0]);
-    expect(screen.getByText(metaMatching(/1 stop ·/))).toBeInTheDocument();
+    const dialog = await openPlanner(user);
+    expect(within(dialog).getByText(metaMatching(/2 stops/))).toBeInTheDocument();
+    expect(within(dialog).getByRole('heading', { name: /chola nadu/i })).toBeInTheDocument();
+    await user.click(within(dialog).getAllByRole('button', { name: /remove/i })[0]);
+    expect(within(dialog).getByText(metaMatching(/1 stop ·/))).toBeInTheDocument();
+    // removing inside the modal also updates the opener badge on the page
+    expect(screen.getByRole('button', { name: /my yatra — trip planners*1/i })).toBeInTheDocument();
   });
 
   it('orders the route nearest-first and clears after confirmation', async () => {
@@ -71,18 +86,33 @@ describe('Trip planner on the merged Yatra Atlas (UT-TRP-02/03, FR-80/81)', () =
     addToTrip('tirupati');
     addToTrip('uthamar-kovil');
     renderAt('/map', <MapPage />);
-    await user.click(screen.getByRole('button', { name: /order my route/i }));
-    expect(screen.getByText(/nearest-first/i)).toBeInTheDocument();
+    const dialog = await openPlanner(user);
+    await user.click(within(dialog).getByRole('button', { name: /order my route/i }));
+    expect(within(dialog).getByText(/nearest-first/i)).toBeInTheDocument();
     const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(true);
-    await user.click(screen.getByRole('button', { name: /^clear$/i }));
-    expect(await screen.findByText(/your trip is empty/i)).toBeInTheDocument();
+    await user.click(within(dialog).getByRole('button', { name: /^clear$/i }));
+    expect(await within(dialog).findByText(/your trip is empty/i)).toBeInTheDocument();
     confirmSpy.mockRestore();
   });
 
-  it('restores a trip from a shared ?t= link (FR-81)', async () => {
+  it('reflects trip adds from the page matrix inside the planner modal (PO round 10)', async () => {
+    const user = userEvent.setup();
+    renderAt('/map', <MapPage />);
+    // the opener badge counts 0 stops on a fresh atlas
+    expect(screen.getByRole('button', { name: /my yatra — trip planners*0/i })).toBeInTheDocument();
+    // add a temple from a matrix card on the page…
+    await user.click(screen.getAllByRole('button', { name: /add to trip/i })[0]);
+    expect(screen.getByRole('button', { name: /my yatra — trip planners*1/i })).toBeInTheDocument();
+    // …and the modal shows it without any reload
+    const dialog = await openPlanner(user);
+    expect(within(dialog).getByText(metaMatching(/1 stop ·/))).toBeInTheDocument();
+  });
+
+  it('restores a trip from a shared ?t= link, auto-opening the planner (FR-81)', async () => {
     renderAt('/map?t=srirangam,tirupati', <MapPage />);
-    expect(await screen.findByText(/trip loaded from a shared link/i)).toBeInTheDocument();
-    expect(screen.getByText(metaMatching(/2 stops/))).toBeInTheDocument();
+    const dialog = await screen.findByRole('dialog', { name: /my yatra/i });
+    expect(within(dialog).getByText(/trip loaded from a shared link/i)).toBeInTheDocument();
+    expect(within(dialog).getByText(metaMatching(/2 stops/))).toBeInTheDocument();
   });
 
   it('draws the route polyline with numbered tooltips in the In-trip scope (US-TRP-04)', async () => {
@@ -105,7 +135,8 @@ describe('Trip planner on the merged Yatra Atlas (UT-TRP-02/03, FR-80/81)', () =
     renderAt('/map', <MapPage />);
     // the celestial stop has no coords, so the plotted-trip count is 0
     await user.click(screen.getByRole('button', { name: 'In trip (0)' }));
-    expect(screen.getByText(metaMatching(/1 stop/))).toBeInTheDocument();
+    const dialog = await openPlanner(user);
+    expect(within(dialog).getByText(metaMatching(/1 stop/))).toBeInTheDocument();
     expect(screen.queryByTestId('map-polyline')).not.toBeInTheDocument();
   });
 });

@@ -5,11 +5,13 @@
  * matrix BELOW the map: every filtered desam as a card in a responsive
  * grid — listed without distances until the pilgrim shares their location,
  * then nearest-first with live straight-line km (PO 2026-09-30 round).
- * The trip planner follows as a full-width section: notice strip, By
- * region/Route order views, "Order my route — nearest first", Share/Print/
- * Clear rail and the numbered stop lists. When the In-trip scope is active
- * the dashed route polyline + numbered stop tooltips render on the atlas
- * itself.
+ * The trip planner opens in a MODAL (PO 2026-09-30 round 10) via the big
+ * gradient button spanning the left column: notice strip, By region/Route
+ * order views, "Order my route — nearest first", Share/Print/Clear rail and
+ * the numbered stop lists. It renders from the same live trip state, so
+ * adds/removes anywhere on the page reflect in it instantly, and a shared
+ * ?t= link auto-opens it. When the In-trip scope is active the dashed
+ * route polyline + numbered stop tooltips render on the atlas itself.
  * Clusters are hand-rolled (grid in layer space, no plugin): they only form
  * with a live map instance below zoom 9, so jsdom/unit tests and e2e zoomed
  * views see plain CircleMarkers. /trip redirects here (share links keep
@@ -21,7 +23,7 @@ import { MapContainer, TileLayer, CircleMarker, Marker, Polyline, Popup, Tooltip
 import L from 'leaflet';
 import {
   Navigation, ExternalLink, MapPin, Crosshair, Maximize,
-  Plus, Printer, RotateCcw, Share2, Trash2,
+  Plus, Printer, RotateCcw, Route as RouteIcon, Share2, Trash2, X,
 } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 import { getAllKshetramsEnriched, getAllAzhwars } from '../data/api.js';
@@ -169,11 +171,21 @@ export default function MapPage() {
   const [mapApi, setMapApi] = useState(null);
   const [clusterTick, setClusterTick] = useState(0);
 
-  // Trip planner state (merged from TripPage)
+  // Trip planner state (merged from TripPage; PO round 10: planner lives in
+  // a modal opened by the big left-column button)
   const [view, setView] = useState('region');
   const [notice, setNotice] = useState('');
+  const [plannerOpen, setPlannerOpen] = useState(false);
   const appliedShare = useRef('');
   const [searchParams, setSearchParams] = useSearchParams();
+
+  // Escape closes the planner modal
+  useEffect(() => {
+    if (!plannerOpen) return undefined;
+    const onKey = (e) => { if (e.key === 'Escape') setPlannerOpen(false); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [plannerOpen]);
 
   const regionShown = useMemo(() => plotted.filter((k) => (
     matchesSearch(k, search, azhwars) && (!region || k.region === region)
@@ -216,6 +228,7 @@ export default function MapPage() {
       setScope('trip');
       setView('route');
       setNotice('Trip loaded from a shared link — now saved in your browser.');
+      setPlannerOpen(true); // the pilgrim came to see their trip — show it
     }
     setSearchParams({}, { replace: true });
   }, [shareParam, setTrip, setSearchParams]);
@@ -436,6 +449,21 @@ export default function MapPage() {
               In trip ({scopeCounts.trip})
             </button>
           </div>
+
+          {/* PO round 10: big planner opener spanning the left column —
+              the trip planner itself lives in a modal */}
+          <button
+            type="button"
+            onClick={() => setPlannerOpen(true)}
+            aria-haspopup="dialog"
+            className="w-full inline-flex items-center justify-center gap-2.5 px-4 py-3.5 rounded-2xl bg-gradient-to-r from-[#D95F0E] to-[#B34700] text-[#FFFDF7] text-[15px] font-bold shadow-sm hover:opacity-95 transition-opacity"
+          >
+            <RouteIcon className="h-5 w-5" aria-hidden="true" />
+            <span>My Yatra — Trip Planner</span>
+            <span className="inline-flex items-center justify-center min-w-[1.5rem] h-[1.5rem] px-1.5 text-[0.8rem] font-bold rounded-full bg-[#FFFDF7]/25 tabular-nums">
+              {stops.length}
+            </span>
+          </button>
         </div>
 
         {/* Map frame with fit-all control + on-map legend (`isolate` keeps
@@ -585,117 +613,142 @@ export default function MapPage() {
         <RegionLegend colors={colors} regions={regions} />
       </div>
 
-      {/* ---- Trip planner (merged from TripPage) ---- */}
-      <section aria-label="My Yatra — Trip Planner" className="mt-10 border-t border-[#E3D2AE] pt-8">
-        {stops.length === 0 ? (
-          <EmptyState
-            title={SITE_COPY.trip.emptyTitle}
-            message={SITE_COPY.trip.emptyMessage}
-            action={(
-              <div className="flex flex-wrap justify-center gap-3 mt-1">
-                <Link className="btn btn--primary" to="/kshetrams">Browse desams</Link>
-              </div>
-            )}
-          />
-        ) : (
-          <>
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-5">
-              <div>
-                <h2 className="font-display text-[30px]! font-semibold text-[#5C1F00]!">
-                  {SITE_COPY.trip.title}
-                </h2>
-                <p className="trip-page__meta mt-2 text-sm text-[#66523D]" aria-live="polite">
-                  {stops.length} {stops.length === 1 ? 'stop' : 'stops'} · about {sumLegs(legs)} km in
-                  current order (straight-line) · Distances are straight-line — road distance varies.
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center gap-2 no-print shrink-0">
-                <button type="button" className={railBtn} onClick={onShare}>
-                  <Share2 className="w-3.5 h-3.5" aria-hidden="true" /> Share
-                </button>
-                <button type="button" className={railBtn} onClick={() => window.print()}>
-                  <Printer className="w-3.5 h-3.5" aria-hidden="true" /> Print
-                </button>
-                <Link to="/kshetrams" className={railBtn}>
-                  <Plus className="w-3.5 h-3.5" aria-hidden="true" /> Add temples
-                </Link>
-                <button type="button" className={railBtn} onClick={onClear}>
-                  <Trash2 className="w-3.5 h-3.5" aria-hidden="true" /> Clear
-                </button>
-              </div>
-            </div>
+      {/* ---- Trip planner modal (PO round 10) — opened by the big
+          left-column button; renders from the same live trip state, so any
+          add/remove anywhere on the page is reflected here ---- */}
+      {plannerOpen ? (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#332417]/65 backdrop-blur-xs"
+          role="dialog"
+          aria-modal="true"
+          aria-label="My Yatra — Trip Planner"
+          onClick={(e) => { if (e.target === e.currentTarget) setPlannerOpen(false); }}
+        >
+          <div className="bg-[#FFFDF7] w-full max-w-3xl rounded-2xl border border-[#C99A2E]/60 shadow-2xl overflow-hidden relative max-h-[92vh] flex flex-col">
+            <div className="absolute inset-x-0 top-0 h-[4px] bg-gradient-to-r from-[#E2C47C] via-[#C99A2E] to-[#96731F]" aria-hidden="true" />
 
-            {notice ? (
-              <p className="role-status mb-5 flex flex-wrap items-center gap-3 rounded-2xl border border-[#C99A2E]/50 bg-[#F6EBD6] px-4 py-3 text-sm text-[#332417]" role="status">
-                <RotateCcw className="w-4 h-4 text-[#B34700] shrink-0" aria-hidden="true" />
-                <span className="flex-1">{notice}</span>
-                <button
-                  type="button"
-                  className="text-xs font-bold uppercase tracking-wider text-[#96731F] hover:text-[#7A2E00] px-2 py-1 rounded transition-colors no-print"
-                  onClick={() => setNotice('')}
-                >
-                  Dismiss
-                </button>
-              </p>
-            ) : null}
-
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 no-print" role="group" aria-label="Trip view">
-              <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  className={view === 'region' ? 'region-chip is-active' : 'region-chip'}
-                  aria-pressed={view === 'region'}
-                  onClick={() => setView('region')}
-                >
-                  By region
-                </button>
-                <button
-                  type="button"
-                  className={view === 'route' ? 'region-chip is-active' : 'region-chip'}
-                  aria-pressed={view === 'route'}
-                  onClick={() => setView('route')}
-                >
-                  Route order
-                </button>
-              </div>
+            <div className="p-5 sm:p-6 pb-4 border-b border-[#F0E3C6] flex items-center justify-between shrink-0">
+              <h2 className="font-display text-2xl sm:text-[26px] font-semibold text-[#5C1F00]">
+                {SITE_COPY.trip.title}
+              </h2>
               <button
                 type="button"
-                className="self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#D95F0E] to-[#B34700] text-[#FFFDF7] text-sm font-semibold shadow-xs hover:opacity-95 transition-opacity"
-                onClick={onOrder}
+                onClick={() => setPlannerOpen(false)}
+                className="p-1.5 rounded-full hover:bg-[#FAF2E3] text-[#66523D] transition-colors"
+                aria-label="Close"
               >
-                <span aria-hidden="true">⤓</span>
-                <span>Order my route — nearest first</span>
+                <X className="w-5 h-5" aria-hidden="true" />
               </button>
             </div>
 
-            {view === 'region' ? (
-              <div className="mt-5">
-                <RegionGroups stops={stops} onRemove={removeFromTrip} isVisited={isVisited} toggleVisited={toggleVisited} />
-              </div>
-            ) : (
-              <div className="mt-5 rounded-2xl border border-[#C99A2E]/40 bg-[#FFFDF7] p-4 sm:p-6 shadow-xs">
-                <ol>
-                  {orderedStops.map((k, i) => (
-                    <TripStop
-                      key={k.id}
-                      kshetram={k}
-                      index={i + 1}
-                      legKm={orderedLegs[i]}
-                      onRemove={removeFromTrip}
-                      isVisited={isVisited}
-                      toggleVisited={toggleVisited}
-                    />
-                  ))}
-                </ol>
-              </div>
-            )}
+            <div className="p-5 sm:p-6 overflow-y-auto flex-1">
+              {stops.length === 0 ? (
+                <EmptyState
+                  title={SITE_COPY.trip.emptyTitle}
+                  message={SITE_COPY.trip.emptyMessage}
+                  action={(
+                    <div className="flex flex-wrap justify-center gap-3 mt-1">
+                      <Link className="btn btn--primary" to="/kshetrams">Browse desams</Link>
+                    </div>
+                  )}
+                />
+              ) : (
+                <>
+                  <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-5">
+                    <p className="trip-page__meta text-sm text-[#66523D]" aria-live="polite">
+                      {stops.length} {stops.length === 1 ? 'stop' : 'stops'} · about {sumLegs(legs)} km in
+                      current order (straight-line) · Distances are straight-line — road distance varies.
+                    </p>
+                    <div className="flex flex-wrap items-center gap-2 no-print shrink-0">
+                      <button type="button" className={railBtn} onClick={onShare}>
+                        <Share2 className="w-3.5 h-3.5" aria-hidden="true" /> Share
+                      </button>
+                      <button type="button" className={railBtn} onClick={() => window.print()}>
+                        <Printer className="w-3.5 h-3.5" aria-hidden="true" /> Print
+                      </button>
+                      <Link to="/kshetrams" className={railBtn}>
+                        <Plus className="w-3.5 h-3.5" aria-hidden="true" /> Add temples
+                      </Link>
+                      <button type="button" className={railBtn} onClick={onClear}>
+                        <Trash2 className="w-3.5 h-3.5" aria-hidden="true" /> Clear
+                      </button>
+                    </div>
+                  </div>
 
-            <p className="mt-5 text-xs text-[#66523D] italic no-print">
-              🖨 This itinerary is print-ready — the print stylesheet hides buttons and maps.
-            </p>
-          </>
-        )}
-      </section>
+                  {notice ? (
+                    <p className="role-status mb-5 flex flex-wrap items-center gap-3 rounded-2xl border border-[#C99A2E]/50 bg-[#F6EBD6] px-4 py-3 text-sm text-[#332417]" role="status">
+                      <RotateCcw className="w-4 h-4 text-[#B34700] shrink-0" aria-hidden="true" />
+                      <span className="flex-1">{notice}</span>
+                      <button
+                        type="button"
+                        className="text-xs font-bold uppercase tracking-wider text-[#96731F] hover:text-[#7A2E00] px-2 py-1 rounded transition-colors no-print"
+                        onClick={() => setNotice('')}
+                      >
+                        Dismiss
+                      </button>
+                    </p>
+                  ) : null}
+
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 no-print" role="group" aria-label="Trip view">
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        className={view === 'region' ? 'region-chip is-active' : 'region-chip'}
+                        aria-pressed={view === 'region'}
+                        onClick={() => setView('region')}
+                      >
+                        By region
+                      </button>
+                      <button
+                        type="button"
+                        className={view === 'route' ? 'region-chip is-active' : 'region-chip'}
+                        aria-pressed={view === 'route'}
+                        onClick={() => setView('route')}
+                      >
+                        Route order
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      className="self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#D95F0E] to-[#B34700] text-[#FFFDF7] text-sm font-semibold shadow-xs hover:opacity-95 transition-opacity"
+                      onClick={onOrder}
+                    >
+                      <span aria-hidden="true">⤓</span>
+                      <span>Order my route — nearest first</span>
+                    </button>
+                  </div>
+
+                  {view === 'region' ? (
+                    <div className="mt-5">
+                      <RegionGroups stops={stops} onRemove={removeFromTrip} isVisited={isVisited} toggleVisited={toggleVisited} />
+                    </div>
+                  ) : (
+                    <div className="mt-5 rounded-2xl border border-[#C99A2E]/40 bg-[#FFFDF7] p-4 sm:p-6 shadow-xs">
+                      <ol>
+                        {orderedStops.map((k, i) => (
+                          <TripStop
+                            key={k.id}
+                            kshetram={k}
+                            index={i + 1}
+                            legKm={orderedLegs[i]}
+                            onRemove={removeFromTrip}
+                            isVisited={isVisited}
+                            toggleVisited={toggleVisited}
+                          />
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+
+                  <p className="mt-5 text-xs text-[#66523D] italic no-print">
+                    🖨 This itinerary is print-ready — the print stylesheet hides buttons and maps.
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

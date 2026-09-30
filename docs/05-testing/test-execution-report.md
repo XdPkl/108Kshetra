@@ -1177,3 +1177,27 @@ one line inside the 360px column (measured: 1 line, h1 w=360). The GPS
 status card joins the column (narrow variant). No behavioral contract
 changes — all locators survive; suites re-run green (212/212 unit, 19/19
 e2e, lint 0 errors). Gate shot: `docs/03-design/gate-shots/plan-yatra/map-left-stack-1440.png` (no horizontal overflow).
+
+## Version 2.18 — Trip Planner Modal (2026-09-30, PO round 10)
+
+PO request: move the trip planner (the full-width section below the map)
+into a MODAL window, opened by a big button spanning the left column; any
+in-trip change on the page must reflect in the modal.
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/pages/MapPage.jsx` | The planner `<section>` becomes a `role="dialog"` modal (AboutPage ScheduleModal idiom: fixed overlay `z-50`, gold top hairline, Escape + click-outside + ✕ close, `max-w-3xl`, scrollable body). Big gradient opener "My Yatra — Trip Planner" with a live stop-count badge spans the left column below the scope pills (`aria-haspopup="dialog"`). A shared `?t=` link auto-opens the modal with the restore notice. The modal renders from the same `useTrip`/`useVisited` state, so matrix-card adds/removes and the opener badge stay in sync instantly |
+| `app/src/pages/__tests__/yatraPages.test.jsx` | Planner tests open the modal first (`openPlanner` helper → dialog assertions); new tests: page matrix "Add to trip" reflects in the modal + opener badge; removing inside the modal updates the badge; Escape closes; `?t=` restore auto-opens the dialog |
+| `app/e2e/yatra.spec.js` | TC-15: open planner → assert 3 stops → close → In-trip pill → polyline → reopen → Order my route → Share inside the dialog; the shared-link step asserts the auto-opened dialog with the restore notice |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (accepted set) |
+| Unit tests (Vitest) | **213/213 pass (21 suites)** |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Visual gate | Opener button + populated modal captured — `docs/03-design/gate-shots/plan-yatra/planner-button-1440.png`, `planner-modal-1440.png` |
