@@ -1166,3 +1166,14 @@ when the intended asset arrives.
 | Matrix | 3 columns at 1440, no "km away" text before locating; count reads "106 results" |
 | Nav | Exactly one map-family pill ("Plan Yatra", active) in the desktop header; drawer shows the merged entry |
 | Known capture artifact | At zoom ≥ 9 in embedded/headless captures most CircleMarker paths cull to `d="M0 0"` (Leaflet renderer padding) — verified identical on the v2.15 live build; e2e TC-14 exercises the real click path |
+
+## Version 2.17 — Plan Yatra Left-Column Arrangement (2026-09-30, PO round 9)
+
+PO snap: the whole yatra stack — eyebrow, "Plan your Yatra" title, status
+line, "Show my location", search, region dropdown and scope pills — moves
+INTO the left column beside the atlas (was: display header spanning full
+width above the sidebar/map grid). Title drops 44/48 → 36/40px so it keeps
+one line inside the 360px column (measured: 1 line, h1 w=360). The GPS
+status card joins the column (narrow variant). No behavioral contract
+changes — all locators survive; suites re-run green (212/212 unit, 19/19
+e2e, lint 0 errors). Gate shot: `docs/03-design/gate-shots/plan-yatra/map-left-stack-1440.png` (no horizontal overflow).

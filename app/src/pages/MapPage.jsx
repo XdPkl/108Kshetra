@@ -313,68 +313,68 @@ export default function MapPage() {
 
   return (
     <div>
-      {/* Display header + location pills (PO 2026-09-30 round 8: the
-          "Divine Abodes / Timeless Grace" ornament was removed) */}
-      <header className="relative pb-6">
-        <p className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-[#B34700]">
-          {SITE_COPY.map.eyebrow}
-        </p>
-        {/* ! beats the unlayered legacy h1 rule in base.css */}
-        <h1 className="mt-2 font-display text-[44px]! leading-[1.04]! font-semibold text-[#5C1F00]! sm:text-[48px]!">
-          {SITE_COPY.map.title}
-        </h1>
-        <p className="mt-2 text-[15px] text-[#66523D]" aria-live="polite">
-          {geoMessage || `${shown.length} of ${plotted.length} desams shown · visited desams carry a gold ring`}
-        </p>
-        <div className="mt-4 flex items-center gap-2 flex-wrap">
-          <button
-            type="button"
-            onClick={locate}
-            className="inline-flex items-center gap-2 rounded-full border border-[#E3D2AE] bg-[#FFFDF7] px-4 py-2 text-[13px] font-semibold text-[#332417] shadow-xs transition-colors hover:border-[#C99A2E]"
-          >
-            <MapPin className="h-4 w-4 text-[#B34700]" aria-hidden="true" />
-            <span>Show my location</span>
-            {me ? <span className="text-[10px] opacity-80">(GPS active)</span> : null}
-          </button>
-          {me ? (
-            <button
-              type="button"
-              onClick={() => setMe(null)}
-              title="Clear my location marker"
-              aria-label="Clear my location"
-              className="rounded-full border border-[#E3D2AE] bg-[#FFFDF7] p-2 text-[#7A2E00] transition-colors hover:border-[#C99A2E]"
-            >
-              <Crosshair className="h-4 w-4" aria-hidden="true" />
-            </button>
-          ) : null}
-        </div>
-      </header>
-
-      {/* Location status card */}
-      {me ? (
-        <div className="mb-6 rounded-2xl border border-[#C99A2E]/60 bg-[#FFFDF7] p-4 sm:p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex items-start gap-3.5">
-            <div className="w-10 h-10 rounded-full bg-[#FAF2E3] border border-[#C99A2E] flex items-center justify-center shrink-0 text-[#B34700]">
-              <Navigation className="w-5 h-5 animate-pulse" aria-hidden="true" />
-            </div>
-            <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#B34700]/10 text-[#B34700]">
-                You are here
-              </span>
-              <h2 className="font-display text-lg sm:text-xl font-bold text-[#7A2E00] mt-1">
-                Your darshan distances are live below
-              </h2>
-              <p className="text-xs text-[#66523D] mt-0.5">
-                Approximate position <strong className="text-[#B34700]">{me[0].toFixed(3)}° N, {me[1].toFixed(3)}° E</strong> — distances are straight-line.
-              </p>
-            </div>
-          </div>
-        </div>
-      ) : null}
-
-      {/* Sidebar (search + filters + nearest cards) beside the atlas */}
+      {/* PO round-9 arrangement: the whole yatra stack (eyebrow, title,
+          status, Show my location, search, region, scope pills) lives in
+          the left column BESIDE the atlas, like the approved snap */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
         <div className="space-y-5">
+          <header className="relative">
+            <p className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-[#B34700]">
+              {SITE_COPY.map.eyebrow}
+            </p>
+            {/* ! beats the unlayered legacy h1 rule in base.css */}
+            <h1 className="mt-2 font-display text-[36px]! leading-[1.04]! font-semibold text-[#5C1F00]! sm:text-[40px]!">
+              {SITE_COPY.map.title}
+            </h1>
+            <p className="mt-2 text-[14px] text-[#66523D]" aria-live="polite">
+              {geoMessage || `${shown.length} of ${plotted.length} desams shown · visited desams carry a gold ring`}
+            </p>
+            <div className="mt-4 flex items-center gap-2 flex-wrap">
+              <button
+                type="button"
+                onClick={locate}
+                className="inline-flex items-center gap-2 rounded-full border border-[#E3D2AE] bg-[#FFFDF7] px-4 py-2 text-[13px] font-semibold text-[#332417] shadow-xs transition-colors hover:border-[#C99A2E]"
+              >
+                <MapPin className="h-4 w-4 text-[#B34700]" aria-hidden="true" />
+                <span>Show my location</span>
+                {me ? <span className="text-[10px] opacity-80">(GPS active)</span> : null}
+              </button>
+              {me ? (
+                <button
+                  type="button"
+                  onClick={() => setMe(null)}
+                  title="Clear my location marker"
+                  aria-label="Clear my location"
+                  className="rounded-full border border-[#E3D2AE] bg-[#FFFDF7] p-2 text-[#7A2E00] transition-colors hover:border-[#C99A2E]"
+                >
+                  <Crosshair className="h-4 w-4" aria-hidden="true" />
+                </button>
+              ) : null}
+            </div>
+          </header>
+
+          {/* Location status card */}
+          {me ? (
+            <div className="rounded-2xl border border-[#C99A2E]/60 bg-[#FFFDF7] p-4 shadow-xs">
+              <div className="flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-full bg-[#FAF2E3] border border-[#C99A2E] flex items-center justify-center shrink-0 text-[#B34700]">
+                  <Navigation className="w-5 h-5 animate-pulse" aria-hidden="true" />
+                </div>
+                <div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#B34700]/10 text-[#B34700]">
+                    You are here
+                  </span>
+                  <h2 className="font-display text-lg font-bold text-[#7A2E00] mt-1">
+                    Your darshan distances are live below
+                  </h2>
+                  <p className="text-xs text-[#66523D] mt-0.5">
+                    Approximate position <strong className="text-[#B34700]">{me[0].toFixed(3)}° N, {me[1].toFixed(3)}° E</strong> — distances are straight-line.
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : null}
+
           {/* Sidebar search */}
           <div className="relative">
             <svg viewBox="0 0 24 24" className="absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-[#96731F]" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
