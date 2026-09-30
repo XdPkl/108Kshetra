@@ -83,9 +83,9 @@ describe('KshetramCard integration (FR-72/79)', () => {
     expect(screen.getByText(/visited/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /srirangam/i }))
       .toHaveAttribute('href', '/kshetram/srirangam');
-    // zip card trip toggle (UXD v3.0): '+ Trip' → '✓ In trip'
-    await user.click(screen.getByRole('button', { name: '+ Trip' }));
-    expect(screen.getByRole('button', { name: '✓ In trip' })).toBeInTheDocument();
+    // browse-card trip toggle (2026-09-30 restyle): 'Add to trip' → 'In trip'
+    await user.click(screen.getByRole('button', { name: 'Add to trip' }));
+    expect(screen.getByRole('button', { name: 'In trip' })).toBeInTheDocument();
   });
 });
 

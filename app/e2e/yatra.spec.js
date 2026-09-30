@@ -18,9 +18,9 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page.getByRole('progressbar')).toHaveAttribute('aria-label', '1 of 106 kshetrams visited');
 
     await page.goto('kshetrams');
-    // UXD v3.0: the Visit-status select became the zip's "Show visited only" checkbox
-    await page.getByLabel('Visit status').check();
-    await expect(page.getByText(/showing 1 of 108 kshetrams/i)).toBeVisible();
+    // 2026-09-30 restyle: the visited checkbox became the "Visited (N)" scope pill
+    await page.getByRole('button', { name: /visited \(1\)/i }).click();
+    await expect(page.getByText('1 kshetram', { exact: true })).toBeVisible();
 
     // Reset clears the marks (native confirm accepted via dialog handler).
     // UXD v3.0: Browse no longer carries the compact tracker — reset on Home.

@@ -24,22 +24,23 @@ test.describe('Home page (TC-02, TC-03, TC-11)', () => {
 test.describe('Browse (TC-04..TC-07)', () => {
   test('lists all 108 kshetrams with the result count', async ({ page }) => {
     await page.goto('kshetrams');
-    await expect(page.getByText(/showing 108 of 108 kshetrams/i)).toBeVisible();
+    await expect(page.getByText('108 kshetrams', { exact: true })).toBeVisible();
     expect(await page.locator('.kshetram-card').count()).toBe(108);
   });
 
   test('search narrows results (TC-05)', async ({ page }) => {
     await page.goto('kshetrams');
     await page.getByLabel(/search kshetrams/i).fill('kanchipuram');
-    await expect(page.locator('.result-count')).not.toHaveText('Showing 108 of 108 kshetrams');
+    await expect(page.locator('.result-count')).not.toHaveText('108 kshetrams');
     const cards = page.locator('.kshetram-card');
     expect(await cards.count()).toBeGreaterThan(0);
   });
 
   test('state filter and combined search (TC-06)', async ({ page }) => {
     await page.goto('kshetrams');
+    await page.getByRole('button', { name: /more filters/i }).click();
     await page.getByLabel(/^State$/i).selectOption('Kerala');
-    await expect(page.getByText(/showing 11 of 108 kshetrams/i)).toBeVisible();
+    await expect(page.getByText('11 kshetrams', { exact: true })).toBeVisible();
   });
 
   test('empty state and reset (TC-07)', async ({ page }) => {
@@ -47,7 +48,7 @@ test.describe('Browse (TC-04..TC-07)', () => {
     await page.getByLabel(/search kshetrams/i).fill('atlantis');
     await expect(page.getByText(/no kshetrams found/i)).toBeVisible();
     await page.getByRole('button', { name: /clear all filters/i }).click();
-    await expect(page.getByText(/showing 108 of 108 kshetrams/i)).toBeVisible();
+    await expect(page.getByText('108 kshetrams', { exact: true })).toBeVisible();
   });
 });
 
@@ -99,7 +100,7 @@ test.describe('Azhwars (TC-10)', () => {
     expect(await page.locator('.azhwar-card').count()).toBe(12);
     const more = page.locator('.chip--more').first();
     await more.click();
-    await expect(page.locator('.result-count')).not.toHaveText('Showing 108 of 108 kshetrams');
+    await expect(page.locator('.result-count')).not.toHaveText('108 kshetrams');
     await expect(page).toHaveURL(/\/kshetrams\?azhwar=/);
   });
 });

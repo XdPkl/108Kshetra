@@ -47,7 +47,7 @@ const siteCopy = defineType({
         S('eyebrow', 'Eyebrow'), S('title', 'Title'), T('lead', 'Lead'), S('ctaLabel', 'CTA label'),
       ]},
     ]},
-    {name: 'browse', type: 'object', title: 'Browse banner', group: 'pages', fields: [S('eyebrow', 'Eyebrow'), S('title', 'Title'), T('lead', 'Lead')]},
+    {name: 'browse', type: 'object', title: 'Browse banner', group: 'pages', fields: [S('eyebrow', 'Eyebrow'), S('title', 'Title'), T('lead', 'Lead'), T('quote', 'Header quote')]},
     {name: 'map', type: 'object', title: 'Map banner', group: 'pages', fields: [S('eyebrow', 'Eyebrow'), S('title', 'Title')]},
     {name: 'trip', type: 'object', title: 'Trip planner banner & empty state', group: 'pages', fields: [S('title', 'Title'), S('emptyTitle', 'Empty-state title'), T('emptyMessage', 'Empty-state message')]},
     {name: 'azhwarsPage', type: 'object', title: 'Azhwars banner', group: 'pages', fields: [S('eyebrow', 'Eyebrow'), S('title', 'Title'), S('titleTamil', 'Title (Tamil, in parens)'), T('lead', 'Lead')]},

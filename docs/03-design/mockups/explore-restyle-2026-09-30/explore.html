@@ -1,0 +1,347 @@
+<!doctype html>
+<!--
+  Explore (/kshetrams) page LAYOUT mockup — 2026-09-30, for PO review.
+  New layout per PO reference image; ALL text is the current site's content
+  verbatim (site-copy.json + component strings + kshetrams.json records).
+  Photos: cards show the "Photo coming soon" placeholder state per the PO
+  reference; cards with a Wikipedia lead image render the photo instead.
+  Gopuram line-art: original inline SVG in the site's gold palette.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Explore — Layout Mockup (2026-09-30)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Mukta+Malar:wght@400;500;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+          body: ['"Mukta Malar"', '"Segoe UI"', 'Arial', 'sans-serif'],
+          cinzel: ['Cinzel', 'serif'],
+        },
+        colors: {
+          ivory: '#FAF2E3', cream: '#FFFDF7', sunk: '#F6EBD6', sandal: '#EEDCC0',
+          ink: '#332417', muted: '#66523D',
+          saffron: '#B34700', flame: '#D95F0E', safdeep: '#7A2E00', safdark: '#571F00',
+          gold: '#C99A2E', goldsoft: '#E2C47C', golddeep: '#96731F', goldink: '#4A3005',
+          hairline: '#E3D2AE', vermilion: '#A6261D',
+        },
+        boxShadow: {
+          card: '0 1px 2px rgba(51,36,23,0.05), 0 8px 24px -12px rgba(51,36,23,0.18)',
+          cardHover: '0 2px 4px rgba(51,36,23,0.06), 0 16px 32px -12px rgba(51,36,23,0.26)',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  body { font-family: 'Mukta Malar', 'Segoe UI', Arial, sans-serif; }
+  .eyebrow { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; }
+</style>
+</head>
+<body class="bg-ivory text-ink antialiased">
+
+<!-- ===================== site header (existing, unchanged — static replica for context) ===================== -->
+<header class="sticky top-0 z-50 bg-gradient-to-r from-safdeep to-saffron shadow-md text-cream">
+  <div class="mx-auto flex h-[68px] max-w-[1280px] items-center gap-4 overflow-x-auto px-4 [&>*]:shrink-0">
+    <a class="flex items-center gap-2.5 shrink-0" href="#">
+      <span class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-b from-goldsoft to-gold shadow-inner">
+        <svg viewBox="0 0 24 24" class="h-6 w-6 text-safdark" fill="currentColor" aria-hidden="true">
+          <path d="M12 2l1.2 2.4L16 5l-1.6 1.8L15 9h-6l.6-2.2L8 5l2.8-.6L12 2zM7 10h10v2H7v-2zm-1.5 3h13l-1 2h-11l-1-2zm1.5 3h10v2H7v-2zm-1.5 3h13v2h-13v-2z"/>
+        </svg>
+      </span>
+      <span class="font-cinzel text-[17px] font-semibold tracking-wide">108 Divya Kshetrams</span>
+    </a>
+    <nav class="flex items-center gap-1 text-[13px] font-semibold">
+      <a class="rounded-full px-3.5 py-1.5 hover:bg-cream/10" href="#">Home</a>
+      <a class="flex items-center gap-1 rounded-full bg-cream px-3.5 py-1.5 text-safdeep shadow-sm" href="#">
+        <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        108 Kshetrams
+        <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+      <a class="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 hover:bg-cream/10" href="#">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 20l-5.5-2.5V6L9 8.5M9 20l6-2.5M9 20V8.5m6 9L20.5 20V6L15 8.5m0 9V8.5m0 0L9 6"/></svg>
+        Map</a>
+      <a class="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 hover:bg-cream/10" href="#">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+        My Yatra
+        <span class="grid h-5 w-5 place-items-center rounded-full bg-gold text-[11px] font-bold text-goldink">2</span></a>
+      <a class="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 hover:bg-cream/10" href="#">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 6.5A2.5 2.5 0 0 1 14.5 4h3A2.5 2.5 0 0 1 20 6.5v13h-8m0-13A2.5 2.5 0 0 0 9.5 4h-3A2.5 2.5 0 0 0 4 6.5v13h8m0-13v13"/></svg>
+        Azhwars</a>
+      <a class="flex items-center gap-1.5 rounded-full px-3.5 py-1.5 hover:bg-cream/10" href="#">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 21c.8-3.8 3.6-6 7-6s6.2 2.2 7 6"/></svg>
+        Acharyas</a>
+      <a class="flex items-center gap-1.5 rounded-full bg-cream px-3.5 py-1.5 text-safdeep shadow-sm" href="#">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 21V9l4-3V3h8v3l4 3v12M9 21v-4h6v4"/></svg>
+        Kshetra Tours
+        <span class="rounded bg-gold/25 px-1.5 py-0.5 text-[9px] font-bold tracking-wide text-safdeep">GUIDED YATRAS</span>
+        <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </nav>
+    <span class="ml-auto flex shrink-0 items-center gap-1.5 text-right">
+      <svg viewBox="0 0 24 24" class="h-6 w-6 text-goldsoft" fill="currentColor" aria-hidden="true"><path d="M12 2c2 3 2 5 0 8-2-3-2-5 0-8zm0 8c3 1 5 3 5 7H7c0-4 2-6 5-7zM4 21h16v1H4v-1z"/></svg>
+      <span class="font-cinzel text-[11px] leading-tight text-goldsoft">Śrīmate<br/>Nārāyaṇāya</span>
+    </span>
+  </div>
+</header>
+
+<!-- ===================== page header band ===================== -->
+<section class="w-full bg-ivory">
+  <div class="mx-auto max-w-site px-4 pt-10 pb-8 sm:px-6">
+    <div class="flex items-start justify-between gap-8">
+      <div>
+        <p class="eyebrow text-saffron">Complete Sacred Directory</p>
+        <h1 class="mt-2 font-display text-[56px] font-semibold leading-[1.04] text-safdark">Explore the 108 Divya Desams</h1>
+        <p class="mt-2 text-[17px] text-muted">Find a sacred place. Plan your next darshan.</p>
+      </div>
+      <!-- gopuram line-art + quote -->
+      <div class="hidden shrink-0 items-start gap-5 pt-1 lg:flex">
+        <svg viewBox="0 0 220 130" class="h-[120px] w-[200px] text-gold" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <g opacity="0.85">
+            <!-- big gopuram -->
+            <path d="M120 118V58h44v60"/>
+            <path d="M126 58v-8h32v8M129 50v-9h26v9M133 41v-10h18v10M137 31v-9h10v9M140 22v-8h4v8"/>
+            <path d="M142 14v-6m0 0l-3 3m3-3l3 3"/>
+            <path d="M126 68h32m-32 10h32m-32 10h32m-32 10h32m-32 10h32"/>
+            <!-- small gopuram -->
+            <path d="M84 118V76h26v42"/>
+            <path d="M88 76v-7h18v7M91 69v-8h12v8M95 61v-8h4v8"/>
+            <path d="M88 84h18m-18 10h18m-18 10h18"/>
+            <!-- palms -->
+            <path d="M52 118c2-18 1-32-4-44m4 44c-2-18-6-30-12-38m12 38c0-16 3-30 10-40m-10 40c2-14 8-26 16-32"/>
+            <path d="M48 74c-6-6-12-8-18-6m18 6c-2-8-6-13-12-15m12 15c2-8 7-12 14-13m-14 13c6-4 12-5 18-2"/>
+            <path d="M186 118c1-14 0-25-4-34m4 34c-1-12-4-22-9-28m9 28c0-12 2-22 8-30m-8 30c2-10 6-19 12-24"/>
+            <!-- ground -->
+            <path d="M14 118h196" stroke-width="2.5"/>
+          </g>
+        </svg>
+        <figure class="max-w-[240px] text-right">
+          <blockquote class="font-display text-[17px] italic leading-snug text-safdeep">
+            &ldquo;Divya Desams are the eternal abodes of Lord Vishnu, celebrated by the Azhwars.&rdquo;
+          </blockquote>
+          <div class="mt-2 flex items-center justify-end gap-2" aria-hidden="true">
+            <span class="h-px w-10 bg-gold/60"></span>
+            <svg viewBox="0 0 12 12" class="h-2.5 w-2.5 text-gold" fill="currentColor"><path d="M6 0l1.5 4.5L12 6 7.5 7.5 6 12 4.5 7.5 0 6l4.5-1.5L6 0z"/></svg>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== search + region chips panel ===================== -->
+<section class="w-full bg-ivory">
+  <div class="mx-auto max-w-site px-4 sm:px-6">
+    <div class="rounded-2xl border border-hairline bg-cream p-4 shadow-card sm:p-5">
+      <label class="relative block">
+        <span class="sr-only">Search kshetrams</span>
+        <svg viewBox="0 0 24 24" class="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-golddeep" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" placeholder="Search temples, places, deities or Azhwars"
+          class="w-full rounded-xl border border-hairline bg-cream py-3 pl-11 pr-4 text-[15px] text-ink placeholder-muted/60 focus:border-gold focus:outline-none" />
+      </label>
+      <div class="mt-3.5 flex items-center gap-2 overflow-x-auto pb-0.5" role="group" aria-label="Quick filter by region">
+        <button class="rounded-full bg-saffron px-4 py-2 text-[13px] font-semibold text-cream shadow-xs">All regions</button>
+        <button class="rounded-full border border-hairline bg-cream px-4 py-2 text-[13px] font-medium text-safdeep hover:border-gold">Vinnulagam</button>
+        <button class="rounded-full border border-hairline bg-cream px-4 py-2 text-[13px] font-medium text-safdeep hover:border-gold">Chola Nadu</button>
+        <button class="rounded-full border border-hairline bg-cream px-4 py-2 text-[13px] font-medium text-safdeep hover:border-gold">Malai Nadu</button>
+        <button class="rounded-full border border-hairline bg-cream px-4 py-2 text-[13px] font-medium text-safdeep hover:border-gold">Nadu Nadu</button>
+        <button class="rounded-full border border-hairline bg-cream px-4 py-2 text-[13px] font-medium text-safdeep hover:border-gold">Pandiya Nadu</button>
+        <button class="rounded-full border border-hairline bg-cream px-4 py-2 text-[13px] font-medium text-safdeep hover:border-gold">Thondai Nadu</button>
+        <button class="rounded-full border border-hairline bg-cream px-4 py-2 text-[13px] font-medium text-safdeep hover:border-gold">Vada Nadu</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== scope tabs + more filters ===================== -->
+<section class="w-full bg-ivory">
+  <div class="mx-auto max-w-site px-4 pt-4 sm:px-6">
+    <div class="flex flex-wrap items-center gap-3">
+      <button class="flex items-center gap-2 rounded-xl border border-gold/60 bg-sunk px-4 py-2.5 text-[14px] font-semibold text-safdeep shadow-xs">
+        <svg viewBox="0 0 24 24" class="h-[18px] w-[18px] text-golddeep" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 21V9l4-3V3h8v3l4 3v12M9 21v-4h6v4M4 21h16"/></svg>
+        All temples
+      </button>
+      <button class="flex items-center gap-2 rounded-xl border border-hairline bg-cream px-4 py-2.5 text-[14px] font-medium text-ink hover:border-gold">
+        <svg viewBox="0 0 24 24" class="h-[18px] w-[18px] text-golddeep" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.4 2.4 4.6-5"/></svg>
+        Visited (0)
+      </button>
+      <button class="flex items-center gap-2 rounded-xl border border-hairline bg-cream px-4 py-2.5 text-[14px] font-medium text-ink hover:border-gold">
+        <svg viewBox="0 0 24 24" class="h-[18px] w-[18px] text-golddeep" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        In my trip (2)
+      </button>
+      <span class="h-8 w-px bg-hairline" aria-hidden="true"></span>
+      <button class="flex items-center gap-3 rounded-xl border border-hairline bg-cream px-4 py-2 text-left hover:border-gold">
+        <svg viewBox="0 0 24 24" class="h-[18px] w-[18px] text-golddeep" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16l-6 7v6l-4 2v-8L4 5z"/></svg>
+        <span>
+          <span class="flex items-center gap-1.5 text-[14px] font-semibold text-ink">More filters
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 text-muted" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+          <span class="block text-[12px] text-muted">State · Deity form · Azhwar</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== results header ===================== -->
+<section class="w-full bg-ivory">
+  <div class="mx-auto max-w-site px-4 pt-8 pb-5 sm:px-6">
+    <div class="flex flex-wrap items-end justify-between gap-4 border-b border-hairline/70 pb-4">
+      <p class="result-count font-display text-[30px] font-semibold leading-none text-safdark">108 kshetrams</p>
+      <label class="flex items-center gap-2.5 text-[13px] font-medium text-muted">
+        Sort by
+        <span class="relative">
+          <select aria-label="Sort by" class="appearance-none rounded-lg border border-hairline bg-cream py-2 pl-3.5 pr-9 text-[13px] font-semibold text-safdeep focus:outline-none">
+            <option>Traditional order</option>
+            <option>Name A–Z</option>
+            <option>Name Z–A</option>
+          </select>
+          <svg viewBox="0 0 24 24" class="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-safdeep" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </span>
+      </label>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== card grid ===================== -->
+<section class="w-full bg-ivory pb-16">
+  <div class="mx-auto max-w-site px-4 sm:px-6">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+      <!-- Card 1: visited=false, in trip -->
+      <article class="kshetram-card group relative flex flex-col overflow-hidden rounded-2xl border border-hairline bg-cream shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-gold hover:shadow-cardHover">
+        <a href="#" aria-label="Thiruvallikeni (Triplicane) — view temple details" class="absolute inset-0 z-0"></a>
+        <div class="relative h-52 shrink-0 overflow-hidden border-b border-hairline bg-sunk">
+          <svg viewBox="0 0 220 130" class="absolute inset-0 m-auto h-[75%] w-[70%] text-gold" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" opacity="0.55">
+            <use href="#gopuram-art"/>
+          </svg>
+          <p class="absolute inset-x-0 bottom-4 text-center text-[13px] font-medium text-muted/80">Photo coming soon</p>
+          <button class="absolute right-3 top-3 z-10 flex items-center gap-1.5 rounded-full border border-gold/70 bg-cream px-3 py-1.5 text-[12px] font-bold text-safdeep shadow-xs">
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 text-golddeep" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
+            In trip
+          </button>
+          <span class="absolute bottom-3 left-3 rounded bg-safdark/85 px-2 py-0.5 text-[11px] font-bold tracking-wide text-goldsoft backdrop-blur-xs">DD #1</span>
+        </div>
+        <div class="flex flex-1 flex-col p-5">
+          <p class="text-[14px] font-medium text-golddeep" lang="ta">திருவல்லிக்கேணி</p>
+          <h3 class="mt-0.5 font-display text-[26px] font-semibold leading-[1.12] text-safdark">Thiruvallikeni (Triplicane)</h3>
+          <div class="mt-3 border-t border-hairline" aria-hidden="true"></div>
+          <p class="mt-3 text-[15px] font-semibold leading-snug text-ink">Sri Parthasarathy Temple</p>
+          <p class="mt-1 text-[13px] text-muted">Triplicane, Chennai · Tamil Nadu</p>
+          <span class="mt-3 inline-flex self-start rounded-md border border-gold/50 bg-ivory px-2.5 py-1 text-[12px] font-medium text-safdeep">Thondai Nadu</span>
+          <div class="relative z-10 mt-auto flex items-center gap-3 pt-5">
+            <span class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-golddeep px-5 py-2.5 text-[14px] font-semibold text-cream shadow-xs transition-colors group-hover:bg-safdeep">
+              View temple
+              <svg viewBox="0 0 24 24" class="h-4 w-4 opacity-85" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg>
+            </span>
+            <span class="h-7 w-px bg-hairline" aria-hidden="true"></span>
+            <button class="flex items-center gap-2 whitespace-nowrap rounded-lg px-2 py-2 text-[14px] font-medium text-ink hover:text-safdeep">
+              <svg viewBox="0 0 22 22" class="h-[18px] w-[18px] text-muted" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="8.2"/></svg>
+              Mark visited
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: not in trip -->
+      <article class="kshetram-card group relative flex flex-col overflow-hidden rounded-2xl border border-hairline bg-cream shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-gold hover:shadow-cardHover">
+        <a href="#" aria-label="Thiruneermali — view temple details" class="absolute inset-0 z-0"></a>
+        <div class="relative h-52 shrink-0 overflow-hidden border-b border-hairline bg-sunk">
+          <svg viewBox="0 0 220 130" class="absolute inset-0 m-auto h-[75%] w-[70%] text-gold" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" opacity="0.55">
+            <use href="#gopuram-art"/>
+          </svg>
+          <p class="absolute inset-x-0 bottom-4 text-center text-[13px] font-medium text-muted/80">Photo coming soon</p>
+          <button class="absolute right-3 top-3 z-10 flex items-center gap-1.5 rounded-full bg-cream/95 px-3 py-1.5 text-[12px] font-semibold text-ink shadow-md ring-1 ring-hairline hover:bg-cream">
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 5v14m-7-7h14"/></svg>
+            Add to trip
+          </button>
+          <span class="absolute bottom-3 left-3 rounded bg-safdark/85 px-2 py-0.5 text-[11px] font-bold tracking-wide text-goldsoft backdrop-blur-xs">DD #2</span>
+        </div>
+        <div class="flex flex-1 flex-col p-5">
+          <p class="text-[14px] font-medium text-golddeep" lang="ta">திருநீர்மலை</p>
+          <h3 class="mt-0.5 font-display text-[26px] font-semibold leading-[1.12] text-safdark">Thiruneermali</h3>
+          <div class="mt-3 border-t border-hairline" aria-hidden="true"></div>
+          <p class="mt-3 text-[15px] font-semibold leading-snug text-ink">Sri Neervanna Perumal Temple</p>
+          <p class="mt-1 text-[13px] text-muted">Thiruneermalai, Chennai · Tamil Nadu</p>
+          <span class="mt-3 inline-flex self-start rounded-md border border-gold/50 bg-ivory px-2.5 py-1 text-[12px] font-medium text-safdeep">Thondai Nadu</span>
+          <div class="relative z-10 mt-auto flex items-center gap-3 pt-5">
+            <span class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-golddeep px-5 py-2.5 text-[14px] font-semibold text-cream shadow-xs transition-colors group-hover:bg-safdeep">
+              View temple
+              <svg viewBox="0 0 24 24" class="h-4 w-4 opacity-85" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg>
+            </span>
+            <span class="h-7 w-px bg-hairline" aria-hidden="true"></span>
+            <button class="flex items-center gap-2 whitespace-nowrap rounded-lg px-2 py-2 text-[14px] font-medium text-ink hover:text-safdeep">
+              <svg viewBox="0 0 22 22" class="h-[18px] w-[18px] text-muted" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="8.2"/></svg>
+              Mark visited
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: in trip, long name wraps -->
+      <article class="kshetram-card group relative flex flex-col overflow-hidden rounded-2xl border border-hairline bg-cream shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-gold hover:shadow-cardHover">
+        <a href="#" aria-label="Thirukkachi (Kanchipuram — Atthigiri) — view temple details" class="absolute inset-0 z-0"></a>
+        <div class="relative h-52 shrink-0 overflow-hidden border-b border-hairline bg-sunk">
+          <svg viewBox="0 0 220 130" class="absolute inset-0 m-auto h-[75%] w-[70%] text-gold" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" opacity="0.55">
+            <use href="#gopuram-art"/>
+          </svg>
+          <p class="absolute inset-x-0 bottom-4 text-center text-[13px] font-medium text-muted/80">Photo coming soon</p>
+          <button class="absolute right-3 top-3 z-10 flex items-center gap-1.5 rounded-full border border-gold/70 bg-cream px-3 py-1.5 text-[12px] font-bold text-safdeep shadow-xs">
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 text-golddeep" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
+            In trip
+          </button>
+          <span class="absolute bottom-3 left-3 rounded bg-safdark/85 px-2 py-0.5 text-[11px] font-bold tracking-wide text-goldsoft backdrop-blur-xs">DD #3</span>
+        </div>
+        <div class="flex flex-1 flex-col p-5">
+          <p class="text-[14px] font-medium text-golddeep" lang="ta">திருக்கச்சி ஏகம்பன்</p>
+          <h3 class="mt-0.5 font-display text-[26px] font-semibold leading-[1.12] text-safdark">Thirukkachi (Kanchipuram — Atthigiri)</h3>
+          <div class="mt-3 border-t border-hairline" aria-hidden="true"></div>
+          <p class="mt-3 text-[15px] font-semibold leading-snug text-ink">Sri Varadharaja Perumal Temple</p>
+          <p class="mt-1 text-[13px] text-muted">Kanchipuram · Tamil Nadu</p>
+          <span class="mt-3 inline-flex self-start rounded-md border border-gold/50 bg-ivory px-2.5 py-1 text-[12px] font-medium text-safdeep">Thondai Nadu</span>
+          <div class="relative z-10 mt-auto flex items-center gap-3 pt-5">
+            <span class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-golddeep px-5 py-2.5 text-[14px] font-semibold text-cream shadow-xs transition-colors group-hover:bg-safdeep">
+              View temple
+              <svg viewBox="0 0 24 24" class="h-4 w-4 opacity-85" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg>
+            </span>
+            <span class="h-7 w-px bg-hairline" aria-hidden="true"></span>
+            <button class="flex items-center gap-2 whitespace-nowrap rounded-lg px-2 py-2 text-[14px] font-medium text-ink hover:text-safdeep">
+              <svg viewBox="0 0 22 22" class="h-[18px] w-[18px] text-muted" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="8.2"/></svg>
+              Mark visited
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- shared gopuram line-art definition -->
+<svg width="0" height="0" class="absolute" aria-hidden="true">
+  <defs>
+    <g id="gopuram-art">
+      <path d="M110 122V62h46v60"/>
+      <path d="M116 62v-9h34v9M119 53v-10h28v10M123 43v-11h20v11M128 32v-10h10v10M131 22v-9h4v9"/>
+      <path d="M133 13V6m0 0l-3 3m3-3l3 3"/>
+      <path d="M116 72h34m-34 10h34m-34 10h34m-34 10h34m-34 10h34"/>
+      <path d="M70 122V80h28v42"/>
+      <path d="M74 80v-8h20v8M77 72v-9h14v9M82 63v-9h4v9"/>
+      <path d="M74 88h20m-20 10h20m-20 10h20"/>
+      <path d="M36 122c2-18 1-32-4-44m4 44c-2-18-6-30-12-38m12 38c0-16 3-30 10-40m-10 40c2-14 8-26 16-32"/>
+      <path d="M32 78c-6-6-12-8-18-6m18 6c-2-8-6-13-12-15m12 15c2-8 7-12 14-13m-14 13c6-4 12-5 18-2"/>
+      <path d="M182 122c1-14 0-25-4-34m4 34c-1-12-4-22-9-28m9 28c0-12 2-22 8-30m-8 30c2-10 6-19 12-24"/>
+      <path d="M10 122h200" stroke-width="2.5"/>
+    </g>
+  </defs>
+</svg>
+
+</body>
+</html>

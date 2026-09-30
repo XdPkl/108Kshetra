@@ -192,37 +192,38 @@ describe('VisitInfoSection branches (UXD v3.0)', () => {
 });
 
 describe('BrowsePage status filters (UXD v3.0)', () => {
-  it('narrows via the visited and trip checkboxes and toggles a region pill off', async () => {
+  it('narrows via the visited and trip scope pills and toggles a region pill off', async () => {
     const user = userEvent.setup();
     markVisited('srirangam', true);
     addToTrip('srirangam');
     addToTrip('tirupati');
     renderAt('/kshetrams', <BrowsePage />);
-    await user.click(screen.getByLabelText('Visit status'));
-    expect(countText(/showing 1 of 108 kshetrams/i)).toBeInTheDocument();
-    await user.click(screen.getByLabelText('Visit status'));
-    await user.click(screen.getByLabelText(/show in trip only/i));
-    expect(countText(/showing 2 of 108 kshetrams/i)).toBeInTheDocument();
-    await user.click(screen.getByLabelText(/show in trip only/i));
+    await user.click(screen.getByRole('button', { name: /visited \(1\)/i }));
+    expect(countText(/^1 kshetram$/i)).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: /all temples/i }));
+    await user.click(screen.getByRole('button', { name: /in my trip \(2\)/i }));
+    expect(countText(/^2 kshetrams$/i)).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: /all temples/i }));
 
     const group = screen.getByRole('group', { name: /quick filter by region/i });
     const chola = within(group).getByRole('button', { name: /chola nadu/i });
     await user.click(chola);
-    expect(countText(/showing 40 of 108 kshetrams/i)).toBeInTheDocument();
+    expect(countText(/^40 kshetrams$/i)).toBeInTheDocument();
     await user.click(chola);
-    expect(countText(/showing 108 of 108 kshetrams/i)).toBeInTheDocument();
+    expect(countText(/^108 kshetrams$/i)).toBeInTheDocument();
   });
 
   it('sorts Z–A and filters by deity form and azhwar', async () => {
     const user = userEvent.setup();
     renderAt('/kshetrams?azhwar=andal', <BrowsePage />);
-    expect(countText(/showing \d+ of 108 kshetrams/i)).not.toHaveTextContent('Showing 108');
+    expect(countText(/^\d+ kshetrams?$/i)).not.toHaveTextContent('108 kshetrams');
+    await user.click(screen.getByRole('button', { name: /more filters/i }));
     await user.selectOptions(screen.getByLabelText('Azhwar'), '');
-    expect(countText(/showing 108 of 108 kshetrams/i)).toBeInTheDocument();
+    expect(countText(/^108 kshetrams$/i)).toBeInTheDocument();
     const deitySelect = screen.getByLabelText('Deity form');
     const firstValue = deitySelect.querySelector('option:nth-child(2)').value;
     await user.selectOptions(deitySelect, firstValue);
-    expect(countText(/showing \d+ of 108 kshetrams/i)).not.toHaveTextContent('Showing 108');
+    expect(countText(/^\d+ kshetrams?$/i)).not.toHaveTextContent('108 kshetrams');
     await user.selectOptions(screen.getByLabelText('Sort by'), 'za');
     const names = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent);
     const desc = [...names].sort((a, b) => b.localeCompare(a));

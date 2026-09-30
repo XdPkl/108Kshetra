@@ -22604,8 +22604,9 @@
     },
     "browse": {
       "eyebrow": "Complete Sacred Directory",
-      "title": "Browse the 108 Divya Desams",
-      "lead": "Search, filter by sacred region, mark visited darshans, and curate your personal yatra pilgrimage route."
+      "title": "Explore the 108 Divya Desams",
+      "lead": "Find a sacred place. Plan your next darshan.",
+      "quote": "Divya Desams are the eternal abodes of Lord Vishnu, celebrated by the Azhwars."
     },
     "map": {
       "eyebrow": "Interactive Pilgrimage Atlas",

@@ -1,7 +1,7 @@
 /**
  * Page-level component tests rendered with a MemoryRouter.
  */
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
@@ -51,7 +51,7 @@ describe('HomePage (UT-HOME-01..03)', () => {
 describe('BrowsePage (UT-BRW-01..04)', () => {
   it('shows all 108 kshetrams with the result count', () => {
     renderAt('/kshetrams');
-    expect(screen.getByText(/showing 108 of 108 kshetrams/i)).toBeInTheDocument();
+    expect(screen.getByText('108 kshetrams')).toBeInTheDocument();
     expect(screen.getAllByRole('article')).toHaveLength(108);
   });
 
@@ -59,8 +59,10 @@ describe('BrowsePage (UT-BRW-01..04)', () => {
     const user = userEvent.setup();
     renderAt('/kshetrams');
     await user.type(screen.getByLabelText(/search kshetrams/i), 'kanchipuram');
-    const countText = await screen.findByText(/showing \d+ of 108 kshetrams/i);
-    expect(countText.textContent).not.toMatch(/showing 108/);
+    // scope to .result-count — the nav also carries an "108 Kshetrams" label
+    await vi.waitFor(() => {
+      expect(document.querySelector('.result-count').textContent).not.toBe('108 kshetrams');
+    });
     expect(screen.getAllByRole('article').length).toBeGreaterThan(0);
   });
 
@@ -79,13 +81,13 @@ describe('BrowsePage (UT-BRW-01..04)', () => {
     await user.type(screen.getByLabelText(/search kshetrams/i), 'atlantis');
     expect(await screen.findByText(/no kshetrams found/i)).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: /clear all filters/i }));
-    expect(await screen.findByText(/showing 108 of 108 kshetrams/i)).toBeInTheDocument();
+    expect(await screen.findByText('108 kshetrams')).toBeInTheDocument();
   });
 
   it('filters by azhwar via the ?azhwar= query param (FR-41)', async () => {
     renderAt('/kshetrams?azhwar=andal');
     expect((await screen.findAllByRole('article')).length).toBeGreaterThan(0);
-    expect(screen.queryByText(/showing 108 of 108 kshetrams/i)).not.toBeInTheDocument();
+    expect(screen.queryByText('108 kshetrams')).not.toBeInTheDocument();
   });
 });
 

@@ -886,3 +886,61 @@ Deterministically reproduced via Playwright click-interception timeout.
 Card names render dataset values: "Thiruvengadam (Tirumala)" (mockup shows
 "Thiruvenkatam") — per the standing naming decision. Deity pill labels come
 from `kshetram.deity`.
+
+---
+
+## Version 2.11 — Explore Page Restyle (2026-09-30)
+
+### Scope
+
+Implementation of the PO-approved Explore mockup (supplied 2026-09-30,
+static mockup at `docs/03-design/mockups/explore-restyle-2026-09-30/explore.html`,
+visually verified against the reference before build): the /kshetrams page
+moves from the ruled-banner + filter-card layout to a display header with
+gopuram line-art + quote, a white search/region panel, scope pills, a
+collapsed "More filters" disclosure, a serif result count, and restyled
+cards. New title/lead copy; browse cards drop the deity pill, pasuram tag
+and ◆ fallback (mockup-faithful; detail pages keep everything).
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/components/GopuramArt.jsx` | NEW: decorative gold gopuram line-art SVG (currentColor strokes) shared by the page header and card placeholders |
+| `app/src/pages/BrowsePage.jsx` | Rewritten: display header (eyebrow + 52px serif title + lead + art/quote at lg+); search + region chips in a white panel ("Vinnulagam" without count); scope checkboxes → exclusive pill buttons All temples / Visited (N) / In my trip (N) with `aria-pressed`; State/Deity-form/Azhwar selects move into a collapsed "More filters" disclosure (labels/aria unchanged); count "Showing N of M kshetrams" → serif "N kshetram(s)" (`.result-count` + aria-live kept); sort control unchanged |
+| `app/src/components/KshetramCard.jsx` | Restyled: h-52 photo, "Photo coming soon" placeholder = GopuramArt + caption (replaces ◆), trip chip "Add to trip"/"In trip", DD tag kept, pasuram tag + deity pill dropped, region pill only, action row `relative z-10` (overlay-interception lesson from TER v2.10 applied) with gold `#96731F` "View temple →" + hairline + "◯ Mark visited"; h3 26px with `!` bangs |
+| `app/src/data/content/site-copy.json` | `browse.title` → "Explore the 108 Divya Desams", `browse.lead` → "Find a sacred place. Plan your next darshan.", NEW `browse.quote` field |
+| `studio/schemas/siteCopy.js` | `browse.quote` field added (pipeline is generic — no GROQ/transform change needed; verified) |
+| `docs/03-design/gate-shots/explore-restyle/` | NEW: 3 gate shots (1440 top / 1440 cards / 390) |
+
+### Test contract updates (lockstep)
+
+| Suite | Change |
+|---|---|
+| `pages.test.jsx` UT-BRW | "showing 108 of 108 kshetrams" → exact "108 kshetrams" (nav-label collision avoided); UT-BRW-02 scoped to `.result-count` via `vi.waitFor` |
+| `v3Branches.test.jsx` | checkbox interactions → scope-pill clicks (`Visited (1)` / `All temples` / `In my trip (2)`, exclusive); More-filters disclosure opened before Azhwar/Deity-form selects; count regexes → `^N kshetrams?$` |
+| `yatra.test.jsx` | `'+ Trip'` / `'✓ In trip'` → `'Add to trip'` / `'In trip'` |
+| `e2e/journeys.spec.js` TC-04..07, TC-10 | count text + exact-match updates; TC-06 clicks "More filters" first |
+| `e2e/yatra.spec.js` TC-13 | `getByLabel('Visit status').check()` → click "Visited (1)" pill; expects "1 kshetram" (singular) |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (unchanged set) |
+| Unit tests (Vitest) | **209/209 pass (21 suites)** |
+| Coverage | **92.14% statements / 82.79% branches / 87.47% functions / 93.45% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Sanity schema validate | 0 warnings (placeholder project id) |
+| CMS round-trip + sync self-test | Offline 11/11 lossless (site-copy title/lead value edits + quote field addition); fixture regenerated; `sync-content --fixture --check` → 0 diffs |
+| Visual gate | 3/3 renders pass vs the PO mockup — `docs/03-design/gate-shots/explore-restyle/` |
+
+### Deterministic verification (Playwright, production preview)
+
+| Check | Result |
+|---|---|
+| Grid | 108 `.kshetram-card`, 3 columns, 368px cards, no horizontal overflow at 1280 / 1440 / 1920 |
+| Header | Title one line at 1440 (h1 height 54px after the 52px + narrower art-block tightening; 56px wrapped) — quote block visible at lg+ |
+| Card anatomy | 26px display name, hairline, region pill only (deity pill absent), no pasuram tag, DD #1 tag, "Add to trip" chip, "Photo coming soon" placeholder, action row one line (gold `rgb(150,115,31)` button + Mark visited), overlay href intact |
+| Interactions | "Visited (0)" pill → count "0 kshetrams"; "More filters" opens; State=Kerala → "11 kshetrams" |
