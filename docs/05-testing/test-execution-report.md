@@ -928,7 +928,7 @@ and ◆ fallback (mockup-faithful; detail pages keep everything).
 | Gate | Result |
 |---|---|
 | oxlint | 0 errors / 5 warnings (unchanged set) |
-| Unit tests (Vitest) | **209/209 pass (21 suites)** |
+| Unit tests (Vitest) | **209/209 pass (21 suites)** — CI failure on 334a6cd: the rewritten scope-pill test (6 clicks × up-to-108-card jsdom re-renders, ~1.3s local) exceeded the 5s default timeout on 2-core runners; fixed with `delay: null` + explicit 15s timeouts on the two heavy browse tests |
 | Coverage | **92.14% statements / 82.79% branches / 87.47% functions / 93.45% lines** (gate 80%) |
 | Production build | Clean |
 | E2E (Playwright, Chromium) | **19/19 journeys pass** |

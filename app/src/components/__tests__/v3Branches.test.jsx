@@ -192,8 +192,10 @@ describe('VisitInfoSection branches (UXD v3.0)', () => {
 });
 
 describe('BrowsePage status filters (UXD v3.0)', () => {
+  // Each click re-renders up to 108 cards; CI's 2-core runners need >5s
+  // (local ~1.3s), so these carry an explicit timeout (CI failure 334a6cd).
   it('narrows via the visited and trip scope pills and toggles a region pill off', async () => {
-    const user = userEvent.setup();
+    const user = userEvent.setup({ delay: null });
     markVisited('srirangam', true);
     addToTrip('srirangam');
     addToTrip('tirupati');
@@ -211,7 +213,7 @@ describe('BrowsePage status filters (UXD v3.0)', () => {
     expect(countText(/^40 kshetrams$/i)).toBeInTheDocument();
     await user.click(chola);
     expect(countText(/^108 kshetrams$/i)).toBeInTheDocument();
-  });
+  }, 15_000);
 
   it('sorts Z–A and filters by deity form and azhwar', async () => {
     const user = userEvent.setup();
@@ -228,7 +230,7 @@ describe('BrowsePage status filters (UXD v3.0)', () => {
     const names = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent);
     const desc = [...names].sort((a, b) => b.localeCompare(a));
     expect(names).toEqual(desc);
-  });
+  }, 15_000);
 });
 
 describe('MapPage extras (UXD v3.0)', () => {
