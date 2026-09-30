@@ -13,6 +13,9 @@ export default defineConfig({
     setupFiles: './src/test/setup.js',
     // Playwright owns e2e/*.spec.js; keep them out of the Vitest run
     exclude: ['e2e/**', 'node_modules/**'],
+    // CI runners are 2-core: heavy full-grid renders (browse grid, the
+    // atlas matrix) exceed the 5s default there while passing locally
+    testTimeout: 15_000,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],

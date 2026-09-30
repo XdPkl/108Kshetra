@@ -1144,6 +1144,7 @@ when the intended asset arrives.
 | `yatraPages.test.jsx` | Heading regex → `/plan your yatra/i`. New test: matrix lists >100 "View temple" cards with NO "km away" before locating; after a mocked `getCurrentPosition`, all cards carry distances (15s timeout — full 108-card render) |
 | `v3Branches.test.jsx` | "MapPage extras": heading → region `Temples in view`; after clearing GPS the cards persist but every "km away" line is gone (15s timeout) |
 | `e2e/yatra.spec.js` | TC-14: heading regex + popup link `/show temple/i`. TC-15: header pill `/plan yatra 3/i` (merged item carries the badge) |
+| `vite.config.js`, heavy suites | CI defect (first push, run 36677374198): the 108-card matrix made every MapPage render exceed the 5s vitest default on the 2-core CI runner — 3 tests timed out (even one explicit 15s). Fix: global `testTimeout: 15_000` + `vi.mock` of `utils/wikiImage.js` in the two atlas-heavy suites so photo-less cards stop firing real Wikipedia fetches during tests (network-dependent and CI-slow; no test asserted fetched images). Gotcha 10 generalized: the heavy-render timeout now lives in the config, not per-test |
 
 ### Execution summary
 

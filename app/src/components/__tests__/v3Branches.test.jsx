@@ -19,6 +19,13 @@ vi.mock('react-leaflet', () => ({
   Polyline: () => <div data-testid="map-polyline" />,
 }));
 
+// The atlas matrix mounts ~108 cards; without this stub each photo-less
+// card fires a real Wikipedia fetch (network-dependent, slow on CI).
+vi.mock('../../utils/wikiImage.js', () => ({
+  fetchWikiImage: vi.fn(() => Promise.resolve({ src: null, credit: null })),
+  getCachedWikiImage: vi.fn(() => null),
+}));
+
 import YatraProgressTracker from '../home/YatraProgressTracker.jsx';
 import SectionNav from '../detail/SectionNav.jsx';
 import Header from '../Header.jsx';
