@@ -107,7 +107,6 @@ export default function Header() {
   const isHomeActive = pathname === '/';
   const isBrowseActive = pathname.startsWith('/kshetram');
   const isMapActive = pathname.startsWith('/map');
-  const isTripActive = pathname.startsWith('/trip');
   const isAzhwarsActive = pathname.startsWith('/azhwar');
   const isAcharyasActive = pathname.startsWith('/acharya');
   const isAboutActive = pathname.startsWith('/about');
@@ -271,20 +270,18 @@ export default function Header() {
             <span>Map</span>
           </NavLink>
 
-          {/* D. MY YATRA (LIVE COUNT BADGE) */}
+          {/* D. MY YATRA (LIVE COUNT BADGE — shortcut to the merged Yatra Atlas) */}
           <NavLink
-            to="/trip"
+            to="/map"
             onClick={closeAll}
-            className={`${pillBase} ${isTripActive ? pillActive : pillIdle}`}
+            className={`${pillBase} ${pillIdle}`}
             title="My Personal Yatra Itinerary"
           >
             <RouteIcon className="w-3.5 h-3.5 text-[#E2C47C]" aria-hidden="true" />
             <span>My Yatra</span>
             {tripCount > 0 && (
               <span
-                className={`inline-flex items-center justify-center min-w-[1.2rem] h-[1.2rem] px-1 text-[0.7rem] font-bold rounded-full transition-transform ${
-                  isTripActive ? 'bg-[#FFFDF7] text-[#7A2E00]' : 'bg-[#C99A2E] text-[#4A3005]'
-                }`}
+                className="inline-flex items-center justify-center min-w-[1.2rem] h-[1.2rem] px-1 text-[0.7rem] font-bold rounded-full bg-[#C99A2E] text-[#4A3005]"
               >
                 {tripCount}
               </span>
@@ -598,9 +595,9 @@ export default function Header() {
             </div>
 
             <Link
-              to="/trip"
+              to="/map"
               onClick={closeAll}
-              className={`${drawerItem} justify-between ${isTripActive ? drawerActive : drawerIdle}`}
+              className={`${drawerItem} justify-between ${drawerIdle}`}
             >
               <div className="flex items-center gap-2.5">
                 <RouteIcon className="w-4 h-4 text-[#B34700]" aria-hidden="true" />

@@ -156,3 +156,20 @@
     background: #FFFFFF !important;
   }
 }
+
+/* Map cluster bubble (2026-09-30 atlas merge) — hand-rolled grid clusters
+   render as divIcons; the bubble is a saffron medallion with the count. */
+.map-cluster { background: transparent; border: 0; }
+.map-cluster__bubble {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background-image: linear-gradient(160deg, #D95F0E, #B34700 55%, #8F3500);
+  border: 2px solid #FFFDF7;
+  box-shadow: 0 2px 8px rgba(87, 31, 0, 0.35);
+  color: #FFFDF7;
+  font-size: 0.8rem;
+  font-weight: 700;
+}

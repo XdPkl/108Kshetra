@@ -13,13 +13,13 @@ vi.mock('react-leaflet', () => ({
   ),
   TileLayer: () => null,
   CircleMarker: ({ children }) => <div data-testid="map-marker">{children}</div>,
+  Marker: ({ children }) => <div data-testid="map-marker">{children}</div>,
   Popup: ({ children }) => <div>{children}</div>,
   Tooltip: ({ children }) => <div data-testid="map-tooltip">{children}</div>,
   Polyline: () => <div data-testid="map-polyline" />,
 }));
 
 import MapPage from '../../pages/MapPage.jsx';
-import TripPage from '../../pages/TripPage.jsx';
 import AboutPage from '../../pages/AboutPage.jsx';
 import MiniMapInner from '../../components/MiniMapInner.jsx';
 import { resetVisited, markVisited } from '../../state/visited.js';
@@ -38,19 +38,20 @@ beforeEach(() => {
 const metaMatching = (pattern) => (content, el) =>
   el?.classList?.contains('trip-page__meta') && pattern.test(el.textContent);
 
-describe('TripPage (UT-TRP-02/03, FR-80/81)', () => {
-  it('shows the guiding empty state', () => {
-    renderAt('/trip', <TripPage />);
+describe('Trip planner on the merged Yatra Atlas (UT-TRP-02/03, FR-80/81)', () => {
+  it('shows the guiding empty state in the trip section', () => {
+    renderAt('/map', <MapPage />);
     expect(screen.getByText(/your trip is empty/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /browse desams/i })).toHaveAttribute('href', '/kshetrams');
-    expect(screen.getByRole('link', { name: /open map/i })).toHaveAttribute('href', '/map');
+    // the "Open map" escape hatch is gone — the atlas IS the map now
+    expect(screen.queryByText(/open map/i)).not.toBeInTheDocument();
   });
 
   it('lists stops grouped by region with remove actions', async () => {
     const user = userEvent.setup();
     addToTrip('srirangam');
     addToTrip('uthamar-kovil');
-    renderAt('/trip', <TripPage />);
+    renderAt('/map', <MapPage />);
     expect(screen.getByText(metaMatching(/2 stops/))).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /chola nadu/i })).toBeInTheDocument();
     await user.click(screen.getAllByRole('button', { name: /remove/i })[0]);
@@ -62,7 +63,7 @@ describe('TripPage (UT-TRP-02/03, FR-80/81)', () => {
     addToTrip('srirangam');
     addToTrip('tirupati');
     addToTrip('uthamar-kovil');
-    renderAt('/trip', <TripPage />);
+    renderAt('/map', <MapPage />);
     await user.click(screen.getByRole('button', { name: /order my route/i }));
     expect(screen.getByText(/nearest-first/i)).toBeInTheDocument();
     const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(true);
@@ -72,29 +73,33 @@ describe('TripPage (UT-TRP-02/03, FR-80/81)', () => {
   });
 
   it('restores a trip from a shared ?t= link (FR-81)', async () => {
-    renderAt('/trip?t=srirangam,tirupati', <TripPage />);
+    renderAt('/map?t=srirangam,tirupati', <MapPage />);
     expect(await screen.findByText(/trip loaded from a shared link/i)).toBeInTheDocument();
     expect(screen.getByText(metaMatching(/2 stops/))).toBeInTheDocument();
   });
 
-  it('draws the trip plan on a route map with numbered tooltips (US-TRP-04)', async () => {
+  it('draws the route polyline with numbered tooltips in the In-trip scope (US-TRP-04)', async () => {
+    const user = userEvent.setup();
     addToTrip('srirangam');
     addToTrip('tirupati');
     addToTrip('uthamar-kovil');
-    renderAt('/trip', <TripPage />);
-    const frame = await screen.findByRole('region', { name: /your trip plan on a map/i });
-    expect(within(frame).getAllByTestId('map-marker')).toHaveLength(3);
-    expect(within(frame).getByTestId('map-polyline')).toBeInTheDocument();
-    const tooltips = within(frame).getAllByTestId('map-tooltip');
+    renderAt('/map', <MapPage />);
+    await user.click(screen.getByRole('button', { name: 'In trip (3)' }));
+    expect(screen.getAllByTestId('map-marker')).toHaveLength(3);
+    expect(screen.getByTestId('map-polyline')).toBeInTheDocument();
+    const tooltips = screen.getAllByTestId('map-tooltip');
     expect(tooltips).toHaveLength(3);
     expect(tooltips.map((t) => t.textContent).join(' ')).toMatch(/^1\. .*2\. .*3\. /);
   });
 
-  it('hides the trip map when no stop has coordinates (celestial-only trip)', async () => {
+  it('renders no route polyline for a celestial-only trip', async () => {
+    const user = userEvent.setup();
     addToTrip('paramapadam');
-    renderAt('/trip', <TripPage />);
+    renderAt('/map', <MapPage />);
+    // the celestial stop has no coords, so the plotted-trip count is 0
+    await user.click(screen.getByRole('button', { name: 'In trip (0)' }));
     expect(screen.getByText(metaMatching(/1 stop/))).toBeInTheDocument();
-    expect(screen.queryByRole('region', { name: /your trip plan on a map/i })).not.toBeInTheDocument();
+    expect(screen.queryByTestId('map-polyline')).not.toBeInTheDocument();
   });
 });
 
@@ -108,19 +113,22 @@ describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
     expect(screen.getByText(/visited desams carry a gold ring/i)).toBeInTheDocument();
   });
 
-  it('filters markers through region chips (FR-78)', async () => {
+  it('narrows markers through the region dropdown and the search box (FR-78, 2026-09-30 merge)', async () => {
     const user = userEvent.setup();
     renderAt('/map', <MapPage />);
     const before = screen.getAllByTestId('map-marker').length;
-    const group = screen.getByRole('group', { name: /filter by region/i });
-    // UXD v3.0: the chip row gained a leading "All regions" chip — index 1 is a region
-    const chip = within(group).getAllByRole('button')[1];
-    const chipLabel = chip.textContent;
-    await user.click(chip);
-    const after = screen.getAllByTestId('map-marker').length;
-    expect(after).toBeLessThan(before);
-    expect(after).toBeGreaterThan(0);
-    expect(screen.getAllByText(chipLabel).length).toBeGreaterThanOrEqual(1);
+
+    const select = screen.getByLabelText('Filter by region');
+    await user.selectOptions(select, 'Chola Nadu');
+    const afterRegion = screen.getAllByTestId('map-marker').length;
+    expect(afterRegion).toBeLessThan(before);
+    expect(afterRegion).toBeGreaterThan(0);
+
+    await user.selectOptions(select, '');
+    await user.type(screen.getByLabelText(/search kshetrams/i), 'kanchipuram');
+    const afterSearch = screen.getAllByTestId('map-marker').length;
+    expect(afterSearch).toBeLessThan(before);
+    expect(afterSearch).toBeGreaterThan(0);
   });
 
   it('narrows markers through the All/Visited/In-trip scope pills (2026-09-30 refresh)', async () => {

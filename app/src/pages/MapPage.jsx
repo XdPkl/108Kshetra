@@ -1,33 +1,59 @@
 /**
- * MapPage — interactive map of every earthly Divya Desam (FR-76..78), 2026-09-30
- * look-and-feel refresh (PO mockup): display header with lotus ornament and
- * location pills, a sidebar with region chips + All/Visited/In-trip scope
- * pills (ported from the Explore page's exclusive-pill pattern) over the
- * nearest-first desam cards (photo, View temple, Add to trip, Mark visited,
- * Focus, Directions), and the Leaflet atlas in a gold frame with a
- * "Fit all temples" control and an on-map legend. Lazy-loaded route chunk
- * (NFR-11).
+ * MapPage — the merged Yatra Atlas (2026-09-30 PO decision: Map + Trip are
+ * one page). The approved atlas look (display header, sidebar search +
+ * region dropdown + All/Visited/In-trip scope pills, nearest desam cards,
+ * clustered Leaflet map with Fit-all and an on-map legend) carries the trip
+ * planner as a full-width section below: notice strip, By region/Route
+ * order views, "Order my route — nearest first", Share/Print/Clear rail and
+ * the numbered stop lists. When the In-trip scope is active the dashed
+ * route polyline + numbered stop tooltips render on the atlas itself.
+ * Clusters are hand-rolled (grid in layer space, no plugin): they only form
+ * with a live map instance below zoom 9, so jsdom/unit tests and e2e zoomed
+ * views see plain CircleMarkers. /trip redirects here (share links keep
+ * working via ?t=). Lazy-loaded route chunk (NFR-11).
  */
-import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { MapContainer, TileLayer, CircleMarker, Popup, Tooltip } from 'react-leaflet';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { MapContainer, TileLayer, CircleMarker, Marker, Polyline, Popup, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
-import { Navigation, ExternalLink, MapPin, Crosshair, Maximize } from 'lucide-react';
+import {
+  Navigation, ExternalLink, MapPin, Crosshair, Maximize,
+  Plus, Printer, RotateCcw, Share2, Trash2,
+} from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
-import { getAllKshetramsEnriched } from '../data/api.js';
+import { getAllKshetramsEnriched, getAllAzhwars } from '../data/api.js';
 import { MAPS_URL_TEMPLATE } from '../data/config.js';
 import { buildRegionColors } from '../utils/regionColors.js';
 import { distanceKm } from '../utils/geo.js';
+import { matchesSearch } from '../utils/filter.js';
+import { orderNearestFirst, legsFor, sumLegs } from '../utils/route.js';
+import { decodeTrip, encodeTrip } from '../state/trip.js';
 import RegionLegend from '../components/RegionLegend.jsx';
 import TripControls from '../components/TripControls.jsx';
+import EmptyState from '../components/EmptyState.jsx';
 import { useVisited } from '../hooks/useVisited.js';
-import { useWikiImage } from '../hooks/useWikiImage.js';
 import { useTrip } from '../hooks/useTrip.js';
+import { useWikiImage } from '../hooks/useWikiImage.js';
 import { SITE_COPY } from '../data/siteCopy.js';
+
+const CLUSTER_MAX_ZOOM = 8; // clusters form below zoom 9, dissolve above
+const CLUSTER_CELL_PX = 70;
 
 const scopeBase = 'inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] transition-all';
 const scopeActive = `${scopeBase} bg-[#B34700] font-semibold text-[#FFFDF7] shadow-xs`;
 const scopeIdle = `${scopeBase} border border-[#E3D2AE] bg-[#FFFDF7] font-medium text-[#7A2E00] hover:border-[#C99A2E]`;
+
+const selectClass = 'rounded-xl border border-[#E3D2AE] bg-[#FFFDF7] px-3 py-2 text-[13px] font-semibold text-[#7A2E00] focus:border-[#C99A2E] focus:outline-hidden';
+
+/** Saffron count bubble for a grid cluster (mockup idiom). */
+function clusterIcon(count) {
+  return L.divIcon({
+    html: `<span class="map-cluster__bubble">${count}</span>`,
+    className: 'map-cluster',
+    iconSize: [36, 36],
+    iconAnchor: [18, 18],
+  });
+}
 
 /** Nearest-first desam card — photo thumb, live distances, and the same
  * action set as the browse cards (View temple / Add to trip / Mark visited)
@@ -108,12 +134,18 @@ function NearestCard({ kshetram: k, km, mapApi }) {
 }
 
 export default function MapPage() {
-  const { visitedIds } = useVisited();
-  const { tripIds } = useTrip();
+  const { visitedIds, isVisited, toggleVisited } = useVisited();
+  const { tripIds, removeFromTrip, setTrip, clearTrip } = useTrip();
+  const azhwars = useMemo(() => getAllAzhwars(), []);
   const plotted = useMemo(
     () => getAllKshetramsEnriched().filter((k) => Array.isArray(k.coords)),
     [],
   );
+  const kshetramIndex = useMemo(() => {
+    const map = new Map();
+    for (const k of getAllKshetramsEnriched()) map.set(k.id, k);
+    return map;
+  }, []);
   const regions = useMemo(() => [...new Set(plotted.map((k) => k.region))], [plotted]);
   const colors = useMemo(() => buildRegionColors(regions), [regions]);
   const counts = useMemo(() => {
@@ -122,26 +154,35 @@ export default function MapPage() {
     return c;
   }, [plotted]);
 
-  const [activeRegions, setActiveRegions] = useState(() => new Set());
+  const [search, setSearch] = useState('');
+  const [region, setRegion] = useState('');
   const [scope, setScope] = useState('all');
   const [me, setMe] = useState(null);
   const [geoMessage, setGeoMessage] = useState('');
   const [mapApi, setMapApi] = useState(null);
+  const [clusterTick, setClusterTick] = useState(0);
 
-  const regionShown = activeRegions.size === 0
-    ? plotted
-    : plotted.filter((k) => activeRegions.has(k.region));
-  const shown = useMemo(() => {
-    if (scope === 'visited') return regionShown.filter((k) => visitedIds.includes(k.id));
-    if (scope === 'trip') return regionShown.filter((k) => tripIds.includes(k.id));
-    return regionShown;
-  }, [regionShown, scope, visitedIds, tripIds]);
+  // Trip planner state (merged from TripPage)
+  const [view, setView] = useState('region');
+  const [notice, setNotice] = useState('');
+  const appliedShare = useRef('');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const regionShown = useMemo(() => plotted.filter((k) => (
+    matchesSearch(k, search, azhwars) && (!region || k.region === region)
+  )), [plotted, search, region, azhwars]);
 
   const scopeCounts = useMemo(() => ({
     all: regionShown.length,
     visited: regionShown.filter((k) => visitedIds.includes(k.id)).length,
     trip: regionShown.filter((k) => tripIds.includes(k.id)).length,
   }), [regionShown, visitedIds, tripIds]);
+
+  const shown = useMemo(() => {
+    if (scope === 'visited') return regionShown.filter((k) => visitedIds.includes(k.id));
+    if (scope === 'trip') return regionShown.filter((k) => tripIds.includes(k.id));
+    return regionShown;
+  }, [regionShown, scope, visitedIds, tripIds]);
 
   const nearest = useMemo(() => {
     if (!me) return [];
@@ -151,14 +192,95 @@ export default function MapPage() {
       .slice(0, 12);
   }, [me, shown]);
 
-  const toggleRegion = (region) => {
-    setActiveRegions((prev) => {
-      const next = new Set(prev);
-      if (next.has(region)) next.delete(region);
-      else next.add(region);
-      return next;
-    });
+  // ---- trip planner (merged from TripPage) ----
+  const stops = tripIds.map((id) => kshetramIndex.get(id)).filter(Boolean);
+  const route = useMemo(() => orderNearestFirst(stops), [stops]); // eslint-disable-line react-hooks/exhaustive-deps
+  const legs = useMemo(() => legsFor(stops), [stops]); // eslint-disable-line react-hooks/exhaustive-deps
+  const orderedStops = route.ordered;
+  const orderedLegs = route.legs;
+
+  const shareParam = searchParams.get('t') ?? '';
+  useEffect(() => {
+    if (!shareParam || appliedShare.current === shareParam) return;
+    appliedShare.current = shareParam;
+    const ids = decodeTrip(shareParam);
+    if (ids.length > 0) {
+      setTrip(ids);
+      setScope('trip');
+      setView('route');
+      setNotice('Trip loaded from a shared link — now saved in your browser.');
+    }
+    setSearchParams({}, { replace: true });
+  }, [shareParam, setTrip, setSearchParams]);
+
+  const onOrder = () => {
+    setTrip(orderedStops.map((k) => k.id));
+    setView('route');
+    setNotice(`Route ordered nearest-first — about ${sumLegs(orderedLegs)} km in a straight line.`);
   };
+
+  const onShare = async () => {
+    const url = `${window.location.origin}${window.location.pathname}?t=${encodeTrip(tripIds)}`;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'My Divya Desam yatra plan', url });
+        return;
+      } catch {
+        return; // user dismissed the share sheet
+      }
+    }
+    await navigator.clipboard.writeText(url);
+    setNotice('Trip link copied to the clipboard.');
+  };
+
+  const onClear = () => {
+    if (window.confirm(`Remove all ${tripIds.length} stops from your trip?`)) {
+      clearTrip();
+      setNotice('');
+    }
+  };
+
+  // ---- cluster computation (live map instance only) ----
+  useEffect(() => {
+    if (!mapApi) return undefined;
+    const bump = () => setClusterTick((t) => t + 1);
+    mapApi.on('zoomend moveend', bump);
+    return () => mapApi.off('zoomend moveend', bump);
+  }, [mapApi]);
+
+  const clusters = useMemo(() => {
+    if (!mapApi || scope === 'trip' || mapApi.getZoom() > CLUSTER_MAX_ZOOM || shown.length < 2) return [];
+    const groups = new Map();
+    for (const k of shown) {
+      const p = mapApi.latLngToLayerPoint(k.coords);
+      const key = `${Math.floor(p.x / CLUSTER_CELL_PX)}:${Math.floor(p.y / CLUSTER_CELL_PX)}`;
+      const bucket = groups.get(key);
+      if (bucket) bucket.push(k);
+      else groups.set(key, [k]);
+    }
+    return [...groups.values()]
+      .filter((members) => members.length > 1)
+      .map((members) => ({
+        key: `cluster-${members[0].id}`,
+        count: members.length,
+        center: L.latLngBounds(members.map((m) => m.coords)).getCenter(),
+        bounds: L.latLngBounds(members.map((m) => m.coords)),
+        ids: members.map((m) => m.id),
+      }));
+    // clusterTick re-runs this after every pan/zoom (its value is unused)
+  }, [mapApi, shown, scope, clusterTick]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const clusteredIds = useMemo(
+    () => new Set(clusters.flatMap((c) => c.ids)),
+    [clusters],
+  );
+
+  // Route overlay: dashed polyline + numbered tooltips for the trip on the
+  // atlas itself (mirrors the selected view ordering, like TripMap did).
+  const mapStops = view === 'route' ? orderedStops : stops;
+  const mapLegs = view === 'route' ? orderedLegs : legs;
+  const routePoints = mapStops.filter((k) => Array.isArray(k.coords));
+  const stopNumber = new Map(mapStops.map((k, i) => [k.id, i + 1]));
 
   const fitAll = () => {
     if (!mapApi || shown.length === 0) return;
@@ -179,6 +301,8 @@ export default function MapPage() {
       { timeout: 10000 },
     );
   };
+
+  const railBtn = 'inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold border border-[#B34700]/60 text-[#7A2E00] hover:bg-[#B34700]/10 transition-colors bg-[#FFFDF7] no-print';
 
   return (
     <div>
@@ -248,10 +372,38 @@ export default function MapPage() {
         </div>
       ) : null}
 
-      {/* Sidebar (filters + nearest cards) beside the atlas */}
+      {/* Sidebar (search + filters + nearest cards) beside the atlas */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
         <div className="space-y-5">
-          {/* Scope pills — All / Visited / In trip (exclusive, Explore idiom) */}
+          {/* Sidebar search */}
+          <div className="relative">
+            <svg viewBox="0 0 24 24" className="absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-[#96731F]" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" />
+            </svg>
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              aria-label="Search kshetrams"
+              placeholder="Search temple or place"
+              className="w-full rounded-xl border border-[#E3D2AE] bg-[#FFFDF7] py-2.5 pl-11 pr-4 text-[14px] text-[#332417] placeholder-[#66523D]/60 focus:border-[#C99A2E] focus:outline-hidden"
+            />
+          </div>
+
+          {/* Region dropdown (replaces the chip row, 2026-09-30 merge) */}
+          <div>
+            <select
+              aria-label="Filter by region"
+              value={region}
+              onChange={(e) => setRegion(e.target.value)}
+              className={`${selectClass} w-full`}
+            >
+              <option value="">All regions ({plotted.length})</option>
+              {regions.map((r) => <option key={r} value={r}>{r} ({counts[r]})</option>)}
+            </select>
+          </div>
+
+          {/* Scope pills — All / Visited / In trip (exclusive) */}
           <div className="flex items-center gap-2 flex-wrap" role="group" aria-label="Showing">
             <button
               type="button"
@@ -285,30 +437,6 @@ export default function MapPage() {
             </button>
           </div>
 
-          {/* Region chips with dots and counts */}
-          <div className="flex items-center gap-1.5 flex-wrap" role="group" aria-label="Filter by region">
-            <button
-              type="button"
-              className={activeRegions.size === 0 ? 'region-chip is-active' : 'region-chip'}
-              aria-pressed={activeRegions.size === 0}
-              onClick={() => setActiveRegions(new Set())}
-            >
-              All regions ({plotted.length})
-            </button>
-            {regions.map((region) => (
-              <button
-                key={region}
-                type="button"
-                className={activeRegions.has(region) ? 'region-chip is-active' : 'region-chip'}
-                aria-pressed={activeRegions.has(region)}
-                onClick={() => toggleRegion(region)}
-              >
-                <span className="region-dot" style={{ background: colors[region] }} aria-hidden="true" />
-                {region} ({counts[region]})
-              </button>
-            ))}
-          </div>
-
           {/* Nearest-first cards (after geolocation) */}
           {me && nearest.length > 0 ? (
             <section aria-label="Nearest Divya Desams from you">
@@ -328,8 +456,10 @@ export default function MapPage() {
           ) : null}
         </div>
 
-        {/* Map frame with fit-all control + on-map legend */}
-        <div className="relative rounded-2xl overflow-hidden border border-[#C99A2E]/55 shadow-xs h-[520px] lg:h-[640px] bg-[#F6EBD6]">
+        {/* Map frame with fit-all control + on-map legend (`isolate` keeps
+            Leaflet's pane z-indexes inside this frame so the sticky header
+            stays on top when the page scrolls) */}
+        <div className="relative isolate rounded-2xl overflow-hidden border border-[#C99A2E]/55 shadow-xs h-[520px] lg:h-[640px] bg-[#F6EBD6]">
           <MapContainer
             center={[11.4, 78.7]}
             zoom={6}
@@ -342,42 +472,62 @@ export default function MapPage() {
               url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            {shown.map((k) => {
-              const visited = visitedIds.includes(k.id);
-              return (
-                <CircleMarker
-                  key={k.id}
-                  center={k.coords}
-                  radius={visited ? 8 : 6}
-                  pathOptions={{
-                    color: visited ? '#C99A2E' : '#FFFFFF',
-                    weight: visited ? 3 : 1.5,
-                    fillColor: colors[k.region],
-                    fillOpacity: 0.9,
-                  }}
-                >
-                  <Tooltip direction="top" offset={[0, -6]} interactive={false}>
-                    <span className="map-tooltip__tamil" lang="ta">{k.tamilName}</span>
-                    <span className="map-tooltip__name">
-                      {k.name}
-                      {visited ? ' · ✓ visited' : ''}
-                    </span>
-                  </Tooltip>
-                  <Popup>
-                    <div className="map-popup">
-                      <p className="map-popup__tamil" lang="ta">{k.tamilName}</p>
-                      <p className="map-popup__name">{k.name}</p>
-                      <div className="map-popup__actions">
-                        <Link className="btn btn--primary btn--small" to={`/kshetram/${k.id}`}>
-                          Open page
-                        </Link>
-                        <TripControls id={k.id} />
+            {scope === 'trip' && routePoints.length > 1 ? (
+              <Polyline
+                positions={routePoints.map((k) => k.coords)}
+                pathOptions={{ color: '#B34700', weight: 2.5, dashArray: '6 6', opacity: 0.8 }}
+              />
+            ) : null}
+            {/* Cluster bubbles (live map, zoomed out) — clicking zooms to the group */}
+            {clusters.map((c) => (
+              <Marker
+                key={c.key}
+                position={c.center}
+                icon={clusterIcon(c.count)}
+                eventHandlers={{ click: () => mapApi?.flyToBounds(c.bounds, { padding: [28, 28], maxZoom: CLUSTER_MAX_ZOOM + 1 }) }}
+              />
+            ))}
+            {[...(scope === 'trip' ? mapStops : shown)]
+              .filter((k) => Array.isArray(k.coords) && !(scope !== 'trip' && clusteredIds.has(k.id)))
+              .map((k) => {
+                const visited = visitedIds.includes(k.id);
+                const number = scope === 'trip' ? stopNumber.get(k.id) : null;
+                return (
+                  <CircleMarker
+                    key={k.id}
+                    center={k.coords}
+                    radius={visited ? 8 : 6}
+                    pathOptions={{
+                      color: visited ? '#C99A2E' : '#FFFFFF',
+                      weight: visited ? 3 : 1.5,
+                      fillColor: colors[k.region],
+                      fillOpacity: 0.9,
+                    }}
+                  >
+                    <Tooltip direction="top" offset={[0, -6]} interactive={false}>
+                      {number ? <span>{number}. </span> : null}
+                      <span className="map-tooltip__tamil" lang="ta">{k.tamilName}</span>
+                      <span className="map-tooltip__name">
+                        {k.name}
+                        {visited ? ' · ✓ visited' : ''}
+                        {number && mapLegs[number - 1] != null ? ` · ${mapLegs[number - 1]} km from previous` : ''}
+                      </span>
+                    </Tooltip>
+                    <Popup>
+                      <div className="map-popup">
+                        <p className="map-popup__tamil" lang="ta">{k.tamilName}</p>
+                        <p className="map-popup__name">{k.name}</p>
+                        <div className="map-popup__actions">
+                          <Link className="btn btn--primary btn--small" to={`/kshetram/${k.id}`}>
+                            Open page
+                          </Link>
+                          <TripControls id={k.id} />
+                        </div>
                       </div>
-                    </div>
-                  </Popup>
-                </CircleMarker>
-              );
-            })}
+                    </Popup>
+                  </CircleMarker>
+                );
+              })}
             {me ? (
               <CircleMarker
                 center={me}
@@ -422,6 +572,209 @@ export default function MapPage() {
       <div className="mt-6 rounded-2xl border border-[#C99A2E]/40 bg-[#FFFDF7] p-4 sm:p-5 shadow-xs">
         <RegionLegend colors={colors} regions={regions} />
       </div>
+
+      {/* ---- Trip planner (merged from TripPage) ---- */}
+      <section aria-label="My Yatra — Trip Planner" className="mt-10 border-t border-[#E3D2AE] pt-8">
+        {stops.length === 0 ? (
+          <EmptyState
+            title={SITE_COPY.trip.emptyTitle}
+            message={SITE_COPY.trip.emptyMessage}
+            action={(
+              <div className="flex flex-wrap justify-center gap-3 mt-1">
+                <Link className="btn btn--primary" to="/kshetrams">Browse desams</Link>
+              </div>
+            )}
+          />
+        ) : (
+          <>
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-5">
+              <div>
+                <h2 className="font-display text-[30px]! font-semibold text-[#5C1F00]!">
+                  {SITE_COPY.trip.title}
+                </h2>
+                <p className="trip-page__meta mt-2 text-sm text-[#66523D]" aria-live="polite">
+                  {stops.length} {stops.length === 1 ? 'stop' : 'stops'} · about {sumLegs(legs)} km in
+                  current order (straight-line) · Distances are straight-line — road distance varies.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 no-print shrink-0">
+                <button type="button" className={railBtn} onClick={onShare}>
+                  <Share2 className="w-3.5 h-3.5" aria-hidden="true" /> Share
+                </button>
+                <button type="button" className={railBtn} onClick={() => window.print()}>
+                  <Printer className="w-3.5 h-3.5" aria-hidden="true" /> Print
+                </button>
+                <Link to="/kshetrams" className={railBtn}>
+                  <Plus className="w-3.5 h-3.5" aria-hidden="true" /> Add temples
+                </Link>
+                <button type="button" className={railBtn} onClick={onClear}>
+                  <Trash2 className="w-3.5 h-3.5" aria-hidden="true" /> Clear
+                </button>
+              </div>
+            </div>
+
+            {notice ? (
+              <p className="role-status mb-5 flex flex-wrap items-center gap-3 rounded-2xl border border-[#C99A2E]/50 bg-[#F6EBD6] px-4 py-3 text-sm text-[#332417]" role="status">
+                <RotateCcw className="w-4 h-4 text-[#B34700] shrink-0" aria-hidden="true" />
+                <span className="flex-1">{notice}</span>
+                <button
+                  type="button"
+                  className="text-xs font-bold uppercase tracking-wider text-[#96731F] hover:text-[#7A2E00] px-2 py-1 rounded transition-colors no-print"
+                  onClick={() => setNotice('')}
+                >
+                  Dismiss
+                </button>
+              </p>
+            ) : null}
+
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 no-print" role="group" aria-label="Trip view">
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  className={view === 'region' ? 'region-chip is-active' : 'region-chip'}
+                  aria-pressed={view === 'region'}
+                  onClick={() => setView('region')}
+                >
+                  By region
+                </button>
+                <button
+                  type="button"
+                  className={view === 'route' ? 'region-chip is-active' : 'region-chip'}
+                  aria-pressed={view === 'route'}
+                  onClick={() => setView('route')}
+                >
+                  Route order
+                </button>
+              </div>
+              <button
+                type="button"
+                className="self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#D95F0E] to-[#B34700] text-[#FFFDF7] text-sm font-semibold shadow-xs hover:opacity-95 transition-opacity"
+                onClick={onOrder}
+              >
+                <span aria-hidden="true">⤓</span>
+                <span>Order my route — nearest first</span>
+              </button>
+            </div>
+
+            {view === 'region' ? (
+              <div className="mt-5">
+                <RegionGroups stops={stops} onRemove={removeFromTrip} isVisited={isVisited} toggleVisited={toggleVisited} />
+              </div>
+            ) : (
+              <div className="mt-5 rounded-2xl border border-[#C99A2E]/40 bg-[#FFFDF7] p-4 sm:p-6 shadow-xs">
+                <ol>
+                  {orderedStops.map((k, i) => (
+                    <TripStop
+                      key={k.id}
+                      kshetram={k}
+                      index={i + 1}
+                      legKm={orderedLegs[i]}
+                      onRemove={removeFromTrip}
+                      isVisited={isVisited}
+                      toggleVisited={toggleVisited}
+                    />
+                  ))}
+                </ol>
+              </div>
+            )}
+
+            <p className="mt-5 text-xs text-[#66523D] italic no-print">
+              🖨 This itinerary is print-ready — the print stylesheet hides buttons and maps.
+            </p>
+          </>
+        )}
+      </section>
     </div>
+  );
+}
+
+/** Region-grouped view: groups keep first-seen region order (FR-80). */
+function RegionGroups({ stops, onRemove, isVisited, toggleVisited }) {
+  const groups = new Map();
+  for (const stop of stops) {
+    const bucket = groups.get(stop.region);
+    if (bucket) bucket.push(stop);
+    else groups.set(stop.region, [stop]);
+  }
+  let globalIndex = 0;
+  return (
+    <div className="space-y-6">
+      {[...groups.entries()].map(([region, group]) => (
+        <section className="rounded-2xl border border-[#C99A2E]/40 bg-[#FFFDF7] p-4 sm:p-6 shadow-xs" key={region}>
+          <div className="flex items-center gap-3 pb-3 mb-2 border-b border-[#F0E3C6]">
+            <span className="region-dot" style={{ background: '#C99A2E' }} aria-hidden="true" />
+            <h3 className="font-display text-xl font-semibold text-[#7A2E00]">{region}</h3>
+            <span className="text-[10px] font-bold bg-[#FAF2E3] text-[#96731F] px-2 py-0.5 rounded-full border border-[#C99A2E]/30">
+              {group.length} {group.length === 1 ? 'stop' : 'stops'}
+            </span>
+          </div>
+          <ol>
+            {group.map((k) => {
+              globalIndex += 1;
+              return (
+                <TripStop
+                  key={k.id}
+                  kshetram={k}
+                  index={globalIndex}
+                  legKm={null}
+                  onRemove={onRemove}
+                  isVisited={isVisited}
+                  toggleVisited={toggleVisited}
+                />
+              );
+            })}
+          </ol>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+/** One stop row: gold trip-index medallion, name block, Darshan Done toggle, remove pill. */
+function TripStop({ kshetram, index, legKm, onRemove, isVisited, toggleVisited }) {
+  const visited = isVisited(kshetram.id);
+  return (
+    <>
+      {legKm != null ? (
+        <li className="flex justify-center items-center gap-2 py-1 text-[11px] text-[#96731F]" aria-hidden="true">
+          <span className="h-4 w-px bg-[#E3D2AE]" />
+          <span>↓ {legKm} km</span>
+          <span className="h-4 w-px bg-[#E3D2AE]" />
+        </li>
+      ) : null}
+      <li className="flex flex-wrap items-center gap-x-4 gap-y-2 py-3 border-b border-[#F0E3C6] last:border-b-0">
+        <span className="trip-index" aria-hidden="true">{index}</span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-xs text-[#96731F] font-medium" lang="ta">{kshetram.tamilName}</span>
+          <Link to={`/kshetram/${kshetram.id}`} className="font-display text-lg font-semibold text-[#7A2E00] hover:text-[#B34700] transition-colors">
+            {kshetram.name}
+          </Link>
+          <span className="block text-xs text-[#66523D]">{kshetram.place} · {kshetram.state}</span>
+        </span>
+        <span className="flex items-center gap-2 no-print">
+          <button
+            type="button"
+            aria-pressed={visited}
+            onClick={() => toggleVisited(kshetram.id)}
+            className={`px-3 py-1.5 rounded-full text-[11px] font-bold border transition-colors ${
+              visited
+                ? 'bg-gradient-to-b from-[#E2C47C] to-[#C99A2E] text-[#4A3005] border-[#96731F]'
+                : 'border-[#B34700]/50 text-[#7A2E00] hover:bg-[#B34700]/10 bg-[#FFFDF7]'
+            }`}
+          >
+            {visited ? 'Darshan Done' : 'Mark Visited'}
+          </button>
+          <button
+            type="button"
+            className="text-sm font-bold text-[#A32020] hover:bg-[#A32020]/10 rounded-full px-3 py-1.5 transition-colors shrink-0"
+            title={`Remove ${kshetram.name} from trip`}
+            aria-label={`Remove ${kshetram.name} from trip`}
+            onClick={() => onRemove(kshetram.id)}
+          >
+            Remove ✕
+          </button>
+        </span>
+      </li>
+    </>
   );
 }

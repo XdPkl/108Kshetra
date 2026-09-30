@@ -1054,3 +1054,55 @@ Directions all unchanged.
 | Layout | Sidebar 360px + map 766×638 at 1440; 106 `.leaflet-interactive` markers; OSM tiles loaded; no horizontal overflow |
 | Controls | Fit-all click is a no-op-safe call with real tiles; badge fully clear of the zoom control (badge.left 1138 > zoom.right 573); on-map legend present |
 | Scope pills | Visited/In-trip pills visible; narrowing covered by unit test |
+
+---
+
+## Version 2.15 — Map + Trip Merged: the Yatra Atlas (2026-09-30, PO-approved)
+
+### Scope
+
+PO request: add the sidebar search box, cluster bubbles and region dropdown
+to the Map page, and merge the Trip planner's functionality. After
+clarification the PO chose **one page replaces both** (the atlas absorbs the
+trip planner; the other route redirects) and **the region dropdown replaces
+the multi-select chips**. TripPage's full feature set survives inside the
+merged page: By region/Route-order views, Order-my-route, Share (?t= links,
+now `/map?t=`)/Print/Add temples/Clear, Darshan Done/Remove rows, region
+groups with numbered medallions, share-link restore.
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/pages/MapPage.jsx` | Rewritten as the merged Yatra Atlas. Sidebar: search box (`matchesSearch` over name/tamil/temple/place/deity/region/azhwars), "All regions" `<select>` (counts in options), exclusive scope pills, nearest cards (GPS-gated). Map: **hand-rolled cluster bubbles** — grid in Leaflet layer space (~70px cells) computed only with a live map instance below zoom 9; multi-point cells render as `Marker` + `L.divIcon` saffron count bubble (click → `flyToBounds`), singles keep the existing CircleMarker/Tooltip/Popup; **In-trip scope never clusters** and draws the dashed route polyline with numbered stop tooltips (view-order aware, reusing `orderNearestFirst`/`legsFor`). Trip section (full width, below): the TripPage body ported (EmptyState when empty; meta via `.trip-page__meta`; notice strip; view chips; rail). Share emits `/map?t=`. `isolate` on the map frame after the visual gate caught Leaflet pane z-indexes covering the sticky header |
+| `app/src/App.jsx` | `/trip` → `TripRedirect` (`<Navigate to={{ pathname: '/map', search }} replace>` — legacy share links keep working); TripPage import removed |
+| `app/src/components/Header.jsx` | My Yatra pill + drawer link → `/map` (always-idle style; the Map pill carries the active state) |
+| `app/src/components/TripPage.jsx`, `TripMap.jsx`, `TripMapInner.jsx` | DELETED (folded into MapPage) |
+| `app/src/styles/zip.css` | `.map-cluster__bubble` saffron medallion styles |
+
+### Test contract updates (lockstep)
+
+| Suite | Change |
+|---|---|
+| `yatraPages.test.jsx` | UT-TRP block rewritten against the merged page at `/map` (empty state inline, share-restore at `/map?t=`, route polyline + numbered tooltips asserted after clicking "In trip (N)", celestial-only trip → no polyline); react-leaflet mock gained `Marker`; region test → dropdown `selectOptions` + new search-narrowing test; mock adds nothing else — cluster code is a no-op under the null map instance so all marker-count contracts survive |
+| `e2e/yatra.spec.js` | TC-14: zoom in ×4 past the cluster threshold before hover/tooltip; region via `getByLabel('Filter by region').selectOption('Pandiya Nadu')`. TC-15: My Yatra → `/map`; route via "In trip (3)" (3 markers + polyline = 4 `.leaflet-interactive`); clipboard contains `/map?t=` |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (accepted set) |
+| Unit tests (Vitest) | **211/211 pass (21 suites)** |
+| Coverage | **90.58% statements / 82.99% branches / 84.74% functions / 91.83% lines** (gate 80%; dipped from 92.16% as TripPage's dedicated tests folded into atlas flows) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Visual gate | 3/3 renders pass after the stacking-context fix — first pass failed: Leaflet panes covered the sticky header at scroll. `docs/03-design/gate-shots/atlas-merge/` |
+
+### Deterministic verification (Playwright, production preview)
+
+| Check | Result |
+|---|---|
+| Clusters | 10 bubbles at zoom 6 (hybrid: singles remain, like the mockup); dissolve by zoom 8–9 as points separate |
+| Search | "kanchipuram" → 1 marker; dropdown "Chola Nadu" narrows (unit-asserted) |
+| Trip merge | Seeded 3 stops: meta "3 stops · about 824 km", Order/Share/Clear present; In-trip scope → dashed polyline + 3 numbered markers; `/trip?t=srirangam` redirects to `/map` and shows the restore notice |
+| Layout | No horizontal overflow at 1440/390; sticky header above map at all scroll positions (isolation verified) |

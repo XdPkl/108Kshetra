@@ -4,7 +4,7 @@
  * (NFR-11 route-level code splitting).
  */
 import { Suspense, lazy } from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import HomePage from './pages/HomePage.jsx';
@@ -14,7 +14,6 @@ import AzhwarsPage from './pages/AzhwarsPage.jsx';
 import AzhwarDetailPage from './pages/AzhwarDetailPage.jsx';
 import AcharyasPage from './pages/AcharyasPage.jsx';
 import AcharyaDetailPage from './pages/AcharyaDetailPage.jsx';
-import TripPage from './pages/TripPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import EmptyState from './components/EmptyState.jsx';
 
@@ -26,6 +25,13 @@ function RouteFallback() {
       Loading map…
     </div>
   );
+}
+
+/** 2026-09-30 merge: Trip folded into the Yatra Atlas — /trip (including
+ * legacy /trip?t=… share links) lands on /map with the query intact. */
+function TripRedirect() {
+  const location = useLocation();
+  return <Navigate to={{ pathname: '/map', search: location.search }} replace />;
 }
 
 export default function App() {
@@ -54,7 +60,7 @@ export default function App() {
               </Suspense>
             )}
           />
-          <Route path="/trip" element={<TripPage />} />
+          <Route path="/trip" element={<TripRedirect />} />
           <Route path="/about" element={<AboutPage />} />
           <Route
             path="*"

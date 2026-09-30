@@ -36,13 +36,18 @@ test.describe('V3 yatra toolkit', () => {
     const markers = page.locator('.leaflet-interactive');
     await expect(markers.first()).toBeVisible();
 
+    // 2026-09-30 merge: cluster bubbles form below zoom 9 — zoom in so the
+    // individual desam markers (and their hover tooltips) are exposed
+    const zoomIn = page.locator('.leaflet-control-zoom-in');
+    for (let i = 0; i < 4; i += 1) await zoomIn.click();
+
     // Hovering a marker shows a tooltip with the desam name (US-MAP-04)
     await markers.first().hover();
     await expect(page.locator('.leaflet-tooltip').last()).toBeVisible();
 
-    // Region chip narrows the plotted markers
+    // Region dropdown narrows the plotted markers
     const before = await markers.count();
-    await page.getByRole('button', { name: /pandiya nadu/i }).first().click();
+    await page.getByLabel('Filter by region').selectOption('Pandiya Nadu');
     const after = await markers.count();
     expect(after).toBeLessThan(before);
 
@@ -53,7 +58,7 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page).toHaveURL(/kshetram\/[a-z-]+$/);
   });
 
-  test('TC-15: trip add → page lists stops → order → share-restore', async ({ page, context }) => {
+  test('TC-15: trip add → atlas lists stops → order → share-restore', async ({ page, context }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     for (const id of ['srirangam', 'tirupati', 'srivilliputhur']) {
       await page.goto(`kshetram/${id}`);
@@ -61,13 +66,14 @@ test.describe('V3 yatra toolkit', () => {
     }
     await expect(page.getByRole('link', { name: /my yatra 3/i })).toBeVisible();
 
+    // 2026-09-30 merge: My Yatra lands on the Yatra Atlas (/map)
     await page.getByRole('link', { name: /my yatra 3/i }).click();
-    await expect(page).toHaveURL(/trip$/);
+    await expect(page).toHaveURL(/map$/);
     await expect(page.getByText(/3 stops/i)).toBeVisible();
 
-    // The plan is drawn on a route map: 3 markers + 1 dashed polyline (US-TRP-04)
-    await expect(page.locator('.trip-map')).toBeVisible();
-    await expect(page.locator('.trip-map .leaflet-interactive')).toHaveCount(4);
+    // The route renders on the atlas itself once the In-trip scope is active
+    await page.getByRole('button', { name: /in trip \(3\)/i }).click();
+    await expect(page.locator('.leaflet-interactive')).toHaveCount(4); // 3 markers + 1 polyline
 
     await page.getByRole('button', { name: /order my route/i }).click();
     await expect(page.getByText(/nearest-first/i)).toBeVisible();
@@ -75,7 +81,7 @@ test.describe('V3 yatra toolkit', () => {
     // Share (clipboard fallback) produces a restorable URL
     await page.getByRole('button', { name: /share/i }).click();
     const shared = await page.evaluate(() => navigator.clipboard.readText());
-    expect(shared).toContain('/trip?t=');
+    expect(shared).toContain('/map?t=');
     await page.evaluate(() => window.localStorage.clear());
     await page.goto(shared.replace(/https?:\/\/[^/]+\/108Kshetra\//, ''));
     await expect(page.getByText(/trip loaded from a shared link/i)).toBeVisible();
