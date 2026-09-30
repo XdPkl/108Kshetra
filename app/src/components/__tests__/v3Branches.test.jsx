@@ -264,7 +264,7 @@ describe('MapPage extras (UXD v3.0)', () => {
     expect(screen.getAllByRole('link', { name: /view temple/i }).length).toBeGreaterThan(0);
     expect(screen.queryByText(/km away/)).not.toBeInTheDocument();
     delete navigator.geolocation;
-  }, 15_000);
+  }, 30_000); // CI 2-core: locate + clear = three full 108-card renders
 });
 
 describe('AboutPage desk branches (UXD v3.0)', () => {
