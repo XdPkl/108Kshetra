@@ -174,19 +174,23 @@ describe('KshetramDetailPage (UT-DTL-01..04, V3 UT-DTL-14..17)', () => {
 });
 
 describe('AzhwarsPage (UT-AZW-01/02)', () => {
-  it('lists all 12 azhwars in order with metadata and desam counts', () => {
+  it('lists all 12 azhwars in order with metadata and pasuram counts', () => {
     renderAt('/azhwars');
     const main = screen.getByRole('main');
     expect(within(main).getAllByRole('heading', { level: 2 })).toHaveLength(12);
     expect(screen.getByText('Nammazhwar')).toBeInTheDocument();
-    expect(screen.getAllByText(/desams/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/pasurams/i).length).toBeGreaterThan(0);
   });
 
-  it('links desam chips to detail pages and the pre-filtered browse', () => {
+  it('links each card to the dossier and the pre-filtered browse (PO round 12 snap)', () => {
     renderAt('/azhwars');
-    expect(screen.getAllByRole('link', { name: /\+\d+ more/i }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole('link', { name: /\+\d+ more/i })[0])
-      .toHaveAttribute('href', expect.stringContaining('/kshetrams?azhwar='));
+    // "N Divya Desams" CTA keeps the pre-filtered browse deep link
+    const desamLinks = screen.getAllByRole('link', { name: /divya desams/i });
+    expect(desamLinks.length).toBe(12);
+    expect(desamLinks[0]).toHaveAttribute('href', expect.stringContaining('/kshetrams?azhwar='));
+    // explicit "Explore profile" CTA + whole-card overlay both target the dossier
+    expect(screen.getAllByRole('link', { name: /explore profile/i }).length).toBe(12);
+    expect(screen.getAllByRole('link', { name: /saint dossier/i }).length).toBe(12);
   });
 });
 

@@ -1239,3 +1239,63 @@ verse.significance as the band's meaning); counts are dataset-derived
 | Production build | Clean |
 | E2E (Playwright, Chromium) | **19/19 journeys pass** |
 | Visual gate | 4/4 renders pass (hero / full / hymns tab / 390 mobile; no horizontal overflow) — `docs/03-design/gate-shots/azhwar-restyle/` |
+
+---
+
+## Version 2.20 — Azhwars Front Page Recreated to the PO Snap (2026-10-01, PO round 12)
+
+PO request: recreate the Azhwars index page (`/azhwars`) to an attached design
+snap — UI design refresh only, **no functionality changes**. Saint-poet gallery
+hero: "SAINT-POET GALLERY" eyebrow, 60px serif title (one line at 1512),
+unparenthesised Tamil subtitle, short lead, gopuram watermark top-right with a
+stacked "DIVINE PLACES ETERNAL GRACE" caption, right-aligned lotus +
+"Traditional order" rule. Cards: numbered badge (01–12), square portrait
+(Wikipedia image via `useWikiImage`, Thiruman-watermark fallback — Kulasekhara
+and Thiruppaan resolve no image), centred Tamil (gold) over English (maroon)
+name, lotus divider, 2-line dataset note, Primary-Work | pasurams stat band,
+CTA row pinned to the card foot: gold "Explore profile →" pill + underlined
+"N Divya Desams →" link keeping the pre-filtered-Browse deep link
+(`/kshetrams?azhwar={id}`) that the old chips row carried. Gallery footer
+strip: "ALWARS | DIVYA DESAMS | ETERNAL INSPIRATION".
+
+### Scope decisions
+
+- **Whole-card overlay link preserved** (`.azhwar-card` count contract kept for
+  e2e TC-10); non-interactive card blocks carry `pointer-events-none` so
+  overlay clicks pass through (caught by TC-18's click-through, matching the
+  old card's idiom).
+- **Chips row replaced by the snap's CTA row**: per-desam chips and the
+  "+N more" link are gone; the "N Divya Desams →" link carries the same
+  `/kshetrams?azhwar=` deep link (TC-10 updated to click it). Direct
+  kshetram-chip navigation from the index is therefore dropped per the snap —
+  restore on PO request (round-6-style flag).
+- **Avatharam/Star/amsam/period/epithet rows dropped per the snap**; all fields
+  remain on the detail dossier.
+- **Site copy updated to the snap** (eyebrow "Saint-Poet Gallery", Tamil
+  without parentheses, lead "Discover their lives, hymns and sacred places.")
+  in app `site-copy.json` + `sync-response.json` fixture together —
+  `sync-content --fixture --check` stays 0-diff. The snap's condensed card
+  notes ("Born on a lotus in Kanchipuram…") remain **not** in the dataset;
+  cards render `azhwars.json` `note` (dataset-mapped, same decision as round 11).
+- Existing assets only: `gopuram-illustration.jpg` (Browse hero watermark
+  asset), lucide `ArrowRight/BookOpen/FileText`, sacred `LotusIcon/ThirumanIcon`.
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/pages/AzhwarsPage.jsx` | Full rewrite to the snap gallery layout |
+| `app/src/data/content/site-copy.json` + `app/scripts/__fixtures__/sync-response.json` | azhwarsPage eyebrow/titleTamil/lead per the snap |
+| `app/src/pages/__tests__/pages.test.jsx` | UT-AZW-01/02 block updated: 12 h2 headings, pasuram band text, 12 "Divya Desams" deep links, 12 "Explore profile" CTAs + 12 overlay links |
+| `app/e2e/journeys.spec.js` | TC-10 clicks the "N Divya Desams" link (replaces `.chip--more`) |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (accepted set) |
+| Unit tests (Vitest) | **216/216 pass (21 suites)** |
+| Coverage | **90.19% statements / 82.40% branches / 85.11% functions / 91.51% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Visual gate | 3/3 renders pass (desktop full / hero / 390 mobile; no horizontal overflow at 1512 or 390; title one line) — `docs/03-design/gate-shots/azhwars-frontpage/` |

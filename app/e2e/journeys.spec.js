@@ -95,11 +95,12 @@ test.describe('Kshetram detail (TC-08, TC-09, V2)', () => {
 });
 
 test.describe('Azhwars (TC-10)', () => {
-  test('lists twelve azhwars and pre-filters browse from the more link', async ({ page }) => {
+  test('lists twelve azhwars and pre-filters browse from the desams link', async ({ page }) => {
     await page.goto('azhwars');
     expect(await page.locator('.azhwar-card').count()).toBe(12);
-    const more = page.locator('.chip--more').first();
-    await more.click();
+    // PO round 12 snap: the per-card "N Divya Desams" link replaces the chips row
+    const desams = page.locator('.azhwar-card a[href*="kshetrams?azhwar="]').first();
+    await desams.click();
     await expect(page.locator('.result-count')).not.toHaveText('108 kshetrams');
     await expect(page).toHaveURL(/\/kshetrams\?azhwar=/);
   });
