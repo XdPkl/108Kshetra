@@ -1730,3 +1730,93 @@ Tamil); prose widths 58–65ch.
 | E2E (Playwright, Chromium) | **19/19 journeys pass** |
 | Measured vs audit | Hero 400px @1280 (target 360–400); tabs y≈537 (in-viewport); type scale matches the audit table at 1280 and 390; sticky rail pins under the 65px header |
 | Visual gate | 12/12 renders pass (7 tabs + mobile + triplicane + celestial + Home/Azhwars header checks) — `docs/03-design/gate-shots/kshetram-detail-restyle-17/` |
+
+## Version 2.26 — Azhwar + Acharya Detail kxd Theme Restyle (2026-10-01, round 18)
+
+PO request: apply the Kshetram detail page's font style and theme (the kxd
+paper/rust language and Source Serif 4 / DM Sans / Noto Serif Tamil stack)
+to `/azhwar/:id` and `/acharya/:id`. Approved scope: full kxd treatment
+(theme + round-17 idiom) with a shared theme stylesheet. **No data or
+site-copy changes** — `sync-content --fixture --check` 0-diff.
+
+### Implementation
+
+- **Shared theme extraction** — new `src/styles/detail-theme.css` carries
+  the `.kxd` theme primitives moved verbatim from `kshetram-detail.css`
+  (palette vars, font stacks, audit type scale h1 56/h2 32/h3 24/h4 21,
+  body 17/28, buttons, breadcrumb, hero frame, sticky tab rail, fact
+  rows, visit cards, verse cards, disclosures, glossary, milestones,
+  markers, resource rows, status toast, responsive/motion/print blocks);
+  `kshetram-detail.css` now holds only kshetram-page layout rules;
+  measured kshetram output is unchanged (hero 400px, rail y≈537, h1 56px).
+- **New `src/styles/saint-detail.css`** (imported last) holds the two
+  pages' own layout under `azd-`/`acd-`/generic `pill`/`disc-list`
+  class names — no collision with kshetram rules.
+- **AzhwarDetailPage** rebuilt under `.kxd`: kxd breadcrumb with next/prev
+  `.btn`, split hero (300px portrait column via restyled SaintPortrait,
+  56px h1, `.tamil` name, epithet + pill chips, stat row, birth-facts
+  grid), **sticky hash-synced five-tab rail** (kxd round-16/17 idiom:
+  `activateTab` writes the hash, `hashchange` listener, roving focus with
+  scroll-into-view and rAF-deferred panel reveal), panels restyled (life
+  = `.article-grid` + Key-moments milestones aside, hymns = verse card +
+  glossary table + commentary callouts, places = ruled desam rows, media
+  = fact rows + listening rows, sources = disc list), opening-verse band
+  and birthplace/sacred-places cards as `.visit-card`s, sources summary
+  row button, `.explore` prev/next nav. All asserted roles/text/hrefs
+  preserved (TC-18 passes unchanged).
+- **AcharyaDetailPage** rebuilt under `.kxd`: identification hero with
+  fact-sheet `.fact-row`s and a sticky "On this page" anchor rail; the
+  numbered sections 01–07 keep their ids/titles as anchors but sit on
+  flat rules with gold serif numerals; Chronology stepper in a visit-card
+  with a "Read the full chronology" disclosure; miracles as numbered
+  circle items; contributions as ruled label/content rows; representative
+  verse in a kxd verse card with pada `.glossary` tables and commentary
+  callouts; lineage chips as kxd pills; iconography fact rows, listening
+  rows, sources columns. TC-19 passes unchanged.
+- **Saint components restyled in place** (same props, same asserted
+  text/roles): SaintPortrait, SaintKeyMoments, SaintLegend, SaintVerse,
+  SaintMedia, SaintSources; PendingContent/NotDocumented already kxd-hooked
+  via `.detail__nodata`. SaintVerse word-by-word meanings moved from tile
+  grid to the kxd `.glossary` table idiom (heading text unchanged).
+- **Fixes found by the visual gate**: long Tamil verse lines now
+  `overflow-wrap: anywhere` (`.tamil` / `.verse .tamil-verse`) after the
+  opening-verse band collided with its side column; the acharya
+  birthplace district `.note` renders on its own line inside fact rows;
+  the chronology stepper wraps on mobile (was 279px horizontal overflow).
+
+### Flagged (PO-owned, unchanged)
+
+- `manavala-mamunigal` "Miracles & Historical Events" packs three miracle
+  entries into a single JSON paragraph without "N." prefixes, so they
+  render as one numbered item (pre-existing data shape, identical before
+  the restyle).
+- The old azhwar/acharya mocks (`docs/03-design/mockups/azhwar-detail.html`,
+  `acharya-detail.html`) still describe the round-11/14 gold/ivory look;
+  no kxd-theme mock exists for these pages (the kxd reference remains the
+  triplicane mock / round-17 audit).
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/styles/detail-theme.css` | NEW — shared `.kxd` theme primitives (moved verbatim from kshetram-detail.css) |
+| `app/src/styles/kshetram-detail.css` | Trimmed to kshetram-page layout rules |
+| `app/src/styles/saint-detail.css` | NEW — azhwar/acharya page layout (`azd-`/`acd-` scoped) |
+| `app/src/main.jsx` | Import `detail-theme.css` + `saint-detail.css` |
+| `app/src/pages/AzhwarDetailPage.jsx` | kxd rebuild + hash-synced sticky tab rail |
+| `app/src/pages/AcharyaDetailPage.jsx` | kxd rebuild (anchors/dossier structure kept) |
+| `app/src/components/saint/{SaintPortrait,SaintKeyMoments,SaintLegend,SaintVerse,SaintMedia,SaintSources}.jsx` | kxd restyle in place |
+| `app/src/pages/__tests__/saintPages.test.jsx` | Hash reset in `beforeEach`; new deep-link/unknown-hash/hash-write/arrow-key tests (226 total) |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 4 warnings (accepted set) |
+| Unit tests (Vitest) | **226/226 pass (21 suites)** |
+| Coverage | **90.43% statements / 81.69% branches / 86.03% functions / 92.13% lines** (gate 80%) |
+| Production build | Clean |
+| CMS round-trip | `sync-content --fixture --check` 0-diff |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** (TC-18/TC-19 unchanged) |
+| Measured | Azhwar: h1 56px Source Serif 4, body 17/28 DM Sans, portrait 300px, sticky rail pins at 64px, tab click writes `#hymns`; Acharya: h1 56px, fact rows + sticky rail, verse card present; 0px horizontal overflow at 1280/390 on both pages |
+| Visual gate | **7/7 renders pass** (azhwar desktop life+hymns+mobile, acharya desktop+mobile, kshetram desktop+mobile regression) — `docs/03-design/gate-shots/azhwar-acharya-kxd-restyle-18/` |

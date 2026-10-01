@@ -726,3 +726,30 @@ ZIP modal, Google Drive/Firebase, per-stop trip note inputs.
 **Judgment calls:** sort keeps Traditional/A–Z/Z–A semantics in zip styling; Azhwars-Who-
 Glorified stays its own section (test-pinned single-link container); Browse compact tracker
 dropped per zip (header darshan counter covers it); inquiry modal is local-only like the zip.
+
+## 31. Saint Detail kxd Theme Rollout (round 18, 2026-10-01)
+
+The kxd paper/rust theme introduced on `/kshetram/:id` (rounds 16–17) is
+extracted into a shared stylesheet (`detail-theme.css`) and applied to
+the saint dossiers:
+
+- **`/azhwar/:id` (FR-90)** — split hero (300px portrait column, 56px
+  serif name, Tamil line, epithet pills, stat row, birth-facts grid),
+  sticky hash-synced five-tab rail, flat ruled panels (article +
+  Key-moments milestones, verse card + pada glossary, ruled desam rows,
+  listening rows), opening-verse band and birthplace/sacred-places cards
+  as tint cards, sources summary row, prev/next pill nav.
+- **`/acharya/:id` (FR-94)** — identification hero (fact-sheet fact rows,
+  sticky On-this-page rail), numbered sections 01–07 on flat rules with
+  gold serif numerals, chronology stepper card with disclosure, numbered
+  miracles, ruled contribution rows, kxd verse card with pada glossary
+  tables and commentary callouts, lineage pills, iconography fact rows
+  and listening rows, three-column sources.
+- Shared primitives (buttons, tab rail, fact rows, visit/verse cards,
+  disclosures, glossary, milestones, status toast) now live in
+  `detail-theme.css`; azhwar/acharya page layout in `saint-detail.css`
+  (`azd-`/`acd-` prefixed). Kshetram rendering is unchanged (measured:
+  hero 400px, rail y≈537).
+- Data contracts unchanged; wireframes above (§18/§19) are superseded
+  visually by this addendum; semantics (roles, headings, anchors,
+  pending markers) unchanged.

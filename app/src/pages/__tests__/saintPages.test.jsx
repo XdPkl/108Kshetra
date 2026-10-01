@@ -2,8 +2,8 @@
  * Page tests for the R2 saint pages (UT-AZW-03, UT-ACH-02/03, TC-18/19):
  * Azhwar detail, Acharyas index and Acharya detail.
  */
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, beforeEach } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../../App.jsx';
@@ -11,6 +11,13 @@ import App from '../../App.jsx';
 function renderAt(url) {
   return render(<MemoryRouter initialEntries={[url]}><App /></MemoryRouter>);
 }
+
+// Round 18: the azhwar tabs sync to the URL hash — the jsdom window is
+// shared across tests in this file, so clear it before each one (gotcha
+// from the round-16 kshetram hash tests).
+beforeEach(() => {
+  window.history.replaceState(null, '', window.location.pathname);
+});
 
 describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-09-30 snap restyle)', () => {
   it('renders the snap hero for Poigai Azhwar: stats, birth facts, key moments', () => {
@@ -103,6 +110,34 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-09-30 snap restyle)', () => {
   it('handles unknown azhwar ids gracefully (FR-33 pattern)', () => {
     renderAt('/azhwar/unknown-saint');
     expect(screen.getByText(/this azhwar was not found/i)).toBeInTheDocument();
+  });
+
+  it('activates a tab from the URL hash and follows hashchange (round 18 deep links)', async () => {
+    window.history.replaceState(null, '', '#hymns');
+    renderAt('/azhwar/poigai');
+    expect(screen.getByRole('tab', { name: /hymns & meaning/i })).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByText(/Word-by-word meaning/i)).toBeInTheDocument();
+    window.history.replaceState(null, '', '#sources');
+    window.dispatchEvent(new Event('hashchange'));
+    expect(await screen.findAllByText(/Project Madurai Texts/i).then((els) => els.length)).toBeGreaterThanOrEqual(1);
+    window.history.replaceState(null, '', window.location.pathname);
+  });
+
+  it('ignores hashes that are not azhwar tabs', () => {
+    window.history.replaceState(null, '', '#nonsense');
+    renderAt('/azhwar/poigai');
+    expect(screen.getByRole('heading', { name: /early years & spiritual awakening/i })).toBeInTheDocument();
+    window.history.replaceState(null, '', window.location.pathname);
+  });
+
+  it('writes the hash on tab clicks and moves tabs with the arrow keys', async () => {
+    const user = userEvent.setup();
+    renderAt('/azhwar/poigai');
+    await user.click(screen.getByRole('tab', { name: /hymns & meaning/i }));
+    expect(window.location.hash).toBe('#hymns');
+    fireEvent.keyDown(screen.getByRole('tab', { name: /hymns & meaning/i }), { key: 'ArrowRight' });
+    expect(screen.getByRole('tab', { name: /sacred places \(12\)/i })).toHaveAttribute('aria-selected', 'true');
+    expect(window.location.hash).toBe('#places');
   });
 });
 

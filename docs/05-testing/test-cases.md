@@ -286,3 +286,25 @@ E2E **19/19** · Visual gate **12/12** · Measured hero 400px @1280 (audit
 target 360–400). Execution recorded in TER v2.25.
 
 *End of Addendum — TCS-108K-008 v1.11*
+
+## Version 1.12 — Azhwar + Acharya Detail kxd Restyle (2026-10-01)
+
+PO round-18 restyle of `/azhwar/:id` and `/acharya/:id` to the shared kxd
+theme (TER v2.26). Data contracts unchanged; interaction contracts added
+in lockstep:
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-AZW-03 | Hash-synced tabs | The five-tab rail syncs to the URL hash: `#hymns`/`#places`/`#media`/`#sources` deep links activate on mount, unknown hashes are ignored, tab clicks write the hash, `hashchange` is followed. Tests reset `window.location.hash` in `beforeEach` (jsdom window is shared) |
+| UT-AZW-03 | Tab activation | Arrow keys and clicks route through `activateTab` (roving focus, hash write, rAF-deferred panel scroll-into-view) |
+| UT-AZW-03 | Restyled panels | Same roles/text/hrefs on kxd primitives; word-by-word meanings render as a `.glossary` table (heading text unchanged); "Key moments", epithet chips, birth facts, verse band, sources row and prev/next nav contracts unchanged |
+| UT-ACH-03 | Restyled dossier | Section ids 01–07 and titles unchanged ("Life & Miracles" etc.); fact sheet = kxd fact rows; "Read the full chronology" disclosure, pending markers, guru/sishya chip hrefs and pada/commentary headings unchanged |
+| TC-18/TC-19 | E2E | Pass unchanged against the restyled pages |
+
+Quality gates: TC-QA-01 Pass (0 errors; 4 accepted warnings) · TC-QA-02
+Pass (**226/226 tests, 21 suites**; 90.43/81.69/86.03/92.13) · TC-QA-03
+Pass · E2E **19/19** · Visual gate **7/7** · Measured h1 56px Source
+Serif 4 + 17/28 DM Sans on both pages; 0px horizontal overflow at
+1280/390. Execution recorded in TER v2.26.
+
+*End of Addendum — TCS-108K-008 v1.12*

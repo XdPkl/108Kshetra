@@ -1,0 +1,265 @@
+/*
+ * Detail-theme stylesheet — the `.kxd` paper/rust theme shared by the
+ * three dossier pages (KshetramDetailPage, AzhwarDetailPage,
+ * AcharyaDetailPage): palette variables, the Source Serif 4 / DM Sans /
+ * Noto Serif Tamil stack, the audit's type scale (56px hero, 32px panel
+ * h2, 17px body) and the shared primitives (hero frame, buttons, sticky
+ * tab rail, fact rows, visit cards, verse cards, disclosures, glossary,
+ * milestones, resource rows, status toast). Page-specific layout rules
+ * live beside this file (kshetram-detail.css, saint-detail.css); the
+ * rules here were moved verbatim from kshetram-detail.css (round 18), so
+ * KshetramDetailPage renders identically. Selector specificity (0,1,1)+
+ * deliberately outranks the unlayered element rules in base.css
+ * (h1/h2/a) without needing !important.
+ */
+.kxd {
+  --paper: #faf2e3;          /* one surface with the site body (audit item 8) */
+  --ink: #333942;
+  --rust: #922e0d;
+  --accent: #ae3712;
+  --gold: #a77529;
+  --line: #e8cf9f;
+  --tint: #fbf0dc;
+  --muted: #74716b;
+  --serif: 'Source Serif 4', Georgia, serif;
+  --sans: 'DM Sans', 'Mukta Malar', Arial, sans-serif;
+  --tamil: 'Noto Serif Tamil', 'Mukta Malar', serif;
+  --header-h: 64px;
+  --tabs-h: 48px;
+  background: transparent;
+  color: var(--ink);
+  font: 17px/28px var(--sans);
+}
+.kxd a { color: var(--rust); text-underline-offset: 4px; }
+.kxd button, .kxd a { -webkit-tap-highlight-color: transparent; }
+.kxd button { font: inherit; cursor: pointer; color: inherit; }
+.kxd button:disabled { cursor: default; }
+.kxd button:focus-visible, .kxd a:focus-visible { outline: 3px solid var(--gold); outline-offset: 5px; }
+.kxd h1, .kxd h2, .kxd h3, .kxd h4 {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--rust);
+  line-height: 1.25;
+  margin: 0 0 14px;
+}
+.kxd h1 { font-size: 56px; line-height: 62px; letter-spacing: -1px; }
+.kxd h2 { font-size: 32px; line-height: 40px; letter-spacing: -0.4px; }
+.kxd h3 { font-size: 24px; line-height: 32px; }
+.kxd h4 { font-size: 21px; line-height: 30px; }
+.kxd p { margin: 0 0 16px; }
+.kxd figure { margin: 0; }
+.kxd .muted, .kxd small { color: var(--muted); }
+.kxd small { font-size: 13px; line-height: 20px; }
+.kxd .eyebrow { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+.kxd .note { font-size: 14px; line-height: 22px; color: var(--muted); }
+
+/* Skip link */
+.kxd .skip { position: absolute; left: -9999px; }
+.kxd .skip:focus { left: 20px; top: 20px; background: white; padding: 10px; z-index: 100; }
+
+/* Breadcrumb — 13px, 20px below (audit item 3) */
+.kxd .breadcrumb { font-size: 13px; line-height: 20px; padding: 0 0 20px; margin: 0; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.kxd .breadcrumb a { text-decoration: none; }
+
+/* Compact split hero (audit items 1–2) */
+.kxd .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; padding: 2px 0 20px; }
+.kxd .hero .eyebrow { margin-bottom: 8px; }
+.kxd .tamil { font-weight: 600; font-family: var(--tamil); color: var(--gold); font-size: 28px; line-height: 42px; margin: 8px 0; overflow-wrap: anywhere; }
+.kxd .hero-summary { margin: 0 0 16px; max-width: 58ch; }
+.kxd .hero-photo-frame {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: var(--tint);
+  border: 1px solid var(--line);
+}
+.kxd .hero-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.kxd .hero-photo-frame .hero-photo { position: absolute; inset: 0; z-index: 10; }
+.kxd .photo-caption { text-align: right; font-size: 12px; line-height: 18px; color: var(--muted); margin-top: 9px; }
+
+/* Actions — 44px targets (audit item 9) */
+.kxd .actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.kxd .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 30px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--rust);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 22px;
+}
+.kxd .btn:hover { background: var(--tint); }
+.kxd .btn.primary { background: var(--accent); color: white; }
+.kxd .btn.primary:hover { background: var(--rust); }
+.kxd .btn[aria-pressed='true'] { background: var(--rust); color: white; }
+.kxd .text-btn {
+  border: 0;
+  background: none;
+  padding: 10px;
+  min-height: 44px;
+  color: var(--rust);
+  font-size: 14px;
+  line-height: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.kxd .text-btn:hover { text-decoration: underline; }
+.kxd .text-btn:disabled { opacity: 0.6; }
+
+/* Sticky tab rail (audit item 5) — opaque surface, edge fade, 48px tabs */
+.kxd .tabs-rail { position: sticky; top: var(--header-h); z-index: 40; background: var(--paper); border-bottom: 1px solid var(--line); position: -webkit-sticky; }
+.kxd .tabs-rail::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 36px;
+  background: linear-gradient(to left, var(--paper), transparent);
+  pointer-events: none;
+}
+.kxd .tabs { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; }
+.kxd .tabs::-webkit-scrollbar { display: none; }
+.kxd .tab {
+  white-space: nowrap;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--ink);
+  height: var(--tabs-h);
+  padding: 0 10px;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: -1px;
+}
+.kxd .tab[aria-selected='true'] { border-color: var(--rust); color: var(--rust); font-weight: 700; }
+.kxd .tab:hover { color: var(--rust); }
+.kxd .panel { padding: 28px 0 40px; scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + 6px); }
+
+/* Fact rows / visit cards / section rules — shared dossier primitives */
+.kxd .intro { max-width: 65ch; }
+.kxd .label { font-size: 14px; line-height: 22px; color: var(--gold); margin-bottom: 5px; }
+.kxd .value { font: 24px/32px var(--serif); }
+.kxd .visit-card { background: var(--tint); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+.kxd .visit-card h3 { font-size: 26px; line-height: 34px; }
+.kxd .fact-row { display: grid; grid-template-columns: 30% 1fr; gap: 24px; padding: 12px 8px; border-bottom: 1px solid var(--line); }
+.kxd .fact-row dt { color: var(--gold); }
+.kxd .fact-row dd { margin: 0; }
+.kxd .facts { margin: 0; }
+.kxd .visit-card .btn { width: 100%; margin: 12px 0; }
+.kxd .visit-card small { display: block; margin: 14px 0 4px; }
+.kxd .section-rule { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 32px; }
+
+/* Article + ruled story blocks (History tab, azhwar Life panel) */
+.kxd .article-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 40px; }
+.kxd .article-grid article { max-width: 65ch; }
+.kxd .article-grid aside { border-left: 1px solid var(--line); padding-left: 28px; }
+.kxd .story { border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 18px; }
+.kxd .story h3 { margin-bottom: 8px; }
+
+/* Verse cards + transliteration (audit tab 4) */
+.kxd .verse { border: 1px solid var(--line); background: var(--tint); border-radius: 12px; text-align: center; padding: 24px 32px; margin: 18px 0; }
+.kxd .verse h3 { font-size: 20px; line-height: 28px; }
+.kxd .verse .tamil-verse { font: 22px/40px var(--tamil); color: var(--rust); margin: 18px 0; overflow-wrap: anywhere; }
+.kxd .verse .verse-meaning { max-width: 62ch; margin: 0 auto 16px; font-size: 16px; line-height: 27px; color: var(--ink); }
+.kxd .transliteration { font: italic 17px/28px var(--serif); padding-top: 14px; border-top: 1px solid var(--line); }
+
+/* Disclosures + glossary tables */
+.kxd .disclosure { border-top: 1px solid var(--line); padding-top: 6px; margin-top: 6px; }
+.kxd .disclosure > summary { cursor: pointer; font: 600 17px/26px var(--serif); color: var(--rust); padding: 10px 0; list-style-position: inside; }
+.kxd .disclosure > summary:hover { text-decoration: underline; }
+.kxd .glossary { width: 100%; border-collapse: collapse; margin: 12px 0 20px; }
+.kxd .glossary td { border-bottom: 1px solid var(--line); padding: 12px 10px; text-align: left; vertical-align: top; }
+.kxd .glossary td:first-child { font-family: var(--serif); width: 36%; border-right: 1px solid var(--line); }
+
+/* Milestones + numbered markers */
+.kxd .milestones { list-style: none; margin: 0 0 16px; padding: 0; }
+.kxd .milestones li { position: relative; padding: 0 0 12px 24px; }
+.kxd .milestones li::before { content: '◆'; position: absolute; left: 0; top: 1px; font-size: 11px; color: var(--gold); }
+.kxd .resource-row { display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.kxd .markers { counter-reset: marker; }
+.kxd .marker { position: relative; border-bottom: 1px solid var(--line); padding: 12px 0 12px 44px; counter-increment: marker; }
+.kxd .marker::before { content: counter(marker); position: absolute; left: 0; top: 14px; font: 20px/28px var(--serif); color: var(--gold); }
+.kxd .marker h3 { font-size: 20px; line-height: 28px; margin-bottom: 6px; }
+.kxd .resource { padding: 16px 0; border-bottom: 1px solid var(--line); }
+.kxd .resource h3 { font-size: 20px; line-height: 28px; display: flex; align-items: center; gap: 8px; }
+.kxd .resource .resource-meta { font-size: 14px; line-height: 22px; color: var(--muted); margin-bottom: 8px; }
+.kxd .resource p { margin-bottom: 8px; }
+
+/* Status toast */
+.kxd .status {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--rust);
+  color: white;
+  padding: 12px 23px;
+  border-radius: 8px;
+  z-index: 60;
+  box-shadow: 0 4px 20px #0002;
+  max-width: 90vw;
+}
+.kxd .status:empty { display: none; }
+
+/* Legacy detail hooks still used inside the pages (no-data note) */
+.kxd .detail__nodata { color: var(--muted); font-size: 14px; line-height: 22px; font-style: italic; }
+
+/* Responsive — shared primitives */
+@media (max-width: 1100px) {
+  .kxd .hero { gap: 32px; }
+  .kxd .tabs { gap: 14px; }
+  .kxd .article-grid { grid-template-columns: minmax(0, 1fr) 250px; gap: 30px; }
+}
+@media (max-width: 800px) {
+  .kxd { font: 16px/27px var(--sans); }
+  .kxd h1 { font-size: 36px; line-height: 42px; }
+  .kxd h2 { font-size: 28px; line-height: 36px; }
+  .kxd h3 { font-size: 22px; line-height: 30px; }
+  .kxd .tamil { font-size: 24px; line-height: 36px; }
+  .kxd .hero { grid-template-columns: 1fr; gap: 20px; padding-bottom: 20px; }
+  .kxd .hero figure { grid-row: 2; }
+  .kxd .hero-photo-frame { height: 200px; }
+  .kxd .tabs { gap: 12px; }
+  .kxd .tab { padding: 0 8px; font-size: 15px; line-height: 22px; }
+  .kxd .panel { padding-top: 24px; scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + 2px); }
+  .kxd .article-grid { grid-template-columns: 1fr; }
+  .kxd .article-grid aside { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 24px; }
+  .kxd .fact-row { grid-template-columns: 35% 1fr; gap: 15px; }
+  .kxd .verse { padding: 20px 16px; }
+  .kxd .verse .tamil-verse { font-size: 20px; line-height: 38px; }
+  .kxd .transliteration { font-size: 16px; line-height: 27px; }
+  /* Glossary as stacked phrase/meaning pairs (audit tab 4, mobile) */
+  .kxd .glossary, .kxd .glossary tbody, .kxd .glossary tr, .kxd .glossary td { display: block; width: 100%; }
+  .kxd .glossary tr { border-bottom: 1px solid var(--line); padding: 8px 0; }
+  .kxd .glossary td { border: 0; padding: 2px 0; }
+  .kxd .glossary td:first-child { border-right: 0; width: auto; font-weight: 600; }
+  .kxd .resource-row { flex-wrap: wrap; }
+  .kxd .breadcrumb { padding-bottom: 16px; }
+}
+
+/* Motion */
+@media (prefers-reduced-motion: no-preference) {
+  .kxd button, .kxd a { transition: background 0.15s, color 0.15s; }
+}
+
+/* Print */
+@media print {
+  .kxd { background: white; font-size: 11pt; }
+  .kxd .actions, .kxd .tabs-rail, .kxd .tabs, .kxd .status, .kxd .skip, .kxd .btn { display: none; }
+  .kxd .panel { min-height: 0; padding: 25px 0; }
+  .kxd .hero { padding: 0; gap: 20px; }
+  .kxd h1 { font-size: 32pt; }
+  .kxd .hero-photo-frame { max-height: 200px; }
+  .kxd .article-grid { grid-template-columns: 1fr; }
+  .kxd a { color: inherit; }
+}

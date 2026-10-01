@@ -10,7 +10,9 @@ import './styles/base.css';
 import './styles/layout.css';
 import './styles/v3.css';
 import './styles/zip.css';
+import './styles/detail-theme.css';
 import './styles/kshetram-detail.css';
+import './styles/saint-detail.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

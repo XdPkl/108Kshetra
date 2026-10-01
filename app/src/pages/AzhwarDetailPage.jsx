@@ -1,18 +1,19 @@
 /**
  * AzhwarDetailPage — the azhwar dossier at /azhwar/:id (US-AZW-02, FR-90),
- * recreated to the 2026-09-30 PO snap: breadcrumb bar with the next-azhwar
- * pill, hero (portrait + name/Tamil/epithet, pasuram & desam stat row, the
- * Birthplace / Birth star / Divine amsam icon row), an accessible five-tab
- * switcher (Life & tradition · Hymns & meaning · Sacred places · Media ·
- * Sources), the persistent opening-verse band, Birthplace/Sacred-places
- * cards, a sources summary row and the chronological prev/next nav.
+ * restyled to the shared kxd theme (round 18, same paper/rust palette and
+ * Source Serif 4 / DM Sans / Noto Serif Tamil stack as the kshetram detail
+ * page): compact split hero with the portrait column, sticky hash-synced
+ * five-tab rail (Life & tradition · Hymns & meaning · Sacred places ·
+ * Media · Sources) with scroll-into-view activation, flat ruled panels
+ * (article + Key-moments aside, verse card + glossary, ruled desam rows,
+ * resource rows), the persistent opening-verse band as a visit card,
+ * Birthplace/Sacred-places cards, a sources summary row and the
+ * chronological prev/next nav.
  * Content is dataset-driven (azhwar-details.json) — the snap's condensed
  * phrases are NOT in the data, so nearest fields render instead (lifeHistory
- * heading, timeline when/event, verse significance). No new icons: lucide
- * BookOpen/MapPin/Star/Search/ArrowRight/Chevron* + the existing
- * TempleGopuramIcon/ShankaIcon/ThirumanIcon sacred icons.
+ * heading, timeline when/event, verse significance).
  */
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
   ArrowRight, BookOpen, ChevronLeft, ChevronRight, MapPin, Search, Star,
@@ -20,7 +21,7 @@ import {
 import { getAzhwarById, getAzhwarNeighbours, getKshetramsByAzhwar } from '../data/api.js';
 import EmptyState from '../components/EmptyState.jsx';
 import NotDocumented from '../components/detail/NotDocumented.jsx';
-import { ShankaIcon, TempleGopuramIcon } from '../components/SacredIcons.jsx';
+import { TempleGopuramIcon, ShankaIcon } from '../components/SacredIcons.jsx';
 import SaintGlyph from '../components/saint/SaintGlyph.jsx';
 import SaintKeyMoments from '../components/saint/SaintKeyMoments.jsx';
 import SaintLegend from '../components/saint/SaintLegend.jsx';
@@ -39,6 +40,20 @@ export default function AzhwarDetailPage() {
   const [tab, setTab] = useState('life');
   const [storyExpanded, setStoryExpanded] = useState(false);
   const tabRefs = useRef({});
+  const panelRef = useRef(null);
+
+  // URL-hash deep links (#hymns etc.) — activate the hashed tab on load,
+  // write the hash on every switch, follow hashchange (kxd round-16 idiom).
+  useEffect(() => {
+    const applyHash = () => {
+      const hash = window.location.hash.slice(1);
+      if (!TAB_IDS.includes(hash)) return;
+      setTab(hash);
+    };
+    applyHash();
+    window.addEventListener('hashchange', applyHash);
+    return () => window.removeEventListener('hashchange', applyHash);
+  }, []);
 
   if (!azhwar) {
     return (
@@ -71,59 +86,56 @@ export default function AzhwarDetailPage() {
     { id: 'sources', label: 'Sources' },
   ];
 
-  const onTabKey = (e) => {
-    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-    e.preventDefault();
-    const delta = e.key === 'ArrowRight' ? 1 : -1;
-    const idx = TAB_IDS.indexOf(tab);
-    const nextTab = TAB_IDS[(idx + delta + TAB_IDS.length) % TAB_IDS.length];
-    setTab(nextTab);
-    tabRefs.current[nextTab]?.focus();
+  // Switch the tab, sync the URL hash and — when the reader is below the
+  // tab rail — reveal the panel just under the sticky header + rail.
+  // rAF defers until the new panel has mounted.
+  const activateTab = (tid, { scrollToPanel = false } = {}) => {
+    setTab(tid);
+    try {
+      window.history.replaceState(null, '', `#${tid}`);
+    } catch { /* jsdom / privacy modes */ }
+    tabRefs.current[tid]?.scrollIntoView?.({ block: 'nearest', inline: 'nearest' });
+    if (scrollToPanel) {
+      requestAnimationFrame(() => {
+        const el = panelRef.current;
+        if (el && el.getBoundingClientRect().top < 48) el.scrollIntoView?.({ block: 'start' });
+      });
+    }
   };
 
-  const tabButtonClass = (tabId) => `px-1 pb-3 pt-1 text-[14px] font-medium transition-colors border-b-2 -mb-px whitespace-nowrap ${
-    tab === tabId
-      ? 'border-[#C99A2E] text-[#B34700]! font-semibold'
-      : 'border-transparent text-[#66523D]! hover:text-[#7A2E00]!'
-  }`;
+  const onTabKey = (e) => {
+    if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+    e.preventDefault();
+    const idx = TAB_IDS.indexOf(tab);
+    const nextTab = TAB_IDS[(idx + (e.key === 'ArrowRight' ? 1 : -1) + TAB_IDS.length) % TAB_IDS.length];
+    activateTab(nextTab, { scrollToPanel: true });
+    tabRefs.current[nextTab]?.focus();
+  };
 
   const storyBlocks = Array.isArray(azhwar.lifeHistory) ? azhwar.lifeHistory : [];
   const [firstBlock, ...restBlocks] = storyBlocks;
 
   return (
-    <>
-      {/* Breadcrumb bar with the next-azhwar pill (PO snap round 11) */}
-      <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-[#66523D] pb-1">
-        <div className="flex items-center gap-2 flex-wrap">
-          <Link to="/azhwars" className="hover:text-[#B34700] transition-colors font-medium">← All Azhwars</Link>
-          {azhwar.order ? (
-            <>
-              <span className="text-[#96731F]">|</span>
-              <span>{azhwar.order} of 12 in chronological order</span>
-            </>
-          ) : null}
-        </div>
+    <div className="kxd">
+      <a className="skip no-print" href="#azhwar-main">Skip to azhwar details</a>
+      <nav className="breadcrumb no-print" aria-label="Breadcrumb">
+        <Link to="/azhwars">← All Azhwars</Link>
+        {azhwar.order ? <span>{azhwar.order} of 12 in chronological order</span> : null}
         {next ? (
-          <Link
-            to={`/azhwar/${next.id}`}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#C99A2E]/60 bg-[#FFFDF7] text-[12px] font-semibold text-[#7A2E00] hover:border-[#B34700] transition-colors shadow-2xs"
-          >
+          <Link to={`/azhwar/${next.id}`} className="btn azd-crumb-next">
             {next.name}
-            <ArrowRight className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
+            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </Link>
         ) : prev ? (
-          <Link
-            to={`/azhwar/${prev.id}`}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#C99A2E]/60 bg-[#FFFDF7] text-[12px] font-semibold text-[#7A2E00] hover:border-[#B34700] transition-colors shadow-2xs"
-          >
-            <ChevronLeft className="w-3.5 h-3.5 text-[#B34700]" aria-hidden="true" />
+          <Link to={`/azhwar/${prev.id}`} className="btn azd-crumb-next">
+            <ChevronLeft className="h-3.5 w-3.5" aria-hidden="true" />
             {prev.name}
           </Link>
         ) : null}
-      </div>
+      </nav>
 
-      {/* Hero: portrait left, identity + stats + birth facts right */}
-      <section className="grid grid-cols-1 md:grid-cols-[280px_minmax(0,1fr)] gap-8 items-start border-b border-[#E3D2AE] pb-8" aria-label={`${azhwar.name} profile`}>
+      {/* Hero: portrait column + identity, stats + birth facts */}
+      <section className="hero azd-hero" aria-label={`${azhwar.name} profile`}>
         <SaintPortrait
           portrait={{
             src: azhwar.photos?.[0]?.src ?? null,
@@ -132,146 +144,128 @@ export default function AzhwarDetailPage() {
           }}
         />
         <div className="min-w-0">
-          <p className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-[#B34700]">
-            {heroEyebrow}
-          </p>
-          {/* ! bangs beat the unlayered legacy h1/h2 rules in base.css */}
-          <h1 className="mt-1.5 font-display text-[40px]! leading-[1.02]! font-semibold text-[#5C1F00]! sm:text-[46px]!">
-            {azhwar.name}
-          </h1>
-          <p className="font-display text-[26px] sm:text-[30px] font-semibold text-[#96731F]! leading-tight mt-1" lang="ta">
-            {azhwar.tamilName}
-          </p>
-          {epithet ? (
-            <p className="font-display text-[17px] font-semibold text-[#96731F]! mt-1">{epithet}</p>
-          ) : null}
+          <p className="eyebrow">{heroEyebrow}</p>
+          <h1>{azhwar.name}</h1>
+          <p className="tamil" lang="ta">{azhwar.tamilName}</p>
+          {epithet ? <p className="azd-epithet">{epithet}</p> : null}
           {moreEpithets.length > 0 ? (
-            <div className="flex flex-wrap gap-1.5 mt-2">
+            <p className="azd-chips">
               {moreEpithets.map((alias) => (
-                <span
-                  key={alias}
-                  className="px-2.5 py-0.5 bg-[#FAF2E3] border border-[#C99A2E]/50 rounded-full text-[11px] font-medium text-[#4A3005]"
-                >
-                  {alias}
-                </span>
+                <span key={alias} className="pill">{alias}</span>
               ))}
-            </div>
+            </p>
           ) : null}
-          <p className="mt-3 text-[15px] text-[#332417]">
+          <p className="hero-summary">
             A life of devotion, remembered through {azhwar.pasuramCount.toLocaleString('en-IN')} sacred verses.
           </p>
 
           {/* Stat row */}
-          <div className="mt-5 flex items-center gap-5 text-[14px]">
-            <span className="flex items-center gap-2 font-semibold text-[#332417]">
-              <BookOpen className="w-5 h-5 text-[#B34700]" aria-hidden="true" />
+          <div className="azd-stats">
+            <span className="azd-stat">
+              <BookOpen className="h-5 w-5" aria-hidden="true" />
               {azhwar.pasuramCount.toLocaleString('en-IN')} pasurams
             </span>
-            <span className="w-px h-6 bg-[#E3D2AE]" aria-hidden="true" />
-            <span className="flex items-center gap-2 font-semibold text-[#332417]">
-              <TempleGopuramIcon className="w-5 h-5" />
+            <span className="azd-stat">
+              <TempleGopuramIcon className="h-5 w-5" />
               {desams.length} Divya Desams
             </span>
           </div>
 
           {/* Birth facts row */}
-          <div className="mt-6 pt-5 border-t border-[#E3D2AE] grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <div className="azd-birth">
             {azhwar.birthplace ? (
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-[#B34700] shrink-0 mt-0.5" aria-hidden="true" />
-                <div className="min-w-0">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#96731F]">Birthplace</p>
-                  <p className="text-[13px] text-[#332417] leading-snug mt-0.5">{azhwar.birthplace.name}</p>
-                  {azhwar.birthplace.district ? (
-                    <p className="text-[11px] text-[#66523D] mt-0.5">{azhwar.birthplace.district}</p>
-                  ) : null}
-                </div>
+              <div>
+                <p className="eyebrow azd-birth-label">
+                  <MapPin className="h-4 w-4" aria-hidden="true" />
+                  Birthplace
+                </p>
+                <p className="azd-birth-value">{azhwar.birthplace.name}</p>
+                {azhwar.birthplace.district ? (
+                  <p className="note">{azhwar.birthplace.district}</p>
+                ) : null}
               </div>
             ) : null}
             {azhwar.birthStar ? (
-              <div className="flex items-start gap-3">
-                <Star className="w-5 h-5 text-[#B34700] shrink-0 mt-0.5" aria-hidden="true" />
-                <div className="min-w-0">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#96731F]">Birth star</p>
-                  <p className="text-[13px] text-[#332417] leading-snug mt-0.5">{azhwar.birthStar}</p>
-                </div>
+              <div>
+                <p className="eyebrow azd-birth-label">
+                  <Star className="h-4 w-4" aria-hidden="true" />
+                  Birth star
+                </p>
+                <p className="azd-birth-value">{azhwar.birthStar}</p>
               </div>
             ) : null}
             {azhwar.amsam ? (
-              <div className="flex items-start gap-3">
-                <ShankaIcon className="w-6 h-5 shrink-0 mt-0.5" />
-                <div className="min-w-0">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#96731F]">Divine amsam</p>
-                  <p className="text-[13px] text-[#332417] leading-snug mt-0.5">{azhwar.amsam}</p>
-                </div>
+              <div>
+                <p className="eyebrow azd-birth-label">
+                  <ShankaIcon className="h-4 w-5" />
+                  Divine amsam
+                </p>
+                <p className="azd-birth-value">{azhwar.amsam}</p>
               </div>
             ) : null}
           </div>
         </div>
       </section>
 
-      {/* Five-tab switcher (PO snap) */}
-      <div
-        role="tablist"
-        aria-label="Azhwar dossier sections"
-        onKeyDown={onTabKey}
-        className="flex items-center gap-6 sm:gap-10 overflow-x-auto border-b border-[#E3D2AE] mt-2"
-      >
-        {tabs.map(({ id, label }) => (
-          <button
-            key={id}
-            ref={(el) => { tabRefs.current[id] = el; }}
-            type="button"
-            role="tab"
-            id={`azhwar-tab-${id}`}
-            aria-selected={tab === id}
-            aria-controls={`azhwar-panel-${id}`}
-            tabIndex={tab === id ? 0 : -1}
-            onClick={() => setTab(id)}
-            className={tabButtonClass(id)}
-          >
-            {label}
-          </button>
-        ))}
+      {/* Sticky five-tab rail (kxd round-17 idiom) */}
+      <div className="tabs-rail no-print">
+        <div
+          role="tablist"
+          aria-label="Azhwar dossier sections"
+          onKeyDown={onTabKey}
+          className="tabs"
+        >
+          {tabs.map(({ id: tabId, label }) => (
+            <button
+              key={tabId}
+              ref={(el) => { tabRefs.current[tabId] = el; }}
+              type="button"
+              role="tab"
+              id={`azhwar-tab-${tabId}`}
+              aria-selected={tab === tabId}
+              aria-controls={`azhwar-panel-${tabId}`}
+              tabIndex={tab === tabId ? 0 : -1}
+              onClick={() => activateTab(tabId)}
+              className="tab"
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div
+        ref={panelRef}
         role="tabpanel"
         id={`azhwar-panel-${tab}`}
         aria-labelledby={`azhwar-tab-${tab}`}
-        className="pt-8 pb-2 min-h-[320px]"
+        aria-label="Azhwar dossier"
+        tabIndex={-1}
+        className="panel"
       >
         {tab === 'life' ? (
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] gap-10 items-start">
-            <div>
-              <p className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-[#B34700]">
-                Life &amp; tradition
-              </p>
+          <div className="article-grid">
+            <article>
+              <p className="eyebrow">Life &amp; tradition</p>
               {firstBlock ? (
-                <>
-                  <h2 className="mt-2 font-display text-[26px]! sm:text-[30px]! leading-[1.1]! font-semibold text-[#5C1F00]!">
-                    {firstBlock.heading}
-                  </h2>
-                  <div className="mt-3 space-y-4">
-                    {firstBlock.paragraphs.map((p) => (
-                      <p key={p.slice(0, 32)} className="text-[15px] leading-relaxed text-[#332417]">{p}</p>
-                    ))}
-                  </div>
-                </>
+                <div className="story">
+                  <h2>{firstBlock.heading}</h2>
+                  {firstBlock.paragraphs.map((p) => (
+                    <p key={p.slice(0, 32)}>{p}</p>
+                  ))}
+                </div>
               ) : (
                 <NotDocumented />
               )}
 
               {restBlocks.length > 0 && storyExpanded ? (
-                <div className="mt-6 space-y-6">
+                <div className="azd-story-more">
                   {restBlocks.map((block) => (
-                    <div key={block.heading}>
-                      <h3 className="font-display text-xl font-semibold text-[#7A2E00]">{block.heading}</h3>
-                      <div className="mt-2 space-y-3">
-                        {block.paragraphs.map((p) => (
-                          <p key={p.slice(0, 32)} className="text-[14px] leading-relaxed text-[#332417]">{p}</p>
-                        ))}
-                      </div>
+                    <div key={block.heading} className="story">
+                      <h3>{block.heading}</h3>
+                      {block.paragraphs.map((p) => (
+                        <p key={p.slice(0, 32)}>{p}</p>
+                      ))}
                     </div>
                   ))}
                   <SaintLegend legend={azhwar.legend} />
@@ -283,43 +277,43 @@ export default function AzhwarDetailPage() {
                   type="button"
                   onClick={() => setStoryExpanded((v) => !v)}
                   aria-expanded={storyExpanded}
-                  className="mt-4 inline-flex items-center gap-2 text-[14px] font-bold text-[#96731F]! underline decoration-[#C99A2E]/70 underline-offset-4 hover:text-[#7A2E00]! transition-colors"
+                  className="text-btn"
                 >
                   {storyExpanded ? 'Show less' : 'Read the complete life story'}
-                  <ArrowRight className={`w-4 h-4 transition-transform${storyExpanded ? ' rotate-90' : ''}`} aria-hidden="true" />
+                  <ArrowRight className={`h-4 w-4${storyExpanded ? ' rotate-90' : ''}`} aria-hidden="true" />
                 </button>
               ) : null}
 
               {(azhwar.bhaktiBhava || azhwar.preservation) ? (
-                <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="azd-callouts">
                   {azhwar.bhaktiBhava ? (
-                    <div className="bg-[#FAF2E3] p-4 rounded-xl border border-[#C99A2E]/40">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#B34700] flex items-center gap-1.5">
+                    <div className="azd-callout">
+                      <p className="eyebrow">
                         <SaintGlyph kind="bhakti" /> Role &amp; bhakti bhava
-                      </span>
-                      <p className="text-xs leading-relaxed text-[#66523D] mt-2">{azhwar.bhaktiBhava}</p>
+                      </p>
+                      <p className="note">{azhwar.bhaktiBhava}</p>
                     </div>
                   ) : null}
                   {azhwar.preservation ? (
-                    <div className="bg-[#FAF2E3] p-4 rounded-xl border border-[#C99A2E]/40">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#B34700] flex items-center gap-1.5">
+                    <div className="azd-callout">
+                      <p className="eyebrow">
                         <SaintGlyph kind="preservation" /> Sampradaya preservation
-                      </span>
-                      <p className="text-xs leading-relaxed text-[#66523D] mt-2">{azhwar.preservation}</p>
+                      </p>
+                      <p className="note">{azhwar.preservation}</p>
                     </div>
                   ) : null}
                 </div>
               ) : null}
 
               {azhwar.era || azhwar.period ? (
-                <p className="mt-5 text-xs text-[#66523D]">
-                  <span className="font-bold uppercase tracking-wider text-[#96731F]">Era · </span>
+                <p className="note azd-era">
+                  <span className="eyebrow">Era · </span>
                   {azhwar.period}
                   {azhwar.era?.academic ? <> (academic: {azhwar.era.academic})</> : null}
                   {azhwar.era?.contemporaries ? <> · contemporary with the {azhwar.era.contemporaries}</> : null}
                 </p>
               ) : null}
-            </div>
+            </article>
             <aside>
               <SaintKeyMoments timeline={azhwar.timeline} />
             </aside>
@@ -327,18 +321,16 @@ export default function AzhwarDetailPage() {
         ) : null}
 
         {tab === 'hymns' ? (
-          <div className="space-y-8">
+          <div>
             {verse ? (
               <SaintVerse verse={verse} />
             ) : (
               <NotDocumented />
             )}
             {Array.isArray(azhwar.works) && azhwar.works.length > 0 ? (
-              <div>
-                <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700] mb-3 flex items-center gap-1.5">
-                  <SaintGlyph kind="works" /> Sacred works
-                </h3>
-                <ul className="text-sm leading-relaxed text-[#332417] list-disc pl-5 space-y-1.5">
+              <div className="section-rule">
+                <h3><SaintGlyph kind="works" /> Sacred works</h3>
+                <ul className="disc-list">
                   {azhwar.works.map((w) => (
                     <li key={w.name}>
                       {w.name}{w.pasurams ? ` (${w.pasurams.toLocaleString('en-IN')} pasurams)` : ''}{w.language ? ` — ${w.language}` : ''}
@@ -352,26 +344,19 @@ export default function AzhwarDetailPage() {
 
         {tab === 'places' ? (
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-[#B34700] mb-4 flex items-center gap-1.5">
-              <TempleGopuramIcon className="w-4 h-4" /> Divya Desams glorified by {azhwar.name} ({desams.length})
-            </h3>
-            <div className="flex flex-wrap items-center gap-2">
+            <h3>Divya Desams glorified by {azhwar.name} ({desams.length})</h3>
+            <ul className="azd-desams">
               {desams.map((k) => (
-                <Link
-                  key={k.id}
-                  to={`/kshetram/${k.id}`}
-                  className="inline-block px-3 py-1.5 rounded-full bg-[#FFFDF7] border border-[#C99A2E]/50 text-[#7A2E00] text-xs font-medium hover:border-[#B34700] hover:text-[#B34700] hover:-translate-y-0.5 transition-all shadow-2xs"
-                >
-                  {k.name}
-                </Link>
+                <li key={k.id}>
+                  <Link to={`/kshetram/${k.id}`}>{k.name}</Link>
+                </li>
               ))}
-              <Link
-                className="chip chip--more text-xs font-bold text-[#B34700] hover:text-[#7A2E00] transition-colors px-2 py-1"
-                to={`/kshetrams?azhwar=${azhwar.id}`}
-              >
+            </ul>
+            <p className="explore">
+              <Link className="text-btn" to={`/kshetrams?azhwar=${azhwar.id}`}>
                 Browse all {desams.length} desams →
               </Link>
-            </div>
+            </p>
           </div>
         ) : null}
 
@@ -386,52 +371,38 @@ export default function AzhwarDetailPage() {
 
       {/* Opening-verse band (persistent) */}
       {verse?.tamil ? (
-        <section
-          aria-label="Discover the opening verse"
-          className="mt-4 rounded-2xl bg-[#F6EBD6] border border-[#C99A2E]/55 p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-6 items-center"
-        >
-          <div className="flex items-start gap-4 min-w-0">
-            <span className="hidden sm:flex w-12 h-12 rounded-xl bg-[#FFFDF7] border border-[#C99A2E]/50 items-center justify-center shrink-0">
-              <BookOpen className="w-6 h-6 text-[#B34700]" aria-hidden="true" />
-            </span>
-            <div className="min-w-0">
-              <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-[#B34700]">
-                Discover the opening verse
-              </p>
-              <p className="font-body text-lg sm:text-[22px] leading-snug font-semibold text-[#4A2408] mt-1.5" lang="ta">
-                {verse.tamil}
-              </p>
-              {verse.work ? (
-                <p className="text-xs text-[#66523D] mt-1.5">{verse.work}</p>
-              ) : null}
-            </div>
+        <section aria-label="Discover the opening verse" className="visit-card azd-verseband">
+          <div className="min-w-0">
+            <p className="eyebrow">Discover the opening verse</p>
+            <p className="tamil" lang="ta">{verse.tamil}</p>
+            {verse.work ? <p className="note">{verse.work}</p> : null}
           </div>
-          <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-start sm:items-center lg:items-stretch xl:items-center gap-4 lg:border-l lg:border-[#C99A2E]/40 lg:pl-6">
+          <div className="azd-verseband-side">
             {verse.significance ? (
-              <div className="max-w-xs">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-[#96731F]">Meaning:</p>
-                <p className="text-xs text-[#332417] leading-relaxed mt-1">{verse.significance}</p>
+              <div>
+                <p className="eyebrow">Meaning:</p>
+                <p className="note">{verse.significance}</p>
               </div>
             ) : null}
-            <div className="flex flex-col items-start gap-2.5 shrink-0">
+            <div className="actions">
               <button
                 type="button"
-                onClick={() => setTab('hymns')}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#D95F0E] to-[#B34700] text-[#FFFDF7] text-[13px] font-bold shadow-xs hover:opacity-95 transition-opacity"
+                onClick={() => activateTab('hymns')}
+                className="btn primary"
               >
                 Read verse &amp; meaning
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </button>
               {recitationHref ? (
                 <a
                   href={recitationHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#7A2E00]! hover:text-[#B34700]! transition-colors"
+                  className="text-btn"
                 >
-                  <Search className="w-4 h-4 text-[#B34700]" aria-hidden="true" />
+                  <Search className="h-4 w-4" aria-hidden="true" />
                   Find recitations
-                  <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
               ) : null}
             </div>
@@ -440,112 +411,79 @@ export default function AzhwarDetailPage() {
       ) : null}
 
       {/* Birthplace / Sacred places cards */}
-      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div className="azd-cards">
         {azhwar.birthplace ? (
-          <div className="flex items-start gap-4 rounded-2xl border border-[#E3D2AE] bg-[#FFFDF7] p-5 shadow-xs">
-            <span className="flex w-12 h-12 rounded-xl bg-[#FAF2E3] border border-[#C99A2E]/50 items-center justify-center shrink-0">
-              <TempleGopuramIcon className="w-7 h-7" />
-            </span>
-            <div className="min-w-0">
-              <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-[#B34700]">Birthplace</p>
-              <p className="font-display text-[20px] font-semibold text-[#7A2E00] leading-snug mt-0.5">
-                {azhwar.birthplace.name}
-              </p>
-              <p className="text-xs text-[#66523D] mt-1">
-                {azhwar.birthplace.district ?? `Sacred birthplace of ${azhwar.name}.`}
-              </p>
-              {birthplaceLink ? (
-                <Link
-                  to={`/kshetram/${birthplaceLink}`}
-                  className="mt-2 inline-flex items-center gap-1.5 text-[13px] font-bold text-[#96731F]! hover:text-[#7A2E00]! transition-colors"
-                >
-                  View kshetram
-                  <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-                </Link>
-              ) : null}
-            </div>
+          <div className="visit-card">
+            <p className="eyebrow">Birthplace</p>
+            <h3>{azhwar.birthplace.name}</h3>
+            <p className="note">
+              {azhwar.birthplace.district ?? `Sacred birthplace of ${azhwar.name}.`}
+            </p>
+            {birthplaceLink ? (
+              <Link to={`/kshetram/${birthplaceLink}`} className="text-btn">
+                View kshetram
+                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </Link>
+            ) : null}
           </div>
         ) : null}
-        <div className="flex items-start gap-4 rounded-2xl border border-[#E3D2AE] bg-[#FFFDF7] p-5 shadow-xs">
-          <span className="flex w-12 h-12 rounded-xl bg-[#FAF2E3] border border-[#C99A2E]/50 items-center justify-center shrink-0">
-            <TempleGopuramIcon className="w-7 h-7" />
-          </span>
-          <div className="min-w-0">
-            <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-[#B34700]">Sacred places</p>
-            <p className="font-display text-[20px] font-semibold text-[#7A2E00] leading-snug mt-0.5">
-              {desams.length} Divya Desams
-            </p>
-            <p className="text-xs text-[#66523D] mt-1">
-              Explore the {desams.length} Divya Desams glorified by {azhwar.name}
-              {verse?.work ? <> in the {verse.work}</> : null}.
-            </p>
-            <Link
-              to={`/kshetrams?azhwar=${azhwar.id}`}
-              className="mt-2 inline-flex items-center gap-1.5 text-[13px] font-bold text-[#96731F]! hover:text-[#7A2E00]! transition-colors"
-            >
-              Explore all {desams.length}
-              <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-            </Link>
-          </div>
+        <div className="visit-card">
+          <p className="eyebrow">Sacred places</p>
+          <h3>{desams.length} Divya Desams</h3>
+          <p className="note">
+            Explore the {desams.length} Divya Desams glorified by {azhwar.name}
+            {verse?.work ? <> in the {verse.work}</> : null}.
+          </p>
+          <Link
+            to={`/kshetrams?azhwar=${azhwar.id}`}
+            className="text-btn"
+          >
+            Explore all {desams.length}
+            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </Link>
         </div>
       </div>
 
       {/* Sources summary row → opens the Sources tab */}
       <button
         type="button"
-        onClick={() => setTab('sources')}
+        onClick={() => activateTab('sources')}
         aria-haspopup="tab"
-        className="mt-6 w-full flex items-center justify-between gap-4 rounded-2xl border border-[#E3D2AE] bg-[#FFFDF7] px-5 py-4 text-left shadow-xs hover:border-[#C99A2E] transition-colors"
+        className="azd-source-row"
       >
-        <span className="flex items-center gap-4 min-w-0">
-          <span className="flex w-11 h-11 rounded-xl bg-[#FAF2E3] border border-[#C99A2E]/50 items-center justify-center shrink-0">
-            <BookOpen className="w-5 h-5 text-[#B34700]" aria-hidden="true" />
-          </span>
+        <span className="azd-source-main">
+          <BookOpen className="h-5 w-5" aria-hidden="true" />
           <span className="min-w-0">
-            <span className="block font-display text-[18px] font-semibold text-[#7A2E00]">
-              Sources &amp; Sampradaya Texts
-            </span>
-            <span className="block text-xs text-[#66523D] mt-0.5">
-              Traditional texts, commentaries and references.
-            </span>
+            <span className="azd-source-title">Sources &amp; Sampradaya Texts</span>
+            <span className="note">Traditional texts, commentaries and references.</span>
           </span>
         </span>
-        <ChevronRight className="w-5 h-5 text-[#96731F] shrink-0" aria-hidden="true" />
+        <ChevronRight className="h-5 w-5" aria-hidden="true" />
       </button>
 
       {/* Bottom chronological navigation */}
-      <nav className="flex items-center justify-between gap-4 pt-5 mt-2 border-t border-[#E3D2AE]" aria-label="Chronological navigation">
+      <nav className="explore azd-nav" aria-label="Chronological navigation">
         {prev
           ? (
-            <Link
-              to={`/azhwar/${prev.id}`}
-              className="group inline-flex items-center gap-2 px-5 py-3 bg-[#FFFDF7] rounded-full border border-[#C99A2E]/60 shadow-xs hover:shadow-md hover:border-[#B34700] transition-all text-xs sm:text-sm"
-            >
-              <ChevronLeft className="w-4 h-4 text-[#B34700] group-hover:-translate-x-0.5 transition-transform" aria-hidden="true" />
-              <span>Previous: <strong className="text-[#7A2E00]">{prev.name}</strong></span>
+            <Link to={`/azhwar/${prev.id}`} className="btn">
+              <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+              <span>Previous: <strong>{prev.name}</strong></span>
             </Link>
           )
           : (
-            <Link to="/azhwars" className="inline-flex items-center gap-2 text-sm font-medium text-[#7A2E00]! hover:text-[#B34700]! transition-colors">
-              ← All Azhwars
-            </Link>
+            <Link to="/azhwars" className="text-btn">← All Azhwars</Link>
           )}
         {next
           ? (
-            <Link
-              to={`/azhwar/${next.id}`}
-              className="group inline-flex items-center gap-2 px-5 py-3 bg-[#FFFDF7] rounded-full border border-[#C99A2E]/60 shadow-xs hover:shadow-md hover:border-[#B34700] transition-all text-xs sm:text-sm ml-auto"
-            >
-              <span>Next: <strong className="text-[#7A2E00]">{next.name}</strong></span>
-              <ChevronRight className="w-4 h-4 text-[#B34700] group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
+            <Link to={`/azhwar/${next.id}`} className="btn">
+              <span>Next: <strong>{next.name}</strong></span>
+              <ChevronRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           )
           : (
-            <Link to="/azhwars" className="ml-auto inline-flex items-center gap-2 text-sm font-medium text-[#7A2E00]! hover:text-[#B34700]! transition-colors">
-              All Azhwars →
-            </Link>
+            <Link to="/azhwars" className="text-btn">All Azhwars →</Link>
           )}
       </nav>
-    </>
+    </div>
   );
 }
