@@ -1201,3 +1201,41 @@ in-trip change on the page must reflect in the modal.
 | Production build | Clean |
 | E2E (Playwright, Chromium) | **19/19 journeys pass** |
 | Visual gate | Opener button + populated modal captured — `docs/03-design/gate-shots/plan-yatra/planner-button-1440.png`, `planner-modal-1440.png` |
+
+## Version 2.19 — Azhwar Detail Restyle to the PO Snap (2026-09-30, PO round 11)
+
+PO request: recreate the Azhwar detail page to an attached design snap —
+portrait hero with eyebrow/name/Tamil/epithet, pasuram & Divya-Desam stat
+row, Birthplace/Birth-star/Divine-amsam icon row (pin/star/conch), a
+five-tab dossier (Life & tradition · Hymns & meaning · Sacred places (N) ·
+Media · Sources), persistent opening-verse band, Birthplace/Sacred-places
+cards, sources summary row, chronological prev/next nav. **Icon contract:
+no new icons** — lucide BookOpen/MapPin/Star/Search/ArrowRight/Chevron* plus
+the existing TempleGopuramIcon/ShankaIcon/ThirumanIcon sacred icons.
+Content decision (PO-confirmed): the snap's condensed phrases are not in
+the dataset, so the layout renders existing azhwar-details.json fields
+(lifeHistory heading/paragraphs, timeline when/event as key moments,
+verse.significance as the band's meaning); counts are dataset-derived
+(Poigai: 100 pasurams / 12 Divya Desams — matches the snap).
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/pages/AzhwarDetailPage.jsx` | Full rewrite. Breadcrumb + next-azhwar pill (prev on azhwar 12); hero (280px portrait via `SaintPortrait`, derived eyebrow — "The first/second/third of the Mudhal Azhwars" for orders 1–3 — epithet + remaining-alias chips, derived lead); stat row; birth-facts grid (amsam cell hidden when absent); **net-new accessible tabs** (`role="tablist"/tab/tabpanel`, arrow-key roving focus — no tab precedent existed); Life tab = first lifeHistory block + "Read the complete life story" expander (remaining blocks + legend) + bhakti/preservation cards + era line, KEY MOMENTS aside; Hymns tab = SaintVerse + works list; Places tab = desam pills + `.chip--more` browse-all; Media/Sources as before; verse band "Read verse & meaning" → Hymns tab, "Find recitations" → archive.org search; cards; sources row → Sources tab; bottom prev/next (falls back to "← All Azhwars") |
+| `app/src/components/saint/SaintPortrait.jsx` | New: portrait + Thiruman-watermark fallback extracted from Identification (shared) |
+| `app/src/components/saint/Identification.jsx` | Refactored to compose SaintPortrait (Acharya page unaffected) |
+| `app/src/components/saint/SaintKeyMoments.jsx` | New azhwar-only KEY MOMENTS rail; `SaintTimeline` untouched for the Acharya page |
+| `app/src/pages/__tests__/saintPages.test.jsx` | Azhwar block rewritten (8 tests): hero assertions, tab switching, story expander, verse-band jump, recitation link, placeholder portrait, madhurakavi amsam-hidden, unknown-id |
+| `app/e2e/yatra.spec.js` | TC-18 → snap flow (hero stats, KEY MOMENTS, verse-band → hymns tab, next/prev nav) |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (accepted set) |
+| Unit tests (Vitest) | **216/216 pass (21 suites)** |
+| Coverage | **90.22% statements / 82.39% branches / 85.14% functions / 91.53% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Visual gate | 4/4 renders pass (hero / full / hymns tab / 390 mobile; no horizontal overflow) — `docs/03-design/gate-shots/azhwar-restyle/` |

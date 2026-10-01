@@ -126,13 +126,18 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page.getByRole('heading', { name: /about us — kshetra tours/i })).toBeVisible();
   });
 
-  test('TC-18: azhwar detail page renders the saint template with navigation', async ({ page }) => {
+  test('TC-18: azhwar detail renders the snap hero with tabs and navigation', async ({ page }) => {
     await page.goto('azhwars');
     await page.getByRole('link', { name: /poigai azhwar/i }).click();
     await expect(page).toHaveURL(/azhwar\/poigai$/);
-    await expect(page.getByRole('heading', { name: /identification/i })).toBeVisible();
+    // 2026-09-30 snap restyle: hero stats + tabs replace the spy-pill sections
+    await expect(page.getByText(/the first of the mudhal azhwars/i)).toBeVisible();
+    await expect(page.getByText(/100 pasurams/i)).toBeVisible();
     await expect(page.getByText('Sarovara Yogi')).toBeVisible();
     await expect(page.getByRole('link', { name: /view kshetram/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /key moments/i })).toBeVisible();
+    // The verse band jumps to the Hymns & meaning tab
+    await page.getByRole('button', { name: /read verse & meaning/i }).click();
     await expect(page.getByText(/word-by-word meaning/i)).toBeVisible();
 
     // Chronological prev/next navigation

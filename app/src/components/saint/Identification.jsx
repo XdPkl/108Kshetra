@@ -7,11 +7,9 @@
  * @param {{label: string, value: import('react').ReactNode}[]} props.rows
  * @param {{src?: string|null, wiki?: string|null, alt: string}} [props.portrait]
  */
-import { useWikiImage } from '../../hooks/useWikiImage.js';
-import { ThirumanIcon } from '../SacredIcons.jsx';
+import SaintPortrait from './SaintPortrait.jsx';
 
 export default function Identification({ rows, portrait }) {
-  const image = useWikiImage(portrait?.wiki ?? null, portrait?.src ?? null);
   const visible = rows.filter((row) => row.value);
   if (visible.length === 0) return null;
   const [first, ...rest] = visible;
@@ -24,19 +22,7 @@ export default function Identification({ rows, portrait }) {
       {/* Portrait with high-contrast framing */}
       {portrait ? (
         <div className="md:col-span-4">
-          <figure className="relative rounded-2xl overflow-hidden border-2 border-[#C99A2E]/70 shadow-md aspect-[3/4] bg-[#FAF2E3] m-0 group">
-            {image.src ? (
-              <img
-                src={image.src}
-                alt={portrait.alt}
-                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105 relative z-10"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
-              />
-            ) : null}
-            <div className="absolute inset-0 flex items-center justify-center bg-[#FAF2E3] text-[#7A2E00]" role="img" aria-label={portrait.alt}>
-              <ThirumanIcon className="w-14 h-20 opacity-60" />
-            </div>
-          </figure>
+          <SaintPortrait portrait={portrait} />
         </div>
       ) : null}
 

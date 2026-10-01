@@ -4,6 +4,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../../App.jsx';
 
@@ -11,37 +12,69 @@ function renderAt(url) {
   return render(<MemoryRouter initialEntries={[url]}><App /></MemoryRouter>);
 }
 
-describe('AzhwarDetailPage (UT-AZW-03, FR-90)', () => {
-  it('renders the full saint template for Poigai Azhwar (PO sample)', () => {
+describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-09-30 snap restyle)', () => {
+  it('renders the snap hero for Poigai Azhwar: stats, birth facts, key moments', () => {
     renderAt('/azhwar/poigai');
     expect(screen.getByRole('heading', { name: /poigai azhwar/i })).toBeInTheDocument();
     expect(screen.getByText(/1 of 12 in chronological order/i)).toBeInTheDocument();
-    // UXD v2: aliases render as chips rather than one joined string
+    expect(screen.getByText(/the first of the mudhal azhwars/i)).toBeInTheDocument();
     expect(screen.getByText('Sarovara Yogi')).toBeInTheDocument();
-    expect(screen.getByText('Kasara Yogi')).toBeInTheDocument();
-    expect(screen.getByText(/Aippasi \(Ashvin\/Kartika transition\)/i)).toBeInTheDocument();
-    const birthplace = screen.getByText(/Thiruvekka \(Kanchipuram\)/i);
-    expect(birthplace).toBeInTheDocument();
-    expect(screen.getByText(/Kanchipuram District, Tamil Nadu/i)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /view kshetram/i })).toHaveAttribute('href', '/kshetram/thiruvekka');
+    expect(screen.getByText('Kasara Yogi')).toBeInTheDocument(); // remaining epithets stay as chips
+    expect(screen.getByText(/100 pasurams/i)).toBeInTheDocument();
+    // stat row + sacred-places card both carry the derived count
+    expect(screen.getAllByText(/12 Divya Desams/i).length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText(/Thiruvekka \(Kanchipuram\)/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/Kanchipuram District, Tamil Nadu/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText(/Panchajanya/i)).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /life history & miracles/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /chronological life timeline/i })).toBeInTheDocument();
-    expect(screen.getByText(/Dehali of Thirukoilur/i)).toBeInTheDocument();
-    expect(screen.getByText(/Mudhal Thiruvanthathi \(100 pasurams\)/i)).toBeInTheDocument();
-    expect(screen.getByText(/Word-by-word meaning/i)).toBeInTheDocument();
-    expect(screen.getByText(/Theological commentary/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /key moments/i })).toBeInTheDocument();
+    expect(screen.getAllByText(/golden lotus/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByRole('heading', { name: /early years & spiritual awakening/i })).toBeInTheDocument();
     expect(screen.getByText(/Sampradaya preservation/i)).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /sources/i })).toBeInTheDocument();
-    expect(screen.getAllByText(/Project Madurai Texts/i).length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByRole('link', { name: /view kshetram/i })).toHaveAttribute('href', '/kshetram/thiruvekka');
+    expect(screen.getByRole('link', { name: /explore all 12/i })).toHaveAttribute('href', '/kshetrams?azhwar=poigai');
+    expect(screen.getByText(/discover the opening verse/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /sources & sampradaya texts/i })).toBeInTheDocument();
   });
 
-  it('shows the identification portrait, contribution icons and listening cards (UXD v1.5)', () => {
+  it('switches tabs: hymns shows the verse apparatus, media the listening cards, sources the texts', async () => {
+    const user = userEvent.setup();
     renderAt('/azhwar/poigai');
-    // PO-supplied painting as the identification portrait
-    expect(screen.getByAltText(/painting of poigai azhwar/i)).toHaveAttribute('src', expect.stringContaining('photos/saint-poigai.jpg'));
-    // Video searches render as YouTube listen cards
+    await user.click(screen.getByRole('tab', { name: /hymns & meaning/i }));
+    expect(screen.getByText(/Word-by-word meaning/i)).toBeInTheDocument();
+    expect(screen.getByText(/Theological commentary/i)).toBeInTheDocument();
+    expect(screen.getByText(/Mudhal Thiruvanthathi \(100 pasurams\)/i)).toBeInTheDocument();
+    await user.click(screen.getByRole('tab', { name: 'Media' }));
     expect(screen.getAllByRole('link', { name: /search on youtube/i }).length).toBeGreaterThanOrEqual(1);
+    await user.click(screen.getByRole('tab', { name: 'Sources' }));
+    expect(screen.getAllByText(/Project Madurai Texts/i).length).toBeGreaterThanOrEqual(1);
+    await user.click(screen.getByRole('tab', { name: /sacred places \(12\)/i }));
+    expect(screen.getByRole('link', { name: /browse all 12 desams/i })).toHaveAttribute('href', '/kshetrams?azhwar=poigai');
+  });
+
+  it('expands the complete life story from the Life & tradition tab', async () => {
+    const user = userEvent.setup();
+    renderAt('/azhwar/poigai');
+    expect(screen.queryByText(/Dehali of Thirukoilur/i)).not.toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: /read the complete life story/i }));
+    expect(screen.getByText(/Dehali of Thirukoilur/i)).toBeInTheDocument();
+  });
+
+  it('jumps to the hymns tab from the verse band and to sources from the summary row', async () => {
+    const user = userEvent.setup();
+    renderAt('/azhwar/poigai');
+    await user.click(screen.getByRole('button', { name: /read verse & meaning/i }));
+    expect(screen.getByText(/Word-by-word meaning/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /find recitations/i })).toHaveAttribute('href', expect.stringContaining('archive.org'));
+    await user.click(screen.getByRole('button', { name: /sources & sampradaya texts/i }));
+    expect(screen.getAllByText(/Project Madurai Texts/i).length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('shows the portrait and chronological navigation', () => {
+    renderAt('/azhwar/poigai');
+    // PO-supplied painting as the hero portrait
+    expect(screen.getByAltText(/painting of poigai azhwar/i)).toHaveAttribute('src', expect.stringContaining('photos/saint-poigai.jpg'));
+    expect(screen.getByRole('link', { name: /next: bhoothathazhwar/i })).toHaveAttribute('href', '/azhwar/bhoothath');
+    expect(screen.getAllByText(/← All Azhwars/i).length).toBeGreaterThanOrEqual(1);
   });
 
   it('renders the placeholder portrait for saints without a supplied photo', () => {
@@ -50,23 +83,21 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90)', () => {
     expect(screen.getByLabelText(/nammazhwar portrait/i)).toBeInTheDocument();
   });
 
-  it('shows derived desam links and chronological prev/next navigation', () => {
-    renderAt('/azhwar/poigai');
-    const main = screen.getByRole('main');
-    expect(within(main).getAllByRole('link', { name: /browse all \d+ desams/i }).length).toBe(1);
-    expect(screen.getByRole('link', { name: /next: bhoothathazhwar/i })).toHaveAttribute('href', '/azhwar/bhoothath');
-    expect(screen.getByText(/← All Azhwars/i)).toBeInTheDocument();
-  });
-
-  it('renders the dossier-populated Nammazhwar with prev/next navigation', () => {
+  it('renders the dossier-populated Nammazhwar with prev/next navigation', async () => {
+    const user = userEvent.setup();
     renderAt('/azhwar/nammazhwar');
     expect(screen.getByRole('heading', { name: /nammazhwar/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /chronological life timeline/i })).toBeInTheDocument();
+    // Prapanna Jana Kootastha lives in a later life-story block — expand it
+    await user.click(screen.getByRole('button', { name: /read the complete life story/i }));
     expect(screen.getAllByText(/Prapanna Jana Kootastha/i).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getByText(/Theological commentary/i)).toBeInTheDocument();
     expect(screen.queryByText(/not yet documented yet\./i)).not.toBeInTheDocument();
     expect(screen.getByRole('link', { name: /previous: thirumazhisai azhwar/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /next: madhurakavi azhwar/i })).toBeInTheDocument();
+  });
+
+  it('hides the divine-amsam cell for azhwars without one in the dataset', () => {
+    renderAt('/azhwar/madhurakavi');
+    expect(screen.queryByText(/divine amsam/i)).not.toBeInTheDocument();
   });
 
   it('handles unknown azhwar ids gracefully (FR-33 pattern)', () => {
