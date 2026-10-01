@@ -53,6 +53,8 @@ export default function KshetramDetailPage() {
   const { id } = useParams();
   const kshetram = getEnrichedKshetramById(id);
   const [lightbox, setLightbox] = useState({ photos: null, index: null });
+  // Hooks must run unconditionally — before the unknown-id early return
+  const photo = useWikiImage(kshetram?.wiki ?? null, kshetram?.photos?.[0]?.src ?? null);
   const [tab, setTab] = useState('overview');
   const tabRefs = useRef({});
 
@@ -77,7 +79,7 @@ export default function KshetramDetailPage() {
   const mapHref = kshetram.mapQuery
     ? `${MAPS_URL_TEMPLATE}${encodeURIComponent(kshetram.mapQuery)}`
     : '';
-  const photo = useWikiImage(kshetram.wiki ?? null, kshetram.photos?.[0]?.src ?? null);
+
   const moolavarName = kshetram.deities?.moolavar?.name ?? kshetram.moolavar?.name ?? null;
   const thaayarName = kshetram.deities?.thaayars?.[0]?.name ?? kshetram.thaayar?.name ?? null;
   const tabs = celestial
