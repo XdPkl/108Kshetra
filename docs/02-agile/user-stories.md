@@ -457,8 +457,8 @@ Remaining v2 changes are presentation-layer restructurings of existing FR journe
 
 | Type | Summary | Links to | Points | Jira key |
 |---|---|---|---|---|
-| Story | US-BRW-05 — Browse sort control | EP-BRW | 2 | — (Jira sync pending a fresh API token) |
-| Story | US-ACH-04 — Acharya parampara expansion | EP-ACH | 2 | — (Jira sync pending a fresh API token) |
+| Story | US-BRW-05 — Browse sort control | EP-BRW | 2 | DTRPR108K-73 |
+| Story | US-ACH-04 — Acharya parampara expansion | EP-ACH | 2 | DTRPR108K-74 |
 
 **US-BRW-05 — Browse sort control** (2 pts, Priority 2) — *FR-20 enhancement*
 > As a visitor, I want to order the kshetram list by name so that I can look up a desam alphabetically as well as in the traditional serial order.
@@ -470,7 +470,7 @@ Remaining v2 changes are presentation-layer restructurings of existing FR journe
 
 ### Post-Delivery Enhancement (2026-09-24) — UXD v3.0 Zip-Parity Rollout
 
-| Story | US-UXD-03 — Zip-parity look-and-feel rollout | EP-UXD | 8 | — (Jira sync pending a fresh API token) |
+| Story | US-UXD-03 — Zip-parity look-and-feel rollout | EP-UXD | 8 | DTRPR108K-75 |
 
 **US-UXD-03 — Zip-parity look-and-feel rollout** (8 pts, Priority 1)
 > As the Product Owner, I want every page of the site to match the layout of my supplied
@@ -484,7 +484,7 @@ behaviors, URL/localStorage contracts and the 108/27 datasets preserved; zip-onl
 
 ### Post-Delivery Enhancement (2026-09-25) — Sanity CMS Content Maintenance
 
-| Story | US-CMS-01 — Admin-editable photos & text via hosted CMS | EP-CMS | 8 | — (Jira sync pending a fresh API token) |
+| Story | US-CMS-01 — Admin-editable photos & text via hosted CMS | EP-CMS | 8 | DTRPR108K-76 |
 
 **US-CMS-01 — Admin-editable photos & text via hosted CMS** (8 pts, Priority 1)
 > As the Product Owner, I want my designated editors (2–3 invited emails, Google login —
@@ -510,3 +510,30 @@ behaviors, URL/localStorage contracts and the 108/27 datasets preserved; zip-onl
   (`app/scripts/sync-content.mjs --fixture … --check`).
 - Delivered as US-CMS-01 (TCS v1.7; TER v2.1). One-time PO setup checklist
   (account, import, invites, webhook) documented in `studio/README.md`.
+
+---
+
+## JIRA Synchronization Record (v2.0 — 2026-10-01)
+
+The four previously-unsynced post-delivery stories were synced to
+https://dtrprasanna.atlassian.net project **DTRPR108K** on **2026-10-01** via the Jira REST
+API, after the PO supplied a fresh API token. Two epics that the tables referenced but that
+did not yet exist in Jira were created first (`EP-UXD`, `EP-CMS`); all four stories carry
+labels `divya-kshetra` and `v3`, descriptions with story text + acceptance criteria, are
+parented to their epics, and were transitioned to **Done** at creation, matching the
+delivered state and the established convention (epics remain **To Do**).
+
+| Type | Summary | Links to | Points | Jira key |
+|---|---|---|---|---|
+| Epic | EP-UXD — Zip-Parity Look-and-Feel Rollout | — | — | DTRPR108K-71 |
+| Epic | EP-CMS — Sanity CMS Content Maintenance | — | — | DTRPR108K-72 |
+| Story | US-BRW-05 — Browse sort control | EP-BRW | 2 | DTRPR108K-73 |
+| Story | US-ACH-04 — Acharya parampara expansion | EP-ACH | 2 | DTRPR108K-74 |
+| Story | US-UXD-03 — Zip-parity look-and-feel rollout | EP-UXD | 8 | DTRPR108K-75 |
+| Story | US-CMS-01 — Admin-editable photos & text via hosted CMS | EP-CMS | 8 | DTRPR108K-76 |
+
+With this sync every story documented in this file through **US-CMS-01 / TER v2.1**
+(2026-09-25) exists in Jira. The Plan-Yatra PO-round work and the Azhwar detail restyle
+delivered 2026-09-26 → 2026-10-01 (TER v2.16 – v2.19, TCS v1.9) are presentation-layer
+iterations within the delivered EP-YMAP / EP-YTRP / EP-AZW2 journeys and are **not yet
+authored as user stories** — to be written up and synced on PO request.
