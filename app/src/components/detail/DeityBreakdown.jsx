@@ -1,16 +1,16 @@
 /**
  * DeityBreakdown — two-column Moolavar | Urchavar breakdown (FR-83/85) in
- * the zip-parity deity cards (UXD v3.0 Gate 3): lead photo with lightbox,
- * Tamil/Sanskrit/transliteration names, etymology and Thaayar legends.
- * Falls back to the legacy V2 deity fields, then to the documented
- * placeholder.
+ * the round-16 mock's ruled columns: photo with lightbox, Tamil/Sanskrit/
+ * transliteration names, italic form note, etymology and a Thaayar consort
+ * block. Falls back to the legacy V2 deity fields, then to the documented
+ * placeholder. The dossier names blob ("… Sanskrit: … Transliteration: …")
+ * is parsed into its three display lines.
  * @param {object} props
  * @param {Kshetram & object} props.kshetram - enriched record
  * @param {(photos: object[], index: number) => void} props.onOpenPhoto - opens the lightbox
  */
 import { useWikiImage } from '../../hooks/useWikiImage.js';
 import NotDocumented from './NotDocumented.jsx';
-import ZipSection from './ZipSection.jsx';
 
 /** Normalises a deity entry's photo list to {src?|wiki?, alt, credit?} items. */
 function photosFor(deity, fallbackWiki, fallbackAlt) {
@@ -36,13 +36,28 @@ function PhotoImg({ photo, alt, className }) {
   );
 }
 
+/** Splits a names blob into {tamil, sanskrit, translit} display lines. */
+function parseNames(names = {}) {
+  let tamil = names.tamil ?? '';
+  let sanskrit = names.sanskrit ?? null;
+  let translit = names.translit ?? null;
+  if (!sanskrit && /Sanskrit:/.test(tamil)) {
+    const match = tamil.match(/^(.*?)\s*Sanskrit:\s*(.*?)(?:\s*Transliteration:\s*(.*))?$/s);
+    if (match) {
+      tamil = match[1];
+      sanskrit = match[2];
+      translit = translit ?? match[3] ?? null;
+    }
+  }
+  return { tamil: tamil.trim() || null, sanskrit, translit };
+}
+
 function DeityColumn({ title, deity, legacy, fallbackWiki, onOpenPhoto }) {
   if (!deity && !legacy) {
     return (
-      <div className="p-5 rounded-2xl border border-[#C99A2E]/40 bg-[#FAF2E3] relative overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#E2C47C] to-[#C99A2E]" aria-hidden="true" />
-        <h3 className="font-display text-2xl font-semibold text-[#7A2E00]">{title}</h3>
-        <div className="mt-4"><NotDocumented /></div>
+      <div>
+        <h3>{title}</h3>
+        <NotDocumented />
       </div>
     );
   }
@@ -57,77 +72,68 @@ function DeityColumn({ title, deity, legacy, fallbackWiki, onOpenPhoto }) {
         : [];
   const lead = photos[0];
   const rest = photos.slice(1);
+  const names = parseNames(d.names ?? {});
+  const displayName = names.translit ?? legacy?.name ?? null;
+  const tamilName = names.tamil ?? legacy?.tamilName ?? null;
+  const formNote = legacy?.form ?? null;
 
   return (
-    <div className="p-5 rounded-2xl border border-[#C99A2E]/40 bg-[#FAF2E3] relative overflow-hidden flex flex-col justify-between">
-      <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#E2C47C] to-[#C99A2E]" aria-hidden="true" />
-      <div>
-        <h3 className="font-display text-2xl font-semibold text-[#7A2E00]">{title}</h3>
+    <div>
+      <h3>{title}</h3>
 
-        {/* Lead photo (lightbox) */}
-        {lead ? (
-          <button
-            type="button"
-            className="mt-3 w-full rounded-xl overflow-hidden border border-[#C99A2E]/45 bg-[#F6EBD6] block text-left"
-            onClick={() => onOpenPhoto(photos, 0)}
-            aria-label={`View ${title} photo 1`}
-          >
-            <PhotoImg photo={lead} alt={lead.alt ?? `${title} photo`} className="w-full aspect-video object-cover" />
-            {lead.credit ? (
-              <p className="text-[0.68rem] text-[#66523D] px-2 py-1 bg-[#F6EBD6]">{lead.credit}</p>
-            ) : null}
-          </button>
-        ) : (
-          <div className="mt-3 rounded-xl border border-[#C99A2E]/45 bg-[#F6EBD6] aspect-video flex flex-col items-center justify-center">
-            <span className="text-4xl text-[#96731F]/70" aria-label={`${title} photo placeholder`}>◆</span>
-            <span className="text-xs text-[#7A2E00] font-semibold mt-1">Sannidhi photo forthcoming</span>
-          </div>
-        )}
+      {/* Lead photo (lightbox) */}
+      {lead ? (
+        <button
+          type="button"
+          className="deity-photo"
+          onClick={() => onOpenPhoto(photos, 0)}
+          aria-label={`View ${title} photo 1`}
+        >
+          <PhotoImg photo={lead} alt={lead.alt ?? `${title} photo`} />
+          {lead.credit ? <p className="note px-2 py-1">{lead.credit}</p> : null}
+        </button>
+      ) : (
+        <p className="note">Sannidhi photo forthcoming.</p>
+      )}
 
-        {/* Extra photo thumbnails */}
-        {rest.length > 0 ? (
-          <div className="flex gap-2 mt-2">
-            {rest.map((photo, i) => (
-              <button
-                key={`${photo.src ?? ''}-${i}`}
-                type="button"
-                className="flex-1 rounded-lg overflow-hidden border border-[#C99A2E]/45"
-                onClick={() => onOpenPhoto(photos, i + 1)}
-                aria-label={`View ${title} photo ${i + 2}`}
-              >
-                <PhotoImg photo={photo} alt={photo.alt ?? `${title} photo ${i + 2}`} className="w-full aspect-video object-cover" />
-              </button>
-            ))}
-          </div>
-        ) : null}
+      {/* Extra photo thumbnails */}
+      {rest.length > 0 ? (
+        <div className="deity-thumbs">
+          {rest.map((photo, i) => (
+            <button
+              key={`${photo.src ?? ''}-${i}`}
+              type="button"
+              onClick={() => onOpenPhoto(photos, i + 1)}
+              aria-label={`View ${title} photo ${i + 2}`}
+            >
+              <PhotoImg photo={photo} alt={photo.alt ?? `${title} photo ${i + 2}`} />
+            </button>
+          ))}
+        </div>
+      ) : null}
 
-        <p className="mt-3 text-sm font-semibold text-[#332417]">
-          {d.names ? (
-            <>
-              <span lang="ta">{d.names.tamil}</span>
-              {d.names.sanskrit ? <span lang="sa"> · {d.names.sanskrit}</span> : null}
-              <span> · {d.names.translit}</span>
-            </>
-          ) : (
-            <>
-              {legacy?.tamilName ? <span lang="ta">{legacy.tamilName}</span> : null}
-              {legacy?.name ? <span> · {legacy.name}</span> : null}
-            </>
-          )}
+      {displayName ? <p className="deity-name">{displayName}</p> : null}
+      {tamilName ? <p className="tamil-small" lang="ta">{tamilName}</p> : null}
+      {names.sanskrit ? (
+        <p>
+          Sanskrit: <span lang="sa">{names.sanskrit}</span>
+          {names.translit && displayName !== names.translit ? (
+            <><br />Transliteration: {names.translit}</>
+          ) : null}
         </p>
-        {legacy?.form ? <p className="text-xs text-[#66523D] italic mt-0.5">{legacy.form}</p> : null}
-        {d.etymology ? <p className="text-xs text-[#66523D] leading-relaxed mt-1">{d.etymology}</p> : null}
-      </div>
+      ) : names.translit && displayName !== names.translit ? (
+        <p>Transliteration: {names.translit}</p>
+      ) : null}
+      {formNote ? <p><em>{formNote}</em></p> : null}
+      {d.etymology ? <p>{d.etymology}</p> : null}
 
       {thaayars.length > 0 ? (
-        <div className="mt-4 pt-3 border-t border-[#EBDDBE]">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-[#7A2E00]">
-            {thaayars.length > 1 ? 'Thaayars' : 'Thaayar'}
-          </h4>
+        <div className="consort">
+          <h4 className="eyebrow">{thaayars.length > 1 ? 'Thaayars' : 'Thaayar'}</h4>
           {thaayars.map((t) => (
-            <div key={t.name} className="mt-1.5">
-              <p className="text-sm font-medium text-[#332417]">{t.name}</p>
-              {t.legend ? <p className="text-xs text-[#66523D] leading-relaxed mt-0.5">{t.legend}</p> : null}
+            <div key={t.name}>
+              <p className="value">{t.name}</p>
+              {t.legend ? <p>{t.legend}</p> : null}
             </div>
           ))}
         </div>
@@ -139,8 +145,9 @@ function DeityColumn({ title, deity, legacy, fallbackWiki, onOpenPhoto }) {
 export default function DeityBreakdown({ kshetram, onOpenPhoto }) {
   const t = kshetram.deities;
   return (
-    <ZipSection id="deities" title="Deities & Consorts">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <section id="deities">
+      <h2>Deities &amp; consorts</h2>
+      <div className="two-columns section-rule">
         <DeityColumn
           title="Moolavar"
           deity={t?.moolavar}
@@ -163,9 +170,7 @@ export default function DeityBreakdown({ kshetram, onOpenPhoto }) {
           onOpenPhoto={onOpenPhoto}
         />
       </div>
-      {t?.sanctumNote ? (
-        <p className="mt-4 text-xs text-[#66523D] italic">{t.sanctumNote}</p>
-      ) : null}
-    </ZipSection>
+      {t?.sanctumNote ? <p className="note section-rule">{t.sanctumNote}</p> : null}
+    </section>
   );
 }

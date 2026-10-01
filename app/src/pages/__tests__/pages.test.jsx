@@ -1,7 +1,7 @@
 /**
  * Page-level component tests rendered with a MemoryRouter.
  */
-import { describe, it, expect, vi } from 'vitest';
+import { beforeEach, describe, it, expect, vi } from 'vitest';
 import { cleanup, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
@@ -92,7 +92,13 @@ describe('BrowsePage (UT-BRW-01..04)', () => {
 });
 
 describe('KshetramDetailPage (UT-DTL-01..04, V3 UT-DTL-14..17)', () => {
-  it('renders the mock hero, Plan-your-visit sidebar and the Overview tab by default (round 15)', () => {
+  // Round 16: the mock syncs the active tab to the URL hash — clear it so
+  // each test starts on the Overview tab.
+  beforeEach(() => {
+    window.history.replaceState(null, '', window.location.pathname);
+  });
+
+  it('renders the mock hero, Plan-your-visit card and the Overview tab by default (round 16)', () => {
     renderAt('/kshetram/srirangam');
     expect(screen.getByRole('heading', { level: 1, name: /srirangam/i })).toBeInTheDocument();
     expect(screen.getByText('Sri Ranganathaswamy Temple')).toBeInTheDocument();
@@ -101,25 +107,24 @@ describe('KshetramDetailPage (UT-DTL-01..04, V3 UT-DTL-14..17)', () => {
     expect(screen.getAllByText(/06:15/).length).toBeGreaterThan(0);
     expect(screen.getByRole('link', { name: /get directions/i })).toHaveAttribute('rel', 'noopener noreferrer');
     expect(screen.getByRole('heading', { name: /about the temple/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /basic shrine profile/i })).toBeInTheDocument();
-    expect(screen.getAllByText(/247 pasurams/).length).toBeGreaterThan(0);
+    expect(screen.getByRole('heading', { name: /shrine at a glance/i })).toBeInTheDocument();
     expect(screen.getByRole('tab', { name: /overview/i })).toHaveAttribute('aria-selected', 'true');
   });
 
-  it('renders every shrine-template section behind its tab', async () => {
+  it('renders every shrine-template section behind its tab (round 16 headings)', async () => {
     const user = userEvent.setup();
     renderAt('/kshetram/srirangam');
     await user.click(screen.getByRole('tab', { name: /deities/i }));
     expect(screen.getByRole('heading', { name: /deities & consorts/i })).toBeInTheDocument();
-    expect(screen.getAllByText(/Ranganathan/).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Ranganathan \/ Periya Perumal/).length).toBeGreaterThan(0);
     await user.click(screen.getByRole('tab', { name: /history/i }));
     expect(screen.getByRole('heading', { name: /sthala puranam & history/i })).toBeInTheDocument();
     await user.click(screen.getByRole('tab', { name: /mangalasasanam/i }));
     expect(screen.getByRole('heading', { name: /^mangalasasanam$/i })).toBeInTheDocument();
     await user.click(screen.getByRole('tab', { name: /visit info/i }));
-    expect(screen.getByRole('heading', { name: /visit info/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /plan your darshan/i })).toBeInTheDocument();
     await user.click(screen.getByRole('tab', { name: /location/i }));
-    expect(screen.getByRole('heading', { name: /^location$/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /find the temple/i })).toBeInTheDocument();
     await user.click(screen.getByRole('tab', { name: /media/i }));
     expect(screen.getByRole('heading', { name: /visuals & media/i })).toBeInTheDocument();
   });
@@ -163,26 +168,29 @@ describe('KshetramDetailPage (UT-DTL-01..04, V3 UT-DTL-14..17)', () => {
     renderAt('/kshetram/srirangam');
     await user.click(screen.getByRole('tab', { name: /mangalasasanam/i }));
     // Full template (PO sample): two representative excerpts
-    expect(screen.getByRole('heading', { name: /Thondaradippodi Azhwar — Thirumaalai/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Thondaradippodi Azhwar · Thirumaalai/i })).toBeInTheDocument();
     expect(screen.getAllByText(/Word-by-word meaning/i).length).toBeGreaterThanOrEqual(2);
     expect(screen.getAllByRole('link', { name: /listen/i }).length).toBeGreaterThanOrEqual(2);
     // Legacy single-pasuram display still works where no template exists
     cleanup();
+    window.history.replaceState(null, '', window.location.pathname);
     renderAt('/kshetram/thiruvekka');
     await user.click(screen.getByRole('tab', { name: /mangalasasanam/i }));
     expect(screen.getAllByText(/sonna vannam seitha/i).length).toBeGreaterThan(0);
   });
 
-  it('shows the pasuram count badge only when documented', () => {
-    renderAt('/kshetram/srirangam');
-    expect(screen.getAllByText(/247 pasurams/i).length).toBeGreaterThan(0);
-  });
-
-  it('links the Azhwars-Who-Glorified list to the per-Azhwar detail pages', async () => {
+  it('shows the pasuram count on the Mangalasasanam tab only when documented', async () => {
     const user = userEvent.setup();
     renderAt('/kshetram/srirangam');
     await user.click(screen.getByRole('tab', { name: /mangalasasanam/i }));
-    const listSection = screen.getByRole('heading', { name: /azhwars who glorified/i }).closest('section');
+    expect(screen.getAllByText(/247 pasurams/i).length).toBeGreaterThan(0);
+  });
+
+  it('links the Explore-the-Azhwars list to the per-Azhwar detail pages', async () => {
+    const user = userEvent.setup();
+    renderAt('/kshetram/srirangam');
+    await user.click(screen.getByRole('tab', { name: /mangalasasanam/i }));
+    const listSection = screen.getByRole('heading', { name: /explore the azhwars/i }).closest('section');
     const links = [...listSection.querySelectorAll('a')];
     expect(links.length).toBeGreaterThanOrEqual(10);
     for (const link of links) {
@@ -204,6 +212,56 @@ describe('KshetramDetailPage (UT-DTL-01..04, V3 UT-DTL-14..17)', () => {
     renderAt('/kshetram/atlantis');
     expect(screen.getByText(/this kshetram was not found/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /back to browse/i })).toHaveAttribute('href', '/kshetrams');
+  });
+
+  it('activates a tab from the URL hash and follows hashchange (round 16 deep links)', async () => {
+    window.history.replaceState(null, '', '#location');
+    renderAt('/kshetram/srirangam');
+    expect(screen.getByRole('tab', { name: /location/i })).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('heading', { name: /find the temple/i })).toBeInTheDocument();
+    window.history.replaceState(null, '', '#media');
+    window.dispatchEvent(new Event('hashchange'));
+    expect(await screen.findByRole('heading', { name: /visuals & media/i })).toBeInTheDocument();
+    window.history.replaceState(null, '', window.location.pathname);
+  });
+
+  it('ignores hashes that are not kshetram tabs', () => {
+    window.history.replaceState(null, '', '#nonsense');
+    renderAt('/kshetram/srirangam');
+    expect(screen.getByRole('tab', { name: /overview/i })).toHaveAttribute('aria-selected', 'true');
+    window.history.replaceState(null, '', window.location.pathname);
+  });
+
+  it('celestial desams ignore visit/location hashes', () => {
+    window.history.replaceState(null, '', '#visit');
+    renderAt('/kshetram/paramapadam');
+    expect(screen.getByRole('tab', { name: /overview/i })).toHaveAttribute('aria-selected', 'true');
+    window.history.replaceState(null, '', window.location.pathname);
+  });
+
+  it('announces trip and visited toggles in the status toast (round 16)', async () => {
+    const user = userEvent.setup();
+    const { container } = renderAt('/kshetram/srirangam');
+    await user.click(screen.getByRole('button', { name: /add to trip/i }));
+    expect(container.querySelector('.status').textContent).toMatch(/added to trip — saved in this browser\./i);
+    await user.click(screen.getByRole('button', { name: /remove from trip/i }));
+    expect(container.querySelector('.status').textContent).toMatch(/removed from trip/i);
+    await user.click(screen.getByRole('button', { name: /mark as visited/i }));
+    expect(container.querySelector('.status').textContent).toMatch(/^visited — saved in this browser\./i);
+    await user.click(screen.getByRole('button', { name: /✓ visited/i }));
+    expect(container.querySelector('.status').textContent).toMatch(/removed from visited/i);
+  });
+
+  it('supports Home/End roving focus on the tablist (round 16)', async () => {
+    const user = userEvent.setup();
+    renderAt('/kshetram/srirangam');
+    const overviewTab = screen.getByRole('tab', { name: /overview/i });
+    await user.click(overviewTab);
+    overviewTab.focus();
+    await user.keyboard('{End}');
+    expect(screen.getByRole('tab', { name: /media/i })).toHaveAttribute('aria-selected', 'true');
+    await user.keyboard('{Home}');
+    expect(screen.getByRole('tab', { name: /overview/i })).toHaveAttribute('aria-selected', 'true');
   });
 });
 

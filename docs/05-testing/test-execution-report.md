@@ -1483,3 +1483,108 @@ browser." note; the sidebar is omitted for celestial desams.
 | Production build | Clean |
 | E2E (Playwright, Chromium) | **19/19 journeys pass** |
 | Visual gate | 5/5 renders pass (hero / overview full / deities tab / location tab / 390 mobile; no horizontal overflow at 1512 or 390) — `docs/03-design/gate-shots/kshetram-detail-restyle/` |
+
+---
+
+## Version 2.24 — Kshetram Detail Restyled to the Triplicane Mock (2026-10-01, PO round 16)
+
+PO request: "recreate the Kshetram Page exactly" against the standalone
+`triplicane.html` design reference — **visual/interaction refresh, no data
+changes**. The page keeps the round-15 anatomy (breadcrumb → split hero →
+seven accessible tabs → panels) but moves to the mock's flat paper/rust
+language: a new page-scoped stylesheet (`src/styles/kshetram-detail.css`,
+selectors scoped under `.kxd` so they out-specify the unlayered legacy
+element rules without `!important`) carries the mock's palette
+(paper `#fffaf0`, rust `#922e0d`, accent `#ae3712`, gold `#a77529`,
+hairline `#e8cf9f`, tint `#fbf0dc`), the Source Serif 4 / DM Sans /
+Noto Serif Tamil stack (fonts added to `index.html`) and the mock's
+responsive/reduced-motion/print blocks. Bootstrap icons → lucide; the site
+header, footer and shell are untouched.
+
+### What changed per tab
+
+- **Hero**: 72px serif name, gold Tamil, temple name, pin row, significance
+  summary; "Add to trip" (filled) / "Mark as visited" (outline, aria-pressed
+  → rust) / Share / Print as mock pills; photo aspect 1.5, right-aligned
+  caption. Trip/visited toggles feed a **status toast** ("Added to trip —
+  saved in this browser.", auto-clears ~4.5s) via a new optional `onNotify`
+  prop; all three action components gained a `variant="kxd"` (default
+  appearance unchanged for map popups and other pages).
+- **Tabs**: same 7 tabs + roving focus (plus Home/End), now synced to the
+  **URL hash** (activate on load, `history.replaceState` on switch,
+  `hashchange` listener; unknown or celestial-forbidden hashes fall back to
+  Overview).
+- **Overview**: intro paragraph (first `puranam.legend` entry) +
+  Moolavar/Thaayar pair; tinted "Plan your visit" card (timings rows,
+  notes row, indicative note, full-width Get directions, Distance from me
+  text button, browser note); "Shrine at a glance" fact sheet replaces the
+  Basic-Shrine-Profile tile grid — the dossier posture string's
+  "Unique feature:" tail becomes the Distinctive form row. The round-15
+  "247 pasurams · N Azhwars" overview cell + "Explore the hymns" button are
+  **dropped per mock** (restorable on request).
+- **Deities**: two ruled columns; the dossier names blob is parsed into
+  Tamil / "Sanskrit:" / "Transliteration:" lines; photo + lightbox kept;
+  "Sannidhi photo forthcoming." note per mock; sanctumNote stays a note
+  (srirangam's proves it is NOT a "five forms" list — the mock's
+  Five-forms section is PO content, flagged).
+- **History**: article grid — dossier legend items split at " — " into
+  titled story blocks (srirangam's untitled items stay paragraphs),
+  "History & inscriptions" timeline, Invasions/Cultural-milestones
+  subsections, "Literary references" rows; aside carries the Prathyaksham
+  list (split from the comma string) and the significance blockquote.
+- **Mangalasasanam**: count pills ("Thirumangai Azhwar · 10"), centered
+  verse cards (dataset "*" markers render as line breaks), word-by-word
+  meanings as glossary tables, "Commentary" from excerpt significance,
+  "Explore the Azhwars" links (replaces Azhwars-Who-Glorified chips);
+  legacy `PasuramSection` fallback kept.
+- **Visit info**: "Plan your darshan" (big serif timing hours, Festival
+  highlight ← `timings.notes`, Getting here ← `profile.location`), "Quick
+  facts" card (serial/region/location), "Further visit details" rows with
+  the ≥3 "not yet documented yet." fallbacks kept.
+- **Location**: "Find the temple" + map grid — Leaflet MiniMap kept (the
+  mock's OSM iframe is a standalone-file stand-in) — "Location details"
+  aside (address, GPS, Get directions, View on Google Maps) and the
+  restyled nearby rows (`.nearby__list` hook kept for e2e).
+- **Media**: numbered "What to look for" markers (dossier "Title: body"
+  strings split) + "Texts & discourses" resource rows (YouTube-search
+  cards + literature).
+
+### Contract notes
+
+- **ZipSection/SerialBadge deleted** — page-dead after the flat restyle
+  (the handover had already flagged it as a cleanup candidate).
+- Mock-authored copy (intro text, story titles, five-forms list,
+  "Distinctive form" prose) is rendered **dataset-mapped** per the
+  rounds-11–15 precedent — PO-owned content not in the datasets, flagged.
+- Site-copy JSON untouched; `sync-content --fixture --check` stays 0-diff.
+- UT-DTL block extended (hash deep links, unknown-hash fallback, celestial
+  hash guard, status toast, Home/End roving focus) → **223 unit tests**;
+  coverage gate holds (81.26% branches). TC-08/TC-16 heading sweeps
+  updated for the mock's sentence-case headings.
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/styles/kshetram-detail.css` | NEW — mock CSS scoped under `.kxd` |
+| `app/index.html` | Fonts: DM Sans, Noto Serif Tamil, Source Serif 4 |
+| `app/src/pages/KshetramDetailPage.jsx` | `.kxd` shell, mock hero/tabs, hash sync, status toast |
+| `app/src/components/detail/{ShrineProfile,DeityBreakdown,PuranamHistory,MangalasasanamSection,VisitInfoSection,VisualsMedia}.jsx` | Restyled in place to the mock layouts (props unchanged) |
+| `app/src/components/{TripControls,VisitedToggle,PageActions,DistanceFromMe}.jsx` | Optional `variant="kxd"` + `onNotify`; defaults unchanged |
+| `app/src/components/NearbyDesams.jsx` | Mock hover rows (nearby__list hook kept) |
+| `app/src/components/detail/ZipSection.jsx` | Deleted (page-dead) |
+| `app/src/pages/__tests__/pages.test.jsx` | UT-DTL block updated + 5 new round-16 tests |
+| `app/src/components/__tests__/detailV3.test.jsx` | Heading/pill assertions for the restyle + bare-excerpt branch test |
+| `app/src/components/__tests__/v3Branches.test.jsx` | VisitInfoSection branch test for the split timing layout |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 4 warnings (accepted set) |
+| Unit tests (Vitest) | **223/223 pass (21 suites)** |
+| Coverage | **89.96% statements / 81.26% branches / 85.44% functions / 91.43% lines** (gate 80%) |
+| Production build | Clean |
+| CMS round-trip | `sync-content --fixture --check` 0-diff |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Visual gate | 10/10 renders pass (triplicane: overview/deities/history/mangalasasanam/visit/location/media + 390 mobile; srirangam overview; paramapadam celestial) — `docs/03-design/gate-shots/kshetram-detail-restyle-16/` |

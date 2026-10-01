@@ -1,12 +1,16 @@
 /**
  * DistanceFromMe — opt-in geolocation button showing straight-line distance
- * to the temple, plus a Google Maps directions link (FR-67), zip-parity pill
- * styling (UXD v3.0 Gate 3).
+ * to the temple, plus a Google Maps directions link (FR-67). Two
+ * appearances: the zip-parity pill row (default) and the round-16 mock
+ * sidebar block (`variant="kxd"` — full-width primary directions button
+ * above a quiet distance text button).
  * @param {object} props
  * @param {[number, number]|null} props.coords - temple [lat, lng]
  * @param {string} props.mapQuery - Google Maps query for directions
+ * @param {string} [props.variant] - 'kxd' for the mock styling
  */
 import { useState } from 'react';
+import { Crosshair, Navigation } from 'lucide-react';
 import { distanceKm } from '../utils/geo.js';
 import { MAPS_URL_TEMPLATE } from '../data/config.js';
 
@@ -18,7 +22,7 @@ const STATUS = {
   done: 'done',
 };
 
-export default function DistanceFromMe({ coords, mapQuery }) {
+export default function DistanceFromMe({ coords, mapQuery, variant }) {
   const [status, setStatus] = useState(STATUS.idle);
   const [distance, setDistance] = useState(null);
 
@@ -41,6 +45,48 @@ export default function DistanceFromMe({ coords, mapQuery }) {
   const directionsHref = mapQuery
     ? `${MAPS_URL_TEMPLATE}${encodeURIComponent(`directions to ${mapQuery}`)}`
     : null;
+  const directions = directionsHref ? (
+    <a
+      className={variant === 'kxd' ? 'btn primary directions' : 'distance__directions text-sm font-semibold text-[#B34700] hover:text-[#7A2E00] transition-colors'}
+      href={directionsHref}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Navigation className="h-4 w-4" aria-hidden="true" />
+      Get directions
+    </a>
+  ) : null;
+  const errors = (
+    <>
+      {status === STATUS.denied ? (
+        <p className="distance__error text-xs text-[#A6261D]" role="alert">
+          Location permission was denied — allow location access to see the distance.
+        </p>
+      ) : null}
+      {status === STATUS.unsupported ? (
+        <p className="distance__error text-xs text-[#A6261D]" role="alert">Your browser does not support location.</p>
+      ) : null}
+    </>
+  );
+
+  if (variant === 'kxd') {
+    return (
+      <div className="distance">
+        {directions}
+        {status === STATUS.done ? (
+          <p className="distance__result note" role="status">
+            You are about {distance} km away (straight line).
+          </p>
+        ) : (
+          <button type="button" className="text-btn" onClick={locate} disabled={status === STATUS.locating}>
+            <Crosshair className="h-4 w-4" aria-hidden="true" />
+            <span>{status === STATUS.locating ? 'Locating…' : 'Distance from me'}</span>
+          </button>
+        )}
+        {errors}
+      </div>
+    );
+  }
 
   return (
     <div className="distance flex flex-wrap items-center gap-3">
@@ -59,24 +105,8 @@ export default function DistanceFromMe({ coords, mapQuery }) {
           <span>{status === STATUS.locating ? 'Locating…' : 'Distance from me'}</span>
         </button>
       )}
-      {status === STATUS.denied ? (
-        <p className="distance__error text-xs text-[#A6261D]" role="alert">
-          Location permission was denied — allow location access to see the distance.
-        </p>
-      ) : null}
-      {status === STATUS.unsupported ? (
-        <p className="distance__error text-xs text-[#A6261D]" role="alert">Your browser does not support location.</p>
-      ) : null}
-      {directionsHref ? (
-        <a
-          className="distance__directions text-sm font-semibold text-[#B34700] hover:text-[#7A2E00] transition-colors"
-          href={directionsHref}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Get directions ↗
-        </a>
-      ) : null}
+      {errors}
+      {directions}
     </div>
   );
 }

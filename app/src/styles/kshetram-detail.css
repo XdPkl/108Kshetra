@@ -1,0 +1,285 @@
+/*
+ * KshetramDetailPage stylesheet (PO round 16, triplicane mock) — ported
+ * from the approved standalone design reference and scoped under `.kxd`
+ * so the paper/rust palette, the Source Serif 4 / DM Sans / Noto Serif
+ * Tamil stack and the flat ruled sections stay page-local. Selector
+ * specificity (0,1,1)+ deliberately outranks the unlayered element rules
+ * in base.css (h1/h2/a) without needing !important.
+ */
+.kxd {
+  --paper: #fffaf0;
+  --ink: #333942;
+  --rust: #922e0d;
+  --accent: #ae3712;
+  --gold: #a77529;
+  --line: #e8cf9f;
+  --tint: #fbf0dc;
+  --muted: #74716b;
+  --serif: 'Source Serif 4', Georgia, serif;
+  --sans: 'DM Sans', 'Mukta Malar', Arial, sans-serif;
+  --tamil: 'Noto Serif Tamil', 'Mukta Malar', serif;
+  background: var(--paper);
+  color: var(--ink);
+  font: 18px/1.65 var(--sans);
+}
+.kxd a { color: var(--rust); text-underline-offset: 4px; }
+.kxd button, .kxd a { -webkit-tap-highlight-color: transparent; }
+.kxd button { font: inherit; cursor: pointer; color: inherit; }
+.kxd button:disabled { cursor: default; }
+.kxd button:focus-visible, .kxd a:focus-visible { outline: 3px solid var(--gold); outline-offset: 5px; }
+.kxd h1, .kxd h2, .kxd h3, .kxd h4 {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--rust);
+  line-height: 1.15;
+  margin: 0 0 18px;
+}
+.kxd h1 { font-size: 72px; letter-spacing: -1.7px; }
+.kxd h2 { font-size: 44px; letter-spacing: -0.8px; }
+.kxd h3 { font-size: 28px; }
+.kxd h4 { font-size: 23px; }
+.kxd p { margin: 0 0 20px; }
+.kxd figure { margin: 0; }
+.kxd .muted, .kxd small { color: var(--muted); }
+.kxd small { font-size: 13px; }
+.kxd .eyebrow { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
+
+/* Skip link */
+.kxd .skip { position: absolute; left: -9999px; }
+.kxd .skip:focus { left: 20px; top: 20px; background: white; padding: 10px; z-index: 100; }
+
+/* Breadcrumb */
+.kxd .breadcrumb { font-size: 13px; padding: 25px 0 30px; display: flex; gap: 14px; flex-wrap: wrap; }
+.kxd .breadcrumb a { text-decoration: none; }
+
+/* Split hero */
+.kxd .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: center; padding: 10px 0 40px; }
+.kxd .hero .eyebrow { margin-bottom: 16px; }
+.kxd .tamil { font-weight: 600; font-family: var(--tamil); color: var(--gold); font-size: 36px; line-height: 1.5; margin: 18px 0 12px; }
+.kxd .temple-name { font-family: var(--serif); font-size: 29px; color: var(--rust); margin: 0 0 12px; }
+.kxd .place { font-size: 14px; display: flex; align-items: center; gap: 6px; }
+.kxd .place svg { color: var(--accent); }
+.kxd .hero-summary { margin: 22px 0; }
+.kxd .hero-photo-frame {
+  width: 100%;
+  aspect-ratio: 1.5;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: var(--tint);
+  border: 1px solid var(--line);
+}
+.kxd .hero-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.kxd .hero-photo-frame .hero-photo { position: absolute; inset: 0; z-index: 10; }
+.kxd .photo-caption { text-align: right; font-size: 12px; color: var(--muted); margin-top: 9px; }
+
+/* Actions */
+.kxd .actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.kxd .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 10px 19px;
+  border-radius: 30px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--rust);
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1.3;
+}
+.kxd .btn:hover { background: var(--tint); }
+.kxd .btn.primary { background: var(--accent); color: white; }
+.kxd .btn.primary:hover { background: var(--rust); }
+.kxd .btn[aria-pressed='true'] { background: var(--rust); color: white; }
+.kxd .text-btn { border: 0; background: none; padding: 9px; color: var(--rust); font-size: 14px; display: inline-flex; align-items: center; gap: 5px; }
+.kxd .text-btn:hover { text-decoration: underline; }
+.kxd .text-btn:disabled { opacity: 0.6; }
+
+/* Tabs */
+.kxd .tabs { display: flex; gap: 28px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: thin; }
+.kxd .tab {
+  white-space: nowrap;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: var(--ink);
+  padding: 15px 10px;
+  font-size: 18px;
+}
+.kxd .tab[aria-selected='true'] { border-color: var(--rust); color: var(--rust); font-weight: 700; }
+.kxd .tab:hover { color: var(--rust); }
+.kxd .panel { padding: 45px 0 62px; min-height: 560px; }
+
+/* Overview */
+.kxd .overview-grid { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 50px; align-items: start; }
+.kxd .overview-grid > * { min-width: 0; }
+.kxd .intro { max-width: 65ch; }
+.kxd .deity-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0; }
+.kxd .deity-pair > div + div { border-left: 1px solid var(--line); padding-left: 30px; }
+.kxd .label { font-size: 14px; color: var(--gold); margin-bottom: 5px; }
+.kxd .value { font: 24px/1.4 var(--serif); }
+.kxd .visit-card { background: var(--tint); border: 1px solid var(--line); border-radius: 14px; padding: 28px; }
+.kxd .visit-card h3 { font-size: 31px; }
+.kxd .fact-row { display: grid; grid-template-columns: 30% 1fr; gap: 24px; padding: 12px 8px; border-bottom: 1px solid var(--line); }
+.kxd .fact-row dt { color: var(--gold); }
+.kxd .fact-row dd { margin: 0; }
+.kxd .facts { margin: 0; }
+.kxd .times { display: flex; justify-content: space-between; gap: 20px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+.kxd .visit-card .btn { width: 100%; margin: 12px 0; }
+.kxd .visit-card small { display: block; margin: 17px 0 4px; }
+.kxd .section-rule { border-top: 1px solid var(--line); padding-top: 30px; margin-top: 32px; }
+
+/* Deities */
+.kxd .two-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 46px; }
+.kxd .two-columns > div + div { border-left: 1px solid var(--line); padding-left: 46px; }
+.kxd .deity-name { font: 600 26px var(--serif); margin-bottom: 10px; color: var(--ink); }
+.kxd .tamil-small { font: 18px/1.9 var(--tamil); }
+.kxd .consort { border-top: 1px solid var(--line); margin-top: 25px; padding-top: 20px; }
+.kxd .deity-photo { display: block; width: 100%; padding: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--tint); margin-bottom: 14px; }
+.kxd .deity-photo img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+.kxd .deity-thumbs { display: flex; gap: 8px; margin-bottom: 14px; }
+.kxd .deity-thumbs button { flex: 1; padding: 0; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; background: var(--tint); }
+.kxd .deity-thumbs img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+
+/* History */
+.kxd .article-grid { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 48px; }
+.kxd .article-grid article { max-width: 68ch; }
+.kxd .article-grid aside { border-left: 1px solid var(--line); padding-left: 32px; }
+.kxd .story { border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 22px; }
+.kxd .story h3 { margin-bottom: 10px; }
+.kxd .prathyaksham { padding: 16px 0; border-bottom: 1px solid var(--line); font: 23px var(--serif); color: var(--rust); }
+.kxd blockquote { margin: 26px 0 0; padding: 25px; background: var(--tint); font: italic 25px/1.45 var(--serif); color: var(--rust); border-radius: 10px; }
+.kxd .timeline { border-left: 2px solid var(--line); padding-left: 22px; }
+.kxd .timeline p { margin-bottom: 18px; }
+.kxd .resource-row { display: flex; justify-content: space-between; gap: 24px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+
+/* Mangalasasanam */
+.kxd .azhwar-counts { display: flex; gap: 15px; flex-wrap: wrap; margin: 25px 0; }
+.kxd .pill { border: 1px solid var(--line); border-radius: 30px; padding: 6px 18px; text-decoration: none; font-size: 14px; color: var(--rust); }
+.kxd .pill:hover { background: var(--tint); }
+.kxd .verse { border: 1px solid var(--line); background: var(--tint); border-radius: 12px; text-align: center; padding: 32px 38px; margin: 22px 0; }
+.kxd .verse h3 { font-size: 24px; }
+.kxd .verse .tamil-verse { font: 22px/2 var(--tamil); color: var(--rust); margin: 22px 0; }
+.kxd .verse .verse-meaning { max-width: 62ch; margin: 0 auto 20px; font-size: 16px; color: var(--ink); }
+.kxd .transliteration { font: italic 20px/1.7 var(--serif); padding-top: 18px; border-top: 1px solid var(--line); }
+.kxd .glossary { width: 100%; border-collapse: collapse; margin: 20px 0 30px; }
+.kxd .glossary td { border-bottom: 1px solid var(--line); padding: 12px 10px; text-align: left; vertical-align: top; }
+.kxd .glossary td:first-child { font-family: var(--serif); width: 36%; border-right: 1px solid var(--line); }
+.kxd .explore { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.kxd .explore a { font: 22px var(--serif); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+.kxd .explore a:hover { text-decoration: underline; }
+
+/* Visit info */
+.kxd .timing-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 22px 0; }
+.kxd .timing-pair .hour { font: 34px var(--serif); display: block; }
+.kxd .timing-pair > div + div { border-left: 1px solid var(--line); padding-left: 24px; }
+.kxd .timing-pair .label { display: flex; align-items: center; gap: 6px; }
+.kxd .note { font-size: 14px; color: var(--muted); }
+
+/* Location */
+.kxd .location-grid { display: grid; grid-template-columns: minmax(0, 2fr) 1fr; gap: 34px; margin: 25px 0 35px; }
+.kxd .kxd-map { width: 100%; height: 430px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--tint); position: relative; z-index: 0; }
+.kxd .kxd-map .mini-map { height: 100%; border: 0; border-radius: 0; }
+.kxd .location-details { border-left: 1px solid var(--line); padding: 10px 0 0 30px; }
+.kxd .location-details .btn { margin: 20px 0 12px; }
+.kxd .nearby { list-style: none; padding: 0; margin: 0; }
+.kxd .nearby li { border-bottom: 1px solid var(--line); }
+.kxd .nearby a { display: flex; justify-content: space-between; gap: 24px; padding: 15px 10px; text-decoration: none; }
+.kxd .nearby a:hover { background: var(--tint); }
+.kxd .nearby span { color: var(--muted); display: inline-flex; align-items: center; gap: 4px; }
+.kxd .kxd-nearby { margin-top: 25px; }
+.kxd .kxd-nearby h3 { font-size: 28px; margin-bottom: 12px; }
+.kxd .kxd-nearby small { font-weight: 400; }
+
+/* Media */
+.kxd .markers { counter-reset: marker; }
+.kxd .marker { position: relative; border-bottom: 1px solid var(--line); padding: 15px 0 15px 52px; counter-increment: marker; }
+.kxd .marker::before { content: counter(marker); position: absolute; left: 0; top: 17px; font: 24px var(--serif); color: var(--gold); }
+.kxd .marker h3 { font-size: 25px; margin-bottom: 10px; }
+.kxd .resource { padding: 20px 0; border-bottom: 1px solid var(--line); }
+.kxd .resource h3 { font-size: 26px; display: flex; align-items: center; gap: 9px; }
+.kxd .resource p { margin-bottom: 12px; }
+
+/* Status toast */
+.kxd .status {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--rust);
+  color: white;
+  padding: 12px 23px;
+  border-radius: 8px;
+  z-index: 60;
+  box-shadow: 0 4px 20px #0002;
+  max-width: 90vw;
+}
+.kxd .status:empty { display: none; }
+
+/* Celestial note */
+.kxd .celestial-note {
+  background: var(--tint);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 15px;
+  color: var(--ink);
+  margin: 0 0 24px;
+}
+
+/* Legacy detail hooks still used inside the page (no-data note) */
+.kxd .detail__nodata { color: var(--muted); font-size: 15px; font-style: italic; }
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .kxd h1 { font-size: 52px; }
+  .kxd .hero { gap: 32px; }
+  .kxd .tamil { font-size: 29px; }
+  .kxd .overview-grid { grid-template-columns: minmax(0, 1fr) 300px; gap: 30px; }
+  .kxd .tabs { gap: 15px; }
+  .kxd .article-grid { grid-template-columns: minmax(0, 1fr) 250px; gap: 30px; }
+}
+@media (max-width: 800px) {
+  .kxd h1 { font-size: 46px; }
+  .kxd h2 { font-size: 33px; }
+  .kxd .tamil { font-size: 29px; }
+  .kxd .temple-name { font-size: 26px; }
+  .kxd .hero { grid-template-columns: 1fr; gap: 25px; padding-bottom: 24px; }
+  .kxd .hero figure { grid-row: 2; }
+  .kxd .hero-photo-frame { max-height: 360px; }
+  .kxd .tabs { gap: 12px; }
+  .kxd .tab { padding: 14px 8px; }
+  .kxd .panel { padding-top: 30px; min-height: 0; }
+  .kxd .overview-grid, .kxd .article-grid, .kxd .location-grid, .kxd .two-columns, .kxd .timing-pair { grid-template-columns: 1fr; }
+  .kxd .two-columns > div + div, .kxd .location-details { border-left: 0; border-top: 1px solid var(--line); padding: 28px 0 0; }
+  .kxd .deity-pair { grid-template-columns: 1fr; }
+  .kxd .deity-pair > div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 20px; }
+  .kxd .article-grid aside { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 28px; }
+  .kxd .timing-pair > div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 20px; }
+  .kxd .verse { padding: 25px 18px; }
+  .kxd .verse .tamil-verse { font-size: 19px; }
+  .kxd .glossary td:first-child { width: 42%; }
+  .kxd .fact-row { grid-template-columns: 35% 1fr; gap: 15px; }
+  .kxd .kxd-map { height: 330px; }
+  .kxd .resource-row { flex-wrap: wrap; }
+  .kxd .breadcrumb { padding: 20px 0; }
+}
+
+/* Motion */
+@media (prefers-reduced-motion: no-preference) {
+  .kxd button, .kxd a { transition: background 0.15s, color 0.15s; }
+}
+
+/* Print */
+@media print {
+  .kxd { background: white; font-size: 11pt; }
+  .kxd .actions, .kxd .tabs, .kxd .status, .kxd .kxd-map, .kxd .skip, .kxd .btn { display: none; }
+  .kxd .panel { min-height: 0; padding: 25px 0; }
+  .kxd .hero { padding: 0; gap: 20px; }
+  .kxd h1 { font-size: 32pt; }
+  .kxd .hero-photo-frame { max-height: 200px; }
+  .kxd .overview-grid, .kxd .article-grid { grid-template-columns: 1fr; }
+  .kxd a { color: inherit; }
+}

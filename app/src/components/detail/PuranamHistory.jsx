@@ -1,69 +1,113 @@
 /**
- * PuranamHistory — Sthala Puranam with history subsections (FR-83) in the
- * zip-parity card (UXD v3.0 Gate 3): origin legend & miracles, prathyaksham,
- * timeline & epigraphy, invasions & preservation, cultural milestones,
- * literature references; Significance as a gold-bar callout. Falls back to
- * the legacy V2 puranam paragraph.
+ * PuranamHistory — Sthala Puranam & history (FR-83) in the round-16 mock's
+ * article grid: story blocks (dossier legend items carry "Title — body"
+ * strings, split for the mock's titled-story layout), "History &
+ * inscriptions" timeline, Invasions/Cultural milestones subsections,
+ * "Literary references" rows; aside with the Prathyaksham list (split from
+ * the dossier's comma string) and the significance blockquote. Falls back
+ * to the legacy V2 puranam paragraph.
  * @param {object} props
  * @param {Kshetram & object} props.kshetram - enriched record
  */
 import NotDocumented from './NotDocumented.jsx';
-import ZipSection from './ZipSection.jsx';
 
 const SUBSECTIONS = [
-  ['timeline', 'Historical timeline & epigraphy'],
   ['invasions', 'Invasions & preservation'],
   ['milestones', 'Cultural milestones'],
 ];
+
+/** Splits "Title — body" legend strings; returns {title, body}. */
+function parseStory(item) {
+  if (typeof item !== 'string') return { body: item };
+  const dash = item.indexOf(' — ');
+  if (dash > 0 && dash < 90) {
+    return { title: item.slice(0, dash), body: item.slice(dash + 3) };
+  }
+  return { body: item };
+}
 
 export default function PuranamHistory({ kshetram }) {
   const p = kshetram.puranam;
   const legacyText = !p || Array.isArray(p) || typeof p !== 'object' ? kshetram.puranam : null;
   const legend = Array.isArray(p?.legend) ? p.legend : legacyText ? [legacyText] : null;
   const literature = Array.isArray(p?.literature) ? p.literature : null;
+  const prathyakshamList = typeof p?.prathyaksham === 'string'
+    ? p.prathyaksham.split(',').map((s) => s.trim()).filter(Boolean)
+    : null;
 
-  if (!legend && !literature && !p?.prathyaksham && !SUBSECTIONS.some(([key]) => p?.[key])) {
+  if (!legend && !literature && !p?.prathyaksham && !p?.timeline && !SUBSECTIONS.some(([key]) => p?.[key])) {
     return (
-      <ZipSection id="puranam" title="Sthala Puranam & History">
+      <section id="puranam">
+        <h2>Sthala Puranam &amp; history</h2>
         <NotDocumented />
-      </ZipSection>
+      </section>
+    );
+  }
+
+  const hasAside = Boolean(prathyakshamList?.length || kshetram.significance);
+  const article = (
+    <article>
+      <h2>Sthala Puranam &amp; history</h2>
+      {legend ? (
+        legend.map((item) => {
+          const { title, body } = parseStory(item);
+          return (
+            <div className="story" key={String(item).slice(0, 24)}>
+              {title ? <h3>{title}</h3> : null}
+              <p>{body}</p>
+            </div>
+          );
+        })
+      ) : null}
+      {p?.timeline ? (
+        <>
+          <h3>History &amp; inscriptions</h3>
+          <div className="timeline">
+            <p>{p.timeline}</p>
+          </div>
+        </>
+      ) : null}
+      {SUBSECTIONS.map(([key, label]) => (p?.[key] ? (
+        <div key={key}>
+          <h3>{label}</h3>
+          <p>{p[key]}</p>
+        </div>
+      ) : null))}
+      {literature ? (
+        <>
+          <h3>Literary references</h3>
+          {literature.map((item) => (
+            <div className="resource-row" key={String(item).slice(0, 24)}>
+              <span>{item}</span>
+            </div>
+          ))}
+        </>
+      ) : null}
+    </article>
+  );
+
+  if (!hasAside) {
+    return (
+      <section id="puranam">
+        {article}
+      </section>
     );
   }
 
   return (
-    <ZipSection id="puranam" title="Sthala Puranam & History">
-      {legend ? (
-        <article className="space-y-3 text-sm leading-relaxed text-[#332417]">
-          <h3 className="font-display text-xl font-semibold text-[#7A2E00]">Origin legend &amp; miracles</h3>
-          {legend.map((para) => <p key={para.slice(0, 24)}>{para}</p>)}
-        </article>
-      ) : null}
-      {p?.prathyaksham ? (
-        <article className="mt-5 space-y-1.5 text-sm leading-relaxed text-[#332417]">
-          <h3 className="font-display text-xl font-semibold text-[#7A2E00]">Prathyaksham</h3>
-          <p>{p.prathyaksham}</p>
-        </article>
-      ) : null}
-      {kshetram.significance ? (
-        <div className="mt-5 p-5 rounded-r-xl border border-[#C99A2E]/40 border-l-4 border-l-[#96731F] bg-[#FAF2E3]">
-          <h3 className="text-[0.7rem] uppercase font-bold tracking-wider text-[#96731F]">Significance</h3>
-          <p className="text-sm mt-1 leading-relaxed text-[#332417]">{kshetram.significance}</p>
-        </div>
-      ) : null}
-      {SUBSECTIONS.map(([key, label]) => (p?.[key] ? (
-        <article key={key} className="mt-5 space-y-1.5 text-sm leading-relaxed text-[#332417]">
-          <h3 className="font-display text-xl font-semibold text-[#7A2E00]">{label}</h3>
-          <p>{p[key]}</p>
-        </article>
-      ) : null))}
-      {literature ? (
-        <article className="mt-5 text-sm leading-relaxed text-[#332417]">
-          <h3 className="font-display text-xl font-semibold text-[#7A2E00]">Literature references</h3>
-          <ul className="mt-2 space-y-1 list-disc pl-5">
-            {literature.map((item) => <li key={item.slice(0, 24)}>{item}</li>)}
-          </ul>
-        </article>
-      ) : null}
-    </ZipSection>
+    <div id="puranam" className="article-grid">
+      {article}
+      <aside>
+        {prathyakshamList?.length ? (
+          <>
+            <h3>Prathyaksham</h3>
+            {prathyakshamList.map((name) => (
+              <div className="prathyaksham" key={name}>{name}</div>
+            ))}
+          </>
+        ) : null}
+        {kshetram.significance ? <blockquote>{kshetram.significance}</blockquote> : null}
+      </aside>
+    </div>
   );
 }

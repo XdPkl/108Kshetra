@@ -10,6 +10,7 @@ import './styles/base.css';
 import './styles/layout.css';
 import './styles/v3.css';
 import './styles/zip.css';
+import './styles/kshetram-detail.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

@@ -242,3 +242,24 @@ Quality gates: TC-QA-01 Pass (0 errors; 5 accepted warnings) · TC-QA-02 Pass
 E2E **19/19**. Execution recorded in TER v2.16.
 
 *End of Addendum — TCS-108K-008 v1.9*
+
+---
+
+## Version 1.10 — Kshetram Detail Restyle to the PO Mock (2026-10-01)
+
+PO round-16 changes to `/kshetram/:id` (TER v2.24). Data contracts
+unchanged; the tab/heading contract moved in lockstep:
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-DTL/TC-08 | Section headings | "Basic Shrine Profile" → **"Shrine at a glance"**; Visit-info panel h2 → **"Plan your darshan"**; Location panel h2 → **"Find the temple"**; "Deities & Consorts"/"Sthala Puranam & History"/"Visuals & Media" → sentence case per mock |
+| UT-DTL | Tab deep links | The seven-tab switcher now syncs to the URL hash (`#location` etc.); unknown/celestial-forbidden hashes fall back to Overview |
+| UT-DTL | Mangalasasanam | Azhwars-Who-Glorified chips → **"Explore the Azhwars"** links; per-Azhwar chips → count pills ("Name · N"); verse titles "Azhwar — Work" → "Azhwar · Work"; word-by-word meanings render as a glossary table |
+| UT-DTL | Yatra hooks | Trip/visited toggles announce via a page status toast; hero buttons use the mock's pill styling (`variant="kxd"`) |
+| TC-16 | Tab walk | Asserts the round-16 headings; "not yet documented yet." fallbacks unchanged (≥3) |
+
+Quality gates: TC-QA-01 Pass (0 errors; 4 accepted warnings) · TC-QA-02 Pass
+(**223/223 tests, 21 suites**; 89.96/81.26/85.44/91.43) · TC-QA-03 Pass ·
+E2E **19/19**. Execution recorded in TER v2.24.
+
+*End of Addendum — TCS-108K-008 v1.10*

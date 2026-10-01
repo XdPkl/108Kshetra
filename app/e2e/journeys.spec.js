@@ -53,18 +53,18 @@ test.describe('Browse (TC-04..TC-07)', () => {
 });
 
 test.describe('Kshetram detail (TC-08, TC-09, V2)', () => {
-  test('shows the mock hero, sidebar and every section behind its tab (round 15)', async ({ page }) => {
+  test('shows the mock hero, sidebar and every section behind its tab (round 16)', async ({ page }) => {
     await page.goto('kshetram/srirangam');
     await expect(page.getByRole('heading', { name: /srirangam/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /plan your visit/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /about the temple/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /basic shrine profile/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /shrine at a glance/i })).toBeVisible();
     const tabs = [
       ['Deities', /deities & consorts/i],
       ['History', /sthala puranam/i],
       ['Mangalasasanam', /^mangalasasanam$/i],
-      ['Visit info', /visit info/i],
-      ['Location', /^location$/i],
+      ['Visit info', /plan your darshan/i],
+      ['Location', /find the temple/i],
       ['Media', /visuals & media/i],
     ];
     for (const [label, heading] of tabs) {

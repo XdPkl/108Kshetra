@@ -1,99 +1,154 @@
 /**
- * VisitInfoSection — pilgrim information (FR-83) in the zip-parity card
- * (UXD v3.0 Gate 3): temple timings plus the Festivals & Utsavams, How to
- * Reach, Stay & Darshan Tips and References blocks as gold-bordered tiles.
- * Every block falls back to the documented "not yet documented" note when
- * data is absent.
+ * VisitInfoSection — pilgrim information (FR-83) in the round-16 mock's
+ * layout: "Plan your darshan" (big serif timing hours, festival highlight,
+ * getting-here text, directions button), a "Quick facts" tinted card and a
+ * "Further visit details" fact sheet whose blocks fall back to the
+ * documented "not yet documented" note when data is absent.
  * @param {object} props
  * @param {Kshetram & object} props.kshetram - enriched record
  */
+import { Clock } from 'lucide-react';
+import { Navigation } from 'lucide-react';
+import { MAPS_URL_TEMPLATE } from '../../data/config.js';
 import NotDocumented from './NotDocumented.jsx';
-import ZipSection from './ZipSection.jsx';
-
-const tileClass = 'p-5 bg-[#FAF2E3] rounded-xl border border-[#C99A2E]/35';
 
 export default function VisitInfoSection({ kshetram }) {
   const { timings, festivals, access, tips, references } = kshetram;
+  const p = kshetram.profile ?? {};
+  const directionsHref = kshetram.mapQuery
+    ? `${MAPS_URL_TEMPLATE}${encodeURIComponent(`directions to ${kshetram.mapQuery}`)}`
+    : null;
+
   return (
-    <ZipSection id="visit" title="Visit Info">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className={tileClass}>
-          <h3 className="font-display text-xl font-semibold text-[#7A2E00]">Temple Timings</h3>
+    <section id="visit">
+      <div className="overview-grid">
+        <div>
+          <h2>Plan your darshan</h2>
+          <p>
+            Essential visitor information for {kshetram.temple || kshetram.name}.
+          </p>
+
+          <h3 className="section-rule">Temple timings</h3>
           {timings ? (
             <>
-              <p className="text-sm font-semibold mt-2 text-[#332417]">
-                🕉 Morning {timings.morning[0]} – {timings.morning[1]}
-                {timings.evening ? ` · Evening ${timings.evening[0]} – ${timings.evening[1]}` : ''}
+              <div className="timing-pair">
+                <div>
+                  <div className="label">
+                    <Clock className="h-4 w-4" aria-hidden="true" />
+                    Morning
+                  </div>
+                  <span className="hour">{timings.morning[0]} – {timings.morning[1]}</span>
+                </div>
+                {timings.evening ? (
+                  <div>
+                    <div className="label">
+                      <Clock className="h-4 w-4" aria-hidden="true" />
+                      Evening
+                    </div>
+                    <span className="hour">{timings.evening[0]} – {timings.evening[1]}</span>
+                  </div>
+                ) : null}
+              </div>
+              <p className="note">
+                <em>Indicative timings — please confirm with the temple office.</em>
               </p>
-              {timings.notes ? <p className="text-xs text-[#66523D] mt-1">{timings.notes}</p> : null}
-              <p className="text-xs text-[#66523D] italic mt-2">Indicative timings — please confirm with the temple office.</p>
             </>
           ) : (
             <NotDocumented />
           )}
+
+          {timings?.notes ? (
+            <>
+              <h3 className="section-rule">Festival highlight</h3>
+              <p className="value">{timings.notes}</p>
+            </>
+          ) : null}
+
+          <h3 className="section-rule">Getting here</h3>
+          <p>{p.location ?? `${kshetram.place} · ${kshetram.state}`}</p>
+          {directionsHref ? (
+            <a
+              className="btn primary directions"
+              href={directionsHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Navigation className="h-4 w-4" aria-hidden="true" />
+              Get directions
+            </a>
+          ) : null}
         </div>
 
-        <div className={tileClass}>
-          <h3 className="font-display text-xl font-semibold text-[#7A2E00]">Festivals &amp; Utsavams</h3>
-          {Array.isArray(festivals) && festivals.length > 0 ? (
-            <ul className="mt-2.5 space-y-1 text-sm text-[#332417] list-disc pl-5">
-              {festivals.map((f) => (
-                <li key={f.name}>{f.name}{f.month ? ` — ${f.month}` : ''}</li>
-              ))}
-            </ul>
-          ) : <div className="mt-2"><NotDocumented /></div>}
-        </div>
-
-        <div className={tileClass}>
-          <h3 className="font-display text-xl font-semibold text-[#7A2E00]">How to Reach</h3>
-          {access ? (
-            <dl className="text-sm mt-2 space-y-1.5 text-[#332417]">
-              {access.town ? (
-                <div className="flex">
-                  <dt className="w-20 shrink-0 text-xs text-[#66523D] uppercase tracking-wider pt-0.5">Town</dt>
-                  <dd className="font-medium">{access.town}</dd>
-                </div>
-              ) : null}
-              {access.rail ? (
-                <div className="flex">
-                  <dt className="w-20 shrink-0 text-xs text-[#66523D] uppercase tracking-wider pt-0.5">Rail</dt>
-                  <dd className="font-medium">{access.rail}</dd>
-                </div>
-              ) : null}
-              {access.airport ? (
-                <div className="flex">
-                  <dt className="w-20 shrink-0 text-xs text-[#66523D] uppercase tracking-wider pt-0.5">Airport</dt>
-                  <dd className="font-medium">{access.airport}</dd>
-                </div>
-              ) : null}
-              {access.road ? (
-                <div className="flex">
-                  <dt className="w-20 shrink-0 text-xs text-[#66523D] uppercase tracking-wider pt-0.5">Road</dt>
-                  <dd className="font-medium">{access.road}</dd>
-                </div>
-              ) : null}
-            </dl>
-          ) : <div className="mt-2"><NotDocumented /></div>}
-        </div>
-
-        <div className={tileClass}>
-          <h3 className="font-display text-xl font-semibold text-[#7A2E00]">Stay &amp; Darshan Tips</h3>
-          {Array.isArray(tips) && tips.length > 0 ? (
-            <ul className="mt-2.5 space-y-1 text-sm text-[#332417] list-disc pl-5">
-              {tips.map((tip) => <li key={tip.slice(0, 24)}>{tip}</li>)}
-            </ul>
-          ) : <div className="mt-2"><NotDocumented /></div>}
-        </div>
-
-        <div className={`${tileClass} md:col-span-2`}>
-          <h3 className="font-display text-xl font-semibold text-[#7A2E00]">References</h3>
-          {Array.isArray(references) && references.length > 0 ? (
-            <ul className="mt-2.5 space-y-1 text-sm text-[#332417] list-disc pl-5">
-              {references.map((ref) => <li key={ref.slice(0, 24)}>{ref}</li>)}
-            </ul>
-          ) : <div className="mt-2"><NotDocumented /></div>}
-        </div>
+        <aside className="visit-card">
+          <h3>Quick facts</h3>
+          <div className="times">
+            <span>Divya Desam</span>
+            <strong>{kshetram.serial ?? '—'}</strong>
+          </div>
+          <div className="times">
+            <span>Region</span>
+            <span>{kshetram.region}</span>
+          </div>
+          <div className="times">
+            <span>Location</span>
+            <span>{kshetram.place}, {kshetram.state}</span>
+          </div>
+        </aside>
       </div>
-    </ZipSection>
+
+      <div className="section-rule">
+        <h3>Further visit details</h3>
+        <dl className="facts">
+          <div className="fact-row">
+            <dt>Festivals &amp; utsavams</dt>
+            <dd>
+              {Array.isArray(festivals) && festivals.length > 0 ? (
+                <ul className="list-disc pl-5">
+                  {festivals.map((f) => (
+                    <li key={f.name}>{f.name}{f.month ? ` — ${f.month}` : ''}</li>
+                  ))}
+                </ul>
+              ) : <NotDocumented />}
+            </dd>
+          </div>
+          <div className="fact-row">
+            <dt>How to reach</dt>
+            <dd>
+              {access ? (
+                <dl className="space-y-1.5">
+                  {['town', 'rail', 'airport', 'road'].map((key) => (access[key] ? (
+                    <div className="flex" key={key}>
+                      <dt className="w-20 shrink-0 text-xs uppercase tracking-wider pt-0.5 text-[#74716B]">{key}</dt>
+                      <dd className="font-medium">{access[key]}</dd>
+                    </div>
+                  ) : null))}
+                </dl>
+              ) : <NotDocumented />}
+            </dd>
+          </div>
+          <div className="fact-row">
+            <dt>Stay &amp; darshan tips</dt>
+            <dd>
+              {Array.isArray(tips) && tips.length > 0 ? (
+                <ul className="list-disc pl-5">
+                  {tips.map((tip) => <li key={tip.slice(0, 24)}>{tip}</li>)}
+                </ul>
+              ) : <NotDocumented />}
+            </dd>
+          </div>
+          <div className="fact-row">
+            <dt>References</dt>
+            <dd>
+              {Array.isArray(references) && references.length > 0 ? (
+                <ul className="list-disc pl-5">
+                  {references.map((ref) => <li key={ref.slice(0, 24)}>{ref}</li>)}
+                </ul>
+              ) : <NotDocumented />}
+            </dd>
+          </div>
+        </dl>
+        <p className="note">Your visits and trip list are saved in this browser only.</p>
+      </div>
+    </section>
   );
 }

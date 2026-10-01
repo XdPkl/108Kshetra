@@ -24,7 +24,7 @@ const thiruvekka = getEnrichedKshetramById('thiruvekka'); // legacy V2 data only
 describe('ShrineProfile (UT-DTL-06, FR-83)', () => {
   it('renders the full profile grid for templated shrines', () => {
     render(<ShrineProfile kshetram={srirangam} />);
-    expect(screen.getByText('Divya Desam #1')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /shrine at a glance/i })).toBeInTheDocument();
     expect(screen.getByText(/Sriranga Vimanam/)).toBeInTheDocument();
     expect(screen.getByText(/Chandra Pushkarini/)).toBeInTheDocument();
     expect(screen.getByText(/Punnai tree/)).toBeInTheDocument();
@@ -69,26 +69,26 @@ describe('DeityBreakdown (UT-DTL-06, FR-83/85)', () => {
 describe('PuranamHistory (FR-83)', () => {
   it('renders the templated subsections and literature list', () => {
     render(<PuranamHistory kshetram={srirangam} />);
-    expect(screen.getByRole('heading', { name: /origin legend & miracles/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /sthala puranam & history/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /invasions & preservation/i })).toBeInTheDocument();
     expect(screen.getByText(/Pillai Lokacharya/i)).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /literature references/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /literary references/i })).toBeInTheDocument();
     expect(screen.getByText(/Koyil Olugu/)).toBeInTheDocument();
   });
 
-  it('falls back to the legacy puranam paragraph and significance', () => {
+  it('falls back to the legacy puranam paragraph and the significance blockquote', () => {
     render(<PuranamHistory kshetram={thiruvekka} />);
     expect(screen.getAllByText(/Saraswati/i).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getByRole('heading', { name: /significance/i })).toBeInTheDocument();
+    expect(screen.getByText(thiruvekka.significance)).toBeInTheDocument();
   });
 });
 
 describe('MangalasasanamSection (FR-83/64/65)', () => {
-  it('shows the summary band with per-Azhwar count chips and excerpt cards', () => {
+  it('shows the summary line with per-Azhwar count pills and verse cards', () => {
     render(<MemoryRouter><MangalasasanamSection kshetram={srirangam} /></MemoryRouter>);
     expect(screen.getByText(/247 pasurams/i)).toBeInTheDocument();
     expect(screen.getByText(/11 Azhwars:/i)).toBeInTheDocument();
-    expect(screen.getByText(/Thirumangai Azhwar 73/i)).toBeInTheDocument();
+    expect(screen.getByText(/Thirumangai Azhwar · 73/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /Thirumaalai/i })).toBeInTheDocument();
     expect(screen.getByText(/Bhagavat-Anubhava/i)).toBeInTheDocument();
   });
@@ -143,13 +143,21 @@ describe('MangalasasanamSection branches', () => {
     expect(screen.getByText(/1 Azhwars:/i)).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: /listen/i })).not.toBeInTheDocument();
   });
+
+  it('renders a bare excerpt without tamil, meaning, glossary or commentary', () => {
+    const bare = { mangalasasanam: { excerpts: [{ azhwarId: 'pey' }] } };
+    render(<MemoryRouter><MangalasasanamSection kshetram={bare} /></MemoryRouter>);
+    expect(screen.getByText(/representative pasuram/i)).toBeInTheDocument();
+    expect(screen.queryByRole('table')).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /commentary/i })).not.toBeInTheDocument();
+  });
 });
 
 describe('VisualsMedia (FR-83)', () => {
-  it('renders visual markers and video-search chips safely', () => {
+  it('renders visual markers and video-search cards safely', () => {
     render(<VisualsMedia kshetram={srirangam} />);
     expect(screen.getByText(/236-foot/i)).toBeInTheDocument();
-    const chip = screen.getByRole('link', { name: /Velukkudi Krishnan/i });
+    const chip = screen.getAllByRole('link', { name: /search videos/i })[0];
     expect(chip).toHaveAttribute('href', expect.stringContaining('youtube.com'));
     expect(chip).toHaveAttribute('rel', 'noopener noreferrer');
   });
