@@ -155,13 +155,15 @@ test.describe('V3 yatra toolkit', () => {
     // PO round 13 snap: each row carries the overlay link AND a Read story link.
     await page.locator('a[href$="/acharya/manavala-mamunigal"]').first().click();
     await expect(page).toHaveURL(/acharya\/manavala-mamunigal$/);
-    await expect(page.getByRole('heading', { name: /life history & miracles/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /life & miracles/i })).toBeVisible();
+    // Round 14 mock: the full chronology collapses behind an expander — open it first.
+    await page.getByText('Read the full chronology').click();
     await expect(page.getByText(/Eedu 36000 Padi/i).first()).toBeVisible();
     await expect(page.getByText(/Sreesailesa-dayaapaatram/i)).toBeVisible();
 
     // Dossier-populated acharya renders the full template without pending markers
     await page.goto('acharya/yamunacharya');
-    await expect(page.getByRole('heading', { name: /chronological life timeline/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /chronology of life events/i })).toBeVisible();
     await expect(page.getByText(/Na Dharma Nishto/i).first()).toBeVisible();
     await expect(page.getByText(/\[Content pending — to be provided\]/i)).toHaveCount(0);
   });

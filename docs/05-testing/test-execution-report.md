@@ -1352,3 +1352,65 @@ the columns; odd-count sections end on a single left-column row.
 | Production build | Clean |
 | E2E (Playwright, Chromium) | **19/19 journeys pass** |
 | Visual gate | 3/3 renders pass (desktop full / hero / 390 mobile; no horizontal overflow at 1512 or 390) — `docs/03-design/gate-shots/acharyas-restyle/` |
+
+---
+
+## Version 2.22 — Acharya Detail Recreated to the PO Mock (2026-10-01, PO round 14)
+
+PO request: refresh the Acharya detail page (`/acharya/:id`) to an attached
+mock — UI design refresh, all content and behaviors preserved. The zip cards
+give way to **numbered open sections (01–07) with ruled headings**, a hero
+**fact sheet** (Period / Names & titles / Birthplace / Divine amsam /
+Jayanthi) beside the name block and biography lead, and a sticky **"On this
+page" anchor rail** (numbered 01–07, plain-hash anchors). Section 02 renders
+the `lifeHistory` blocks in data order (red serif sub-headings) with the
+**Chronology of Life Events stepper** (gold numbered circles on a rule,
+`timeline.when` labels) inserted after the first block — the full `when/event`
+pairs sit behind a "Read the full chronology" expander so no dataset text is
+lost; the "Miracles & Historical Events" block parses its "N. Title: text"
+paragraphs into **numbered circle items with bold lead-ins**; SaintLegend
+follows. Section 03 is the mock's ruled **contribution rows** (Works with
+bullets + worksSummary side cell, Sampradaya Preservation, Philosophical
+Theme, Associated Divya Desams pills). Section 04 centers the verse (work
+line, Tamil, transliteration, outlined **LISTEN** pill keeping the
+audio/archive.org href), **Pada & Atham as two side-by-side tables**, and the
+three commentary cards. Sections 05–07: lineage chips (Guru:/Sishyas: labels
+unchanged), iconography **definition table** beside the listening cards
+(same YouTube search links), digital texts, and the numbered sources row.
+
+### Contract notes
+
+- **No data, site-copy or fixture changes.** All dataset fields keep
+  rendering; `amsamAcharyaId` / birthplace `kshetramId` links stay in the
+  fact sheet; empty visuals fall back to `NotDocumented` (as before), all
+  other empty sections keep the visible pending marker (FR-94).
+- Tests updated for renamed headings only: "Chronology of Life Events"
+  (was "Chronological Life Timeline") in UT-ACH-03 ×2 and TC-19; TC-19's
+  "Life History & Miracles" → "Life & Miracles"; TC-19 now opens the
+  chronology expander before asserting "Eedu 36000 Padi" (it lives in a
+  `timeline.event`, now behind the collapsed expander).
+- Long Tamil verse lines get `break-words` — fixed a 390px horizontal
+  overflow caught during this round's mobile check.
+- Shared components untouched (`SaintVerse`/`SaintMedia`/`SectionNav`/
+  `ZipSection` still serve the Azhwar and Kshetram templates); the acharya
+  page is self-contained. Existing icons only (`SaintGlyph`, `LotusIcon`,
+  `ShankaIcon`, lucide-free).
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/pages/AcharyaDetailPage.jsx` | Full rewrite to the numbered-dossier mock layout |
+| `app/src/pages/__tests__/saintPages.test.jsx` | Heading regexes ×2 (chronology) |
+| `app/e2e/yatra.spec.js` | TC-19: heading regexes ×2 + chronology-expander click |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (accepted set) |
+| Unit tests (Vitest) | **216/216 pass (21 suites)** |
+| Coverage | **90.26% statements / 81.83% branches / 85.40% functions / 91.59% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Visual gate | 3/3 renders pass (desktop full / hero / 390 mobile; no horizontal overflow at 1512 or 390) — `docs/03-design/gate-shots/acharya-detail-restyle/` |

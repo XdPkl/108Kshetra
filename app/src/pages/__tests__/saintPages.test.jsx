@@ -148,7 +148,7 @@ describe('AcharyaDetailPage (UT-ACH-03, FR-94)', () => {
   it('renders the Nathamuni dossier with Sanskrit-thanivan verse in Tamil script', () => {
     renderAt('/acharya/nathamuni');
     expect(screen.getByRole('heading', { level: 1, name: /nathamuni/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /chronological life timeline/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /chronology of life events/i })).toBeInTheDocument();
     expect(screen.getByText(/Cuddalore District, Tamil Nadu/i)).toBeInTheDocument();
     expect(screen.getByText(/Re-discovery of Dravida Vedam/i)).toBeInTheDocument();
     expect(screen.getByText(/Theological commentary/i)).toBeInTheDocument();
@@ -161,7 +161,7 @@ describe('AcharyaDetailPage (UT-ACH-03, FR-94)', () => {
   it('renders the dossier-populated Yamunacharya without pending markers (FR-94)', () => {
     renderAt('/acharya/yamunacharya');
     expect(screen.getByRole('heading', { level: 1, name: /yamunacharya/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /chronological life timeline/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /chronology of life events/i })).toBeInTheDocument();
     expect(screen.getAllByText(/Na Dharma Nishto/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText(/Theological commentary/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Nathamuni' })).toHaveAttribute('href', '/acharya/nathamuni');
