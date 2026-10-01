@@ -53,15 +53,25 @@ test.describe('Browse (TC-04..TC-07)', () => {
 });
 
 test.describe('Kshetram detail (TC-08, TC-09, V2)', () => {
-  test('shows all sections with a safe map link', async ({ page }) => {
+  test('shows the mock hero, sidebar and every section behind its tab (round 15)', async ({ page }) => {
     await page.goto('kshetram/srirangam');
     await expect(page.getByRole('heading', { name: /srirangam/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /temple timings/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /deities & consorts/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /^mangalasasanam$/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /sthala puranam/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /nearby divya desams/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /significance/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /plan your visit/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /about the temple/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /basic shrine profile/i })).toBeVisible();
+    const tabs = [
+      ['Deities', /deities & consorts/i],
+      ['History', /sthala puranam/i],
+      ['Mangalasasanam', /^mangalasasanam$/i],
+      ['Visit info', /visit info/i],
+      ['Location', /^location$/i],
+      ['Media', /visuals & media/i],
+    ];
+    for (const [label, heading] of tabs) {
+      await page.getByRole('tab', { name: label }).click();
+      await expect(page.getByRole('heading', { name: heading }).first()).toBeVisible();
+    }
+    await page.getByRole('tab', { name: 'Location' }).click();
     const mapLink = page.getByRole('link', { name: /view on google maps/i });
     await expect(mapLink).toHaveAttribute('target', '_blank');
     await expect(mapLink).toHaveAttribute('rel', /noopener/);
@@ -77,6 +87,7 @@ test.describe('Kshetram detail (TC-08, TC-09, V2)', () => {
 
   test('nearby list links to adjacent desams', async ({ page }) => {
     await page.goto('kshetram/srirangam');
+    await page.getByRole('tab', { name: 'Location' }).click();
     const nearby = page.locator('.nearby__list a');
     expect(await nearby.count()).toBeGreaterThan(0);
   });

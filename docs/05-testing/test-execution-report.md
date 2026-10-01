@@ -1414,3 +1414,72 @@ unchanged), iconography **definition table** beside the listening cards
 | Production build | Clean |
 | E2E (Playwright, Chromium) | **19/19 journeys pass** |
 | Visual gate | 3/3 renders pass (desktop full / hero / 390 mobile; no horizontal overflow at 1512 or 390) — `docs/03-design/gate-shots/acharya-detail-restyle/` |
+
+---
+
+## Version 2.23 — Kshetram Detail Recreated to the PO Mock (2026-10-01, PO round 15)
+
+PO request: redesign the Kshetram detail page (`/kshetram/:id`) to an
+attached mock — **design refresh only, no data or functionality changes**.
+New shell: "Kshetras / name" breadcrumb; split hero — left block with the
+"Divya Desam N · region" eyebrow (enriched `serial`, as the old SerialBadge),
+56px serif name, gold Tamil, `temple` subtitle, location-pin row, the
+`significance` text as the hero summary, and the yatra/share actions
+(TripControls / VisitedToggle / PageActions, unchanged components) | right
+temple photo (Wikipedia lead image via `useWikiImage`, gopuram-illustration
+fallback) with the mock's "Temple exterior · illustrative" caption. An
+**accessible seven-tab section switcher** (Overview · Deities · History ·
+Mangalasasanam · Visit info · Location · Media — azhwar-dossier idiom:
+`role=tablist`, arrow-key roving focus, panels unmount on switch; visit and
+location tabs omitted for celestial desams) wraps the **existing gold-strip
+section components completely unchanged** (ShrineProfile, DeityBreakdown,
+PuranamHistory, MangalasasanamSection, VisitInfoSection, VisualsMedia, plus
+the inline Location panel with map link / MiniMap / NearbyDesams). The
+Overview panel adds the mock's "About the temple" block: Moolavar / Thaayar
+name cells (dataset-derived) and the "247 pasurams · N Azhwars" stat with an
+"Explore the hymns →" button that switches to the Mangalasasanam tab, where
+the Azhwars-Who-Glorified chip list now lives. A **"Plan your visit" sidebar**
+beside Overview carries the temple timings (Morning/Evening rows + notes +
+indicative-timings note), the DistanceFromMe control (its built-in "Get
+directions" link) and the mock's "Visits and trips are saved in this
+browser." note; the sidebar is omitted for celestial desams.
+
+### Contract notes
+
+- **Zero changes to the six section components and their component tests**
+  (`detailV3.test.jsx`, `detailComponents.test.jsx` untouched) — the tabs
+  wrap them as-is, so their ZipSection cards render inside the panels.
+- **Timings appear twice** (sidebar + Visit Info tab's existing tile) — kept
+  deliberately so the Visit Info card set stays component-identical; flag
+  for PO if the tab tile should drop.
+- The DistanceFromMe control moved from the Location section to the sidebar
+  (visible on load, satisfying TC-09 without clicks); the Location panel
+  keeps the map link, MiniMap and nearby list.
+- Page-level tests (UT-DTL block) rewritten for the tab anatomy — tab clicks
+  before per-section assertions, `cleanup()` before the second in-test
+  render, celestial assertions extended to the hidden tabs; e2e TC-08's
+  heading sweep and TC-16 walk the tabs (map link asserted after switching
+  to Location). The old "← Back to all kshetrams" link became the mock's
+  "Kshetras / name" breadcrumb.
+- No data, site-copy or fixture changes; "Explore the hymns" is in-page tab
+  navigation only.
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/pages/KshetramDetailPage.jsx` | Full shell rewrite: split hero + sidebar + seven accessible tabs |
+| `app/src/pages/__tests__/pages.test.jsx` | UT-DTL block rewritten (9 tests) for the tab anatomy |
+| `app/e2e/journeys.spec.js` | TC-08 block + nearby test walk the tabs |
+| `app/e2e/yatra.spec.js` | TC-16 walks the tabs |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (accepted set) |
+| Unit tests (Vitest) | **217/217 pass (21 suites)** |
+| Coverage | **89.74% statements / 81.59% branches / 84.84% functions / 91.12% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Visual gate | 5/5 renders pass (hero / overview full / deities tab / location tab / 390 mobile; no horizontal overflow at 1512 or 390) — `docs/03-design/gate-shots/kshetram-detail-restyle/` |

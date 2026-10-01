@@ -104,13 +104,19 @@ test.describe('V3 yatra toolkit', () => {
 
   test('TC-16: detail V3 shows the shrine template sections and yatra hooks', async ({ page }) => {
     await page.goto('kshetram/srirangam');
-    for (const heading of [
-      'Basic Shrine Profile', 'Deities & Consorts', 'Sthala Puranam & History',
-      'Mangalasasanam', 'Visit Info', 'Location', 'Visuals & Media',
+    // Round 15 mock: sections live behind the seven-tab switcher
+    await expect(page.getByRole('heading', { name: 'Basic Shrine Profile' })).toBeVisible();
+    for (const [label, heading] of [
+      ['Deities', 'Deities & Consorts'], ['History', 'Sthala Puranam & History'],
+      ['Mangalasasanam', 'Mangalasasanam'], ['Visit info', 'Visit Info'],
+      ['Location', 'Location'], ['Media', 'Visuals & Media'],
     ]) {
-      await expect(page.getByRole('heading', { name: heading })).toBeVisible();
+      await page.getByRole('tab', { name: label }).click();
+      await expect(page.getByRole('heading', { name: heading }).first()).toBeVisible();
     }
+    await page.getByRole('tab', { name: 'Mangalasasanam' }).click();
     await expect(page.getByText(/word-by-word meaning/i).first()).toBeVisible();
+    await page.getByRole('tab', { name: 'Visit info' }).click();
     await expect(page.getByText(/not yet documented yet\./i).first()).toBeVisible();
   });
 
