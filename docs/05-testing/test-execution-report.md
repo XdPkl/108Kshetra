@@ -1299,3 +1299,56 @@ strip: "ALWARS | DIVYA DESAMS | ETERNAL INSPIRATION".
 | Production build | Clean |
 | E2E (Playwright, Chromium) | **19/19 journeys pass** |
 | Visual gate | 3/3 renders pass (desktop full / hero / 390 mobile; no horizontal overflow at 1512 or 390; title one line) — `docs/03-design/gate-shots/azhwars-frontpage/` |
+
+---
+
+## Version 2.21 — Acharyas Index Recreated to the PO Snap (2026-10-01, PO round 13)
+
+PO request: recreate the Acharyas index page (`/acharyas`) to an attached
+design snap — UI design refresh only, **no functionality changes**. Guru-
+parampara hero over the gopuram artwork watermark (Browse-hero idiom): "THE
+GURU PARAMPARA" eyebrow, 56px serif title, line-lotus-line ornament, two-line
+lead. Era sections keep the single-source `eraGroup` labels as ruled headings
+(heading + lotus + rule; the count pill is dropped per the snap). The card
+grid becomes a **two-column parampara roster**: portrait (176×144, Wikipedia
+image via `useWikiImage`; photo-less entries render a golden-Shanka radial-
+blob fallback — existing `ShankaIcon`, no new asset) beside Tamil (maroon) /
+name (28px serif) / `role`, an "Era: … | Guru: …" meta line ("Not specified"
+when the dataset has no guru — Nathamuni, per the snap) and a "Read story →"
+link. Lotus-centred rules separate roster rows; a thin vertical rule splits
+the columns; odd-count sections end on a single left-column row.
+
+### Scope decisions
+
+- **Two dossier links per acharya** (whole-row overlay + explicit "Read
+  story") — TC-19's href locator gained `.first()` (strict mode). Non-
+  interactive row content carries `pointer-events-none` so overlay clicks pass
+  through (the round-12 idiom).
+- **Site copy untouched** — the existing `acharyasPage` fields already match
+  the snap verbatim; no fixture change this round.
+- Era-group count pill dropped per the snap; the era headings themselves are
+  asserted by UT-ACH-02 / TC-19 and remain.
+- Data mapping unchanged: `tamilName` / `name` / `role` / `era` / `guru` →
+  resolved via `getAcharyaById`; all 27 acharyas across the 3 era groups.
+- Existing assets only: `gopuram-illustration.jpg` watermark, lucide
+  `ArrowRight`, sacred `LotusIcon`/`ShankaIcon`. The snap's sepia temple-
+  complex artwork is not in the repo — the existing gopuram illustration
+  stands in (swap when the PO asset arrives).
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/pages/AcharyasPage.jsx` | Full rewrite to the snap roster layout (pairs chunking, row dividers, Shanka-blob fallback) |
+| `app/e2e/yatra.spec.js` | TC-19: `.first()` on the dossier href locator (two links per row now) |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (accepted set) |
+| Unit tests (Vitest) | **216/216 pass (21 suites)** — no unit-test changes needed |
+| Coverage | **90.23% statements / 82.56% branches / 85.17% functions / 91.53% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Visual gate | 3/3 renders pass (desktop full / hero / 390 mobile; no horizontal overflow at 1512 or 390) — `docs/03-design/gate-shots/acharyas-restyle/` |
