@@ -1,167 +1,154 @@
-# HANDOVER — 108 Divya Kshetrams (2026-09-30, end of PO-mockup marathon session)
+# HANDOVER — 108 Divya Kshetrams (2026-10-01, end of Plan-Yatra/Azhwar session)
 
-State: **Everything pushed, CI+Deploy green on `33d567f`, live verified.**
-`main` = `33d567f` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
-Live: https://xdpkl.github.io/108Kshetra/ (main chunk `index-DfqukMMv.js` —
-NOTE: the Map/Trip pages are a LAZY chunk, see gotcha 12 before grepping
-bundles). Working tree clean. Scratch scripts deleted; no preview server on
-:4173. Nothing in flight; next context starts fresh on whatever the PO
-brings (likely round-6 flags or another page refresh).
+State: **Everything pushed, CI+Deploy green on `d241501`, live verified.**
+`main` = `d241501` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
+Live: https://xdpkl.github.io/108Kshetra/ — verify bundles by CONTENT, not by
+hash (CI Linux builds hash differently than local Windows; and the Map and
+Azhwar pages' strings may live in the main bundle or lazy chunks — see
+gotcha 12). Working tree clean. No preview server on :4173. Scratch scripts
+deleted. Nothing in flight; next context starts fresh on whatever the PO
+brings (they iterate fast — five more rounds shipped today).
 
-## 1. What today delivered, in order (6 shipped rounds, all live)
+## 1. What today delivered, in order (5 PO rounds + 2 CI fixes, all live)
 
 | Commit | Work | Register |
 |---|---|---|
-| `36a64ea` | **Featured Kshetrams restyle** (PO mockup): 2×2 grid of horizontal photo-left cards (44% photo), deity pill, gold hairline under name, solid brown "View temple →" + outlined "Mark visited", lead → "Find your next sacred stop.", DD#/Pasuram photo tags dropped (PO confirmed). **Fixed real bug:** "Mark visited" was unclickable — whole-card overlay link (`absolute inset-0 z-0`) intercepted it; action rows now carry `relative z-10` | TER v2.10 |
-| `334a6cd`+`03e2444` | **Explore page restyle** (PO mockup, static mockup-first at `docs/03-design/mockups/explore-restyle-2026-09-30/explore.html`): display header (eyebrow + serif title + lead), search + region chips in a white panel, scope checkboxes → exclusive pills (All temples / Visited (N) / In my trip (N)), State/Deity-form/Azhwar selects into a collapsed "More filters" disclosure, serif "N kshetram(s)" count (`.result-count` kept), restyled cards (gold `#96731F` View temple, region pill only, "Add to trip"/"In trip" chip). Title "Browse the…" → "Explore the 108 Divya Desams", lead → "Find a sacred place. Plan your next darshan." Full test lockstep (count strings, `+ Trip`→`Add to trip`, pill clicks, disclosure-open steps). `03e2444` fixed a CI-only vitest timeout (gotcha 10) | TER v2.11 |
-| `2efe66f` | **Gopuram illustration** (PO artwork): converted via `make-hero-image.mjs` → `src/assets/gopuram-illustration.jpg` (1860×846, 77 KB); replaced the ◆/line-art in browse card "Photo coming soon" placeholders (full-bleed object-cover) and the explore header art; `GopuramArt.jsx` deleted | TER v2.12 |
-| `85f9345` | **Explore watermark header** (PO request): illustration promoted to a watermark occupying the right half of the header (`w-1/2`, object-contain, two-axis `mask-image` fade left+bottom, opacity-80), quote floats over its sky area; title 52→48px to keep one line in the narrower column | TER v2.13 |
-| `23e094e` | **Map page refresh** (PO mockup; after clarifying the snap = Map page, not Trip): display header + lotus "Divine Abodes / Timeless Grace" ornament, sidebar (360px) with All/Visited/In-trip scope pills + region chips + nearest cards (photo, View temple, TripControls, Mark visited, Focus, Directions), map 640px with **Fit all temples** (`mapApi.fitBounds`), on-map legend bar (Temple/Visited/In trip), count badge under Fit-all (moved off the Leaflet zoom control after the visual gate caught clipping) | TER v2.14 |
-| `33d567f` | **Map + Trip MERGED into the Yatra Atlas** (PO chose "one page replaces both" + "dropdown replaces chips"): sidebar gains search box (`matchesSearch` from `utils/filter.js`) and an "All regions" `<select>` (chips removed); **hand-rolled cluster bubbles** (grid in Leaflet layer space, 70px cells, only with a live map instance below zoom 9 — `Marker` + `L.divIcon` saffron count bubble, click → `flyToBounds`; singles keep CircleMarker/Tooltip/Popup; **In-trip scope never clusters**); trip planner section below the map (meta `.trip-page__meta`, Share/Print/Add temples/Clear rail, By region/Route-order chips, Order-my-route, Darshan Done/Remove rows, EmptyState); **route overlay on the atlas**: In-trip scope draws the dashed polyline + numbered stop tooltips (view-order aware). Share emits `/map?t=`; `/trip` → `TripRedirect` (`<Navigate>` preserving `?t=`); header My Yatra pill + drawer link → `/map` (always idle; Map pill carries active). `TripPage.jsx`, `TripMap.jsx`, `TripMapInner.jsx` DELETED. `isolate` on the map frame (gotcha 11) | **TER v2.15** / TCS v1.8 |
+| `cc072dc` + `556fcfc` | **"Plan your Yatra" round** (PO list): temple matrix BELOW the atlas — cards always listed (no more GPS gating), distances only after "Show my location" (then nearest-first); header "Map" + "My Yatra" pills merged into one **"Plan Yatra"** pill (drawer entries merged too); map popup "Open page" → gold `#96731F` text link **"Show Temple"**; page title → "Plan your Yatra" (site copy + CMS fixture); gopuram ornament added then **removed** (`64b85af`, PO round 8 — the "attached icon" never reached the repo). `556fcfc` CI fix: **global `testTimeout: 15_000` in vite.config.js** + `vi.mock` of `utils/wikiImage.js` in the two atlas-heavy suites (tests were firing real Wikipedia fetches per photo-less card) | TER v2.16 / TCS v1.9 |
+| `72c3339` | **Left-column arrangement** (PO snap): the whole yatra stack (eyebrow, title, status line, Show my location, search, region dropdown, scope pills, GPS card) moved INTO the 360px left column beside the map; title 36/40px keeps one line | TER v2.17 |
+| `293e039` + `e9eebb7` | **Trip planner modal** (PO): the planner section below the map became a `role="dialog"` modal (AboutPage ScheduleModal idiom) opened by a big gradient **"My Yatra — Trip Planner {N}"** button spanning the left column; live stop-count badge; Escape/backdrop/✕ close; `?t=` share links **auto-open** the modal; page edits reflect in the modal instantly. `e9eebb7` CI fix: v3Branches atlas-extras test needs an explicit **30s** timeout (three full 108-card renders on 2-core runners) | TER v2.18 |
+| `d241501` | **Azhwar detail recreated to the PO snap** (round 11): portrait hero (Poigai photo; Thiruman placeholder for the other 11), derived eyebrow ("The first/second/third of the Mudhal Azhwars" for orders 1–3), epithet + alias chips, derived lead, stat row (book "N pasurams" | gopuram "N Divya Desams"), Birthplace/Birth-star/Divine-amsam icon row (pin/star/Shanka conch; amsam cell hidden for madhurakavi+kulasekhara); **net-new accessible five-tab dossier** (Life & tradition with "Read the complete life story" expander + KEY MOMENTS rail · Hymns & meaning · Sacred places (N) · Media · Sources); persistent opening-verse band ("Read verse & meaning" → Hymns tab; "Find recitations" → archive.org); Birthplace/Sacred-places cards; sources row → Sources tab; prev/next nav. **Content is dataset-mapped (PO-confirmed decision)** — the snap's condensed phrases are NOT in the data; `SaintPortrait.jsx` + `SaintKeyMoments.jsx` new; `Identification.jsx` refactored to compose SaintPortrait (Acharya page keeps its own Identification/SaintTimeline/SaintLegend untouched) | TER v2.19 / UT-AZW-03 rewritten |
 
-Final gates at handoff: **211/211 unit (21 suites) · 19/19 e2e · coverage
-90.58% stmts / 82.99% branches / 84.74% funcs / 91.83% lines (gate 80% —
-dipped from 92% because TripPage's dedicated tests folded into atlas flows;
-watch it) · oxlint 0 errors / 5 accepted warnings · build clean · CMS
-round-trip 11/11 lossless + `sync-content --fixture --check` 0 diffs ·
-visual gates all green** (featured 4/4, explore 3/3, artwork 2/2, watermark
-2/2, map 2/2 after badge fix, atlas 3/3 after isolate fix).
+Final gates at handoff: **216/216 unit (21 suites) · 19/19 e2e · coverage
+90.22% stmts / 82.39% branches / 85.14% funcs / 91.53% lines (gate 80%) ·
+oxlint 0 errors / 5 accepted warnings · build clean · CMS round-trip
+lossless (site-copy `map.title` = "Plan your Yatra" in fixture too) ·
+visual gates all green** (plan-yatra: matrix/popup/no-ornament/left-stack/
+planner-button/modal; azhwar-restyle: hero/full/hymns/390).
 
-Current key measurements: explore header title **48px, one line at 1440**;
-watermark **576×290 right-half**, masked edges; browse cards photo **44%**,
-action row `px-3.5 gap-2.5` (px-4/gap-3 wraps); atlas sidebar **360px** +
-map **640px** (lg); cluster bubbles at zoom ≤ 8, ~10 at the default zoom 6.
+Current key measurements: atlas left column **360px** + map (lg) right;
+title 36/40px one line; temple matrix `sm:grid-cols-2 xl:grid-cols-3`;
+popup gold `#96731F`; azhwar hero portrait 280px; verse-band gold gradient
+button; tabs = the ONLY `role="tablist"` in the codebase (azhwar page).
 
 ## 2. Open items / likely next requests
 
-- **More PO fix lists** — the PO iterates fast (6 rounds today). Proven
-  process: map → measure → fix → re-measure → gates → TER → commit → push →
-  CI/live check. For design asks: static HTML mockup first
-  (`docs/03-design/mockups/explore-restyle-2026-09-30/explore.html` is the
-  approved explore reference; home: `refresh-2026-09/home.html`) — iterate
-  via screenshots + visual-judge, then implement. Note: AskUserQuestion can
-  return NO answer when unattended — then proceed with best judgment and
-  flag the decision.
-- **Round-6 flags**: (a) browse cards dropped the deity pill + "N Pasurams"
-  tag (mockup-faithful; detail pages keep both — restore on request);
-  (b) header now has BOTH "Map" and "My Yatra" pills pointing to `/map` —
-  label consolidation is a PO decision; (c) old plaque watermark asset +
-  `make-hero-watermark.mjs` still unused — cleanup candidates; (d) "Reset
-  progress" quiet link under the home tracker still kept (TC-13).
-- **Naming deltas** PO image vs dataset ("Thiruvenkatam" vs
-  "Thiruvengadam") remain dataset-owned; cards render dataset values.
-- **Photos pending from PO**: Kulasekhara + Thiruppaan strip tiles (◆
-  fallback — no enwiki lead image), CEO portrait (admin-gated controls),
-  Srivilliputhur card, scaffold acharya dossiers. Photos resolve via
-  `useWikiImage` / enrichment (unchanged pipeline).
+- **More PO fix lists** — the PO iterates fast (11 rounds in two days).
+  Proven process: implement (snap/mockup-first only when the design is
+  open-ended — this session's snaps WERE the approved designs) → measure →
+  gates → TER → commit → push → CI/live check. AskUserQuestion can return
+  NO answer when unattended — proceed with best judgment and flag.
+- **PO "attached" images may not reach the repo** (happened in round 7:
+  "change the icon to the attached one" with no file). Flag the decision,
+  use the nearest existing asset, swap when the real asset arrives.
+- **Azhwar content**: if the PO wants the snap's exact condensed copy
+  ("From the lotus pond to the lamp of wisdom", short key-moment titles,
+  verse "Meaning:" lines), that means authoring new fields in
+  `azhwar-details.json` for all 12 azhwars — PO-owned content, not yet
+  requested. Currently mapped from `lifeHistory`/`timeline`/`verse.significance`.
+- **Round-6 flags still open**: browse cards keep the dropped deity pill +
+  Pasuram tag (restore on request); old plaque watermark asset +
+  `make-hero-watermark.mjs` unused — cleanup candidates; "Reset progress"
+  quiet link kept (TC-13); naming deltas dataset-owned.
+- **Photos pending from PO**: Kulasekhara + Thiruppaan strip tiles, CEO
+  portrait, Srivilliputhur card, scaffold acharya dossiers. Photos resolve
+  via `useWikiImage`/enrichment (azhwar portraits: `photos[]` in
+  azhwar-details.json — only Poigai has one).
 - **Jira sync** still pending a fresh API token. `docs/03-design/mockups-v3/`
-  stays deleted (PO decision 2026-09-25). PO Sanity setup (~20 min,
-  `studio/README.md`) unchanged; repo JSON is the `npm run import` source.
-- **Coverage drift watch**: 90.58% vs gate 80% — fine, but the merge
-  dropped it ~1.6pt; if another refactor drops ~5pt more it gets tight.
+  stays deleted (PO decision 2026-09-25).
+- **Coverage drift watch**: 90.22% vs gate 80% — fine, but the atlas matrix
+  and azhwar tabs keep adding render weight; CI is 2-core (see gotcha 16).
 
 ## 3. Architecture pointers (current map)
 
 - Content source of truth: `app/src/data/content/*.json`; shims preserve old
   import paths — do not bypass. UI reaches data ONLY via `data/api.js`.
-  Transforms in `studio/scripts/lib/` are GENERIC for siteCopy (spread +
-  `*[_id=="siteCopy"][0]`) — new site-copy fields only need app JSON +
-  `studio/schemas/siteCopy.js` + verify/fixture regen (did this for
-  `browse.quote`; no GROQ/transform edits needed).
-- **Home** (unchanged today): full-bleed hero 364px, YatraProgressTracker,
-  FeaturedKshetrams (2×2 horizontal `FeaturedKshetramCard`), SaintStrip
-  bands; App.jsx main drops the container on `/`.
-- **Explore/BrowsePage** (2026-09-30): display header + watermark; white
-  panel (search + region chips incl. "Vinnulagam"); scope pills (exclusive,
-  `aria-label="Showing"` group); "More filters" disclosure (selects keep
-  aria-labels State/Deity form/Azhwar); serif count "N kshetram(s)" in
-  `.result-count` (singular handled); KshetramCard = photo h-52, gopuram
-  illustration placeholder, "Add to trip"/"In trip" chip, DD tag, region
-  pill only, action row `relative z-10`.
-- **Yatra Atlas / MapPage** (2026-09-30 merge; lazy chunk): sidebar search +
-  region dropdown (`aria-label="Filter by region"` on the SELECT — the group
-  wrapper has no label, getByLabelText matches only the select) + scope
-  pills (group "Showing") + nearest cards (GPS-gated, `NearestCard`);
-  clusters (`CLUSTER_MAX_ZOOM = 8`, `CLUSTER_CELL_PX = 70`) computed in a
-  memo keyed on `[mapApi, shown, scope, clusterTick]` with a
-  `zoomend moveend` listener bumping `clusterTick`; trip section (group
-  "Trip view", `.trip-page__meta`, share-restore effect with
-  `appliedShare` ref); route overlay via `mapStops`/`mapLegs` when
-  `scope === 'trip'`; share URLs `/map?t=`; TripRedirect in App.jsx.
-- Header: My Yatra pill + drawer "My Yatra Route" link → `/map`, always
-  idle style; `isTripActive` was removed from Header.jsx.
+  Site-copy fields: app JSON + fixture `sync-response.json` must change
+  TOGETHER (`sync-content --fixture --check` must stay 0-diff).
+- **Plan Yatra / MapPage** (lazy chunk): left 360px column = whole yatra
+  stack + big trip-planner opener; map frame (`isolate`, Fit-all, legend,
+  count badge); temple matrix below the map (`cardList` memo — km only when
+  `me` set); popup "Show Temple" gold link; trip planner in `plannerOpen`
+  modal (auto-open on `?t=` restore); In-trip scope draws route overlay;
+  cluster bubbles below zoom 9 (`CLUSTER_MAX_ZOOM = 8`, `CLUSTER_CELL_PX = 70`).
+- **AzhwarDetailPage**: breadcrumb+next pill → hero (SaintPortrait) → stat
+  row → birth-facts row → tablist (`tab`/`setTab`, `TAB_IDS`, roving focus
+  via `tabRefs`) → verse band → cards → sources row → prev/next. Tab content
+  unmounts on switch (tests must click tabs before asserting tab content).
+- Header: single **"Plan Yatra"** pill → `/map` (active on /map, live trip
+  badge); drawer merged entry; `/trip` still redirects to `/map`.
 - Admin gate: `isAdminSession()` in AboutPage — localStorage
   `kshetra_admin=1` via `/about?admin=1`, revoke `?admin=0`.
-- Photo pipeline: card 640 / portrait 800 / lightbox 1280 baked into sync;
-  `wiki` title = no-photo fallback; PO artwork conversion via
-  `node scripts/make-hero-image.mjs <in> <out>` (sharp).
-- Registers/dates: **TER v2.15; TCS v1.8**; US-CMS-01.
+- Registers/dates: **TER v2.19; TCS v1.9** (UT-AZW-03 rewritten); US-CMS-01.
 
 ## 4. Gotchas (accumulated — ALL still valid, plus new)
 
 1. **Unlayered legacy CSS beats every Tailwind utility.** Offenders: `a {}`
-   (scoped out of header nav; 2026-09 pages pin link colors with `!` bangs),
-   `h1 {}` (hero + explore/map h1 use `!`), `h2/h3 {}` (home headings +
-   browse/map card h3s pin with `!`). Grep `styles/*.css` before fighting a
-   utility. Tailwind v4 important = TRAILING bang (`text-[#7A2E00]!`).
-2. **Whole-card overlay links (`absolute inset-0 z-0`) intercept clicks** on
-   any action button that isn't `z-10`. Both card components now lift their
-   action rows (`relative z-10`). Any new card keeps this rule.
+   (gold links need `text-[#96731F]!`), `h1 {}` / `h2 {}` (display text uses
+   trailing `!`: `text-[44px]! text-[#5C1F00]!`). Grep `styles/*.css` before
+   fighting a utility. Tailwind v4 important = TRAILING bang.
+2. **Whole-card overlay links intercept clicks** — action rows need
+   `relative z-10` (browse + atlas cards carry it; keep the rule).
 3. **Split pills don't use pillBase** (header temples/tours) — apply pill
-   idiom changes to all three or they diverge. Nav children get
-   shrink/nowrap from the nav's `[&>*]:` variants.
+   idiom changes to all three.
 4. **Images in this harness**: prefer deterministic Playwright
-   `getBoundingClientRect()` over screenshots; wrap checks need CENTER-LINE
-   spread + bucketing; `await page.evaluate(() => document.fonts.ready)`
-   before measuring; scratch scripts live in `app/` and are deleted after;
-   preview serves `/108Kshetra/` on :4173 — kill/restart when unsure
-   (stale dist).
+   `getBoundingClientRect()`; wrap checks need CENTER-LINE spread + bucketing;
+   `document.fonts.ready` before measuring; scratch scripts live in `app/`,
+   delete after; preview serves `/108Kshetra/` on :4173 — kill/restart when
+   unsure.
 5. **sharp**: hardcode CH=4 after `ensureAlpha().raw()`.
-6. **Wikipedia photos**: REST summary API; enwiki has no lead image for
-   Kulasekhara/Thiruppaan Alvar, Vedanta Desika. Hotlinking thumbs: only
-   FIXED widths (330/500/960/1280/1920…).
-7. **Exact-match text assertions**: use `{ exact: true }` / exact strings,
-   never regex, for absence tests ("Nalayira Divya Prabandham", count
-   strings). Careful: nav "108 Kshetrams" pill collides with /108
-   kshetrams/i regexes — scope to `.result-count`.
+6. **Wikipedia photos**: REST summary API; hotlink only FIXED widths.
+7. **Exact-match text assertions**: `{ exact: true }` / exact strings for
+   absence tests; nav "108 Kshetrams" pill collides with /108 kshetrams/i.
 8. **No Python** — node one-liners / heredoc `.mjs`.
-9. `ProgressBanner.jsx` is app-dead (tests only); live tracker is
-   `YatraProgressTracker`.
-10. **Vitest per-test timeout is 5s and CI runners are 2-core**: heavy
-    jsdom tests (multiple 108-card renders) exceed it on CI while passing
-    locally (~1.3s). The two heavy v3Branches browse tests carry explicit
-    `15_000` timeouts + `userEvent.setup({ delay: null })`. If a new test
-    renders the full browse grid repeatedly, give it a timeout.
-11. **Leaflet pane z-indexes (200–800) escape a non-isolated container** and
-    cover the sticky header (`z-50`) once the page scrolls — the map frame
-    carries `isolate`. Keep it when touching the map chrome.
-12. **Lazy-chunk live verification**: MapPage is a lazy chunk
-    (`dist/assets/MapPage-*.js`) — map/trip strings are NOT in the main
-    bundle; grep the chunk referenced by the live main bundle. CI (Linux)
-    build hashes differ from local Windows builds — verify by CONTENT, not
-    by matching hashes. Also: ugrep misbehaves on 1.2MB single-line bundles
-    — use `node -e "...includes(...)"`.
-13. **CI logs without gh auth**: fetch failure details via
-    `GET /repos/XdPkl/108Kshetra/commits/<sha>/check-runs` →
-    `check-runs/{id}/annotations` — gives the exact test + file:line
-    (public repo, no token).
+9. `ProgressBanner.jsx` is app-dead; live tracker is `YatraProgressTracker`.
+10. **Vitest on CI (2-core) is ~3-4× slower than local**: global
+    `testTimeout: 15_000` lives in `vite.config.js`; the v3Branches
+    atlas-extras test carries an explicit **30_000**. Any test that renders
+    the 108-card atlas matrix repeatedly (mount + locate + clear = 3 full
+    renders) needs headroom.
+11. **Leaflet pane z-indexes** escape a non-isolated container — the map
+    frame carries `isolate`; keep it.
+12. **Lazy-chunk live verification**: grep the LIVE bundle by CONTENT via
+    `node -e "...includes(...)"` (ugrep chokes on 1.2MB single-line files).
+    Note: as of d241501 the azhwar strings live in the MAIN bundle; MapPage
+    strings are in the lazy `MapPage-*.js` chunk referenced by it.
+13. **CI logs without gh auth**: `GET /repos/XdPkl/108Kshetra/commits/<sha>/
+    check-runs` → `check-runs/{id}/annotations` gives the exact failing test
+    + file:line (public repo, no token). Both CI failures this session were
+    caught this way.
 14. **Region dropdown label**: `getByLabelText('Filter by region')` matches
-    the select only (the wrapper div has no role/label — a group with the
-    same aria-label causes "multiple elements" errors).
-15. Old gotchas: shim re-export collision (rolldown PARSE_ERROR); scan ALL
-    distinct keys before schema-mapping; `sanity schema validate` needs
-    placeholder project id; JSON key-order normalization; Vite-only imports
-    break plain-node; gh CLI unauthenticated (curl api.github.com + node
-    one-liners); lucide icon imports; `markVisited(id, true)`;
-    `fireEvent.click` for hover UI in jsdom; coverage exit codes behind
-    pipes; `.zcodeignore` stays UNTRACKED (also in `.git/info/exclude`).
+    the select only.
+15. Old gotchas: shim re-export collision; scan ALL distinct keys before
+    schema-mapping; sanity schema validate placeholder id; JSON key-order
+    normalization; Vite-only imports break plain-node; gh CLI unauthenticated;
+    lucide icon imports; `markVisited(id, true)`; `fireEvent.click` for hover
+    UI; coverage exit codes behind pipes; `.zcodeignore` UNTRACKED.
+16. **NEW — tests must not touch the network**: `utils/wikiImage.js` is
+    `vi.mock`ed in `yatraPages.test.jsx` and `v3Branches.test.jsx` (photo-
+    less cards otherwise fire real Wikipedia fetches ×108). If a new heavy
+    suite renders KshetramCard/NearestCard grids, add the same mock.
+17. **NEW — jsdom accessible names join WITHOUT spaces**: the planner opener
+    button's accessible name is "My Yatra — Trip Planner1" — match counts
+    with `/trip planner\s*1/i`, never `/planner 1/i`.
+18. **NEW — repeated strings across hero+cards**: azhwar birthplace name and
+    district render in BOTH the hero facts row and the cards row → use
+    `getAllByText(...).length >= 1`, not `getByText` (strict-mode duplicate
+    errors).
+19. **NEW — Leaflet marker culling in headless/IAB captures**: at zoom ≥ 9
+    most CircleMarker paths cull to `d="M0 0"` and are unclickable there —
+    verified identical on the old live build; NOT a regression. e2e TC-14
+    exercises the real click path in Playwright.
+20. **NEW — trip planner lives in a modal**: any test asserting trip content
+    (empty state, meta `.trip-page__meta`, Order/Share/Clear, remove rows)
+    must click the "My Yatra — Trip Planner" opener first; `?t=` links
+    auto-open it. The opener badge and header Plan Yatra badge update live.
 
 ## 5. Command cheat-sheet
 
 ```
 # app/  (quality gates — CI parity)
-npm test                 # 211 unit / 21 suites
-npm run test:coverage    # gates: 80% stmts/branches/funcs/lines (now ~90.6%)
+npm test                 # 216 unit / 21 suites (global timeout 15s)
+npm run test:coverage    # gates: 80% stmts/branches/funcs/lines (~90.2%)
 npm run lint             # oxlint (0 errors; 5 accepted warnings)
 npm run build            # production build
 npx playwright test      # 19 e2e (boots vite preview on :4173)
