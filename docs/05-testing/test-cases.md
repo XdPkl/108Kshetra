@@ -308,3 +308,27 @@ Serif 4 + 17/28 DM Sans on both pages; 0px horizontal overflow at
 1280/390. Execution recorded in TER v2.26.
 
 *End of Addendum — TCS-108K-008 v1.12*
+
+## Version 1.13 — Azhwar Detail Poigai-Mock Restyle (2026-10-01)
+
+PO round-19 recreation of `/azhwar/:id` to the five-screen poigai mock
+(TER v2.27). Data contracts unchanged; wording/interaction contracts
+moved in lockstep:
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-AZW-03 | Verse band | "Discover the opening verse" / "Read verse & meaning" → **"The lamp of knowledge"** band with an **"Explore hymn & meaning"** jump button |
+| UT-AZW-03 | Hymns tab | Commentary heading **"Theological commentary & anubhavam" → "Commentary & anubhavam"**; "Listen ↗" → **"Find recitations"** pill (same hrefs); word-by-word meanings render as sidebar glossary rows; MEANING block falls back to the dataset significance |
+| UT-AZW-03 | Places tab | "View kshetram" moved from the retired birthplace card to the featured desam card (href = first desam with a wiki image, e.g. `/kshetram/kanchi-varadaraja`); "Explore all N" → **"Browse all N desams"** pill; celestial desams grouped under a "Celestial Divya Desams" card |
+| UT-AZW-03 | Retired round-11 rows | Breadcrumb next-azhwar pill, birthplace/sacred-places cards and "Sources & Sampradaya Texts" summary button are gone (absorbed into the Places/Sources tabs); hero crumb is a plain path |
+| UT-AZW-03 | Unchanged | Hero text/stats/birth facts, epithet chips, "Key moments" heading + timeline events, story expander, media "Search on YouTube ↗" hrefs, sources texts, hash-synced tabs + roving focus, prev/next nav, portrait alt/placeholder |
+| TC-18 | E2E | View-kshetram asserted on the Sacred places tab; band jump uses "explore hymn & meaning" |
+| Saint components | Contracts | SaintVerse/SaintMedia/SaintSources/SaintKeyMoments branch tests updated to the new names (SaintMedia gains optional name/photo/onSeeSources props) |
+
+Quality gates: TC-QA-01 Pass (0 errors; 4 accepted warnings) · TC-QA-02
+Pass (**226/226 tests, 21 suites**; 90.43/81.85/85.95/92.16) · TC-QA-03
+Pass · E2E **19/19** · Visual gate **7/7 vs the PO mockups** · Measured
+hero 372px, display h2 40px, portrait 240px; 0px overflow at
+1440/1280/390. Execution recorded in TER v2.27.
+
+*End of Addendum — TCS-108K-008 v1.13*

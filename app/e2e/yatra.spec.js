@@ -140,10 +140,13 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page.getByText(/the first of the mudhal azhwars/i)).toBeVisible();
     await expect(page.getByText(/100 pasurams/i)).toBeVisible();
     await expect(page.getByText('Sarovara Yogi')).toBeVisible();
-    await expect(page.getByRole('link', { name: /view kshetram/i })).toBeVisible();
     await expect(page.getByRole('heading', { name: /key moments/i })).toBeVisible();
     // The verse band jumps to the Hymns & meaning tab
-    await page.getByRole('button', { name: /read verse & meaning/i }).click();
+    // Round 19: the featured desam card lives on the Sacred places tab
+    await page.getByRole('tab', { name: /sacred places \(12\)/i }).click();
+    await expect(page.getByRole('link', { name: /view kshetram/i })).toBeVisible();
+    // The lamp-of-knowledge band jumps to the Hymns & meaning tab
+    await page.getByRole('button', { name: /explore hymn & meaning/i }).click();
     await expect(page.getByText(/word-by-word meaning/i)).toBeVisible();
 
     // Chronological prev/next navigation

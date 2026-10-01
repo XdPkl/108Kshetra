@@ -64,7 +64,7 @@ describe('SaintVerse branches', () => {
   it('renders the pending slot when the original script is absent (B2 saints)', () => {
     render(<SaintVerse verse={{ work: 'A work', transliteration: 'Some translit' }} />);
     expect(screen.getByText(/original verse text pending/i)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /listen/i })).toHaveAttribute('href', expect.stringContaining('archive.org'));
+    expect(screen.getByRole('link', { name: /find recitations/i })).toHaveAttribute('href', expect.stringContaining('archive.org'));
   });
   it('renders meaning, significance and a curated audio link when present', () => {
     render(<SaintVerse verse={{
@@ -73,16 +73,16 @@ describe('SaintVerse branches', () => {
     }} />);
     expect(screen.getByText('A plain meaning.')).toBeInTheDocument();
     expect(screen.getByText(/why it matters/i)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /listen/i })).toHaveAttribute('href', 'https://example.org/recitation');
+    expect(screen.getByRole('link', { name: /find recitations/i })).toHaveAttribute('href', 'https://example.org/recitation');
   });
   it('renders the theological commentary blocks', () => {
     render(<SaintVerse verse={{ transliteration: 'T', commentary: [{ heading: 'H1', text: 'C1' }] }} />);
-    expect(screen.getByRole('heading', { name: /theological commentary/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /commentary & anubhavam/i })).toBeInTheDocument();
     expect(screen.getByText(/C1/)).toBeInTheDocument();
   });
   it('omits the listen link when no work or audio is given', () => {
     render(<SaintVerse verse={{ transliteration: 'T' }} />);
-    expect(screen.queryByRole('link', { name: /listen/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /find recitations/i })).not.toBeInTheDocument();
   });
 });
 

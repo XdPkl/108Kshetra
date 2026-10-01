@@ -19,17 +19,16 @@ beforeEach(() => {
   window.history.replaceState(null, '', window.location.pathname);
 });
 
-describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-09-30 snap restyle)', () => {
-  it('renders the snap hero for Poigai Azhwar: stats, birth facts, key moments', () => {
+describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-10-01 poigai mock restyle)', () => {
+  it('renders the compact mock hero for Poigai Azhwar: stats, birth facts, key moments', () => {
     renderAt('/azhwar/poigai');
     expect(screen.getByRole('heading', { name: /poigai azhwar/i })).toBeInTheDocument();
-    expect(screen.getByText(/1 of 12 in chronological order/i)).toBeInTheDocument();
     expect(screen.getByText(/the first of the mudhal azhwars/i)).toBeInTheDocument();
     expect(screen.getByText('Sarovara Yogi')).toBeInTheDocument();
     expect(screen.getByText('Kasara Yogi')).toBeInTheDocument(); // remaining epithets stay as chips
     expect(screen.getByText(/100 pasurams/i)).toBeInTheDocument();
-    // stat row + sacred-places card both carry the derived count
-    expect(screen.getAllByText(/12 Divya Desams/i).length).toBeGreaterThanOrEqual(2);
+    // stat row carries the derived count (the places card moved into its tab)
+    expect(screen.getAllByText(/12 Divya Desams/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText(/Thiruvekka \(Kanchipuram\)/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText(/Kanchipuram District, Tamil Nadu/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText(/Panchajanya/i)).toBeInTheDocument();
@@ -37,25 +36,26 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-09-30 snap restyle)', () => {
     expect(screen.getAllByText(/golden lotus/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByRole('heading', { name: /early years & spiritual awakening/i })).toBeInTheDocument();
     expect(screen.getByText(/Sampradaya preservation/i)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /view kshetram/i })).toHaveAttribute('href', '/kshetram/thiruvekka');
-    expect(screen.getByRole('link', { name: /explore all 12/i })).toHaveAttribute('href', '/kshetrams?azhwar=poigai');
-    expect(screen.getByText(/discover the opening verse/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /sources & sampradaya texts/i })).toBeInTheDocument();
+    expect(screen.getAllByText(/the lamp of knowledge/i).length).toBeGreaterThanOrEqual(1);
   });
 
-  it('switches tabs: hymns shows the verse apparatus, media the listening cards, sources the texts', async () => {
+  it('switches tabs: hymns shows the verse reader, places the desam directory, media and sources the rows', async () => {
     const user = userEvent.setup();
     renderAt('/azhwar/poigai');
     await user.click(screen.getByRole('tab', { name: /hymns & meaning/i }));
     expect(screen.getByText(/Word-by-word meaning/i)).toBeInTheDocument();
-    expect(screen.getByText(/Theological commentary/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /commentary & anubhavam/i })).toBeInTheDocument();
     expect(screen.getByText(/Mudhal Thiruvanthathi \(100 pasurams\)/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /find recitations/i })).toHaveAttribute('href', expect.stringContaining('archive.org'));
     await user.click(screen.getByRole('tab', { name: 'Media' }));
     expect(screen.getAllByRole('link', { name: /search on youtube/i }).length).toBeGreaterThanOrEqual(1);
     await user.click(screen.getByRole('tab', { name: 'Sources' }));
     expect(screen.getAllByText(/Project Madurai Texts/i).length).toBeGreaterThanOrEqual(1);
     await user.click(screen.getByRole('tab', { name: /sacred places \(12\)/i }));
     expect(screen.getByRole('link', { name: /browse all 12 desams/i })).toHaveAttribute('href', '/kshetrams?azhwar=poigai');
+    // featured desam card (first desam with a wiki photo) + celestial grouping
+    expect(screen.getByRole('link', { name: /view kshetram/i })).toHaveAttribute('href', '/kshetram/kanchi-varadaraja');
+    expect(screen.getByText(/celestial divya desams/i)).toBeInTheDocument();
   });
 
   it('expands the complete life story from the Life & tradition tab', async () => {
@@ -66,14 +66,11 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-09-30 snap restyle)', () => {
     expect(screen.getByText(/Dehali of Thirukoilur/i)).toBeInTheDocument();
   });
 
-  it('jumps to the hymns tab from the verse band and to sources from the summary row', async () => {
+  it('jumps to the hymns tab from the lamp-of-knowledge band', async () => {
     const user = userEvent.setup();
     renderAt('/azhwar/poigai');
-    await user.click(screen.getByRole('button', { name: /read verse & meaning/i }));
+    await user.click(screen.getByRole('button', { name: /explore hymn & meaning/i }));
     expect(screen.getByText(/Word-by-word meaning/i)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /find recitations/i })).toHaveAttribute('href', expect.stringContaining('archive.org'));
-    await user.click(screen.getByRole('button', { name: /sources & sampradaya texts/i }));
-    expect(screen.getAllByText(/Project Madurai Texts/i).length).toBeGreaterThanOrEqual(1);
   });
 
   it('shows the portrait and chronological navigation', () => {

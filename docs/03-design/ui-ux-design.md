@@ -753,3 +753,18 @@ the saint dossiers:
 - Data contracts unchanged; wireframes above (§18/§19) are superseded
   visually by this addendum; semantics (roles, headings, anchors,
   pending markers) unchanged.
+
+## 32. Azhwar Detail Poigai-Mock Recreation (round 19, 2026-10-01)
+
+`/azhwar/:id` (FR-90) rebuilt to the PO's five generated mockups on the
+shared kxd theme: compact profile shell (240px portrait, identity block,
+birth-facts columns), sticky hash-synced five-tab rail, and per-tab
+layouts — Life (narrative + gold-dot Key-moments timeline), Hymns (verse
+reader with transliteration/meaning flag blocks + glossary sidebar +
+commentary accordions), Sacred places (featured desam photo card +
+numbered directory with the celestial pair grouped), Media (discourse
+rows with speaker split + iconography sidebar), Sources (repository rows
+with derived domain links + Reading-this-archive note). The opening-verse
+band becomes "The lamp of knowledge" with an "Explore hymn & meaning"
+jump. §18 wireframes are superseded visually; semantics (roles, headings,
+hash behaviour, pending markers) preserved — contract moves in TCS v1.13.

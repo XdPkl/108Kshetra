@@ -1,27 +1,36 @@
 /**
  * AzhwarDetailPage — the azhwar dossier at /azhwar/:id (US-AZW-02, FR-90),
- * restyled to the shared kxd theme (round 18, same paper/rust palette and
- * Source Serif 4 / DM Sans / Noto Serif Tamil stack as the kshetram detail
- * page): compact split hero with the portrait column, sticky hash-synced
- * five-tab rail (Life & tradition · Hymns & meaning · Sacred places ·
- * Media · Sources) with scroll-into-view activation, flat ruled panels
- * (article + Key-moments aside, verse card + glossary, ruled desam rows,
- * resource rows), the persistent opening-verse band as a visit card,
- * Birthplace/Sacred-places cards, a sources summary row and the
- * chronological prev/next nav.
- * Content is dataset-driven (azhwar-details.json) — the snap's condensed
- * phrases are NOT in the data, so nearest fields render instead (lifeHistory
- * heading, timeline when/event, verse significance).
+ * recreated to the 2026-10-01 poigai mock (round 19) on the shared kxd
+ * theme: plain breadcrumb, compact profile shell (portrait column,
+ * identity block with epithet + stats, birth-facts columns with vertical
+ * rules), the sticky hash-synced five-tab rail, and per-tab layouts —
+ * Life & tradition (narrative + Key-moments dot timeline), Hymns & meaning
+ * (verse reader + glossary sidebar + commentary accordions via
+ * SaintVerse), Sacred places (featured desam photo card + numbered
+ * directory with the celestial pair grouped), Media (discourse rows +
+ * iconography sidebar via SaintMedia) and Sources (repository rows +
+ * Reading-this-archive note). The "The lamp of knowledge" opening-verse
+ * band and the chronological prev/next nav stay persistent; the round-11
+ * birthplace/sacred-places cards and sources summary row are retired
+ * (absorbed into the Sacred-places and Sources tabs).
+ * Content is dataset-driven (azhwar-details.json) — mock-authored
+ * fragments ("The lamp of knowledge", "Reading this archive", section
+ * display titles) are flagged in the TER. No data changes.
  */
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
-  ArrowRight, BookOpen, ChevronLeft, ChevronRight, MapPin, Search, Star,
+  ArrowRight, BookOpen, ChevronLeft, ChevronRight, MapPin, Star,
 } from 'lucide-react';
-import { getAzhwarById, getAzhwarNeighbours, getKshetramsByAzhwar } from '../data/api.js';
+import {
+  getAzhwarById,
+  getAzhwarNeighbours,
+  getEnrichedKshetramById,
+  getKshetramsByAzhwar,
+} from '../data/api.js';
 import EmptyState from '../components/EmptyState.jsx';
 import NotDocumented from '../components/detail/NotDocumented.jsx';
-import { TempleGopuramIcon, ShankaIcon } from '../components/SacredIcons.jsx';
+import { LotusIcon, ShankaIcon, TempleGopuramIcon } from '../components/SacredIcons.jsx';
 import SaintGlyph from '../components/saint/SaintGlyph.jsx';
 import SaintKeyMoments from '../components/saint/SaintKeyMoments.jsx';
 import SaintLegend from '../components/saint/SaintLegend.jsx';
@@ -29,6 +38,8 @@ import SaintMedia from '../components/saint/SaintMedia.jsx';
 import SaintPortrait from '../components/saint/SaintPortrait.jsx';
 import SaintSources from '../components/saint/SaintSources.jsx';
 import SaintVerse from '../components/saint/SaintVerse.jsx';
+import gopuramIllustration from '../assets/gopuram-illustration.jpg';
+import { useWikiImage } from '../hooks/useWikiImage.js';
 
 const MUDHAL_ORDINALS = ['first', 'second', 'third'];
 const TAB_IDS = ['life', 'hymns', 'places', 'media', 'sources'];
@@ -41,6 +52,13 @@ export default function AzhwarDetailPage() {
   const [storyExpanded, setStoryExpanded] = useState(false);
   const tabRefs = useRef({});
   const panelRef = useRef(null);
+  // Hooks must run unconditionally — before the unknown-id early return
+  const desams = getKshetramsByAzhwar(id ?? '');
+  const featuredDesam = desams.find((k) => getEnrichedKshetramById(k.id)?.wiki) ?? desams[0] ?? null;
+  const featuredPhoto = useWikiImage(
+    featuredDesam ? (getEnrichedKshetramById(featuredDesam.id)?.wiki ?? null) : null,
+    null,
+  );
 
   // URL-hash deep links (#hymns etc.) — activate the hashed tab on load,
   // write the hash on every switch, follow hashchange (kxd round-16 idiom).
@@ -68,11 +86,7 @@ export default function AzhwarDetailPage() {
   }
 
   const { prev, next } = getAzhwarNeighbours(id);
-  const desams = getKshetramsByAzhwar(id);
-  const birthplaceLink = azhwar.birthplace?.kshetramId;
   const verse = azhwar.verse ?? null;
-  const recitationHref = verse?.audio
-    ?? (verse?.work ? `https://archive.org/search?query=${encodeURIComponent(`${verse.work} recitation`)}` : null);
   const heroEyebrow = azhwar.order && azhwar.order <= 3
     ? `The ${MUDHAL_ORDINALS[azhwar.order - 1]} of the Mudhal Azhwars`
     : `Sri Vaishnava Sampradaya${azhwar.order ? ` · Azhwar ${azhwar.order} of 12` : ''}`;
@@ -85,6 +99,9 @@ export default function AzhwarDetailPage() {
     { id: 'media', label: 'Media' },
     { id: 'sources', label: 'Sources' },
   ];
+  // The mock groups the two Celestial desams apart from the earthly ones.
+  const celestialDesams = desams.filter((k) => k.state === 'Celestial');
+  const earthlyDesams = desams.filter((k) => k.state !== 'Celestial');
 
   // Switch the tab, sync the URL hash and — when the reader is below the
   // tab rail — reveal the panel just under the sticky header + rail.
@@ -120,21 +137,11 @@ export default function AzhwarDetailPage() {
       <a className="skip no-print" href="#azhwar-main">Skip to azhwar details</a>
       <nav className="breadcrumb no-print" aria-label="Breadcrumb">
         <Link to="/azhwars">← All Azhwars</Link>
-        {azhwar.order ? <span>{azhwar.order} of 12 in chronological order</span> : null}
-        {next ? (
-          <Link to={`/azhwar/${next.id}`} className="btn azd-crumb-next">
-            {next.name}
-            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-          </Link>
-        ) : prev ? (
-          <Link to={`/azhwar/${prev.id}`} className="btn azd-crumb-next">
-            <ChevronLeft className="h-3.5 w-3.5" aria-hidden="true" />
-            {prev.name}
-          </Link>
-        ) : null}
+        <span className="azd-crumb-sep" aria-hidden="true">›</span>
+        <span>{azhwar.name}</span>
       </nav>
 
-      {/* Hero: portrait column + identity, stats + birth facts */}
+      {/* Compact profile shell — portrait | identity | birth facts */}
       <section className="hero azd-hero" aria-label={`${azhwar.name} profile`}>
         <SaintPortrait
           portrait={{
@@ -143,7 +150,7 @@ export default function AzhwarDetailPage() {
             alt: azhwar.photos?.[0]?.alt ?? `${azhwar.name} portrait`,
           }}
         />
-        <div className="min-w-0">
+        <div className="azd-identity">
           <p className="eyebrow">{heroEyebrow}</p>
           <h1>{azhwar.name}</h1>
           <p className="tamil" lang="ta">{azhwar.tamilName}</p>
@@ -158,8 +165,6 @@ export default function AzhwarDetailPage() {
           <p className="hero-summary">
             A life of devotion, remembered through {azhwar.pasuramCount.toLocaleString('en-IN')} sacred verses.
           </p>
-
-          {/* Stat row */}
           <div className="azd-stats">
             <span className="azd-stat">
               <BookOpen className="h-5 w-5" aria-hidden="true" />
@@ -170,44 +175,42 @@ export default function AzhwarDetailPage() {
               {desams.length} Divya Desams
             </span>
           </div>
-
-          {/* Birth facts row */}
-          <div className="azd-birth">
-            {azhwar.birthplace ? (
-              <div>
-                <p className="eyebrow azd-birth-label">
-                  <MapPin className="h-4 w-4" aria-hidden="true" />
-                  Birthplace
-                </p>
-                <p className="azd-birth-value">{azhwar.birthplace.name}</p>
-                {azhwar.birthplace.district ? (
-                  <p className="note">{azhwar.birthplace.district}</p>
-                ) : null}
-              </div>
-            ) : null}
-            {azhwar.birthStar ? (
-              <div>
-                <p className="eyebrow azd-birth-label">
-                  <Star className="h-4 w-4" aria-hidden="true" />
-                  Birth star
-                </p>
-                <p className="azd-birth-value">{azhwar.birthStar}</p>
-              </div>
-            ) : null}
-            {azhwar.amsam ? (
-              <div>
-                <p className="eyebrow azd-birth-label">
-                  <ShankaIcon className="h-4 w-5" />
-                  Divine amsam
-                </p>
-                <p className="azd-birth-value">{azhwar.amsam}</p>
-              </div>
-            ) : null}
-          </div>
+        </div>
+        <div className="azd-facts">
+          {azhwar.birthplace ? (
+            <div>
+              <p className="eyebrow azd-birth-label">
+                <MapPin className="h-4 w-4" aria-hidden="true" />
+                Birthplace
+              </p>
+              <p className="azd-birth-value">{azhwar.birthplace.name}</p>
+              {azhwar.birthplace.district ? (
+                <p className="note">{azhwar.birthplace.district}</p>
+              ) : null}
+            </div>
+          ) : null}
+          {azhwar.birthStar ? (
+            <div>
+              <p className="eyebrow azd-birth-label">
+                <Star className="h-4 w-4" aria-hidden="true" />
+                Birth star
+              </p>
+              <p className="azd-birth-value">{azhwar.birthStar}</p>
+            </div>
+          ) : null}
+          {azhwar.amsam ? (
+            <div>
+              <p className="eyebrow azd-birth-label">
+                <ShankaIcon className="h-4 w-5" />
+                Divine amsam
+              </p>
+              <p className="azd-birth-value">{azhwar.amsam}</p>
+            </div>
+          ) : null}
         </div>
       </section>
 
-      {/* Sticky five-tab rail (kxd round-17 idiom) */}
+      {/* Sticky five-tab rail (kxd idiom; hash behaviour per mock guidance) */}
       <div className="tabs-rail no-print">
         <div
           role="tablist"
@@ -249,7 +252,7 @@ export default function AzhwarDetailPage() {
               <p className="eyebrow">Life &amp; tradition</p>
               {firstBlock ? (
                 <div className="story">
-                  <h2>{firstBlock.heading}</h2>
+                  <h2 className="azd-display">{firstBlock.heading}</h2>
                   {firstBlock.paragraphs.map((p) => (
                     <p key={p.slice(0, 32)}>{p}</p>
                   ))}
@@ -257,6 +260,18 @@ export default function AzhwarDetailPage() {
               ) : (
                 <NotDocumented />
               )}
+
+              {restBlocks.length > 0 ? (
+                <button
+                  type="button"
+                  onClick={() => setStoryExpanded((v) => !v)}
+                  aria-expanded={storyExpanded}
+                  className="btn primary azd-story-toggle"
+                >
+                  {storyExpanded ? 'Show less' : 'Read the complete life story'}
+                  <ArrowRight className={`h-4 w-4${storyExpanded ? ' rotate-90' : ''}`} aria-hidden="true" />
+                </button>
+              ) : null}
 
               {restBlocks.length > 0 && storyExpanded ? (
                 <div className="azd-story-more">
@@ -270,18 +285,6 @@ export default function AzhwarDetailPage() {
                   ))}
                   <SaintLegend legend={azhwar.legend} />
                 </div>
-              ) : null}
-
-              {restBlocks.length > 0 ? (
-                <button
-                  type="button"
-                  onClick={() => setStoryExpanded((v) => !v)}
-                  aria-expanded={storyExpanded}
-                  className="text-btn"
-                >
-                  {storyExpanded ? 'Show less' : 'Read the complete life story'}
-                  <ArrowRight className={`h-4 w-4${storyExpanded ? ' rotate-90' : ''}`} aria-hidden="true" />
-                </button>
               ) : null}
 
               {(azhwar.bhaktiBhava || azhwar.preservation) ? (
@@ -344,122 +347,128 @@ export default function AzhwarDetailPage() {
 
         {tab === 'places' ? (
           <div>
-            <h3>Divya Desams glorified by {azhwar.name} ({desams.length})</h3>
-            <ul className="azd-desams">
-              {desams.map((k) => (
-                <li key={k.id}>
-                  <Link to={`/kshetram/${k.id}`}>{k.name}</Link>
-                </li>
-              ))}
-            </ul>
-            <p className="explore">
-              <Link className="text-btn" to={`/kshetrams?azhwar=${azhwar.id}`}>
-                Browse all {desams.length} desams →
-              </Link>
+            <h2 className="azd-display">Divya Desams in his hymns</h2>
+            <p className="azd-sub">
+              {desams.length} sacred places glorified by {azhwar.name}.
             </p>
+            <div className="azd-places">
+              {featuredDesam ? (
+                <figure className="azd-featured">
+                  <div className="azd-featured-frame">
+                    <img
+                      className="azd-featured-img"
+                      src={featuredPhoto.src ?? gopuramIllustration}
+                      alt={featuredPhoto.src ? `${featuredDesam.name} temple` : ''}
+                    />
+                  </div>
+                  <figcaption>
+                    <h3>{featuredDesam.name}</h3>
+                    <p className="note">One of the Divya Desams glorified by {azhwar.name}.</p>
+                    <Link className="text-btn azd-featured-link" to={`/kshetram/${featuredDesam.id}`}>
+                      View kshetram
+                      <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    </Link>
+                  </figcaption>
+                </figure>
+              ) : null}
+              <div>
+                <ol className="azd-dir">
+                  {earthlyDesams.map((k, i) => (
+                    <li key={k.id}>
+                      <Link to={`/kshetram/${k.id}`}>
+                        <span className="azd-dir-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                        <span className="azd-dir-name">{k.name}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+                {celestialDesams.length > 0 ? (
+                  <div className="visit-card azd-celestial">
+                    <p className="eyebrow azd-celestial-h">
+                      <LotusIcon className="h-4 w-4" />
+                      Celestial Divya Desams
+                    </p>
+                    <ol className="azd-dir azd-dir--celestial">
+                      {celestialDesams.map((k, i) => (
+                        <li key={k.id}>
+                          <Link to={`/kshetram/${k.id}`}>
+                            <span className="azd-dir-num" aria-hidden="true">{String(earthlyDesams.length + i + 1).padStart(2, '0')}</span>
+                            <span className="azd-dir-name">{k.name}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                ) : null}
+                <p className="azd-browse">
+                  <Link className="btn primary" to={`/kshetrams?azhwar=${azhwar.id}`}>
+                    Browse all {desams.length} desams
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </p>
+              </div>
+            </div>
           </div>
         ) : null}
 
         {tab === 'media' ? (
-          <SaintMedia visuals={azhwar.visuals} />
+          <SaintMedia
+            visuals={azhwar.visuals}
+            name={azhwar.name}
+            photo={azhwar.photos?.[0] ?? null}
+            onSeeSources={() => activateTab('sources')}
+          />
         ) : null}
 
         {tab === 'sources' ? (
-          <SaintSources sources={azhwar.sources} fallback={<NotDocumented />} />
+          <div className="azd-sources-grid">
+            <div>
+              <h2 className="azd-display">Sources &amp; further reading</h2>
+              <p className="azd-sub">Explore the repositories referenced in this archive.</p>
+              <SaintSources sources={azhwar.sources} fallback={<NotDocumented />} />
+            </div>
+            <aside className="visit-card azd-reading">
+              <p className="eyebrow azd-reading-h">
+                <BookOpen className="h-4 w-4" aria-hidden="true" />
+                Reading this archive
+              </p>
+              <p>
+                The traditional narratives of the Azhwars, found in Guru Parampara,
+                Sthala Puranas and Sri Vaishnava sampradaya sources, and modern
+                academic chronologies should be distinguished.
+              </p>
+              <p>
+                This source list provides further reading and helpful repositories
+                for exploring the life, works and context of {azhwar.name}. They are
+                not verified passage-level citations for the content on this site.
+              </p>
+            </aside>
+          </div>
         ) : null}
       </div>
 
-      {/* Opening-verse band (persistent) */}
+      {/* Opening-verse band — "The lamp of knowledge" (persistent) */}
       {verse?.tamil ? (
-        <section aria-label="Discover the opening verse" className="visit-card azd-verseband">
+        <section aria-label="The lamp of knowledge" className="visit-card azd-verseband">
+          <div className="azd-lamp" aria-hidden="true">
+            <LotusIcon className="h-10 w-10" />
+          </div>
           <div className="min-w-0">
-            <p className="eyebrow">Discover the opening verse</p>
-            <p className="tamil" lang="ta">{verse.tamil}</p>
+            <p className="eyebrow">The lamp of knowledge</p>
+            <p className="tamil azd-band-tamil" lang="ta">{verse.tamil}</p>
             {verse.work ? <p className="note">{verse.work}</p> : null}
           </div>
           <div className="azd-verseband-side">
             {verse.significance ? (
-              <div>
-                <p className="eyebrow">Meaning:</p>
-                <p className="note">{verse.significance}</p>
-              </div>
+              <p className="azd-band-meaning">{verse.significance}</p>
             ) : null}
-            <div className="actions">
-              <button
-                type="button"
-                onClick={() => activateTab('hymns')}
-                className="btn primary"
-              >
-                Read verse &amp; meaning
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </button>
-              {recitationHref ? (
-                <a
-                  href={recitationHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-btn"
-                >
-                  <Search className="h-4 w-4" aria-hidden="true" />
-                  Find recitations
-                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                </a>
-              ) : null}
-            </div>
+            <button type="button" onClick={() => activateTab('hymns')} className="azd-band-link">
+              Explore hymn &amp; meaning
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </button>
           </div>
         </section>
       ) : null}
-
-      {/* Birthplace / Sacred places cards */}
-      <div className="azd-cards">
-        {azhwar.birthplace ? (
-          <div className="visit-card">
-            <p className="eyebrow">Birthplace</p>
-            <h3>{azhwar.birthplace.name}</h3>
-            <p className="note">
-              {azhwar.birthplace.district ?? `Sacred birthplace of ${azhwar.name}.`}
-            </p>
-            {birthplaceLink ? (
-              <Link to={`/kshetram/${birthplaceLink}`} className="text-btn">
-                View kshetram
-                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-              </Link>
-            ) : null}
-          </div>
-        ) : null}
-        <div className="visit-card">
-          <p className="eyebrow">Sacred places</p>
-          <h3>{desams.length} Divya Desams</h3>
-          <p className="note">
-            Explore the {desams.length} Divya Desams glorified by {azhwar.name}
-            {verse?.work ? <> in the {verse.work}</> : null}.
-          </p>
-          <Link
-            to={`/kshetrams?azhwar=${azhwar.id}`}
-            className="text-btn"
-          >
-            Explore all {desams.length}
-            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-          </Link>
-        </div>
-      </div>
-
-      {/* Sources summary row → opens the Sources tab */}
-      <button
-        type="button"
-        onClick={() => activateTab('sources')}
-        aria-haspopup="tab"
-        className="azd-source-row"
-      >
-        <span className="azd-source-main">
-          <BookOpen className="h-5 w-5" aria-hidden="true" />
-          <span className="min-w-0">
-            <span className="azd-source-title">Sources &amp; Sampradaya Texts</span>
-            <span className="note">Traditional texts, commentaries and references.</span>
-          </span>
-        </span>
-        <ChevronRight className="h-5 w-5" aria-hidden="true" />
-      </button>
 
       {/* Bottom chronological navigation */}
       <nav className="explore azd-nav" aria-label="Chronological navigation">

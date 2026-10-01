@@ -1820,3 +1820,104 @@ site-copy changes** — `sync-content --fixture --check` 0-diff.
 | E2E (Playwright, Chromium) | **19/19 journeys pass** (TC-18/TC-19 unchanged) |
 | Measured | Azhwar: h1 56px Source Serif 4, body 17/28 DM Sans, portrait 300px, sticky rail pins at 64px, tab click writes `#hymns`; Acharya: h1 56px, fact rows + sticky rail, verse card present; 0px horizontal overflow at 1280/390 on both pages |
 | Visual gate | **7/7 renders pass** (azhwar desktop life+hymns+mobile, acharya desktop+mobile, kshetram desktop+mobile regression) — `docs/03-design/gate-shots/azhwar-acharya-kxd-restyle-18/` |
+
+## Version 2.27 — Azhwar Detail Recreated to the Poigai Mock (2026-10-01, round 19)
+
+PO request: "Refresh the design of Azhwars detail page exactly the same as
+the attached mockups" — five generated desktop mockups
+(`poigai-redesign-mockups.zip`: 01-life … 05-sources + design-notes.md)
+inspecting every tab of /azhwar/poigai. **Visual/interaction refresh, no
+data changes** (`sync-content --fixture --check` 0-diff); built on the kxd
+theme from round 18 (same palette, fonts, tab rail, hash behaviour per the
+design notes' "keep the current URL hash behavior").
+
+### Implementation
+
+- **Compact shared profile shell** (hymns mock = the reference): portrait
+  column 240px, identity block (56px serif name, gold Tamil line, first
+  epithet serif, remaining epithets as pills, summary line, pasurams |
+  Divya Desams stat row), birth-facts columns (Birthplace / Birth star /
+  Divine amsam) with vertical rules to the right. Hero measured 372px
+  (was 531px). Breadcrumb is a plain path ("← All Azhwars › Poigai
+  Azhwar") — the round-11 next-azhwar crumb pill is retired.
+- **Life & tradition**: narrative (dataset first life-history block) with
+  a maroon "Read the complete life story" pill, expanded blocks + legend,
+  bhakti/preservation callouts and era note; **Key moments** aside is now
+  a gold-dot timeline on a connector line (the dataset `when` labels match
+  the mock's five moments exactly).
+- **Hymns & meaning** (SaintVerse rebuilt): editorial verse reader —
+  Tamil excerpt (`white-space: pre-line`), gold-flag TRANSLITERATION and
+  MEANING blocks (MEANING falls back to the dataset significance; the
+  sidebar "About this verse" only renders when both fields exist),
+  maroon "Find recitations" pill — beside a WORD-BY-WORD MEANING glossary
+  sidebar (serif word + sans meaning rows); "Commentary & anubhavam"
+  accordion rows below (renamed from "Theological commentary &
+  anubhavam"); Sacred-works list kept.
+- **Sacred places**: "Divya Desams in his hymns" + count subtitle,
+  featured desam photo card (first desam whose enriched record has a wiki
+  image — gopuram-illustration fallback; "View kshetram" link) beside a
+  numbered two-column directory, with the two Celestial desams grouped in
+  a tinted "Celestial Divya Desams" card; maroon "Browse all 12 desams"
+  pill.
+- **Media** (SaintMedia rebuilt): "Listen, learn & contemplate" rows —
+  speaker split from the search-title via the dataset's three speaker
+  names (Velukkudi Krishnan / Karunakarachariar / Ananthapadmanabhachariar),
+  red "Search on YouTube ↗" action (destinations unchanged, nothing
+  implies playable recordings) — beside a Sacred-iconography sidebar
+  (portrait via `assetUrl`, posture/mudras/garments/shrine rows, digital
+  texts with derived repository links, "See sources" tab jump).
+- **Sources** (SaintSources rebuilt): "Sources & further reading" rows —
+  serif title + gold domain parsed from the "Title — domain" strings,
+  external links derived from the dataset domains only (first row gets an
+  "Open repository →" pill, the rest circle arrows) — beside the tinted
+  "Reading this archive" note card.
+- **"The lamp of knowledge" opening-verse band** (persistent): gold lotus
+  tile stand-in for the mock's lamp artwork, Tamil verse, work caption,
+  significance note and an "Explore hymn & meaning" jump (renamed from
+  "Read verse & meaning"). The round-11 birthplace/sacred-places cards
+  and sources summary row are retired (absorbed into the Places/Sources
+  tabs); the bottom prev/next nav stays.
+- Hash-synced sticky tab rail unchanged (rounds 16–19 idiom).
+
+### Flagged (mock-authored copy / PO-owned)
+
+- "The lamp of knowledge" band title, "Reading this archive" note text,
+  "Sources & further reading"/"Explore the repositories…" and
+  "Listen, learn & contemplate"/"Selected discourses…" titles are
+  mock-authored (not dataset fields) — rendered as-is and replaceable via
+  future CMS fields.
+- Mock source-row descriptions and the condensed verse MEANING wording
+  are PO-authored; dataset significance stands in.
+- The mock's lamp photograph and places editorial image are generated
+  illustrations; the implementation uses the PO-supplied portrait,
+  Wikipedia photography and the gopuram fallback per the design notes
+  ("replace with a verified photograph before publication").
+- The mock featured Srirangam in the places card; the implementation
+  features the first desam with an available image (Kanchipuram
+  Varadaraja Perumal for Poigai) — deterministic and dataset-driven.
+- `manavala-mamunigal`-style miracle/data quirks noted in TER v2.26 are
+  unchanged (acharya page untouched this round).
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/pages/AzhwarDetailPage.jsx` | Mock shell rebuild (hero, places/sources tabs, lamp band, crumb) |
+| `app/src/components/saint/{SaintVerse,SaintMedia,SaintSources,SaintKeyMoments}.jsx` | Rebuilt to the mock layouts (+ `assetUrl` for the media portrait) |
+| `app/src/styles/saint-detail.css` | Round-19 azhwar layout classes |
+| `app/src/pages/__tests__/saintPages.test.jsx` | Renamed contracts: "explore hymn & meaning", "the lamp of knowledge", commentary heading, places-tab view-kshetram/browse asserts |
+| `app/src/components/saint/__tests__/saintComponents.test.jsx` | "Find recitations" link name; "Commentary & anubhavam" heading |
+| `app/e2e/yatra.spec.js` | TC-18: view-kshetram via the Sacred places tab; "explore hymn & meaning" |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 4 warnings (accepted set) |
+| Unit tests (Vitest) | **226/226 pass (21 suites)** |
+| Coverage | **90.43% statements / 81.85% branches / 85.95% functions / 92.16% lines** (gate 80%) |
+| Production build | Clean |
+| CMS round-trip | `sync-content --fixture --check` 0-diff |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** (TC-18 updated in lockstep) |
+| Measured | h1 56px Source Serif 4, display h2 40px, portrait 240px, hero 372px, rail sticky; tab click writes `#sources`; 0px horizontal overflow at 1440/1280/390 across life/places/media tabs |
+| Visual gate | **7/7 renders pass vs the PO mockups** (five desktop tabs + two mobile) — `docs/03-design/gate-shots/azhwar-poigai-mock-restyle-19/`; first pass caught the missing MEANING block, a broken media portrait (missing base-path `assetUrl`) and the missing Sources heading, all fixed |
