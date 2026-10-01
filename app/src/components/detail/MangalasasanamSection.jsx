@@ -1,9 +1,10 @@
 /**
- * MangalasasanamSection — sacred hymns of the Azhwars (FR-64/65/83) in the
- * round-16 mock's layout: per-Azhwar count pills, centered verse cards
- * (Tamil lines split on the dataset's "*" markers), word-by-word meaning
- * glossary tables, commentary, and a listen link. Falls back to the legacy
- * single-pasuram display.
+ * MangalasasanamSection — sacred hymns of the Azhwars (FR-64/65/83),
+ * rescanned per the PO round-17 audit: a compact three-column Azhwar
+ * name/count list (two columns on mobile), verse cards with intentional
+ * line breaks, and the word-by-word glossary + commentary in labelled
+ * disclosure sections so the verse and Listen action stay visible.
+ * Falls back to the legacy single-pasuram display.
  * @param {object} props
  * @param {Kshetram & object} props.kshetram - enriched record
  */
@@ -30,7 +31,7 @@ function verseLines(text) {
   return lines.length > 0 ? lines : null;
 }
 
-/** One excerpt: verse card + glossary table + commentary. */
+/** One excerpt: verse card + glossary/commentary disclosures. */
 function Excerpt({ excerpt }) {
   const azhwar = getAzhwarById(excerpt.azhwarId);
   const href = listenHrefFor(excerpt);
@@ -63,8 +64,8 @@ function Excerpt({ excerpt }) {
         ) : null}
       </div>
       {Array.isArray(excerpt.wordMeanings) && excerpt.wordMeanings.length > 0 ? (
-        <>
-          <h3>Word-by-word meaning</h3>
+        <details className="disclosure">
+          <summary>Word-by-word meaning</summary>
           <table className="glossary" aria-label="Pasuram phrase meanings">
             <tbody>
               {excerpt.wordMeanings.map(([word, meaning]) => (
@@ -75,13 +76,13 @@ function Excerpt({ excerpt }) {
               ))}
             </tbody>
           </table>
-        </>
+        </details>
       ) : null}
       {excerpt.significance ? (
-        <>
-          <h3>Commentary</h3>
+        <details className="disclosure">
+          <summary>Commentary</summary>
           <p>{excerpt.significance}</p>
-        </>
+        </details>
       ) : null}
     </>
   );
@@ -107,28 +108,29 @@ export default function MangalasasanamSection({ kshetram }) {
       <h2>Mangalasasanam</h2>
       <p className="value">Sacred hymns of the Azhwars</p>
       {m?.perAzhwar?.length ? (
-        <p className="muted">
-          {total ? <strong>{total.toLocaleString('en-IN')} pasurams</strong> : null}
-          {total ? ' · ' : ''}
-          {m.perAzhwar.length} Azhwars:
-        </p>
-      ) : null}
-      {m?.perAzhwar?.length ? (
-        <div className="azhwar-counts">
-          {m.perAzhwar.map(([azhwarId, count]) => {
-            const azhwar = getAzhwarById(azhwarId);
-            return (
-              <Link
-                key={azhwarId}
-                to={`/azhwar/${azhwarId}`}
-                className="pill"
-                title={`${azhwar?.name ?? azhwarId}: ${count ?? '—'} pasurams`}
-              >
-                {azhwar?.name ?? azhwarId} · {count}
-              </Link>
-            );
-          })}
-        </div>
+        <>
+          <p className="muted">
+            {total ? <strong>{total.toLocaleString('en-IN')} pasurams</strong> : null}
+            {total ? ' · ' : ''}
+            {m.perAzhwar.length} Azhwars:
+          </p>
+          <ul className="azhwar-list">
+            {m.perAzhwar.map(([azhwarId, count]) => {
+              const azhwar = getAzhwarById(azhwarId);
+              return (
+                <li key={azhwarId}>
+                  <Link
+                    to={`/azhwar/${azhwarId}`}
+                    title={`${azhwar?.name ?? azhwarId}: ${count ?? '—'} pasurams`}
+                  >
+                    <span>{azhwar?.name ?? azhwarId}</span>
+                    <span className="azhwar-count"> · {count}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </>
       ) : null}
       {m?.excerpts?.length
         ? m.excerpts.map((excerpt) => (

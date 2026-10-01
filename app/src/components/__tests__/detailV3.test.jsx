@@ -39,16 +39,17 @@ describe('ShrineProfile (UT-DTL-06, FR-83)', () => {
 });
 
 describe('DeityBreakdown (UT-DTL-06, FR-83/85)', () => {
-  it('renders two columns with names, etymology, Thaayar legend and photo strips', () => {
-    const onOpenPhoto = vi.fn();
-    render(<DeityBreakdown kshetram={srirangam} onOpenPhoto={onOpenPhoto} />);
+  it('renders two text-first columns with names, etymology, Thaayar legend and labels', () => {
+    render(<DeityBreakdown kshetram={srirangam} onOpenPhoto={vi.fn()} />);
     expect(screen.getByRole('heading', { name: /deities & consorts/i })).toBeInTheDocument();
     expect(screen.getAllByText(/Ranganathan \/ Periya Perumal/i).length).toBeGreaterThan(0);
     expect(screen.getByText(/Master of the sacred stage/i)).toBeInTheDocument();
     expect(screen.getByText(/never steps past the threshold/i)).toBeInTheDocument();
-    expect(screen.getByText(/Garbhagriha/i)).toBeInTheDocument(); // sanctum note
-    const stripButtons = screen.getAllByRole('button', { name: /photo/i });
-    expect(stripButtons.length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByText(/Garbhagriha/i)).toBeInTheDocument(); // sanctum callout
+    // Round 17 audit: the shared temple lead image is NOT reused as a
+    // "deity" photo — a not-available note appears instead
+    expect(screen.getAllByText(/deity photo not available\./i).length).toBe(2);
+    expect(screen.queryAllByRole('button', { name: /photo/i })).toHaveLength(0);
   });
 
   it('falls back to legacy V2 deity fields and shows placeholders when no photos exist', () => {
@@ -57,11 +58,21 @@ describe('DeityBreakdown (UT-DTL-06, FR-83/85)', () => {
     expect(screen.getByText(/Komala Valli/i)).toBeInTheDocument();
   });
 
-  it('opens the lightbox via a photo strip button', async () => {
+  it('opens the lightbox via a curated src photo button', async () => {
     const user = userEvent.setup();
     const onOpenPhoto = vi.fn();
-    render(<DeityBreakdown kshetram={srirangam} onOpenPhoto={onOpenPhoto} />);
-    await user.click(screen.getAllByRole('button', { name: /photo/i })[0]);
+    const withCuratedPhoto = {
+      ...srirangam,
+      deities: {
+        ...srirangam.deities,
+        moolavar: {
+          ...srirangam.deities.moolavar,
+          photos: [{ src: 'moolavar.png', alt: 'Moolavar at the sanctum' }],
+        },
+      },
+    };
+    render(<DeityBreakdown kshetram={withCuratedPhoto} onOpenPhoto={onOpenPhoto} />);
+    await user.click(screen.getByRole('button', { name: /photo/i }));
     expect(onOpenPhoto).toHaveBeenCalled();
   });
 });
@@ -88,7 +99,7 @@ describe('MangalasasanamSection (FR-83/64/65)', () => {
     render(<MemoryRouter><MangalasasanamSection kshetram={srirangam} /></MemoryRouter>);
     expect(screen.getByText(/247 pasurams/i)).toBeInTheDocument();
     expect(screen.getByText(/11 Azhwars:/i)).toBeInTheDocument();
-    expect(screen.getByText(/Thirumangai Azhwar · 73/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Thirumangai Azhwar\s*·\s*73/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /Thirumaalai/i })).toBeInTheDocument();
     expect(screen.getByText(/Bhagavat-Anubhava/i)).toBeInTheDocument();
   });
@@ -100,10 +111,17 @@ describe('MangalasasanamSection (FR-83/64/65)', () => {
 });
 
 describe('VisitInfoSection (FR-83)', () => {
-  it('shows timings plus not-yet-documented fallbacks for missing blocks', () => {
+  it('shows timings plus the collapsed not-yet-documented note for missing blocks', () => {
     render(<VisitInfoSection kshetram={srirangam} />);
     expect(screen.getAllByText(/06:15/).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/not yet documented yet\./i).length).toBeGreaterThanOrEqual(3);
+    // Round 17 audit: srirangam documents no festivals/access/tips/references,
+    // so the four rows collapse into one short note
+    expect(screen.getByText(/additional travel and darshan details are not yet documented\./i)).toBeInTheDocument();
+    // srirangam's daily Vishwaroopa darshan sits under its own heading…
+    expect(screen.getByRole('heading', { name: /special darshan timings/i })).toBeInTheDocument();
+    // …while the Ekadasi reference becomes a separately labelled festival note
+    expect(screen.getByRole('heading', { name: /festival note/i })).toBeInTheDocument();
+    expect(screen.getByText('Ekadasi special')).toBeInTheDocument();
   });
 
   it('renders festivals, access, tips and references when documented', () => {

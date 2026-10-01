@@ -33,15 +33,14 @@ const CEO_NAME = ABOUT.ceo.name;
 /** Region dropdown rows — names/highlights from site copy, counts computed from the live dataset. */
 const REGION_ROWS = SITE_COPY.header.regionRows;
 
-// PO round 4: pills must never wrap to a second row, so below xl (where the
-// 19.5px labels cannot fit beside the brand) they drop to 13px with tighter
-// padding; xl+ keeps the round-2 50% size.
-const pillBase = 'px-1.5 xl:px-2 py-1 rounded-full font-medium transition-all flex items-center gap-1.5 whitespace-nowrap';
-// PO round 3 item 6: the header sits on the deep saffron band, so idle pills
-// are cream and active pills are frosted white with a gold ring. The hover
-// bang beats the unlayered `color: inherit` override in base.css.
-const pillIdle = 'hover:bg-[#FFFDF7]/10 hover:text-[#E2C47C]! text-[#FFFDF7]';
-const pillActive = 'bg-[#FFFDF7]/15 text-[#FFFDF7] font-bold ring-1 ring-[#E2C47C]/60 shadow-2xs';
+// PO round 4: pills must never wrap to a second row. PO round 17: the
+// primary nav is a calm row of text links on one flat surface — 16px
+// labels, a single subtle pill for the active item, no stacked badges.
+const pillBase = 'px-2 py-1.5 rounded-full font-medium transition-all flex items-center gap-1.5 whitespace-nowrap';
+// The header nav carries the unlayered `color: inherit` rule in base.css,
+// so text-color utilities on nav anchors need the important bang.
+const pillIdle = 'text-[#FFFDF7] hover:text-[#E2C47C]!';
+const pillActive = 'bg-[#FFFDF7]/15 text-[#E2C47C]! font-bold';
 
 export default function Header() {
   const { count: tripCount } = useTrip();
@@ -115,10 +114,10 @@ export default function Header() {
   const drawerActive = 'bg-[#B34700]/15 text-[#B34700] font-bold';
 
   return (
-    <header className="site-header sticky top-0 z-50 bg-gradient-to-r from-[#7A2E00] to-[#B34700] shadow-md">
-      {/* Gold hairlines crown and foot the full-bleed band (PO round 3 item 6) */}
-      <div className="h-[2px] bg-gradient-to-r from-transparent via-[#E2C47C] to-transparent"></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between gap-2 xl:gap-4">
+    <header className="site-header sticky top-0 z-50 bg-[#7A2E00]">
+      {/* PO round 17: one calm surface + a single 1px bottom rule (was:
+          gradient band + two gold hairlines + shadow) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 lg:h-16 flex items-center justify-between gap-2 xl:gap-4">
 
         {/* ================= 1. BRAND LOGO & SACRED TITLE ================= */}
         <Link
@@ -127,7 +126,7 @@ export default function Header() {
           className="flex items-center gap-2.5 shrink-0 text-left group"
           title="108 Divya Kshetrams — Sanctuary Home"
         >
-          <div className="p-1 rounded-lg bg-[#FAF2E3] border border-[#C99A2E]/50 group-hover:border-[#C99A2E] shadow-2xs group-hover:shadow-xs transition-all">
+          <div className="p-1 rounded-lg bg-[#FAF2E3] border border-[#C99A2E]/50 group-hover:border-[#C99A2E] transition-all">
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="#C99A2E" aria-hidden="true" focusable="false">
               <circle cx="12" cy="2.2" r="1.3" />
               <path d="M9.6 4.7h4.8l-.5 3H10.1l-.5-3z" />
@@ -139,7 +138,7 @@ export default function Header() {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
-              <span className="font-display text-[1.28rem] sm:text-[1.38rem] font-bold text-[#FFFDF7] leading-none whitespace-nowrap group-hover:text-[#E2C47C] transition-colors">
+              <span className="font-display text-[1.125rem] lg:text-[1.375rem] font-bold text-[#FFFDF7] leading-none whitespace-nowrap group-hover:text-[#E2C47C] transition-colors">
                 108 Divya Kshetrams
               </span>
               <ThirumanIcon className="w-3.5 h-4.5 hidden sm:inline-block opacity-85 shrink-0" />
@@ -148,10 +147,7 @@ export default function Header() {
         </Link>
 
         {/* ================= 2. DESKTOP NAVIGATION ================= */}
-        {/* PO round 4 fix: children never shrink and never wrap — the two
-            split pills ("108 Kshetras", "Kshetra Tours") otherwise compress
-            under space pressure and fold their labels onto a second line */}
-        <nav className="hidden lg:flex flex-nowrap items-center justify-end gap-x-0.5 text-[13px] xl:text-[19.5px] text-[#FFFDF7] [&>*]:shrink-0 [&>*]:whitespace-nowrap" aria-label="Primary">
+        <nav className="hidden lg:flex flex-nowrap items-center justify-end gap-x-0.5 text-[16px] text-[#FFFDF7] [&>*]:shrink-0 [&>*]:whitespace-nowrap" aria-label="Primary">
 
           {/* A. HOME */}
           <NavLink
@@ -176,22 +172,22 @@ export default function Header() {
               <NavLink
                 to="/kshetrams"
                 onClick={closeAll}
-                className={`pl-2 pr-1 py-1 rounded-l-full font-medium transition-all flex items-center gap-1.5 ${isBrowseActive ? pillActive : pillIdle}`}
+                className={`pl-2.5 pr-1 py-1.5 rounded-l-full font-medium transition-all flex items-center gap-1.5 ${isBrowseActive ? pillActive : pillIdle}`}
                 title="Browse All 108 Divya Desams"
               >
-                <Compass className="w-3.5 h-3.5 text-[#E2C47C]" aria-hidden="true" />
+                <Compass className="w-4 h-4 text-[#E2C47C]" aria-hidden="true" />
                 <span>108 Kshetras</span>
               </NavLink>
 
               <button
                 type="button"
                 onClick={() => setTempleDropdownOpen((prev) => !prev)}
-                className={`pr-1.5 py-1 rounded-r-full font-medium transition-all ${isBrowseActive ? 'bg-[#FFFDF7]/15 text-[#FFFDF7] ring-1 ring-[#E2C47C]/60' : 'hover:bg-[#FFFDF7]/10 hover:text-[#E2C47C]! text-[#FFFDF7]'}`}
+                className={`pr-2 py-1.5 rounded-r-full font-medium transition-all ${isBrowseActive ? 'bg-[#FFFDF7]/15 text-[#FFFDF7]' : 'text-[#FFFDF7] hover:text-[#E2C47C]'}`}
                 aria-label="Toggle Regional Temples Dropdown"
                 aria-expanded={templeDropdownOpen}
               >
                 <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${templeDropdownOpen ? 'rotate-180 text-[#B34700]' : 'text-[#66523D]'}`}
+                  className={`w-4 h-4 transition-transform duration-200 ${templeDropdownOpen ? 'rotate-180 text-[#FFFDF7]' : 'text-[#E2C47C]'}`}
                   aria-hidden="true"
                 />
               </button>
@@ -312,39 +308,32 @@ export default function Header() {
             <div
               className={`flex items-center rounded-full border transition-all ${
                 isAboutActive
-                  ? 'bg-gradient-to-r from-[#E2C47C] to-[#C99A2E] text-[#4A3005] border-[#FFFDF7] shadow-sm'
-                  : 'bg-gradient-to-r from-[#FAF2E3] to-[#FFFDF7] hover:border-[#E2C47C] border-[#C99A2E]/50 text-[#7A2E00] shadow-2xs'
+                  ? 'bg-[#FFFDF7]/15 border-[#E2C47C]/60 text-[#E2C47C]!'
+                  : 'border-[#FFFDF7]/30 text-[#FFFDF7] hover:border-[#E2C47C] hover:text-[#E2C47C]!'
               }`}
             >
               <NavLink
                 to="/about"
                 onClick={closeAll}
-                className="pl-2.5 pr-1 py-1 font-bold flex items-center gap-1.5"
+                className="pl-2.5 pr-1 py-1.5 font-bold flex items-center gap-1.5"
                 title="Kshetra Tours — About the digital archive & pilgrimage trust"
               >
                 <Award
-                  className={`w-3.5 h-3.5 ${isAboutActive ? 'text-[#4A3005]' : 'text-[#B34700]'}`}
+                  className="w-4 h-4 text-[#E2C47C]"
                   aria-hidden="true"
                 />
                 <span>Kshetra Tours</span>
-                <span
-                  className={`text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded-full tracking-wider ${
-                    isAboutActive ? 'bg-[#7A2E00]/15 text-[#4A3005]' : 'bg-[#C99A2E]/20 text-[#7A2E00]'
-                  }`}
-                >
-                  Guided Yatras
-                </span>
               </NavLink>
 
               <button
                 type="button"
                 onClick={() => setToursDropdownOpen((prev) => !prev)}
-                className="pr-2 py-1"
+                className="pr-2 py-1.5"
                 aria-label="Toggle Kshetra Tours Menu"
                 aria-expanded={toursDropdownOpen}
               >
                 <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${toursDropdownOpen ? 'rotate-180' : ''} ${isAboutActive ? 'text-[#4A3005]' : 'text-[#7A2E00]'}`}
+                  className={`w-4 h-4 transition-transform duration-200 ${toursDropdownOpen ? 'rotate-180' : ''} text-[#E2C47C]`}
                   aria-hidden="true"
                 />
               </button>
@@ -506,8 +495,8 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Decorative Gold Border Gradient */}
-      <div className="h-[2px] bg-gradient-to-r from-transparent via-[#C99A2E] to-transparent"></div>
+      {/* Single 1px bottom rule (PO round 17) */}
+      <div className="h-px bg-[#E2C47C]/45"></div>
 
       {/* ================= 4. MOBILE NAVIGATION DRAWER ================= */}
       {mobileMenuOpen && (

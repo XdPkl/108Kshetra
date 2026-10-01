@@ -1,10 +1,10 @@
 /**
- * DeityBreakdown — two-column Moolavar | Urchavar breakdown (FR-83/85) in
- * the round-16 mock's ruled columns: photo with lightbox, Tamil/Sanskrit/
- * transliteration names, italic form note, etymology and a Thaayar consort
- * block. Falls back to the legacy V2 deity fields, then to the documented
- * placeholder. The dossier names blob ("… Sanskrit: … Transliteration: …")
- * is parsed into its three display lines.
+ * DeityBreakdown — two-column Moolavar | Urchavar breakdown (FR-83/85),
+ * text-first per the PO round-17 audit: curated `src` photos only (the
+ * shared temple lead image is NOT reused as a "deity" photo — a small
+ * "Deity photo not available." note appears instead), Name/Form/Consort/
+ * Meaning groups with clear labels, and the sanctum clarification as a
+ * tinted callout. Falls back to the legacy V2 deity fields.
  * @param {object} props
  * @param {Kshetram & object} props.kshetram - enriched record
  * @param {(photos: object[], index: number) => void} props.onOpenPhoto - opens the lightbox
@@ -12,16 +12,9 @@
 import { useWikiImage } from '../../hooks/useWikiImage.js';
 import NotDocumented from './NotDocumented.jsx';
 
-/** Normalises a deity entry's photo list to {src?|wiki?, alt, credit?} items. */
-function photosFor(deity, fallbackWiki, fallbackAlt) {
-  if (deity?.photos?.length) return deity.photos.slice(0, 3);
-  if (fallbackWiki) return [{ wiki: fallbackWiki, alt: fallbackAlt }];
-  return [];
-}
-
-/** Resolves a photo entry (src or wiki title) to a displayable image URL. */
+/** Resolves a curated photo entry (explicit src only) for display. */
 function PhotoImg({ photo, alt, className }) {
-  const image = useWikiImage(photo.wiki ?? null, photo.src ?? null);
+  const image = useWikiImage(null, photo.src ?? null);
   if (!image.src) {
     return <span className="flex aspect-video items-center justify-center text-3xl text-[#96731F]/70" aria-hidden="true">◆</span>;
   }
@@ -52,7 +45,7 @@ function parseNames(names = {}) {
   return { tamil: tamil.trim() || null, sanskrit, translit };
 }
 
-function DeityColumn({ title, deity, legacy, fallbackWiki, onOpenPhoto }) {
+function DeityColumn({ title, deity, legacy, onOpenPhoto }) {
   if (!deity && !legacy) {
     return (
       <div>
@@ -62,7 +55,9 @@ function DeityColumn({ title, deity, legacy, fallbackWiki, onOpenPhoto }) {
     );
   }
   const d = deity ?? {};
-  const photos = photosFor(deity, fallbackWiki, `${title} at this kshetram`);
+  // Audit tab 2: only curated (direct-src) photos qualify as deity photos;
+  // wiki-titled entries just repeat the temple lead image.
+  const photos = (deity?.photos ?? []).filter((p) => p.src).slice(0, 3);
   const thaayars = Array.isArray(d.thaayar)
     ? d.thaayar
     : d.thaayar
@@ -81,7 +76,7 @@ function DeityColumn({ title, deity, legacy, fallbackWiki, onOpenPhoto }) {
     <div>
       <h3>{title}</h3>
 
-      {/* Lead photo (lightbox) */}
+      {/* Curated deity photo (lightbox) */}
       {lead ? (
         <button
           type="button"
@@ -93,15 +88,15 @@ function DeityColumn({ title, deity, legacy, fallbackWiki, onOpenPhoto }) {
           {lead.credit ? <p className="note px-2 py-1">{lead.credit}</p> : null}
         </button>
       ) : (
-        <p className="note">Sannidhi photo forthcoming.</p>
+        <p className="note">Deity photo not available.</p>
       )}
 
-      {/* Extra photo thumbnails */}
+      {/* Extra curated photo thumbnails */}
       {rest.length > 0 ? (
         <div className="deity-thumbs">
           {rest.map((photo, i) => (
             <button
-              key={`${photo.src ?? ''}-${i}`}
+              key={`${photo.src}-${i}`}
               type="button"
               onClick={() => onOpenPhoto(photos, i + 1)}
               aria-label={`View ${title} photo ${i + 2}`}
@@ -112,6 +107,7 @@ function DeityColumn({ title, deity, legacy, fallbackWiki, onOpenPhoto }) {
         </div>
       ) : null}
 
+      <div className="label">Name</div>
       {displayName ? <p className="deity-name">{displayName}</p> : null}
       {tamilName ? <p className="tamil-small" lang="ta">{tamilName}</p> : null}
       {names.sanskrit ? (
@@ -124,8 +120,19 @@ function DeityColumn({ title, deity, legacy, fallbackWiki, onOpenPhoto }) {
       ) : names.translit && displayName !== names.translit ? (
         <p>Transliteration: {names.translit}</p>
       ) : null}
-      {formNote ? <p><em>{formNote}</em></p> : null}
-      {d.etymology ? <p>{d.etymology}</p> : null}
+
+      {formNote ? (
+        <>
+          <div className="label">Form</div>
+          <p><em>{formNote}</em></p>
+        </>
+      ) : null}
+      {d.etymology ? (
+        <>
+          <div className="label">Meaning</div>
+          <p>{d.etymology}</p>
+        </>
+      ) : null}
 
       {thaayars.length > 0 ? (
         <div className="consort">
@@ -159,18 +166,21 @@ export default function DeityBreakdown({ kshetram, onOpenPhoto }) {
                 : null,
             }
             : null}
-          fallbackWiki={kshetram.wiki}
           onOpenPhoto={onOpenPhoto}
         />
         <DeityColumn
           title="Urchavar"
           deity={t?.urchavar}
           legacy={kshetram.urchavar}
-          fallbackWiki={null}
           onOpenPhoto={onOpenPhoto}
         />
       </div>
-      {t?.sanctumNote ? <p className="note section-rule">{t.sanctumNote}</p> : null}
+      {t?.sanctumNote ? (
+        <div className="sanctum-callout">
+          <div className="label">Sanctum note</div>
+          <p>{t.sanctumNote}</p>
+        </div>
+      ) : null}
     </section>
   );
 }

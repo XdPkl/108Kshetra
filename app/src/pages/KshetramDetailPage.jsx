@@ -1,15 +1,13 @@
 /**
  * KshetramDetailPage — Detail template for one kshetram at /kshetram/:id
- * (FR-30..33, FR-60..87), recreated to the PO mock (2026-10-01, PO round
- * 16, triplicane reference): paper/rust palette scoped under `.kxd`
- * (kshetram-detail.css), "Kshetras / name" breadcrumb, split hero
- * (Divya-Desam eyebrow, serif name, Tamil, temple name, pin row,
- * significance, trip/visited/share/print actions | temple photo), an
- * accessible seven-tab switcher with URL-hash deep links wrapping the
- * mock-styled sections, a status toast for the yatra toggles and a
- * "Plan your visit" card beside the Overview tab. Celestial desams keep
- * hiding the earthly features (no visit/location tabs, no sidebar,
- * celestial note). No data changes.
+ * (FR-30..33, FR-60..87). Round-16 mock recreation, compacted per the PO
+ * round-17 UX audit: compact hero (56px title, 300px photo, tight rhythm),
+ * sticky tab rail under the global header with scroll-into-view activation,
+ * Overview restructured so "Shrine at a glance" starts under the article
+ * column beside the 310px visit card, factual intro (profile.location, not
+ * mythological prose) and dossier-first deity names (reconciles the
+ * Overview/Deities Moolavar mismatch). Status toast, hash deep links and
+ * celestial gating unchanged. No data changes.
  */
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -60,13 +58,14 @@ export default function KshetramDetailPage() {
   const photo = useWikiImage(kshetram?.wiki ?? null, kshetram?.photos?.[0]?.src ?? null);
   const [tab, setTab] = useState('overview');
   const tabRefs = useRef({});
+  const panelRef = useRef(null);
   const [notice, setNotice] = useState('');
   const noticeTimer = useRef(null);
   // Celestial gating is needed by the hash effect, so compute it pre-return
   const celestial = !kshetram?.coords && !kshetram?.timings && kshetram?.state === 'Celestial';
 
-  // URL-hash deep links (#location etc.) — mock behaviour: activate the
-  // hashed tab on load, write the hash on every switch, follow hashchange.
+  // URL-hash deep links (#location etc.) — activate the hashed tab on load,
+  // write the hash on every switch, follow hashchange.
   useEffect(() => {
     const applyHash = () => {
       const hash = window.location.hash.slice(1);
@@ -106,17 +105,21 @@ export default function KshetramDetailPage() {
     : '';
   const gpsText = kshetram.profile?.gps
     ?? (coords ? `${coords[0]}° N, ${coords[1]}° E` : null);
-  // Mock Overview intro: the first puranam paragraph (dataset-mapped)
-  const intro = Array.isArray(kshetram.puranam?.legend)
-    ? kshetram.puranam.legend[0] ?? null
-    : typeof kshetram.puranam === 'string' ? kshetram.puranam : null;
-  const moolavarName = kshetram.deities?.moolavar?.name
+  // Audit tab 1: a brief factual orientation — the profile's location text,
+  // not the mythological origin prose (which stays in the History tab).
+  const intro = kshetram.profile?.location
+    ?? (Array.isArray(kshetram.puranam?.legend)
+      ? kshetram.puranam.legend[0] ?? null
+      : typeof kshetram.puranam === 'string' ? kshetram.puranam : null);
+  // Audit tab 1: dossier-first names reconcile the Overview with the
+  // Deities tab (srirangam's enrichment name said "Nam Perumal").
+  const moolavarName = kshetram.deities?.moolavar?.names?.translit
+    ?? kshetram.deities?.moolavar?.name
     ?? kshetram.moolavar?.name
-    ?? kshetram.deities?.moolavar?.names?.translit
     ?? null;
-  const thaayarName = kshetram.deities?.thaayars?.[0]?.name
+  const thaayarName = kshetram.deities?.moolavar?.thaayar?.name
+    ?? kshetram.deities?.thaayars?.[0]?.name
     ?? kshetram.thaayar?.name
-    ?? kshetram.deities?.moolavar?.thaayar?.name
     ?? null;
   const tabs = celestial
     ? BASE_TABS.filter(({ id: tid }) => tid !== 'visit' && tid !== 'location')
@@ -128,18 +131,28 @@ export default function KshetramDetailPage() {
     noticeTimer.current = setTimeout(() => setNotice(''), 4500);
   };
 
-  const activateTab = (tid) => {
+  // When the reader is below the tab rail, reveal the selected panel just
+  // under the sticky header + rail instead of leaving them lost in the page
+  // (audit item 6). rAF defers until the new panel has mounted.
+  const activateTab = (tid, { scrollToPanel = false } = {}) => {
     setTab(tid);
     try {
       window.history.replaceState(null, '', `#${tid}`);
     } catch { /* jsdom / privacy modes */ }
+    tabRefs.current[tid]?.scrollIntoView?.({ block: 'nearest', inline: 'nearest' });
+    if (scrollToPanel) {
+      requestAnimationFrame(() => {
+        const el = panelRef.current;
+        if (el && el.getBoundingClientRect().top < 48) el.scrollIntoView?.({ block: 'start' });
+      });
+    }
   };
 
   const onTabKey = (e) => {
     if (e.key === 'Home' || e.key === 'End') {
       e.preventDefault();
       const nextTab = e.key === 'Home' ? tabs[0] : tabs[tabs.length - 1];
-      activateTab(nextTab.id);
+      activateTab(nextTab.id, { scrollToPanel: true });
       tabRefs.current[nextTab.id]?.focus();
       return;
     }
@@ -147,7 +160,7 @@ export default function KshetramDetailPage() {
     e.preventDefault();
     const idx = tabs.findIndex(({ id: tid }) => tid === tab);
     const nextTab = tabs[(idx + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
-    activateTab(nextTab.id);
+    activateTab(nextTab.id, { scrollToPanel: true });
     tabRefs.current[nextTab.id]?.focus();
   };
 
@@ -164,7 +177,7 @@ export default function KshetramDetailPage() {
         <span aria-current="page">{kshetram.name}</span>
       </nav>
 
-      {/* ============ SPLIT HERO ============ */}
+      {/* ============ COMPACT SPLIT HERO ============ */}
       <section className="hero" aria-labelledby="kshetram-title">
         <div>
           <p className="eyebrow">
@@ -215,97 +228,99 @@ export default function KshetramDetailPage() {
 
       {celestial ? <p className="celestial-note">{CELESTIAL_NOTE}</p> : null}
 
-      {/* ============ SECTION TABS ============ */}
-      <div
-        role="tablist"
-        aria-label="Kshetram sections"
-        onKeyDown={onTabKey}
-        className="tabs no-print"
-      >
-        {tabs.map(({ id: tid, label }) => (
-          <button
-            key={tid}
-            ref={(el) => { tabRefs.current[tid] = el; }}
-            type="button"
-            role="tab"
-            id={`kshetram-tab-${tid}`}
-            aria-selected={tab === tid}
-            aria-controls={`kshetram-panel-${tid}`}
-            tabIndex={tab === tid ? 0 : -1}
-            onClick={() => activateTab(tid)}
-            className="tab"
-          >
-            {label}
-          </button>
-        ))}
+      {/* ============ STICKY SECTION TABS ============ */}
+      <div className="tabs-rail no-print">
+        <div
+          role="tablist"
+          aria-label="Kshetram sections"
+          onKeyDown={onTabKey}
+          className="tabs"
+        >
+          {tabs.map(({ id: tid, label }) => (
+            <button
+              key={tid}
+              ref={(el) => { tabRefs.current[tid] = el; }}
+              type="button"
+              role="tab"
+              id={`kshetram-tab-${tid}`}
+              aria-selected={tab === tid}
+              aria-controls={`kshetram-panel-${tid}`}
+              tabIndex={tab === tid ? 0 : -1}
+              onClick={() => activateTab(tid, { scrollToPanel: true })}
+              className="tab"
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div
+        ref={panelRef}
         role="tabpanel"
         id={`kshetram-panel-${tab}`}
         aria-labelledby={`kshetram-tab-${tab}`}
         className="panel"
-        /* anchor target for the skip link (sits after the tabs) */
         tabIndex={-1}
       >
         <div id="kshetram-main">
           {tab === 'overview' ? (
-            <>
-              <div className="overview-grid">
-                <div>
-                  <h2>About the temple</h2>
-                  {intro ? <p className="intro">{intro}</p> : null}
-                  {moolavarName || thaayarName ? (
-                    <div className="deity-pair">
-                      {moolavarName ? (
-                        <div>
-                          <div className="label">Moolavar</div>
-                          <div className="value">{moolavarName}</div>
-                        </div>
-                      ) : null}
-                      {thaayarName ? (
-                        <div>
-                          <div className="label">Thaayar</div>
-                          <div className="value">{thaayarName}</div>
-                        </div>
-                      ) : null}
-                    </div>
-                  ) : null}
-                </div>
-
-                {/* Plan your visit card */}
-                {!celestial ? (
-                  <aside className="visit-card">
-                    <h3>Plan your visit</h3>
-                    {kshetram.timings ? (
-                      <>
-                        <div className="times">
-                          <strong>Morning</strong>
-                          <span>{kshetram.timings.morning?.[0]} – {kshetram.timings.morning?.[1]}</span>
-                        </div>
-                        {kshetram.timings.evening ? (
-                          <div className="times">
-                            <strong>Evening</strong>
-                            <span>{kshetram.timings.evening[0]} – {kshetram.timings.evening[1]}</span>
-                          </div>
-                        ) : null}
-                        {kshetram.timings.notes ? (
-                          <div className="times"><span>{kshetram.timings.notes}</span></div>
-                        ) : null}
-                        <small>Indicative timings. Confirm with the temple office.</small>
-                      </>
-                    ) : (
-                      <NotDocumented />
-                    )}
-                    <DistanceFromMe coords={coords} mapQuery={kshetram.mapQuery} variant="kxd" />
-                    <p className="note">Visits and trips are saved in this browser.</p>
-                  </aside>
+            <div className="overview-grid">
+              <div>
+                <h2>About the temple</h2>
+                {intro ? <p className="intro">{intro}</p> : null}
+                {moolavarName || thaayarName ? (
+                  <div className="deity-pair">
+                    {moolavarName ? (
+                      <div>
+                        <div className="label">Moolavar</div>
+                        <div className="value">{moolavarName}</div>
+                      </div>
+                    ) : null}
+                    {thaayarName ? (
+                      <div>
+                        <div className="label">Thaayar</div>
+                        <div className="value">{thaayarName}</div>
+                      </div>
+                    ) : null}
+                  </div>
                 ) : null}
+                {/* Audit item 7: the fact sheet starts under the article
+                    column while the visit card occupies the right column */}
+                <div className="section-rule">
+                  <ShrineProfile kshetram={kshetram} />
+                </div>
               </div>
-              <div className="section-rule">
-                <ShrineProfile kshetram={kshetram} />
-              </div>
-            </>
+
+              {/* Plan your visit card */}
+              {!celestial ? (
+                <aside className="visit-card">
+                  <h3>Plan your visit</h3>
+                  {kshetram.timings ? (
+                    <>
+                      <div className="times">
+                        <strong>Morning</strong>
+                        <span>{kshetram.timings.morning?.[0]} – {kshetram.timings.morning?.[1]}</span>
+                      </div>
+                      {kshetram.timings.evening ? (
+                        <div className="times">
+                          <strong>Evening</strong>
+                          <span>{kshetram.timings.evening[0]} – {kshetram.timings.evening[1]}</span>
+                        </div>
+                      ) : null}
+                      {kshetram.timings.notes ? (
+                        <div className="times"><span>{kshetram.timings.notes}</span></div>
+                      ) : null}
+                      <small>Indicative timings. Confirm with the temple office.</small>
+                    </>
+                  ) : (
+                    <NotDocumented />
+                  )}
+                  <DistanceFromMe coords={coords} mapQuery={kshetram.mapQuery} variant="kxd" />
+                  <p className="note">Visits and trips are saved in this browser.</p>
+                </aside>
+              ) : null}
+            </div>
           ) : null}
 
           {tab === 'deities' ? <DeityBreakdown kshetram={kshetram} onOpenPhoto={openPhoto} /> : null}

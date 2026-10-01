@@ -181,8 +181,8 @@ describe('Small shared pieces (UXD v3.0)', () => {
   });
 });
 
-describe('VisitInfoSection branches (round 16 mock)', () => {
-  it('renders morning-only timings, road access and documented fallbacks', () => {
+describe('VisitInfoSection branches (round 17 audit)', () => {
+  it('renders morning-only timings, road access and per-row documented fallbacks', () => {
     render(
       <VisitInfoSection
         kshetram={{
@@ -195,7 +195,8 @@ describe('VisitInfoSection branches (round 16 mock)', () => {
     expect(screen.getByText('06:00 – 12:00')).toBeInTheDocument();
     expect(screen.queryByText(/evening/i)).not.toBeInTheDocument();
     expect(screen.getByText('By road')).toBeInTheDocument();
-    expect(screen.getAllByText(/not yet documented yet\./i).length).toBeGreaterThanOrEqual(3);
+    // Some data exists, so the rows stay — missing ones read "Not yet documented."
+    expect(screen.getAllByText(/not yet documented\./i).length).toBe(3);
   });
 });
 

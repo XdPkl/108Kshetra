@@ -65,7 +65,7 @@ test.describe('Kshetram detail (TC-08, TC-09, V2)', () => {
       ['Mangalasasanam', /^mangalasasanam$/i],
       ['Visit info', /plan your darshan/i],
       ['Location', /find the temple/i],
-      ['Media', /visuals & media/i],
+      ['Media', /sacred features & resources/i],
     ];
     for (const [label, heading] of tabs) {
       await page.getByRole('tab', { name: label }).click();

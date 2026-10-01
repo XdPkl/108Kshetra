@@ -1,10 +1,10 @@
 /**
- * VisualsMedia — visual markers, discourses (YouTube-search cards) and
- * literature/digital-text references (FR-83) in the round-16 mock's
- * "What to look for" / "Texts & discourses" two-column layout. Dossier
- * marker strings ("Title: body") split into numbered marker entries.
- * Renders whatever exists; a fully empty block shows the documented
- * fallback note.
+ * VisualsMedia — "Sacred features & resources" (FR-83), retitled and
+ * de-duplicated per the PO round-17 audit: numbered "What to look for"
+ * markers, then a single labelled resource list where YouTube entries are
+ * explicitly labelled as search links (title 20px, metadata 14px) and
+ * literature rows carry no invented links or thumbnails. A fully empty
+ * block shows the documented fallback note.
  * @param {object} props
  * @param {Kshetram & object} props.kshetram - enriched record
  */
@@ -25,8 +25,8 @@ export default function VisualsMedia({ kshetram }) {
 
   return (
     <section id="media">
-      <h2>Visuals &amp; media</h2>
-      <p className="value">Sacred details and resources for further study.</p>
+      <h2>Sacred features &amp; resources</h2>
+      <p className="value">What to look for and where to study further.</p>
       {!hasAny ? <NotDocumented /> : (
         <div className="two-columns section-rule">
           {Array.isArray(v.descriptions) && v.descriptions.length > 0 ? (
@@ -47,14 +47,14 @@ export default function VisualsMedia({ kshetram }) {
           ) : <div />}
           <div>
             <h3>Texts &amp; discourses</h3>
-            <p>Useful resources for deeper study of the temple.</p>
+            <p className="resource-meta">Search links open YouTube or archive searches — no recordings are hosted here.</p>
             {Array.isArray(v.videoSearches) && v.videoSearches.map((q) => (
               <div className="resource" key={q}>
                 <h3>
                   <YouTubeIcon />
                   {q}
                 </h3>
-                <p>Search for discourses on the temple using this query.</p>
+                <p className="resource-meta">YouTube search</p>
                 <a
                   href={`https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`}
                   target="_blank"

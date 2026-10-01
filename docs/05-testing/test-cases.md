@@ -263,3 +263,26 @@ Quality gates: TC-QA-01 Pass (0 errors; 4 accepted warnings) · TC-QA-02 Pass
 E2E **19/19**. Execution recorded in TER v2.24.
 
 *End of Addendum — TCS-108K-008 v1.10*
+
+---
+
+## Version 1.11 — Kshetram Detail UX-Audit Compaction (2026-10-01)
+
+PO round-17 audit applied to `/kshetram/:id` (TER v2.25). Data contracts
+unchanged; heading/wording contracts moved in lockstep:
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-DTL/TC-08 | Media panel heading | "Visuals & Media" → **"Sacred features & resources"** (tab label stays "Media") |
+| UT-DTL | Visit-info empty state | Four "not yet documented yet." rows collapse to **"Additional travel and darshan details are not yet documented."** when all four blocks are absent; partial data keeps rows reading "Not yet documented." |
+| UT-DTL | Visit-info notes split | `timings.notes` darshan lines → "Special darshan timings"; Ekadasi/festival sentences → "Festival note" |
+| UT-DTL | Sticky tabs | Tab rail pins under the 64px header with scroll-into-view activation; hash deep links, roving focus and panel unmount semantics unchanged |
+| UT-DTL | Overview content | Intro = factual `profile.location`; Moolavar/Thaayar names dossier-first (reconciles the Overview/Deities mismatch) |
+| TC-16 | Assertions | Tab walk uses the new headings; the collapsed not-yet-documented note replaces the per-row fallback |
+
+Quality gates: TC-QA-01 Pass (0 errors; 4 accepted warnings) · TC-QA-02 Pass
+(**223/223 tests, 21 suites**; 89.98/81.47/85.76/91.58) · TC-QA-03 Pass ·
+E2E **19/19** · Visual gate **12/12** · Measured hero 400px @1280 (audit
+target 360–400). Execution recorded in TER v2.25.
+
+*End of Addendum — TCS-108K-008 v1.11*

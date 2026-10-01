@@ -1588,3 +1588,145 @@ header, footer and shell are untouched.
 | CMS round-trip | `sync-content --fixture --check` 0-diff |
 | E2E (Playwright, Chromium) | **19/19 journeys pass** |
 | Visual gate | 10/10 renders pass (triplicane: overview/deities/history/mangalasasanam/visit/location/media + 390 mobile; srirangam overview; paramapadam celestial) — `docs/03-design/gate-shots/kshetram-detail-restyle-16/` |
+
+---
+
+## Version 2.25 — Kshetram Detail UX-Audit Compaction + Calm Header (2026-10-01, PO round 17)
+
+PO supplied a computed-style UX audit of `/kshetram/srirangam` (desktop
+1280×720, mobile 390×844) with a concrete spec; every applicable item is
+implemented, **scoped to the temple-detail surface except the explicitly
+requested header simplification**.
+
+### Typography (measured against the audit's table, scoped via `.kxd`)
+
+Hero title 72→**56px/62px** (mobile 46→**36px/42px**); Tamil 36→**28px/42px**
+(mobile **24px/36px**); temple name 29→**22px/30px** (mobile **20px/28px**);
+panel h2 44→**32px/40px** (mobile **28px/36px**); section h3 28→**24px/32px**
+(mobile **22px/30px**); sidebar h3 31→**26px/34px**; deity names 26→
+**24px/32px**; body 18→**17px/28px** (mobile **16px/27px**); tab labels 18→
+**16px** (mobile **15px**); Tamil verse line-height 44→**40px**;
+transliteration 20→**17px/28px**; notes/labels standardised at **14px/22px**
+(mobile 13px/20px). Fonts unchanged (Source Serif 4 / DM Sans / Noto Serif
+Tamil); prose widths 58–65ch.
+
+### Layout & navigation
+
+- **Hero compacted** (measured 511→**400px** at 1280): top-aligned columns,
+  40px gap, 20px bottom padding, 58ch summary, 8px eyebrow→title→Tamil→
+  temple-name rhythm, 12px place→summary, 16px summary→actions. The tab bar
+  now sits at document y≈537 — inside the initial 720px viewport (was y≈686
+  with a 511px hero). Photo: fixed **300px** height desktop / **200px**
+  mobile (was aspect-ratio), radius 12, cover.
+- **Hero photo resolution**: `utils/wikiImage.js` rewrites the ~330px lead
+  thumbnail URL to a **fixed 1280px** Wikimedia thumb (fixed-width hotlink
+  rule preserved; falls back to the original image ≤4000px wide, else the
+  summary thumbnail) — the audit's "visibly soft at 540px" complaint.
+- **Breadcrumb** 13px with 20px below; the page surface unified with the
+  body (`--paper` = body ivory, `.kxd` background transparent — the audit's
+  "lighter inner rectangle" removed).
+- **Header** (global, per audit item 4): flat `#7A2E00` surface with a
+  single 1px gold bottom rule (was gradient + two hairlines + shadow),
+  **64px** tall desktop / **56px** mobile, 16px nav labels, 22px/18px logo
+  text, text-only idle nav items with one subtle active pill, the
+  "Guided Yatras" badge removed from the desktop nav, dropdown/drawer
+  behaviour and all tested strings unchanged. Verified on Home + Azhwars
+  (visual gate shots 11–12).
+- **Sticky tab rail**: the tablist is wrapped in an opaque ivory rail
+  (`position: sticky; top: 64px/56px`, z-40 below the sticky header,
+  right-edge scroll fade). Tabs 48px tall, 20px/12px gaps, 2px active
+  underline (no filled chip). Activation **scrolls the panel into view**
+  below the rail when the reader had scrolled past it (rAF +
+  `scroll-margin-top`), brings off-screen tabs into view, and keeps
+  focus/Left-Right/Home-End semantics; verified in a real browser
+  (rail pins at ~70px, panel heading lands just below the rail).
+- **Panels**: padding 45/62→**28px/40px**; section rules 24px/32px rhythm;
+  paragraph margin 16px. **Overview restructured**: "Shrine at a glance"
+  starts under the article column beside the **310px** visit card (was a
+  full-width row sized by the sidebar); fact rows keep 12px vertical
+  padding.
+- **Actions**: 44px min-height, 14px labels, 16px horizontal padding;
+  Add-to-trip remains the only filled primary; icons aria-hidden with
+  labelled buttons; gold focus-visible rings retained.
+
+### Per-tab changes
+
+1. **Overview**: intro is now the **factual** `profile.location` text (the
+   mythological origin prose stays in History); Moolavar/Thaayar names are
+   **dossier-first** (`deities.moolavar.names.translit` /
+   `deities.moolavar.thaayar.name`), reconciling the audit's
+   "Ranganathan (Nam Perumal)" vs "Sri Ranganathan / Periya Perumal"
+   mismatch with the Deities tab.
+2. **Deities**: the shared temple lead image is **no longer reused** as a
+   deity photo — only curated direct-`src` photos render (lightbox kept);
+   otherwise "Deity photo not available."; Name/Form/Meaning groups carry
+   `.label` headers; the sanctum clarification moved into a tinted callout;
+   columns gap 32px.
+3. **History**: separate **"Origin legend"** (traditional accounts) and
+   **"Temple history"** (historically sourced) headings; the chronology
+   prose converts to a **gold-marker milestone list** (splits on ";" or
+   sentence boundaries); Invasions/Cultural milestones demoted to h4;
+   article width 65ch. Srirangam's Prathyaksham — embedded in a legend
+   string — is **extracted into the aside list** (the visual gate caught
+   the empty-aside regression; re-gated pass). Untitled legend paragraphs
+   are correct where the dossier carries no "Title — body" strings.
+4. **Mangalasasanam**: the 11 per-Azhwar pills became a **three-column
+   name/count list** (two columns on mobile, 44px rows); verse titles 20px,
+   Tamil 22px/40px, transliteration 17px/28px; **"Word-by-word meaning" and
+   "Commentary" render as labelled `<details>` disclosures** (verse + Listen
+   stay visible; mobile glossary stacks phrase/meaning pairs).
+5. **Visit info**: `timings.notes` is split on sentence boundaries —
+   darshan lines under **"Special darshan timings"**, Ekadasi/festival
+   sentences under a separately labelled **"Festival note"** (no invented
+   dates, disclaimer preserved); the four empty "Further visit details"
+   rows collapse to **one** "Additional travel and darshan details are not
+   yet documented." note (partial data keeps rows reading "Not yet
+   documented."); Get directions remains primary.
+6. **Location**: map 360px desktop / 260px mobile with a visible tinted
+   loading placeholder; nearby rows min-height 52px with right-aligned
+   distances (straight-line/approximate labels kept).
+7. **Media**: panel retitled **"Sacred features & resources"** (tab label
+   unchanged); search rows explicitly labelled "YouTube search" with one
+   consolidated lead sentence; resource titles 20px / metadata 14px; no
+   invented thumbnails or recordings.
+8. **Mobile**: 36px title, 200px photo, sticky rail reachable while
+   scrolling; no horizontal overflow (measured + judge-verified).
+
+### Contract notes
+
+- **No data or site-copy changes** — `sync-content --fixture --check`
+  0-diff; all new strings are JSX-hardcoded (srirangam's
+  "Vishwaroopa darshan…; Ekadasi special" splits at the existing "; ").
+- Heading contract moves: "Visuals & Media" → "Sacred features & resources"
+  (panel h2); Visit-info fallback wording "not yet documented yet." →
+  "Not yet documented." / collapsed note. UT-DTL, detailV3, v3Branches and
+  e2e TC-08/TC-16 updated in lockstep (TCS v1.11).
+- `WikiThumb`'s stubbed-fetch unit test still passes (the upscale rewrite
+  only rewrites `…/thumb/…/NNNpx-…` URLs).
+- Not implemented (flagged): real captioned deity/media imagery and cited
+  history links remain PO-owned content; the header drawer keeps its
+  existing design (the audit's header items target the primary nav).
+
+### Component changes
+
+| File | Change |
+|---|---|
+| `app/src/styles/kshetram-detail.css` | Audit type scale, compact hero, sticky rail, panels, glossary/mobile, unified surface |
+| `app/src/pages/KshetramDetailPage.jsx` | Compact hero, sticky rail + scroll-into-view, Overview restructure, factual intro, dossier-first names |
+| `app/src/components/detail/{DeityBreakdown,PuranamHistory,MangalasasanamSection,VisitInfoSection,VisualsMedia}.jsx` | Audit per-tab changes (above) |
+| `app/src/components/Header.jsx` | Calm flat header per audit item 4 |
+| `app/src/utils/wikiImage.js` | 1280px fixed-width thumbnail rewrite |
+| `app/src/pages/__tests__/pages.test.jsx`, `app/src/components/__tests__/{detailV3,v3Branches}.test.jsx`, `app/e2e/{journeys,yatra}.spec.js` | Heading/wording contracts updated |
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 4 warnings (accepted set) |
+| Unit tests (Vitest) | **223/223 pass (21 suites)** |
+| Coverage | **89.98% statements / 81.47% branches / 85.76% functions / 91.58% lines** (gate 80%) |
+| Production build | Clean |
+| CMS round-trip | `sync-content --fixture --check` 0-diff |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Measured vs audit | Hero 400px @1280 (target 360–400); tabs y≈537 (in-viewport); type scale matches the audit table at 1280 and 390; sticky rail pins under the 65px header |
+| Visual gate | 12/12 renders pass (7 tabs + mobile + triplicane + celestial + Home/Azhwars header checks) — `docs/03-design/gate-shots/kshetram-detail-restyle-17/` |

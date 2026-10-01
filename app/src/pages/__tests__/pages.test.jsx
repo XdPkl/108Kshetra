@@ -126,7 +126,7 @@ describe('KshetramDetailPage (UT-DTL-01..04, V3 UT-DTL-14..17)', () => {
     await user.click(screen.getByRole('tab', { name: /location/i }));
     expect(screen.getByRole('heading', { name: /find the temple/i })).toBeInTheDocument();
     await user.click(screen.getByRole('tab', { name: /media/i }));
-    expect(screen.getByRole('heading', { name: /visuals & media/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /sacred features & resources/i })).toBeInTheDocument();
   });
 
   it('shows deity cells, sidebar timings and share/print actions', async () => {
@@ -221,7 +221,7 @@ describe('KshetramDetailPage (UT-DTL-01..04, V3 UT-DTL-14..17)', () => {
     expect(screen.getByRole('heading', { name: /find the temple/i })).toBeInTheDocument();
     window.history.replaceState(null, '', '#media');
     window.dispatchEvent(new Event('hashchange'));
-    expect(await screen.findByRole('heading', { name: /visuals & media/i })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /sacred features & resources/i })).toBeInTheDocument();
     window.history.replaceState(null, '', window.location.pathname);
   });
 

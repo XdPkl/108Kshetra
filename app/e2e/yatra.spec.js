@@ -109,7 +109,7 @@ test.describe('V3 yatra toolkit', () => {
     for (const [label, heading] of [
       ['Deities', 'Deities & consorts'], ['History', 'Sthala Puranam & history'],
       ['Mangalasasanam', 'Mangalasasanam'], ['Visit info', 'Plan your darshan'],
-      ['Location', 'Find the temple'], ['Media', 'Visuals & media'],
+      ['Location', 'Find the temple'], ['Media', 'Sacred features & resources'],
     ]) {
       await page.getByRole('tab', { name: label }).click();
       await expect(page.getByRole('heading', { name: heading }).first()).toBeVisible();
@@ -117,7 +117,7 @@ test.describe('V3 yatra toolkit', () => {
     await page.getByRole('tab', { name: 'Mangalasasanam' }).click();
     await expect(page.getByText(/word-by-word meaning/i).first()).toBeVisible();
     await page.getByRole('tab', { name: 'Visit info' }).click();
-    await expect(page.getByText(/not yet documented yet\./i).first()).toBeVisible();
+    await expect(page.getByText(/additional travel and darshan details are not yet documented/i).first()).toBeVisible();
   });
 
   test('TC-17: nav shows Kshetra Tours, darshan strips render, About page opens', async ({ page }) => {

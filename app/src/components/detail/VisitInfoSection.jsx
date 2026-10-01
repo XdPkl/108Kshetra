@@ -1,9 +1,11 @@
 /**
- * VisitInfoSection — pilgrim information (FR-83) in the round-16 mock's
- * layout: "Plan your darshan" (big serif timing hours, festival highlight,
- * getting-here text, directions button), a "Quick facts" tinted card and a
- * "Further visit details" fact sheet whose blocks fall back to the
- * documented "not yet documented" note when data is absent.
+ * VisitInfoSection — pilgrim information (FR-83), adjusted per the PO
+ * round-17 audit: the daily-darshan lines from `timings.notes` render under
+ * "Special darshan timings" while any Ekadasi/festival sentence becomes a
+ * separately labelled "Festival note" (no invented dates); a fully empty
+ * "Further visit details" set collapses to one short note instead of four
+ * "not yet documented" rows; directions stay the primary action; the
+ * temple-office disclaimer is preserved.
  * @param {object} props
  * @param {Kshetram & object} props.kshetram - enriched record
  */
@@ -12,12 +14,30 @@ import { Navigation } from 'lucide-react';
 import { MAPS_URL_TEMPLATE } from '../../data/config.js';
 import NotDocumented from './NotDocumented.jsx';
 
+const FESTIVAL_PATTERN = /ekad[ai]si|utsavam|festival|brahmotsavam/i;
+
+/** Splits `timings.notes` into darshan lines and festival-note lines. */
+function splitNotes(notes) {
+  if (!notes) return { special: [], festival: [] };
+  const lines = notes.split(/;\s*/).map((s) => s.trim()).filter(Boolean);
+  return {
+    special: lines.filter((s) => !FESTIVAL_PATTERN.test(s)),
+    festival: lines.filter((s) => FESTIVAL_PATTERN.test(s)),
+  };
+}
+
 export default function VisitInfoSection({ kshetram }) {
   const { timings, festivals, access, tips, references } = kshetram;
   const p = kshetram.profile ?? {};
   const directionsHref = kshetram.mapQuery
     ? `${MAPS_URL_TEMPLATE}${encodeURIComponent(`directions to ${kshetram.mapQuery}`)}`
     : null;
+  const { special, festival } = splitNotes(timings?.notes);
+  const hasFestivals = Array.isArray(festivals) && festivals.length > 0;
+  const hasAccess = Boolean(access);
+  const hasTips = Array.isArray(tips) && tips.length > 0;
+  const hasReferences = Array.isArray(references) && references.length > 0;
+  const hasAnyFurther = hasFestivals || hasAccess || hasTips || hasReferences;
 
   return (
     <section id="visit">
@@ -57,10 +77,17 @@ export default function VisitInfoSection({ kshetram }) {
             <NotDocumented />
           )}
 
-          {timings?.notes ? (
+          {special.length > 0 ? (
             <>
-              <h3 className="section-rule">Festival highlight</h3>
-              <p className="value">{timings.notes}</p>
+              <h3 className="section-rule">Special darshan timings</h3>
+              {special.map((line) => <p className="value" key={line}>{line}</p>)}
+            </>
+          ) : null}
+
+          {festival.length > 0 ? (
+            <>
+              <h3 className="section-rule">Festival note</h3>
+              {festival.map((line) => <p className="value" key={line}>{line}</p>)}
             </>
           ) : null}
 
@@ -98,55 +125,61 @@ export default function VisitInfoSection({ kshetram }) {
 
       <div className="section-rule">
         <h3>Further visit details</h3>
-        <dl className="facts">
-          <div className="fact-row">
-            <dt>Festivals &amp; utsavams</dt>
-            <dd>
-              {Array.isArray(festivals) && festivals.length > 0 ? (
-                <ul className="list-disc pl-5">
-                  {festivals.map((f) => (
-                    <li key={f.name}>{f.name}{f.month ? ` — ${f.month}` : ''}</li>
-                  ))}
-                </ul>
-              ) : <NotDocumented />}
-            </dd>
-          </div>
-          <div className="fact-row">
-            <dt>How to reach</dt>
-            <dd>
-              {access ? (
-                <dl className="space-y-1.5">
-                  {['town', 'rail', 'airport', 'road'].map((key) => (access[key] ? (
-                    <div className="flex" key={key}>
-                      <dt className="w-20 shrink-0 text-xs uppercase tracking-wider pt-0.5 text-[#74716B]">{key}</dt>
-                      <dd className="font-medium">{access[key]}</dd>
-                    </div>
-                  ) : null))}
-                </dl>
-              ) : <NotDocumented />}
-            </dd>
-          </div>
-          <div className="fact-row">
-            <dt>Stay &amp; darshan tips</dt>
-            <dd>
-              {Array.isArray(tips) && tips.length > 0 ? (
-                <ul className="list-disc pl-5">
-                  {tips.map((tip) => <li key={tip.slice(0, 24)}>{tip}</li>)}
-                </ul>
-              ) : <NotDocumented />}
-            </dd>
-          </div>
-          <div className="fact-row">
-            <dt>References</dt>
-            <dd>
-              {Array.isArray(references) && references.length > 0 ? (
-                <ul className="list-disc pl-5">
-                  {references.map((ref) => <li key={ref.slice(0, 24)}>{ref}</li>)}
-                </ul>
-              ) : <NotDocumented />}
-            </dd>
-          </div>
-        </dl>
+        {hasAnyFurther ? (
+          <dl className="facts">
+            <div className="fact-row">
+              <dt>Festivals &amp; utsavams</dt>
+              <dd>
+                {hasFestivals ? (
+                  <ul className="list-disc pl-5">
+                    {festivals.map((f) => (
+                      <li key={f.name}>{f.name}{f.month ? ` — ${f.month}` : ''}</li>
+                    ))}
+                  </ul>
+                ) : <p className="detail__nodata">Not yet documented.</p>}
+              </dd>
+            </div>
+            <div className="fact-row">
+              <dt>How to reach</dt>
+              <dd>
+                {hasAccess ? (
+                  <dl className="space-y-1.5">
+                    {['town', 'rail', 'airport', 'road'].map((key) => (access[key] ? (
+                      <div className="flex" key={key}>
+                        <dt className="w-20 shrink-0 text-xs uppercase tracking-wider pt-0.5 text-[#74716B]">{key}</dt>
+                        <dd className="font-medium">{access[key]}</dd>
+                      </div>
+                    ) : null))}
+                  </dl>
+                ) : <p className="detail__nodata">Not yet documented.</p>}
+              </dd>
+            </div>
+            <div className="fact-row">
+              <dt>Stay &amp; darshan tips</dt>
+              <dd>
+                {hasTips ? (
+                  <ul className="list-disc pl-5">
+                    {tips.map((tip) => <li key={tip.slice(0, 24)}>{tip}</li>)}
+                  </ul>
+                ) : <p className="detail__nodata">Not yet documented.</p>}
+              </dd>
+            </div>
+            <div className="fact-row">
+              <dt>References</dt>
+              <dd>
+                {hasReferences ? (
+                  <ul className="list-disc pl-5">
+                    {references.map((ref) => <li key={ref.slice(0, 24)}>{ref}</li>)}
+                  </ul>
+                ) : <p className="detail__nodata">Not yet documented.</p>}
+              </dd>
+            </div>
+          </dl>
+        ) : (
+          <p className="detail__nodata">
+            Additional travel and darshan details are not yet documented.
+          </p>
+        )}
         <p className="note">Your visits and trip list are saved in this browser only.</p>
       </div>
     </section>
