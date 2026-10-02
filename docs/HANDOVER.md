@@ -1,8 +1,9 @@
-# HANDOVER — 108 Divya Kshetrams (2026-10-02, after rounds 22–23: acharyas directory + home/map/about restyles)
+# HANDOVER — 108 Divya Kshetrams (2026-10-03, after rounds 22–23 + dead-code cleanup)
 
-State: **Everything pushed, CI+Deploy green on `a04d609`, live verified.**
-`main` = `a00dfee` (handover doc commit on top of `a04d609`) in sync with
-`origin/main` (https://github.com/XdPkl/108Kshetra).
+State: **Everything pushed, CI+Deploy green on `cc35030`, live verified.**
+`main` = `cc35030` (dead-code cleanup, TER v2.32 / TCS v1.18, on top of
+round-23 `a04d609`) in sync with `origin/main`
+(https://github.com/XdPkl/108Kshetra).
 Live: https://xdpkl.github.io/108Kshetra/ — verify bundles by CONTENT, not by
 hash (CI Linux hashes differ from local Windows; grep the live
 `assets/index-*.js` via `node -e "...includes(...)"` — gotcha 12; MapPage
@@ -22,11 +23,12 @@ Nothing in flight; next context starts fresh on whatever the PO brings
 | `359a934` | **Round 22 — Acharyas directory consistency restyle**: new `.dir` directory theme (`src/styles/directory.css`, kxd-mirrored tokens, Source Serif 4 / DM Sans / **Mukta Malar** for Tamil) + reusable `src/components/directory/` — DirectoryHeader, PersonEntry, PortraitFallback, ProfileLink; /acharyas rebuilt: full-width mobile intro (38px title/16px lead, watermark column-free), era jump links (#early-masters/#age-of-ramanuja/#later-acharyas), 27 standardized entries (English name → Tamil name → 16px summary → Period/Guru rows → unique "View profile — {name}"), hairline-only separators, one 3/4 portrait framing (72px mobile / 104px desktop; 5 wiki + 22 fallback tiles); /azhwars coordinated (shared header/link/fallback; whole-card overlay retired; desams deep link kept). Guru "Not specified" NOT inferred (nathamuni/kidambi-appullar/thiruvaimozhi-pillai); `era` vs `period` field asymmetry flagged | TER v2.30, TCS v1.16 |
 | `a04d609` | **Round 23 — Home/Map/About coordinated restyle**: new `src/styles/ui.css` control language (solid maroon `#922e0d` primary / outlined secondary / plain tertiary / on-photo inverse; 44px targets; gold focus rings) + `src/components/ui/` (Button/ButtonLink, **Dialog** with focus containment + focus return + Escape, Field/SearchField/FilterSelect, SectionHeading, ContactDetails) — ALL gradient controls retired. Home: reliable hero overlay + "Browse temples"/"Plan your yatra", compact My yatra (reset hidden at zero), shared TempleCard grid, PersonPreview strips, "View all Azhwars/Acharyas" CTAs. Map: pane+map workspace, result→marker selection sync (`path[stroke-width="4"]`), Fit results vs Reset filters, mobile Map/List switch + Filters disclosure, "Trip planner (N)" in shared Dialog, in-trip flag markers + legend, tile-error/no-result/loading states. About: editorial open sections, reading-order nav (ids unchanged for header deep links), compact Team (fallback portrait, first-sentence quote, first-para bio, plain credentials), circuit comparison cards + duration-scope note, single contact block, inquiry dialog (name + ≥1 contact method, preserved circuit, alert-validated, local reference only on record). 108/106 sentence = `SITE_COPY.progressScope`, verbatim on home + map | TER v2.31, TCS v1.17 |
 
-Final gates at handoff: **254/254 unit (23 suites) · 19/19 e2e · coverage
-90.47% stmts / 81.32% branches / 86.29% funcs / 92.08% lines (gate 80%) ·
-oxlint 0 errors / 6 warnings (baseline 4 + same set-state-in-effect
-advisories on new dialog effects) · build clean · CMS round-trip 0-diff ·
-visual gates green** (round 22: 7/7 in `gate-shots/acharyas-directory-22/`;
+| `cc35030` | **Cleanup (audit round, no PO request)** — deleted 9 files / 645 lines: 7 components with zero non-test importers (SearchFilterBar, ProgressBanner, SectionNav, WikiThumb, Badge, base SectionHeading, VisitedBadge) + 2 finished scripts (make-hero-watermark, convert-js-to-json); 14 tests retired (UT-TRK-03/04, FR-84 SectionNav, WikiThumb ×2, SearchFilterBar, Badge, base SectionHeading); 3 stale WikiThumb doc-comments corrected | TER v2.32, TCS v1.18 |
+
+Final gates at handoff: **240/240 unit (23 suites) · 19/19 e2e · coverage
+90.37% stmts / 81.45% branches / 86.11% funcs / 91.87% lines (gate 80%) ·
+oxlint 0 errors / 6 warnings (baseline) · build clean · CMS round-trip
+0-diff · visual gates green** (round 22: 7/7 in `gate-shots/acharyas-directory-22/`;
 round 23: 22/22 in `gate-shots/home-map-about-23/{before,after}/` incl.
 zoom200/map-selected/map-focus/map-mobile/dialog shots; earlier rounds
 18–21 in `gate-shots/azhwar-*-1[89]` and `azhwar-philosophy-restyle-21/`).
@@ -66,9 +68,9 @@ zoom200/map-selected/map-focus/map-mobile/dialog shots; earlier rounds
 - **Jira**: stories through US-CMS-01 synced (DTRPR108K-1..76). Authoring
   PO-round stories (rounds 5..23) NOT started. **API token from the
   earlier sync should be revoked** (was exposed in chat history).
-- **Coverage drift watch**: branches 81.32% vs gate 80% — headroom
-  ~1.3pp. Any new conditional needs a test (rounds 21–23 added tests for
-  exactly this). CI is 2-core (gotcha 10).
+- **Coverage drift watch**: branches 81.45% vs gate 80% — headroom
+  ~1.45pp (widened by the cleanup). Any new conditional needs a test
+  (rounds 21–23 added tests for exactly this). CI is 2-core (gotcha 10).
 - **Divine amsam in the azhwar hero** renders the dataset string verbatim
   ("Lord Vishnu's holy conch, Panchajanya"); PO's round-20 brief suggested
   "Panchajanya, Vishnu's conch" — kept verbatim, flagged; PO may ask again.
@@ -153,10 +155,11 @@ zoom200/map-selected/map-focus/map-mobile/dialog shots; earlier rounds
   zoom clicks; clusters asserted gone via `.map-cluster` count 0).
   TC-15/17/02/18/19 use renamed controls (trip planner aria, strip CTAs,
   hero actions). e2e specs are **LF** (git normalized).
-- Registers/dates: **TER v2.31; TCS v1.17** (UT-DTL unchanged since
+- Registers/dates: **TER v2.32; TCS v1.18** (UT-DTL unchanged since
   round 17; UT-AZW-03 rounds 19–21; UT-ACH-02 rewritten round 22;
-  UT-HOME/MAP/ABT-01..03 updated round 23; new suite
-  `components/ui/__tests__/ui.test.jsx`).
+  UT-HOME/MAP/ABT-01..03 updated round 23; UT-TRK-03/04 + FR-84
+  SectionNav + WikiThumb/SearchFilterBar/Badge/base-SectionHeading cases
+  retired in the cleanup; suite `components/ui/__tests__/ui.test.jsx`).
 
 ## 4. Gotchas (accumulated — ALL still valid, plus new)
 
@@ -262,7 +265,10 @@ zoom200/map-selected/map-focus/map-mobile/dialog shots; earlier rounds
     navigator.clipboard is getter-only.
 40. **CRLF files swallow plain `\n`-based replace() patches silently** —
     HomePage/AboutPage have CRLF; use regex /\r?\n/ in node patch scripts
-    and VERIFY the patch landed (grep) before rebuilding.
+    and VERIFY the patch landed (grep) before rebuilding. In `node -e`
+    inside bash double quotes, write `\r?\n` ONLY in regex literals — a
+    string literal `'\r?\n'` becomes CR+`?`+LF and silently no-ops or
+    inserts a literal `?` (bit twice in the cleanup).
 41. **directory.css variables live on the `.dir` scope** — components
     using `--dir-*` (dir-portrait, dir-entry__*, dir-profile-link) render
     with unset vars outside a `.dir` ancestor; home/map/about are wrapped
@@ -272,7 +278,7 @@ zoom200/map-selected/map-focus/map-mobile/dialog shots; earlier rounds
 
 ```
 # app/  (quality gates — CI parity)
-npm test                 # 254 unit / 23 suites (global timeout 15s)
+npm test                 # 240 unit / 23 suites (global timeout 15s)
 npm run test:coverage    # gates: 80% stmts/branches/funcs/lines (~90%)
 npm run lint             # oxlint (0 errors; 6 warnings — see TER v2.31)
 npm run build            # production build (REBUILD before re-measuring!)
