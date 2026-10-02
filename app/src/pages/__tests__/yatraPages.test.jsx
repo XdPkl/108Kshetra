@@ -48,7 +48,7 @@ const metaMatching = (pattern) => (content, el) =>
 /** PO round 10: the trip planner lives in a modal opened by the big
  * left-column button ("My Yatra — Trip Planner"). */
 const openPlanner = async (user) => {
-  await user.click(screen.getByRole('button', { name: /my yatra — trip planner/i }));
+  await user.click(screen.getByRole('button', { name: /trip planner/i }));
   return screen.getByRole('dialog', { name: /my yatra/i });
 };
 
@@ -77,7 +77,7 @@ describe('Trip planner on the merged Yatra Atlas (UT-TRP-02/03, FR-80/81)', () =
     await user.click(within(dialog).getAllByRole('button', { name: /remove/i })[0]);
     expect(within(dialog).getByText(metaMatching(/1 stop ·/))).toBeInTheDocument();
     // removing inside the modal also updates the opener badge on the page
-    expect(screen.getByRole('button', { name: /my yatra — trip planners*1/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /trip planner — 1 stop/i })).toBeInTheDocument();
   });
 
   it('orders the route nearest-first and clears after confirmation', async () => {
@@ -99,10 +99,10 @@ describe('Trip planner on the merged Yatra Atlas (UT-TRP-02/03, FR-80/81)', () =
     const user = userEvent.setup();
     renderAt('/map', <MapPage />);
     // the opener badge counts 0 stops on a fresh atlas
-    expect(screen.getByRole('button', { name: /my yatra — trip planners*0/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /trip planner — 0 stops/i })).toBeInTheDocument();
     // add a temple from a matrix card on the page…
     await user.click(screen.getAllByRole('button', { name: /add to trip/i })[0]);
-    expect(screen.getByRole('button', { name: /my yatra — trip planners*1/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /trip planner — 1 stop/i })).toBeInTheDocument();
     // …and the modal shows it without any reload
     const dialog = await openPlanner(user);
     expect(within(dialog).getByText(metaMatching(/1 stop ·/))).toBeInTheDocument();
@@ -184,15 +184,6 @@ describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
     expect(screen.getAllByTestId('map-marker')).toHaveLength(all);
   });
 
-  it('offers the Fit-all-temples control (2026-09-30 refresh)', async () => {
-    const user = userEvent.setup();
-    renderAt('/map', <MapPage />);
-    // with the react-leaflet mock there is no real map instance; the click
-    // must be a safe no-op rather than a crash
-    await user.click(screen.getByRole('button', { name: /fit all temples/i }));
-    expect(screen.getByRole('button', { name: /fit all temples/i })).toBeInTheDocument();
-  });
-
   it('shows a hover tooltip for every plotted marker (US-MAP-04)', () => {
     renderAt('/map', <MapPage />);
     const markers = screen.getAllByTestId('map-marker');
@@ -240,6 +231,56 @@ describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
   });
 });
 
+
+describe('MapPage workspace (round-23)', () => {
+  it('toggles the mobile Map/List switch and the Filters disclosure', async () => {
+    const user = userEvent.setup();
+    renderAt('/map', <MapPage />);
+    const mapBtn = screen.getByRole('button', { name: 'Map' });
+    const listBtn = screen.getByRole('button', { name: 'List' });
+    expect(mapBtn).toHaveAttribute('aria-pressed', 'true');
+    expect(listBtn).toHaveAttribute('aria-pressed', 'false');
+    await user.click(listBtn);
+    expect(listBtn).toHaveAttribute('aria-pressed', 'true');
+    expect(mapBtn).toHaveAttribute('aria-pressed', 'false');
+    const filtersBtn = screen.getByRole('button', { name: 'Filters' });
+    expect(filtersBtn).toHaveAttribute('aria-expanded', 'false');
+    await user.click(filtersBtn);
+    expect(filtersBtn).toHaveAttribute('aria-expanded', 'true');
+    // the scope pills live in the disclosure and remain queryable
+    expect(screen.getByRole('group', { name: /showing/i })).toBeInTheDocument();
+  });
+
+  it('distinguishes Reset filters from Fit results and restores all temples', async () => {
+    const user = userEvent.setup();
+    renderAt('/map', <MapPage />);
+    expect(screen.getByRole('button', { name: /fit results/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /reset filters/i })).toBeInTheDocument();
+    await user.type(screen.getByLabelText(/search kshetrams/i), 'kanchipuram');
+    const narrowed = screen.getAllByTestId('map-marker').length;
+    expect(narrowed).toBeLessThan(106);
+    await user.click(screen.getByRole('button', { name: /reset filters/i }));
+    expect(screen.getAllByTestId('map-marker').length).toBe(106);
+    expect(screen.getByLabelText(/search kshetrams/i)).toHaveValue('');
+  });
+
+  it('synchronizes a selected result with its marker highlight', async () => {
+    const user = userEvent.setup();
+    renderAt('/map', <MapPage />);
+    await user.click(screen.getAllByRole('button', { name: /focus .* on the map/i })[0]);
+    // the selected row is outlined (selected styling applied)
+    const selected = [...document.querySelectorAll('li')].find((el) => el.className.includes('ring-1'));
+    expect(selected).not.toBeNull();
+  });
+
+  it('renders the Fit-results control as a safe no-op without a live map', async () => {
+    const user = userEvent.setup();
+    renderAt('/map', <MapPage />);
+    await user.click(screen.getByRole('button', { name: /fit results/i }));
+    expect(screen.getByRole('button', { name: /fit results/i })).toBeInTheDocument();
+  });
+});
+
 describe('AboutPage (UT-ABT-01, FR-87)', () => {
   it('renders site, tours and contact sections from the approved PO content', () => {
     renderAt('/about', <AboutPage />);
@@ -250,7 +291,7 @@ describe('AboutPage (UT-ABT-01, FR-87)', () => {
     expect(screen.getByText(/interactive yatra planner/i)).toBeInTheDocument();
     expect(screen.getByText(/regional circuit itineraries/i)).toBeInTheDocument();
     expect(screen.getByText(/contact@kshetratours\.org/i)).toBeInTheDocument();
-    expect(screen.getByText(/email us/i)).toBeInTheDocument();
+    expect(screen.getByText(/general inquiries/i)).toBeInTheDocument();
     expect(screen.queryByText(/\[to be provided\]/i)).not.toBeInTheDocument();
   });
 
@@ -266,9 +307,9 @@ describe('AboutPage (UT-ABT-01, FR-87)', () => {
     expect(screen.queryByText(/sampradaya yatra trustee/i)).not.toBeInTheDocument();
     // PO round 4: the celestial (Vinnulaga) circuit is removed — 6 remain
     expect(screen.getByRole('heading', { name: /popular divya desam pilgrimage circuits/i })).toBeInTheDocument();
-    const inquires = screen.getAllByRole('button', { name: /inquire circuit/i });
+    const inquires = screen.getAllByRole('button', { name: /ask about this yatra/i });
     expect(inquires).toHaveLength(6);
-    const regionLinks = screen.getAllByRole('link', { name: /view all .* temples/i });
+    const regionLinks = screen.getAllByRole('link', { name: /view temples/i });
     expect(regionLinks).toHaveLength(6);
     expect(regionLinks[0]).toHaveAttribute('href', '/kshetrams?region=Chola%20Nadu');
     expect(regionLinks[5]).toHaveAttribute('href', '/kshetrams?region=Nadu%20Nadu');
@@ -281,7 +322,7 @@ describe('AboutPage (UT-ABT-01, FR-87)', () => {
   it('opens the inquiry modal from a circuit, submits, and shows the booking reference', async () => {
     const user = userEvent.setup();
     renderAt('/about', <AboutPage />);
-    await user.click(screen.getAllByRole('button', { name: /inquire circuit/i })[0]);
+    await user.click(screen.getAllByRole('button', { name: /ask about this yatra/i })[0]);
     const dialog = screen.getByRole('dialog', { name: /request yatra schedule/i });
     expect(within(dialog).getByLabelText(/devotee \/ pilgrim name/i)).toBeInTheDocument();
     await user.type(within(dialog).getByLabelText(/devotee \/ pilgrim name/i), 'Ramanuja Dasa');
@@ -291,5 +332,21 @@ describe('AboutPage (UT-ABT-01, FR-87)', () => {
     expect(await within(dialog).findByText(/inquiry received/i)).toBeInTheDocument();
     expect(within(dialog).getByText(/YATRA-\d{4}/)).toBeInTheDocument();
     expect(within(dialog).getByText(/1\. chola nadu heritage yatra/i)).toBeInTheDocument();
+  });
+
+  it('blocks submission without at least one contact method (round 23)', async () => {
+    const user = userEvent.setup();
+    renderAt('/about', <AboutPage />);
+    await user.click(screen.getAllByRole('button', { name: /ask about this yatra/i })[0]);
+    const dialog = screen.getByRole('dialog', { name: /request yatra schedule/i });
+    await user.type(within(dialog).getByLabelText(/devotee \/ pilgrim name/i), 'Ramanuja Dasa');
+    // both contact fields left empty — the error path fires, no success
+    await user.click(within(dialog).getByRole('button', { name: /submit schedule inquiry/i }));
+    expect(within(dialog).getByRole('alert')).toHaveTextContent(/share at least one contact method/i);
+    expect(within(dialog).queryByText(/inquiry received/i)).not.toBeInTheDocument();
+    // filling one method unblocks the confirmed-delivery success state
+    await user.type(within(dialog).getByLabelText(/phone \/ whatsapp/i), '+91 98765 43210');
+    await user.click(within(dialog).getByRole('button', { name: /submit schedule inquiry/i }));
+    expect(await within(dialog).findByText(/inquiry received/i)).toBeInTheDocument();
   });
 });

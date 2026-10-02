@@ -12,32 +12,34 @@ function renderAt(url) {
   return render(<MemoryRouter initialEntries={[url]}><App /></MemoryRouter>);
 }
 
-describe('HomePage (UT-HOME-01..03)', () => {
-  it('shows the three-line hero and featured kshetrams', () => {
+describe('HomePage (UT-HOME-01..03; round-23 coordinated restyle)', () => {
+  it('shows the hero with two actions and the shared temple cards', () => {
     renderAt('/');
     expect(screen.getByRole('heading', { name: /108 divya kshetrams/i })).toBeInTheDocument();
-    // 2026-09 refresh: the invocation stack top-right renders the phrase once
-    // (it had been fully removed in PO round 3; the approved mockup brings it
-    // back as a decorative hero element)
-    expect(screen.getAllByText('Nalayira Divya Prabandham')).toHaveLength(1);
+    // Round 23: the invocation stack is retired — no decorative competing text
+    expect(screen.queryByText('Nalayira Divya Prabandham')).not.toBeInTheDocument();
     // The yatra tracker counts only the 106 earthly kshetrams (PO 2026-09-25);
-    // the 2026-09 refresh exposes the count via the progressbar contract
+    // the progressbar contract exposes the count
     const progressbar = screen.getByRole('progressbar');
     expect(progressbar).toHaveAttribute('aria-valuenow', '0');
     expect(progressbar).toHaveAttribute('aria-label', '0 of 106 kshetrams visited');
-    // 4 featured kshetram links
-    expect(screen.getAllByRole('link', { name: /srirangam|tirumala|kanchipuram|srivilliputhur/i }).length)
-      .toBeGreaterThanOrEqual(4);
+    // The scope sentence explains the 108/106 distinction site-wide
+    expect(screen.getByText(/the archive holds 108 divya desams/i)).toBeInTheDocument();
+    // 4 featured kshetram cards, each with the shared action set
+    expect(screen.getAllByRole('link', { name: /view temple/i }).length).toBeGreaterThanOrEqual(4);
+    expect(screen.getAllByRole('button', { name: /add to trip/i }).length).toBeGreaterThanOrEqual(4);
+    expect(screen.getAllByRole('button', { name: /mark as visited/i }).length).toBeGreaterThanOrEqual(4);
   });
 
-  it('offers navigation to Browse and the darshan strips', () => {
+  it('offers navigation to Browse, the map and the person strips', () => {
     renderAt('/');
-    // 2026-09 refresh: the CTA label is "Explore Kshetrams" (PO request)
-    expect(screen.getByRole('link', { name: /explore kshetrams/i })).toHaveAttribute('href', '/kshetrams');
-    // PO request 2026-09-10: darshan strips replace the hero "Azhwars" CTA
-    expect(screen.getByRole('link', { name: /azhwar darshan - featured/i })).toHaveAttribute('href', '/azhwars');
-    expect(screen.getByRole('link', { name: /acharya darshan - featured/i })).toHaveAttribute('href', '/acharyas');
-    // PO round 4: one row of 4 tiles per strip
+    // Round 23: hero actions are "Browse temples" (primary) + "Plan your yatra" (secondary)
+    expect(screen.getByRole('link', { name: /browse temples/i })).toHaveAttribute('href', '/kshetrams');
+    expect(screen.getByRole('link', { name: /plan your yatra/i })).toHaveAttribute('href', '/map');
+    // Round 23: strip CTAs renamed to the directory-consistent labels
+    expect(screen.getByRole('link', { name: /view all azhwars/i })).toHaveAttribute('href', '/azhwars');
+    expect(screen.getByRole('link', { name: /view all acharyas/i })).toHaveAttribute('href', '/acharyas');
+    // Person previews keep unique-named profile links (no overlay stops)
     expect(screen.getAllByRole('link', { name: /poigai azhwar|bhoothathazhwar/i }).length).toBeGreaterThanOrEqual(2);
     expect(screen.getAllByRole('link', { name: /thirumazhisai|peyazhwar/i }).length).toBeGreaterThanOrEqual(2);
     expect(screen.queryAllByRole('link', { name: /nammazhwar|andal/i })).toHaveLength(0);

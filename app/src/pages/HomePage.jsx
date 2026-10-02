@@ -23,7 +23,7 @@ export default function HomePage() {
     getAllKshetrams().filter((k) => k.region !== 'Celestial').map((k) => k.id),
   );
   return (
-    <div>
+    <div className="dir">
       <Hero />
 
       <YatraProgressTracker total={earthlyIds.size} eligibleIds={earthlyIds} />
@@ -34,7 +34,6 @@ export default function HomePage() {
           eyebrow and the poetic line is the display heading (approved layout) */}
       <SaintStrip
         tone="ivory"
-        withDivider
         eyebrow={azhwarStrip.title}
         title={azhwarStrip.eyebrow}
         lead={azhwarStrip.lead}

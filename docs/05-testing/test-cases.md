@@ -397,3 +397,26 @@ Pass · E2E **19/19** · Visual gate **7/7** (before/after per width +
 focus-ring crop). Execution recorded in TER v2.30.
 
 *End of Addendum — TCS-108K-008 v1.16*
+
+## Version 1.17 — Home / Map / About Coordinated Restyle (2026-10-02)
+
+PO round-23 coordinated restyle of `/`, `/map` and `/about` on the shared
+design foundation (TER v2.31). Dataset unchanged; contract moves:
+
+| ID | Change | Detail |
+|---|---|---|
+| Shared | UI primitives | New `ui.css` + `components/ui/` (Button/ButtonLink variants, Dialog with focus containment/return/Escape, Field/SearchField/FilterSelect, SectionHeading, ContactDetails); all gradient controls replaced by solid maroon / outlined / tertiary |
+| Shared | Directory reuse | Home/map/about render in the `.dir` scope (DM Sans English body, Mukta Malar Tamil); new shared `TempleCard` and `PersonPreview` join DirectoryHeader/PortraitFallback/ProfileLink |
+| UT-HOME-01..03 | Home | Hero: dark overlay, two actions ("Browse temples" primary, "Plan your yatra" secondary), invocation stack retired; compact My yatra (count/106, bar, one action, reset hidden at zero); 108/106 sentence site-wide; featured grid on TempleCard; person previews with unique profile links; CTAs renamed "View all Azhwars/Acharyas" |
+| UT-MAP-01..03, UT-TRP-02/03 | Map | Workspace layout (pane + map); result→marker selection sync; "Fit results" vs "Reset filters"; one result-count presentation; Map/List mobile switch + Filters disclosure; Trip planner (N) in shared Dialog; flag markers + legend for in-trip, gold rings for visited; tile-error/no-result/loading states; distances still optional via location |
+| UT-ABT-01 | About | Editorial open sections; nav in reading order (archive → yatras → circuits → team → contact → etiquette); compact Team (fallback portrait, short quote/bio, plain credentials); circuit comparison cards with meta rows + duration-scope note; one ContactDetails block; inquiry dialog with name + ≥1 contact method, preserved circuit, alert-validated delivery confirmation |
+| New suite | ui.test.jsx | Button/Dialog/fields/ContactDetails branch coverage (+ TempleCard/PersonPreview in directory.test.jsx) |
+| TC-02/14/15/17 | E2E | TC-02 hero actions + article cards; TC-14 result→marker focus → highlighted marker → tooltip → popup; TC-15/17 planner/strip control renames |
+
+Quality gates: TC-QA-01 Pass (0 errors; 6 warnings — accepted set +
+same advisories on new dialog effects) · TC-QA-02 Pass (**254/254
+tests, 23 suites**; 90.47/81.32/86.29/92.08) · TC-QA-03 Pass · E2E
+**19/19** · Visual gate **22/22** (before/after ×4 widths ×3 pages +
+zoom/focus/dialog/mobile states). Execution recorded in TER v2.31.
+
+*End of Addendum — TCS-108K-008 v1.17*

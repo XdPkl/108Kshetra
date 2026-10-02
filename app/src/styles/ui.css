@@ -1,0 +1,194 @@
+/*
+ * Shared UI primitives (PO round 23 — home/map/about coordinated restyle).
+ * One control language for the whole site, referenced against the kxd
+ * dossier theme: maroon solid primary buttons, outlined secondary
+ * buttons, plain tertiary links; shared form fields, dialogs, scope
+ * pills and focus states. Gold is decorative only (focus rings, rules).
+ * Class selectors are prefixed `ui-` and deliberately outrank the
+ * unlayered element rules in base.css (a/button) without !important.
+ */
+:root {
+  --ui-primary: #922e0d;      /* maroon actions (kxd --rust) */
+  --ui-primary-dark: #7a2e00;
+  --ui-accent: #ae3712;
+  --ui-gold: #a77529;
+  --ui-line: #e8cf9f;
+  --ui-tint: #fbf0dc;
+  --ui-ink: #333942;
+  --ui-muted: #74716b;
+  --ui-serif: 'Source Serif 4', Georgia, serif;
+  --ui-sans: 'DM Sans', 'Mukta Malar', Arial, sans-serif;
+  --ui-tamil: 'Mukta Malar', 'Noto Serif Tamil', serif;
+}
+
+/* ---- Buttons: solid primary / outlined secondary / plain tertiary ---- */
+.ui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font: 600 14px/22px var(--ui-sans);
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.ui-btn:focus-visible,
+.ui-tertiary:focus-visible {
+  outline: 3px solid var(--ui-gold);
+  outline-offset: 3px;
+}
+.ui-btn--primary { background: var(--ui-primary); color: #fffdf7; }
+.ui-btn--primary:hover { background: var(--ui-primary-dark); }
+.ui-btn--secondary {
+  background: transparent;
+  border-color: var(--ui-primary);
+  color: var(--ui-primary);
+}
+.ui-btn--secondary:hover { background: var(--ui-tint); }
+/* On-photo variant of the outlined secondary (dark hero) */
+.ui-btn--inverse {
+  background: rgba(28, 12, 3, 0.35);
+  border-color: rgba(255, 253, 247, 0.75);
+  color: #fffdf7;
+}
+.ui-btn--inverse:hover { background: rgba(28, 12, 3, 0.55); }
+.ui-btn--small { min-height: 36px; padding: 6px 12px; font-size: 13px; line-height: 20px; border-radius: 8px; }
+
+/* Plain tertiary link (no container) */
+.ui-tertiary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 2px;
+  border: 0;
+  background: none;
+  color: var(--ui-primary);
+  font: 700 14px/22px var(--ui-sans);
+  text-decoration: none;
+  cursor: pointer;
+}
+.ui-tertiary:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---- Form fields ---- */
+.ui-label { display: block; margin-bottom: 5px; font: 700 14px/22px var(--ui-sans); color: var(--ui-ink); }
+.ui-input,
+.ui-select,
+.ui-textarea {
+  width: 100%;
+  border: 1px solid var(--ui-line);
+  border-radius: 8px;
+  background: #fffdf7;
+  color: var(--ui-ink);
+  font: 400 16px/26px var(--ui-sans);
+  padding: 9px 12px;
+  min-height: 44px;
+}
+.ui-textarea { min-height: 88px; resize: vertical; }
+.ui-input:focus-visible,
+.ui-select:focus-visible,
+.ui-textarea:focus-visible { outline: 3px solid var(--ui-gold); outline-offset: 1px; border-color: var(--ui-gold); }
+.ui-input::placeholder { color: var(--ui-muted); }
+.ui-field-error { margin: 5px 0 0; font: 600 14px/22px var(--ui-sans); color: #a32020; }
+.ui-hint { margin: 5px 0 0; font: 400 14px/22px var(--ui-sans); color: var(--ui-muted); }
+
+/* Scope pill (map All/Visited/In-trip, list switch) — 44px targets */
+.ui-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--ui-line);
+  background: #fffdf7;
+  color: var(--ui-primary);
+  font: 600 14px/22px var(--ui-sans);
+  cursor: pointer;
+}
+.ui-pill:hover { border-color: var(--ui-gold); }
+.ui-pill[aria-pressed='true'] { background: var(--ui-primary); border-color: var(--ui-primary); color: #fffdf7; font-weight: 700; }
+
+/* ---- Dialog (trip planner, inquiry form) ---- */
+.ui-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(51, 36, 23, 0.65);
+}
+.ui-dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: min(92dvh, 860px);
+  background: #fffdf7;
+  border: 1px solid var(--ui-line);
+  border-radius: 14px;
+  box-shadow: 0 22px 48px rgba(51, 36, 23, 0.35);
+  overflow: hidden;
+}
+.ui-dialog__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid var(--ui-tint);
+  flex: none;
+}
+.ui-dialog__title { margin: 0; font: 600 26px/34px var(--ui-serif); color: var(--ui-primary); }
+.ui-dialog__eyebrow { margin: 0 0 2px; font: 700 11px/18px var(--ui-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ui-gold); }
+.ui-dialog__close {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--ui-muted);
+  cursor: pointer;
+}
+.ui-dialog__close:hover { background: var(--ui-tint); color: var(--ui-primary); }
+.ui-dialog__close:focus-visible { outline: 3px solid var(--ui-gold); outline-offset: 2px; }
+.ui-dialog__body { padding: 20px 22px 24px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+/* Serif display heading helper (Source Serif 4 via Tailwind-independent class) */
+.ui-heading { font-family: var(--ui-serif); }
+
+/* ---- In-trip flag marker (shape + label, not color alone) ---- */
+.map-trip-flag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--ui-primary);
+  color: #fffdf7;
+  font-size: 14px;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(51, 36, 23, 0.35);
+}
+.map-trip-flag.static { width: auto; height: auto; background: none; box-shadow: none; color: var(--ui-primary); font-size: 15px; }
+.map-trip-flag-wrap { background: none; border: none; }
+
+/* ---- Result / info rows shared by the map workspace ---- */
+.ui-meta-row { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.ui-meta-row dt { flex: none; font: 700 14px/22px var(--ui-sans); color: var(--ui-gold); }
+.ui-meta-row dd { margin: 0; min-width: 0; font: 400 15px/24px var(--ui-sans); color: var(--ui-ink); overflow-wrap: break-word; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .ui-btn { transition: background 0.15s, color 0.15s, border-color 0.15s; }
+}

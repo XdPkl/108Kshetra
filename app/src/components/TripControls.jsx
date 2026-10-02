@@ -42,11 +42,8 @@ export default function TripControls({ id, variant, onNotify }) {
   return (
     <button
       type="button"
-      className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all shadow-xs ${
-        inTrip
-          ? 'bg-gradient-to-b from-[#E2C47C] to-[#C99A2E] text-[#4A3005] border border-[#96731F]'
-          : 'border border-[#B34700]/60 text-[#7A2E00] hover:bg-[#B34700]/10 bg-[#FFFDF7]'
-      }`}
+      className="ui-btn ui-btn--secondary ui-btn--small"
+      style={inTrip ? { background: '#fbf0dc', borderColor: '#a77529', color: '#922e0d' } : undefined}
       aria-pressed={inTrip}
       aria-label={inTrip ? 'Remove from trip' : 'Add to trip'}
       onClick={handleToggle}

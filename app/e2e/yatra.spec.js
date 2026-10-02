@@ -39,10 +39,19 @@ test.describe('V3 yatra toolkit', () => {
     // 2026-09-30 merge: cluster bubbles form below zoom 9 — zoom in so the
     // individual desam markers (and their hover tooltips) are exposed
     const zoomIn = page.locator('.leaflet-control-zoom-in');
-    for (let i = 0; i < 4; i += 1) await zoomIn.click();
+    for (let i = 0; i < 4; i += 1) {
+      await zoomIn.click();
+      await page.waitForTimeout(400); // let each zoom animation settle
+    }
+    await expect(page.locator('.map-cluster')).toHaveCount(0);
 
-    // Hovering a marker shows a tooltip with the desam name (US-MAP-04)
-    await markers.first().hover();
+    // Round 23: selecting a result in the pane highlights its marker
+    // (heavier gold stroke) — hover it for the tooltip (US-MAP-04) and
+    // click it for the popup, exercising result/marker synchronization
+    await page.getByRole('button', { name: /focus .* on the map/i }).first().click();
+    const focused = page.locator('path[stroke-width="4"]');
+    await expect(focused).toBeVisible();
+    await focused.hover();
     await expect(page.locator('.leaflet-tooltip').last()).toBeVisible();
 
     // Region dropdown narrows the plotted markers
@@ -51,10 +60,13 @@ test.describe('V3 yatra toolkit', () => {
     const after = await markers.count();
     expect(after).toBeLessThan(before);
 
-    // Clicking a marker opens a popup with the gold "Show Temple" link
-    await markers.first().click();
+    // Re-focus from the filtered list (the filter may drop the earlier
+    // selection) and open its popup with the shared "View temple" link
+    await page.getByRole('button', { name: /focus .* on the map/i }).first().click();
+    await expect(focused).toBeVisible();
+    await focused.click();
     await expect(page.locator('.leaflet-popup-content')).toBeVisible();
-    await page.getByRole('link', { name: /show temple/i }).click();
+    await page.getByRole('link', { name: /view temple/i }).last().click();
     await expect(page).toHaveURL(/kshetram\/[a-z-]+$/);
   });
 
@@ -74,7 +86,7 @@ test.describe('V3 yatra toolkit', () => {
     // PO round 10: the trip planner lives in a modal opened by the big
     // left-column button
     const dialog = page.getByRole('dialog', { name: /my yatra/i });
-    await page.getByRole('button', { name: /my yatra — trip planner/i }).click();
+    await page.getByRole('button', { name: /trip planner/i }).click();
     await expect(dialog).toBeVisible();
     await expect(dialog.getByText(/3 stops/i)).toBeVisible();
     await dialog.getByRole('button', { name: 'Close' }).click();
@@ -85,7 +97,7 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page.locator('.leaflet-interactive')).toHaveCount(4); // 3 markers + 1 polyline
 
     // Route order + share run inside the reopened planner modal
-    await page.getByRole('button', { name: /my yatra — trip planner/i }).click();
+    await page.getByRole('button', { name: /trip planner/i }).click();
     await dialog.getByRole('button', { name: /order my route/i }).click();
     await expect(dialog.getByText(/nearest-first/i)).toBeVisible();
 
@@ -124,8 +136,8 @@ test.describe('V3 yatra toolkit', () => {
     await page.goto('');
     await expect(page.getByRole('link', { name: /kshetra tours/i })).toBeVisible();
     // PO request 2026-09-10: the hero "Azhwars" CTA became the darshan strips
-    await expect(page.getByRole('main').getByRole('link', { name: /azhwar darshan - featured/i })).toBeVisible();
-    await expect(page.getByRole('main').getByRole('link', { name: /acharya darshan - featured/i })).toBeVisible();
+    await expect(page.getByRole('main').getByRole('link', { name: /view all azhwars/i })).toBeVisible();
+    await expect(page.getByRole('main').getByRole('link', { name: /view all acharyas/i })).toBeVisible();
 
     await page.getByRole('link', { name: /kshetra tours/i }).click();
     await expect(page).toHaveURL(/about$/);

@@ -2119,3 +2119,144 @@ profile routes and the three era groups are preserved.
 | E2E (Playwright, Chromium) | **19/19 journeys pass** — TC-19 extended: era jump-link click lands on `#later-acharyas` with the heading in viewport |
 | Measured | @390: title 38px, lead 16px full-width (358px), 1 column, portrait 72px, profile-link height 44px; @768: 2 columns, portrait 104px; @1280/1440: title 56px, watermark shown, 2 columns; **0px horizontal overflow at all four widths**; longest name ("Thirukkurugai Piran Pillan") wraps and fits; jump click → hash `#later-acharyas`, section top at 76px, all 3 groups + 27 entries still rendered; keyboard path to the first profile link has no duplicate stops |
 | Visual gate | **7/7 pass** (acharyas 390/768/1280/1440, azhwars 390/1280, focus-ring crop) — `docs/03-design/gate-shots/acharyas-directory-22/{before,after}/` (before captured from live `300a8e9`) |
+
+## Version 2.31 — Home / Map / About Coordinated Restyle (2026-10-02, round 23)
+
+PO request: improve `/`, `/map` and `/about` as **one coordinated update**
+with consistency against `/kshetram/srirangam` and the person pages as the
+primary acceptance requirement. **No dataset changes** (`sync-content
+--fixture --check` 0-diff); site-copy gained fields (hero.ctaSecondary,
+progressScope, about anchors/labels, circuit meta labels) with the fixture
+updated in lockstep.
+
+### Shared design foundation
+
+- **New `src/styles/ui.css`** (imported last): the site-wide control
+  language — solid maroon primary `#922e0d` (hover `#7a2e00`), outlined
+  secondary, plain tertiary, on-photo inverse variant, 44px targets,
+  gold focus rings, shared form fields (16px text), scope pills, dialog
+  chrome and the in-trip flag marker. All gold/orange **gradients on
+  controls are retired** (hero CTA pill, trip-planner opener, modal top
+  strips, TripControls pill, trip-stop chips).
+- **New `src/components/ui/`**: `Button`/`ButtonLink` (variant prop),
+  `Dialog` (Escape, overlay click, **focus containment + focus return**,
+  scrollable mobile body), `fields.jsx` (`Field`/`SearchField`/
+  `FilterSelect`), `SectionHeading`, `ContactDetails` (labelled rows +
+  copy affordances, placeholders suppress copy).
+- **Directory components reused on the new pages** (all three pages now
+  render inside the `.dir` scope): `TempleCard` (new shared temple-card
+  foundation: 3/4 top-anchored photo, English name → Tamil name, View
+  temple / Add to trip / Mark as visited), `PersonPreview` (new shared
+  person tile: directory portrait framing + PortraitFallback + English
+  name → Tamil name + unique "View profile" link), `PortraitFallback`,
+  `ProfileLink`. `TripControls` restyled to the shared pill (names/aria
+  unchanged).
+- Home/map/about English body text measures **DM Sans** (Tamil falls
+  through to Mukta Malar); headings **Source Serif 4** — verified
+  computed styles on all pages.
+
+### HOME
+
+- Hero: reliable dark overlay (solid dim base + left scrim) behind the
+  text; exactly two actions — primary "Browse temples", secondary
+  "Plan your yatra" (copy updated in site-copy + fixture). Retired as
+  decorative clutter: the top-right invocation stack, the italic
+  display description line and the gold gradient CTA.
+- "My yatra" compacted to one calm row: serif label, `0 / 106` count,
+  slim progress bar, one primary "Mark a visit" action. **Reset
+  progress** is a secondary management action, rendered only when
+  progress > 0 (native confirm retained). The progressbar contract
+  (aria-label "{n} of {total} kshetrams visited") is unchanged.
+- **108/106 sentence** (`SITE_COPY.progressScope`): "The archive holds
+  108 Divya Desams — yatra progress and the map cover the 106 terrestrial
+  shrines." — rendered verbatim on home and /map (verified identical).
+- Featured grid uses shared `TempleCard` + `SectionHeading`; strips use
+  `PersonPreview` with CTAs renamed to **"View all Azhwars" / "View all
+  Acharyas"**.
+
+### MAP
+
+- Planning-workspace layout: left pane (sticky, internally scrollable)
+  with compact header, search, region select, All/Visited/In-trip pills
+  (names unchanged), location controls, outlined "Trip planner (N)"
+  action and the **result list**; large map beside it.
+- **Result/marker synchronization**: clicking a result's name (or its
+  "Focus on map" action) flies to the temple and outlines the row
+  (selected marker: maroon fill, 4px gold stroke — verified in
+  map-selected.png).
+- **"Fit results"** bounds the current filtered set; the distinct
+  **"Reset filters"** action (pane + empty state) restores all temples.
+- One result-count presentation ("N of 106 terrestrial desams shown")
+  in the header and the on-map badge; concise on-map legend (Temple /
+  Visited ring / In-trip flag) + region-color legend card below (colors
+  stay inside the visualization).
+- **States**: tile-error notice (map stays usable, list is the
+  accessible fallback), no-result EmptyState with Reset filters, map
+  loading badge. Location access remains optional.
+- **Visited/in-trip beyond color**: visited markers keep the gold ring;
+  in-trip temples render a maroon flag marker (shape + "· in trip"
+  tooltip label + legend entry).
+- Mobile: compact search/region, labelled **Map/List switch**,
+  expandable **Filters** disclosure (scope pills collapsed by default,
+  always open ≥lg), prominent "Trip planner (N)".
+- Trip planner renders in the shared `Dialog` (focus containment,
+  Escape, focus return); its internals restyled to the shared controls.
+
+### ABOUT
+
+- Editorial layout: open sections (65–75ch, 16–17px) for the archive,
+  guided yatras and etiquette; cards kept for the circuit grid and the
+  contact block. Section navigation follows the **reading order**:
+  About the archive → Guided yatras → Regional circuits → Team →
+  Contact → Temple etiquette (labels updated in site-copy; anchor ids
+  unchanged so the header dropdown deep links keep working).
+- **Compact leadership**: small portrait frame with the restrained
+  PortraitFallback tile (admin upload/URL controls preserved); shortened
+  quote (first sentence) and biography (opening paragraph) — rendered
+  side of the unchanged dataset (full text preserved in about.json for
+  the CMS); credentials listed plainly with check icons.
+- **Circuit comparison cards**: Name → Region → Shrines → Indicative
+  duration → Base location → summary → key shrines line → "View
+  temples" / "Ask about this yatra". A duration-scope note clarifies
+  that durations cover the whole listed circuit and dispersed routes
+  (Vada Nadu) may run as subcircuits — flagged for PO confirmation.
+- **One authoritative contact block** (ContactDetails): General
+  inquiries (`contact@kshetratours.org`), CEO office
+  (`yatra@kshetratours.com`), Phone/WhatsApp — values rendered verbatim.
+- **Inquiry dialog** (shared Dialog): name required; **email or phone —
+  at least one** (inline `role=alert` error blocks submission); circuit
+  preserved from the opener; pilgrims/window/notes optional. Success
+  (booking reference) renders only after the inquiry is recorded
+  (locally persisted under `kshetra_inquiries`; the site has no server
+  channel — flagged below).
+
+### Flags for PO review (not invented)
+
+- **Contact verification result**: `kshetratours.org` (the general
+  email domain) has **no DNS presence** (domain does not resolve);
+  `kshetratours.com` is a live Kshetra Tours website whose published
+  phone (**+91 98405 01427**) differs from the dataset's
+  `+91 98765 43210` (a placeholder-pattern number). Per the brief the
+  data was NOT changed — the differing addresses/phone need PO-owned
+  authoritative values before being trusted.
+- Inquiry delivery is local-only (reference recorded in the browser);
+  the success copy promises coordinator follow-up — a live delivery
+  channel remains PO-owned scope.
+- Duration-scope note wording is presentational clarification; the
+  subcircuit split for Vada Nadu should be confirmed with the operator.
+- `body.style.zoom` was rejected as a 200%-zoom proxy (it leaves media
+  queries at desktop widths); the faithful proxy (640px CSS viewport,
+  DPR 2) shows **0px horizontal overflow** on all three pages.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 6 warnings (baseline 4 + the same accepted set-state-in-effect advisories on the new dialog open/reset effects) |
+| Unit tests (Vitest) | **254/254 pass (23 suites)** — new `ui.test.jsx` (9) + TempleCard/PersonPreview branches; home, map, tracker, about suites updated in lockstep |
+| Coverage | **90.47% statements / 81.32% branches / 86.29% functions / 92.08% lines** (gate 80%) |
+| Production build | Clean |
+| CMS round-trip | `sync-content --fixture --check` 0-diff (site-copy additions mirrored in fixture) |
+| E2E (Playwright, Chromium) | **19/19 pass** — TC-14 reworked to exercise result→marker selection (focus → highlighted marker → tooltip → popup); TC-15/17/02 updated for the renamed controls |
+| Measured | 0px horizontal overflow at 390/768/1280/1440 on all three pages and at the 200%-zoom proxy (640 CSS px); dialog opens with focus inside; Escape closes; validation error path confirmed; progressScope wording identical on home + map; trip/visit data flows unchanged (state modules untouched) |
+| Visual gate | **22/22 pass** (home/map/about × 390/768/1280/1440 + zoom200 × 2 + map-selected/map-focus/map-mobile ×3 + dialog ×3) — `docs/03-design/gate-shots/home-map-about-23/{before,after}/` (before captured from live round-22 bundle) |

@@ -22580,7 +22580,8 @@
       "title": "108 Divya Kshetrams",
       "subtitle": "ஆழ்வார்களால் மங்களாசாசனம் செய்யப்பட்ட நூற்றெட்டு திவ்ய தேசங்கள்",
       "description": "The sacred abodes of Lord Narayana — 108 Divya Desams glorified by the twelve Azhwars",
-      "cta": "Explore Kshetrams"
+      "cta": "Browse temples",
+      "ctaSecondary": "Plan your yatra"
     },
     "home": {
       "featured": {
@@ -22593,13 +22594,13 @@
         "eyebrow": "Saint-poets of the Tamil Veda",
         "title": "The Twelve Azhwars",
         "lead": "Whose hymns sanctified these hills, groves and cities.",
-        "ctaLabel": "Azhwar Darshan - Featured"
+        "ctaLabel": "View all Azhwars"
       },
       "acharyaStrip": {
         "eyebrow": "The guru parampara",
         "title": "The Acharyas",
         "lead": "Teachers who received, preserved and expounded the tradition.",
-        "ctaLabel": "Acharya Darshan - Featured"
+        "ctaLabel": "View all Acharyas"
       }
     },
     "browse": {
@@ -22635,12 +22636,12 @@
         "tagline": "A dedicated devotional resource and guided pilgrimage initiative celebrating the 108 Divya Desams glorified in the Tamil Veda."
       },
       "anchors": [
-        "Digital Archive",
-        "Guided Yatras",
-        "Leadership & CEO",
-        "Regional Circuits",
+        "About the archive",
+        "Guided yatras",
+        "Regional circuits",
+        "Team",
         "Contact",
-        "Sanctum Etiquette"
+        "Temple etiquette"
       ],
       "sections": {
         "archiveEyebrow": "The digital archive",
@@ -22662,10 +22663,18 @@
         "keyShrinesLabel": "Key shrines in this circuit:",
         "viewAllPrefix": "View all",
         "viewAllSuffix": "temples",
-        "inquireCircuit": "Inquire Circuit",
+        "inquireCircuit": "Ask about this yatra",
         "etiquetteEyebrow": "Yatra guidance & sacred tradition",
         "etiquetteTitle": "Sanctum Etiquette & Parayanam Protocols",
-        "etiquetteLead": "Essential spiritual guidelines to observe when approaching the sanctums of Lord Narayana across the 108 Divya Desams."
+        "etiquetteLead": "Essential spiritual guidelines to observe when approaching the sanctums of Lord Narayana across the 108 Divya Desams.",
+        "generalEmailLabel": "General inquiries",
+        "ceoEmailLabel": "CEO office",
+        "circuitsDurationNote": "Durations are indicative for each circuit as listed. Geographically dispersed routes — such as Vada Nadu, combining Tamil Nadu shrines with the Himalayan abodes — may be operated as separate subcircuit runs; confirm the plan when enquiring.",
+        "circuitRegionLabel": "Region",
+        "circuitCountLabel": "Shrines",
+        "circuitDurationLabel": "Indicative duration",
+        "circuitBaseLabel": "Base location",
+        "viewTemplesLabel": "View temples"
       },
       "scheduleModal": {
         "deskEyebrow": "Pilgrim Service Desk",
@@ -22677,7 +22686,8 @@
           "circuit": "Preferred Pilgrimage Circuit",
           "pilgrims": "Number of Pilgrims",
           "window": "Expected Travel Window",
-          "notes": "Special Requirements (Optional)"
+          "notes": "Special Requirements (Optional)",
+          "contactNote": "Share at least one contact method — email or phone."
         },
         "placeholders": {
           "name": "e.g. Sriraman / Padmavathi",
@@ -22847,7 +22857,8 @@
       "goodFaithNote": "Content is provided in good faith for devotional and educational purposes.",
       "privacyNote": "Your visited marks and trip are stored only in your browser — never sent to any server.",
       "mark": "108 Divya Desams • Sri Ramanuja Dasa"
-    }
+    },
+    "progressScope": "The archive holds 108 Divya Desams — yatra progress and the map cover the 106 terrestrial shrines."
   },
   "config": {
     "stats": {

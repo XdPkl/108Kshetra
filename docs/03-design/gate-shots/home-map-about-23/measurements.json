@@ -1,0 +1,90 @@
+{
+  "home": {
+    "390": {
+      "overflowX": 0,
+      "h1Font": "\"Source Serif 4\", Georgia, serif",
+      "paraFont": "\"Mukta Malar\", \"Segoe UI\", Arial, sans-s"
+    },
+    "768": {
+      "overflowX": 0,
+      "h1Font": "\"Source Serif 4\", Georgia, serif",
+      "paraFont": "\"Mukta Malar\", \"Segoe UI\", Arial, sans-s"
+    },
+    "1280": {
+      "overflowX": 0,
+      "h1Font": "\"Source Serif 4\", Georgia, serif",
+      "paraFont": "\"Mukta Malar\", \"Segoe UI\", Arial, sans-s"
+    },
+    "1440": {
+      "overflowX": 0,
+      "h1Font": "\"Source Serif 4\", Georgia, serif",
+      "paraFont": "\"Mukta Malar\", \"Segoe UI\", Arial, sans-s"
+    }
+  },
+  "map": {
+    "390": {
+      "overflowX": 0,
+      "h1Font": "\"Source Serif 4\", Georgia, serif",
+      "paraFont": "\"DM Sans\", \"Mukta Malar\", Arial, sans-se"
+    },
+    "768": {
+      "overflowX": 0,
+      "h1Font": "\"Source Serif 4\", Georgia, serif",
+      "paraFont": "\"DM Sans\", \"Mukta Malar\", Arial, sans-se"
+    },
+    "1280": {
+      "overflowX": 0,
+      "h1Font": "\"Source Serif 4\", Georgia, serif",
+      "paraFont": "\"DM Sans\", \"Mukta Malar\", Arial, sans-se"
+    },
+    "1440": {
+      "overflowX": 0,
+      "h1Font": "\"Source Serif 4\", Georgia, serif",
+      "paraFont": "\"DM Sans\", \"Mukta Malar\", Arial, sans-se"
+    }
+  },
+  "about": {
+    "390": {
+      "overflowX": 0,
+      "h1Font": "\"Source Serif 4\", Georgia, serif",
+      "paraFont": "\"DM Sans\", \"Mukta Malar\", Arial, sans-se"
+    },
+    "768": {
+      "overflowX": 0,
+      "h1Font": "\"Source Serif 4\", Georgia, serif",
+      "paraFont": "\"DM Sans\", \"Mukta Malar\", Arial, sans-se"
+    },
+    "1280": {
+      "overflowX": 0,
+      "h1Font": "\"Source Serif 4\", Georgia, serif",
+      "paraFont": "\"DM Sans\", \"Mukta Malar\", Arial, sans-se"
+    },
+    "1440": {
+      "overflowX": 0,
+      "h1Font": "\"Source Serif 4\", Georgia, serif",
+      "paraFont": "\"DM Sans\", \"Mukta Malar\", Arial, sans-se"
+    }
+  },
+  "home-zoom200": {
+    "overflowX": 0
+  },
+  "about-zoom200": {
+    "overflowX": 0
+  },
+  "mapSelected": {
+    "selectedRow": true
+  },
+  "mapMobile": {
+    "overflowX": 0
+  },
+  "dialog": {
+    "open": true,
+    "focusOnOpen": true
+  },
+  "dialogValidation": true,
+  "dialogEscape": true,
+  "progressScopeWording": {
+    "home": true,
+    "map": true
+  }
+}

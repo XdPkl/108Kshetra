@@ -54,15 +54,14 @@ beforeEach(() => {
   vi.restoreAllMocks();
 });
 
-describe('YatraProgressTracker (2026-09 refresh)', () => {
-  it('keeps an empty bar at zero and confirms before reset', async () => {
+describe('YatraProgressTracker (round-23 compaction)', () => {
+  it('keeps an empty bar at zero, hides reset at zero, and confirms before reset', async () => {
     const user = userEvent.setup();
     const { rerender } = renderAt('/', <YatraProgressTracker total={108} />);
     expect(screen.queryByText('0%')).not.toBeInTheDocument();
     expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
-    const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(false);
-    await user.click(screen.getByRole('button', { name: /reset progress/i }));
-    expect(confirmSpy).toHaveBeenCalledTimes(1);
+    // Round 23: the reset management action is hidden while progress is zero
+    expect(screen.queryByRole('button', { name: /reset progress/i })).not.toBeInTheDocument();
     markVisited('srirangam', true);
     markVisited('tirupati', true);
     markVisited('srivilliputhur', true);
@@ -71,9 +70,12 @@ describe('YatraProgressTracker (2026-09 refresh)', () => {
         <YatraProgressTracker total={108} />
       </MemoryRouter>,
     );
-    // 2026-09 refresh: the slim bar carries the count via the progressbar
-    // contract (no inline percentage label)
+    // the slim bar carries the count via the progressbar contract
     expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '3');
+    // the reset management action appears once progress exists
+    const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(false);
+    await user.click(screen.getByRole('button', { name: /reset progress/i }));
+    expect(confirmSpy).toHaveBeenCalledTimes(1);
     confirmSpy.mockReturnValue(true);
     await user.click(screen.getByRole('button', { name: /reset progress/i }));
     rerender(
@@ -83,6 +85,9 @@ describe('YatraProgressTracker (2026-09 refresh)', () => {
     );
     expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
     expect(screen.getByRole('progressbar')).toHaveAttribute('aria-label', '0 of 108 kshetrams visited');
+    // hidden again once the reset clears all marks
+    expect(screen.queryByRole('button', { name: /reset progress/i })).not.toBeInTheDocument();
+    confirmSpy.mockRestore();
   });
 
   it('scopes the yatra to the 106 earthly kshetrams, ignoring celestial marks (PO 2026-09-25)', () => {
@@ -242,8 +247,8 @@ describe('BrowsePage status filters (UXD v3.0)', () => {
   }, 15_000);
 });
 
-describe('MapPage extras (UXD v3.0)', () => {
-  it('shows the location card and focus actions after locating; cards persist without distances after clearing', async () => {
+describe('MapPage extras (round-23 workspace)', () => {
+  it('shows distances after locating; result rows persist without distances after clearing', async () => {
     const user = userEvent.setup();
     Object.defineProperty(navigator, 'geolocation', {
       value: { getCurrentPosition: (ok) => ok({ coords: { latitude: 10.8624, longitude: 78.6901 } }) },
@@ -251,25 +256,28 @@ describe('MapPage extras (UXD v3.0)', () => {
     });
     renderAt('/map', <MapPage />);
     await user.click(screen.getByRole('button', { name: /show my location/i }));
-    expect(await screen.findByText(/your darshan distances are live below/i)).toBeInTheDocument();
+    // Round 23: distances fill in on the result rows once GPS is shared
+    expect((await screen.findAllByText(/km away/i)).length).toBeGreaterThan(0);
     expect(screen.getByRole('region', { name: /temples in view/i })).toBeInTheDocument();
-    // 2026-09-30 refresh: matrix rows are cards with the browse action set
+    // result rows carry the shared action tiers
     expect(screen.getAllByRole('link', { name: /view temple/i }).length).toBeGreaterThan(0);
     expect(screen.getAllByRole('button', { name: /add to trip/i }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole('button', { name: /mark visited/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole('button', { name: /mark as visited/i }).length).toBeGreaterThan(0);
     expect(screen.getByText(/\d+ results/i)).toBeInTheDocument();
-    await user.click(screen.getAllByRole('button', { name: /^focus$/i })[0]);
+    // selecting a result focuses its marker (safe no-op without a live map)
+    await user.click(screen.getAllByRole('button', { name: /focus .* on the map/i })[0]);
+    await user.click(screen.getAllByRole('button', { name: /focus on map/i })[0]);
     await user.click(screen.getByRole('button', { name: /clear my location/i }));
-    // PO 2026-09-30: the matrix always lists temples — clearing the GPS
-    // only removes the distance lines, never the cards
+    // the result list always lists temples — clearing the GPS only removes
+    // the distance lines, never the rows
     expect(screen.getByRole('region', { name: /temples in view/i })).toBeInTheDocument();
     expect(screen.getAllByRole('link', { name: /view temple/i }).length).toBeGreaterThan(0);
     expect(screen.queryByText(/km away/)).not.toBeInTheDocument();
     delete navigator.geolocation;
-  }, 30_000); // CI 2-core: locate + clear = three full 108-card renders
+  }, 30_000); // CI 2-core: locate + clear = three full 108-row renders
 });
 
-describe('AboutPage desk branches (UXD v3.0)', () => {
+describe('AboutPage desk branches (round-23 editorial restyle)', () => {
   it('sets and resets the CEO photo via the URL prompt', async () => {
     const user = userEvent.setup();
     // PO round 4: upload/URL controls are admin-gated — enable the flag
@@ -279,7 +287,7 @@ describe('AboutPage desk branches (UXD v3.0)', () => {
     await user.click(screen.getByRole('button', { name: /^url$/i }));
     expect(prompt).toHaveBeenCalled();
     expect(screen.getByRole('img', { name: /ceo of kshetra tours/i })).toHaveAttribute('src', 'https://example.com/ceo.jpg');
-    await user.click(screen.getByRole('button', { name: /reset photo/i }));
+    await user.click(screen.getByRole('button', { name: /^reset$/i }));
     expect(screen.queryByRole('img', { name: /ceo of kshetra tours/i })).not.toBeInTheDocument();
   });
 

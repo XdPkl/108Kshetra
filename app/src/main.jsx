@@ -14,6 +14,7 @@ import './styles/detail-theme.css';
 import './styles/kshetram-detail.css';
 import './styles/saint-detail.css';
 import './styles/directory.css';
+import './styles/ui.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

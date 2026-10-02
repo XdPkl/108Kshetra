@@ -8,14 +8,13 @@ test.describe('Home page (TC-02, TC-03, TC-11)', () => {
   test('shows hero, featured kshetrams and navigation', async ({ page }) => {
     await page.goto('');
     await expect(page.getByRole('heading', { name: /108 divya kshetrams/i })).toBeVisible();
-    // 2026-09 refresh: the hero invocation stack renders the phrase exactly
-    // once (removed entirely in PO round 3, restored by the approved mockup)
-    await expect(page.getByText('Nalayira Divya Prabandham', { exact: true })).toHaveCount(1);
-    // 2026-09 refresh: CTA is "Explore Kshetrams"; cards use the new
-    // featured-card anatomy
-    await expect(page.getByRole('link', { name: /explore kshetrams/i })).toBeVisible();
-    expect(await page.locator('.featured-card').count()).toBeGreaterThanOrEqual(4);
-    await expect(page.getByRole('link', { name: /azhwar darshan - featured/i })).toBeVisible();
+    // Round 23: the invocation stack is retired as decorative clutter —
+    // the hero carries exactly two actions over the darkened artwork
+    await expect(page.getByText('Nalayira Divya Prabandham', { exact: true })).toHaveCount(0);
+    await expect(page.getByRole('link', { name: /browse temples/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /plan your yatra/i })).toBeVisible();
+    expect(await page.locator('main article').count()).toBeGreaterThanOrEqual(4);
+    await expect(page.getByRole('link', { name: /view all azhwars/i })).toBeVisible();
     await expect(page.getByRole('link', { name: '108 Kshetras' })).toBeVisible();
     await expect(page.locator('footer')).toContainText(/good faith/i);
   });
