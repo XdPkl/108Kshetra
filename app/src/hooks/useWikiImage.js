@@ -1,5 +1,5 @@
 /**
- * useWikiImage — resolves an image the way WikiThumb does (local src first,
+ * useWikiImage — resolves an image (local src first,
  * else the cached Wikipedia lead thumbnail) but returns the raw entry so
  * zip-parity layouts can render the <img> with their own markup (UXD v3.0).
  * @param {string|null} title - Wikipedia article title

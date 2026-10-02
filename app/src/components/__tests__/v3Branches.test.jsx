@@ -27,7 +27,6 @@ vi.mock('../../utils/wikiImage.js', () => ({
 }));
 
 import YatraProgressTracker from '../home/YatraProgressTracker.jsx';
-import SectionNav from '../detail/SectionNav.jsx';
 import Header from '../Header.jsx';
 import EmptyState from '../EmptyState.jsx';
 import PageActions from '../PageActions.jsx';
@@ -99,20 +98,6 @@ describe('YatraProgressTracker (round-23 compaction)', () => {
     expect(earthlyIds.size).toBe(106);
     renderAt('/', <YatraProgressTracker total={earthlyIds.size} eligibleIds={earthlyIds} />);
     expect(screen.getByRole('progressbar')).toHaveAttribute('aria-label', '1 of 106 kshetrams visited');
-  });
-});
-
-describe('SectionNav (UXD v3.0)', () => {
-  it('activates the last section at the bottom of the page', () => {
-    render(
-      <SectionNav sections={[
-        { id: 'alpha', label: 'Alpha' }, { id: 'beta', label: 'Beta' }, { id: 'gamma', label: 'Gamma' },
-      ]} />,
-    );
-    const chips = screen.getAllByRole('link');
-    expect(chips[0]).toHaveAttribute('aria-current', 'true');
-    fireEvent.scroll(window);
-    expect(chips[2]).toHaveAttribute('aria-current', 'true');
   });
 });
 

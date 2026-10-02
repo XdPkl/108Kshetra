@@ -420,3 +420,27 @@ tests, 23 suites**; 90.47/81.32/86.29/92.08) · TC-QA-03 Pass · E2E
 zoom/focus/dialog/mobile states). Execution recorded in TER v2.31.
 
 *End of Addendum — TCS-108K-008 v1.17*
+## Version 1.18 — Dead-Code Cleanup (2026-10-03)
+
+Repo-wide over-engineering audit (ponytail-audit) found seven components
+and two scripts with zero non-test importers, kept alive only by their
+own suites. Deleted; their unit cases retire with them. No live page,
+route or e2e journey exercised any of them.
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-TRK-03/04 | **Retired** | ProgressBanner progressbar + confirm-reset tests — component was app-dead (superseded by YatraProgressTracker, home round 23); UT-TRK-01/02/05 unaffected |
+| FR-84 (SectionNav) | **Retired** | SectionNav anchor-chip tests in detailV3 + v3Branches — component was page-dead; GalleryLightbox (FR-85) tests remain |
+| WikiThumb UTs | **Retired** | detailV2 + detailComponents suites — superseded by useWikiImage/PortraitFallback |
+| SearchFilterBar UTs | **Retired** | Superseded by MapPage's own filter pane |
+| Badge / SectionHeading (base) UTs | **Retired** | Header badges are plain spans; ui/SectionHeading is the live heading component |
+| VisitedBadge | Deleted | No importers anywhere, including tests |
+| Scripts | Deleted | make-hero-watermark.mjs (unused; plaque CSS never shipped) and convert-js-to-json.mjs (one-off CMS-rollout migration, complete) |
+
+Quality gates: TC-QA-01 Pass (0 errors; 6 warnings — unchanged baseline)
+· TC-QA-02 Pass (**240/240 tests, 23 suites**; coverage
+90.37/81.45/86.11/91.87 — branch gate headroom improved) · TC-QA-03
+Pass · CMS round-trip 0-diff (no content touched) · E2E **19/19**
+unchanged. Execution recorded in TER v2.32.
+
+*End of Addendum — TCS-108K-008 v1.18*

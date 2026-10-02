@@ -1,6 +1,6 @@
 /**
  * Wikipedia summary-image fetch with module-level cache — shared by
- * WikiThumb, the kshetram hero and the gallery lightbox so one fetch
+ * the kshetram hero and the gallery lightbox so one fetch
  * serves all (FR-60/85). The PO round-17 audit found the ~330px lead
  * thumbnail visibly soft when enlarged to the hero's 540px+ frame, so the
  * thumb URL is rewritten to a fixed 1280px width (upload.wikimedia.org

@@ -7,7 +7,6 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import ProgressBanner from '../../components/ProgressBanner.jsx';
 import VisitedToggle from '../../components/VisitedToggle.jsx';
 import TripControls from '../../components/TripControls.jsx';
 import RegionLegend from '../../components/RegionLegend.jsx';
@@ -19,32 +18,6 @@ beforeEach(() => {
   window.localStorage.clear();
   resetVisited();
   clearTrip();
-});
-
-describe('ProgressBanner (UT-TRK-03/04)', () => {
-  const labelMatching = (pattern) => (content, el) =>
-    el?.classList?.contains('progress-banner__label') && pattern.test(el.textContent);
-
-  it('shows count and progressbar semantics', () => {
-    render(<ProgressBanner total={108} />);
-    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
-    expect(screen.getByText(labelMatching(/0 of 108 kshetrams visited/))).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /reset progress/i })).not.toBeInTheDocument();
-  });
-
-  it('resets after confirmation and keeps marks when dismissed', async () => {
-    const user = userEvent.setup();
-    toggleVisited('srirangam');
-    render(<ProgressBanner total={108} />);
-    expect(screen.getByText(labelMatching(/1 of 108 kshetrams visited/))).toBeInTheDocument();
-    const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(false);
-    await user.click(screen.getByRole('button', { name: /reset progress/i }));
-    expect(screen.getByText(labelMatching(/1 of 108 kshetrams visited/))).toBeInTheDocument();
-    confirmSpy.mockReturnValue(true);
-    await user.click(screen.getByRole('button', { name: /reset progress/i }));
-    expect(screen.getByText(labelMatching(/0 of 108 kshetrams visited/))).toBeInTheDocument();
-    confirmSpy.mockRestore();
-  });
 });
 
 describe('VisitedToggle (UT-TRK-02)', () => {

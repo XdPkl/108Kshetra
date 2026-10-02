@@ -2260,3 +2260,34 @@ updated in lockstep.
 | E2E (Playwright, Chromium) | **19/19 pass** — TC-14 reworked to exercise result→marker selection (focus → highlighted marker → tooltip → popup); TC-15/17/02 updated for the renamed controls |
 | Measured | 0px horizontal overflow at 390/768/1280/1440 on all three pages and at the 200%-zoom proxy (640 CSS px); dialog opens with focus inside; Escape closes; validation error path confirmed; progressScope wording identical on home + map; trip/visit data flows unchanged (state modules untouched) |
 | Visual gate | **22/22 pass** (home/map/about × 390/768/1280/1440 + zoom200 × 2 + map-selected/map-focus/map-mobile ×3 + dialog ×3) — `docs/03-design/gate-shots/home-map-about-23/{before,after}/` (before captured from live round-22 bundle) |
+## Version 2.32 — Dead-Code Cleanup (2026-10-03)
+
+No PO round — repo-wide over-engineering audit followed by deletion of
+nine dead files (7 components + 2 one-off/unused scripts, ~495 lines)
+plus their ~90 lines of test blocks. FR-tagged items were confirmed
+superseded before deletion: ProgressBanner by the home YatraProgressTracker
+(round 23), SearchFilterBar by the MapPage filter pane, SectionNav by the
+detail pages' own rails, WikiThumb by useWikiImage/PortraitFallback.
+Dataset untouched (CMS round-trip 0-diff).
+
+### Deleted
+
+- `src/components/`: SearchFilterBar, WikiThumb, Badge, VisitedBadge,
+  SectionHeading (base — ui/SectionHeading is live), ProgressBanner
+- `src/components/detail/SectionNav.jsx`
+- `scripts/`: make-hero-watermark.mjs, convert-js-to-json.mjs
+- Test blocks: ProgressBanner (UT-TRK-03/04), SectionNav (FR-84, both
+  suites), WikiThumb (×2 suites), SearchFilterBar, Badge, base
+  SectionHeading; three stale WikiThumb mentions in live doc-comments
+  corrected to reference useWikiImage
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 6 warnings (baseline unchanged; two transient unused-import warnings during the removal were fixed, not suppressed) |
+| Unit tests (Vitest) | **240/240 pass (23 suites)** — 14 dead-code tests retired |
+| Coverage | **90.37% statements / 81.45% branches / 86.11% functions / 91.87% lines** (gate 80%) — branch headroom widened 81.32 → 81.45 |
+| Production build | Clean |
+| CMS round-trip | `sync-content --fixture --check` 0-diff |
+| E2E (Playwright, Chromium) | **19/19 pass** — unchanged; no e2e path exercised any deleted component |

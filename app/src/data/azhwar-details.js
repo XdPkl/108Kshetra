@@ -6,7 +6,7 @@
  * Content lives in content/azhwar-details.json (editable via the Sanity CMS).
  *
  * Shape (all optional):
- *  wiki? (Wikipedia article title — drives the featured-strip thumbnail via WikiThumb),
+ *  wiki? (Wikipedia article title — drives the featured-strip thumbnail via useWikiImage),
  *  photos? [{src, alt, credit?}] (up to 2 — the Identification portrait; src is a
  *          site-relative path resolved by assetUrl(), e.g. 'photos/…', or an
  *          absolute CDN URL),

@@ -5,7 +5,6 @@ import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import WikiThumb from '../WikiThumb.jsx';
 import DistanceFromMe from '../DistanceFromMe.jsx';
 import PageActions from '../PageActions.jsx';
 import PasuramSection from '../PasuramSection.jsx';
@@ -13,29 +12,6 @@ import NearbyDesams from '../NearbyDesams.jsx';
 import { kshetrams } from '../../data/kshetrams.js';
 
 afterEach(() => vi.unstubAllGlobals());
-
-describe('WikiThumb', () => {
-  it('renders the placeholder when no article title exists', () => {
-    render(<WikiThumb title={null} alt="placeholder" />);
-    expect(screen.getByLabelText('placeholder')).toBeInTheDocument();
-  });
-
-  it('renders the sourced photo with credit when the article has one', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve({ thumbnail: { source: 'https://upload.wikimedia.org/x.jpg' }, description: 'temple' }),
-    }));
-    render(<WikiThumb title="Some Temple" alt="photo" />);
-    await waitFor(() => expect(screen.getByRole('img')).toHaveAttribute('src', 'https://upload.wikimedia.org/x.jpg'));
-    expect(screen.getByText(/Wikipedia \(CC BY-SA\)/)).toBeInTheDocument();
-  });
-
-  it('keeps the placeholder when the fetch fails', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')));
-    render(<WikiThumb title="Missing Temple" alt="fallback" />);
-    await waitFor(() => expect(screen.getByLabelText('fallback')).toBeInTheDocument());
-  });
-});
 
 describe('DistanceFromMe', () => {
   const coords = [10.863, 78.69];

@@ -7,7 +7,6 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import DeityBreakdown from '../DeityBreakdown.jsx';
 import PuranamHistory from '../PuranamHistory.jsx';
-import WikiThumb from '../../WikiThumb.jsx';
 
 const noop = () => {};
 
@@ -44,18 +43,6 @@ describe('DeityBreakdown — multiple Thaayars (dossier format)', () => {
     );
     expect(screen.getByRole('heading', { name: /thaayar/i })).toBeInTheDocument();
     expect(screen.getByText(/Padmavathi/)).toBeInTheDocument();
-  });
-});
-
-describe('WikiThumb — direct src photos (dossier-embedded images)', () => {
-  it('renders the supplied src without a wiki fetch', () => {
-    render(<WikiThumb src="/photos/temple.png" alt="Temple photo" />);
-    const img = screen.getByRole('img', { name: /temple photo/i });
-    expect(img).toHaveAttribute('src', '/photos/temple.png');
-  });
-  it('renders the placeholder when neither src nor title exists', () => {
-    render(<WikiThumb title={null} alt="Nothing here" />);
-    expect(screen.getByText('◆')).toBeInTheDocument();
   });
 });
 

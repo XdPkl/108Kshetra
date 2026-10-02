@@ -15,7 +15,6 @@ import PuranamHistory from '../../components/detail/PuranamHistory.jsx';
 import MangalasasanamSection from '../../components/detail/MangalasasanamSection.jsx';
 import VisitInfoSection from '../../components/detail/VisitInfoSection.jsx';
 import VisualsMedia from '../../components/detail/VisualsMedia.jsx';
-import SectionNav from '../../components/detail/SectionNav.jsx';
 import GalleryLightbox from '../../components/detail/GalleryLightbox.jsx';
 
 const srirangam = getEnrichedKshetramById('srirangam');
@@ -186,13 +185,7 @@ describe('VisualsMedia (FR-83)', () => {
   });
 });
 
-describe('SectionNav & GalleryLightbox (FR-84/85)', () => {
-  it('renders anchor chips for the available sections', () => {
-    render(<SectionNav sections={[{ id: 'profile', label: 'Profile' }, { id: 'media', label: 'Media' }]} />);
-    expect(screen.getByRole('link', { name: 'Profile' })).toHaveAttribute('href', '#profile');
-    expect(screen.getByRole('link', { name: 'Media' })).toHaveAttribute('href', '#media');
-  });
-
+describe('GalleryLightbox (FR-85)', () => {
   it('closes the lightbox on Escape and renders credits', async () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
