@@ -444,3 +444,23 @@ Pass · CMS round-trip 0-diff (no content touched) · E2E **19/19**
 unchanged. Execution recorded in TER v2.32.
 
 *End of Addendum — TCS-108K-008 v1.18*
+## Version 1.19 — Azhwars Page Restyle (2026-10-03)
+
+PO round-24 restyle of `/azhwars` onto the /kshetrams design system
+(TER v2.33). Dataset unchanged; one site-copy field added
+(`azhwarsPage.noDesamsNote` — the Madhurakavi zero-desams note, mirrored
+in the sync fixture and studio schema). Contract moves:
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-AZW-01 | Intro | Compact Browse-style intro (eyebrow / Cormorant heading / Tamil subtitle / lead / desktop-only gopuram watermark); ordinal badges and the decorative invocation stack removed |
+| UT-AZW-02 | Cards + actions | KshetramCard interaction rules: 300ms rise, opaque-gold hover border, gold "View profile" link (18px radius token, deepens on card hover, 2px arrow shift, motion-reduce guarded) with unique "View profile — {name}" accessible names; desam links keep the `?azhwar=` deep link (11 — Madhurakavi's zero-desams note replaces the empty-result link); object-contain portraits; full-wrapping hymn titles; left-aligned bios |
+| TC-10 | E2E | Unchanged — 12 cards, first desam deep link pre-filters browse |
+
+Quality gates: TC-QA-01 Pass (0 errors; 6 baseline warnings) · TC-QA-02
+Pass (**240/240 tests, 23 suites**; 90.37/81.47/86.11/91.87) · TC-QA-03
+Pass · CMS round-trip 0-diff · E2E **19/19** · Visual gate **8/8**
+(4 widths + zoom200 + hover + focus + zero-desams note; before ×2 from
+live). Execution recorded in TER v2.33.
+
+*End of Addendum — TCS-108K-008 v1.19*

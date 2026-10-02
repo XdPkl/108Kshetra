@@ -2291,3 +2291,72 @@ Dataset untouched (CMS round-trip 0-diff).
 | Production build | Clean |
 | CMS round-trip | `sync-content --fixture --check` 0-diff |
 | E2E (Playwright, Chromium) | **19/19 pass** — unchanged; no e2e path exercised any deleted component |
+## Version 2.33 — Azhwars Page Restyle to the Kshetrams System (2026-10-03, round 24)
+
+PO request: update /azhwars to the supplied refined mockup **reusing the
+/kshetrams fonts, buttons, colors and interaction styles** (the mockup
+image itself was not found on disk — the written brief + the live
+/kshetrams page served as the binding reference; flagged to the PO).
+Dataset unchanged (`sync-content --fixture --check` 0-diff after adding
+one site-copy field).
+
+### What changed
+
+- **Intro**: the Browse header idiom — saffron uppercase eyebrow
+  ("SAINT-POET GALLERY"), Cormorant 44/48px `#5C1F00` heading
+  ("The Twelve Azhwars"), Tamil subtitle, lead — with the gopuram
+  illustration as a desktop-only right watermark. The `.dir`
+  DirectoryHeader, the stacked "Divine/Places/Eternal/Grace" text and
+  the "Traditional order" rule are removed; page no longer wraps in
+  `.dir` (body font reverts to the site-wide Mukta Malar, matching
+  /kshetrams).
+- **Grid**: same pattern as /kshetrams — 1 col / 2 col `sm` / 3 col `lg`,
+  24px gap (gap-6).
+- **Cards** (AzhwarCard rebuilt on the KshetramCard interaction rules):
+  centered object-contain portrait band (h-52, `#F6EBD6`, preserves
+  artwork proportions and embedded text; Thiruman glyph fallback when no
+  image), Tamil name 14px `#96731F` centered, English name Cormorant
+  26px `#5C1F00` centered, **left-aligned** full biography 15px/1.65
+  `#332417` (no line-clamp), hairline divider, hymn titles + pasuram
+  count as plain rows (nested bordered stat band removed; multi-work
+  titles like Nammazhwar's four and Thirumangai's wrap fully — no
+  truncate), and an action row pinned with `mt-auto`. Ordinal badges
+  ("01"…) removed.
+- **Actions**: "View profile" is now a semantic `Link` styled like
+  "View temple" (`rounded-lg` = 18px token, gold `#96731F`, `#FFFDF7`
+  text, py-2.5/px-5, 6px icon gap, arrow shifts 2px on card hover,
+  button deepens to `#7A2E00` on card hover, 150ms cubic-bezier(0.4,0,0.2,1)).
+  The "N Divya Desams" link keeps the brown/gold treatment and its
+  `/kshetrams?azhwar=` deep link. **Madhurakavi (zero desams) shows the
+  new `SITE_COPY.azhwarsPage.noDesamsNote`** ("His hymns sing only of
+  his guru — no Divya Desams carry them.") instead of a link to an empty
+  result — added to site-copy.json, the sync fixture and the studio
+  schema in lockstep. Card hover: 300ms rise 4px, border to opaque gold,
+  shadow subtle→large; `motion-reduce` variants disable the lift and
+  arrow shift (transitions were already covered by the global
+  reduced-motion rule).
+- No trip/visited controls added; shared header untouched; the 12 azhwars,
+  their order, names, bios, hymn titles, counts, artwork and routes are
+  unchanged (round-22 test expectations updated, not removed).
+
+### Flags for PO review
+
+- The referenced mockup `azhwars-matched-styles.png` was not found in the
+  workspace — implemented from the written brief (which carried exact
+  px/behavior values) + the live /kshetrams computed styles. If the image
+  shows composition differences, send it and we'll reconcile.
+- The zero-desams note wording is site-copy (admin-editable), not
+  dataset — adjust freely in the CMS.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 6 warnings (baseline unchanged) |
+| Unit tests (Vitest) | **240/240 pass (23 suites)** — UT-AZW-02 updated: 11 desam links (12th card is the note), "View profile — {name}" accessible names, zero-desam note asserted |
+| Coverage | **90.37% statements / 81.47% branches / 86.11% functions / 91.87% lines** (gate 80%) |
+| Production build | Clean |
+| CMS round-trip | `sync-content --fixture --check` 0-diff (noDesamsNote mirrored in fixture) |
+| E2E (Playwright, Chromium) | **19/19 pass** — TC-10 unchanged (12 `.azhwar-card`s, first desam deep link pre-filters browse) |
+| Measured | 0px horizontal overflow at 375/768/1280/1440 and the 200%-zoom proxy (640 CSS px, DPR 2) |
+| Visual gate | **8/8 pass** — after ×4 widths + zoom200 + card-hover + keyboard-focus + madhurakavi note, with before ×2 from the live round-22 bundle — `docs/03-design/gate-shots/azhwars-restyle-24/{before,after}/` |
