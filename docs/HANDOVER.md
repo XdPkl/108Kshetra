@@ -1,73 +1,84 @@
 # HANDOVER — 108 Divya Kshetrams (2026-10-02, after rounds 22–23: acharyas directory + home/map/about restyles)
 
 State: **Everything pushed, CI+Deploy green on `a04d609`, live verified.**
-`main` = `a04d609` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
+`main` = `a00dfee` (handover doc commit on top of `a04d609`) in sync with
+`origin/main` (https://github.com/XdPkl/108Kshetra).
 Live: https://xdpkl.github.io/108Kshetra/ — verify bundles by CONTENT, not by
 hash (CI Linux hashes differ from local Windows; grep the live
-`assets/index-*.js` via `node -e "...includes(...)"` — gotcha 12).
+`assets/index-*.js` via `node -e "...includes(...)"` — gotcha 12; MapPage
+strings live in the lazy `assets/MapPage-*.js` chunk, not the main bundle).
 Working tree clean. No preview server on :4173. Scratch scripts deleted.
 Nothing in flight; next context starts fresh on whatever the PO brings
 (23 rounds in ~5 days).
 
-## 1. What this session delivered (PO rounds 18–21, all live)
+## 1. What the last two sessions delivered (PO rounds 18–23, all live)
 
 | Commit | Work | Register |
 |---|---|---|
-| `a036264` | **Round 18 — Azhwar + Acharya detail restyled to the shared kxd theme**: kxd primitives (palette vars, Source Serif 4 / DM Sans / Noto Serif Tamil, audit type scale, buttons, sticky tab rail, fact/verse cards, disclosures, toast) moved VERBATIM out of `kshetram-detail.css` into new `src/styles/detail-theme.css`; `kshetram-detail.css` now page-specific only (kshetram rendering unchanged: hero 400px, rail y≈537); new `saint-detail.css` (`azd-`/`acd-` prefixed); both pages rebuilt under `.kxd`; azhwar got the hash-synced sticky five-tab rail; 6 saint components restyled in place; Tamil `overflow-wrap`, birthplace note block, mobile stepper-wrap fixes from the visual gate; hash reset + deep-link tests | TER v2.26, TCS v1.12 |
-| `04524a0` | **Round 19 — Azhwar detail recreated to the poigai mock** (5 generated mockups + design-notes.md in `Documents/Codex/2026-10-01/re/outputs/poigai-mock/`): compact profile shell (240px portrait | identity | birth-facts columns), plain breadcrumb, Life (narrative + gold-dot Key-moments timeline — dataset `when` labels match the mock's 5 moments), Hymns verse reader (translit/meaning flag blocks, Find-recitations pill, glossary sidebar, Commentary & anubhavam accordions), Sacred places (featured desam wiki-photo card + numbered 2-col directory + Celestial grouping via `state === 'Celestial'`), Media (discourse rows split on the 3 known speaker names + iconography sidebar), Sources ("Title — domain" rows, hrefs derived from dataset domains only), "The lamp of knowledge" band; retired round-11 cards/pills; TC-18 + unit contracts renamed in lockstep | TER v2.27, TCS v1.13 |
-| `ead6db5` (+`4fc23db` scratch cleanup) | **Round 20 — Consistency pass vs Srirangam**: birth facts full-width BENEATH identity with short values (birthplace = pre-"—" name; full narrative + district moved to Life panel), subdued "Also known as" alias text (chips removed); 32px section headings (40px `.azd-display` dropped); lamp band → Life tab only; Life concise summary (first paragraph) + expander; transliteration split on "/" into lines; media rows full-width + ONE search-behaviour note + iconography BELOW (portrait beside text); sources uniform "Open repository ↗" links + reading guidance behind a disclosure; compact mobile hero (128px portrait, rail y 1318→880); fixed latent round-19 regression (acharya `.acd-media-grid` base rule lost); TC-18 reordered; 18-check interactive validation | TER v2.28, TCS v1.14 |
-| `300a8e9` | **Round 21 — "Philosophy & legacy" alignment to PO mock crop**: bhaktiBhava/preservation as serif h3 sub-heads over plain text under a 32px "Philosophy & legacy" section (tint callouts removed); era data as an "Era & contemporaries" aside block (gold-caps rows: Traditional chronology ← `period`, Academic ← `era.academic`, Contemporaries ← `era.contemporaries`) under the Key-moments timeline; new pey unit test | TER v2.29, TCS v1.15 |
+| `a036264` | **Round 18 — Azhwar + Acharya detail restyled to the shared kxd theme**: kxd primitives moved VERBATIM out of `kshetram-detail.css` into `src/styles/detail-theme.css`; new `saint-detail.css` (`azd-`/`acd-` prefixed); both dossier pages rebuilt under `.kxd`; azhwar got the hash-synced sticky five-tab rail | TER v2.26, TCS v1.12 |
+| `04524a0` | **Round 19 — Azhwar detail recreated to the poigai mock**: compact profile shell, verse reader, Sacred-places directory with celestial grouping, media rows + speaker split, "Title — domain" sources, lamp-of-knowledge band | TER v2.27, TCS v1.13 |
+| `ead6db5` | **Round 20 — Consistency pass vs Srirangam**: birth facts beneath identity, 32px headings, Life summary + expander, media/sources alignment, compact mobile hero; fixed latent `.acd-media-grid` regression; TC-18 reordered | TER v2.28, TCS v1.14 |
+| `300a8e9` | **Round 21 — "Philosophy & legacy" alignment to PO mock crop**: serif sub-heads + "Era & contemporaries" gold-caps aside | TER v2.29, TCS v1.15 |
+| `359a934` | **Round 22 — Acharyas directory consistency restyle**: new `.dir` directory theme (`src/styles/directory.css`, kxd-mirrored tokens, Source Serif 4 / DM Sans / **Mukta Malar** for Tamil) + reusable `src/components/directory/` — DirectoryHeader, PersonEntry, PortraitFallback, ProfileLink; /acharyas rebuilt: full-width mobile intro (38px title/16px lead, watermark column-free), era jump links (#early-masters/#age-of-ramanuja/#later-acharyas), 27 standardized entries (English name → Tamil name → 16px summary → Period/Guru rows → unique "View profile — {name}"), hairline-only separators, one 3/4 portrait framing (72px mobile / 104px desktop; 5 wiki + 22 fallback tiles); /azhwars coordinated (shared header/link/fallback; whole-card overlay retired; desams deep link kept). Guru "Not specified" NOT inferred (nathamuni/kidambi-appullar/thiruvaimozhi-pillai); `era` vs `period` field asymmetry flagged | TER v2.30, TCS v1.16 |
+| `a04d609` | **Round 23 — Home/Map/About coordinated restyle**: new `src/styles/ui.css` control language (solid maroon `#922e0d` primary / outlined secondary / plain tertiary / on-photo inverse; 44px targets; gold focus rings) + `src/components/ui/` (Button/ButtonLink, **Dialog** with focus containment + focus return + Escape, Field/SearchField/FilterSelect, SectionHeading, ContactDetails) — ALL gradient controls retired. Home: reliable hero overlay + "Browse temples"/"Plan your yatra", compact My yatra (reset hidden at zero), shared TempleCard grid, PersonPreview strips, "View all Azhwars/Acharyas" CTAs. Map: pane+map workspace, result→marker selection sync (`path[stroke-width="4"]`), Fit results vs Reset filters, mobile Map/List switch + Filters disclosure, "Trip planner (N)" in shared Dialog, in-trip flag markers + legend, tile-error/no-result/loading states. About: editorial open sections, reading-order nav (ids unchanged for header deep links), compact Team (fallback portrait, first-sentence quote, first-para bio, plain credentials), circuit comparison cards + duration-scope note, single contact block, inquiry dialog (name + ≥1 contact method, preserved circuit, alert-validated, local reference only on record). 108/106 sentence = `SITE_COPY.progressScope`, verbatim on home + map | TER v2.31, TCS v1.17 |
 
-Final gates at handoff: **227/227 unit (21 suites) · 19/19 e2e · coverage
-90.45% stmts / 81.52% branches / 86.00% funcs / 92.18% lines (gate 80%) ·
-oxlint 0 errors / 4 accepted warnings · build clean · CMS round-trip
-lossless · visual gates green** (round 20: 14/14 incl. before/after +
-Srirangam cross-check in `gate-shots/azhwar-consistency-20/{before,after}/`;
-round 21: 4/4 in `gate-shots/azhwar-philosophy-restyle-21/`; round 19: 7/7
-in `gate-shots/azhwar-poigai-mock-restyle-19/`; round 18: 7/7 in
-`gate-shots/azhwar-acharya-kxd-restyle-18/`).
-
-Key measurements (azhwar poigai): hero 455px @1280 (facts row beneath,
-portrait 240px), rail y≈592; @390 rail y≈880, portrait 128px; section h2
-32px (28px mobile); 0px overflow at 390/768/1280/1440. Interactive
-validation script (18 checks: hash entry/reload/history/keyboard/focus/
-expanders/sticky rail/fade cue) passed and lives only in the TER record.
+Final gates at handoff: **254/254 unit (23 suites) · 19/19 e2e · coverage
+90.47% stmts / 81.32% branches / 86.29% funcs / 92.08% lines (gate 80%) ·
+oxlint 0 errors / 6 warnings (baseline 4 + same set-state-in-effect
+advisories on new dialog effects) · build clean · CMS round-trip 0-diff ·
+visual gates green** (round 22: 7/7 in `gate-shots/acharyas-directory-22/`;
+round 23: 22/22 in `gate-shots/home-map-about-23/{before,after}/` incl.
+zoom200/map-selected/map-focus/map-mobile/dialog shots; earlier rounds
+18–21 in `gate-shots/azhwar-*-1[89]` and `azhwar-philosophy-restyle-21/`).
 
 ## 2. Open items / likely next requests
 
-- **More PO fix lists** — PO iterates fast (21 rounds). Proven loop:
+- **More PO fix lists** — PO iterates fast (23 rounds). Proven loop:
   inspect mock/data → implement → Playwright measurement + screenshots →
   gates → TER → commit → push → CI/live check (verify by content). PO
   supplies mockups as zips of generated PNGs + design-notes.md, or single
-  mock crops (see round 21).
-- **Acharya detail not yet poigai-refined**: it still has the round-18
-  kxd dossier (fact rows, anchor rail, gold numerals). The azhwar page
-  has since moved to mock-shells + round-20/21 refinements; the PO may
-  ask to bring /acharya/:id to the same standard (or supply acharya
-  mockups — `docs/03-design/mockups/acharya-detail.html` is the OLD
-  round-14 look; same for `azhwar-detail.html`).
+  mock crops (see rounds 21).
+- **CONTACT DISCREPANCIES (round 23, verified, NOT fixed — PO-owned
+  data)**: `contact@kshetratours.org` domain does NOT resolve in DNS;
+  `kshetratours.com` is a live agency site whose published phone
+  (+91 98405 01427) differs from the dataset's placeholder-pattern
+  `+91 98765 43210`. Values rendered verbatim per "do not invent";
+  awaiting PO's authoritative replacements.
+- **Inquiry delivery is local-only**: the about-page dialog records
+  inquiries to `localStorage.kshetra_inquiries` with a YATRA-xxxx
+  reference; success copy promises coordinator follow-up but there is no
+  server channel. A live delivery path is PO scope.
+- **Vada Nadu duration note** (round 23) is presentational clarification;
+  the actual subcircuit split (Tamil Nadu vs Himalayan runs) needs
+  operator confirmation.
+- **Acharya detail not yet poigai-refined**: still the round-18 kxd
+  dossier (fact rows, anchor rail, gold numerals). PO may ask to bring
+  /acharya/:id to the azhwar standard.
 - **PO-owned content pending** (flagged in TERs): triplicane-mock authored
   copy (kshetram), azhwar mock labels ("The lamp of knowledge",
   "Reading this archive", "Sources & further reading",
   "Listen, learn & contemplate" — rendered, flagged, no CMS fields yet),
-  lamp/editorial artwork stand-ins (lotus tile + wiki photos), real
-  captioned deity/media imagery, cited history links, scaffold acharya
-  dossiers (nadadur-ammal etc. show pending markers), CEO portrait,
-  Srivilliputhur card, azhwar portraits (only Poigai has photos[]).
+  lamp/editorial artwork stand-ins, real captioned deity/media imagery,
+  cited history links, scaffold acharya dossiers (nadadur-ammal etc. show
+  pending markers), CEO portrait, Srivilliputhur card, azhwar/acharya
+  portraits (only Poigai has photos[]; NO acharya has photos[] — 5 wiki
+  images + 22 fallback tiles are stand-ins).
 - **Jira**: stories through US-CMS-01 synced (DTRPR108K-1..76). Authoring
-  PO-round stories (rounds 5..21) NOT started. **API token from the
+  PO-round stories (rounds 5..23) NOT started. **API token from the
   earlier sync should be revoked** (was exposed in chat history).
-- **Coverage drift watch**: branches 81.52% vs gate 80% — headroom ~1.5pp.
-  Any new conditional needs a test (round 21 added the pey test for this
-  reason). CI is 2-core (gotcha 10).
+- **Coverage drift watch**: branches 81.32% vs gate 80% — headroom
+  ~1.3pp. Any new conditional needs a test (rounds 21–23 added tests for
+  exactly this). CI is 2-core (gotcha 10).
 - **Divine amsam in the azhwar hero** renders the dataset string verbatim
-  ("Lord Vishnu's holy conch, Panchajanya"); the PO's round-20 brief
-  suggested "Panchajanya, Vishnu's conch" — kept verbatim per "preserve
-  source content", flagged; PO may ask again.
+  ("Lord Vishnu's holy conch, Panchajanya"); PO's round-20 brief suggested
+  "Panchajanya, Vishnu's conch" — kept verbatim, flagged; PO may ask again.
 - **Timings duplication** (kshetram sidebar + Visit tab) persists by
   design; SectionNav.jsx still page-dead; browse cards' dropped deity pill
   + Pasuram tag restorable on request; plaque watermark +
-  make-hero-watermark.mjs unused; "Reset progress" quiet link kept (TC-13).
+  make-hero-watermark.mjs unused; "Reset progress" quiet link kept (TC-13)
+  — note round 23's home tracker hides reset at zero progress.
+- **Field-name asymmetry**: acharyas.json `era` vs azhwars.json `period`
+  (both labelled "Period" in UI) — consider unifying in a content round.
 
 ## 3. Architecture pointers (current map)
 
@@ -75,49 +86,77 @@ expanders/sticky rail/fade cue) passed and lives only in the TER record.
   old import paths — do not bypass. UI reaches data ONLY via
   `data/api.js`. Site-copy fields: app JSON + fixture
   `sync-response.json` change TOGETHER (`sync-content --fixture --check`
-  0-diff). Kshetram serial = `enriched.serial` from dossier-templates.json.
-- **Azhwar data is TWO files merged**: `azhwars.json` (index: period,
-  note, work) + `azhwar-details.json` (dossier). `getAzhwarById` returns
-  the ENRICHED merge — check BOTH files when reasoning about fields
-  (round 21: `period` looked missing from details but comes from the
-  index).
+  0-diff; the fixture is the raw Sanity doc — add new site-copy fields to
+  BOTH). Round-23 site-copy additions: `hero.ctaSecondary`,
+  root `progressScope`, `about.anchors` (new reading order),
+  `about.sections.{inquireCircuit→"Ask about this yatra",
+  generalEmailLabel, ceoEmailLabel, circuitsDurationNote,
+  circuitRegionLabel, circuitCountLabel, circuitDurationLabel,
+  circuitBaseLabel, viewTemplesLabel}`,
+  `about.scheduleModal.labels.contactNote`, renamed strip CTAs
+  ("View all Azhwars/Acharyas"), `hero.cta` = "Browse temples".
+- **Azhwar data is TWO files merged**: `azhwars.json` (index) +
+  `azhwar-details.json` (dossier); `getAzhwarById` returns the ENRICHED
+  merge — check BOTH files when reasoning about fields.
 - **Stylesheets** (import order in main.jsx): tokens → base → layout →
-  v3 → zip → `detail-theme.css` (shared `.kxd` primitives: palette,
-  fonts, type scale h1 56/h2 32/h3 24/h4 21, body 17/28, buttons,
-  `.tabs-rail`, fact/visit/verse cards, disclosures, glossary, milestones,
-  markers, toast, media/print blocks) → `kshetram-detail.css`
-  (kshetram-only layouts) → `saint-detail.css` LAST (`azd-` azhwar /
-  `acd-` acharya page layouts + shared `.pill`/`.disc-list`; acharya
-  section unchanged since round 18 except the `.acd-media-grid` restore).
-- **AzhwarDetailPage** (`/azhwar/:id`): `.kxd` wrapper → plain breadcrumb
-  → `.azd-hero` (portrait 240px | identity; `.azd-facts` full-width row
-  beneath; short birthplace = `name.split(' — ')[0]`; nameless
-  birthplace records → em-dash) → sticky hash-synced `.tabs-rail`
-  (life/hymns/places/media/sources; `activateTab` + hashchange + roving
-  focus; `window.history` hash MUST be reset in test `beforeEach`) →
-  single unmounting panel → `.azd-nav` prev/next. Lamp band is INSIDE the
-  life panel (not persistent). Hooks (incl. `useWikiImage` for the
-  featured desam) run before the unknown-id early return.
-- **Saint components**: SaintVerse (verse reader: eyebrow=work, h2
-  "Opening verse", pre-line Tamil, flag blocks — MEANING falls back to
-  `verse.significance`, sidebar About only when BOTH exist; translit
-  splits on "/"; commentary = `.azd-acc-item` details), SaintMedia (full-
-  width rows; SPEAKER_PATTERN splits the 3 known speaker names; icono-
-  grid below), SaintSources ("Title — domain" parse → uniform links),
-  SaintKeyMoments (dot timeline), SaintPortrait (`.azd-portrait`), 
-  SaintLegend, PendingContent (`.detail__nodata`), NotDocumented (shared,
-  untouched). SaintMedia props: visuals, name, photo, onSeeSources.
-- **KshetramDetailPage** unchanged since round 17 (consistency reference).
-  **AcharyaDetailPage** on round-18 kxd (dossier sections 01–07, anchor
-  rail, Chronology stepper, MiracleList, pada glossary tables).
-- **E2E TC-18 order** (round 20): hero asserts → band jump "explore hymn
-  & meaning" on LIFE tab → places tab → view kshetram → prev/next nav.
-  TC-19 (acharya) unchanged. e2e spec file is now **LF** (git normalized
-  it) — see gotcha 33.
-- Registers/dates: **TER v2.29; TCS v1.15** (UT-DTL unchanged since round
-  17; UT-AZW-03 rewritten rounds 19–21; UT-ACH-02/03 unchanged since
-  rounds 12–18). UI-UX doc addenda §31 (round 18) + §32 (round 19);
-  rounds 20–21 recorded in TER/TCS only.
+  v3 → zip → `detail-theme.css` (`.kxd` dossier primitives) →
+  `kshetram-detail.css` → `saint-detail.css` → `directory.css` (`.dir`
+  directory theme: tokens + dir-* classes; **variables live on the
+  `.dir` scope** — see gotcha 41) → `ui.css` LAST (round-23 site-wide
+  control language: `.ui-btn` variants, `.ui-tertiary`, `.ui-input/
+  select/textarea`, `.ui-pill`, `.ui-dialog*`, `.map-trip-flag`,
+  `.ui-meta-row`, `.ui-heading`).
+- **Three design scopes now**: `.kxd` (detail dossiers), `.dir`
+  (directories + home/map/about wrappers — gives DM Sans body text),
+  base site (browse/detail pages not yet migrated). TempleCard,
+  PersonPreview, PortraitFallback, ProfileLink, DirectoryHeader,
+  PersonEntry live in `src/components/directory/`; Button/Dialog/fields/
+  SectionHeading/ContactDetails in `src/components/ui/`.
+- **AcharyasPage** (`/acharyas`): DirectoryHeader (media slot = gopuram
+  watermark, hidden <lg) → dir-jumps (3 era anchors) → per-era
+  `.dir-section` (dataset eraGroup labels + count) → `.dir-list` 2-col
+  ≥640px → PersonEntry ×27 (grid-template-areas; mobile portrait 72px
+  beside identity; guru resolved via `getAcharyaById`, absent → "Not
+  specified"). AzhwarsPage keeps the round-12 card gallery but uses
+  DirectoryHeader/PortraitFallback/ProfileLink (no overlay).
+- **HomePage** (`/`): Hero (photo + dual scrim, 2 ui-btn actions) →
+  YatraProgressTracker (compact card; reset rendered only when count>0;
+  progressbar aria-label contract "N of 106 kshetrams visited") →
+  FeaturedKshetrams (SectionHeading + TempleCard ×4) → SaintStrip ×2
+  (PersonPreview tiles) → ornament.
+- **MapPage** (`/map`, lazy chunk): `.dir` grid `[380px, 1fr]` — left
+  pane (sticky, max-h dvh-96, overflow-y-auto: header + progressScope +
+  resultCount line, SearchField, FilterSelect, mobile Map/List switch +
+  Filters toggle (`lg:hidden`), scope pills + location + Reset filters
+  (collapsible on mobile via `filtersOpen`, always `lg:flex`), Trip
+  planner button (aria-label "Trip planner — N stop/stops"), result
+  list) | map frame (Loading badge while !mapApi, tile-error notice via
+  TileLayer `tileerror`, Fit results button, result-count badge,
+  legend). ResultRow: name button + "Focus on map" → `focusTemple` =
+  setSelectedId + flyTo(12); selected row `ring-1` outline; selected
+  marker radius 10/weight 4/stroke-width 4. Non-trip scope renders
+  in-trip members as flag divIcon Markers. Trip planner renders from
+  the same trip state inside shared Dialog. State logic (search/region/
+  scope/me/geo/clusters/share `?t=`) unchanged from round 10.
+- **AboutPage** (`/about`): banner + dir-jumps nav (reading order;
+  anchor ids UNCHANGED: archive/guided-yatras/circuits/ceo-leadership/
+  contact-desk/sanctum-etiquette — header dropdown deep-links into
+  `#ceo-leadership`/`#contact-desk`) → open sections → CircuitCard grid
+  (ui-meta-row dl) → compact Team (CeoPortrait: dir-portrait +
+  PortraitFallback + admin upload/URL controls; short quote = first
+  sentence, short bio = first para — render-side only, about.json
+  intact) → contact (ContactDetails rows) → etiquette cards →
+  InquiryDialog (shared Dialog; localStorage `kshetra_inquiries`;
+  validation: name required + email-or-phone).
+- **E2E notes**: TC-14 now exercises result→marker selection (focus →
+  `path[stroke-width="4"]` hover/click → tooltip → popup; ~400ms between
+  zoom clicks; clusters asserted gone via `.map-cluster` count 0).
+  TC-15/17/02/18/19 use renamed controls (trip planner aria, strip CTAs,
+  hero actions). e2e specs are **LF** (git normalized).
+- Registers/dates: **TER v2.31; TCS v1.17** (UT-DTL unchanged since
+  round 17; UT-AZW-03 rounds 19–21; UT-ACH-02 rewritten round 22;
+  UT-HOME/MAP/ABT-01..03 updated round 23; new suite
+  `components/ui/__tests__/ui.test.jsx`).
 
 ## 4. Gotchas (accumulated — ALL still valid, plus new)
 
@@ -126,7 +165,9 @@ expanders/sticky rail/fade cue) passed and lives only in the TER record.
    important = TRAILING bang. Detail pages avoid this via `.kxd`-scoped
    stylesheets (0,1,1 specificity wins).
 2. **Whole-card/row overlay links** — non-interactive content needs
-   `pointer-events-none` (TC-18/19 catch absence).
+   `pointer-events-none` (TC-18/19 catch absence). NOTE round 22/23:
+   person entries and temple/person cards NO LONGER carry overlay links —
+   the profile link is the single stop; don't re-add overlays.
 3. **Split pills don't use pillBase** (header temples/tours) — apply pill
    idiom changes to all three.
 4. **Images/measurement in this harness**: Playwright
@@ -138,7 +179,8 @@ expanders/sticky rail/fade cue) passed and lives only in the TER record.
    the sticky header/rail stitches mid-page (visual-judge flags it).
 5. **sharp**: hardcode CH=4 after `ensureAlpha().raw()`.
 6. **Wikipedia photos**: REST summary API; hotlink only FIXED widths
-   (wikiImage.js rewrites to 1280px).
+   (wikiImage.js rewrites to 1280px). Some dataset wiki slugs 404 on the
+   live API (Neervanna Perumal etc.) — harmless console noise.
 7. **Exact-match text assertions**; nav "108 Kshetrams" pill collides with
    /108 kshetrams/i.
 8. **No Python** — node one-liners / heredoc `.mjs`.
@@ -149,6 +191,7 @@ expanders/sticky rail/fade cue) passed and lives only in the TER record.
     live bundle (ugrep chokes on 1.2MB single-line files); `index-*.css`
     also matches `index-` — pick `.js` explicitly. Template-literal
     classes (`azhwar-tab-${id}`) never appear verbatim — grep prefixes.
+    MapPage is a lazy chunk — its strings are in `assets/MapPage-*.js`.
 13. **CI logs without gh auth**: check-runs → annotations API.
 14. Region dropdown label: `getByLabelText('Filter by region')`.
 15. Old gotchas: shim re-export collision; scan ALL distinct keys before
@@ -192,33 +235,46 @@ expanders/sticky rail/fade cue) passed and lives only in the TER record.
     4 shots on a value I wrongly called authored (it comes from
     azhwars.json). Verify dataset facts before accepting spec verdicts,
     and re-judge with corrected facts rather than "fixing" the page.
-33. **NEW — `getByText` with a substring regex matches ancestors too**:
+33. **`getByText` with a substring regex matches ancestors too**:
     band/section titles inside wrappers throw "multiple elements" — use
     `getAllByText(...).length >= 1` or exact strings.
-34. **NEW — relative photo paths need `assetUrl()`** when a component
+34. **Relative photo paths need `assetUrl()`** when a component
     renders `<img src>` directly (GitHub Pages base `/108Kshetra/`);
     `useWikiImage` applies it internally, raw `photos[].src` does not
     (round 19's broken media portrait).
-35. **NEW — birthplace records can be `{kshetramId}` only** (name
+35. **Birthplace records can be `{kshetramId}` only** (name
     undefined for 3 azhwars) — guard `.split`/renders (em-dash fallback).
-36. **NEW — media tab: videoSearches mix narrative strings with real
+36. **Media tab: videoSearches mix narrative strings with real
     search titles**; SPEAKER_PATTERN splits only the three known speaker
     suffixes (Velukkudi Krishnan | Karunakarachariar |
     Ananthapadmanabhachariar); other strings render title-only rows.
-
-37. **NEW — Leaflet flyTo does not animate the map-pane transform in this build** (transform stays translate3d(0,0,0)); a transform-stability wait passes while flyTo is still flying. In e2e, target the selected marker directly (`path[stroke-width="4"]`, set by the round-23 selection highlight) and hover/click it — TC-14 does this. Also leave ~400ms between zoom-control clicks so cluster dissolve settles.
-38. **NEW — `document.body.style.zoom` is NOT a 200%-zoom proxy** (media queries stay at desktop width → fake overflow). Use a 640px CSS viewport with DPR 2 (=1280 window at 200%): all pages show 0px overflow.
-39. **NEW — userEvent.setup() swaps navigator.clipboard** — install clipboard spies AFTER setup, and defineProperty (not Object.assign) because navigator.clipboard is getter-only.
-40. **NEW — CRLF files swallow plain `\n`-based replace() patches silently** — HomePage/AboutPage have CRLF; use regex /\r?\n/ in node patch scripts and VERIFY the patch landed (grep) before rebuilding.
-41. **NEW — directory.css variables live on the `.dir` scope** — components using `--dir-*` (dir-portrait, dir-entry__*, dir-profile-link) render with unset vars outside a `.dir` ancestor; home/map/about are wrapped in `.dir` for this reason (also gives DM Sans body text).
+37. **Leaflet flyTo does not animate the map-pane transform in this build**
+    (transform stays translate3d(0,0,0)); a transform-stability wait
+    passes while flyTo is still flying. In e2e, target the selected marker
+    directly (`path[stroke-width="4"]`, set by the round-23 selection
+    highlight) and hover/click it — TC-14 does this. Also leave ~400ms
+    between zoom-control clicks so cluster dissolve settles.
+38. **`document.body.style.zoom` is NOT a 200%-zoom proxy** (media queries
+    stay at desktop width → fake overflow). Use a 640px CSS viewport with
+    DPR 2 (=1280 window at 200%): all pages show 0px overflow.
+39. **userEvent.setup() swaps navigator.clipboard** — install clipboard
+    spies AFTER setup, and defineProperty (not Object.assign) because
+    navigator.clipboard is getter-only.
+40. **CRLF files swallow plain `\n`-based replace() patches silently** —
+    HomePage/AboutPage have CRLF; use regex /\r?\n/ in node patch scripts
+    and VERIFY the patch landed (grep) before rebuilding.
+41. **directory.css variables live on the `.dir` scope** — components
+    using `--dir-*` (dir-portrait, dir-entry__*, dir-profile-link) render
+    with unset vars outside a `.dir` ancestor; home/map/about are wrapped
+    in `.dir` for this reason (also gives DM Sans body text).
 
 ## 5. Command cheat-sheet
 
 ```
 # app/  (quality gates — CI parity)
-npm test                 # 227 unit / 21 suites (global timeout 15s)
+npm test                 # 254 unit / 23 suites (global timeout 15s)
 npm run test:coverage    # gates: 80% stmts/branches/funcs/lines (~90%)
-npm run lint             # oxlint (0 errors; 4 accepted warnings)
+npm run lint             # oxlint (0 errors; 6 warnings — see TER v2.31)
 npm run build            # production build (REBUILD before re-measuring!)
 npx playwright test      # 19 e2e (boots vite preview on :4173)
 
@@ -240,6 +296,7 @@ cd app && node scripts/make-hero-image.mjs <input.png> [src/assets/out.jpg]
 #   getBoundingClientRect (hero height, rail y, type scale, overflow)
 #   full-page screenshots → docs/03-design/gate-shots/<round-dir>/
 #   scrollTo(0,0) before fullPage captures (sticky-header stitch)
+#   200%-zoom check = 640px viewport + DPR 2 (NOT body.style.zoom — gotcha 38)
 
 # CI/Actions status + failure details (gh CLI has no auth here)
 curl -s "https://api.github.com/repos/XdPkl/108Kshetra/actions/runs?per_page=4"
@@ -249,4 +306,5 @@ curl -s "https://api.github.com/repos/XdPkl/108Kshetra/commits/<sha>/check-runs"
 # live verification by content (gotcha 12)
 curl -s "https://xdpkl.github.io/108Kshetra/" | grep -oE 'assets/index-[^"]+\.js'
 #   then node -e "...includes('Expected String')" on that bundle
+#   MapPage strings are in the lazy assets/MapPage-*.js chunk
 ```
