@@ -1,13 +1,13 @@
-# HANDOVER — 108 Divya Kshetrams (2026-10-02, end of Azhwar/Acharya kxd-theme session)
+# HANDOVER — 108 Divya Kshetrams (2026-10-02, after rounds 22–23: acharyas directory + home/map/about restyles)
 
-State: **Everything pushed, CI+Deploy green on `300a8e9`, live verified.**
-`main` = `300a8e9` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
+State: **Everything pushed, CI+Deploy green on `a04d609`, live verified.**
+`main` = `a04d609` in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
 Live: https://xdpkl.github.io/108Kshetra/ — verify bundles by CONTENT, not by
 hash (CI Linux hashes differ from local Windows; grep the live
 `assets/index-*.js` via `node -e "...includes(...)"` — gotcha 12).
 Working tree clean. No preview server on :4173. Scratch scripts deleted.
 Nothing in flight; next context starts fresh on whatever the PO brings
-(21 rounds in ~4 days).
+(23 rounds in ~5 days).
 
 ## 1. What this session delivered (PO rounds 18–21, all live)
 
@@ -205,6 +205,12 @@ expanders/sticky rail/fade cue) passed and lives only in the TER record.
     search titles**; SPEAKER_PATTERN splits only the three known speaker
     suffixes (Velukkudi Krishnan | Karunakarachariar |
     Ananthapadmanabhachariar); other strings render title-only rows.
+
+37. **NEW — Leaflet flyTo does not animate the map-pane transform in this build** (transform stays translate3d(0,0,0)); a transform-stability wait passes while flyTo is still flying. In e2e, target the selected marker directly (`path[stroke-width="4"]`, set by the round-23 selection highlight) and hover/click it — TC-14 does this. Also leave ~400ms between zoom-control clicks so cluster dissolve settles.
+38. **NEW — `document.body.style.zoom` is NOT a 200%-zoom proxy** (media queries stay at desktop width → fake overflow). Use a 640px CSS viewport with DPR 2 (=1280 window at 200%): all pages show 0px overflow.
+39. **NEW — userEvent.setup() swaps navigator.clipboard** — install clipboard spies AFTER setup, and defineProperty (not Object.assign) because navigator.clipboard is getter-only.
+40. **NEW — CRLF files swallow plain `\n`-based replace() patches silently** — HomePage/AboutPage have CRLF; use regex /\r?\n/ in node patch scripts and VERIFY the patch landed (grep) before rebuilding.
+41. **NEW — directory.css variables live on the `.dir` scope** — components using `--dir-*` (dir-portrait, dir-entry__*, dir-profile-link) render with unset vars outside a `.dir` ancestor; home/map/about are wrapped in `.dir` for this reason (also gives DM Sans body text).
 
 ## 5. Command cheat-sheet
 
