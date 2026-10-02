@@ -159,9 +159,13 @@ test.describe('V3 yatra toolkit', () => {
     await page.goto('acharyas');
     await expect(page.getByRole('heading', { name: /the acharyas/i })).toBeVisible();
     await expect(page.getByText(/The age of Ramanuja/i)).toBeVisible();
-    // href-targeted: other cards' role text (Thiruvaimozhi Pillai) matches a loose name query.
+    // Round 22: era jump links anchor-scroll to the sections, which all
+    // stay rendered; all 27 entries keep a single unique-named profile link
+    await expect(page.getByRole('link', { name: 'Early masters' })).toBeVisible();
+    await page.getByRole('link', { name: 'Later acharyas' }).click();
+    await expect(page).toHaveURL(/acharyas#later-acharyas$/);
+    await expect(page.getByRole('heading', { name: 'Later acharyas' })).toBeInViewport();
     // Ends-with match: the preview build serves under the /108Kshetra/ router basename.
-    // PO round 13 snap: each row carries the overlay link AND a Read story link.
     await page.locator('a[href$="/acharya/manavala-mamunigal"]').first().click();
     await expect(page).toHaveURL(/acharya\/manavala-mamunigal$/);
     await expect(page.getByRole('heading', { name: /life & miracles/i })).toBeVisible();

@@ -1,17 +1,24 @@
 /**
  * AzhwarsPage — the twelve Azhwars in traditional order (FR-40/41),
- * recreated to the PO snap (2026-10-01, PO round 12): saint-poet gallery
- * hero with the gopuram watermark and "Traditional order" rule, and
- * numbered portrait cards — Tamil/English name over a lotus divider,
- * dataset note, Primary Work | pasurams stat band, and an
- * Explore profile / "N Divya Desams" CTA row (the desams link keeps the
- * pre-filtered Browse deep link from the old chips row).
+ * coordinated with the shared `.dir` directory theme (PO round 22):
+ * DirectoryHeader intro (full-width mobile text; the gopuram watermark
+ * + invocation stack live in the hidden-below-lg media slot), the
+ * numbered portrait cards keep the approved round-12 gallery, with the
+ * shared primitives — PortraitFallback tile behind photo-less
+ * portraits and ProfileLink (unique accessible names, 44px touch
+ * target, gold focus ring) as the single keyboard stop per profile
+ * (the whole-card overlay link is retired). The "N Divya Desams"
+ * secondary link remains independently usable with its Browse
+ * pre-filter deep link.
  */
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, FileText } from 'lucide-react';
 import { getAllAzhwars, getKshetramsByAzhwar } from '../data/api.js';
 import { useWikiImage } from '../hooks/useWikiImage.js';
 import { LotusIcon, ThirumanIcon } from '../components/SacredIcons.jsx';
+import DirectoryHeader from '../components/directory/DirectoryHeader.jsx';
+import PortraitFallback from '../components/directory/PortraitFallback.jsx';
+import ProfileLink from '../components/directory/ProfileLink.jsx';
 import { SITE_COPY } from '../data/siteCopy.js';
 import gopuramIllustration from '../assets/gopuram-illustration.jpg';
 
@@ -21,15 +28,8 @@ function AzhwarCard({ azhwar, index }) {
 
   return (
     <article className="azhwar-card group relative flex flex-col rounded-2xl border border-[#C99A2E]/50 bg-[#FFFCF3] p-6 shadow-xs hover:-translate-y-1 hover:border-[#C99A2E] hover:shadow-md transition-all">
-      {/* Whole-card navigation overlay (below the CTA row) */}
-      <Link
-        to={`/azhwar/${azhwar.id}`}
-        aria-label={`${azhwar.name} — view the saint dossier`}
-        className="absolute inset-0 z-0"
-      />
-
       {/* Numbered portrait */}
-      <div className="relative z-10 flex items-start gap-4 pointer-events-none">
+      <div className="flex items-start gap-4">
         <span className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#C99A2E]/60 bg-[#FBF3DF] text-sm font-bold text-[#7A2E00]">
           {String(index + 1).padStart(2, '0')}
         </span>
@@ -40,19 +40,17 @@ function AzhwarCard({ azhwar, index }) {
               alt={`${azhwar.name} portrait`}
               loading="lazy"
               referrerPolicy="no-referrer"
-              className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+              className="absolute inset-0 z-10 h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
               onError={(e) => { e.currentTarget.style.display = 'none'; }}
             />
           ) : null}
-          {/* Sacred Thiruman watermark fallback */}
-          <div className="absolute inset-0 flex items-center justify-center text-[#7A2E00]" aria-hidden="true">
-            <ThirumanIcon className="w-12 h-16 opacity-60" />
-          </div>
+          {/* Sacred Thiruman watermark fallback (shared tile treatment) */}
+          <PortraitFallback icon={<ThirumanIcon className="w-12 h-16 opacity-60" />} />
         </div>
       </div>
 
       {/* Name block */}
-      <div className="relative z-10 mt-5 text-center pointer-events-none">
+      <div className="mt-5 text-center">
         <p className="font-display text-[22px] font-bold leading-tight text-[#96731F]" lang="ta">
           {azhwar.tamilName}
         </p>
@@ -70,7 +68,7 @@ function AzhwarCard({ azhwar, index }) {
       </div>
 
       {/* Stat band: primary work | pasuram count */}
-      <div className="relative z-10 mt-5 flex items-stretch overflow-hidden rounded-xl border border-[#EEDDBB] bg-[#F7EDD8]/80 text-left pointer-events-none">
+      <div className="mt-5 flex items-stretch overflow-hidden rounded-xl border border-[#EEDDBB] bg-[#F7EDD8]/80 text-left">
         <div className="flex min-w-0 flex-1 items-center gap-2.5 px-4 py-3">
           <BookOpen className="h-5 w-5 shrink-0 text-[#96731F]" aria-hidden="true" />
           <div className="min-w-0">
@@ -90,15 +88,15 @@ function AzhwarCard({ azhwar, index }) {
         </div>
       </div>
 
-      {/* CTA row — pinned to the card foot so rows with wrapped names align */}
-      <div className="relative z-10 mt-auto flex items-center justify-between gap-3 pt-4">
-        <Link
+      {/* CTA row — pinned to the card foot so rows with wrapped names align.
+          One profile link per destination (no whole-card overlay). */}
+      <div className="mt-auto flex items-center justify-between gap-3 pt-4">
+        <ProfileLink
           to={`/azhwar/${azhwar.id}`}
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-[#C99A2E] to-[#96731F] px-5 py-2.5 text-[13px] font-bold text-[#FFF9EC] shadow-xs hover:opacity-95 transition-opacity"
+          accessibleName={`Explore profile — ${azhwar.name}`}
         >
           Explore profile
-          <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
+        </ProfileLink>
         <Link
           to={`/kshetrams?azhwar=${azhwar.id}`}
           className="inline-flex items-center gap-1.5 text-[13px] font-bold text-[#96731F] underline underline-offset-2 hover:text-[#B34700] transition-colors"
@@ -114,39 +112,28 @@ function AzhwarCard({ azhwar, index }) {
 export default function AzhwarsPage() {
   const azhwars = getAllAzhwars();
   return (
-    <div className="space-y-7">
-      {/* Saint-poet gallery hero — gopuram watermark on the right */}
-      <div className="relative">
-        <div className="pointer-events-none absolute -top-1 right-0 hidden select-none items-start gap-4 lg:flex" aria-hidden="true">
-          <img
-            src={gopuramIllustration}
-            alt=""
-            className="h-40 w-auto object-contain opacity-60 [mask-composite:intersect] [mask-image:linear-gradient(to_left,black_70%,transparent),linear-gradient(to_bottom,black_70%,transparent)]"
-          />
-          <span className="mt-2 flex flex-col items-start gap-1.5 text-[10px] font-semibold uppercase tracking-[0.32em] text-[#B0A183]">
-            <span>Divine</span>
-            <span>Places</span>
-            <span>Eternal</span>
-            <span>Grace</span>
-          </span>
-        </div>
-
-        <div className="relative max-w-[72%]">
-          <p className="text-[13px] font-bold uppercase tracking-[0.18em] text-[#B34700]">
-            {SITE_COPY.azhwarsPage.eyebrow}
-          </p>
-          {/* ! beats the unlayered legacy h1 rule in base.css */}
-          <h1 className="mt-2 font-display text-[44px]! leading-[1.04]! font-semibold text-[#5C1F00]! sm:text-[60px]!">
-            {SITE_COPY.azhwarsPage.title}
-          </h1>
-          <p className="mt-1 font-display text-[26px] font-bold leading-tight text-[#96731F] sm:text-[32px]" lang="ta">
-            {SITE_COPY.azhwarsPage.titleTamil}
-          </p>
-          <p className="mt-2 text-[17px] text-[#66523D]">
-            {SITE_COPY.azhwarsPage.lead}
-          </p>
-        </div>
-
+    <div className="dir space-y-7">
+      <DirectoryHeader
+        eyebrow={SITE_COPY.azhwarsPage.eyebrow}
+        title={SITE_COPY.azhwarsPage.title}
+        tamilTitle={SITE_COPY.azhwarsPage.titleTamil}
+        lead={SITE_COPY.azhwarsPage.lead}
+        media={(
+          <div className="flex h-full items-start justify-end gap-4 pr-1 pt-1">
+            <img
+              src={gopuramIllustration}
+              alt=""
+              className="h-40 w-auto object-contain opacity-60 [mask-composite:intersect] [mask-image:linear-gradient(to_left,black_70%,transparent),linear-gradient(to_bottom,black_70%,transparent)]"
+            />
+            <span className="mt-2 flex flex-col items-start gap-1.5 text-[10px] font-semibold uppercase tracking-[0.32em] text-[#B0A183]">
+              <span>Divine</span>
+              <span>Places</span>
+              <span>Eternal</span>
+              <span>Grace</span>
+            </span>
+          </div>
+        )}
+      >
         {/* Traditional order rule — tucked under the gopuram watermark */}
         <div className="relative z-10 mt-1 hidden justify-end lg:flex">
           <div className="flex flex-col items-center">
@@ -158,7 +145,7 @@ export default function AzhwarsPage() {
             </div>
           </div>
         </div>
-      </div>
+      </DirectoryHeader>
 
       {/* Grid of all 12 */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -150,19 +150,31 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-10-01 poigai mock restyle)', 
   });
 });
 
-describe('AcharyasPage (UT-ACH-02, FR-93)', () => {
-  it('lists acharyas grouped by parampara era with links', () => {
+describe('AcharyasPage (UT-ACH-02, FR-93; round-22 directory consistency)', () => {
+  it('lists all 27 acharyas grouped by parampara era with unique profile links', () => {
     renderAt('/acharyas');
     expect(screen.getByRole('heading', { name: /the acharyas/i })).toBeInTheDocument();
-    expect(screen.getByText(/Purvacharyas — the early masters/i)).toBeInTheDocument();
-    expect(screen.getByText(/The age of Ramanuja/i)).toBeInTheDocument();
-    expect(screen.getByText(/Later acharyas/i)).toBeInTheDocument();
-    // href-targeted: role text of other acharyas (e.g. Thiruvaimozhi Pillai's
-    // "Acharya of Sri Manavala Mamunigal…") also matches a loose name query
-    const link = screen
-      .getAllByRole('link')
-      .find((el) => el.getAttribute('href') === '/acharya/manavala-mamunigal');
-    expect(link).toBeDefined();
+    // Era sections keep the dataset labels; the jump links carry the
+    // short PO labels ("Early masters", "Age of Ramanuja", …)
+    expect(screen.getByRole('heading', { name: 'Purvacharyas — the early masters' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'The age of Ramanuja' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Later acharyas' })).toBeInTheDocument();
+    // All 27 entries render as standardized PersonEntry articles
+    expect(screen.getAllByRole('article')).toHaveLength(27);
+    // In-page jump links target the era anchors (sections stay visible)
+    expect(screen.getByRole('link', { name: 'Early masters' })).toHaveAttribute('href', '#early-masters');
+    expect(screen.getByRole('link', { name: 'Age of Ramanuja' })).toHaveAttribute('href', '#age-of-ramanuja');
+    expect(screen.getByRole('link', { name: 'Later acharyas' })).toHaveAttribute('href', '#later-acharyas');
+    expect(document.getElementById('early-masters')).not.toBeNull();
+    // Consistent Period/Guru metadata on every entry
+    expect(screen.getAllByText('Period')).toHaveLength(27);
+    expect(screen.getAllByText('Guru')).toHaveLength(27);
+    // gurus without a dataset link render the neutral value, never inferred
+    expect(screen.getAllByText('Not specified').length).toBeGreaterThanOrEqual(2);
+    // One unique-named profile link per acharya (no whole-row overlay stop)
+    const profile = screen.getByRole('link', { name: 'View profile — Sri Manavala Mamunigal' });
+    expect(profile).toHaveAttribute('href', '/acharya/manavala-mamunigal');
+    expect(screen.getAllByRole('link', { name: /view profile — /i })).toHaveLength(27);
   });
 });
 

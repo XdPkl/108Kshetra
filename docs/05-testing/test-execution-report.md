@@ -2029,3 +2029,93 @@ labels over hairline rows. **No data changes** (`sync-content --fixture
 | E2E (Playwright, Chromium) | **19/19 journeys pass** |
 | Measured | Section h2 32px (28px @390); philosophy column 756px / era aside 271px @1280, stacked @390; 0px overflow at both widths |
 | Visual gate | **4/4 pass vs the PO crop** (pey/poigai × 1280/390; an initial fail was the judge working from a stale brief — the Traditional-chronology value is dataset content, confirmed against azhwars.json) — `docs/03-design/gate-shots/azhwar-philosophy-restyle-21/` |
+
+## Version 2.30 — Acharyas Directory Consistency Restyle (2026-10-02, round 22)
+
+PO request: improve `/acharyas` with **consistency as the primary
+requirement** — shared typography/colours/spacing/interactions referenced
+against `/kshetram/srirangam` and the saint detail pages, and the
+directory components coordinated with `/azhwars`. **No data changes**
+(`sync-content --fixture --check` 0-diff); all 27 acharyas, their order,
+profile routes and the three era groups are preserved.
+
+### Changes
+
+- **Shared directory theme** — new `src/styles/directory.css` scoped
+  under `.dir` (imported last in main.jsx): tokens mirror the kxd
+  palette exactly (rust `#922e0d` text/actions, accent `#ae3712` hover,
+  gold `#a77529`, line `#e8cf9f`, tint `#fbf0dc`); Source Serif 4 for
+  English headings, DM Sans for English body/UI, **Mukta Malar** for
+  Tamil (per PO; kxd keeps Noto Serif Tamil first). Four reusable
+  components in `src/components/directory/`: **DirectoryHeader**
+  (eyebrow/serif title/optional Tamil title/lead + hidden-below-lg
+  media slot), **PersonEntry** (standardized entry), **PortraitFallback**
+  (restrained tinted shanka tile), **ProfileLink** (maroon text link,
+  gold focus ring, 44px touch target, unique accessible name).
+- **Mobile introduction fix**: the old hero clamped text to
+  `max-w-[60%]` at every width — intro now spans the full content width
+  on mobile (measured 358px inside 390); the gopuram illustration stays
+  an absolutely-positioned desktop-only watermark (no mobile column).
+  Mobile title 38px (spec 36–40), lead 16px; desktop 56px/17px (shared
+  kxd scale).
+- **In-page era jump links**: "Early masters" / "Age of Ramanuja" /
+  "Later acharyas" anchor to `#early-masters` / `#age-of-ramanuja` /
+  `#later-acharyas` (explicit mapping from the dataset eraGroup labels;
+  unmapped groups fall back to a slugged id). `scroll-margin-top: 76px`
+  clears the sticky header; smooth scroll under
+  `prefers-reduced-motion: no-preference`; all groups always rendered.
+- **Standardized PersonEntry** (×27): English serif name (21/24px,
+  wraps naturally), Tamil name (gold Mukta Malar), 16px contribution
+  summary (`role`), metadata rows **Period** (`era`, 15px) and **Guru**
+  (resolved `guru` id → name; "Not specified" when absent) with 14px
+  gold labels, then a single "View profile →" link. Two-column roster
+  ≥640px, one column below; subtle horizontal hairlines only — the
+  central vertical divider and the repeated lotus row junctions are
+  removed; section headings keep the dataset eraGroup label plus a
+  muted count.
+- **Portrait framing**: one 3/4 top-anchored frame everywhere — 72px
+  beside the identity on mobile (spec 64–80), 104px spanning the entry
+  on desktop. Portraits resolve only from the dataset (5 Wikipedia
+  slurs: Nathamuni, Yamunacharya, Ramanuja, Pillai Lokacharya, Manavala
+  Mamunigal); the other 22 show the restrained fallback tile. No
+  historical portrait is generated or invented.
+- **Duplicate keyboard stops removed**: the whole-row overlay link and
+  the "Read story" link are retired in favour of one ProfileLink per
+  entry with a unique accessible name ("View profile — {name}").
+  Azhwars cards get the same treatment ("Explore profile — {name}";
+  whole-card overlay retired) while keeping the approved round-12 card
+  gallery; the "N Divya Desams" secondary link remains independently
+  usable with its pre-filtered Browse deep link.
+- `/azhwars` coordination: DirectoryHeader (same mobile intro fix),
+  PortraitFallback behind photo-less portraits, ProfileLink CTAs. The
+  `font-display` Cormorant headings and stat band on azhwar cards are
+  unchanged (flag below).
+
+### Flags for PO review (not inferred)
+
+- **Guru "Not specified"** renders for Nathamuni (lineage founder),
+  Kidambi Appullar and Thiruvaimozhi Pillai (`guru` absent in
+  acharyas.json) — relationships are not guessed.
+- **Field-name asymmetry**: acharyas.json carries the period string as
+  `era`, azhwars.json as `period`; both directories label it "Period".
+  Consider unifying the field name in a content round.
+- **Acharya portraits**: no `photos[]` exists for any of the 27 — the
+  5 wiki images + 22 tiles are stand-ins; real captioned imagery
+  remains PO-owned content.
+- **Azhwar cards** deliberately keep the round-12 gallery (card grid,
+  Cormorant headings, work/pasuram stat band) — the PersonEntry roster
+  idiom applies to /acharyas; /azhwars adopted the shared header,
+  profile link and portrait-fallback primitives only.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 4 warnings (accepted set) |
+| Unit tests (Vitest) | **237/237 pass (22 suites)** — new `directory.test.jsx` (9 branch tests); UT-ACH-02 and UT-AZW-01/02 updated in lockstep |
+| Coverage | **90.52% statements / 81.70% branches / 86.26% functions / 92.26% lines** (gate 80%) |
+| Production build | Clean |
+| CMS round-trip | `sync-content --fixture --check` 0-diff |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** — TC-19 extended: era jump-link click lands on `#later-acharyas` with the heading in viewport |
+| Measured | @390: title 38px, lead 16px full-width (358px), 1 column, portrait 72px, profile-link height 44px; @768: 2 columns, portrait 104px; @1280/1440: title 56px, watermark shown, 2 columns; **0px horizontal overflow at all four widths**; longest name ("Thirukkurugai Piran Pillan") wraps and fits; jump click → hash `#later-acharyas`, section top at 76px, all 3 groups + 27 entries still rendered; keyboard path to the first profile link has no duplicate stops |
+| Visual gate | **7/7 pass** (acharyas 390/768/1280/1440, azhwars 390/1280, focus-ring crop) — `docs/03-design/gate-shots/acharyas-directory-22/{before,after}/` (before captured from live `300a8e9`) |

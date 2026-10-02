@@ -1,0 +1,252 @@
+/*
+ * Directory stylesheet — the shared `.dir` theme for the person
+ * directories (/azhwars, /acharyas). Tokens mirror the kxd dossier
+ * palette (detail-theme.css) so directories and detail pages read as
+ * one system: ivory paper, maroon text/actions, restrained gold
+ * accents. English headings are Source Serif 4, English body/UI is
+ * DM Sans and Tamil is Mukta Malar. Class names are prefixed `dir-`
+ * so they never collide with base/layout/v3 rules; the scoped class
+ * selectors deliberately outrank the unlayered element rules in
+ * base.css (h1/h2/a) without needing !important.
+ */
+.dir {
+  --dir-rust: #922e0d;      /* maroon text/actions (kxd --rust) */
+  --dir-accent: #ae3712;    /* hover accent (kxd --accent) */
+  --dir-gold: #a77529;      /* restrained gold accents (kxd --gold) */
+  --dir-ink: #333942;
+  --dir-muted: #74716b;
+  --dir-line: #e8cf9f;
+  --dir-tint: #fbf0dc;
+  --dir-serif: 'Source Serif 4', Georgia, serif;
+  --dir-sans: 'DM Sans', 'Mukta Malar', Arial, sans-serif;
+  --dir-tamil: 'Mukta Malar', 'Noto Serif Tamil', serif;
+  font-family: var(--dir-sans);
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--dir-ink);
+}
+
+/* ---- Directory header: eyebrow / title / optional Tamil title / lead.
+   The decorative illustration sits in an absolutely-positioned media slot
+   (hidden below lg, so mobile text keeps the full content width). ---- */
+.dir-head { position: relative; }
+.dir-head__media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  display: none;
+  pointer-events: none;
+  user-select: none;
+}
+.dir-head__body { position: relative; max-width: 100%; }
+.dir-head__eyebrow {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dir-gold);
+}
+.dir-head__title {
+  margin: 0;
+  font-family: var(--dir-serif);
+  font-weight: 600;
+  font-size: 38px;
+  line-height: 44px;
+  letter-spacing: -0.5px;
+  color: var(--dir-rust);
+}
+.dir-head__tamil {
+  margin: 4px 0 0;
+  font-family: var(--dir-tamil);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 34px;
+  color: var(--dir-gold);
+  overflow-wrap: anywhere;
+}
+.dir-head__lead {
+  margin: 12px 0 0;
+  max-width: 74ch;
+  font-size: 16px;
+  line-height: 27px;
+  color: var(--dir-muted);
+}
+@media (min-width: 1024px) {
+  .dir-head__media { display: block; }
+  .dir-head__body { max-width: 58%; }
+  .dir-head__title { font-size: 56px; line-height: 62px; }
+  .dir-head__tamil { font-size: 26px; line-height: 40px; }
+  .dir-head__lead { font-size: 17px; line-height: 28px; }
+}
+
+/* ---- In-page jump links (era anchors; sections stay visible) ---- */
+.dir-jumps { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 20px; }
+.dir-jumps a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 2px;
+  color: var(--dir-rust);
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.dir-jumps a svg { color: var(--dir-gold); }
+.dir-jumps a:hover { color: var(--dir-accent); text-decoration: underline; text-underline-offset: 4px; }
+.dir-jumps a:focus-visible,
+.dir-profile-link:focus-visible {
+  outline: 3px solid var(--dir-gold);
+  outline-offset: 4px;
+}
+
+/* ---- Era sections: ruled heading over the entry list.
+   scroll-margin-top clears the sticky 64px site header on jump-link
+   navigation; smooth scrolling respects reduced-motion. ---- */
+.dir-section { margin-top: 36px; scroll-margin-top: 76px; }
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.dir) { scroll-behavior: smooth; }
+}
+.dir-section-head { display: flex; align-items: center; gap: 18px; }
+.dir-section-head h2 {
+  margin: 0;
+  min-width: 0;
+  font-family: var(--dir-serif);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: -0.2px;
+  color: var(--dir-rust);
+}
+.dir-section-rule { flex: 1; min-width: 40px; height: 1px; background: var(--dir-line); }
+.dir-section-count { flex: none; font-size: 14px; line-height: 22px; color: var(--dir-muted); }
+@media (min-width: 768px) {
+  .dir-section-head h2 { font-size: 32px; line-height: 40px; }
+}
+
+/* ---- Entry list: one column on mobile, two on desktop; horizontal
+   hairlines only (no vertical divider between the columns) ---- */
+.dir-list { display: grid; grid-template-columns: 1fr; margin-top: 6px; }
+@media (min-width: 640px) {
+  .dir-list { grid-template-columns: 1fr 1fr; column-gap: 40px; }
+}
+
+/* ---- Person entry: portrait | identity row, summary, metadata and
+   profile link beneath. On mobile the portrait (72px) sits beside the
+   identity and the rest flows full width; on desktop the portrait spans
+   the entry so summary/meta align beside it. ---- */
+.dir-entry {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  grid-template-areas:
+    'portrait identity'
+    'summary summary'
+    'meta meta'
+    'link link';
+  column-gap: 18px;
+  row-gap: 10px;
+  align-content: start;
+  min-width: 0;
+  padding: 20px 0 22px;
+  border-top: 1px solid var(--dir-line);
+}
+@media (min-width: 640px) {
+  .dir-entry {
+    grid-template-columns: 104px minmax(0, 1fr);
+    grid-template-areas:
+      'portrait identity'
+      'portrait summary'
+      'portrait meta'
+      'portrait link';
+    column-gap: 26px;
+    row-gap: 8px;
+    padding: 26px 0 28px;
+  }
+}
+.dir-entry__portrait { grid-area: portrait; }
+.dir-entry__identity { grid-area: identity; min-width: 0; align-self: center; }
+.dir-entry__summary { grid-area: summary; margin: 0; font-size: 16px; line-height: 26px; color: var(--dir-ink); overflow-wrap: break-word; }
+.dir-entry__meta { grid-area: meta; margin: 0; display: grid; row-gap: 2px; }
+.dir-entry__link { grid-area: link; align-self: start; }
+
+.dir-entry__name {
+  margin: 0;
+  font-family: var(--dir-serif);
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 28px;
+  color: var(--dir-rust);
+  overflow-wrap: break-word;
+}
+.dir-entry__tamil {
+  margin: 3px 0 0;
+  font-family: var(--dir-tamil);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--dir-gold);
+  overflow-wrap: anywhere;
+}
+@media (min-width: 640px) {
+  .dir-entry__name { font-size: 24px; line-height: 32px; }
+}
+
+.dir-meta-row { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.dir-meta-row dt { flex: none; font-size: 14px; line-height: 22px; font-weight: 700; color: var(--dir-gold); }
+.dir-meta-row dd { margin: 0; min-width: 0; font-size: 15px; line-height: 24px; color: var(--dir-ink); overflow-wrap: break-word; }
+
+/* ---- Portrait frame: one aspect ratio (3/4) and crop rule (top-anchored)
+   everywhere; the fallback tile shows only when no portrait resolves ---- */
+.dir-portrait {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--dir-tint);
+  border: 1px solid var(--dir-line);
+}
+.dir-portrait img {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+.dir-portrait__fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dir-tint);
+  color: var(--dir-gold);
+}
+
+/* ---- Shared profile link: maroon text link, 44px touch target ---- */
+.dir-profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 2px;
+  color: var(--dir-rust);
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.dir-profile-link:hover { color: var(--dir-accent); text-decoration: underline; text-underline-offset: 4px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .dir-profile-link svg { transition: transform 0.15s; }
+  .dir-profile-link:hover svg { transform: translateX(2px); }
+}

@@ -274,15 +274,18 @@ describe('AzhwarsPage (UT-AZW-01/02)', () => {
     expect(screen.getAllByText(/pasurams/i).length).toBeGreaterThan(0);
   });
 
-  it('links each card to the dossier and the pre-filtered browse (PO round 12 snap)', () => {
+  it('links each card to the dossier with a unique accessible name and the pre-filtered browse (round 22)', () => {
     renderAt('/azhwars');
     // "N Divya Desams" CTA keeps the pre-filtered browse deep link
     const desamLinks = screen.getAllByRole('link', { name: /divya desams/i });
     expect(desamLinks.length).toBe(12);
     expect(desamLinks[0]).toHaveAttribute('href', expect.stringContaining('/kshetrams?azhwar='));
-    // explicit "Explore profile" CTA + whole-card overlay both target the dossier
-    expect(screen.getAllByRole('link', { name: /explore profile/i }).length).toBe(12);
-    expect(screen.getAllByRole('link', { name: /saint dossier/i }).length).toBe(12);
+    // Round 22: one profile stop per card — uniquely named, no whole-card
+    // overlay link duplicating the destination
+    expect(screen.getAllByRole('link', { name: /explore profile — /i }).length).toBe(12);
+    expect(screen.getByRole('link', { name: 'Explore profile — Nammazhwar' }))
+      .toHaveAttribute('href', '/azhwar/nammazhwar');
+    expect(screen.queryByRole('link', { name: /saint dossier/i })).not.toBeInTheDocument();
   });
 });
 

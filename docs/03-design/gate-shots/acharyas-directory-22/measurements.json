@@ -1,0 +1,164 @@
+{
+  "390": {
+    "titleSize": "38px",
+    "leadSize": "16px",
+    "leadWidth": 358,
+    "headBodyWidth": 358,
+    "mainWidth": 390,
+    "listCols": 1,
+    "portraitW": 72,
+    "profileLinkHeight": 44,
+    "entryCount": 27,
+    "fallbackTiles": 22,
+    "portraitImgs": 5,
+    "watermarkShown": false,
+    "overflowX": 0
+  },
+  "768": {
+    "titleSize": "38px",
+    "leadSize": "16px",
+    "leadWidth": 720,
+    "headBodyWidth": 720,
+    "mainWidth": 768,
+    "listCols": 2,
+    "portraitW": 104,
+    "profileLinkHeight": 44,
+    "entryCount": 27,
+    "fallbackTiles": 22,
+    "portraitImgs": 5,
+    "watermarkShown": false,
+    "overflowX": 0
+  },
+  "1280": {
+    "titleSize": "56px",
+    "leadSize": "17px",
+    "leadWidth": 668,
+    "headBodyWidth": 668,
+    "mainWidth": 1200,
+    "listCols": 2,
+    "portraitW": 104,
+    "profileLinkHeight": 44,
+    "entryCount": 27,
+    "fallbackTiles": 22,
+    "portraitImgs": 5,
+    "watermarkShown": true,
+    "overflowX": 0
+  },
+  "1440": {
+    "titleSize": "56px",
+    "leadSize": "17px",
+    "leadWidth": 668,
+    "headBodyWidth": 668,
+    "mainWidth": 1200,
+    "listCols": 2,
+    "portraitW": 104,
+    "profileLinkHeight": 44,
+    "entryCount": 27,
+    "fallbackTiles": 22,
+    "portraitImgs": 5,
+    "watermarkShown": true,
+    "overflowX": 0
+  },
+  "tabStopsToFirstProfile": [
+    {
+      "tag": "A",
+      "cls": "flex items-center gap-2.5 shrink-0 text-left group",
+      "label": null,
+      "text": "108 Divya Kshetrams"
+    },
+    {
+      "tag": "A",
+      "cls": "px-2 py-1.5 rounded-full font-medium transition-all flex items-center gap-1.5 whitespace-nowrap text-[#FFFDF7] hover:text-[#E2C47C]!",
+      "label": null,
+      "text": "Home"
+    },
+    {
+      "tag": "A",
+      "cls": "pl-2.5 pr-1 py-1.5 rounded-l-full font-medium transition-all flex items-center gap-1.5 text-[#FFFDF7] hover:text-[#E2C47C]!",
+      "label": null,
+      "text": "108 Kshetras"
+    },
+    {
+      "tag": "BUTTON",
+      "cls": "pr-2 py-1.5 rounded-r-full font-medium transition-all text-[#FFFDF7] hover:text-[#E2C47C]",
+      "label": "Toggle Regional Temples Dropdown",
+      "text": ""
+    },
+    {
+      "tag": "A",
+      "cls": "px-2 py-1.5 rounded-full font-medium transition-all flex items-center gap-1.5 whitespace-nowrap text-[#FFFDF7] hover:text-[#E2C47C]!",
+      "label": null,
+      "text": "Plan Yatra"
+    },
+    {
+      "tag": "A",
+      "cls": "px-2 py-1.5 rounded-full font-medium transition-all flex items-center gap-1.5 whitespace-nowrap text-[#FFFDF7] hover:text-[#E2C47C]!",
+      "label": null,
+      "text": "Azhwars"
+    },
+    {
+      "tag": "A",
+      "cls": "px-2 py-1.5 rounded-full font-medium transition-all flex items-center gap-1.5 whitespace-nowrap bg-[#FFFDF7]/15 text-[#E2C47C]! font-bold active",
+      "label": null,
+      "text": "Acharyas"
+    },
+    {
+      "tag": "A",
+      "cls": "pl-2.5 pr-1 py-1.5 font-bold flex items-center gap-1.5",
+      "label": null,
+      "text": "Kshetra Tours"
+    },
+    {
+      "tag": "BUTTON",
+      "cls": "pr-2 py-1.5",
+      "label": "Toggle Kshetra Tours Menu",
+      "text": ""
+    },
+    {
+      "tag": "A",
+      "cls": "",
+      "label": null,
+      "text": "Early masters"
+    },
+    {
+      "tag": "A",
+      "cls": "",
+      "label": null,
+      "text": "Age of Ramanuja"
+    },
+    {
+      "tag": "A",
+      "cls": "",
+      "label": null,
+      "text": "Later acharyas"
+    }
+  ],
+  "jump": {
+    "hash": "#later-acharyas",
+    "scrollY": 2837,
+    "laterTop": 76,
+    "groupsVisible": "true,true,true",
+    "entryCountAfterJump": 27
+  },
+  "longName": {
+    "name": "Thirukkurugai Piran Pillan",
+    "wraps": true,
+    "clientWidthFits": true
+  },
+  "azhwars390": {
+    "leadWidth": 358,
+    "mainWidth": 390,
+    "profileLinks": 12,
+    "fallbackTiles": 12,
+    "overlayLinks": 0,
+    "overflowX": 0
+  },
+  "azhwars1280": {
+    "leadWidth": 668,
+    "mainWidth": 1200,
+    "profileLinks": 12,
+    "fallbackTiles": 12,
+    "overlayLinks": 0,
+    "overflowX": 0
+  }
+}

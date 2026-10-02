@@ -374,3 +374,26 @@ Pass · E2E **19/19** · Visual gate **4/4 vs the PO crop**. Execution
 recorded in TER v2.29.
 
 *End of Addendum — TCS-108K-008 v1.15*
+
+## Version 1.16 — Acharyas Directory Consistency Restyle (2026-10-02)
+
+PO round-22 consistency restyle of `/acharyas` (TER v2.30) with the
+directory primitives shared by `/azhwars`. Data contracts unchanged;
+layout/interaction contract moves:
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-ACH-02 | Header | DirectoryHeader intro: full-width mobile text (no 60% clamp), 38px mobile title / 16px lead, desktop gopuram watermark only; era jump links "Early masters" / "Age of Ramanuja" / "Later acharyas" anchor to section ids with the sticky header cleared (scroll-margin 76px) |
+| UT-ACH-02 | Entries | 27 standardized PersonEntry articles: serif English name, gold Mukta Malar Tamil name, 16px summary, Period/Guru metadata rows (14px labels; guru absent → "Not specified"), horizontal hairlines only (vertical divider + lotus junctions removed); sections keep the dataset eraGroup labels |
+| UT-ACH-02 | Portraits | One 3/4 top-anchored frame (72px mobile / 104px desktop); dataset-only resolution (5 wiki images), restrained PortraitFallback tile otherwise — no invented portraits |
+| UT-ACH-02 | Links | One unique-named "View profile — {name}" ProfileLink per entry (44px target, gold focus ring); whole-row overlay + "Read story" duplicate stops retired |
+| UT-AZW-01/02 | Coordination | Azhwar cards adopt DirectoryHeader (full-width mobile intro), PortraitFallback and ProfileLink ("Explore profile — {name}", overlay retired); the "N Divya Desams" secondary deep link is unchanged and independently usable |
+| New suite | directory.test.jsx | Branch tests for DirectoryHeader slots, PersonEntry field omissions/portrait resolution, PortraitFallback and ProfileLink naming (useWikiImage mocked — no network) |
+| TC-19 | E2E | Era jump-link click asserted (URL hash `#later-acharyas`, heading in viewport) before the profile-link navigation; all other steps unchanged |
+
+Quality gates: TC-QA-01 Pass (0 errors; 4 accepted warnings) · TC-QA-02
+Pass (**237/237 tests, 22 suites**; 90.52/81.70/86.26/92.26) · TC-QA-03
+Pass · E2E **19/19** · Visual gate **7/7** (before/after per width +
+focus-ring crop). Execution recorded in TER v2.30.
+
+*End of Addendum — TCS-108K-008 v1.16*

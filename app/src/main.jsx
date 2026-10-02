@@ -13,6 +13,7 @@ import './styles/zip.css';
 import './styles/detail-theme.css';
 import './styles/kshetram-detail.css';
 import './styles/saint-detail.css';
+import './styles/directory.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
