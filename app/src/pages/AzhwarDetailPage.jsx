@@ -311,37 +311,48 @@ export default function AzhwarDetailPage() {
                 ) : null}
 
                 {(azhwar.bhaktiBhava || azhwar.preservation) ? (
-                  <div className="azd-callouts">
+                  <section className="azd-philosophy">
+                    <h2>Philosophy &amp; legacy</h2>
                     {azhwar.bhaktiBhava ? (
-                      <div className="azd-callout">
-                        <p className="eyebrow">
-                          <SaintGlyph kind="bhakti" /> Role &amp; bhakti bhava
-                        </p>
-                        <p className="note">{azhwar.bhaktiBhava}</p>
+                      <div>
+                        <h3>Role &amp; bhakti bhava</h3>
+                        <p>{azhwar.bhaktiBhava}</p>
                       </div>
                     ) : null}
                     {azhwar.preservation ? (
-                      <div className="azd-callout">
-                        <p className="eyebrow">
-                          <SaintGlyph kind="preservation" /> Sampradaya preservation
-                        </p>
-                        <p className="note">{azhwar.preservation}</p>
+                      <div>
+                        <h3>Sampradaya preservation</h3>
+                        <p>{azhwar.preservation}</p>
                       </div>
                     ) : null}
-                  </div>
-                ) : null}
-
-                {azhwar.era || azhwar.period ? (
-                  <p className="note azd-era">
-                    <span className="eyebrow">Era · </span>
-                    {azhwar.period}
-                    {azhwar.era?.academic ? <> (academic: {azhwar.era.academic})</> : null}
-                    {azhwar.era?.contemporaries ? <> · contemporary with the {azhwar.era.contemporaries}</> : null}
-                  </p>
+                  </section>
                 ) : null}
               </article>
               <aside>
                 <SaintKeyMoments timeline={azhwar.timeline} />
+                {azhwar.period || azhwar.era?.academic || azhwar.era?.contemporaries ? (
+                  <div className="azd-era-block section-rule">
+                    <h3>Era &amp; contemporaries</h3>
+                    {azhwar.period ? (
+                      <div className="azd-era-row">
+                        <p className="eyebrow">Traditional chronology</p>
+                        <p>{azhwar.period}</p>
+                      </div>
+                    ) : null}
+                    {azhwar.era?.academic ? (
+                      <div className="azd-era-row">
+                        <p className="eyebrow">Academic chronology</p>
+                        <p>{azhwar.era.academic}</p>
+                      </div>
+                    ) : null}
+                    {azhwar.era?.contemporaries ? (
+                      <div className="azd-era-row">
+                        <p className="eyebrow">Contemporaries</p>
+                        <p>{azhwar.era.contemporaries}</p>
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
               </aside>
             </div>
 

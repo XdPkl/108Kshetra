@@ -1986,3 +1986,46 @@ restored).
 | Interactive validation (Playwright) | **18/18 PASS**: direct hash entry (#hymns), unknown-hash fresh load → Life, tab click writes the hash without growing history, reload keeps the hashed tab, ArrowRight roving focus, 3px gold focus-visible outline, life-story/commentary/reading-guidance expanders, sticky rail at 64px, 36px rail overflow fade, mobile portrait 128px, rail y≈880, selected tab brought into view, 0px overflow @390 |
 | Measured hero (before → after) | @390 rail y 1318→880; @768 1225→650; @1280/1440 hero 372→455 (facts row beneath); 0px overflow at 390/768/1280/1440 |
 | Visual gate | **14/14 pass** (five tabs × desktop+mobile, before/after delta confirmed, Srirangam 1280/1440 cross-checked: 32px headings, shared palette/rules/rail) — `docs/03-design/gate-shots/azhwar-consistency-20/after/` |
+
+## Version 2.29 — Azhwar Life "Philosophy & legacy" Alignment (2026-10-01, round 21)
+
+PO request (mock crop): align the lower half of the azhwar Life &
+tradition tab — "Role & bhakti bhava" / "Sampradaya preservation" as
+serif sub-headings over plain text under a "Philosophy & legacy" section,
+and the era data as an "Era & contemporaries" aside block with gold-caps
+labels over hairline rows. **No data changes** (`sync-content --fixture
+--check` 0-diff); the crop's content is Pey Azhwar's dataset text.
+
+### Changes
+
+- **Philosophy & legacy** (`azd-philosophy`): the round-18 tint callout
+  pair is replaced by a 32px serif section heading with the dataset's
+  `bhaktiBhava` and `preservation` as h3 sub-heads over plain 17px text —
+  no cards, no icons. Rendered when either field exists.
+- **Era & contemporaries** (`azd-era-block`): new aside block under the
+  Key-moments timeline (separated by the shared section rule) mapping
+  dataset fields to gold-caps rows: `period` → "Traditional chronology",
+  `era.academic` → "Academic chronology", `era.contemporaries` →
+  "Contemporaries", each with a hairline separator. Replaces the old
+  one-line "Era · …" note.
+- Note: the Traditional-chronology row renders dataset `period` values
+  from azhwars.json ("6th–7th century CE" for Pey/Poigai) — the mock's
+  row is dataset-backed, not authored. Headings "Philosophy & legacy" /
+  "Era & contemporaries" and the three row labels are the mock's
+  structural labels.
+- `SaintGlyph` no longer decorates these headings (the works list keeps
+  its glyph); `.azd-callout` remains in use by the Acharya commentary and
+  SaintLegend.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 4 warnings (accepted set) |
+| Unit tests (Vitest) | **227/227 pass (21 suites)** — new pey test covers Philosophy & legacy + Era & contemporaries |
+| Coverage | **90.45% statements / 81.52% branches / 86.00% functions / 92.18% lines** (gate 80%) |
+| Production build | Clean |
+| CMS round-trip | `sync-content --fixture --check` 0-diff |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** |
+| Measured | Section h2 32px (28px @390); philosophy column 756px / era aside 271px @1280, stacked @390; 0px overflow at both widths |
+| Visual gate | **4/4 pass vs the PO crop** (pey/poigai × 1280/390; an initial fail was the judge working from a stale brief — the Traditional-chronology value is dataset content, confirmed against azhwars.json) — `docs/03-design/gate-shots/azhwar-philosophy-restyle-21/` |

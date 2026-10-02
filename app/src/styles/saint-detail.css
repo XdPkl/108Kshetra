@@ -76,9 +76,6 @@
 .kxd .azd-birth-note { margin-top: 2px; }
 .kxd .azd-story-toggle { margin-top: 8px; }
 .kxd .azd-story-more { margin-top: 24px; }
-.kxd .azd-era { margin-top: 20px; }
-.kxd .azd-callouts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
-.kxd .azd-callout .eyebrow { display: inline-flex; align-items: center; gap: 6px; }
 .kxd .azd-km-h { margin-bottom: 18px; }
 .kxd .azd-km { list-style: none; position: relative; margin: 0; padding: 0; }
 .kxd .azd-km::before { content: ''; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 1px; background: var(--line); }
@@ -86,6 +83,20 @@
 .kxd .azd-km li:last-child { padding-bottom: 4px; }
 .kxd .azd-km li::before { content: ''; position: absolute; left: 0; top: 7px; width: 11px; height: 11px; border-radius: 50%; background: var(--gold); }
 .kxd .azd-km h4 { font-size: 19px; line-height: 26px; margin-bottom: 4px; }
+
+/* Philosophy & legacy — serif sub-heads over plain text (mock crop) */
+.kxd .azd-philosophy { margin-top: 32px; }
+.kxd .azd-philosophy h2 { margin-bottom: 20px; }
+.kxd .azd-philosophy > div + div { margin-top: 24px; }
+.kxd .azd-philosophy p { margin: 0; font-size: 17px; line-height: 28px; color: var(--ink); }
+
+/* Era & contemporaries — gold-caps rows over hairlines in the aside */
+.kxd .azd-era-block { margin-top: 28px; }
+.kxd .azd-era-block h3 { margin-bottom: 4px; }
+.kxd .azd-era-row { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.kxd .azd-era-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.kxd .azd-era-row .eyebrow { margin-bottom: 4px; }
+.kxd .azd-era-row > p:last-child { margin: 0; font-size: 15px; line-height: 25px; color: var(--ink); }
 
 /* Hymns & meaning — verse reader | glossary sidebar, commentary accordions */
 .kxd .azd-verse-reader { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 40px; }
@@ -270,7 +281,6 @@
   .kxd .azd-facts > div:first-child { padding-top: 0; }
   .kxd .azd-facts .azd-birth-label { margin-bottom: 2px; }
   .kxd .azd-verse-tamil { font-size: 22px; line-height: 38px; }
-  .kxd .azd-callouts { grid-template-columns: 1fr; }
   .kxd .azd-dir { grid-template-columns: 1fr; }
   .kxd .azd-listen-row { grid-template-columns: 44px 1fr; row-gap: 6px; }
   .kxd .azd-listen-action { grid-column: 2; }

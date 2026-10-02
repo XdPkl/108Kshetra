@@ -104,6 +104,18 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-10-01 poigai mock restyle)', 
     expect(screen.queryByText(/divine amsam/i)).not.toBeInTheDocument();
   });
 
+  it('renders Philosophy & legacy and the Era & contemporaries aside (round 21, pey)', () => {
+    renderAt('/azhwar/pey');
+    expect(screen.getByRole('heading', { name: /philosophy & legacy/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /role & bhakti bhava/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /sampradaya preservation/i })).toBeInTheDocument();
+    expect(screen.getByText(/Saksatkara Bhakti/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /era & contemporaries/i })).toBeInTheDocument();
+    expect(screen.getByText(/Academic chronology/i)).toBeInTheDocument();
+    expect(screen.getByText(/Early Sangam \/ Post-Sangam/i)).toBeInTheDocument();
+    expect(screen.getByText(/his illustrious disciple/i)).toBeInTheDocument();
+  });
+
   it('handles unknown azhwar ids gracefully (FR-33 pattern)', () => {
     renderAt('/azhwar/unknown-saint');
     expect(screen.getByText(/this azhwar was not found/i)).toBeInTheDocument();

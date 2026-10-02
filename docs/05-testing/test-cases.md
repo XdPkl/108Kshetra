@@ -356,3 +356,21 @@ Pass · E2E **19/19** · Interactive validation **18/18** · Visual gate
 Execution recorded in TER v2.28.
 
 *End of Addendum — TCS-108K-008 v1.14*
+
+## Version 1.15 — Azhwar "Philosophy & legacy" Alignment (2026-10-01)
+
+PO round-21 alignment of the azhwar Life tab's lower half to the mock
+crop (TER v2.29). Data contracts unchanged; wording/structure moves:
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-AZW-03 | Philosophy & legacy | The tint callout pair becomes a 32px serif section with "Role & bhakti bhava" / "Sampradaya preservation" h3 sub-heads over plain text (same dataset fields) |
+| UT-AZW-03 | Era & contemporaries | The one-line "Era · …" note becomes an aside block with gold-caps rows — Traditional chronology (`period`), Academic chronology (`era.academic`), Contemporaries (`era.contemporaries`) — over hairline separators |
+| UT-AZW-03 | New test | Pey renders both sections with dataset text (branch coverage for the era rows) |
+
+Quality gates: TC-QA-01 Pass (0 errors; 4 accepted warnings) · TC-QA-02
+Pass (**227/227 tests, 21 suites**; 90.45/81.52/86.00/92.18) · TC-QA-03
+Pass · E2E **19/19** · Visual gate **4/4 vs the PO crop**. Execution
+recorded in TER v2.29.
+
+*End of Addendum — TCS-108K-008 v1.15*
