@@ -29,7 +29,7 @@ export default function SaintVerse({ verse }) {
       <div className="azd-verse-reader">
         <div className="azd-verse-main">
           {verse.work ? <p className="eyebrow">{verse.work}</p> : null}
-          <h2 className="azd-display">Opening verse</h2>
+          <h2>Opening verse</h2>
           {verse.tamil ? (
             <p className="tamil azd-verse-tamil" lang="ta">{verse.tamil}</p>
           ) : (
@@ -40,7 +40,11 @@ export default function SaintVerse({ verse }) {
           {verse.transliteration ? (
             <div className="azd-flag">
               <p className="eyebrow">Transliteration</p>
-              <p className="azd-flag-text">{verse.transliteration}</p>
+              {/* The dataset marks line breaks with "/" — render them as the
+                  verse's corresponding lines. */}
+              <p className="azd-flag-text azd-translit">
+                {verse.transliteration.split('/').map((line) => line.trim()).join('\n')}
+              </p>
             </div>
           ) : null}
           {meaningText ? (
@@ -89,7 +93,7 @@ export default function SaintVerse({ verse }) {
 
       {commentary.length > 0 ? (
         <div className="section-rule azd-commentary">
-          <h2 className="azd-display">Commentary &amp; anubhavam</h2>
+          <h2>Commentary &amp; anubhavam</h2>
           <div className="azd-acc">
             {commentary.map(({ heading, text }) => (
               <details key={heading} className="azd-acc-item">

@@ -332,3 +332,27 @@ hero 372px, display h2 40px, portrait 240px; 0px overflow at
 1440/1280/390. Execution recorded in TER v2.27.
 
 *End of Addendum — TCS-108K-008 v1.13*
+
+## Version 1.14 — Azhwar Detail Consistency Pass (2026-10-01)
+
+PO round-20 refinement of `/azhwar/:id` against the Srirangam kshetram
+reference (TER v2.28). Data contracts unchanged; layout/wording contract
+moves:
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-AZW-03 | Profile | Birth facts render beneath the identity with short values (birthplace = pre-"—" name); the full birthplace narrative + district render in the Life panel; epithet chips → subdued "Also known as" text (no interactive styling) |
+| UT-AZW-03 | Headings | Section headings at the shared 32px kxd scale (the 40px round-19 display size removed); hero 56px and Tamil treatment unchanged |
+| UT-AZW-03 | Lamp band | "The lamp of knowledge" renders on the Life tab only; the "Explore hymn & meaning" jump remains (TC-18 reordered accordingly) |
+| UT-AZW-03 | Hymns | Transliteration lines split on the dataset "/" markers; Tamil line breaks preserved; glossary + commentary disclosures unchanged |
+| UT-AZW-03 | Media | Full-width discourse rows; one shared search-behaviour note; iconography below the rows ("Search on YouTube ↗" link names and hrefs unchanged) |
+| UT-AZW-03 | Sources | Uniform "Open repository ↗" labelled links on every row (dataset-derived hrefs unchanged); reading guidance collapsed behind a disclosure |
+| TC-18 | E2E | Band jump asserted on the Life tab before the Sacred-places switch; all other steps unchanged |
+
+Quality gates: TC-QA-01 Pass (0 errors; 4 accepted warnings) · TC-QA-02
+Pass (**226/226 tests, 21 suites**; 90.45/81.61/86.00/92.18) · TC-QA-03
+Pass · E2E **19/19** · Interactive validation **18/18** · Visual gate
+**14/14** (before/after per width; Srirangam cross-checked at 1280/1440).
+Execution recorded in TER v2.28.
+
+*End of Addendum — TCS-108K-008 v1.14*

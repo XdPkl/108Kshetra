@@ -1921,3 +1921,68 @@ design notes' "keep the current URL hash behavior").
 | E2E (Playwright, Chromium) | **19/19 journeys pass** (TC-18 updated in lockstep) |
 | Measured | h1 56px Source Serif 4, display h2 40px, portrait 240px, hero 372px, rail sticky; tab click writes `#sources`; 0px horizontal overflow at 1440/1280/390 across life/places/media tabs |
 | Visual gate | **7/7 renders pass vs the PO mockups** (five desktop tabs + two mobile) — `docs/03-design/gate-shots/azhwar-poigai-mock-restyle-19/`; first pass caught the missing MEANING block, a broken media portrait (missing base-path `assetUrl`) and the missing Sources heading, all fixed |
+
+## Version 2.28 — Azhwar Detail Consistency Pass vs Srirangam (2026-10-01, round 20)
+
+PO request: improve /azhwar/poigai using /kshetram/srirangam as the visual
+consistency reference — shared cream/maroon/gold language, Source Serif 4 /
+DM Sans / Tamil type treatment, shared tokens for width, gutters,
+breadcrumbs, headings, tabs, buttons, borders and spacing (already kxd
+since rounds 18–19; this pass aligns scale, profile composition, per-tab
+layouts and mobile rhythm). **No data changes** (`sync-content --fixture
+--check` 0-diff); all source content, Tamil text, routes and links
+preserved. Before/after captures per width:
+`docs/03-design/gate-shots/azhwar-consistency-20/{before,after}/`.
+
+### Changes
+
+1. **Profile layout** — hero is portrait + identity again; the three
+   birth facts moved to a full-width row beneath the identity (top
+   hairline, vertical rules) instead of narrow columns beside the title.
+   Short hero values: Birthplace = the pre-"—" name ("Thiruvekka
+   (Kanchipuram)"); Birth star and Divine amsam render verbatim
+   ("Thiruvonam (Sravanam)", "Lord Vishnu's holy conch, Panchajanya").
+   The complete birthplace narrative + district moved into the Life &
+   tradition panel ("Birthplace · …" note). Epithet chips replaced by a
+   subdued "Also known as" text line (no hover styling on static text).
+   Nameless birthplace records (kshetramId only) render an em-dash.
+2. **Typography** — the 40px `.azd-display` panel headings dropped;
+   section headings now the shared kxd h2 (32px, measured equal to
+   Srirangam's). Hero 56px title and Tamil treatment unchanged.
+3. **Repeated content** — "The lamp of knowledge" band renders only
+   inside the Life & tradition panel (removed from the other four tabs);
+   the chronological prev/next nav stays after every panel.
+4. **Tab layouts** — Life: concise summary (first paragraph of the
+   opening block) with the rest of the story + legend behind "Read the
+   complete life story". Hymns: Tamil verse keeps its line breaks;
+   transliteration split on the dataset's "/" markers into corresponding
+   lines. Places: directory numbers align with wrapped titles. Media:
+   full-width discourse rows; one shared "searches, not playable
+   recordings" note replaces the per-row helper text; Sacred iconography
+   moved below the rows as portrait-beside-text (stacked on mobile).
+   Sources: uniform labelled "Open repository ↗" links on every row;
+   the reading note condensed with the full guidance behind a "Read the
+   full guidance" disclosure.
+5. **Mobile** — compact hero: 128px portrait beside the identity
+   (overriding the shared `.kxd .hero` single-column stacking),
+   facts as a tight ruled stack; tab rail reached at y≈880 (was 1318);
+   the horizontally scrollable tabs keep the edge-fade overflow cue and
+   bring the selected tab into view.
+
+Also fixed a latent round-19 regression: the Acharya media grid lost its
+two-column base rule in the stylesheet rewrite (`.acd-media-grid`
+restored).
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 4 warnings (accepted set) |
+| Unit tests (Vitest) | **226/226 pass (21 suites)** |
+| Coverage | **90.45% statements / 81.61% branches / 86.00% functions / 92.18% lines** (gate 80%) |
+| Production build | Clean |
+| CMS round-trip | `sync-content --fixture --check` 0-diff |
+| E2E (Playwright, Chromium) | **19/19 journeys pass** (TC-18 reordered: the band jump now happens on the Life tab before the Sacred-places switch) |
+| Interactive validation (Playwright) | **18/18 PASS**: direct hash entry (#hymns), unknown-hash fresh load → Life, tab click writes the hash without growing history, reload keeps the hashed tab, ArrowRight roving focus, 3px gold focus-visible outline, life-story/commentary/reading-guidance expanders, sticky rail at 64px, 36px rail overflow fade, mobile portrait 128px, rail y≈880, selected tab brought into view, 0px overflow @390 |
+| Measured hero (before → after) | @390 rail y 1318→880; @768 1225→650; @1280/1440 hero 372→455 (facts row beneath); 0px overflow at 390/768/1280/1440 |
+| Visual gate | **14/14 pass** (five tabs × desktop+mobile, before/after delta confirmed, Srirangam 1280/1440 cross-checked: 32px headings, shared palette/rules/rail) — `docs/03-design/gate-shots/azhwar-consistency-20/after/` |

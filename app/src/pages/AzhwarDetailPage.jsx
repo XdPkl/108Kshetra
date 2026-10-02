@@ -156,9 +156,10 @@ export default function AzhwarDetailPage() {
           <p className="tamil" lang="ta">{azhwar.tamilName}</p>
           {epithet ? <p className="azd-epithet">{epithet}</p> : null}
           {moreEpithets.length > 0 ? (
-            <p className="azd-chips">
+            <p className="azd-aliases note">
+              Also known as
               {moreEpithets.map((alias) => (
-                <span key={alias} className="pill">{alias}</span>
+                <span key={alias}>{alias}</span>
               ))}
             </p>
           ) : null}
@@ -176,6 +177,8 @@ export default function AzhwarDetailPage() {
             </span>
           </div>
         </div>
+        {/* Short hero values — the complete birthplace narrative and district
+            render in the Life & tradition panel below. */}
         <div className="azd-facts">
           {azhwar.birthplace ? (
             <div>
@@ -183,10 +186,9 @@ export default function AzhwarDetailPage() {
                 <MapPin className="h-4 w-4" aria-hidden="true" />
                 Birthplace
               </p>
-              <p className="azd-birth-value">{azhwar.birthplace.name}</p>
-              {azhwar.birthplace.district ? (
-                <p className="note">{azhwar.birthplace.district}</p>
-              ) : null}
+              <p className="azd-birth-value">
+                {typeof azhwar.birthplace.name === 'string' ? azhwar.birthplace.name.split(' — ')[0] : '—'}
+              </p>
             </div>
           ) : null}
           {azhwar.birthStar ? (
@@ -247,79 +249,124 @@ export default function AzhwarDetailPage() {
         className="panel"
       >
         {tab === 'life' ? (
-          <div className="article-grid">
-            <article>
-              <p className="eyebrow">Life &amp; tradition</p>
-              {firstBlock ? (
-                <div className="story">
-                  <h2 className="azd-display">{firstBlock.heading}</h2>
-                  {firstBlock.paragraphs.map((p) => (
-                    <p key={p.slice(0, 32)}>{p}</p>
-                  ))}
+          <div>
+            <div className="article-grid">
+              <article>
+                <p className="eyebrow">Life &amp; tradition</p>
+                {firstBlock ? (
+                  <div className="story">
+                    <h2>{firstBlock.heading}</h2>
+                    {/* Concise summary: the block's opening paragraph; the rest
+                        of the story sits behind the expander below. */}
+                    <p>{firstBlock.paragraphs[0]}</p>
+                  </div>
+                ) : (
+                  <NotDocumented />
+                )}
+
+                {azhwar.birthplace?.name ? (
+                  <p className="note azd-birth-note">
+                    <span className="eyebrow">Birthplace · </span>
+                    {azhwar.birthplace.name}
+                    {azhwar.birthplace.district ? <> · {azhwar.birthplace.district}</> : null}
+                  </p>
+                ) : null}
+
+                {(() => {
+                  const hasMoreStory = restBlocks.length > 0
+                    || (firstBlock?.paragraphs.length ?? 0) > 1
+                    || Boolean(azhwar.legend);
+                  return hasMoreStory ? (
+                    <button
+                      type="button"
+                      onClick={() => setStoryExpanded((v) => !v)}
+                      aria-expanded={storyExpanded}
+                      className="btn primary azd-story-toggle"
+                    >
+                      {storyExpanded ? 'Show less' : 'Read the complete life story'}
+                      <ArrowRight className={`h-4 w-4${storyExpanded ? ' rotate-90' : ''}`} aria-hidden="true" />
+                    </button>
+                  ) : null;
+                })()}
+
+                {storyExpanded ? (
+                  <div className="azd-story-more">
+                    {firstBlock ? (
+                      <div className="story">
+                        {firstBlock.paragraphs.slice(1).map((p) => (
+                          <p key={p.slice(0, 32)}>{p}</p>
+                        ))}
+                      </div>
+                    ) : null}
+                    {restBlocks.map((block) => (
+                      <div key={block.heading} className="story">
+                        <h3>{block.heading}</h3>
+                        {block.paragraphs.map((p) => (
+                          <p key={p.slice(0, 32)}>{p}</p>
+                        ))}
+                      </div>
+                    ))}
+                    <SaintLegend legend={azhwar.legend} />
+                  </div>
+                ) : null}
+
+                {(azhwar.bhaktiBhava || azhwar.preservation) ? (
+                  <div className="azd-callouts">
+                    {azhwar.bhaktiBhava ? (
+                      <div className="azd-callout">
+                        <p className="eyebrow">
+                          <SaintGlyph kind="bhakti" /> Role &amp; bhakti bhava
+                        </p>
+                        <p className="note">{azhwar.bhaktiBhava}</p>
+                      </div>
+                    ) : null}
+                    {azhwar.preservation ? (
+                      <div className="azd-callout">
+                        <p className="eyebrow">
+                          <SaintGlyph kind="preservation" /> Sampradaya preservation
+                        </p>
+                        <p className="note">{azhwar.preservation}</p>
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
+
+                {azhwar.era || azhwar.period ? (
+                  <p className="note azd-era">
+                    <span className="eyebrow">Era · </span>
+                    {azhwar.period}
+                    {azhwar.era?.academic ? <> (academic: {azhwar.era.academic})</> : null}
+                    {azhwar.era?.contemporaries ? <> · contemporary with the {azhwar.era.contemporaries}</> : null}
+                  </p>
+                ) : null}
+              </article>
+              <aside>
+                <SaintKeyMoments timeline={azhwar.timeline} />
+              </aside>
+            </div>
+
+            {/* The lamp-of-knowledge band renders on the Life tab only */}
+            {verse?.tamil ? (
+              <section aria-label="The lamp of knowledge" className="visit-card azd-verseband">
+                <div className="azd-lamp" aria-hidden="true">
+                  <LotusIcon className="h-10 w-10" />
                 </div>
-              ) : (
-                <NotDocumented />
-              )}
-
-              {restBlocks.length > 0 ? (
-                <button
-                  type="button"
-                  onClick={() => setStoryExpanded((v) => !v)}
-                  aria-expanded={storyExpanded}
-                  className="btn primary azd-story-toggle"
-                >
-                  {storyExpanded ? 'Show less' : 'Read the complete life story'}
-                  <ArrowRight className={`h-4 w-4${storyExpanded ? ' rotate-90' : ''}`} aria-hidden="true" />
-                </button>
-              ) : null}
-
-              {restBlocks.length > 0 && storyExpanded ? (
-                <div className="azd-story-more">
-                  {restBlocks.map((block) => (
-                    <div key={block.heading} className="story">
-                      <h3>{block.heading}</h3>
-                      {block.paragraphs.map((p) => (
-                        <p key={p.slice(0, 32)}>{p}</p>
-                      ))}
-                    </div>
-                  ))}
-                  <SaintLegend legend={azhwar.legend} />
+                <div className="min-w-0">
+                  <p className="eyebrow">The lamp of knowledge</p>
+                  <p className="tamil azd-band-tamil" lang="ta">{verse.tamil}</p>
+                  {verse.work ? <p className="note">{verse.work}</p> : null}
                 </div>
-              ) : null}
-
-              {(azhwar.bhaktiBhava || azhwar.preservation) ? (
-                <div className="azd-callouts">
-                  {azhwar.bhaktiBhava ? (
-                    <div className="azd-callout">
-                      <p className="eyebrow">
-                        <SaintGlyph kind="bhakti" /> Role &amp; bhakti bhava
-                      </p>
-                      <p className="note">{azhwar.bhaktiBhava}</p>
-                    </div>
+                <div className="azd-verseband-side">
+                  {verse.significance ? (
+                    <p className="azd-band-meaning">{verse.significance}</p>
                   ) : null}
-                  {azhwar.preservation ? (
-                    <div className="azd-callout">
-                      <p className="eyebrow">
-                        <SaintGlyph kind="preservation" /> Sampradaya preservation
-                      </p>
-                      <p className="note">{azhwar.preservation}</p>
-                    </div>
-                  ) : null}
+                  <button type="button" onClick={() => activateTab('hymns')} className="azd-band-link">
+                    Explore hymn &amp; meaning
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </button>
                 </div>
-              ) : null}
-
-              {azhwar.era || azhwar.period ? (
-                <p className="note azd-era">
-                  <span className="eyebrow">Era · </span>
-                  {azhwar.period}
-                  {azhwar.era?.academic ? <> (academic: {azhwar.era.academic})</> : null}
-                  {azhwar.era?.contemporaries ? <> · contemporary with the {azhwar.era.contemporaries}</> : null}
-                </p>
-              ) : null}
-            </article>
-            <aside>
-              <SaintKeyMoments timeline={azhwar.timeline} />
-            </aside>
+              </section>
+            ) : null}
           </div>
         ) : null}
 
@@ -347,7 +394,7 @@ export default function AzhwarDetailPage() {
 
         {tab === 'places' ? (
           <div>
-            <h2 className="azd-display">Divya Desams in his hymns</h2>
+            <h2>Divya Desams in his hymns</h2>
             <p className="azd-sub">
               {desams.length} sacred places glorified by {azhwar.name}.
             </p>
@@ -423,7 +470,7 @@ export default function AzhwarDetailPage() {
         {tab === 'sources' ? (
           <div className="azd-sources-grid">
             <div>
-              <h2 className="azd-display">Sources &amp; further reading</h2>
+              <h2>Sources &amp; further reading</h2>
               <p className="azd-sub">Explore the repositories referenced in this archive.</p>
               <SaintSources sources={azhwar.sources} fallback={<NotDocumented />} />
             </div>
@@ -433,44 +480,27 @@ export default function AzhwarDetailPage() {
                 Reading this archive
               </p>
               <p>
-                The traditional narratives of the Azhwars, found in Guru Parampara,
-                Sthala Puranas and Sri Vaishnava sampradaya sources, and modern
-                academic chronologies should be distinguished.
+                The Azhwars' story comes from traditional narratives and modern
+                academic chronologies — this list offers further reading, not
+                verified passage-level citations.
               </p>
-              <p>
-                This source list provides further reading and helpful repositories
-                for exploring the life, works and context of {azhwar.name}. They are
-                not verified passage-level citations for the content on this site.
-              </p>
+              <details className="azd-reading-more">
+                <summary>Read the full guidance</summary>
+                <p>
+                  The traditional narratives of the Azhwars, found in Guru Parampara,
+                  Sthala Puranas and Sri Vaishnava sampradaya sources, and modern
+                  academic chronologies should be distinguished. This source list
+                  provides further reading and helpful repositories for exploring the
+                  life, works and context of {azhwar.name}. They are not verified
+                  passage-level citations for the content on this site.
+                </p>
+              </details>
             </aside>
           </div>
         ) : null}
       </div>
 
-      {/* Opening-verse band — "The lamp of knowledge" (persistent) */}
-      {verse?.tamil ? (
-        <section aria-label="The lamp of knowledge" className="visit-card azd-verseband">
-          <div className="azd-lamp" aria-hidden="true">
-            <LotusIcon className="h-10 w-10" />
-          </div>
-          <div className="min-w-0">
-            <p className="eyebrow">The lamp of knowledge</p>
-            <p className="tamil azd-band-tamil" lang="ta">{verse.tamil}</p>
-            {verse.work ? <p className="note">{verse.work}</p> : null}
-          </div>
-          <div className="azd-verseband-side">
-            {verse.significance ? (
-              <p className="azd-band-meaning">{verse.significance}</p>
-            ) : null}
-            <button type="button" onClick={() => activateTab('hymns')} className="azd-band-link">
-              Explore hymn &amp; meaning
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </button>
-          </div>
-        </section>
-      ) : null}
-
-      {/* Bottom chronological navigation */}
+      {/* Bottom chronological navigation (after every panel) */}
       <nav className="explore azd-nav" aria-label="Chronological navigation">
         {prev
           ? (
