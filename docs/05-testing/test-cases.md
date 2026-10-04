@@ -485,3 +485,28 @@ Pass · CMS round-trip 0-diff · E2E **19/19** · Visual gate **9/9**
 from live). Execution recorded in TER v2.34.
 
 *End of Addendum — TCS-108K-008 v1.20*
+## Version 1.21 — Map "Option 3" Rebuild (2026-10-04)
+
+PO round-26 rebuild of `/map` as a full-width map with floating filters
+and a results dock (TER v2.35). All planning state logic preserved; one
+site-copy pair changed (`trip.emptyTitle` → "Your yatra starts here",
+`trip.emptyMessage` → guru-focused chooser line, mirrored in fixture).
+Contract moves:
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-MAP-01..03 | Layout | Title strip (Cormorant "Plan your Yatra" + results summary + "My trip — N stops" opener); full-width map with floating upper-left filter panel, desktop upper-right Fit results / My location, lower-left zoom control, lower-right marker legend (hidden < sm); horizontal results dock (3 across, overflow-x scroll) with Tamil-above-English cards, photo-unavailable fallback, region pills, action tiers, selected-card gold outline |
+| UT-MAP-01 | Filters | Reset filters appears only while a filter is active; empty-results copy verbatim from the brief with its own Reset button; mobile List view keeps filters above stacked cards |
+| UT-TRP-02/03 | Planner | Opener renamed "My trip"; dialog mechanics unchanged; new empty-state copy ("Your yatra starts here" / "Explore temples" action) asserted |
+| UT-MAP-01 | New case | Narrow screens: map controls render inside the filter panel (matchMedia-gated; jsdom defaults desktop) |
+| TC-14/15 | E2E | Pass unchanged in flow — control name updates only (My trip opener) |
+
+Quality gates: TC-QA-01 Pass (0 errors; 5 warnings) · TC-QA-02 Pass
+(**236/236 tests, 23 suites**; 90.26/81.47/85.86/91.71) · TC-QA-03 Pass
+· CMS round-trip 0-diff · E2E **19/19** · Visual gate **9/9**
+(4 widths + zoom200 + selected card + empty results + dialog +
+mobile-list; selected-marker screenshot withdrawn as unverifiable —
+gotcha 37 — with TC-14 as the interactive proof). Execution recorded in
+TER v2.35.
+
+*End of Addendum — TCS-108K-008 v1.21*

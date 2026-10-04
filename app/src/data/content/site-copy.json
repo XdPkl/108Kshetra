@@ -40,8 +40,8 @@
   },
   "trip": {
     "title": "My Yatra — Trip Planner",
-    "emptyTitle": "Your trip is empty",
-    "emptyMessage": "Add desams from any kshetram page, card or map popup to start planning your yatra."
+    "emptyTitle": "Your yatra starts here",
+    "emptyMessage": "Choose a temple on the map or in the list, then select 'Add to trip'."
   },
   "azhwarsPage": {
     "eyebrow": "Saint-Poet Gallery",

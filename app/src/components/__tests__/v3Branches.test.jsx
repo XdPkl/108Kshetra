@@ -240,7 +240,7 @@ describe('MapPage extras (round-23 workspace)', () => {
       configurable: true,
     });
     renderAt('/map', <MapPage />);
-    await user.click(screen.getByRole('button', { name: /show my location/i }));
+    await user.click(screen.getByRole('button', { name: /^my location$/i }));
     // Round 23: distances fill in on the result rows once GPS is shared
     expect((await screen.findAllByText(/km away/i)).length).toBeGreaterThan(0);
     expect(screen.getByRole('region', { name: /temples in view/i })).toBeInTheDocument();
@@ -251,7 +251,6 @@ describe('MapPage extras (round-23 workspace)', () => {
     expect(screen.getByText(/\d+ results/i)).toBeInTheDocument();
     // selecting a result focuses its marker (safe no-op without a live map)
     await user.click(screen.getAllByRole('button', { name: /focus .* on the map/i })[0]);
-    await user.click(screen.getAllByRole('button', { name: /focus on map/i })[0]);
     await user.click(screen.getByRole('button', { name: /clear my location/i }));
     // the result list always lists temples — clearing the GPS only removes
     // the distance lines, never the rows

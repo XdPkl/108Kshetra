@@ -48,7 +48,7 @@ const metaMatching = (pattern) => (content, el) =>
 /** PO round 10: the trip planner lives in a modal opened by the big
  * left-column button ("My Yatra — Trip Planner"). */
 const openPlanner = async (user) => {
-  await user.click(screen.getByRole('button', { name: /trip planner/i }));
+  await user.click(screen.getByRole('button', { name: /my trip/i }));
   return screen.getByRole('dialog', { name: /my yatra/i });
 };
 
@@ -57,8 +57,8 @@ describe('Trip planner on the merged Yatra Atlas (UT-TRP-02/03, FR-80/81)', () =
     const user = userEvent.setup();
     renderAt('/map', <MapPage />);
     const dialog = await openPlanner(user);
-    expect(within(dialog).getByText(/your trip is empty/i)).toBeInTheDocument();
-    expect(within(dialog).getByRole('link', { name: /browse desams/i })).toHaveAttribute('href', '/kshetrams');
+    expect(within(dialog).getByText(/your yatra starts here/i)).toBeInTheDocument();
+    expect(within(dialog).getByRole('link', { name: /explore temples/i })).toHaveAttribute('href', '/kshetrams');
     // the "Open map" escape hatch is gone — the atlas IS the map now
     expect(screen.queryByText(/open map/i)).not.toBeInTheDocument();
     // Escape closes the modal
@@ -77,7 +77,7 @@ describe('Trip planner on the merged Yatra Atlas (UT-TRP-02/03, FR-80/81)', () =
     await user.click(within(dialog).getAllByRole('button', { name: /remove/i })[0]);
     expect(within(dialog).getByText(metaMatching(/1 stop ·/))).toBeInTheDocument();
     // removing inside the modal also updates the opener badge on the page
-    expect(screen.getByRole('button', { name: /trip planner — 1 stop/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /My trip — 1 stop/i })).toBeInTheDocument();
   });
 
   it('orders the route nearest-first and clears after confirmation', async () => {
@@ -91,7 +91,7 @@ describe('Trip planner on the merged Yatra Atlas (UT-TRP-02/03, FR-80/81)', () =
     expect(within(dialog).getByText(/nearest-first/i)).toBeInTheDocument();
     const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(true);
     await user.click(within(dialog).getByRole('button', { name: /^clear$/i }));
-    expect(await within(dialog).findByText(/your trip is empty/i)).toBeInTheDocument();
+    expect(await within(dialog).findByText(/your yatra starts here/i)).toBeInTheDocument();
     confirmSpy.mockRestore();
   });
 
@@ -99,10 +99,10 @@ describe('Trip planner on the merged Yatra Atlas (UT-TRP-02/03, FR-80/81)', () =
     const user = userEvent.setup();
     renderAt('/map', <MapPage />);
     // the opener badge counts 0 stops on a fresh atlas
-    expect(screen.getByRole('button', { name: /trip planner — 0 stops/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /My trip — 0 stops/i })).toBeInTheDocument();
     // add a temple from a matrix card on the page…
     await user.click(screen.getAllByRole('button', { name: /add to trip/i })[0]);
-    expect(screen.getByRole('button', { name: /trip planner — 1 stop/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /My trip — 1 stop/i })).toBeInTheDocument();
     // …and the modal shows it without any reload
     const dialog = await openPlanner(user);
     expect(within(dialog).getByText(metaMatching(/1 stop ·/))).toBeInTheDocument();
@@ -197,7 +197,7 @@ describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
   it('handles missing geolocation gracefully (FR-78)', async () => {
     const user = userEvent.setup();
     renderAt('/map', <MapPage />);
-    await user.click(screen.getByRole('button', { name: /show my location/i }));
+    await user.click(screen.getByRole('button', { name: /^my location$/i }));
     expect(screen.getByText(/location is not supported/i)).toBeInTheDocument();
   });
 
@@ -214,7 +214,7 @@ describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
       value: { getCurrentPosition: (ok) => ok({ coords: { latitude: 10.8624, longitude: 78.6901 } }) },
       configurable: true,
     });
-    await user.click(screen.getByRole('button', { name: /show my location/i }));
+    await user.click(screen.getByRole('button', { name: /^my location$/i }));
     // Same matrix now carries the straight-line distances, nearest first
     expect((await within(matrix).findAllByText(/km away/)).length).toBeGreaterThan(100);
     delete navigator.geolocation;
@@ -233,35 +233,49 @@ describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
 
 
 describe('MapPage workspace (round-23)', () => {
-  it('toggles the mobile Map/List switch and the Filters disclosure', async () => {
+  it('toggles the mobile Map/List switch; List view shows filters above stacked results', async () => {
     const user = userEvent.setup();
     renderAt('/map', <MapPage />);
     const mapBtn = screen.getByRole('button', { name: 'Map' });
     const listBtn = screen.getByRole('button', { name: 'List' });
     expect(mapBtn).toHaveAttribute('aria-pressed', 'true');
     expect(listBtn).toHaveAttribute('aria-pressed', 'false');
+    // the floating filter panel is present in map view
+    expect(screen.getByLabelText(/search kshetrams/i)).toBeInTheDocument();
     await user.click(listBtn);
     expect(listBtn).toHaveAttribute('aria-pressed', 'true');
     expect(mapBtn).toHaveAttribute('aria-pressed', 'false');
-    const filtersBtn = screen.getByRole('button', { name: 'Filters' });
-    expect(filtersBtn).toHaveAttribute('aria-expanded', 'false');
-    await user.click(filtersBtn);
-    expect(filtersBtn).toHaveAttribute('aria-expanded', 'true');
-    // the scope pills live in the disclosure and remain queryable
+    // List view keeps the search and filters available above the results
+    expect(screen.getByLabelText(/search kshetrams/i)).toBeInTheDocument();
     expect(screen.getByRole('group', { name: /showing/i })).toBeInTheDocument();
   });
 
-  it('distinguishes Reset filters from Fit results and restores all temples', async () => {
+  it('keeps the map controls inside the filter panel on narrow screens', () => {
+    // matchMedia is unavailable in jsdom (desktop default); simulate mobile
+    window.matchMedia = (q) => ({ matches: false, media: q, addEventListener() {}, removeEventListener() {} });
+    try {
+      renderAt('/map', <MapPage />);
+      expect(screen.getByRole('button', { name: /^my location$/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /fit results/i })).toBeInTheDocument();
+      expect(document.querySelector('.absolute.right-3.top-3')).toBeNull();
+    } finally {
+      delete window.matchMedia;
+    }
+  });
+
+  it('shows Reset filters only while a filter is active and restores all temples', async () => {
     const user = userEvent.setup();
     renderAt('/map', <MapPage />);
     expect(screen.getByRole('button', { name: /fit results/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /reset filters/i })).toBeInTheDocument();
+    // nothing active yet — the reset action is hidden
+    expect(screen.queryByRole('button', { name: /reset filters/i })).not.toBeInTheDocument();
     await user.type(screen.getByLabelText(/search kshetrams/i), 'kanchipuram');
     const narrowed = screen.getAllByTestId('map-marker').length;
     expect(narrowed).toBeLessThan(106);
     await user.click(screen.getByRole('button', { name: /reset filters/i }));
     expect(screen.getAllByTestId('map-marker').length).toBe(106);
     expect(screen.getByLabelText(/search kshetrams/i)).toHaveValue('');
+    expect(screen.queryByRole('button', { name: /reset filters/i })).not.toBeInTheDocument();
   });
 
   it('synchronizes a selected result with its marker highlight', async () => {

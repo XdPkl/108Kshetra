@@ -86,7 +86,7 @@ test.describe('V3 yatra toolkit', () => {
     // PO round 10: the trip planner lives in a modal opened by the big
     // left-column button
     const dialog = page.getByRole('dialog', { name: /my yatra/i });
-    await page.getByRole('button', { name: /trip planner/i }).click();
+    await page.getByRole('button', { name: /my trip/i }).click();
     await expect(dialog).toBeVisible();
     await expect(dialog.getByText(/3 stops/i)).toBeVisible();
     await dialog.getByRole('button', { name: 'Close' }).click();
@@ -97,7 +97,7 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page.locator('.leaflet-interactive')).toHaveCount(4); // 3 markers + 1 polyline
 
     // Route order + share run inside the reopened planner modal
-    await page.getByRole('button', { name: /trip planner/i }).click();
+    await page.getByRole('button', { name: /my trip/i }).click();
     await dialog.getByRole('button', { name: /order my route/i }).click();
     await expect(dialog.getByText(/nearest-first/i)).toBeVisible();
 

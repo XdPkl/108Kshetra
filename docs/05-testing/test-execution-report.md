@@ -2433,3 +2433,95 @@ round (`sync-content --fixture --check` 0-diff).
 | E2E (Playwright, Chromium) | **19/19 pass** — TC-19 unchanged (pill substring names still match; #later-acharyas click → URL fragment + heading in viewport) |
 | Measured | 0px horizontal overflow at 375/768/1280/1440 and the 200%-zoom proxy (640 CSS px, DPR 2) |
 | Visual gate | **9/9 pass** — after ×4 widths + zoom200 + era-pill-active + era-anchor-scroll (heading at y≈120px below the 64px header) + card-hover + keyboard-focus, with before ×2 from the live round-22 bundle — `docs/03-design/gate-shots/acharyas-restyle-25/{before,after}/` |
+## Version 2.35 — Map Page "Option 3" Rebuild (2026-10-04, round 26)
+
+PO request: rebuild /map as a **full-width interactive map with floating
+filters and a horizontal temple-results dock below** ("selected option 3"
+mockup — not found on disk; the written brief + live /kshetrams served as
+the binding reference, as in rounds 24/25; flagged). All state logic
+(search/region/scope/geo/clusters/`?t=` share/planner) is preserved
+verbatim from rounds 10/23; the presentation layer was rebuilt. One
+site-copy pair changed (trip empty-state copy).
+
+### What changed
+
+- **Title strip** (replaces the left-pane header): saffron eyebrow, the
+  /kshetrams h1 idiom (Cormorant 44/48px `#5C1F00` "Plan your Yatra"),
+  the results summary + gold-ring note (`aria-live`), the progressScope
+  sentence, and the mobile-only Map/List switch. The opener is renamed
+  **"My trip"** (gold button, stop-count badge, `aria-label "My trip — N
+  stops"`; the old "Trip planner — N stops" name is retired).
+- **Full-width map** (`h-440/540/620` rounded frame, kshetrams border
+  token): the search/region/scope panel **floats over the upper-left
+  corner** (white/95 + backdrop blur + shadow); **"Fit results" and "My
+  location"** sit in the upper-right on desktop; Leaflet's zoom control
+  moved to the **lower-left** (`zoomControl={false}` + `L.control.zoom({
+  position: 'bottomleft' })`) so it never sits under the panel; the
+  **marker legend** (Temple / Visited / In trip / Cluster) moved to the
+  lower-right above the OSM attribution. `fitBounds` padding clears the
+  floating panel (`paddingTopLeft [340, 24]`).
+- **Narrow screens**: the corner controls collide with the full-width
+  panel, so below `lg` the same buttons render inside the panel (a
+  right-aligned row under a hairline) via a `matchMedia('(min-width:
+  1024px)')` gate (jsdom has no matchMedia → desktop default keeps the
+  old tests valid; one instance per breakpoint). The marker legend is
+  hidden below `sm` — the tall panel leaves no quiet corner, and
+  tooltips already label every marker state.
+- **Results dock** (replaces the tall sidebar): "Temples in view" serif
+  heading + "N results" count, then a horizontal row — **three cards
+  visible on desktop, `overflow-x-auto` for the rest**; full-width
+  stacked cards in the mobile List view (filters stay available above
+  them). Dock cards (MapResultCard): photo band with the gopuram +
+  "Photo unavailable" fallback, **Tamil name above the English name**,
+  temple name, place · state, region pill, distances after location
+  share, and the action tiers — TripControls ("Add to trip"/"✓ In
+  trip"), "View temple" link, "Mark as visited"/"✓ Visited" (`aria-
+  pressed`). Clicking a card's name selects + focuses the marker
+  (`aria-label "Focus {name} on the map"`); actions act only on
+  themselves. Selected card: full-gold border + ring; hover = border +
+  shadow only (the dock clips vertical overflow, so no card lift).
+  300ms transitions; `motion-reduce` guarded; global focus rings apply.
+- **Empty results** (brief copy verbatim): "No temples match these
+  filters." / "Try another name or reset your filters." + Reset button;
+  "Reset filters" in the panel now appears **only when a filter is
+  active**.
+- **Trip planner dialog**: unchanged mechanics (region/route views,
+  order-nearest-first, share/print/clear, `?t=` auto-open, focus
+  containment/Escape/focus return). Empty-state copy changed via
+  site-copy: **"Your yatra starts here"** / "Choose a temple on the map
+  or in the list, then select 'Add to trip'." / **"Explore temples"**
+  action (site-copy.json + fixture in lockstep; schema fields
+  unchanged; round-trip 0-diff).
+- Unchanged: markers (region colors, gold-ring visited, in-trip flags,
+  selected `stroke-width 4`), clusters below zoom 9, tooltips/popups,
+  tile-error notice, RegionLegend card below the dock, `/trip` redirect,
+  lazy chunk.
+
+### Flags for PO review
+
+- Mockup not found on disk — built from the brief + live reference.
+- The selected-marker-in-screenshot could not be visually verified: this
+  build's Leaflet `flyTo` leaves the rendered pane stale in headless
+  screenshots (gotcha 37), so the companion shot was withdrawn; the
+  result→marker sync is verified interactively by TC-14 (highlighted
+  marker hover/tooltip/popup) and by a unit assertion on the outlined
+  card. Resizable-desktop edge: a user who toggles mobile List view then
+  widens past `lg` sees the map without the floating panel until they
+  tap Map (the switch is mobile-only) — accepted, flagged.
+- The first visual pass caught a real mobile collision (corner controls
+  vs full-width panel) — fixed with the in-panel controls row; a second
+  pass caught the legend overlapping the panel — fixed by hiding the
+  legend below `sm`.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (below the 6 baseline — two stale advisories disappeared with the rewrite) |
+| Unit tests (Vitest) | **236/236 pass (23 suites)** — planner tests renamed to "My trip — N stops"; new empty-state copy asserted; Map/List test rewritten (Filters disclosure retired); Reset-filters-conditional test; narrow-screen controls-in-panel test |
+| Coverage | **90.26% statements / 81.47% branches / 85.86% functions / 91.71% lines** (gate 80%) |
+| Production build | Clean |
+| CMS round-trip | `sync-content --fixture --check` 0-diff (trip empty-state copy mirrored) |
+| E2E (Playwright, Chromium) | **19/19 pass** — TC-14 (zoom → focus → highlighted marker → tooltip → popup → region filter) and TC-15 (My trip → dialog → In-trip scope → order → share) pass against the new layout |
+| Measured | 0px horizontal overflow at 375/768/1280/1440, the 200%-zoom proxy, and mobile List view |
+| Visual gate | **9/9 pass** — map-375/768/1280/1440 + zoom200 + selected-card outline + empty-results + planner dialog + mobile-list (before ×2 from the live round-23 bundle); the selected-marker screenshot was withdrawn as unverifiable (gotcha 37) with TC-14 as the interactive proof — `docs/03-design/gate-shots/map-option3-26/{before,after}/` |
