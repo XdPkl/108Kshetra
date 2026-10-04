@@ -537,3 +537,246 @@ With this sync every story documented in this file through **US-CMS-01 / TER v2.
 delivered 2026-09-26 → 2026-10-01 (TER v2.16 – v2.19, TCS v1.9) are presentation-layer
 iterations within the delivered EP-YMAP / EP-YTRP / EP-AZW2 journeys and are **not yet
 authored as user stories** — to be written up and synced on PO request.
+## Version 2.1 — PO Refinement Iterations Backlog (2026-10-04)
+
+Every delivered-but-unregistered PO iteration from the zip-parity rollout
+(TER v2.0, 2026-09-24) through the cluster-distance slider (TER v2.37,
+2026-10-04) is now authored as a story, grouped under one epic. This
+supersedes the v2.0 sync record's closing note that the round work was
+"not yet authored as user stories". All seventeen stories are **delivered
+and verified** (each cites its TER/TCS version); on sync they are to be
+transitioned **Done** at creation per the established convention.
+Round-to-story mapping follows the TER version headings (the PO's own
+round numbers are approximate for the September fix-list era; the TER
+versions are the traceable record).
+
+### Epic
+
+**EP-PO-ITER — PO Refinement Iterations** (Goal: trace the 2026-09/10
+product-owner iteration stream — fix lists, page restyles to PO mockups,
+the Yatra Atlas rebuild and the results-matrix/cluster-slider round — as
+shippable, verifiable stories).
+
+---
+
+**US-PO-01 — v3.0 Zip-Parity Look-and-Feel Rollout** (13 pts, Priority 1) — *FR-19..30, FR-40/41, FR-60..87*
+> As the Product Owner, I want the whole site rebuilt to the approved
+> v3.0 "zip parity" mockups, so the app matches the static design demos
+> section by section.
+
+- **Given** the 11 approval gates (global shell → Home → Browse → Kshetram
+  detail → Azhwars index → Azhwar detail → Acharyas index → Acharya
+  detail → Map), **when** each lands, **then** the page matches the zip
+  mock's layout with all datasets, URL/localStorage contracts and tests
+  preserved (188 unit / 19 e2e at the final gate).
+- Orphaned legacy CSS retired gate by gate (54 + 39 + 9 rules among
+  others); Tailwind v4 token layer (`zip.css`) introduced.
+- Delivered as TER v2.0 / TCS v1.6 (2026-09-24).
+
+**US-PO-02 — PO Fix Lists 1–4 + container & split-pill fixes** (5 pts, Priority 1) — *cross-cutting UI defects*
+> As the Product Owner, I want my post-rollout defect lists cleared, so
+> the live site matches the approved visuals exactly.
+
+- Four PO fix-list rounds plus the responsive-container and split-pill
+  single-line fixes: nav pill contrast, gradient retirements, container
+  widths, split pills on one line (TER v2.2–v2.8, 2026-09-27).
+- Every fix verified against the live bundle before sign-off.
+- Delivered as TER v2.2–v2.8 / TCS v1.6.
+
+**US-PO-03 — Home page design refresh + Featured Kshetrams restyle** (5 pts, Priority 1) — *FR-19*
+> As the Product Owner, I want the home page refreshed to my sketch and
+> the featured-temple cards restyled, so the landing view carries the
+> refreshed identity.
+
+- Hero refresh, tracker treatment and the featured-card restyle with
+  corner toggles and DD serial tags (TER v2.9–v2.10, 2026-09-27/30).
+- Delivered as TER v2.9–v2.10 / TCS v1.6.
+
+**US-PO-04 — Explore page restyle + gopuram watermark** (3 pts, Priority 2) — *FR-20..25*
+> As the Product Owner, I want the Explore (Kshetrams) page restyled with
+> the gopuram illustration watermarked into the header, so browse matches
+> the refreshed home.
+
+- Display header, filter panel and card grid restyle; two PO follow-ups
+  integrate the illustration as a right-half watermark (TER v2.11–v2.13,
+  2026-09-30).
+- Delivered as TER v2.11–v2.13 / TCS v1.8.
+
+**US-PO-05 — The Yatra Atlas: Map+Trip merge, matrix, planner modal** (8 pts, Priority 1) — *FR-76..81*
+> As a pilgrim, I want one Plan-Yatra workspace — map, filters, results
+> and my trip — so I can plan without bouncing between pages.
+
+- Map refresh; Map+Trip merged into `/map`; result matrix + merged nav;
+  left-column arrangement; trip planner moved into a modal (TER
+  v2.14–v2.18, 2026-09-30). `/trip` redirects; `?t=` share links keep
+  working.
+- Delivered as TER v2.14–v2.18 / TCS v1.9.
+
+**US-PO-06 — Azhwar detail + Azhwars index to the PO snaps** (5 pts, Priority 1) — *FR-90..92*
+> As the Product Owner, I want the Azhwar pages recreated to my snap
+> mockups, so the saint journeys match the approved design.
+
+- Detail restyle to the PO snap; front page recreated to the snap
+  (TER v2.19–v2.20, 2026-09-30/10-01).
+- Delivered as TER v2.19–v2.20 / TCS v1.9.
+
+**US-PO-07 — Acharyas index + detail to the PO snaps** (5 pts, Priority 1) — *FR-93/94*
+> As the Product Owner, I want the Acharya journeys recreated to my snap
+> mockups, so the parampara matches the approved design.
+
+- Index and detail recreated per the PO snaps with pending markers for
+  scaffold dossiers (TER v2.21–v2.22, 2026-10-01).
+- Delivered as TER v2.21–v2.22 / TCS v1.10.
+
+**US-PO-08 — Kshetram detail mock restyles + UX-audit compaction** (5 pts, Priority 1) — *FR-50..59*
+> As the Product Owner, I want the Kshetram detail page recreated to my
+> mock, then compacted per the UX audit, so the flagship template reads
+> calmly at full content depth.
+
+- PO-mock recreation, triplicane restyle, then the UX-audit compaction +
+  calm header (TER v2.23–v2.25, 2026-10-01).
+- Delivered as TER v2.23–v2.25 / TCS v1.11.
+
+**US-PO-09 — Saint detail kxd theme + Poigai recreation + consistency runs** (8 pts, Priority 1) — *FR-90..92*
+> As the Product Owner, I want the Azhwar detail journey refined across
+> my follow-up mockups — shared kxd theme, the Poigai recreation, the
+> Srirangam consistency pass and the Philosophy-&-legacy alignment — so
+> the saint dossiers reach the approved standard.
+
+- Shared kxd dossier theme extracted; Poigai mock recreation; Srirangam
+  consistency pass; "Philosophy & legacy" alignment (TER v2.26–v2.29,
+  2026-10-01 — PO rounds 18–21).
+- Delivered as TER v2.26–v2.29 / TCS v1.15.
+
+**US-PO-10 — Acharyas directory consistency restyle** (3 pts, Priority 2) — *FR-93*
+> As the Product Owner, I want the /acharyas directory restyled for
+> consistency with the shared directory theme, so the rosters read as one
+> family.
+
+- `.dir` directory theme + shared directory components; 27 standardized
+  entries; /azhwars coordinated (TER v2.30, 2026-10-02 — round 22).
+- Delivered as TER v2.30 / TCS v1.16.
+
+**US-PO-11 — Home/Map/About coordinated restyle on the shared control language** (8 pts, Priority 1) — *FR-19, FR-76..81, FR-87*
+> As the Product Owner, I want home, map and about restyled as one
+> coordinated update with the shared maroon/gold control language, so the
+> trio matches the kshetram-detail standard.
+
+- `ui.css` control language + shared ui components (Button/Dialog/fields/
+  SectionHeading/ContactDetails); hero overlay; map pane+map workspace
+  with result→marker selection; editorial About with inquiry dialog;
+  108/106 progressScope sentence site-wide (TER v2.31, 2026-10-02 —
+  round 23).
+- Delivered as TER v2.31 / TCS v1.17.
+
+**US-PO-12 — Repo dead-code cleanup (audit round)** (2 pts, Priority 3) — *maintainability*
+> As the developer, I want the audit-identified dead code removed, so the
+> codebase carries no test-only fossils or finished one-off scripts.
+
+- 7 test-only components + 2 finished scripts deleted (645 lines); 14
+  dead-code tests retired; FR supersessions recorded (TER v2.32,
+  2026-10-03).
+- Delivered as TER v2.32 / TCS v1.18.
+
+**US-PO-13 — Azhwars page restyled to the Kshetrams system** (5 pts, Priority 1) — *FR-40/41*
+> As the Product Owner, I want /azhwars to match my refined mockup using
+> the kshetrams design system, so the gallery reads like the rest of the
+> refreshed site.
+
+- Browse-style intro, kshetrams grid, KshetramCard interaction rules,
+  object-contain portraits, ordinals removed, zero-desams note for
+  Madhurakavi via site-copy (TER v2.33, 2026-10-03 — round 24).
+- Delivered as TER v2.33 / TCS v1.19.
+
+**US-PO-14 — Acharyas page restyled to the Kshetrams system** (5 pts, Priority 1) — *FR-93*
+> As the Product Owner, I want /acharyas restyled onto the kshetrams
+> design system per my refined mockup, so both rosters share the refreshed
+> language.
+
+- Compact intro, era anchor pills with dataset counts + gold selected
+  state (aria-current + IntersectionObserver scroll-spy), horizontal
+  profile cards with Period/Guru dl rows (TER v2.34, 2026-10-03 —
+  round 25).
+- Delivered as TER v2.34 / TCS v1.20.
+
+**US-PO-15 — Map page rebuilt to "option 3"** (8 pts, Priority 1) — *FR-76..81*
+> As the Product Owner, I want /map as a full-width interactive map with
+> floating filters and a results dock below, so planning matches my
+> selected option-3 mockup.
+
+- Title strip with "My trip" opener; floating filter panel; Fit results /
+  My location controls; zoom relocated; results dock → cards with focus,
+  trip and visited actions; brief empty-results copy; planner empty-state
+  recopied via site-copy (TER v2.35, 2026-10-03 — round 26).
+- Delivered as TER v2.35 / TCS v1.21.
+
+**US-PO-16 — Map fixes: Focus action + full results matrix** (3 pts, Priority 1) — *FR-76..81*
+> As the Product Owner, I want the per-card Focus action back and every
+> temple listed in the matrix below the map without scrolling, so nothing
+> hides behind a scroll button or a view switch.
+
+- Visible "Focus on map" action on every card; horizontal-scroll dock
+  replaced by a wrapping 1/2/3-column grid on every viewport; Map/List
+  switch machinery removed (TER v2.36, 2026-10-04 — round 27).
+- Delivered as TER v2.36 / TCS v1.22.
+
+**US-PO-17 — Cluster-distance slider** (3 pts, Priority 2) — *FR-76..78*
+> As the Product Owner, I want a slider for the map cluster distance from
+> 1 km to 50 km with a 10 km default, so I control how close temples must
+> be to share a bubble.
+
+- Distance-based greedy seed clustering (`clusterByDistanceKm`, pure +
+  unit-tested) replaces the 70px screen-space grid; slider lives in the
+  floating filter panel with a live "N km" readout; zoom-9 dissolve and
+  trip-scope exemption unchanged (TER v2.37, 2026-10-04 — round 28).
+- Delivered as TER v2.37 / TCS v1.23.
+
+### Story-Point Summary (v2.1)
+
+| Epic | Stories | Points |
+|---|---|---|
+| EP-PO-ITER | US-PO-01..17 (17 stories) | 94 |
+
+---
+
+## JIRA Synchronization Record (v2.1 — 2026-10-04, PENDING TOKEN)
+
+The seventeen stories above (plus epic **EP-PO-ITER**) are authored and
+their REST API v3 payloads pre-generated in
+`docs/02-agile/jira-payloads.json`. **They are NOT yet synced**: the API
+token stored in `.env.local` was revoked (it appeared in chat history —
+see handover open item) and returns HTTP 401 as of 2026-10-04. Sync on
+the PO's next fresh token with:
+
+```
+node docs/02-agile/sync-jira-stories.mjs
+```
+
+The script reads `JIRA_EMAIL` / `JIRA_API_TOKEN` / `JIRA_BASE` from
+`.env.local` (never committed), creates the epic first (reusing it if a
+summary search finds it), creates the seventeen stories parented to it
+with labels `divya-kshetra` + `v3`, and transitions each to **Done** per
+the delivered-state convention. Expected keys continue from
+**DTRPR108K-77**. Record the returned keys in the table below, then move
+this record into the sync-history series.
+
+| Type | Summary | Links to | Points | Jira key |
+|---|---|---|---|---|
+| Epic | EP-PO-ITER — PO Refinement Iterations | — | — | pending |
+| Story | US-PO-01 — v3.0 Zip-Parity Look-and-Feel Rollout | EP-PO-ITER | 13 | pending |
+| Story | US-PO-02 — PO Fix Lists 1–4 + container & split-pill fixes | EP-PO-ITER | 5 | pending |
+| Story | US-PO-03 — Home page design refresh + Featured Kshetrams restyle | EP-PO-ITER | 5 | pending |
+| Story | US-PO-04 — Explore page restyle + gopuram watermark | EP-PO-ITER | 3 | pending |
+| Story | US-PO-05 — The Yatra Atlas: Map+Trip merge, matrix, planner modal | EP-PO-ITER | 8 | pending |
+| Story | US-PO-06 — Azhwar detail + Azhwars index to the PO snaps | EP-PO-ITER | 5 | pending |
+| Story | US-PO-07 — Acharyas index + detail to the PO snaps | EP-PO-ITER | 5 | pending |
+| Story | US-PO-08 — Kshetram detail mock restyles + UX-audit compaction | EP-PO-ITER | 5 | pending |
+| Story | US-PO-09 — Saint detail kxd theme + Poigai recreation + consistency runs | EP-PO-ITER | 8 | pending |
+| Story | US-PO-10 — Acharyas directory consistency restyle | EP-PO-ITER | 3 | pending |
+| Story | US-PO-11 — Home/Map/About coordinated restyle | EP-PO-ITER | 8 | pending |
+| Story | US-PO-12 — Repo dead-code cleanup (audit round) | EP-PO-ITER | 2 | pending |
+| Story | US-PO-13 — Azhwars page restyled to the Kshetrams system | EP-PO-ITER | 5 | pending |
+| Story | US-PO-14 — Acharyas page restyled to the Kshetrams system | EP-PO-ITER | 5 | pending |
+| Story | US-PO-15 — Map page rebuilt to "option 3" | EP-PO-ITER | 8 | pending |
+| Story | US-PO-16 — Map fixes: Focus action + full results matrix | EP-PO-ITER | 3 | pending |
+| Story | US-PO-17 — Cluster-distance slider | EP-PO-ITER | 3 | pending |

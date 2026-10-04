@@ -1,0 +1,1272 @@
+{
+  "transitionPayloadNote": "stories are transitioned to Done after creation (fetch /transitions and pick the one named \"Done\")",
+  "epic": {
+    "fields": {
+      "project": {
+        "key": "DTRPR108K"
+      },
+      "issuetype": {
+        "name": "Epic"
+      },
+      "summary": "EP-PO-ITER — PO Refinement Iterations",
+      "labels": [
+        "divya-kshetra",
+        "v3"
+      ],
+      "description": {
+        "type": "doc",
+        "version": 1,
+        "content": [
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Goal: trace the 2026-09/10 product-owner iteration stream — fix lists, page restyles to PO mockups, the Yatra Atlas rebuild, the results-matrix fixes and the cluster-distance slider — as shippable, verifiable stories."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "content": [
+              {
+                "type": "text",
+                "text": "Contains US-PO-01..17 (94 points). All seventeen stories are delivered and verified (each cites its TER/TCS version); on creation they are transitioned Done per the established convention (epics remain To Do)."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "stories": [
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-01 — v3.0 Zip-Parity Look-and-Feel Rollout",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want the whole site rebuilt to the approved v3.0 \"zip parity\" mockups, so the app matches the static design demos section by section."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Given the 11 approval gates (global shell, Home, Browse, Kshetram detail, Azhwars index, Azhwar detail, Acharyas index, Acharya detail, Map), when each lands, then the page matches the zip mock with all datasets, URL/localStorage contracts and tests preserved (188 unit / 19 e2e at the final gate)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Orphaned legacy CSS retired gate by gate (54 + 39 + 9 rules among others); Tailwind v4 token layer (zip.css) introduced."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.0 / TCS v1.6 (2026-09-24)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 13
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-02 — PO Fix Lists 1–4 + container & split-pill fixes",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want my post-rollout defect lists cleared, so the live site matches the approved visuals exactly."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Four PO fix-list rounds plus the responsive-container and split-pill single-line fixes land: nav pill contrast, gradient retirements, container widths, split pills on one line."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Every fix verified against the live bundle before sign-off."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.2–v2.8 / TCS v1.6 (2026-09-27)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 5
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-03 — Home page design refresh + Featured Kshetrams restyle",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want the home page refreshed to my sketch and the featured-temple cards restyled, so the landing view carries the refreshed identity."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Hero refresh, tracker treatment and the featured-card restyle with corner toggles and DD serial tags."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.9–v2.10 / TCS v1.6 (2026-09-27/30)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 5
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-04 — Explore page restyle + gopuram watermark",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want the Explore (Kshetrams) page restyled with the gopuram illustration watermarked into the header, so browse matches the refreshed home."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Display header, filter panel and card grid restyle; two PO follow-ups integrate the illustration as a right-half watermark."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.11–v2.13 / TCS v1.8 (2026-09-30)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 3
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-05 — The Yatra Atlas: Map+Trip merge, matrix, planner modal",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As a pilgrim, I want one Plan-Yatra workspace — map, filters, results and my trip — so I can plan without bouncing between pages."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Map refresh; Map+Trip merged into /map; result matrix + merged nav; left-column arrangement; trip planner moved into a modal. /trip redirects; ?t= share links keep working."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.14–v2.18 / TCS v1.9 (2026-09-30)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 8
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-06 — Azhwar detail + Azhwars index to the PO snaps",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want the Azhwar pages recreated to my snap mockups, so the saint journeys match the approved design."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Detail restyled to the PO snap; front page recreated to the snap."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.19–v2.20 / TCS v1.9 (2026-09-30/10-01)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 5
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-07 — Acharyas index + detail to the PO snaps",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want the Acharya journeys recreated to my snap mockups, so the parampara matches the approved design."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Index and detail recreated per the PO snaps with pending markers for scaffold dossiers."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.21–v2.22 / TCS v1.10 (2026-10-01)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 5
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-08 — Kshetram detail mock restyles + UX-audit compaction",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want the Kshetram detail page recreated to my mock, then compacted per the UX audit, so the flagship template reads calmly at full content depth."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: PO-mock recreation, triplicane restyle, then the UX-audit compaction + calm header."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.23–v2.25 / TCS v1.11 (2026-10-01)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 5
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-09 — Saint detail kxd theme + Poigai recreation + consistency runs",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want the Azhwar detail journey refined across my follow-up mockups — shared kxd theme, the Poigai recreation, the Srirangam consistency pass and the Philosophy-&-legacy alignment — so the saint dossiers reach the approved standard."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Shared kxd dossier theme extracted; Poigai mock recreation; Srirangam consistency pass; \"Philosophy & legacy\" alignment."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.26–v2.29 / TCS v1.15 (2026-10-01, PO rounds 18–21)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 8
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-10 — Acharyas directory consistency restyle",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want the /acharyas directory restyled for consistency with the shared directory theme, so the rosters read as one family."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: .dir directory theme + shared directory components; 27 standardized entries; /azhwars coordinated."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.30 / TCS v1.16 (2026-10-02, round 22)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 3
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-11 — Home/Map/About coordinated restyle on the shared control language",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want home, map and about restyled as one coordinated update with the shared maroon/gold control language, so the trio matches the kshetram-detail standard."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: ui.css control language + shared ui components (Button/Dialog/fields/SectionHeading/ContactDetails); hero overlay; map pane+map workspace with result→marker selection; editorial About with inquiry dialog; 108/106 progressScope sentence site-wide."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.31 / TCS v1.17 (2026-10-02, round 23)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 8
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-12 — Repo dead-code cleanup (audit round)",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the developer, I want the audit-identified dead code removed, so the codebase carries no test-only fossils or finished one-off scripts."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: 7 test-only components + 2 finished scripts deleted (645 lines); 14 dead-code tests retired; FR supersessions recorded."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.32 / TCS v1.18 (2026-10-03)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 2
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-13 — Azhwars page restyled to the Kshetrams system",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want /azhwars to match my refined mockup using the kshetrams design system, so the gallery reads like the rest of the refreshed site."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Browse-style intro, kshetrams grid, KshetramCard interaction rules, object-contain portraits, ordinals removed, zero-desams note for Madhurakavi via site-copy."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.33 / TCS v1.19 (2026-10-03, round 24)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 5
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-14 — Acharyas page restyled to the Kshetrams system",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want /acharyas restyled onto the kshetrams design system per my refined mockup, so both rosters share the refreshed language."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Compact intro; era anchor pills with dataset counts + gold selected state (aria-current + IntersectionObserver scroll-spy); horizontal profile cards with Period/Guru dl rows."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.34 / TCS v1.20 (2026-10-03, round 25)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 5
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-15 — Map page rebuilt to \"option 3\"",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want /map as a full-width interactive map with floating filters and a results dock below, so planning matches my selected option-3 mockup."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Title strip with \"My trip\" opener; floating filter panel; Fit results / My location controls; zoom relocated; results cards with focus, trip and visited actions; brief empty-results copy; planner empty-state recopied via site-copy."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.35 / TCS v1.21 (2026-10-03, round 26)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 8
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-16 — Map fixes: Focus action + full results matrix",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want the per-card Focus action back and every temple listed in the matrix below the map without scrolling, so nothing hides behind a scroll button or a view switch."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Visible \"Focus on map\" action on every card; horizontal-scroll dock replaced by a wrapping 1/2/3-column grid on every viewport; Map/List switch machinery removed."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.36 / TCS v1.22 (2026-10-04, round 27)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 3
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-17 — Cluster-distance slider",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want a slider for the map cluster distance from 1 km to 50 km with a 10 km default, so I control how close temples must be to share a bubble."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Distance-based greedy seed clustering (clusterByDistanceKm, pure + unit-tested) replaces the 70px screen-space grid; slider in the floating filter panel with a live \"N km\" readout; zoom-9 dissolve and trip-scope exemption unchanged."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.37 / TCS v1.23 (2026-10-04, round 28)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 3
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    }
+  ]
+}
