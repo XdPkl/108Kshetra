@@ -1,7 +1,7 @@
-# HANDOVER — 108 Divya Kshetrams (2026-10-04, after rounds 24–30 + audit + Jira backlog sync)
+# HANDOVER — 108 Divya Kshetrams (2026-10-04, after rounds 24–31 + audit + Jira sync)
 
-State: **Round 30 pushed, CI+Deploy green on `3ea21aa`, live verified.**
-`main` = `3ea21aa` (Homepage option-1 redesign) in sync with `origin/main`
+State: **Round 31 pushed, CI+Deploy green on `a9d57af`, live verified.**
+`main` = `a9d57af` (Map cluster focus) in sync with `origin/main`
 (https://github.com/XdPkl/108Kshetra). Live: https://xdpkl.github.io/108Kshetra/
 — verify bundles by CONTENT, not by hash (CI Linux hashes differ; grep the
 live `assets/index-*.js` via `node -e "...includes(...)"` — gotcha 12; MapPage
@@ -20,18 +20,20 @@ No preview server running. Scratch scripts deleted. Nothing in flight.
 | `b8437aa` | **Round 28 — cluster-distance slider**: pure `clusterByDistanceKm(points, radiusKm)` (greedy seed-based km grouping, `ponytail:` noted, 5 unit cases) replaces the 70px pixel-grid; slider 1–50 km default 10 in the floating panel with live "N km" readout; zoom-9 dissolve + trip-scope exemption unchanged. NOTE: greedy seed grouping is **non-monotone in radius** (a pair can dissolve while others merge as the radius grows) — documented in TER v2.37 | TER v2.37, TCS v1.23 |
 | `63fdbe5` + `2fefff3` | **Jira backlog authoring + SYNC**: all 24 delivered iterations authored as **US-PO-01..17 under epic EP-PO-ITER (94 pts)** in `docs/02-agile/user-stories.md` v2.1; synced to DTRPR108K via REST v3 — epic **DTRPR108K-82**, stories **DTRPR108K-83..99**, all transitioned **Done** at creation (epics To Do per convention). Sync script: `docs/02-agile/sync-jira-stories.mjs` (reads `.env.local`, epic lookup idempotent, stories not deduplicated) | user-stories.md v2.1 |
 | `64089d6` | **Round 29 — /about rebuilt to "option 1"**: two-column hero (copy + gopuram watermark + reused browse quote, 2-line display heading measured), sticky-below-header section nav on lg+ with IO scroll-spy (six ids + header deep links preserved; mobile = scrollable row with fade cue, never sticky), editorial purpose (paragraphs 0+2, two dataset-derived icon rows), "Find your regional yatra" + 3 compact service-theme rows, six circuit cards in a revealable 1/2/3-col grid (ordinals stripped, `aria-expanded` reveal, actions pinned, region URLs + preselected dialog intact), founder desk (full-bio disclosure keeps bio[1]+pillars+base+email; admin-gated portrait untouched), contact block with announced copy actions, etiquette accordions; dialog 680px, asterisk only on the name, inline name-required validation + re-entrancy lock. Site-copy `about` restructured (hero/purpose/yatras added; banner + 11 dead section fields retired) with fixture + studio schema lockstep | TER v2.38, TCS v1.24, user-stories US-PO-18 (sync pending) |
-| `3ea21aa` | **Round 30 — homepage rebuilt to "option 1"**: immersive 600px hero reusing the PO-supplied `hero-sunset-lamps.jpg` with the new copy hierarchy (eyebrow, 2-line 66px Cormorant heading, supporting line, real-text Tamil `lang="ta"`, gold "Explore the Kshetrams" + inverse "Plan your yatra", both in the initial viewport); progress strip switches "Begin your yatra"/"Continue your yatra" from live state with the visible "N of 106 visited." equivalent (progressbar contract unchanged); featured grid now the shared KshetramCard in 1/2/3 cols keeping ALL FOUR curated temples (Srirangam, Thiruvengadam, Thirukkachi + Srivilliputhur on a further row); two tradition columns (divider, tertiary Explore links) keeping compact 2×2 PersonPreview profile links; guided-yatra invitation → `/about#guided-yatras` with the shared gopuram illustration + browse quote; **SaintStrip + orphaned FeaturedKshetramCard deleted**. Site-copy hero/home restructured (invocation/subtitle retired, progress+invite added) with fixture + schema lockstep | TER v2.39, TCS v1.25, user-stories US-PO-19 (sync pending) |
+| `3ea21aa` | **Round 30 — homepage rebuilt to "option 1"**: immersive 600px hero reusing the PO-supplied `hero-sunset-lamps.jpg` with the new copy hierarchy (eyebrow, 2-line 66px Cormorant heading, supporting line, real-text Tamil `lang="ta"`, gold "Explore the Kshetrams" + inverse "Plan your yatra", both in the initial viewport); progress strip switches "Begin your yatra"/"Continue your yatra" from live state with the visible "N of 106 visited." equivalent (progressbar contract unchanged); featured grid now the shared KshetramCard in 1/2/3 cols keeping ALL FOUR curated temples (Srirangam, Thiruvengadam, Thirukkachi + Srivilliputhur on a further row); two tradition columns (divider, tertiary Explore links) keeping compact 2×2 PersonPreview profile links; guided-yatra invitation → `/about#guided-yatras` with the shared gopuram illustration + browse quote; **SaintStrip + orphaned FeaturedKshetramCard deleted**. Site-copy hero/home restructured (invocation/subtitle retired, progress+invite added) with fixture + schema lockstep | TER v2.39, TCS v1.25, user-stories US-PO-19 |
+| `a9d57af` | **Round 31 — map cluster focus**: clicking a cluster bubble draws a dashed bounds outline (`Rectangle`, 6/6 dashes, `interactive:false`), gold-rings the focused bubble (`aria-label` on the divIcon) and filters the results grid to the member temples behind a `role="status"` chip (medallion count + Clear); the focus filters the GRID only, never `shown` (feedback would dissolve the clicked cluster); clears on Escape/chip/Reset/scope change/any filter removing a member, NEVER on zoom (the standing fly-to-bounds at maxZoom 9 dissolves the cluster by design — outline is a snapshot). **Jira: US-PO-18/19/20 synced as DTRPR108K-101/102/103** (Done, under epic -82); sync script gains `--only` + requests `fields:['key']` from /search/jql (bare-ID response had duplicated the epic — re-parented stories, duplicate deleted, incident in user-stories v2.2) | TER v2.40, TCS v1.26, user-stories US-PO-20 |
 
-Final gates at handoff: **246/246 unit (23 suites) · 19/19 e2e · coverage
-90.41% stmts / 81.97% branches / 85.07% funcs / 92.11% lines (gate 80%) ·
-oxlint 0 errors / 5 warnings · build clean · CMS round-trip 0-diff ·
+Final gates at handoff: **246/246 unit (23 suites) · 21/21 e2e · coverage
+89.78% stmts / 81.19% branches / 84.26% funcs / 91.59% lines (gate 80%) ·
+oxlint 0 errors / 6 warnings (+1 accepted same-class set-state-in-effect;
+CI gate is 0 errors) · build clean ·
 visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/`,
 `acharyas-restyle-25/`, `map-option3-26/`, `map-cluster-slider-28/`,
-`about-option1-29/`, `home-option1-30/`).
+`about-option1-29/`, `home-option1-30/`, `map-cluster-focus-31/`).
 
 ## 2. Open items / likely next requests
 
-- **More PO fix lists** — 30 rounds in ~10 days. Proven loop: inspect
+- **More PO fix lists** — 31 rounds in ~10 days. Proven loop: inspect
   brief/mock → implement reusing kshetrams idioms → Playwright measurement
   + screenshots → judge → gates → TER → commit → push → CI/live check.
 - **PO mockups**: rounds 24/25/26 mockup files never existed on disk (the
@@ -50,16 +52,17 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   (nadadur-ammal etc. show pending markers), CEO portrait, azhwar/acharya
   portraits (only Poigai has photos[]; NO acharya has photos[] — 5 wiki
   images + 22 shanka emblem fallbacks on /acharyas are stand-ins).
-- **Jira: BACKLOG IS SYNCED through round 28** (DTRPR108K-82..99). Rounds
-  29–30 are **authored as US-PO-18/19 in user-stories.md but NOT synced**
-  — run `sync-jira-stories.mjs` when the PO asks (extend its story list;
-  it is idempotent for the epic only, stories are not deduplicated). The
-  fresh API token in `.env.local` works; if it was ever pasted into chat,
-  revoke it — nothing else needs it until a backlog sync.
-- **Coverage**: branches recovered to 81.97% (dead-code deletion in
-  round 30) — headroom ~2pp again. Any new conditional needs a test.
-  CI is 2-core (gotcha 10); one e2e flake observed (TC-15 clipboard
-  permission, passed on re-run).
+- **Jira: FULLY SYNCED through round 31** (epic DTRPR108K-82; stories
+  DTRPR108K-83..99 + 101..103, all Done). `sync-jira-stories.mjs` gained
+  `--only=US-PO-x` (stories are NOT deduplicated — always pass --only
+  for new stories) and requests `fields:['key']` from /search/jql (the
+  bare-ID response once duplicated the epic — incident in user-stories
+  v2.2). The API token in `.env.local` works; revoke it if it was ever
+  pasted into chat.
+- **Coverage**: branches 81.19% vs gate 80% — ~1.2pp headroom (the
+  cluster-focus branches are e2e-covered, not unit-covered). Any new
+  conditional needs a test. CI is 2-core (gotcha 10); one e2e flake
+  observed (TC-15 clipboard permission, passed on re-run).
 - **Vada Nadu duration note** (round 23) presentational; subcircuit split
   needs operator confirmation. **Timings duplication** (kshetram sidebar +
   Visit tab) persists by design. **Field-name asymmetry** (acharyas `era`
@@ -292,6 +295,19 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
     absolutely-positioned header shrink-wraps to its content and reads
     as a right-edge seam. The gotcha-22 "scrollTo(0,0) before fullPage"
     rule is NOT sufficient for sticky headers.
+52. **Jira POST /search/jql returns bare issue IDs unless
+    `fields: ['key']` is in the body** — reading `issues[0].key` from an
+    unhydrated response yields `undefined` and an epic-lookup "reuse"
+    check silently creates a duplicate epic (round 31; repaired). Also:
+    NEVER embed the sync script's invocation in bash backticks — command
+    substitution EXECUTES it (re-created a story; gotcha 22 applies
+    double to docs/02-agile).
+53. **Map cluster click = fly (maxZoom 9) + focus that survives zoom** —
+    the fly dissolves the bubbles at zoom 9 on purpose; the outline is
+    a click-time snapshot and the membership check (not zoom) owns the
+    clear. A 2-temple cluster's outline is ~13×35px at zoom 9 — judge
+    mobile evidence with the 15-temple cluster, and drag-map pans must
+    START inside the map sliver or the page selects text instead.
 
 ## 5. Command cheat-sheet
 
