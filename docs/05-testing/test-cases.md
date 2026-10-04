@@ -464,3 +464,24 @@ Pass · CMS round-trip 0-diff · E2E **19/19** · Visual gate **8/8**
 live). Execution recorded in TER v2.33.
 
 *End of Addendum — TCS-108K-008 v1.19*
+## Version 1.20 — Acharyas Page Restyle (2026-10-03)
+
+PO round-25 restyle of `/acharyas` onto the /kshetrams design system
+(TER v2.34), mirroring the round-24 /azhwars treatment. Dataset
+unchanged; no site-copy changes. Contract moves:
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-ACH-02 | Intro + era nav | Browse-style compact intro (eyebrow / Cormorant heading / lead / quiet desktop watermark); era jump links become scope-pill anchors with dataset counts (6/9/12) and a gold selected treatment; sections keep ids/fragnents and `scroll-margin-top` |
+| UT-ACH-02 | Cards | Horizontal kshetrams-system cards: object-contain portraits (5 photos + 22 quiet emblem fallbacks), Cormorant 26px names, full bios, Period/Guru `dl` rows (verbatim, "Not specified" preserved), gold "View profile" action lower-right, 300ms hover rise + button deepen + 2px arrow shift, motion-reduce guarded; ordinal badges removed |
+| UT-ACH-02 | New cases | Era pill sets `aria-current` on click; IntersectionObserver tracks the topmost visible era while scrolling (IO mocked in jsdom) |
+| Deleted | PersonEntry + DirectoryHeader | Zero non-test importers after the restyle; 6 test blocks retired with them; PortraitFallback/ProfileLink/PersonPreview remain in service |
+| TC-19 | E2E | Unchanged — pill names still substring-match, anchor click → URL fragment + heading in viewport |
+
+Quality gates: TC-QA-01 Pass (0 errors; 6 baseline warnings) · TC-QA-02
+Pass (**235/235 tests, 23 suites**; 90.42/81.25/86.15/91.88) · TC-QA-03
+Pass · CMS round-trip 0-diff · E2E **19/19** · Visual gate **9/9**
+(4 widths + zoom200 + era-active + era-scroll + hover + focus; before ×2
+from live). Execution recorded in TER v2.34.
+
+*End of Addendum — TCS-108K-008 v1.20*

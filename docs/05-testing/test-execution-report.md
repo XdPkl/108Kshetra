@@ -2360,3 +2360,76 @@ one site-copy field).
 | E2E (Playwright, Chromium) | **19/19 pass** — TC-10 unchanged (12 `.azhwar-card`s, first desam deep link pre-filters browse) |
 | Measured | 0px horizontal overflow at 375/768/1280/1440 and the 200%-zoom proxy (640 CSS px, DPR 2) |
 | Visual gate | **8/8 pass** — after ×4 widths + zoom200 + card-hover + keyboard-focus + madhurakavi note, with before ×2 from the live round-22 bundle — `docs/03-design/gate-shots/azhwars-restyle-24/{before,after}/` |
+## Version 2.34 — Acharyas Page Restyle to the Kshetrams System (2026-10-03, round 25)
+
+PO request: update /acharyas to the refined mockup **reusing the
+/kshetrams design system** (mockup image not found on disk — the written
+brief + the live /kshetrams page served as the binding reference, same
+as round 24; flagged). Dataset unchanged; no site-copy changes this
+round (`sync-content --fixture --check` 0-diff).
+
+### What changed
+
+- **Intro**: the Browse header idiom — saffron uppercase eyebrow ("THE
+  GURU PARAMPARA"), Cormorant 44/48px `#5C1F00` heading ("The Acharyas"),
+  existing lead at a comfortable reading width (`max-w-[62ch]`), the
+  gopuram illustration reduced in prominence (opacity 60%) as a
+  desktop-only right watermark. The `.dir` DirectoryHeader is removed;
+  the page no longer wraps in `.dir` (body font reverts to the site-wide
+  Mukta Malar, matching /kshetrams).
+- **Era navigation**: the plain jump links are replaced by anchor pills
+  styled like the Kshetrams scope pills (gold selected treatment:
+  cream `#F6EBD6` + gold border + darker text; idle: white + hairline
+  border). They remain **anchor links, never filters** — all three
+  sections stay rendered and the section ids / URL fragments
+  (#early-masters, #age-of-ramanuja, #later-acharyas) are unchanged.
+  Counts (6/9/12) derive from the dataset grouping. Selected state: set
+  on click, tracked while scrolling via an IntersectionObserver
+  (topmost visible section wins; skipped where IO is unavailable), and
+  communicated as `aria-current="true"` beyond color alone.
+- **Sections**: dataset era labels kept as Cormorant 30px `#5C1F00`
+  headings with a restrained gold divider and a data-derived count;
+  `scroll-mt-[88px]` clears the 64px fixed header on anchor jumps.
+- **Profile cards** (PersonEntry replaced by an AcharyaCard rebuilt on
+  the KshetramCard interaction rules): horizontal on desktop (portrait
+  column left, `sm:w-32`), stacked on mobile; `#FFFDF7` surface,
+  `#C99A2E`/45 border, rounded-2xl, subtle shadow, 300ms 4px hover rise
+  with opaque-gold border and larger shadow (`motion-reduce` guarded).
+  Portraits: `object-contain` (proportions preserved; 5 Wikipedia
+  images render, 22 quiet shanka-emblem fallbacks — the emblem is
+  decorative and small). English name Cormorant 26px, Tamil name Mukta
+  Malar 14px `#96731F`, full left-aligned biography 15px/1.65 `#332417`
+  (no truncation), hairline, Period/Guru as a semantic `dl` with fixed-
+  width labels and wrapping values (dataset values verbatim; "Not
+  specified" never inferred), and a gold "View profile" action pinned
+  to the lower right (18px radius token, `#96731F` → `#7A2E00` on card
+  hover, 2px arrow shift, 150ms cubic-bezier(0.4,0,0.2,1)). No ordinal
+  badges, no trip/visited controls, no whole-card overlay.
+- **Deleted with the rewrite** (zero non-test importers after the
+  restyle): `directory/PersonEntry.jsx` and `directory/DirectoryHeader.jsx`
+  (96 lines) plus their 6 test blocks; PortraitFallback/ProfileLink/
+  PersonPreview remain in service on /about, home and TempleCard.
+
+### Flags for PO review
+
+- Mockup `acharyas-refined.png` was not found in the workspace —
+  implemented from the written brief + live /kshetrams computed styles.
+  Send the image if composition differs.
+- First visual-gate pass failed 6 files on a screenshot-harness race
+  (2 of 5 wiki portraits missed by the capture timing) and a harness
+  framing bug (era-scroll shot taken after scrolling to top); both were
+  re-captured and re-judged — the page itself was correct
+  (gotcha 32: verify dataset facts, re-judge with corrected facts).
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 6 warnings (baseline unchanged) |
+| Unit tests (Vitest) | **235/235 pass (23 suites)** — UT-ACH-02 updated (era pills carry dataset counts; articles still 27; Period/Guru ×27); new: era-pill `aria-current` on click + IntersectionObserver topmost-visible tracking (IO mocked) |
+| Coverage | **90.42% statements / 81.25% branches / 86.15% functions / 91.88% lines** (gate 80%) |
+| Production build | Clean |
+| CMS round-trip | `sync-content --fixture --check` 0-diff |
+| E2E (Playwright, Chromium) | **19/19 pass** — TC-19 unchanged (pill substring names still match; #later-acharyas click → URL fragment + heading in viewport) |
+| Measured | 0px horizontal overflow at 375/768/1280/1440 and the 200%-zoom proxy (640 CSS px, DPR 2) |
+| Visual gate | **9/9 pass** — after ×4 widths + zoom200 + era-pill-active + era-anchor-scroll (heading at y≈120px below the 64px header) + card-hover + keyboard-focus, with before ×2 from the live round-22 bundle — `docs/03-design/gate-shots/acharyas-restyle-25/{before,after}/` |

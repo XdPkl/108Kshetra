@@ -3,7 +3,7 @@
  * Azhwar detail, Acharyas index and Acharya detail.
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../../App.jsx';
@@ -150,31 +150,78 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-10-01 poigai mock restyle)', 
   });
 });
 
-describe('AcharyasPage (UT-ACH-02, FR-93; round-22 directory consistency)', () => {
+describe('AcharyasPage (UT-ACH-02, FR-93; round-25 kshetrams-system restyle)', () => {
   it('lists all 27 acharyas grouped by parampara era with unique profile links', () => {
     renderAt('/acharyas');
     expect(screen.getByRole('heading', { name: /the acharyas/i })).toBeInTheDocument();
-    // Era sections keep the dataset labels; the jump links carry the
-    // short PO labels ("Early masters", "Age of Ramanuja", …)
+    // Era sections keep the dataset labels; the era pills carry the
+    // short PO labels with dataset-derived counts
     expect(screen.getByRole('heading', { name: 'Purvacharyas — the early masters' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The age of Ramanuja' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Later acharyas' })).toBeInTheDocument();
-    // All 27 entries render as standardized PersonEntry articles
+    // All 27 entries render as profile card articles
     expect(screen.getAllByRole('article')).toHaveLength(27);
-    // In-page jump links target the era anchors (sections stay visible)
-    expect(screen.getByRole('link', { name: 'Early masters' })).toHaveAttribute('href', '#early-masters');
-    expect(screen.getByRole('link', { name: 'Age of Ramanuja' })).toHaveAttribute('href', '#age-of-ramanuja');
-    expect(screen.getByRole('link', { name: 'Later acharyas' })).toHaveAttribute('href', '#later-acharyas');
+    // Era pills are anchor links targeting the era anchors (sections stay
+    // visible; counts from the dataset: 6 / 9 / 12)
+    expect(screen.getByRole('link', { name: /Early masters \(6\)/ })).toHaveAttribute('href', '#early-masters');
+    expect(screen.getByRole('link', { name: /Age of Ramanuja \(9\)/ })).toHaveAttribute('href', '#age-of-ramanuja');
+    expect(screen.getByRole('link', { name: /Later acharyas \(12\)/ })).toHaveAttribute('href', '#later-acharyas');
     expect(document.getElementById('early-masters')).not.toBeNull();
     // Consistent Period/Guru metadata on every entry
     expect(screen.getAllByText('Period')).toHaveLength(27);
     expect(screen.getAllByText('Guru')).toHaveLength(27);
     // gurus without a dataset link render the neutral value, never inferred
     expect(screen.getAllByText('Not specified').length).toBeGreaterThanOrEqual(2);
-    // One unique-named profile link per acharya (no whole-row overlay stop)
+    // One unique-named profile link per acharya (no whole-card overlay stop)
     const profile = screen.getByRole('link', { name: 'View profile — Sri Manavala Mamunigal' });
     expect(profile).toHaveAttribute('href', '/acharya/manavala-mamunigal');
     expect(screen.getAllByRole('link', { name: /view profile — /i })).toHaveLength(27);
+  });
+
+  it('marks the selected era pill with aria-current when its link is clicked', () => {
+    class MockIntersectionObserver {
+      observe() {}
+      disconnect() {}
+      unobserve() {}
+    }
+    window.IntersectionObserver = MockIntersectionObserver;
+    try {
+      renderAt('/acharyas');
+      const later = screen.getByRole('link', { name: /Later acharyas \(12\)/ });
+      expect(later).not.toHaveAttribute('aria-current');
+      fireEvent.click(later);
+      expect(later).toHaveAttribute('aria-current', 'true');
+      expect(screen.getByRole('link', { name: /Early masters \(6\)/ })).not.toHaveAttribute('aria-current');
+    } finally {
+      delete window.IntersectionObserver;
+    }
+  });
+
+  it('tracks the topmost visible era while scrolling (IntersectionObserver)', () => {
+    const callbacks = [];
+    class MockIntersectionObserver {
+      constructor(cb) { callbacks.push(cb); }
+      observe() {}
+      disconnect() {}
+      unobserve() {}
+    }
+    window.IntersectionObserver = MockIntersectionObserver;
+    try {
+      renderAt('/acharyas');
+      // Scroll event: later-acharyas sits above (smaller top) but a
+      // non-intersecting entry is ignored entirely
+      act(() => callbacks[0]([
+        { target: { id: 'age-of-ramanuja' }, isIntersecting: false, boundingClientRect: { top: 0 } },
+        { target: { id: 'later-acharyas' }, isIntersecting: true, boundingClientRect: { top: 120 } },
+        { target: { id: 'early-masters' }, isIntersecting: true, boundingClientRect: { top: 300 } },
+      ]));
+      expect(screen.getByRole('link', { name: /Later acharyas \(12\)/ })).toHaveAttribute('aria-current', 'true');
+      // No intersecting section at all → the current pill is unchanged
+      act(() => callbacks[0]([{ target: { id: 'early-masters' }, isIntersecting: false, boundingClientRect: { top: 0 } }]));
+      expect(screen.getByRole('link', { name: /Later acharyas \(12\)/ })).toHaveAttribute('aria-current', 'true');
+    } finally {
+      delete window.IntersectionObserver;
+    }
   });
 });
 
