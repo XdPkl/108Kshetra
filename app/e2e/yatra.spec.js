@@ -136,8 +136,9 @@ test.describe('V3 yatra toolkit', () => {
     await page.goto('');
     await expect(page.getByRole('link', { name: /kshetra tours/i })).toBeVisible();
     // PO request 2026-09-10: the hero "Azhwars" CTA became the darshan strips
-    await expect(page.getByRole('main').getByRole('link', { name: /view all azhwars/i })).toBeVisible();
-    await expect(page.getByRole('main').getByRole('link', { name: /view all acharyas/i })).toBeVisible();
+    // (round 30: the strips became the tradition columns — "Explore …" links)
+    await expect(page.getByRole('main').getByRole('link', { name: /explore azhwars/i })).toBeVisible();
+    await expect(page.getByRole('main').getByRole('link', { name: /explore acharyas/i })).toBeVisible();
 
     await page.getByRole('link', { name: /kshetra tours/i }).click();
     await expect(page).toHaveURL(/about$/);

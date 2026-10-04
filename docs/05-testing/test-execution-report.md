@@ -2706,3 +2706,88 @@ inquiry dialog's label/rule mismatch.
 | E2E (Playwright) | **19/19 pass** — TC-17 updated to the new hero heading |
 | Measured in DOM | h1 = 2 line boxes, Cormorant Garamond `rgb(92,31,0)`; gold action radius 18px; sticky nav top = 64px (flush under header); `#circuits` anchor lands at 168px (clears the ~120px nav bottom); dialog 680px; 0px horizontal overflow at 375/768/1280 |
 | Visual gate | **7/7 pass after a repair loop** — first pass failed 5 findings (closed key-shrines lead-in read as orphaned content on every card; `#circuits` anchor sliced the service-row line under the nav; mobile fade cue imperceptible; founder not stacked at 375px; one wrapped "Base location" label) — all fixed and re-judged; the maroon dialog submit was accepted as the shared dialog primary — `docs/03-design/gate-shots/about-option1-29/` |
+
+## Version 2.39 — Homepage "Option 1" Redesign (2026-10-04, round 30)
+
+**Trigger (PO brief):** align the homepage with the selected option-1
+mockup — immersive full-width hero, compact progress strip, featured
+card grid, paired tradition columns and a guided-yatra invitation — on
+the kshetrams design system, preserving every behaviour (trip/visited
+persistence, progress calculation, profile access, routes) and the
+mockup's three featured temples while keeping Srivilliputhur reachable.
+
+### What changed
+
+- **Hero** (`home/Hero.jsx`): the same PO-supplied atmospheric artwork
+  (`hero-sunset-lamps.jpg`, 2172×724 — reused per brief, no new/imagined
+  imagery) at an immersive 600px desktop height (440px mobile), same
+  dark base + left scrim (image stays brighter right). New copy
+  hierarchy from site-copy: eyebrow "Sacred places. Living tradition.",
+  two-line Cormorant display heading "108 sacred abodes. One timeless
+  journey." (66px/1.05 desktop, measured 2 line boxes), supporting line,
+  the real-text Tamil line `நூற்றெட்டு திவ்ய தேசங்கள்` (`lang="ta"`,
+  spelling matches the source content's long form). Actions: gold
+  "Explore the Kshetrams" (kshetrams gold on the shared `.ui-btn` base,
+  group arrow) + the existing inverse "Plan your yatra" — both measured
+  inside the initial 900px viewport. The retired `invocation`/`subtitle`
+  copy fields are gone from the schema.
+- **Progress strip** (`home/YatraProgressTracker.jsx`): heading switches
+  by live state — "Begin your yatra" empty / "Continue your yatra"
+  returning — over the supporting copy; the progressbar contract is
+  unchanged (`aria-label "{count} of {total} kshetrams visited"`, gold
+  fill, reduced-motion guard) with a visible "N of 106 visited." text
+  equivalent beside the 108/106 scope sentence; gold "Mark a visit" →
+  `/kshetrams`; the reset control still renders only when progress
+  exists. Counts stay state-driven (106 terrestrial ids; celestial
+  entries never counted).
+- **Featured Kshetrams** (`home/FeaturedKshetrams.jsx`): now renders the
+  shared `/kshetrams` KshetramCard (correct per-temple wiki photos, Tamil
+  over English names, temple/place/state, region pill, gold View temple,
+  Add-to-trip chip, Mark visited) in a 1/2/3-column grid. All four
+  curated records render — the mockup's row of three (Srirangam,
+  Thiruvengadam/Tirupati, Thirukkachi/kanchi-varadaraja) plus
+  Srivilliputhur wrapping onto a further row; the mockup's wrong
+  Kanchipuram photo is moot because photos come from each temple's own
+  record. Section eyebrow/lead follow the mockup; view-all link kept.
+- **Tradition columns**: the two full-width SaintStrip bands become one
+  section of two open editorial halves with a vertical divider (eyebrow,
+  display heading, concise explanation, tertiary "Explore Azhwars /
+  Acharyas" links with the arrow) — each keeping its compact 2×2
+  PersonPreview profile previews below the introduction, so all existing
+  homepage profile links survive. SaintStrip.jsx is deleted (zero
+  importers post-restructure); the `.dir` root wrapper stays so the
+  portrait variables resolve.
+- **Guided-yatra invitation**: new About-style band — eyebrow/heading
+  "Travel with devotion and context", description, gold "Explore guided
+  yatras" → `/about#guided-yatras` — with the shared sepia gopuram
+  illustration and the standing browse quote right (same idiom as the
+  About hero; nothing invented: no prices, dates, ratings, testimonials).
+  Closing ornament + shared footer retained below.
+- **Dead code**: `home/FeaturedKshetramCard.jsx` (orphaned since round
+  23) and `home/SaintStrip.jsx` deleted; FeaturedKshetrams switched from
+  TempleCard to the shared KshetramCard.
+- **Site-copy restructure (schema lockstep)**: `hero` rebuilt (eyebrow/
+  title/description/tamilLine/cta/ctaSecondary; invocation + subtitle
+  retired), `home.progress` added, `home.featured.eyebrow` revalued,
+  `azhwarStrip`/`acharyaStrip` revalued (eyebrow/title/lead/ctaLabel),
+  `home.invite` added. App JSON + sync fixture patched together (0-diff
+  verified); `studio/schemas/siteCopy.js` mirrored; Sanity schema
+  validate clean.
+- **Harness learnings (gotchas 50-51)**: fullPage captures need a
+  lazy-load priming pass (scroll through, wait for `document.images`)
+  or below-the-fold wiki photos shoot blank; and the sticky header must
+  be pinned `position:absolute; width:100%` during the stitch or
+  Playwright strands it mid-page (shrink-to-fit also truncates it).
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (baseline unchanged) |
+| Unit tests (Vitest) | **246/246 pass (23 suites)** — UT-HOME rewritten: hero copy/Tamil/actions, progress strip in begin + continue states, four featured cards with the shared action set, tradition columns + profile previews, invitation anchor |
+| Coverage | **90.41% statements / 81.97% branches / 85.07% functions / 92.11% lines** (gate 80%) — dead-code deletion recovered branch headroom (~1.97pp) |
+| Production build | Clean |
+| CMS round-trip | 0-diff (site-copy hero + home + fixture rewritten together) |
+| E2E (Playwright) | **19/19 pass** — TC-02 (hero heading/actions) and TC-17 (Explore Azhwars/Acharyas links) updated |
+| Measured in DOM | hero 600px desktop / 578px mobile; h1 = 2 line boxes, Cormorant Garamond 66px; both hero actions inside the initial viewport; 0px horizontal overflow at 375/768/1280; returning state = "Continue your yatra" + 2 Visited badges |
+| Visual gate | **5/5 pass after a repair loop** — first pass failed the tradition tiles (4-across mid-word name breaks → 2×2 per column), then two capture-harness artifacts (blank lazy images → priming pass; stranded sticky header in fullPage stitches → absolute pin) — `docs/03-design/gate-shots/home-option1-30/` |

@@ -7,14 +7,12 @@ import { test, expect } from '@playwright/test';
 test.describe('Home page (TC-02, TC-03, TC-11)', () => {
   test('shows hero, featured kshetrams and navigation', async ({ page }) => {
     await page.goto('');
-    await expect(page.getByRole('heading', { name: /108 divya kshetrams/i })).toBeVisible();
-    // Round 23: the invocation stack is retired as decorative clutter —
-    // the hero carries exactly two actions over the darkened artwork
-    await expect(page.getByText('Nalayira Divya Prabandham', { exact: true })).toHaveCount(0);
-    await expect(page.getByRole('link', { name: /browse temples/i })).toBeVisible();
+    // Round 30 option-1 hero: new display heading + the two standing actions
+    await expect(page.getByRole('heading', { name: /108 sacred abodes/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /explore the kshetrams/i })).toBeVisible();
     await expect(page.getByRole('link', { name: /plan your yatra/i })).toBeVisible();
     expect(await page.locator('main article').count()).toBeGreaterThanOrEqual(4);
-    await expect(page.getByRole('link', { name: /view all azhwars/i })).toBeVisible();
+    await expect(page.getByRole('main').getByRole('link', { name: /explore azhwars/i })).toBeVisible();
     await expect(page.getByRole('link', { name: '108 Kshetras' })).toBeVisible();
     await expect(page.locator('footer')).toContainText(/good faith/i);
   });

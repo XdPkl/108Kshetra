@@ -29,22 +29,28 @@ const siteCopy = defineType({
   ],
   fields: [
     {name: 'hero', type: 'object', title: 'Home hero', group: 'home', fields: [
-      S('invocation', 'Invocation (Tamil)'),
       S('eyebrow', 'Eyebrow'),
       S('title', 'Title'),
-      S('subtitle', 'Subtitle (Tamil)'),
       T('description', 'Description'),
-      S('cta', 'Button label'),
+      S('tamilLine', 'Tamil line'),
+      S('cta', 'Primary CTA'),
+      S('ctaSecondary', 'Secondary CTA'),
     ]},
     {name: 'home', type: 'object', title: 'Home sections', group: 'home', fields: [
+      {name: 'progress', type: 'object', title: 'Pilgrimage progress strip', fields: [
+        S('beginTitle', 'Empty-state heading'), S('continueTitle', 'Returning-visit heading'), T('support', 'Supporting copy'),
+      ]},
       {name: 'featured', type: 'object', title: 'Featured kshetrams', fields: [
         S('eyebrow', 'Eyebrow'), S('title', 'Title'), T('lead', 'Lead'), S('viewAll', 'View-all link'),
       ]},
-      {name: 'azhwarStrip', type: 'object', title: 'Azhwars strip', fields: [
+      {name: 'azhwarStrip', type: 'object', title: 'Azhwars column', fields: [
         S('eyebrow', 'Eyebrow'), S('title', 'Title'), T('lead', 'Lead'), S('ctaLabel', 'CTA label'),
       ]},
-      {name: 'acharyaStrip', type: 'object', title: 'Acharyas strip', fields: [
+      {name: 'acharyaStrip', type: 'object', title: 'Acharyas column', fields: [
         S('eyebrow', 'Eyebrow'), S('title', 'Title'), T('lead', 'Lead'), S('ctaLabel', 'CTA label'),
+      ]},
+      {name: 'invite', type: 'object', title: 'Guided-yatra invitation', fields: [
+        S('eyebrow', 'Eyebrow'), S('title', 'Title'), T('description', 'Description'), S('cta', 'CTA label'),
       ]},
     ]},
     {name: 'browse', type: 'object', title: 'Browse banner', group: 'pages', fields: [S('eyebrow', 'Eyebrow'), S('title', 'Title'), T('lead', 'Lead'), T('quote', 'Header quote')]},

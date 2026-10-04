@@ -6,47 +6,78 @@ import { cleanup, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../../App.jsx';
+import { resetVisited, markVisited } from '../../state/visited.js';
 
 // Render helper mounting the full App at a given URL.
 function renderAt(url) {
   return render(<MemoryRouter initialEntries={[url]}><App /></MemoryRouter>);
 }
 
-describe('HomePage (UT-HOME-01..03; round-23 coordinated restyle)', () => {
-  it('shows the hero with two actions and the shared temple cards', () => {
+describe('HomePage (UT-HOME-01..03; round-30 option-1 redesign)', () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+    resetVisited();
+  });
+
+  it('shows the immersive hero with the two standing actions and the real Tamil line', () => {
     renderAt('/');
-    expect(screen.getByRole('heading', { name: /108 divya kshetrams/i })).toBeInTheDocument();
-    // Round 23: the invocation stack is retired — no decorative competing text
-    expect(screen.queryByText('Nalayira Divya Prabandham')).not.toBeInTheDocument();
-    // The yatra tracker counts only the 106 earthly kshetrams (PO 2026-09-25);
-    // the progressbar contract exposes the count
+    expect(screen.getByRole('heading', { name: /108 sacred abodes\. one timeless journey\./i })).toBeInTheDocument();
+    expect(screen.getByText(/sacred places\. living tradition\./i)).toBeInTheDocument();
+    expect(screen.getByText('நூற்றெட்டு திவ்ய தேசங்கள்', { exact: true })).toHaveAttribute('lang', 'ta');
+    expect(screen.getByRole('link', { name: /explore the kshetrams/i })).toHaveAttribute('href', '/kshetrams');
+    expect(screen.getByRole('link', { name: /plan your yatra/i })).toHaveAttribute('href', '/map');
+  });
+
+  it('drives the pilgrimage strip from live state with the 108/106 scope', () => {
+    renderAt('/');
+    // Empty state — "Begin your yatra", zero progress, scope sentence intact
+    expect(screen.getByRole('heading', { name: /begin your yatra/i })).toBeInTheDocument();
     const progressbar = screen.getByRole('progressbar');
     expect(progressbar).toHaveAttribute('aria-valuenow', '0');
     expect(progressbar).toHaveAttribute('aria-label', '0 of 106 kshetrams visited');
-    // The scope sentence explains the 108/106 distinction site-wide
+    expect(screen.getByText(/0 of 106 visited/i)).toBeInTheDocument();
     expect(screen.getByText(/the archive holds 108 divya desams/i)).toBeInTheDocument();
-    // 4 featured kshetram cards, each with the shared action set
-    expect(screen.getAllByRole('link', { name: /view temple/i }).length).toBeGreaterThanOrEqual(4);
-    expect(screen.getAllByRole('button', { name: /add to trip/i }).length).toBeGreaterThanOrEqual(4);
-    expect(screen.getAllByRole('button', { name: /mark as visited/i }).length).toBeGreaterThanOrEqual(4);
+    // Returning visitor — the heading and the real stored count switch
+    markVisited('srirangam', true);
+    cleanup();
+    renderAt('/');
+    expect(screen.getByRole('heading', { name: /continue your yatra/i })).toBeInTheDocument();
+    expect(screen.getByText(/1 of 106 visited/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /reset progress/i })).toBeInTheDocument();
   });
 
-  it('offers navigation to Browse, the map and the person strips', () => {
+  it('keeps all four featured temples with the shared card action set', () => {
     renderAt('/');
-    // Round 23: hero actions are "Browse temples" (primary) + "Plan your yatra" (secondary)
-    expect(screen.getByRole('link', { name: /browse temples/i })).toHaveAttribute('href', '/kshetrams');
-    expect(screen.getByRole('link', { name: /plan your yatra/i })).toHaveAttribute('href', '/map');
-    // Round 23: strip CTAs renamed to the directory-consistent labels
-    expect(screen.getByRole('link', { name: /view all azhwars/i })).toHaveAttribute('href', '/azhwars');
-    expect(screen.getByRole('link', { name: /view all acharyas/i })).toHaveAttribute('href', '/acharyas');
-    // Person previews keep unique-named profile links (no overlay stops)
+    expect(screen.getByRole('heading', { name: /featured kshetrams/i })).toBeInTheDocument();
+    expect(screen.getAllByText(/find your next sacred stop/i).length).toBeGreaterThanOrEqual(1);
+    // the whole-card overlay links carry the four names (the View temple
+    // span + toggles sit above them); Srivilliputhur survives the 3-card row
+    expect(screen.getAllByRole('link', { name: /view temple details/i }).length).toBe(4);
+    expect(screen.getByRole('link', { name: /srivilliputhur — view temple details/i })).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: /add to trip/i }).length).toBe(4);
+    expect(screen.getAllByRole('button', { name: /mark visited/i }).length).toBe(4);
+  });
+
+  it('pairs the tradition columns and keeps the profile previews reachable', () => {
+    renderAt('/');
+    expect(screen.getByRole('heading', { name: /saint-poets of the tamil veda/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /the guru parampara/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /explore azhwars/i })).toHaveAttribute('href', '/azhwars');
+    expect(screen.getByRole('link', { name: /explore acharyas/i })).toHaveAttribute('href', '/acharyas');
+    // compact previews keep unique-named profile links (no overlay stops)
     expect(screen.getAllByRole('link', { name: /poigai azhwar|bhoothathazhwar/i }).length).toBeGreaterThanOrEqual(2);
     expect(screen.getAllByRole('link', { name: /thirumazhisai|peyazhwar/i }).length).toBeGreaterThanOrEqual(2);
     expect(screen.queryAllByRole('link', { name: /nammazhwar|andal/i })).toHaveLength(0);
     expect(screen.getAllByRole('link', { name: /nathamuni|yamunacharya|ramanujacharya|pillai lokacharya/i }).length)
       .toBe(4);
     expect(screen.queryAllByRole('link', { name: /manavala/i })).toHaveLength(0);
-    expect(screen.queryByRole('link', { name: /meet the azhwars/i })).not.toBeInTheDocument();
+  });
+
+  it('invites to the guided yatras through the About section anchor', () => {
+    renderAt('/');
+    expect(screen.getByRole('heading', { name: /travel with devotion and context/i })).toBeInTheDocument();
+    expect(screen.getByText(/traditional context, practical travel guidance/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /explore guided yatras/i })).toHaveAttribute('href', '/about#guided-yatras');
   });
 });
 

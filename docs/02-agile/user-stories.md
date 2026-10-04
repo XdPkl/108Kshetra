@@ -749,11 +749,27 @@ shippable, verifiable stories).
 - Delivered as TER v2.38 / TCS v1.24. NOT yet synced to Jira (backlog
   sync runs on request; stories are not deduplicated).
 
+**US-PO-19 — Homepage "option 1" redesign** (5 pts, Priority 2) — *FR-10..12*
+> As the Product Owner, I want the homepage aligned to the selected
+> option-1 mockup — immersive hero, progress strip, featured card grid,
+> paired tradition columns and a guided-yatra invitation — so the opening
+> is more impactful while every existing behaviour, id and link survives.
+
+- Hero reuses the PO-supplied artwork at ~600px with the new copy
+  hierarchy and the real-text Tamil line; progress strip switches
+  "Begin/Continue your yatra" from live state; featured grid keeps all
+  four curated temples on the shared KshetramCard; tradition columns
+  keep the compact profile previews; invitation links to
+  `/about#guided-yatras`; SaintStrip + orphaned FeaturedKshetramCard
+  deleted; site-copy hero/home restructured with schema lockstep (TER
+  v2.39, 2026-10-04 — round 30).
+- Delivered as TER v2.39 / TCS v1.25. NOT yet synced to Jira.
+
 ### Story-Point Summary (v2.1)
 
 | Epic | Stories | Points |
 |---|---|---|
-| EP-PO-ITER | US-PO-01..18 (18 stories; US-PO-18 authored, sync pending) | 99 |
+| EP-PO-ITER | US-PO-01..19 (19 stories; US-PO-18/19 authored, sync pending) | 104 |
 
 ---
 

@@ -559,3 +559,21 @@ recorded in place per the standing convention.
 Quality gates: TC-QA-01 Pass (0 errors; 5 warnings) · TC-QA-02 Pass (**243/243, 23 suites**; 89.90/81.15/84.33/91.52) · TC-QA-03 Pass · E2E **19/19** · Visual gate **7/7** after repair loop (1280/768/375 + sticky/anchor/dialog states). Execution recorded in TER v2.38.
 
 *End of Addendum — TCS-108K-008 v1.24*
+
+## Version 1.25 — Homepage "Option 1" Redesign (2026-10-04)
+
+PO round-30 redesign of the homepage (TER v2.39). Routes, stores and the
+progressbar contract unchanged; contract updates recorded in place.
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-HOME-01 | Rewritten | Immersive hero: new eyebrow/display heading, real-text Tamil line (`lang="ta"`), gold "Explore the Kshetrams" → `/kshetrams` + inverse "Plan your yatra" → `/map` |
+| UT-HOME-02 | Rewritten | Progress strip from live state: "Begin your yatra" at zero with the visible "0 of 106 visited." equivalent and the 108/106 scope sentence; "Continue your yatra" + real count + Reset after `markVisited`; progressbar aria contract unchanged |
+| UT-HOME-03 | Rewritten | Featured grid keeps all four curated temples (incl. Srivilliputhur on the further row) on the shared KshetramCard — 4 overlay links, 4 Add-to-trip, 4 Mark-visited |
+| UT-HOME-04 | New | Tradition columns: "Saint-poets of the Tamil Veda" / "The guru parampara" headings, "Explore Azhwars/Acharyas" hrefs, compact PersonPreview profile links (unique names, no overlay stops) |
+| UT-HOME-05 | New | Guided-yatra invitation: heading/copy + "Explore guided yatras" → `/about#guided-yatras` |
+| TC-02, TC-17 | E2E | New hero heading + actions; Explore Azhwars/Acharyas links in main |
+
+Quality gates: TC-QA-01 Pass (0 errors; 5 warnings) · TC-QA-02 Pass (**246/246, 23 suites**; 90.41/81.97/85.07/92.11) · TC-QA-03 Pass · E2E **19/19** · Visual gate **5/5** after repair loop (1280/768/375 + hero-initial + returning-visitor states). Execution recorded in TER v2.39.
+
+*End of Addendum — TCS-108K-008 v1.25*

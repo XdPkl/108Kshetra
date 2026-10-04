@@ -1,31 +1,41 @@
 {
   "hero": {
-    "invocation": "ஸ்ரீமதே ராமானுஜாய நமஃ",
-    "eyebrow": "Nalayira Divya Prabandham",
-    "title": "108 Divya Kshetrams",
-    "subtitle": "ஆழ்வார்களால் மங்களாசாசனம் செய்யப்பட்ட நூற்றெட்டு திவ்ய தேசங்கள்",
-    "description": "The sacred abodes of Lord Narayana — 108 Divya Desams glorified by the twelve Azhwars",
-    "cta": "Browse temples",
+    "eyebrow": "Sacred places. Living tradition.",
+    "title": "108 sacred abodes. One timeless journey.",
+    "description": "Explore the Divya Desams glorified by the twelve Azhwars. Discover their stories and plan your next darshan.",
+    "tamilLine": "நூற்றெட்டு திவ்ய தேசங்கள்",
+    "cta": "Explore the Kshetrams",
     "ctaSecondary": "Plan your yatra"
   },
   "home": {
     "featured": {
-      "eyebrow": "Begin your journey",
+      "eyebrow": "Find your next sacred stop",
       "title": "Featured Kshetrams",
       "lead": "Find your next sacred stop.",
       "viewAll": "View all 108 Kshetrams →"
     },
     "azhwarStrip": {
-      "eyebrow": "Saint-poets of the Tamil Veda",
-      "title": "The Twelve Azhwars",
-      "lead": "Whose hymns sanctified these hills, groves and cities.",
-      "ctaLabel": "View all Azhwars"
+      "eyebrow": "The twelve Azhwars",
+      "title": "Saint-poets of the Tamil Veda",
+      "lead": "The twelve Azhwars, through their divine hymns, glorified the 108 Divya Desams and revealed the path of devotion, surrender and eternal grace.",
+      "ctaLabel": "Explore Azhwars"
     },
     "acharyaStrip": {
-      "eyebrow": "The guru parampara",
-      "title": "The Acharyas",
-      "lead": "Teachers who received, preserved and expounded the tradition.",
-      "ctaLabel": "View all Acharyas"
+      "eyebrow": "The Acharyas",
+      "title": "The guru parampara",
+      "lead": "The Acharyas preserved and propagated the teachings of the Azhwars, guiding generations in the path of devotion, knowledge and service.",
+      "ctaLabel": "Explore Acharyas"
+    },
+    "progress": {
+      "beginTitle": "Begin your yatra",
+      "continueTitle": "Continue your yatra",
+      "support": "Mark your visits and keep your pilgrimage in one place."
+    },
+    "invite": {
+      "eyebrow": "Travel with devotion and context",
+      "title": "Travel with devotion and context",
+      "description": "Our guided yatras help you experience the Divya Desams with traditional context, practical travel guidance and a deeper understanding.",
+      "cta": "Explore guided yatras"
     }
   },
   "browse": {
