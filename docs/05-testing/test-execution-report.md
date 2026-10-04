@@ -2551,3 +2551,46 @@ PO feedback on the round-26 build, two items, both addressed:
 | CMS round-trip | 0-diff |
 | E2E (Playwright) | **19/19 pass** — TC-14/15 unchanged |
 | Visual gate | map-1280 + map-375 recaptured and re-judged **pass** (106 cards, aligned rows, "Focus on map" visible, no overflow/collisions) — `docs/03-design/gate-shots/map-option3-26/after/` |
+## Version 2.37 — Cluster-Distance Slider (2026-10-04, round 28)
+
+PO request: **"keep a slider for the distance of the clusters. From 1 km
+to max 50 kms. Keep default as 10 kms."** The map's clustering switches
+from a 70px screen-space grid to true distance-based grouping governed by
+the slider. Zoom and scope behavior unchanged.
+
+### What changed
+
+- **`utils/geo.js` — new pure `clusterByDistanceKm(points, radiusKm)`**:
+  greedy seed-based grouping — points are walked in order and each joins
+  the FIRST existing group whose seed is within `radiusKm` (existing
+  `distanceKm` haversine), else seeds a new group; returns member-index
+  arrays. Dataset order keeps runs stable. Marked with a `ponytail:`
+  note: seed-distance grouping (not centroid re-computation or a
+  hierarchical clusterer) — fine at 106 fixed points; supercluster is
+  the upgrade path. Note: greedy seed-grouping is legitimately
+  non-monotone in the radius (members migrate to earlier groups as the
+  radius grows, so a couple of pairs can dissolve while others merge);
+  the slider visibly re-clusters at every step and never moves the map.
+- **MapPage**: new `clusterKm` state (default **10**); the `clusters`
+  memo keeps every guard (live map / not trip-scope / zoom ≤ 8 / ≥ 2
+  shown temples) and now groups via the pure function, keeping groups of
+  ≥ 2. `CLUSTER_CELL_PX` and the `latLngToLayerPoint` bucket are
+  deleted; bubble center/bounds/`flyToBounds` click and the zoom-9
+  dissolve are unchanged.
+- **Slider UI**: a native range input (1–50, step 1) in the floating
+  filter panel under the scope pills — label "Cluster temples within",
+  bold "N km" readout, gold `accent-color`, 44px row, descriptive
+  `aria-label`. Rendered once (the panel is the single filter instance).
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (baseline unchanged) |
+| Unit tests (Vitest) | **241/241 pass (23 suites)** — new `clusterByDistanceKm` describe (within-radius grouping, sub-pair singletons, broad merge, first-seed order stability, empty input) |
+| Coverage | **90.50% statements / 81.50% branches / 85.27% functions / 92.02% lines** (gate 80%) |
+| Production build | Clean |
+| CMS round-trip | 0-diff (no content touched) |
+| E2E (Playwright) | **19/19 pass** — TC-14's zoom-until-clusters-dissolve flow unchanged (one TC-15 clipboard-permission flake passed on re-run) |
+| Verified in DOM | slider value tracks at every step; cluster bubbles 4 @ 1 km, 15 @ 10 km (default), 16 @ 30 km, 15 @ 50 km — non-monotone pairing effects documented above |
+| Visual gate | **2/2 pass** — slider row composition at default 10 km + moved 50 km (readout, thumb position, no overlap/clipping) — `docs/03-design/gate-shots/map-cluster-slider-28/after/` |

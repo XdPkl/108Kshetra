@@ -523,3 +523,19 @@ PO round-27 fixes to the round-26 map (TER v2.36):
 Quality gates: TC-QA-01 Pass (0 errors; 5 warnings) · TC-QA-02 Pass (**236/236, 23 suites**; 90.24/81.38/85.84/91.70) · TC-QA-03 Pass · E2E **19/19** · Visual re-gate 1280+375 pass. Execution recorded in TER v2.36.
 
 *End of Addendum — TCS-108K-008 v1.22*
+## Version 1.23 — Cluster-Distance Slider (2026-10-04)
+
+PO round-28 request: slider for the map cluster distance, 1–50 km,
+default 10 km (TER v2.37). Clustering is now distance-based (greedy
+seed grouping, `clusterByDistanceKm` in utils/geo.js, unit-tested) in
+place of the 70px screen-space grid; zoom-9 dissolve and trip-scope
+exemption unchanged.
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-MAP-01 | Clustering | New pure `clusterByDistanceKm` describe (5 cases); slider sets the radius, re-clusters live, never moves the map |
+| TC-14 | E2E | Unchanged — zoom-until-dissolved flow passes |
+
+Quality gates: TC-QA-01 Pass (0 errors; 5 warnings) · TC-QA-02 Pass (**241/241, 23 suites**; 90.50/81.50/85.27/92.02) · TC-QA-03 Pass · E2E **19/19** · Visual gate **2/2** (slider at 10 km and 50 km). Execution recorded in TER v2.37.
+
+*End of Addendum — TCS-108K-008 v1.23*

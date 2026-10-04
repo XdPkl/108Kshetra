@@ -33,3 +33,28 @@ export function nearbyKshetrams(coords, kshetrams, radiusKm = 50) {
     .filter((entry) => entry.distanceKm <= radiusKm)
     .sort((a, b) => a.distanceKm - b.distanceKm);
 }
+
+/**
+ * Greedy distance-based clustering for the map bubbles (PO round 28):
+ * points are walked in the given order and each joins the FIRST existing
+ * group whose seed point is within radiusKm; a point near no seed seeds a
+ * new group. Input order therefore shapes the groups (dataset order is
+ * stable run to run).
+ *
+ * # ponytail: seed-distance grouping, not centroid re-computation or a
+ * proper hierarchical clusterer (supercluster) — fine at 106 fixed
+ * points; upgrade if the dataset grows or boundaries start to matter.
+ * @param {[number, number][]} points - [lat, lng] list
+ * @param {number} radiusKm - group-membership radius from a group's seed
+ * @returns {number[][]} groups of input indices (≥1 member each), in
+ *   first-seen order
+ */
+export function clusterByDistanceKm(points, radiusKm) {
+  const groups = [];
+  for (let i = 0; i < points.length; i += 1) {
+    const group = groups.find((g) => distanceKm(points[g[0]], points[i]) <= radiusKm);
+    if (group) group.push(i);
+    else groups.push([i]);
+  }
+  return groups;
+}

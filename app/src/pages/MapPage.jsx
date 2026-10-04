@@ -28,7 +28,7 @@ import {
 import 'leaflet/dist/leaflet.css';
 import { getAllKshetramsEnriched, getAllAzhwars } from '../data/api.js';
 import { buildRegionColors } from '../utils/regionColors.js';
-import { distanceKm } from '../utils/geo.js';
+import { clusterByDistanceKm, distanceKm } from '../utils/geo.js';
 import { matchesSearch } from '../utils/filter.js';
 import { orderNearestFirst, legsFor, sumLegs } from '../utils/route.js';
 import { decodeTrip, encodeTrip } from '../state/trip.js';
@@ -45,7 +45,6 @@ import { SITE_COPY } from '../data/siteCopy.js';
 import gopuramIllustration from '../assets/gopuram-illustration.jpg';
 
 const CLUSTER_MAX_ZOOM = 8; // clusters form below zoom 9, dissolve above
-const CLUSTER_CELL_PX = 70;
 
 /** Saffron count bubble for a grid cluster (mockup idiom). */
 function clusterIcon(count) {
@@ -182,6 +181,7 @@ export default function MapPage() {
   const [search, setSearch] = useState('');
   const [region, setRegion] = useState('');
   const [scope, setScope] = useState('all');
+  const [clusterKm, setClusterKm] = useState(10);
   const [me, setMe] = useState(null);
   const [geoMessage, setGeoMessage] = useState('');
   const [mapApi, setMapApi] = useState(null);
@@ -313,15 +313,8 @@ export default function MapPage() {
 
   const clusters = useMemo(() => {
     if (!mapApi || scope === 'trip' || mapApi.getZoom() > CLUSTER_MAX_ZOOM || shown.length < 2) return [];
-    const groups = new Map();
-    for (const k of shown) {
-      const p = mapApi.latLngToLayerPoint(k.coords);
-      const key = `${Math.floor(p.x / CLUSTER_CELL_PX)}:${Math.floor(p.y / CLUSTER_CELL_PX)}`;
-      const bucket = groups.get(key);
-      if (bucket) bucket.push(k);
-      else groups.set(key, [k]);
-    }
-    return [...groups.values()]
+    return clusterByDistanceKm(shown.map((k) => k.coords), clusterKm)
+      .map((indices) => indices.map((i) => shown[i]))
       .filter((members) => members.length > 1)
       .map((members) => ({
         key: `cluster-${members[0].id}`,
@@ -331,7 +324,8 @@ export default function MapPage() {
         ids: members.map((m) => m.id),
       }));
     // clusterTick re-runs this after every pan/zoom (its value is unused)
-  }, [mapApi, shown, scope, clusterTick]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [mapApi, shown, scope, clusterKm, clusterTick]); // eslint-disable-line react-hooks/exhaustive-deps
+
 
   const clusteredIds = useMemo(
     () => new Set(clusters.flatMap((c) => c.ids)),
@@ -435,6 +429,29 @@ export default function MapPage() {
             Reset filters
           </button>
         ) : null}
+        {/* Cluster-distance slider (PO round 28): governs which temples
+            share a bubble below zoom 9; changing it never moves the map. */}
+        <div className="flex items-center justify-between gap-3 text-[13px] font-medium text-[#332417]">
+          <label htmlFor="map-cluster-km" className="min-w-0 shrink-0">
+            Cluster temples within
+          </label>
+          <span className="flex items-center gap-2">
+            <input
+              id="map-cluster-km"
+              type="range"
+              min={1}
+              max={50}
+              step={1}
+              value={clusterKm}
+              onChange={(e) => setClusterKm(Number(e.target.value))}
+              aria-label="Cluster distance in kilometres — temples within this distance share a bubble"
+              className="h-11 w-28 cursor-pointer accent-[#96731F]"
+            />
+            <span className="w-[52px] text-right font-semibold text-[#7A2E00] tabular-nums" aria-hidden="true">
+              {clusterKm} km
+            </span>
+          </span>
+        </div>
       </div>
     </>
   );
