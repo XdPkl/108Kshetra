@@ -17,7 +17,7 @@
  * key" error on this site, so we create with the core fields and apply
  * labels + points via a follow-up edit.
  *
- * Usage:  node docs/02-agile/sync-jira-stories.mjs
+ * Usage:  node docs/02-agile/sync-jira-stories.mjs [--only=US-PO-18,US-PO-19]
  */
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -56,8 +56,22 @@ const api = async (path, opts = {}, attempt = 1) => {
 
 const payloads = JSON.parse(readFileSync(join(here, 'jira-payloads.json'), 'utf8'));
 
+// --only US-PO-18,US-PO-19: sync a subset (already-synced stories are NOT
+// deduplicated, so a full re-run would recreate them).
+const onlyArg = process.argv.find((a) => a.startsWith('--only='));
+const only = onlyArg ? onlyArg.split('=')[1].split(',').map((s) => s.trim()) : null;
+const stories = only ? payloads.stories.filter((s) => only.some((k) => s.fields.summary.startsWith(k))) : payloads.stories;
+if (only && stories.length === 0) {
+  console.error('--only matched no stories:', only);
+  process.exit(1);
+}
+if (only) console.log('syncing only:', stories.map((s) => s.fields.summary.split(' — ')[0]));
+
 // --- epic: reuse if it already exists ---
-const search = await api('/search/jql', { method: 'POST', body: JSON.stringify({ jql: 'project=DTRPR108K AND summary~"EP-PO-ITER" AND issuetype=Epic' }) });
+const search = await api('/search/jql', { method: 'POST', // the new /search/jql API returns bare issue IDs unless fields are
+  // requested — without fields:["key"] the lookup reads undefined and
+  // duplicates the epic (observed 2026-10-04, round 31)
+  body: JSON.stringify({ jql: 'project=DTRPR108K AND summary~"EP-PO-ITER" AND issuetype=Epic', fields: ['key'] }) });
 let epicKey = search.issues?.[0]?.key;
 if (epicKey) {
   console.log(`Epic exists: ${epicKey}`);
@@ -71,7 +85,7 @@ if (epicKey) {
 
 // --- stories: create core, update labels/points, parent, transition Done ---
 const keys = [];
-for (const story of payloads.stories) {
+for (const story of stories) {
   const { labels, customfield_10016, ...core } = story.fields;
   const created = await api('/issue', { method: 'POST', body: JSON.stringify({ fields: { ...core, parent: { key: epicKey } } }) });
   await api(`/issue/${created.key}`, { method: 'PUT', body: JSON.stringify({ fields: { labels, customfield_10016 } }) });

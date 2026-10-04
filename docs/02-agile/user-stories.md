@@ -746,8 +746,7 @@ shippable, verifiable stories).
   with announced copy actions, etiquette accordions; dialog widened to
   680px, asterisk only on the name, inline name-required validation and a
   re-entrancy lock (TER v2.38, 2026-10-04 — round 29).
-- Delivered as TER v2.38 / TCS v1.24. NOT yet synced to Jira (backlog
-  sync runs on request; stories are not deduplicated).
+- Delivered as TER v2.38 / TCS v1.24. Synced as DTRPR108K-101 (2026-10-04).
 
 **US-PO-19 — Homepage "option 1" redesign** (5 pts, Priority 2) — *FR-10..12*
 > As the Product Owner, I want the homepage aligned to the selected
@@ -763,17 +762,33 @@ shippable, verifiable stories).
   `/about#guided-yatras`; SaintStrip + orphaned FeaturedKshetramCard
   deleted; site-copy hero/home restructured with schema lockstep (TER
   v2.39, 2026-10-04 — round 30).
-- Delivered as TER v2.39 / TCS v1.25. NOT yet synced to Jira.
+- Delivered as TER v2.39 / TCS v1.25. Synced as DTRPR108K-102 (2026-10-04).
+
+**US-PO-20 — Map cluster focus: outline + list filter** (3 pts, Priority 2) — *FR-76..78*
+> As the Product Owner, I want clicking a map cluster to highlight the
+> group — a dashed outline of its area on the map and the results list
+> below filtered to its temples — so I can inspect one region of the
+> atlas without losing the wide view.
+
+- Bubble click draws a dashed bounds outline around the group, gold-rings
+  the focused bubble and keeps the standing fly-to-bounds behaviour
+  (maxZoom 9); the results grid filters to the member temples behind a
+  status chip ("N temples from the selected cluster" + Clear); Escape,
+  Reset filters, a scope change or any filter removing a member temple
+  clears the focus — zoom deliberately does not (the fly dissolves the
+  cluster at zoom 9 by design); the focus filters the grid only, never
+  the cluster computation (TER v2.40, 2026-10-04 — round 31).
+- Delivered as TER v2.40 / TCS v1.26. Synced as DTRPR108K-103 (2026-10-04).
 
 ### Story-Point Summary (v2.1)
 
 | Epic | Stories | Points |
 |---|---|---|
-| EP-PO-ITER | US-PO-01..19 (19 stories; US-PO-18/19 authored, sync pending) | 104 |
+| EP-PO-ITER | US-PO-01..20 (20 stories, all synced) | 107 |
 
 ---
 
-## JIRA Synchronization Record (v2.1 — 2026-10-04)
+## JIRA Synchronization Record (v2.2 — 2026-10-04)
 
 The seventeen stories above (plus epic **EP-PO-ITER**) were synced to
 https://dtrprasanna.atlassian.net project **DTRPR108K** on **2026-10-04**
@@ -784,8 +799,18 @@ created first (**DTRPR108K-82**); all seventeen stories carry labels
 text + acceptance criteria, are parented to the epic, and were
 transitioned to **Done** at creation, matching the delivered state and
 the established convention (epics remain **To Do**). Re-run at any time
-with `node docs/02-agile/sync-jira-stories.mjs` (the epic lookup makes
-it reuse DTRPR108K-82; stories are not deduplicated).
+with `node docs/02-agile/sync-jira-stories.mjs --only=US-PO-18,US-PO-19`
+(stories are not deduplicated — always pass --only for new stories).
+
+**v2.2 (2026-10-04, round 31):** US-PO-18/19/20 synced as
+DTRPR108K-101/102/103 via the new `--only` filter and transitioned
+Done, parented to DTRPR108K-82. Incident note: the epic-lookup JQL ran
+against the new POST /search/jql endpoint, which returns bare issue IDs
+unless `fields: ['key']` is requested — the unhydrated response made the
+script read `undefined` and create a duplicate epic (DTRPR108K-100,
+parent of 101–103). Repaired in place: the three stories were re-parented
+to DTRPR108K-82 and the duplicate epic deleted; the script now requests
+`fields: ['key']` so the lookup is genuinely idempotent.
 
 Note: the site's create-issue endpoint rejects a payload combining
 labels + description + story points with a spurious "project" error, so
@@ -812,3 +837,6 @@ points via a follow-up edit (see the script header).
 | Story | US-PO-15 — Map page rebuilt to "option 3" | EP-PO-ITER | 8 | DTRPR108K-97 |
 | Story | US-PO-16 — Map fixes: Focus action + full results matrix | EP-PO-ITER | 3 | DTRPR108K-98 |
 | Story | US-PO-17 — Cluster-distance slider | EP-PO-ITER | 3 | DTRPR108K-99 |
+| Story | US-PO-18 — About page "option 1" restyle | EP-PO-ITER | 5 | DTRPR108K-101 |
+| Story | US-PO-19 — Homepage "option 1" redesign | EP-PO-ITER | 5 | DTRPR108K-102 |
+| Story | US-PO-20 — Map cluster focus: outline + list filter | EP-PO-ITER | 3 | DTRPR108K-103 |

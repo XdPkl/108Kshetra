@@ -70,6 +70,45 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page).toHaveURL(/kshetram\/[a-z-]+$/);
   });
 
+
+  test('TC-20: clicking a cluster outlines its area and filters the list below (round 31)', async ({ page }) => {
+    await page.goto('map');
+    await expect(page.getByRole('heading', { name: /plan your yatra/i })).toBeVisible();
+    // Clusters form at the initial zoom (6 ≤ 8); grab one of the bubbles
+    const bubble = page.locator('.map-cluster__bubble').first();
+    await expect(bubble).toBeVisible();
+    const grid = page.locator('[aria-label="Temples in view"]');
+    const before = await grid.locator('li').count();
+    expect(before).toBeGreaterThan(2);
+
+    await bubble.click();
+    // the dashed bounds outline is drawn on the map pane
+    await expect(page.locator('.leaflet-overlay-pane path[stroke-dasharray]')).toBeVisible();
+    // the chip announces the focus and the grid narrows to the members
+    await expect(page.getByText(/temples? from the selected cluster/i)).toBeVisible();
+    const after = await grid.locator('li').count();
+    expect(after).toBeGreaterThan(1);
+    expect(after).toBeLessThan(before);
+
+    // Clear restores the full list and removes outline + chip
+    await page.getByRole('button', { name: 'Clear', exact: true }).click();
+    await expect(page.getByText(/from the selected cluster/i)).not.toBeVisible();
+    await expect(page.locator('.leaflet-overlay-pane path[stroke-dasharray]')).toHaveCount(0);
+    await expect(grid.locator('li')).toHaveCount(before);
+  });
+
+  test('TC-20b: a filter that removes a cluster member clears the focus', async ({ page }) => {
+    await page.goto('map');
+    const bubble = page.locator('.map-cluster__bubble').first();
+    await expect(bubble).toBeVisible();
+    await bubble.click();
+    await expect(page.getByText(/from the selected cluster/i)).toBeVisible();
+    // a search that empties the result set removes the members — the
+    // focus clears itself
+    await page.getByLabel(/search kshetrams/i).fill('atlantis');
+    await expect(page.getByText(/from the selected cluster/i)).not.toBeVisible();
+    await expect(page.locator('.leaflet-overlay-pane path[stroke-dasharray]')).toHaveCount(0);
+  });
   test('TC-15: trip add → atlas lists stops → order → share-restore', async ({ page, context }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     for (const id of ['srirangam', 'tirupati', 'srivilliputhur']) {

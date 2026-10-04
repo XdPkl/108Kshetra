@@ -577,3 +577,20 @@ progressbar contract unchanged; contract updates recorded in place.
 Quality gates: TC-QA-01 Pass (0 errors; 5 warnings) · TC-QA-02 Pass (**246/246, 23 suites**; 90.41/81.97/85.07/92.11) · TC-QA-03 Pass · E2E **19/19** · Visual gate **5/5** after repair loop (1280/768/375 + hero-initial + returning-visitor states). Execution recorded in TER v2.39.
 
 *End of Addendum — TCS-108K-008 v1.25*
+
+## Version 1.26 — Map Cluster Focus: Outline + List Filter (2026-10-04)
+
+PO round-31 feature (TER v2.40): clicking a cluster bubble outlines the
+group's bounds on the map and filters the results grid to its member
+temples. Unit contract additions are jsdom-unreachable (clusters need a
+live map), so verification is e2e-first.
+
+| ID | Change | Detail |
+|---|---|---|
+| TC-20 | E2E (new) | Click a bubble → dashed `path[stroke-dasharray]` overlay appears, chip "N temples from the selected cluster" visible, grid narrows (before > after > 1), focused bubble gold-ringed; Clear restores the full grid and removes outline + chip |
+| TC-20b | E2E (new) | A search that empties the result set removes the member temples — the focus clears itself (outline + chip gone) |
+| UT-MAP (mock) | Unit | react-leaflet mocks gain `Rectangle`; suite stays 246/246 |
+
+Quality gates: TC-QA-01 Pass (0 errors; 6 warnings — +1 accepted same-class set-state-in-effect) · TC-QA-02 Pass (**246/246, 23 suites**; 89.78/81.19/84.26/91.59) · TC-QA-03 Pass · E2E **21/21** · Visual gate **3/3** after repair loop (desktop full + map viewport + mobile 15-cluster focus). Execution recorded in TER v2.40.
+
+*End of Addendum — TCS-108K-008 v1.26*

@@ -1267,6 +1267,300 @@
         "customfield_10016": 3
       },
       "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-18 — About page \"option 1\" restyle",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want /about rebuilt to the selected option-1 mockup on the kshetrams design system — hero, section nav, editorial purpose, circuit cards, founder desk, contact, etiquette accordions — with the enquiry-dialog label/rule mismatch corrected, so the page matches the live shared components while keeping every section, id and the enquiry flow."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Two-column hero with the shared gopuram watermark and reused quote; sticky lg+ section nav with scroll-spy (six deep-linked ids preserved; mobile scrollable row, never sticky)."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Open purpose section; six circuit cards in a revealable 1/2/3-column grid (ordinals stripped, aria-expanded reveal, dataset verbatim); founder desk with full-bio disclosure; contact block with announced copy actions; etiquette accordions."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Enquiry dialog 680px wide, asterisk only on the name, inline name-required validation, re-entrancy lock; site-copy restructured with fixture + studio schema lockstep."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.38 / TCS v1.24 (2026-10-04, round 29)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 5
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-19 — Homepage \"option 1\" redesign",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want the homepage aligned to the selected option-1 mockup — immersive hero, progress strip, featured card grid, paired tradition columns and a guided-yatra invitation — so the opening is more impactful while every existing behaviour, id and link survives."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Hero reuses the PO-supplied artwork at ~600px with the new copy hierarchy and the real-text Tamil line; gold + inverse actions both inside the initial viewport."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Progress strip switches \"Begin your yatra\"/\"Continue your yatra\" from live state with a visible text equivalent; featured grid keeps all four curated temples on the shared KshetramCard; tradition columns keep the compact profile previews."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Invitation links to /about#guided-yatras; SaintStrip and the orphaned FeaturedKshetramCard deleted; site-copy hero/home restructured with schema lockstep."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.39 / TCS v1.25 (2026-10-04, round 30)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 5
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-20 — Map cluster focus: outline + list filter",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want clicking a map cluster to highlight the group — a dashed outline of its area on the map and the results list below filtered to its temples — so I can inspect one region of the atlas without losing the wide view."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Bubble click draws a dashed bounds outline around the group, gold-rings the focused bubble and keeps the standing fly-to-bounds behaviour (maxZoom 9)."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: The results grid filters to the member temples with a status chip (\"N temples from the selected cluster\" + Clear); region/search/scope still apply first — the focus is one more filter layer, never the only one."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Escape, the chip's Clear, Reset filters, a scope change or any filter removing a member temple clears the focus; the zoom change deliberately does not (the fly dissolves the cluster at zoom 9 by design)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.40 / TCS v1.26 (2026-10-04, round 31)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 3
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
     }
   ]
 }

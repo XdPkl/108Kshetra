@@ -17,6 +17,7 @@ vi.mock('react-leaflet', () => ({
   Popup: ({ children }) => <div>{children}</div>,
   Tooltip: ({ children }) => <div data-testid="map-tooltip">{children}</div>,
   Polyline: () => <div data-testid="map-polyline" />,
+  Rectangle: () => null,
 }));
 
 // The atlas matrix mounts ~108 cards; without this stub each photo-less

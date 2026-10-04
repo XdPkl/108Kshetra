@@ -173,3 +173,9 @@
   font-size: 0.8rem;
   font-weight: 700;
 }
+/* Focused cluster (round 31): the clicked bubble gains the gold ring */
+.map-cluster--active .map-cluster__bubble,
+.map-cluster__bubble--active {
+  border-color: #C99A2E;
+  box-shadow: 0 0 0 3px rgba(201, 154, 46, 0.55), 0 2px 8px rgba(87, 31, 0, 0.35);
+}

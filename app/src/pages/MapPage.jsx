@@ -19,7 +19,7 @@
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { MapContainer, TileLayer, CircleMarker, Marker, Polyline, Popup, Tooltip } from 'react-leaflet';
+import { MapContainer, TileLayer, CircleMarker, Marker, Polyline, Rectangle, Popup, Tooltip } from 'react-leaflet';
 import L from 'leaflet';
 import {
   MapPin, Plus, Printer, RotateCcw, Route as RouteIcon,
@@ -46,11 +46,12 @@ import gopuramIllustration from '../assets/gopuram-illustration.jpg';
 
 const CLUSTER_MAX_ZOOM = 8; // clusters form below zoom 9, dissolve above
 
-/** Saffron count bubble for a grid cluster (mockup idiom). */
-function clusterIcon(count) {
+/** Saffron count bubble for a grid cluster (mockup idiom); the focused
+ * cluster gets the gold ring so its bubble reads as selected. */
+function clusterIcon(count, active = false) {
   return L.divIcon({
-    html: `<span class="map-cluster__bubble">${count}</span>`,
-    className: 'map-cluster',
+    html: `<span class="map-cluster__bubble${active ? ' map-cluster__bubble--active' : ''}" aria-label="Cluster of ${count} temples — show the group's area and filter the list below">${count}</span>`,
+    className: active ? 'map-cluster map-cluster--active' : 'map-cluster',
     iconSize: [36, 36],
     iconAnchor: [18, 18],
   });
@@ -188,6 +189,13 @@ export default function MapPage() {
   const [clusterTick, setClusterTick] = useState(0);
   const [tileError, setTileError] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  // Focused cluster (round 31): the bubble the visitor clicked — a dashed
+  // bounds outline on the map + the results grid filtered to its member
+  // temples. Cleared by Escape, the chip's Clear, Reset filters, a scope
+  // change, or any filter that removes a member temple. Zoom is
+  // deliberately NOT a clear trigger: flying to the bounds dissolves the
+  // cluster (zoom 9) so the member markers show while the focus stands.
+  const [focusedCluster, setFocusedCluster] = useState(null);
 
   // Desktop gets the corner control stack; below lg the same buttons live
   // inside the filter panel (the full-width panel would collide with an
@@ -235,6 +243,15 @@ export default function MapPage() {
     setSearch('');
     setRegion('');
     setScope('all');
+    setFocusedCluster(null);
+  };
+
+  // Click a cluster bubble: keep the standing fly-to-bounds behavior AND
+  // focus the group (dashed outline + the results grid filtered to its
+  // member temples). Clicking another bubble switches the focus.
+  const selectCluster = (c) => {
+    setFocusedCluster({ key: c.key, count: c.count, ids: new Set(c.ids), bounds: c.bounds });
+    mapApi?.flyToBounds(c.bounds, { padding: [28, 28], maxZoom: CLUSTER_MAX_ZOOM + 1 });
   };
 
   // Result dock: always listed (dataset order until the pilgrim shares
@@ -331,6 +348,34 @@ export default function MapPage() {
     () => new Set(clusters.flatMap((c) => c.ids)),
     [clusters],
   );
+
+  // Focused-cluster lifecycle: the focus dies when the trip scope hides
+  // the bubbles, or a filter change removes one of the member temples
+  // from the result set. (clusterTick rides along so a zoom that
+  // regroups the atlas re-validates too.)
+  useEffect(() => {
+    if (!focusedCluster) return undefined;
+    const invalid = scope === 'trip'
+      || shown.filter((k) => focusedCluster.ids.has(k.id)).length !== focusedCluster.ids.size;
+    if (invalid) setFocusedCluster(null);
+    return undefined;
+  }, [focusedCluster, scope, shown, clusterTick]);
+
+  // Escape clears the cluster focus (the Dialog idiom, map flavor).
+  useEffect(() => {
+    if (!focusedCluster) return undefined;
+    const onKey = (e) => { if (e.key === 'Escape') setFocusedCluster(null); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [focusedCluster]);
+
+  // The results grid honors the cluster focus (region/search/scope still
+  // apply first — this is one more filter layer, never the only one).
+  const listed = useMemo(() => (
+    focusedCluster
+      ? cardList.filter((entry) => focusedCluster.ids.has(entry.kshetram.id))
+      : cardList
+  ), [cardList, focusedCluster]);
 
   // Route overlay: dashed polyline + numbered tooltips for the trip on the
   // atlas itself (mirrors the selected view ordering).
@@ -558,15 +603,25 @@ export default function MapPage() {
               pathOptions={{ color: '#922e0d', weight: 2.5, dashArray: '6 6', opacity: 0.8 }}
             />
           ) : null}
-          {/* Cluster bubbles (live map, zoomed out) — clicking zooms to the group */}
+          {/* Cluster bubbles (live map, zoomed out) — clicking focuses the
+              group: dashed bounds outline + the list filtered to members */}
           {clusters.map((c) => (
             <Marker
               key={c.key}
               position={c.center}
-              icon={clusterIcon(c.count)}
-              eventHandlers={{ click: () => mapApi?.flyToBounds(c.bounds, { padding: [28, 28], maxZoom: CLUSTER_MAX_ZOOM + 1 }) }}
+              icon={clusterIcon(c.count, focusedCluster?.key === c.key)}
+              eventHandlers={{ click: () => selectCluster(c) }}
             />
           ))}
+          {/* Focused-cluster outline — a dashed snapshot of the group's
+              bounds; decorative (the chip + grid carry the state) */}
+          {focusedCluster ? (
+            <Rectangle
+              bounds={focusedCluster.bounds}
+              interactive={false}
+              pathOptions={{ color: '#B34700', weight: 2, dashArray: '6 6', fillColor: '#B34700', fillOpacity: 0.06 }}
+            />
+          ) : null}
           {[...(scope === 'trip' ? mapStops : shown)]
             .filter((k) => Array.isArray(k.coords) && !(scope !== 'trip' && clusteredIds.has(k.id)))
             .map((k) => {
@@ -684,20 +739,43 @@ export default function MapPage() {
 
       {/* ---- Results grid below the map: every matching temple, wrapping
            1/2/3 across (PO round 27: no scroll needed); the tile-failure
-           fallback everywhere ---- */}
+           fallback everywhere. A focused cluster narrows the grid to its
+           member temples (round 31), announced by the chip. ---- */}
       <section
         aria-label="Temples in view"
         className="pt-5"
       >
-        <div className="flex items-baseline justify-between gap-3 pb-3">
-          <h2 className="font-display text-[26px]! leading-[1.12]! font-semibold text-[#5C1F00]!">
-            Temples in view
-          </h2>
-          <span className="text-[14px] font-medium text-[#66523D]">{cardList.length} results</span>
+        <div className="flex flex-wrap items-center justify-between gap-3 pb-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <h2 className="font-display text-[26px]! leading-[1.12]! font-semibold text-[#5C1F00]!">
+              Temples in view
+            </h2>
+            {focusedCluster ? (
+              <p
+                role="status"
+                className="flex items-center gap-2 rounded-full border border-[#C99A2E]/60 bg-[#F6EBD6] px-3.5 py-1.5 text-[13px] font-semibold text-[#7A2E00]"
+              >
+                <span className="map-cluster__bubble static flex h-[18px] w-[18px] items-center justify-center text-[10px]" aria-hidden="true">
+                  {focusedCluster.count}
+                </span>
+                <span>
+                  {listed.length} temple{listed.length === 1 ? '' : 's'} from the selected cluster
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setFocusedCluster(null)}
+                  className="rounded-md px-1.5 py-0.5 text-[12px] font-bold text-[#7A2E00]! underline underline-offset-2 transition-colors hover:text-[#5C1F00]!"
+                >
+                  Clear
+                </button>
+              </p>
+            ) : null}
+          </div>
+          <span className="text-[14px] font-medium text-[#66523D]">{listed.length} results</span>
         </div>
-        {cardList.length > 0 ? (
+        {listed.length > 0 ? (
           <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {cardList.map(({ kshetram: k, km }) => (
+            {listed.map(({ kshetram: k, km }) => (
               <MapResultCard
                 key={k.id}
                 kshetram={k}

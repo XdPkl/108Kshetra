@@ -2791,3 +2791,74 @@ mockup's three featured temples while keeping Srivilliputhur reachable.
 | E2E (Playwright) | **19/19 pass** — TC-02 (hero heading/actions) and TC-17 (Explore Azhwars/Acharyas links) updated |
 | Measured in DOM | hero 600px desktop / 578px mobile; h1 = 2 line boxes, Cormorant Garamond 66px; both hero actions inside the initial viewport; 0px horizontal overflow at 375/768/1280; returning state = "Continue your yatra" + 2 Visited badges |
 | Visual gate | **5/5 pass after a repair loop** — first pass failed the tradition tiles (4-across mid-word name breaks → 2×2 per column), then two capture-harness artifacts (blank lazy images → priming pass; stranded sticky header in fullPage stitches → absolute pin) — `docs/03-design/gate-shots/home-option1-30/` |
+
+## Version 2.40 — Map Cluster Focus: Outline + List Filter (2026-10-04, round 31)
+
+**Trigger (PO request):** clicking a cluster bubble should (a) show the
+cluster's area on the map as a dotted enclosed area and (b) filter the
+results grid below to just that cluster's temples — one more filtering
+layer after the region. Feasibility was assessed first: both features
+share one state (`focusedCluster`), the geometry already exists in the
+round-28 cluster memo (`bounds`, `ids`), and no new dependency is needed.
+
+### What changed
+
+- **`focusedCluster` state (MapPage)**: `{ key, count, ids: Set, bounds }`
+  set by `selectCluster(c)` on bubble click. The standing round-26
+  `flyToBounds` behaviour is kept in the same handler (maxZoom 9 — the
+  fly dissolves the bubble layer into individual markers, which is
+  precisely the point of inspecting a cluster).
+- **Dashed bounds outline**: a react-leaflet `Rectangle` over the
+  cluster's bounds (`interactive: false`) — `#B34700`, weight 2,
+  `dashArray: '6 6'`, 6% fill; the same dotted idiom as the trip
+  polyline. A bounds rectangle was chosen over a convex hull (the
+  lazy-but-correct option; hull remains the upgrade path if the PO
+  wants the organic shape).
+- **Focused-bubble styling**: `clusterIcon(count, active)` renders the
+  focused bubble with a gold ring (`.map-cluster--active` in zip.css)
+  and an `aria-label` naming the cluster ("Cluster of N temples — show
+  the group's area and filter the list below"); Leaflet markers are
+  keyboard-focusable, so the feature is reachable without a pointer.
+- **Results-grid filter**: `listed = cardList.filter(ids.has)` — applied
+  ONLY at the grid level, never to `shown` (which drives the cluster
+  computation; feeding the filter back would dissolve the clicked
+  cluster recursively). Region/search/scope still apply first — the
+  focus is one more layer, never the only one.
+- **Status chip** in the "Temples in view" header: gold-tinted pill with
+  the cluster's medallion count, "{listed.length} temples from the
+  selected cluster" and a Clear link (`role="status"`, so the narrowing
+  is announced); the results count line reflects the filtered list.
+- **Lifecycle**: the focus clears on Escape (the Dialog idiom), the
+  chip's Clear, Reset filters, a scope change (trip scope has no
+  clusters), or any filter that removes a member temple (effect
+  validating membership against `shown`; `clusterTick` rides along so a
+  re-grouping pan re-validates too). Zoom is deliberately NOT a clear
+  trigger — the fly itself dissolves the cluster at zoom 9, and the
+  outline is a snapshot that survives while the member markers show.
+  Clicking another bubble switches the focus.
+
+### Jira (delivered + synced this round)
+
+US-PO-18/19/20 authored in user-stories.md and synced to DTRPR108K as
+**DTRPR108K-101/102/103** (Done, parented to epic DTRPR108K-82) via the
+sync script's new `--only` filter. Two incidents, both repaired and
+documented in the user-stories v2.2 record: (1) the epic-lookup JQL ran
+against the new POST /search/jql endpoint, which returns bare issue IDs
+unless `fields: ['key']` is requested — the unhydrated response created
+a duplicate epic (DTRPR108K-100); the three stories were re-parented to
+DTRPR108K-82 and the duplicate deleted, and the script now requests the
+key field so the lookup is genuinely idempotent. (2) a shell backtick
+incident briefly duplicated US-PO-18 (DTRPR108K-104) — deleted
+immediately; docs/02-agile doc edits now go through the Write tool only
+(gotcha 22 re-learned the hard way).
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 6 warnings (+1: the membership-validation effect is the same accepted `set-state-in-effect` class as the existing 5; CI gate is 0 errors) |
+| Unit tests (Vitest) | **246/246 pass (23 suites)** — react-leaflet mocks gained `Rectangle`; bubble-click logic is not jsdom-reachable (`mapApi` null → clusters empty), so verification lives in e2e |
+| Coverage | **89.78% statements / 81.19% branches / 84.26% functions / 91.59% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright) | **21/21 pass** — new TC-20 (click → outline + chip + narrowed grid + Clear restores) and TC-20b (a search that empties the result set clears the focus) |
+| Visual gate | **3/3 pass after a repair loop** — desktop full page + map viewport passed; the mobile shot took three iterations, all capture-side: the first shot caught the ~2-3s `flyToBounds` animation mid-flight (waits extended to 3.5s), a page-text drag produced a selection band (drag now starts inside the map sliver), and a 2-temple cluster's outline is ~13×35px at zoom 9 — unreadable in the 73px sliver below the round-26 floating panel (the 15-temple cluster, same as desktop, is the mobile evidence) — `docs/03-design/gate-shots/map-cluster-focus-31/` |
