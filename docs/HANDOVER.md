@@ -1,7 +1,7 @@
-# HANDOVER — 108 Divya Kshetrams (2026-10-04, after rounds 24–29 + audit + Jira backlog sync)
+# HANDOVER — 108 Divya Kshetrams (2026-10-04, after rounds 24–30 + audit + Jira backlog sync)
 
-State: **Round 29 pushed, CI+Deploy green on `64089d6`, live verified.**
-`main` = `64089d6` (About option-1 restyle) in sync with `origin/main`
+State: **Round 30 pushed, CI+Deploy green on `3ea21aa`, live verified.**
+`main` = `3ea21aa` (Homepage option-1 redesign) in sync with `origin/main`
 (https://github.com/XdPkl/108Kshetra). Live: https://xdpkl.github.io/108Kshetra/
 — verify bundles by CONTENT, not by hash (CI Linux hashes differ; grep the
 live `assets/index-*.js` via `node -e "...includes(...)"` — gotcha 12; MapPage
@@ -20,18 +20,18 @@ No preview server running. Scratch scripts deleted. Nothing in flight.
 | `b8437aa` | **Round 28 — cluster-distance slider**: pure `clusterByDistanceKm(points, radiusKm)` (greedy seed-based km grouping, `ponytail:` noted, 5 unit cases) replaces the 70px pixel-grid; slider 1–50 km default 10 in the floating panel with live "N km" readout; zoom-9 dissolve + trip-scope exemption unchanged. NOTE: greedy seed grouping is **non-monotone in radius** (a pair can dissolve while others merge as the radius grows) — documented in TER v2.37 | TER v2.37, TCS v1.23 |
 | `63fdbe5` + `2fefff3` | **Jira backlog authoring + SYNC**: all 24 delivered iterations authored as **US-PO-01..17 under epic EP-PO-ITER (94 pts)** in `docs/02-agile/user-stories.md` v2.1; synced to DTRPR108K via REST v3 — epic **DTRPR108K-82**, stories **DTRPR108K-83..99**, all transitioned **Done** at creation (epics To Do per convention). Sync script: `docs/02-agile/sync-jira-stories.mjs` (reads `.env.local`, epic lookup idempotent, stories not deduplicated) | user-stories.md v2.1 |
 | `64089d6` | **Round 29 — /about rebuilt to "option 1"**: two-column hero (copy + gopuram watermark + reused browse quote, 2-line display heading measured), sticky-below-header section nav on lg+ with IO scroll-spy (six ids + header deep links preserved; mobile = scrollable row with fade cue, never sticky), editorial purpose (paragraphs 0+2, two dataset-derived icon rows), "Find your regional yatra" + 3 compact service-theme rows, six circuit cards in a revealable 1/2/3-col grid (ordinals stripped, `aria-expanded` reveal, actions pinned, region URLs + preselected dialog intact), founder desk (full-bio disclosure keeps bio[1]+pillars+base+email; admin-gated portrait untouched), contact block with announced copy actions, etiquette accordions; dialog 680px, asterisk only on the name, inline name-required validation + re-entrancy lock. Site-copy `about` restructured (hero/purpose/yatras added; banner + 11 dead section fields retired) with fixture + studio schema lockstep | TER v2.38, TCS v1.24, user-stories US-PO-18 (sync pending) |
+| `3ea21aa` | **Round 30 — homepage rebuilt to "option 1"**: immersive 600px hero reusing the PO-supplied `hero-sunset-lamps.jpg` with the new copy hierarchy (eyebrow, 2-line 66px Cormorant heading, supporting line, real-text Tamil `lang="ta"`, gold "Explore the Kshetrams" + inverse "Plan your yatra", both in the initial viewport); progress strip switches "Begin your yatra"/"Continue your yatra" from live state with the visible "N of 106 visited." equivalent (progressbar contract unchanged); featured grid now the shared KshetramCard in 1/2/3 cols keeping ALL FOUR curated temples (Srirangam, Thiruvengadam, Thirukkachi + Srivilliputhur on a further row); two tradition columns (divider, tertiary Explore links) keeping compact 2×2 PersonPreview profile links; guided-yatra invitation → `/about#guided-yatras` with the shared gopuram illustration + browse quote; **SaintStrip + orphaned FeaturedKshetramCard deleted**. Site-copy hero/home restructured (invocation/subtitle retired, progress+invite added) with fixture + schema lockstep | TER v2.39, TCS v1.25, user-stories US-PO-19 (sync pending) |
 
-Final gates at handoff: **243/243 unit (23 suites) · 19/19 e2e · coverage
-89.90% stmts / 81.15% branches / 84.33% funcs / 91.52% lines (gate 80%;
-branch headroom ~1.15pp) ·
+Final gates at handoff: **246/246 unit (23 suites) · 19/19 e2e · coverage
+90.41% stmts / 81.97% branches / 85.07% funcs / 92.11% lines (gate 80%) ·
 oxlint 0 errors / 5 warnings · build clean · CMS round-trip 0-diff ·
 visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/`,
 `acharyas-restyle-25/`, `map-option3-26/`, `map-cluster-slider-28/`,
-`about-option1-29/`).
+`about-option1-29/`, `home-option1-30/`).
 
 ## 2. Open items / likely next requests
 
-- **More PO fix lists** — 29 rounds in ~10 days. Proven loop: inspect
+- **More PO fix lists** — 30 rounds in ~10 days. Proven loop: inspect
   brief/mock → implement reusing kshetrams idioms → Playwright measurement
   + screenshots → judge → gates → TER → commit → push → CI/live check.
 - **PO mockups**: rounds 24/25/26 mockup files never existed on disk (the
@@ -50,14 +50,14 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   (nadadur-ammal etc. show pending markers), CEO portrait, azhwar/acharya
   portraits (only Poigai has photos[]; NO acharya has photos[] — 5 wiki
   images + 22 shanka emblem fallbacks on /acharyas are stand-ins).
-- **Jira: BACKLOG IS SYNCED through round 28** (DTRPR108K-82..99). Round
-  29 is **authored as US-PO-18 (5 pts) in user-stories.md but NOT synced**
+- **Jira: BACKLOG IS SYNCED through round 28** (DTRPR108K-82..99). Rounds
+  29–30 are **authored as US-PO-18/19 in user-stories.md but NOT synced**
   — run `sync-jira-stories.mjs` when the PO asks (extend its story list;
   it is idempotent for the epic only, stories are not deduplicated). The
   fresh API token in `.env.local` works; if it was ever pasted into chat,
   revoke it — nothing else needs it until a backlog sync.
-- **Coverage drift watch**: branches 81.15% vs gate 80% — headroom ~1.15pp
-  (dipped from 81.50 this round). Any new conditional needs a test.
+- **Coverage**: branches recovered to 81.97% (dead-code deletion in
+  round 30) — headroom ~2pp again. Any new conditional needs a test.
   CI is 2-core (gotcha 10); one e2e flake observed (TC-15 clipboard
   permission, passed on re-run).
 - **Vada Nadu duration note** (round 23) presentational; subcircuit split
@@ -131,15 +131,29 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   `useRef` submit lock. Gold action idiom: `ui-btn rounded-lg!
   bg-[#96731F] text-[#FFFDF7]! hover:bg-[#7A2E00]!` (ui-btn base supplies
   44px target + gold focus ring).
+- **HomePage** (`/`, round 30 option-1): full-bleed bands on `max-w-site`
+  columns, root keeps `.dir` (portrait variables). Hero (existing
+  `hero-sunset-lamps.jpg` object-cover, dark base + left scrim,
+  min-h-[440px] lg:min-h-[600px]; gold primary is a raw `Link` with the
+  round-29 goldBtn idiom — NOT ButtonLink, whose maroon variant would
+  fight the tailwind bg) → YatraProgressTracker (heading switches
+  `SITE_COPY.home.progress.beginTitle/continueTitle` on `count === 0`;
+  gold Mark a visit; reset only when count > 0) → FeaturedKshetrams
+  (shared KshetramCard, grid 1/2/3, all 4 FEATURED_KSHETRAM_IDS render,
+  4th wraps) → tradition section (two columns + lg divider via
+  local TraditionColumn; PersonPreview 2×2 per column — 4-across breaks
+  names mid-word) → invitation band (gold CTA to `/about#guided-yatras`,
+  gopuram illustration + browse.quote figure) → ornament. SaintStrip and
+  FeaturedKshetramCard are DELETED.
 - **Tests must not touch the network**: `useWikiImage` mocked in
   directory/yatraPages tests; real fetch stubbed elsewhere (vi.stubGlobal).
-- Registers/dates: **TER v2.38; TCS v1.24**; user-stories.md v2.1 (Jira
-  sync record with all 18 keys + US-PO-18 authored, sync pending).
+- Registers/dates: **TER v2.39; TCS v1.25**; user-stories.md v2.1 (Jira
+  sync record with all 18 keys + US-PO-18/19 authored, sync pending).
   UT-DTL unchanged since round 17;
   UT-ACH-02 rewritten rounds 22/25; UT-AZW-02 round 24; UT-MAP-01..03 +
-  UT-TRP-02/03 rewritten rounds 26–28 (My trip opener, reset-conditional,
-  narrow-controls, results-grid tests); UT-ABT-01..05 rewritten/added
-  round 29; `utils/__tests__/geo.test.js`
+  UT-TRP-02/03 rewritten rounds 26–28; UT-ABT-01..05 rewritten/added
+  round 29; UT-HOME-01..05 rewritten/added round 30;
+  `utils/__tests__/geo.test.js`
   gained the clusterByDistanceKm describe.
 
 ## 4. Gotchas (accumulated — ALL still valid, plus new)
@@ -266,6 +280,18 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
     same-hue fade over a barely-different surface is invisible to the
     judge — strengthen it (`from-45%` + wider stop) so the overflow cue
     actually reads (round 29 mobile nav).
+50. **Playwright fullPage captures need a lazy-load priming pass** —
+    scroll through the page (half-viewport steps, ~120ms each) and wait
+    for `document.images` BEFORE the shot, or below-the-fold
+    `loading="lazy"` wiki photos render as blank ivory boxes (round 30
+    mobile/tablet shots failed on exactly this; desktop passed on
+    timing luck).
+51. **The sticky site-header strands mid-page in fullPage stitches** —
+    during capture, pin it `position:absolute; top:0; width:100%`
+    (harness-only) and scroll to top first. Without `width:100%` an
+    absolutely-positioned header shrink-wraps to its content and reads
+    as a right-edge seam. The gotcha-22 "scrollTo(0,0) before fullPage"
+    rule is NOT sufficient for sticky headers.
 
 ## 5. Command cheat-sheet
 
