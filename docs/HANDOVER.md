@@ -1,7 +1,7 @@
-# HANDOVER — 108 Divya Kshetrams (2026-10-04, after rounds 24–28 + audit + Jira backlog sync)
+# HANDOVER — 108 Divya Kshetrams (2026-10-04, after rounds 24–29 + audit + Jira backlog sync)
 
-State: **Everything pushed, CI+Deploy green on `2fefff3`, live verified.**
-`main` = `2fefff3` (Jira sync record) in sync with `origin/main`
+State: **Round 29 pushed, CI+Deploy green on `64089d6`, live verified.**
+`main` = `64089d6` (About option-1 restyle) in sync with `origin/main`
 (https://github.com/XdPkl/108Kshetra). Live: https://xdpkl.github.io/108Kshetra/
 — verify bundles by CONTENT, not by hash (CI Linux hashes differ; grep the
 live `assets/index-*.js` via `node -e "...includes(...)"` — gotcha 12; MapPage
@@ -19,22 +19,25 @@ No preview server running. Scratch scripts deleted. Nothing in flight.
 | `177e3b4` | **Round 27 — map PO fixes**: visible "Focus on map" action on every results card; horizontal-scroll dock → wrapping 1/2/3-column grid listing EVERY matching temple on every viewport; Map/List switch + mobileView state + list-view inline filter panel removed | TER v2.36, TCS v1.22 |
 | `b8437aa` | **Round 28 — cluster-distance slider**: pure `clusterByDistanceKm(points, radiusKm)` (greedy seed-based km grouping, `ponytail:` noted, 5 unit cases) replaces the 70px pixel-grid; slider 1–50 km default 10 in the floating panel with live "N km" readout; zoom-9 dissolve + trip-scope exemption unchanged. NOTE: greedy seed grouping is **non-monotone in radius** (a pair can dissolve while others merge as the radius grows) — documented in TER v2.37 | TER v2.37, TCS v1.23 |
 | `63fdbe5` + `2fefff3` | **Jira backlog authoring + SYNC**: all 24 delivered iterations authored as **US-PO-01..17 under epic EP-PO-ITER (94 pts)** in `docs/02-agile/user-stories.md` v2.1; synced to DTRPR108K via REST v3 — epic **DTRPR108K-82**, stories **DTRPR108K-83..99**, all transitioned **Done** at creation (epics To Do per convention). Sync script: `docs/02-agile/sync-jira-stories.mjs` (reads `.env.local`, epic lookup idempotent, stories not deduplicated) | user-stories.md v2.1 |
+| `64089d6` | **Round 29 — /about rebuilt to "option 1"**: two-column hero (copy + gopuram watermark + reused browse quote, 2-line display heading measured), sticky-below-header section nav on lg+ with IO scroll-spy (six ids + header deep links preserved; mobile = scrollable row with fade cue, never sticky), editorial purpose (paragraphs 0+2, two dataset-derived icon rows), "Find your regional yatra" + 3 compact service-theme rows, six circuit cards in a revealable 1/2/3-col grid (ordinals stripped, `aria-expanded` reveal, actions pinned, region URLs + preselected dialog intact), founder desk (full-bio disclosure keeps bio[1]+pillars+base+email; admin-gated portrait untouched), contact block with announced copy actions, etiquette accordions; dialog 680px, asterisk only on the name, inline name-required validation + re-entrancy lock. Site-copy `about` restructured (hero/purpose/yatras added; banner + 11 dead section fields retired) with fixture + studio schema lockstep | TER v2.38, TCS v1.24, user-stories US-PO-18 (sync pending) |
 
-Final gates at handoff: **241/241 unit (23 suites) · 19/19 e2e · coverage
-90.50% stmts / 81.50% branches / 85.27% funcs / 92.02% lines (gate 80%) ·
+Final gates at handoff: **243/243 unit (23 suites) · 19/19 e2e · coverage
+89.90% stmts / 81.15% branches / 84.33% funcs / 91.52% lines (gate 80%;
+branch headroom ~1.15pp) ·
 oxlint 0 errors / 5 warnings · build clean · CMS round-trip 0-diff ·
 visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/`,
-`acharyas-restyle-25/`, `map-option3-26/`, `map-cluster-slider-28/`).
+`acharyas-restyle-25/`, `map-option3-26/`, `map-cluster-slider-28/`,
+`about-option1-29/`).
 
 ## 2. Open items / likely next requests
 
-- **More PO fix lists** — 28 rounds in ~10 days. Proven loop: inspect
+- **More PO fix lists** — 29 rounds in ~10 days. Proven loop: inspect
   brief/mock → implement reusing kshetrams idioms → Playwright measurement
   + screenshots → judge → gates → TER → commit → push → CI/live check.
-- **PO mockup files keep not existing on disk** (rounds 24/25/26: `azhwars-matched-styles.png`,
-  `acharyas-refined.png`, option-3 mock) — the written briefs were
-  self-sufficient and implementation used them + live /kshetrams computed
-  styles; flagged to the PO each time. If a mockup ever arrives, reconcile.
+- **PO mockups**: rounds 24/25/26 mockup files never existed on disk (the
+  written briefs were self-sufficient; flagged each time). Round 29's
+  option-1 mockup arrived as a chat image (not a repo file) and was used
+  for layout/hierarchy with live /kshetrams computed styles as authority.
 - **CONTACT DISCREPANCIES (round 23, verified, NOT fixed — PO-owned data)**:
   `contact@kshetratours.org` domain does NOT resolve; `kshetratours.com`
   is a live agency site whose phone (+91 98405 01427) differs from the
@@ -47,14 +50,16 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   (nadadur-ammal etc. show pending markers), CEO portrait, azhwar/acharya
   portraits (only Poigai has photos[]; NO acharya has photos[] — 5 wiki
   images + 22 shanka emblem fallbacks on /acharyas are stand-ins).
-- **Jira: BACKLOG IS NOW SYNCED through round 28** (DTRPR108K-82..99). The
-  previously-open "author rounds 5–23" item is CLOSED. The fresh API token
-  in `.env.local` works; if it was ever pasted into chat, revoke it —
-  nothing else needs it until a future backlog sync (`sync-jira-stories.mjs`
-  is idempotent for the epic only; stories are not deduplicated).
-- **Coverage drift watch**: branches 81.50% vs gate 80% — headroom ~1.5pp.
-  Any new conditional needs a test. CI is 2-core (gotcha 10); one e2e
-  flake observed (TC-15 clipboard permission, passed on re-run).
+- **Jira: BACKLOG IS SYNCED through round 28** (DTRPR108K-82..99). Round
+  29 is **authored as US-PO-18 (5 pts) in user-stories.md but NOT synced**
+  — run `sync-jira-stories.mjs` when the PO asks (extend its story list;
+  it is idempotent for the epic only, stories are not deduplicated). The
+  fresh API token in `.env.local` works; if it was ever pasted into chat,
+  revoke it — nothing else needs it until a backlog sync.
+- **Coverage drift watch**: branches 81.15% vs gate 80% — headroom ~1.15pp
+  (dipped from 81.50 this round). Any new conditional needs a test.
+  CI is 2-core (gotcha 10); one e2e flake observed (TC-15 clipboard
+  permission, passed on re-run).
 - **Vada Nadu duration note** (round 23) presentational; subcircuit split
   needs operator confirmation. **Timings duplication** (kshetram sidebar +
   Visit tab) persists by design. **Field-name asymmetry** (acharyas `era`
@@ -65,17 +70,22 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
 - Content source of truth: `app/src/data/content/*.json`; shims preserve
   old import paths — do not bypass. UI reaches data ONLY via
   `data/api.js`. Site-copy fields change app JSON + fixture TOGETHER
-  (`sync-content --fixture --check` 0-diff). Recent site-copy additions:
-  `azhwarsPage.noDesamsNote` (round 24), `trip.emptyTitle/emptyMessage`
-  rewritten (round 26: "Your yatra starts here" / "Explore temples").
-- **Design-language shift this session**: /azhwars, /acharyas and /map all
-  left the `.dir` directory theme for the **/kshetrams design system**
+  (`sync-content --fixture --check` 0-diff). Round-29 site-copy
+  restructure: `about.hero/purpose/yatras` + `sections.founderEyebrow/
+  founderBioCta/contactIntro/contactTeamCta` + `labels.nameRequired`
+  added; `about.banner` and 11 dead section fields retired; anchors[0]/[2]
+  and `contactEyebrow` revalued.
+- **Design-language shift through round 29**: /azhwars, /acharyas, /map
+  AND /about all left the `.dir` directory theme for the **/kshetrams
+  design system**
   (Cormorant Garamond display via `font-display`, Mukta Malar body,
   `#5C1F00` headings, `#96731F` gold buttons with 18px `rounded-lg`
   token, `#FFFDF7` surfaces, `#C99A2E`/45 card borders → opaque gold +
   4px lift + shadow-lg on hover, 300ms; motion-reduce guards). `.dir`
-  scope now wraps ONLY HomePage and AboutPage (they still use dir-jumps,
-  dir-portrait, PersonPreview, TempleCard, PortraitFallback, ProfileLink).
+  scope now wraps ONLY HomePage (AboutPage's CeoPortrait keeps a LOCAL
+  `.dir` wrapper for the portrait variables — gotcha 41; home still uses
+  dir-jumps, dir-portrait, PersonPreview, TempleCard, PortraitFallback,
+  ProfileLink).
   ui.css shared primitives (Button/Dialog/fields/SectionHeading/
   ContactDetails) stay site-wide.
 - **Directory components** after round-25 deletions: TempleCard,
@@ -103,13 +113,33 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   pills have `aria-current` + IO scroll-spy (guard: `typeof
   IntersectionObserver === 'undefined'` → skipped in jsdom); sections
   scroll-mt-[88px].
+- **AboutPage** (`/about`, round 29 option-1): hero (eyebrow/2-line
+  Cormorant h1/description, gold anchor CTA `#guided-yatras` + secondary
+  `/kshetrams`, gopuram watermark + `SITE_COPY.browse.quote` figure) →
+  section nav (six pills, `SITE_COPY.about.anchors`, lg:sticky lg:top-16
+  translucent, IO scroll-spy, mobile overflow-x row + fade gradient;
+  sections `scroll-mt-[76px] lg:scroll-mt-[136px]`, #circuits
+  `lg:scroll-mt-[168px]`) → #archive purpose 2-col → #guided-yatras
+  (circuitsNote lead, 3 theme rows) with child #circuits grid (first 3 +
+  aria-expanded reveal to 6; CircuitCard: region eyebrow, stripped-title
+  Cormorant h3, gold-label dl rows, desc, goldBtn inquire + secondary
+  View temples) → #ceo-leadership (portrait+name/bio/full-bio details |
+  quote card) → #contact-desk (gold Request schedule + Contact-the-team
+  anchor → ContactDetails card) → #sanctum-etiquette details accordions.
+  InquiryDialog passes `className="max-w-[680px]"` (Dialog now takes a
+  className prop); name-required inline error + contact either/or rule;
+  `useRef` submit lock. Gold action idiom: `ui-btn rounded-lg!
+  bg-[#96731F] text-[#FFFDF7]! hover:bg-[#7A2E00]!` (ui-btn base supplies
+  44px target + gold focus ring).
 - **Tests must not touch the network**: `useWikiImage` mocked in
   directory/yatraPages tests; real fetch stubbed elsewhere (vi.stubGlobal).
-- Registers/dates: **TER v2.37; TCS v1.23**; user-stories.md v2.1 (Jira
-  sync record with all 18 keys). UT-DTL unchanged since round 17;
+- Registers/dates: **TER v2.38; TCS v1.24**; user-stories.md v2.1 (Jira
+  sync record with all 18 keys + US-PO-18 authored, sync pending).
+  UT-DTL unchanged since round 17;
   UT-ACH-02 rewritten rounds 22/25; UT-AZW-02 round 24; UT-MAP-01..03 +
   UT-TRP-02/03 rewritten rounds 26–28 (My trip opener, reset-conditional,
-  narrow-controls, results-grid tests); `utils/__tests__/geo.test.js`
+  narrow-controls, results-grid tests); UT-ABT-01..05 rewritten/added
+  round 29; `utils/__tests__/geo.test.js`
   gained the clusterByDistanceKm describe.
 
 ## 4. Gotchas (accumulated — ALL still valid, plus new)
@@ -224,6 +254,18 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
     alive — the audit found 7), and after page restyles re-check: a
     restyle can orphan shared components (round 25 killed PersonEntry +
     DirectoryHeader).
+48. **A closed `<details>` whose summary reads as content (a lead-in
+    label like "Key shrines in this circuit:") judges as broken/orphaned
+    content** — round 29's visual gate failed every circuit card on it.
+    Disclosures need title-looking summaries (a clear control label) or
+    the content rendered plain. Also: an anchor whose scroll-mt exactly
+    equals the sticky bars' bottom leaves the line ABOVE the target
+    half-sliced under the translucent nav — give content anchors a few
+    px MORE scroll-margin than the bars' height.
+49. Tailwind v4 still accepts `bg-gradient-to-*` (v3 alias), but a
+    same-hue fade over a barely-different surface is invisible to the
+    judge — strengthen it (`from-45%` + wider stop) so the overflow cue
+    actually reads (round 29 mobile nav).
 
 ## 5. Command cheat-sheet
 
