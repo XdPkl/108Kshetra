@@ -233,21 +233,15 @@ describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
 
 
 describe('MapPage workspace (round-23)', () => {
-  it('toggles the mobile Map/List switch; List view shows filters above stacked results', async () => {
-    const user = userEvent.setup();
+  it('lists every temple in the results grid below the map (round 27)', () => {
     renderAt('/map', <MapPage />);
-    const mapBtn = screen.getByRole('button', { name: 'Map' });
-    const listBtn = screen.getByRole('button', { name: 'List' });
-    expect(mapBtn).toHaveAttribute('aria-pressed', 'true');
-    expect(listBtn).toHaveAttribute('aria-pressed', 'false');
-    // the floating filter panel is present in map view
-    expect(screen.getByLabelText(/search kshetrams/i)).toBeInTheDocument();
-    await user.click(listBtn);
-    expect(listBtn).toHaveAttribute('aria-pressed', 'true');
-    expect(mapBtn).toHaveAttribute('aria-pressed', 'false');
-    // List view keeps the search and filters available above the results
-    expect(screen.getByLabelText(/search kshetrams/i)).toBeInTheDocument();
-    expect(screen.getByRole('group', { name: /showing/i })).toBeInTheDocument();
+    // no Map/List switch — the grid renders on every viewport
+    expect(screen.queryByRole('button', { name: 'List' })).not.toBeInTheDocument();
+    expect(screen.getByRole('region', { name: /temples in view/i })).toBeInTheDocument();
+    // all plotted temples are listed; each card carries the explicit
+    // "Focus on map" action beside the shared tiers
+    expect(screen.getAllByRole('button', { name: /focus on map/i }).length).toBeGreaterThan(100);
+    expect(screen.getAllByRole('link', { name: /view temple/i }).length).toBeGreaterThan(100);
   });
 
   it('keeps the map controls inside the filter panel on narrow screens', () => {

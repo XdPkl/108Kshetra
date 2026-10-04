@@ -2525,3 +2525,29 @@ site-copy pair changed (trip empty-state copy).
 | E2E (Playwright, Chromium) | **19/19 pass** — TC-14 (zoom → focus → highlighted marker → tooltip → popup → region filter) and TC-15 (My trip → dialog → In-trip scope → order → share) pass against the new layout |
 | Measured | 0px horizontal overflow at 375/768/1280/1440, the 200%-zoom proxy, and mobile List view |
 | Visual gate | **9/9 pass** — map-375/768/1280/1440 + zoom200 + selected-card outline + empty-results + planner dialog + mobile-list (before ×2 from the live round-23 bundle); the selected-marker screenshot was withdrawn as unverifiable (gotcha 37) with TC-14 as the interactive proof — `docs/03-design/gate-shots/map-option3-26/{before,after}/` |
+## Version 2.36 — Map PO Fixes: Focus Action + Full Results Matrix (2026-10-04, round 27)
+
+PO feedback on the round-26 build, two items, both addressed:
+
+1. **Focus reintroduced** — every results-grid card carries a visible
+   "Focus on map" action in its action row (the name-click focus from
+   round 26 stays as well; the TC-14 name-button flow is untouched).
+2. **All temples listed, no scrolling** — the horizontal-scroll dock is
+   replaced by a wrapping 1/2/3-column grid listing every matching temple
+   on EVERY viewport. This made the mobile Map/List switch pointless, so
+   it (the mobileView state, the switch UI and the list-view inline
+   filter panel) was removed — one filter panel instance floats over the
+   map at all widths. 106 cards render at 375px and 1280px with 0px
+   horizontal overflow (verified in DOM + judged).
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (unchanged) |
+| Unit tests (Vitest) | **236/236 pass (23 suites)** — Map/List toggle test replaced by an always-on results-grid + Focus-on-map test (>100 cards assert both) |
+| Coverage | 90.24% statements / 81.38% branches / 85.84% functions / 91.70% lines (gate 80%) |
+| Production build | Clean |
+| CMS round-trip | 0-diff |
+| E2E (Playwright) | **19/19 pass** — TC-14/15 unchanged |
+| Visual gate | map-1280 + map-375 recaptured and re-judged **pass** (106 cards, aligned rows, "Focus on map" visible, no overflow/collisions) — `docs/03-design/gate-shots/map-option3-26/after/` |

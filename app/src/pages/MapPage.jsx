@@ -6,10 +6,11 @@
  * upper-left corner, "Fit results" and "My location" in the upper
  * right, Leaflet's zoom control at the lower left (never under the
  * panel), the marker legend at the lower right above the attribution,
- * and the temple results as a dock below the map — three cards across
- * on desktop with horizontal scrolling, full-width stacked cards in the
- * mobile List view. Cards and markers select each other (the selected
- * card is outlined and its marker carries the heavier gold stroke);
+ * and the temple results as a wrapping 1/2/3-column grid below the map
+ * listing every matching temple (PO round 27: no horizontal scrolling,
+ * no Map/List switch — the grid renders on every viewport). Cards and
+ * markers select each other (the selected card is outlined and its
+ * marker carries the heavier gold stroke);
  * clicking a card's name focuses the map, actions act only on
  * themselves. Clusters, tooltips, popups, the trip polyline, ?t= share
  * restore, tile-error fallback and the shared planner dialog (focus
@@ -76,15 +77,17 @@ const pillIdle = `${pillBase} border border-[#E3D2AE] bg-[#FFFDF7] font-medium t
  * name, temple/place lines, region pill, then the action tiers —
  * Add to trip / View temple / Mark as visited. Clicking the name
  * selects the temple and focuses its marker (the card itself is NOT a
- * link, so actions never nest). The dock clips vertical overflow, so
- * the hover treatment is border + shadow only — no card lift. */
+ * link, so actions never nest). The visible "Focus on map" action
+ * (PO round 27) sits beside the other actions; hover is border + shadow
+ * only — no card lift, so the grid rows stay aligned.
+ */
 function MapResultCard({ kshetram: k, km, selected, onSelect }) {
   const { isVisited, toggleVisited } = useVisited();
   const visited = isVisited(k.id);
   const image = useWikiImage(k.wiki ?? null, k.photo ?? null);
   return (
     <li
-      className={`group relative flex w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border bg-[#FFFDF7] shadow-xs transition-all duration-300 sm:w-[320px] lg:w-[calc((100%-48px)/3)] ${
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-[#FFFDF7] shadow-xs transition-all duration-300 ${
         selected ? 'border-[#C99A2E] ring-1 ring-[#C99A2E]/50' : 'border-[#C99A2E]/45'
       }`}
     >
@@ -129,6 +132,13 @@ function MapResultCard({ kshetram: k, km, selected, onSelect }) {
         </span>
         <div className="mt-auto flex flex-wrap items-center gap-2 pt-3">
           <TripControls id={k.id} />
+          <button
+            type="button"
+            onClick={() => onSelect(k)}
+            className="ui-tertiary text-[13px]"
+          >
+            Focus on map
+          </button>
           {/* ! beats the unlayered legacy `a { color }` rule in base.css */}
           <Link to={`/kshetram/${k.id}`} className="ui-btn ui-btn--primary ui-btn--small">
             View temple
@@ -178,7 +188,6 @@ export default function MapPage() {
   const [clusterTick, setClusterTick] = useState(0);
   const [tileError, setTileError] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
-  const [mobileView, setMobileView] = useState('map');
 
   // Desktop gets the corner control stack; below lg the same buttons live
   // inside the filter panel (the full-width panel would collide with an
@@ -368,9 +377,9 @@ export default function MapPage() {
     );
   };
 
-  /** The search/region/scope controls — rendered floating over the map
-   * corner on desktop and in map view, inline above the dock in the
-   * mobile List view (one instance in the DOM at a time per breakpoint). */
+  /** The search/region/scope controls — rendered floating over the map's
+   * upper-left corner (single instance; the results grid below lists every
+   * matching temple on every viewport). */
   const filterControls = (
     <>
       <SearchField
@@ -482,17 +491,6 @@ export default function MapPage() {
             {geoMessage || resultCount} · Visited desams carry a gold ring.
           </p>
           <p className="mt-1 text-[14px] text-[#66523D]">{SITE_COPY.progressScope}</p>
-          {/* Mobile-only workspace switch */}
-          <div className="mt-3 flex items-center gap-2 lg:hidden">
-            <div className="flex gap-2" role="group" aria-label="Map or list view">
-              <button type="button" className="ui-pill" aria-pressed={mobileView === 'map'} onClick={() => setMobileView('map')}>
-                Map
-              </button>
-              <button type="button" className="ui-pill" aria-pressed={mobileView === 'list'} onClick={() => setMobileView('list')}>
-                List
-              </button>
-            </div>
-          </div>
         </div>
         <button
           type="button"
@@ -511,9 +509,7 @@ export default function MapPage() {
 
       {/* ---- Full-width map with floating controls ---- */}
       <div
-        className={`relative isolate overflow-hidden rounded-2xl border border-[#E3D2AE] shadow-xs h-[440px] sm:h-[540px] lg:h-[620px] bg-[#F6EBD6] ${
-          mobileView === 'map' ? '' : 'hidden lg:block'
-        }`}
+        className={`relative isolate overflow-hidden rounded-2xl border border-[#E3D2AE] shadow-xs h-[440px] sm:h-[540px] lg:h-[620px] bg-[#F6EBD6]`}
       >
         {!mapApi ? (
           <p className="absolute inset-x-0 top-3 z-[500] mx-auto w-fit rounded-full bg-[#FFFDF7]/95 px-4 py-1.5 text-[14px] font-medium text-[#74716b] shadow-xs" role="status">
@@ -629,21 +625,17 @@ export default function MapPage() {
           ) : null}
         </MapContainer>
 
-        {/* Floating search/filter panel — upper left. Unmounted in the
-            mobile List view, where the same controls render inline above
-            the dock (keeps one accessible instance per breakpoint). Below
-            lg it also carries the map controls, which would collide with
-            a full-width panel if absolutely positioned in the corner. */}
-        {mobileView !== 'list' ? (
-          <div className="absolute left-3 top-3 z-[500] flex w-[min(340px,calc(100%-24px))] flex-col gap-3 rounded-2xl border border-[#E3D2AE] bg-[#FFFDF7]/95 p-4 shadow-md backdrop-blur-xs">
-            {filterControls}
-            {!isDesktop ? (
-              <div className="flex flex-wrap items-center justify-end gap-2 border-t border-[#E3D2AE] pt-3">
-                {mapActions}
-              </div>
-            ) : null}
-          </div>
-        ) : null}
+        {/* Floating search/filter panel — upper left. Below lg it also
+            carries the map controls, which would collide with a full-width
+            panel if absolutely positioned in the corner. */}
+        <div className="absolute left-3 top-3 z-[500] flex w-[min(340px,calc(100%-24px))] flex-col gap-3 rounded-2xl border border-[#E3D2AE] bg-[#FFFDF7]/95 p-4 shadow-md backdrop-blur-xs">
+          {filterControls}
+          {!isDesktop ? (
+            <div className="flex flex-wrap items-center justify-end gap-2 border-t border-[#E3D2AE] pt-3">
+              {mapActions}
+            </div>
+          ) : null}
+        </div>
 
         {/* Map corner controls — upper right (desktop only) */}
         {isDesktop ? (
@@ -673,19 +665,12 @@ export default function MapPage() {
         </div>
       </div>
 
-      {/* Mobile List view: the filters stay available above the results */}
-      {mobileView === 'list' ? (
-        <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-[#E3D2AE] bg-[#FFFDF7] p-4 shadow-xs lg:hidden">
-          {filterControls}
-        </div>
-      ) : null}
-
-      {/* ---- Results dock below the map: three cards across on desktop,
-           horizontal scrolling for the rest; stacked full-width in the
-           mobile List view (and the tile-failure fallback everywhere) ---- */}
+      {/* ---- Results grid below the map: every matching temple, wrapping
+           1/2/3 across (PO round 27: no scroll needed); the tile-failure
+           fallback everywhere ---- */}
       <section
         aria-label="Temples in view"
-        className={`pt-5 ${mobileView === 'list' ? 'block' : 'hidden lg:block'}`}
+        className="pt-5"
       >
         <div className="flex items-baseline justify-between gap-3 pb-3">
           <h2 className="font-display text-[26px]! leading-[1.12]! font-semibold text-[#5C1F00]!">
@@ -694,7 +679,7 @@ export default function MapPage() {
           <span className="text-[14px] font-medium text-[#66523D]">{cardList.length} results</span>
         </div>
         {cardList.length > 0 ? (
-          <ul className="flex flex-col gap-6 lg:flex-row lg:overflow-x-auto lg:pb-2 lg:[scrollbar-width:thin]">
+          <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {cardList.map(({ kshetram: k, km }) => (
               <MapResultCard
                 key={k.id}

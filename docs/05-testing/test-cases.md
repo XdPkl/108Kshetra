@@ -510,3 +510,16 @@ gotcha 37 — with TC-14 as the interactive proof). Execution recorded in
 TER v2.35.
 
 *End of Addendum — TCS-108K-008 v1.21*
+## Version 1.22 — Map PO Fixes (2026-10-04)
+
+PO round-27 fixes to the round-26 map (TER v2.36):
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-MAP-01..03 | Results matrix | Horizontal-scroll dock replaced by a wrapping 1/2/3-column grid listing every matching temple on every viewport; the Map/List switch, its state and the list-view inline filter panel removed (one floating panel instance) |
+| UT-MAP-01 | Focus action | Visible "Focus on map" action on every card (name-click focus retained); new unit test asserts >100 focus/view-temple stops |
+| TC-14/15 | E2E | Unchanged |
+
+Quality gates: TC-QA-01 Pass (0 errors; 5 warnings) · TC-QA-02 Pass (**236/236, 23 suites**; 90.24/81.38/85.84/91.70) · TC-QA-03 Pass · E2E **19/19** · Visual re-gate 1280+375 pass. Execution recorded in TER v2.36.
+
+*End of Addendum — TCS-108K-008 v1.22*
