@@ -12,6 +12,11 @@
  * created parented to the epic and transitioned to Done (the delivered
  * state; epics remain To Do per convention).
  *
+ * Field quirk (observed 2026-10-04): combining labels/description/story-
+ * points in one CREATE call trips a false "Specify a valid project ID or
+ * key" error on this site, so we create with the core fields and apply
+ * labels + points via a follow-up edit.
+ *
  * Usage:  node docs/02-agile/sync-jira-stories.mjs
  */
 import { readFileSync } from 'node:fs';
@@ -22,7 +27,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 
 // --- credentials from .env.local (repo root) ---
 const env = {};
-for (const line of readFileSync(resolve(here, '../../../.env.local'), 'utf8').split(/\r?\n/)) {
+for (const line of readFileSync(resolve(here, '../../.env.local'), 'utf8').split(/\r?\n/)) {
   const m = line.match(/^([A-Z_]+)=(.*)$/);
   if (m) env[m[1]] = m[2].trim();
 }
@@ -32,36 +37,44 @@ if (!JIRA_EMAIL || !JIRA_API_TOKEN || !JIRA_BASE) {
   process.exit(1);
 }
 const auth = `Basic ${Buffer.from(`${JIRA_EMAIL}:${JIRA_API_TOKEN}`).toString('base64')}`;
-const api = async (path, opts = {}) => {
+const sleep = (ms) => new Promise((ok) => setTimeout(ok, ms));
+const api = async (path, opts = {}, attempt = 1) => {
   const res = await fetch(`${JIRA_BASE}/rest/api/3${path}`, {
     ...opts,
     headers: { Authorization: auth, 'Content-Type': 'application/json', ...(opts.headers ?? {}) },
   });
-  if (!res.ok) {
-    console.error(`HTTP ${res.status} ${res.statusText} — ${path}\n${await res.text()}`);
-    process.exit(1);
+  if (res.ok) return res.status === 204 ? null : res.json();
+  const body = await res.text();
+  if (res.status >= 500 || res.status === 429 || attempt < 3) {
+    console.log(`  retry ${attempt} after HTTP ${res.status}...`);
+    await sleep(1200);
+    return api(path, opts, attempt + 1);
   }
-  return res.status === 204 ? null : res.json();
+  console.error(`HTTP ${res.status} ${res.statusText} — ${path}\n${body}`);
+  process.exit(1);
 };
 
 const payloads = JSON.parse(readFileSync(join(here, 'jira-payloads.json'), 'utf8'));
 
 // --- epic: reuse if it already exists ---
-const search = await api(`/search?jql=${encodeURIComponent(`project=DTRPR108K AND summary~"EP-PO-ITER" AND issuetype=Epic`)}`);
+const search = await api('/search/jql', { method: 'POST', body: JSON.stringify({ jql: 'project=DTRPR108K AND summary~"EP-PO-ITER" AND issuetype=Epic' }) });
 let epicKey = search.issues?.[0]?.key;
 if (epicKey) {
   console.log(`Epic exists: ${epicKey}`);
 } else {
-  const created = await api('/issue', { method: 'POST', body: JSON.stringify(payloads.epic.fields) });
+  const { labels, customfield_10016, ...core } = payloads.epic.fields;
+  const created = await api('/issue', { method: 'POST', body: JSON.stringify({ fields: core }) });
   epicKey = created.key;
+  await api(`/issue/${epicKey}`, { method: 'PUT', body: JSON.stringify({ fields: { labels, customfield_10016 } }) });
   console.log(`Epic created: ${epicKey}`);
 }
 
-// --- stories: create parented, then transition to Done ---
+// --- stories: create core, update labels/points, parent, transition Done ---
 const keys = [];
 for (const story of payloads.stories) {
-  const body = { ...story.fields, parent: { key: epicKey } };
-  const created = await api('/issue', { method: 'POST', body: JSON.stringify(body) });
+  const { labels, customfield_10016, ...core } = story.fields;
+  const created = await api('/issue', { method: 'POST', body: JSON.stringify({ fields: { ...core, parent: { key: epicKey } } }) });
+  await api(`/issue/${created.key}`, { method: 'PUT', body: JSON.stringify({ fields: { labels, customfield_10016 } }) });
   const transitions = await api(`/issue/${created.key}/transitions`);
   const done = transitions.transitions.find((t) => /done/i.test(t.name));
   if (done) await api(`/issue/${created.key}/transitions`, { method: 'POST', body: JSON.stringify({ transition: { id: done.id } }) });

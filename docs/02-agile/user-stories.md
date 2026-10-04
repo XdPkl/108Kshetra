@@ -739,44 +739,42 @@ shippable, verifiable stories).
 
 ---
 
-## JIRA Synchronization Record (v2.1 — 2026-10-04, PENDING TOKEN)
+## JIRA Synchronization Record (v2.1 — 2026-10-04)
 
-The seventeen stories above (plus epic **EP-PO-ITER**) are authored and
-their REST API v3 payloads pre-generated in
-`docs/02-agile/jira-payloads.json`. **They are NOT yet synced**: the API
-token stored in `.env.local` was revoked (it appeared in chat history —
-see handover open item) and returns HTTP 401 as of 2026-10-04. Sync on
-the PO's next fresh token with:
+The seventeen stories above (plus epic **EP-PO-ITER**) were synced to
+https://dtrprasanna.atlassian.net project **DTRPR108K** on **2026-10-04**
+via the Jira REST API after the PO supplied a fresh API token (the
+previously-stored one had been revoked and returned 401). The epic was
+created first (**DTRPR108K-82**); all seventeen stories carry labels
+`divya-kshetra` + `v3`, story-point estimates, descriptions with story
+text + acceptance criteria, are parented to the epic, and were
+transitioned to **Done** at creation, matching the delivered state and
+the established convention (epics remain **To Do**). Re-run at any time
+with `node docs/02-agile/sync-jira-stories.mjs` (the epic lookup makes
+it reuse DTRPR108K-82; stories are not deduplicated).
 
-```
-node docs/02-agile/sync-jira-stories.mjs
-```
-
-The script reads `JIRA_EMAIL` / `JIRA_API_TOKEN` / `JIRA_BASE` from
-`.env.local` (never committed), creates the epic first (reusing it if a
-summary search finds it), creates the seventeen stories parented to it
-with labels `divya-kshetra` + `v3`, and transitions each to **Done** per
-the delivered-state convention. Expected keys continue from
-**DTRPR108K-77**. Record the returned keys in the table below, then move
-this record into the sync-history series.
+Note: the site's create-issue endpoint rejects a payload combining
+labels + description + story points with a spurious "project" error, so
+the script creates each issue with the core fields and applies labels +
+points via a follow-up edit (see the script header).
 
 | Type | Summary | Links to | Points | Jira key |
 |---|---|---|---|---|
-| Epic | EP-PO-ITER — PO Refinement Iterations | — | — | pending |
-| Story | US-PO-01 — v3.0 Zip-Parity Look-and-Feel Rollout | EP-PO-ITER | 13 | pending |
-| Story | US-PO-02 — PO Fix Lists 1–4 + container & split-pill fixes | EP-PO-ITER | 5 | pending |
-| Story | US-PO-03 — Home page design refresh + Featured Kshetrams restyle | EP-PO-ITER | 5 | pending |
-| Story | US-PO-04 — Explore page restyle + gopuram watermark | EP-PO-ITER | 3 | pending |
-| Story | US-PO-05 — The Yatra Atlas: Map+Trip merge, matrix, planner modal | EP-PO-ITER | 8 | pending |
-| Story | US-PO-06 — Azhwar detail + Azhwars index to the PO snaps | EP-PO-ITER | 5 | pending |
-| Story | US-PO-07 — Acharyas index + detail to the PO snaps | EP-PO-ITER | 5 | pending |
-| Story | US-PO-08 — Kshetram detail mock restyles + UX-audit compaction | EP-PO-ITER | 5 | pending |
-| Story | US-PO-09 — Saint detail kxd theme + Poigai recreation + consistency runs | EP-PO-ITER | 8 | pending |
-| Story | US-PO-10 — Acharyas directory consistency restyle | EP-PO-ITER | 3 | pending |
-| Story | US-PO-11 — Home/Map/About coordinated restyle | EP-PO-ITER | 8 | pending |
-| Story | US-PO-12 — Repo dead-code cleanup (audit round) | EP-PO-ITER | 2 | pending |
-| Story | US-PO-13 — Azhwars page restyled to the Kshetrams system | EP-PO-ITER | 5 | pending |
-| Story | US-PO-14 — Acharyas page restyled to the Kshetrams system | EP-PO-ITER | 5 | pending |
-| Story | US-PO-15 — Map page rebuilt to "option 3" | EP-PO-ITER | 8 | pending |
-| Story | US-PO-16 — Map fixes: Focus action + full results matrix | EP-PO-ITER | 3 | pending |
-| Story | US-PO-17 — Cluster-distance slider | EP-PO-ITER | 3 | pending |
+| Epic | EP-PO-ITER — PO Refinement Iterations | — | — | DTRPR108K-82 |
+| Story | US-PO-01 — v3.0 Zip-Parity Look-and-Feel Rollout | EP-PO-ITER | 13 | DTRPR108K-83 |
+| Story | US-PO-02 — PO Fix Lists 1–4 + container & split-pill fixes | EP-PO-ITER | 5 | DTRPR108K-84 |
+| Story | US-PO-03 — Home page design refresh + Featured Kshetrams restyle | EP-PO-ITER | 5 | DTRPR108K-85 |
+| Story | US-PO-04 — Explore page restyle + gopuram watermark | EP-PO-ITER | 3 | DTRPR108K-86 |
+| Story | US-PO-05 — The Yatra Atlas: Map+Trip merge, matrix, planner modal | EP-PO-ITER | 8 | DTRPR108K-87 |
+| Story | US-PO-06 — Azhwar detail + Azhwars index to the PO snaps | EP-PO-ITER | 5 | DTRPR108K-88 |
+| Story | US-PO-07 — Acharyas index + detail to the PO snaps | EP-PO-ITER | 5 | DTRPR108K-89 |
+| Story | US-PO-08 — Kshetram detail mock restyles + UX-audit compaction | EP-PO-ITER | 5 | DTRPR108K-90 |
+| Story | US-PO-09 — Saint detail kxd theme + Poigai recreation + consistency runs | EP-PO-ITER | 8 | DTRPR108K-91 |
+| Story | US-PO-10 — Acharyas directory consistency restyle | EP-PO-ITER | 3 | DTRPR108K-92 |
+| Story | US-PO-11 — Home/Map/About coordinated restyle | EP-PO-ITER | 8 | DTRPR108K-93 |
+| Story | US-PO-12 — Repo dead-code cleanup (audit round) | EP-PO-ITER | 2 | DTRPR108K-94 |
+| Story | US-PO-13 — Azhwars page restyled to the Kshetrams system | EP-PO-ITER | 5 | DTRPR108K-95 |
+| Story | US-PO-14 — Acharyas page restyled to the Kshetrams system | EP-PO-ITER | 5 | DTRPR108K-96 |
+| Story | US-PO-15 — Map page rebuilt to "option 3" | EP-PO-ITER | 8 | DTRPR108K-97 |
+| Story | US-PO-16 — Map fixes: Focus action + full results matrix | EP-PO-ITER | 3 | DTRPR108K-98 |
+| Story | US-PO-17 — Cluster-distance slider | EP-PO-ITER | 3 | DTRPR108K-99 |
