@@ -9,7 +9,7 @@ import { X } from 'lucide-react';
 
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-export default function Dialog({ open, onClose, title, eyebrow = null, children }) {
+export default function Dialog({ open, onClose, title, eyebrow = null, className = '', children }) {
   const surfaceRef = useRef(null);
   const returnFocus = useRef(null);
 
@@ -54,7 +54,7 @@ export default function Dialog({ open, onClose, title, eyebrow = null, children 
       aria-label={title}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="ui-dialog" ref={surfaceRef}>
+      <div className={`ui-dialog ${className}`.trim()} ref={surfaceRef}>
         <div className="ui-dialog__header">
           <div>
             {eyebrow ? <p className="ui-dialog__eyebrow">{eyebrow}</p> : null}

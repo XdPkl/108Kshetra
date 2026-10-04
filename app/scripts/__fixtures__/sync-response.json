@@ -22631,39 +22631,42 @@
       "lead": "The acharyas of the guru parampara — the teachers who received, preserved and expounded the Sri Vaishnava tradition after the Azhwars, in addition to the twelve saint-poets."
     },
     "about": {
-      "banner": {
-        "eyebrow": "Nalayira Divya Prabandham Series",
-        "title": "About Us — Kshetra Tours",
-        "tagline": "A dedicated devotional resource and guided pilgrimage initiative celebrating the 108 Divya Desams glorified in the Tamil Veda."
+      "hero": {
+        "eyebrow": "About Kshetra Tours",
+        "title": "Sacred places. Meaningful journeys.",
+        "description": "A devotional archive and guided pilgrimages to the 108 Divya Desams.",
+        "primaryCta": "Explore guided yatras",
+        "secondaryCta": "Browse the archive"
       },
       "anchors": [
-        "About the archive",
+        "Our purpose",
         "Guided yatras",
-        "Regional circuits",
+        "Circuits",
         "Team",
         "Contact",
         "Temple etiquette"
       ],
+      "purpose": {
+        "title": "Preserving the tradition. Helping you make the journey.",
+        "archiveRowTitle": "Explore the sacred archive",
+        "travelRowTitle": "Travel with devotional context"
+      },
+      "yatras": {
+        "title": "Find your regional yatra",
+        "exploreAllCta": "Explore all regional circuits"
+      },
       "sections": {
-        "archiveEyebrow": "The digital archive",
         "toursEyebrow": "Guided yatras",
-        "contactEyebrow": "Pilgrim inquiries",
-        "emailLabel": "Email us",
+        "contactEyebrow": "Begin your yatra with us",
+        "contactIntro": "Share your travel plans or questions. Our team will be happy to assist you with a suggested itinerary and further details.",
+        "contactTeamCta": "Contact the team",
         "phoneLabel": "Phone / WhatsApp",
         "responseHoursLabel": "Response hours:",
         "requestSchedule": "Request Yatra Schedule",
-        "ceoEyebrow": "Leadership & Sampradaya Seva",
-        "ceoTitle": "Founder & Chief Executive Officer",
-        "ceoBadge": "Kainkaryam Leadership",
-        "quoteAttribution": "Founder’s Desk, Kshetra Tours",
+        "founderEyebrow": "A tradition of service",
+        "founderBioCta": "Read the full biography",
         "inquireCeo": "Inquire us",
-        "directEmailLabel": "Direct Email:",
-        "circuitsEyebrow": "Devotional itineraries",
-        "circuitsTitle": "Popular Divya Desam Pilgrimage Circuits",
         "circuitsNote": "Organized regionally to minimize travel fatigue and maximize sanctum darshan time.",
-        "keyShrinesLabel": "Key shrines in this circuit:",
-        "viewAllPrefix": "View all",
-        "viewAllSuffix": "temples",
         "inquireCircuit": "Ask about this yatra",
         "etiquetteEyebrow": "Yatra guidance & sacred tradition",
         "etiquetteTitle": "Sanctum Etiquette & Parayanam Protocols",
@@ -22671,7 +22674,6 @@
         "generalEmailLabel": "General inquiries",
         "ceoEmailLabel": "CEO office",
         "circuitsDurationNote": "Durations are indicative for each circuit as listed. Geographically dispersed routes — such as Vada Nadu, combining Tamil Nadu shrines with the Himalayan abodes — may be operated as separate subcircuit runs; confirm the plan when enquiring.",
-        "circuitRegionLabel": "Region",
         "circuitCountLabel": "Shrines",
         "circuitDurationLabel": "Indicative duration",
         "circuitBaseLabel": "Base location",
@@ -22682,13 +22684,14 @@
         "title": "Request Yatra Schedule",
         "labels": {
           "name": "Devotee / Pilgrim Name *",
-          "phone": "Phone / WhatsApp *",
-          "email": "Email Address *",
+          "phone": "Phone / WhatsApp",
+          "email": "Email Address",
           "circuit": "Preferred Pilgrimage Circuit",
           "pilgrims": "Number of Pilgrims",
           "window": "Expected Travel Window",
           "notes": "Special Requirements (Optional)",
-          "contactNote": "Share at least one contact method — email or phone."
+          "contactNote": "Share at least one contact method — email or phone.",
+          "nameRequired": "Please share your name."
         },
         "placeholders": {
           "name": "e.g. Sriraman / Padmavathi",

@@ -27,6 +27,9 @@ function CopyButton({ value }) {
     >
       {copied ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : <Copy className="h-3.5 w-3.5" aria-hidden="true" />}
       <span aria-hidden="true">{copied ? 'Copied' : 'Copy'}</span>
+      {/* the flip to "Copied" is announced even though the visible label is
+          shadowed by the button's aria-label */}
+      <span className="sr-only" role="status">{copied ? 'Copied to clipboard' : ''}</span>
     </button>
   );
 }

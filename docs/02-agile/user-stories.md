@@ -731,11 +731,29 @@ shippable, verifiable stories).
   trip-scope exemption unchanged (TER v2.37, 2026-10-04 — round 28).
 - Delivered as TER v2.37 / TCS v1.23.
 
+**US-PO-18 — About page "option 1" restyle** (5 pts, Priority 2) — *FR-87*
+> As the Product Owner, I want /about rebuilt to the selected option-1
+> mockup on the kshetrams design system — hero, section nav, editorial
+> purpose, circuit cards, founder desk, contact, etiquette accordions —
+> with the enquiry-dialog label/rule mismatch corrected, so the page
+> matches the live shared components while keeping every section, id and
+> the enquiry flow.
+
+- Two-column hero (copy + gopuram watermark + reused quote), sticky lg+
+  section nav with scroll-spy (ids preserved), open purpose section, six
+  circuit cards in a revealable 1/2/3-column grid (ordinals stripped,
+  dataset verbatim), founder desk with full-bio disclosure, contact block
+  with announced copy actions, etiquette accordions; dialog widened to
+  680px, asterisk only on the name, inline name-required validation and a
+  re-entrancy lock (TER v2.38, 2026-10-04 — round 29).
+- Delivered as TER v2.38 / TCS v1.24. NOT yet synced to Jira (backlog
+  sync runs on request; stories are not deduplicated).
+
 ### Story-Point Summary (v2.1)
 
 | Epic | Stories | Points |
 |---|---|---|
-| EP-PO-ITER | US-PO-01..17 (17 stories) | 94 |
+| EP-PO-ITER | US-PO-01..18 (18 stories; US-PO-18 authored, sync pending) | 99 |
 
 ---
 

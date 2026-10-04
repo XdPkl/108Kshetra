@@ -54,24 +54,37 @@ const siteCopy = defineType({
     {name: 'acharyasPage', type: 'object', title: 'Acharyas banner', group: 'pages', fields: [S('eyebrow', 'Eyebrow'), S('title', 'Title'), T('lead', 'Lead')]},
 
     {name: 'about', type: 'object', title: 'About chrome', group: 'about', fields: [
-      {name: 'banner', type: 'object', title: 'Banner', fields: [S('eyebrow', 'Eyebrow'), S('title', 'Title'), T('tagline', 'Tagline')]},
-      SA('anchors', 'Quick-jump chip labels'),
+      {name: 'hero', type: 'object', title: 'About hero', fields: [
+        S('eyebrow', 'Eyebrow'), S('title', 'Title'), T('description', 'Description'),
+        S('primaryCta', 'Primary CTA'), S('secondaryCta', 'Secondary CTA'),
+      ]},
+      SA('anchors', 'Section-nav labels (order matches the six section ids)'),
+      {name: 'purpose', type: 'object', title: 'Our purpose', fields: [
+        S('title', 'Title'), S('archiveRowTitle', 'Archive row title'), S('travelRowTitle', 'Travel row title'),
+      ]},
+      {name: 'yatras', type: 'object', title: 'Guided yatras', fields: [
+        S('title', 'Title'), S('exploreAllCta', 'Explore-all-circuits button'),
+      ]},
       {name: 'sections', type: 'object', title: 'Section headings & labels', fields: [
-        S('archiveEyebrow', 'Archive eyebrow'), S('toursEyebrow', 'Tours eyebrow'),
-        S('contactEyebrow', 'Contact eyebrow'), S('emailLabel', 'Email label'), S('phoneLabel', 'Phone label'),
+        S('toursEyebrow', 'Tours eyebrow'),
+        S('contactEyebrow', 'Contact eyebrow'), T('contactIntro', 'Contact intro'), S('contactTeamCta', 'Contact-the-team button'),
+        S('phoneLabel', 'Phone label'),
         S('responseHoursLabel', 'Response-hours label'), S('requestSchedule', 'Request-schedule button'),
-        S('ceoEyebrow', 'CEO eyebrow'), S('ceoTitle', 'CEO title'), S('ceoBadge', 'CEO badge'),
-        S('quoteAttribution', 'Quote attribution'), S('inquireCeo', 'Inquire-CEO button'), S('directEmailLabel', 'Direct-email label'),
-        S('circuitsEyebrow', 'Circuits eyebrow'), S('circuitsTitle', 'Circuits title'), T('circuitsNote', 'Circuits note'),
-        S('keyShrinesLabel', 'Key-shrines label'), S('viewAllPrefix', 'View-all prefix'), S('viewAllSuffix', 'View-all suffix'),
+        S('founderEyebrow', 'Founder eyebrow'), S('founderBioCta', 'Full-biography disclosure label'), S('inquireCeo', 'Inquire-CEO button'),
+        T('circuitsNote', 'Circuits note'),
         S('inquireCircuit', 'Inquire-circuit button'),
         S('etiquetteEyebrow', 'Etiquette eyebrow'), S('etiquetteTitle', 'Etiquette title'), T('etiquetteLead', 'Etiquette lead'),
+        S('generalEmailLabel', 'General-email label'), S('ceoEmailLabel', 'CEO-email label'),
+        T('circuitsDurationNote', 'Duration note'),
+        S('circuitCountLabel', 'Count label'), S('circuitDurationLabel', 'Duration label'), S('circuitBaseLabel', 'Base label'),
+        S('viewTemplesLabel', 'View-temples button'),
       ]},
       {name: 'scheduleModal', type: 'object', title: 'Request-Yatra-Schedule modal', fields: [
         S('deskEyebrow', 'Desk eyebrow'), S('title', 'Modal title'),
         {name: 'labels', type: 'object', title: 'Form labels', fields: [
           S('name', 'Name'), S('phone', 'Phone'), S('email', 'Email'), S('circuit', 'Circuit'),
           S('pilgrims', 'Pilgrims'), S('window', 'Travel window'), S('notes', 'Special requirements'),
+          T('contactNote', 'Contact-method hint'), S('nameRequired', 'Name-required error'),
         ]},
         {name: 'placeholders', type: 'object', title: 'Placeholders', fields: [
           S('name', 'Name'), S('phone', 'Phone'), S('email', 'Email'), T('notes', 'Special requirements'),

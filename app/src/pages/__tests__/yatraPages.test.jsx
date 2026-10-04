@@ -290,41 +290,75 @@ describe('MapPage workspace (round-23)', () => {
 });
 
 describe('AboutPage (UT-ABT-01, FR-87)', () => {
-  it('renders site, tours and contact sections from the approved PO content', () => {
+  it('renders the option-1 hero, the six-link section nav and the purpose rows', () => {
     renderAt('/about', <AboutPage />);
-    expect(screen.getByRole('heading', { name: /about us — kshetra tours/i })).toBeInTheDocument();
-    expect(screen.getByText(/about this site/i)).toBeInTheDocument();
-    // PO-approved mock content (docs/03-design/mockups/about.html)
-    expect(screen.getByText(/kshetra insights/i)).toBeInTheDocument();
-    expect(screen.getByText(/interactive yatra planner/i)).toBeInTheDocument();
-    expect(screen.getByText(/regional circuit itineraries/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /sacred places\. meaningful journeys\./i })).toBeInTheDocument();
+    expect(screen.getByText(/about kshetra tours/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /browse the archive/i })).toHaveAttribute('href', '/kshetrams');
+    // the section nav preserves the deep-linked ids in reading order
+    const nav = screen.getByRole('navigation', { name: /about sections/i });
+    const navLinks = within(nav).getAllByRole('link');
+    expect(navLinks).toHaveLength(6);
+    expect(navLinks.map((l) => l.getAttribute('href'))).toEqual([
+      '#archive', '#guided-yatras', '#circuits', '#ceo-leadership', '#contact-desk', '#sanctum-etiquette',
+    ]);
+    // purpose rows derive from the dataset; the archive explanation survives
+    expect(screen.getByRole('heading', { name: /explore the sacred archive/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /travel with devotional context/i })).toBeInTheDocument();
+    expect(screen.getByText(/four-thousand-verse Tamil Veda/i)).toBeInTheDocument();
+    expect(screen.getByText(/where a detail is not yet documented/i)).toBeInTheDocument();
+    // contact values render verbatim; no placeholder markers leak
     expect(screen.getByText(/contact@kshetratours\.org/i)).toBeInTheDocument();
-    expect(screen.getByText(/general inquiries/i)).toBeInTheDocument();
     expect(screen.queryByText(/\[to be provided\]/i)).not.toBeInTheDocument();
   });
 
-  it('renders the CEO desk, 7 circuits and sanctum etiquette (UXD v3.0 Gate 11 addendum)', () => {
+  it('shows the first circuit row and reveals all six via the explore action', async () => {
+    const user = userEvent.setup();
     renderAt('/about', <AboutPage />);
-    // CEO desk — corrected PO content (2026-09-25 fix list)
-    expect(screen.getByRole('heading', { name: /founder & chief executive officer/i })).toBeInTheDocument();
-    expect(screen.getAllByText(/ram gopalan/i).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/yatra@kshetratours\.com/i).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getByText(/106 divya desams completed/i)).toBeInTheDocument();
-    expect(screen.getByText(/1000\+ pilgrims guided/i)).toBeInTheDocument();
-    expect(screen.getByText(/#315, creations manchester/i)).toBeInTheDocument();
-    expect(screen.queryByText(/sampradaya yatra trustee/i)).not.toBeInTheDocument();
-    // PO round 4: the celestial (Vinnulaga) circuit is removed — 6 remain
-    expect(screen.getByRole('heading', { name: /popular divya desam pilgrimage circuits/i })).toBeInTheDocument();
+    // ordinals are stripped from the dataset titles
+    expect(screen.getByRole('heading', { name: 'Chola Nadu Heritage Yatra' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /nadu nadu mini yatra/i })).not.toBeInTheDocument();
+    const expand = screen.getByRole('button', { name: /explore all regional circuits/i });
+    expect(expand).toHaveAttribute('aria-expanded', 'false');
+    await user.click(expand);
+    expect(expand).toHaveAttribute('aria-expanded', 'true');
     const inquires = screen.getAllByRole('button', { name: /ask about this yatra/i });
     expect(inquires).toHaveLength(6);
     const regionLinks = screen.getAllByRole('link', { name: /view temples/i });
     expect(regionLinks).toHaveLength(6);
     expect(regionLinks[0]).toHaveAttribute('href', '/kshetrams?region=Chola%20Nadu');
     expect(regionLinks[5]).toHaveAttribute('href', '/kshetrams?region=Nadu%20Nadu');
-    // Etiquette cards
-    expect(screen.getByRole('heading', { name: /sanctum etiquette & parayanam protocols/i })).toBeInTheDocument();
+    // dataset values verbatim (shrines / duration / base) + the duration caution
+    expect(screen.getByText(/40 Divya Desams/)).toBeInTheDocument();
+    expect(screen.getByText(/kumbakonam & srirangam \(trichy\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/may be operated as separate subcircuit runs/i)).toBeInTheDocument();
+  });
+
+  it('renders the founder desk with the full biography behind a disclosure', async () => {
+    const user = userEvent.setup();
+    renderAt('/about', <AboutPage />);
+    expect(screen.getByRole('heading', { name: /ram gopalan/i })).toBeInTheDocument();
+    expect(screen.getByText(/founder & chief executive officer/i)).toBeInTheDocument();
+    expect(screen.getByText(/a tradition of service/i)).toBeInTheDocument();
+    // concise biography + quotation visible; verified pillars kept, folded away
+    expect(screen.getByText(/ram gopalan founded kshetra tours/i)).toBeInTheDocument();
+    expect(screen.getByText(/our sacred divya desams are not mere destinations/i)).toBeInTheDocument();
+    expect(within(screen.getByText(/read the full biography/i).closest('details'))
+      .getByText(/106 divya desams completed/i)).toBeInTheDocument();
+    await user.click(screen.getByText(/read the full biography/i));
+    expect(screen.getByText(/under his leadership/i)).toBeInTheDocument();
+    expect(screen.getByText(/#315, creations manchester/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/yatra@kshetratours\.com/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByRole('button', { name: /inquire us/i })).toBeInTheDocument();
+  });
+
+  it('presents sanctum etiquette and parayanam as accordions, guidance preserved', () => {
+    renderAt('/about', <AboutPage />);
     expect(screen.getByRole('heading', { name: /temple sanctum etiquette/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /divya prabandham parayanam/i })).toBeInTheDocument();
+    // closed accordions keep the guidance (and the Tamil) in the document
+    expect(screen.getByText(/dhoti and angavastram/i)).toBeInTheDocument();
+    expect(screen.getByText(/பல்லாண்டு/)).toBeInTheDocument();
   });
 
   it('opens the inquiry modal from a circuit, submits, and shows the booking reference', async () => {
@@ -339,20 +373,30 @@ describe('AboutPage (UT-ABT-01, FR-87)', () => {
     await user.click(within(dialog).getByRole('button', { name: /submit schedule inquiry/i }));
     expect(await within(dialog).findByText(/inquiry received/i)).toBeInTheDocument();
     expect(within(dialog).getByText(/YATRA-\d{4}/)).toBeInTheDocument();
-    expect(within(dialog).getByText(/1\. chola nadu heritage yatra/i)).toBeInTheDocument();
+    expect(within(dialog).getByText(/chola nadu heritage yatra/i)).toBeInTheDocument();
   });
 
-  it('blocks submission without at least one contact method (round 23)', async () => {
+  it('blocks submission without a name or a contact method; labels match the rule (round 29)', async () => {
     const user = userEvent.setup();
     renderAt('/about', <AboutPage />);
     await user.click(screen.getAllByRole('button', { name: /ask about this yatra/i })[0]);
     const dialog = screen.getByRole('dialog', { name: /request yatra schedule/i });
+    // only the name carries the asterisk; the either/or hint stays on the fields
+    expect(within(dialog).getByText('Devotee / Pilgrim Name *')).toBeInTheDocument();
+    expect(within(dialog).queryByText('Phone / WhatsApp *')).not.toBeInTheDocument();
+    expect(within(dialog).queryByText('Email Address *')).not.toBeInTheDocument();
+    // empty name → inline error, entered values preserved
+    await user.type(within(dialog).getByLabelText(/phone \/ whatsapp/i), '+91 98765 43210');
+    await user.click(within(dialog).getByRole('button', { name: /submit schedule inquiry/i }));
+    expect(within(dialog).getByRole('alert')).toHaveTextContent(/please share your name/i);
+    expect(within(dialog).getByLabelText(/phone \/ whatsapp/i)).toHaveValue('+91 98765 43210');
+    // name present but no contact method → the shared rule fires
     await user.type(within(dialog).getByLabelText(/devotee \/ pilgrim name/i), 'Ramanuja Dasa');
-    // both contact fields left empty — the error path fires, no success
+    await user.clear(within(dialog).getByLabelText(/phone \/ whatsapp/i));
     await user.click(within(dialog).getByRole('button', { name: /submit schedule inquiry/i }));
     expect(within(dialog).getByRole('alert')).toHaveTextContent(/share at least one contact method/i);
     expect(within(dialog).queryByText(/inquiry received/i)).not.toBeInTheDocument();
-    // filling one method unblocks the confirmed-delivery success state
+    // one method unblocks the confirmed-delivery success state
     await user.type(within(dialog).getByLabelText(/phone \/ whatsapp/i), '+91 98765 43210');
     await user.click(within(dialog).getByRole('button', { name: /submit schedule inquiry/i }));
     expect(await within(dialog).findByText(/inquiry received/i)).toBeInTheDocument();

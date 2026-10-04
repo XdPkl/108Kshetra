@@ -2594,3 +2594,115 @@ the slider. Zoom and scope behavior unchanged.
 | E2E (Playwright) | **19/19 pass** — TC-14's zoom-until-clusters-dissolve flow unchanged (one TC-15 clipboard-permission flake passed on re-run) |
 | Verified in DOM | slider value tracks at every step; cluster bubbles 4 @ 1 km, 15 @ 10 km (default), 16 @ 30 km, 15 @ 50 km — non-monotone pairing effects documented above |
 | Visual gate | **2/2 pass** — slider row composition at default 10 km + moved 50 km (readout, thumb position, no overlap/clipping) — `docs/03-design/gate-shots/map-cluster-slider-28/after/` |
+
+## Version 2.38 — About Page "Option 1" Restyle (2026-10-04, round 29)
+
+**Trigger (PO brief):** redesign `/about` to the selected option-1 mockup on
+the `/kshetrams` design system — spacious two-column hero, section
+navigation, open editorial purpose, guided-yatra circuit cards, compact
+founder desk, full-width contact, etiquette accordions — while preserving
+the archive content, all six regional circuits, section ids for the header
+deep links, the contact channels and the enquiry flow, and correcting the
+inquiry dialog's label/rule mismatch.
+
+### What changed
+
+- **Design-language shift**: AboutPage leaves the `.dir` directory theme
+  for the kshetrams system (Cormorant Garamond display headings `#5C1F00`,
+  Mukta Malar body, gold `#96731F` actions on the `.ui-btn` 44px base with
+  its gold focus ring, `#FFFDF7` cards with `#C99A2E`/45 borders → opaque
+  gold + 4px lift + shadow-lg over 300ms, motion-reduce guards). `.dir`
+  now wraps ONLY HomePage; the CEO portrait keeps a local `.dir` wrapper
+  so the `--dir-*` portrait variables still resolve (gotcha 41 pattern).
+- **Hero**: eyebrow "About Kshetra Tours", two-line display heading
+  (measured 2 line boxes at 1280), description, gold "Explore guided
+  yatras" (anchor to `#guided-yatras`) + outlined "Browse the archive"
+  (`/kshetrams`); the shared gopuram illustration as the right-side
+  desktop watermark with the Browse header quote (text reused verbatim
+  from `SITE_COPY.browse.quote` — no new artwork, no invented imagery).
+- **Section navigation**: six anchor pills in reading order with the
+  existing ids (`archive`, `guided-yatras`, `circuits`, `ceo-leadership`,
+  `contact-desk`, `sanctum-etiquette`) — header dropdown deep links
+  untouched. Sticky below the shared header on lg+ only (mobile never
+  carries two sticky bars); on mobile a single horizontally scrollable row
+  with a right-edge fade cue. IntersectionObserver scroll-spy (topmost
+  intersecting wins, `aria-current`), skipped where IO is unavailable —
+  the same idiom as the acharyas era pills. Smooth anchor scrolling is
+  skipped under `prefers-reduced-motion`.
+- **Our purpose**: open editorial two-column section — heading "Preserving
+  the tradition. Helping you make the journey." with `site.paragraphs[0]`
+  (Lord Narayana / twelve Azhwars / Nalayira Divya Prabandham) and
+  `site.paragraphs[2]` (transparent treatment of undocumented details) at
+  ~65ch; right column two icon rows whose titles are new chrome copy and
+  whose texts derive verbatim from the dataset (`features[0].text`,
+  `tours.intro`). `paragraphs[1]` (planner enumeration) is no longer
+  rendered — that detail lives in the app pages it describes.
+- **Guided yatras + circuits**: "Find your regional yatra" lead
+  (`sections.circuitsNote`) plus the duration/Vada-Nadu subcircuit caution;
+  the three service themes render as compact icon rows (visible — each is
+  a single sentence, a disclosure would add nothing). Circuit grid is
+  1/2/3-column showing the first row; "Explore all regional circuits"
+  reveals the remaining three (`aria-expanded` toggles, keyboard-native
+  button). Cards: region eyebrow, title (decorative "N." ordinal stripped
+  at render), Shrines / Indicative duration / Base location rows (dataset
+  verbatim, labels don't wrap), summary, actions pinned to the card foot —
+  gold "Ask about this yatra" (opens the enquiry dialog preselected,
+  string now ordinal-free) + outlined "View temples" (region-filter URL
+  preserved). The key-shrines disclosure was removed after the visual
+  gate read its closed lead-in as broken content (`keyShrinesLabel`
+  retired from copy + schema); highlights remain available on the
+  region-filtered kshetrams pages.
+- **Founder**: "A tradition of service" eyebrow, Ram Gopalan + role +
+  opening-biography paragraph left, quotation (first sentence, dataset)
+  in a tinted aside right; "Read the full biography" disclosure keeps the
+  second paragraph, the verified pillar claims, the base address and the
+  CEO office email reachable; "Inquire us" secondary still opens the
+  dialog on the Executive Office option; the admin-gated portrait
+  affordance (upload/URL/reset, `?admin=1`) is unchanged.
+- **Contact**: "Begin your yatra with us" eyebrow over the existing
+  "Contact" heading; short intro; gold "Request Yatra Schedule" and an
+  outlined "Contact the team" anchor to the visible contact details;
+  ContactDetails card (both emails + phone, verbatim, with copy controls)
+  keeps its own scroll margin. CopyButton now mirrors its state into an
+  `sr-only` `role="status"` region so the flip to "Copied" is announced
+  despite the button's `aria-label`.
+- **Temple etiquette**: the two guidance cards become accessible
+  `<details>` accordions (title/subtitle in the summary, full points and
+  the Tamil text preserved in the document).
+- **Inquiry dialog**: `.ui-dialog` accepts a `className` prop and the
+  inquiry passes `max-w-[680px]` (680px measured at 1280). Label/rule
+  mismatch corrected — only the name carries the asterisk; phone/email
+  are plain labels with the either/or hint on the field. Inline
+  name-required validation (`labels.nameRequired`, `role="alert"`,
+  `aria-invalid`, error cleared on typing, values preserved); a `useRef`
+  lock prevents a re-entrant submit between click and the success render;
+  success still shows only after the local record is written. Escape,
+  focus containment and focus restoration are the shared Dialog's.
+- **Site-copy restructure (schema lockstep)**: added `about.hero`,
+  `about.purpose`, `about.yatras`, `sections.founderEyebrow`,
+  `founderBioCta`, `contactIntro`, `contactTeamCta`,
+  `scheduleModal.labels.nameRequired`; updated `anchors` labels ("Our
+  purpose", "Circuits") and `contactEyebrow`; retired `banner` and the
+  dead section fields (`archiveEyebrow`, `emailLabel`, `ceoTitle`,
+  `ceoBadge`, `quoteAttribution`, `directEmailLabel`, `circuitsEyebrow`,
+  `circuitsTitle`, `viewAllPrefix`, `viewAllSuffix`, `circuitRegionLabel`,
+  `keyShrinesLabel`). App JSON + sync fixture patched together
+  (0-diff verified) and `studio/schemas/siteCopy.js` mirrored; Sanity
+  schema validate clean.
+- **Register decision**: the dialog submit button intentionally keeps the
+  shared `.ui-btn--primary` maroon — the gold `#96731F` is the
+  card/hero action skin; the maroon primary is the dialog/form system
+  (same as the trip planner), so the two button systems are not mixed.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 5 warnings (baseline unchanged) |
+| Unit tests (Vitest) | **243/243 pass (23 suites)** — UT-ABT rewritten for the option-1 structure (hero/nav/purpose; circuit reveal + links; founder desk + disclosure; etiquette accordions) and the dialog validation rule (asterisk only on name, name-required inline error, either/or contact rule, values preserved) |
+| Coverage | **89.90% statements / 81.15% branches / 84.33% functions / 91.52% lines** (gate 80%) — branch headroom ~1.15pp, watch item |
+| Production build | Clean |
+| CMS round-trip | 0-diff (site-copy `about` + fixture rewritten together) |
+| E2E (Playwright) | **19/19 pass** — TC-17 updated to the new hero heading |
+| Measured in DOM | h1 = 2 line boxes, Cormorant Garamond `rgb(92,31,0)`; gold action radius 18px; sticky nav top = 64px (flush under header); `#circuits` anchor lands at 168px (clears the ~120px nav bottom); dialog 680px; 0px horizontal overflow at 375/768/1280 |
+| Visual gate | **7/7 pass after a repair loop** — first pass failed 5 findings (closed key-shrines lead-in read as orphaned content on every card; `#circuits` anchor sliced the service-row line under the nav; mobile fade cue imperceptible; founder not stacked at 375px; one wrapped "Base location" label) — all fixed and re-judged; the maroon dialog submit was accepted as the shared dialog primary — `docs/03-design/gate-shots/about-option1-29/` |

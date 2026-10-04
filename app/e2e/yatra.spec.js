@@ -141,7 +141,8 @@ test.describe('V3 yatra toolkit', () => {
 
     await page.getByRole('link', { name: /kshetra tours/i }).click();
     await expect(page).toHaveURL(/about$/);
-    await expect(page.getByRole('heading', { name: /about us — kshetra tours/i })).toBeVisible();
+    // Round 29 option-1 restyle: the hero display heading
+    await expect(page.getByRole('heading', { name: /sacred places\. meaningful journeys\./i })).toBeVisible();
   });
 
   test('TC-18: azhwar detail renders the snap hero with tabs and navigation', async ({ page }) => {

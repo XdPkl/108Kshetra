@@ -539,3 +539,23 @@ exemption unchanged.
 Quality gates: TC-QA-01 Pass (0 errors; 5 warnings) · TC-QA-02 Pass (**241/241, 23 suites**; 90.50/81.50/85.27/92.02) · TC-QA-03 Pass · E2E **19/19** · Visual gate **2/2** (slider at 10 km and 50 km). Execution recorded in TER v2.37.
 
 *End of Addendum — TCS-108K-008 v1.23*
+
+## Version 1.24 — About Page "Option 1" Restyle (2026-10-04)
+
+PO round-29 redesign of `/about` on the kshetrams design system (TER
+v2.38). Section ids and header deep links unchanged; contract updates
+recorded in place per the standing convention.
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-ABT-01 | Rewritten | Option-1 hero (two-line display heading, CTA hrefs incl. `/kshetrams`), six-link section nav in deep-link id order, purpose rows derived from the dataset, archive explanation + transparency paragraph retained, verbatim contact values |
+| UT-ABT-02 | Rewritten | Circuits: first row of 3 shown with ordinals stripped; "Explore all regional circuits" toggles `aria-expanded` and reveals all 6; View-temples region URLs; dataset count/base values verbatim; duration caution present |
+| UT-ABT-03 | New | Founder desk: name/role/eyebrow, concise bio, quotation, full-biography disclosure (second paragraph, pillars, base, CEO email), "Inquire us" preserved |
+| UT-ABT-04 | New | Etiquette accordions render both titles; guidance and Tamil text present in the document while collapsed |
+| UT-ABT-05 | Rewritten | Inquiry dialog: asterisk on the name only (label/rule mismatch fixed), name-required inline `alert` with values preserved, either/or contact rule fires, success reference only after record; preselect string ordinal-free |
+| UT-ABT (branches) | Unchanged | v3Branches CEO-photo admin flow, Escape/close dialog paths pass untouched (portrait keeps a local `.dir` wrapper) |
+| TC-17 | E2E | Asserts the new hero heading after the Kshetra-Tours nav |
+
+Quality gates: TC-QA-01 Pass (0 errors; 5 warnings) · TC-QA-02 Pass (**243/243, 23 suites**; 89.90/81.15/84.33/91.52) · TC-QA-03 Pass · E2E **19/19** · Visual gate **7/7** after repair loop (1280/768/375 + sticky/anchor/dialog states). Execution recorded in TER v2.38.
+
+*End of Addendum — TCS-108K-008 v1.24*
