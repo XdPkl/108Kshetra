@@ -1,7 +1,7 @@
-# HANDOVER — 108 Divya Kshetrams (2026-10-04, after rounds 24–31 + audit + Jira sync)
+# HANDOVER — 108 Divya Kshetrams (2026-10-05, after rounds 24–32 + audit + Jira sync)
 
-State: **Round 31 pushed, CI+Deploy green on `a9d57af`, live verified.**
-`main` = `a9d57af` (Map cluster focus) in sync with `origin/main`
+State: **Round 32 pushed, CI+Deploy green on `f91ef87`, live verified.**
+`main` = `f91ef87` (Browse grid photo fix) in sync with `origin/main`
 (https://github.com/XdPkl/108Kshetra). Live: https://xdpkl.github.io/108Kshetra/
 — verify bundles by CONTENT, not by hash (CI Linux hashes differ; grep the
 live `assets/index-*.js` via `node -e "...includes(...)"` — gotcha 12; MapPage
@@ -22,18 +22,20 @@ No preview server running. Scratch scripts deleted. Nothing in flight.
 | `64089d6` | **Round 29 — /about rebuilt to "option 1"**: two-column hero (copy + gopuram watermark + reused browse quote, 2-line display heading measured), sticky-below-header section nav on lg+ with IO scroll-spy (six ids + header deep links preserved; mobile = scrollable row with fade cue, never sticky), editorial purpose (paragraphs 0+2, two dataset-derived icon rows), "Find your regional yatra" + 3 compact service-theme rows, six circuit cards in a revealable 1/2/3-col grid (ordinals stripped, `aria-expanded` reveal, actions pinned, region URLs + preselected dialog intact), founder desk (full-bio disclosure keeps bio[1]+pillars+base+email; admin-gated portrait untouched), contact block with announced copy actions, etiquette accordions; dialog 680px, asterisk only on the name, inline name-required validation + re-entrancy lock. Site-copy `about` restructured (hero/purpose/yatras added; banner + 11 dead section fields retired) with fixture + studio schema lockstep | TER v2.38, TCS v1.24, user-stories US-PO-18 (sync pending) |
 | `3ea21aa` | **Round 30 — homepage rebuilt to "option 1"**: immersive 600px hero reusing the PO-supplied `hero-sunset-lamps.jpg` with the new copy hierarchy (eyebrow, 2-line 66px Cormorant heading, supporting line, real-text Tamil `lang="ta"`, gold "Explore the Kshetrams" + inverse "Plan your yatra", both in the initial viewport); progress strip switches "Begin your yatra"/"Continue your yatra" from live state with the visible "N of 106 visited." equivalent (progressbar contract unchanged); featured grid now the shared KshetramCard in 1/2/3 cols keeping ALL FOUR curated temples (Srirangam, Thiruvengadam, Thirukkachi + Srivilliputhur on a further row); two tradition columns (divider, tertiary Explore links) keeping compact 2×2 PersonPreview profile links; guided-yatra invitation → `/about#guided-yatras` with the shared gopuram illustration + browse quote; **SaintStrip + orphaned FeaturedKshetramCard deleted**. Site-copy hero/home restructured (invocation/subtitle retired, progress+invite added) with fixture + schema lockstep | TER v2.39, TCS v1.25, user-stories US-PO-19 |
 | `a9d57af` | **Round 31 — map cluster focus**: clicking a cluster bubble draws a dashed bounds outline (`Rectangle`, 6/6 dashes, `interactive:false`), gold-rings the focused bubble (`aria-label` on the divIcon) and filters the results grid to the member temples behind a `role="status"` chip (medallion count + Clear); the focus filters the GRID only, never `shown` (feedback would dissolve the clicked cluster); clears on Escape/chip/Reset/scope change/any filter removing a member, NEVER on zoom (the standing fly-to-bounds at maxZoom 9 dissolves the cluster by design — outline is a snapshot). **Jira: US-PO-18/19/20 synced as DTRPR108K-101/102/103** (Done, under epic -82); sync script gains `--only` + requests `fields:['key']` from /search/jql (bare-ID response had duplicated the epic — re-parented stories, duplicate deleted, incident in user-stories v2.2) | TER v2.40, TCS v1.26, user-stories US-PO-20 |
+| `f91ef87` | **Round 32 — browse grid photo fix** (PO report: all 108 cards "Photo coming soon" despite available photos): root cause — the browse grid consumed `useKshetrams()` → RAW records (no image fields) while the 61 Wikipedia slugs live in enrichment.json, which detail/map/home-featured merge but browse never did; no lookup was even attempted (verified live: 0 requests). Fix: `useKshetrams()` returns `getAllKshetramsEnriched()` (one line; only consumer is BrowsePage). Outcome: 61 lookups fire, **42 cards render photos**, 66 honestly keep the placeholder (no slug/no lead image/known 404s — PO-owned content). Not a regression: browse never fetched (wiring unchanged since initial delivery; no test asserted the raw-vs-enriched shape) | TER v2.41, TCS v1.27, user-stories US-PO-21 |
 
 Final gates at handoff: **246/246 unit (23 suites) · 21/21 e2e · coverage
-89.78% stmts / 81.19% branches / 84.26% funcs / 91.59% lines (gate 80%) ·
+89.89% stmts / 81.31% branches / 84.44% funcs / 91.71% lines (gate 80%) ·
 oxlint 0 errors / 6 warnings (+1 accepted same-class set-state-in-effect;
 CI gate is 0 errors) · build clean ·
 visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/`,
 `acharyas-restyle-25/`, `map-option3-26/`, `map-cluster-slider-28/`,
-`about-option1-29/`, `home-option1-30/`, `map-cluster-focus-31/`).
+`about-option1-29/`, `home-option1-30/`, `map-cluster-focus-31/`,
+`browse-photos-32/`).
 
 ## 2. Open items / likely next requests
 
-- **More PO fix lists** — 31 rounds in ~10 days. Proven loop: inspect
+- **More PO fix lists** — 32 rounds in ~10 days. Proven loop: inspect
   brief/mock → implement reusing kshetrams idioms → Playwright measurement
   + screenshots → judge → gates → TER → commit → push → CI/live check.
 - **PO mockups**: rounds 24/25/26 mockup files never existed on disk (the
@@ -52,13 +54,17 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   (nadadur-ammal etc. show pending markers), CEO portrait, azhwar/acharya
   portraits (only Poigai has photos[]; NO acharya has photos[] — 5 wiki
   images + 22 shanka emblem fallbacks on /acharyas are stand-ins).
-- **Jira: FULLY SYNCED through round 31** (epic DTRPR108K-82; stories
-  DTRPR108K-83..99 + 101..103, all Done). `sync-jira-stories.mjs` gained
+- **Jira: FULLY SYNCED through round 32** (epic DTRPR108K-82; stories
+  DTRPR108K-83..99 + 101..103 + 105, all Done). `sync-jira-stories.mjs` gained
   `--only=US-PO-x` (stories are NOT deduplicated — always pass --only
   for new stories) and requests `fields:['key']` from /search/jql (the
   bare-ID response once duplicated the epic — incident in user-stories
   v2.2). The API token in `.env.local` works; revoke it if it was ever
   pasted into chat.
+- **Browse photo ceiling**: 42/108 cards have photos; the other 66 need
+  PO-owned data (Wikipedia slugs in enrichment.json or uploaded photos).
+  If the PO supplies slugs, edit enrichment.json + the sync fixture
+  together (`sync-content --fixture --check` 0-diff).
 - **Coverage**: branches 81.19% vs gate 80% — ~1.2pp headroom (the
   cluster-focus branches are e2e-covered, not unit-covered). Any new
   conditional needs a test. CI is 2-core (gotcha 10); one e2e flake
@@ -150,8 +156,12 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   FeaturedKshetramCard are DELETED.
 - **Tests must not touch the network**: `useWikiImage` mocked in
   directory/yatraPages tests; real fetch stubbed elsewhere (vi.stubGlobal).
-- Registers/dates: **TER v2.39; TCS v1.25**; user-stories.md v2.1 (Jira
-  sync record with all 18 keys + US-PO-18/19 authored, sync pending).
+- **Data layers matter**: base records (`content/kshetrams.json`) have NO
+  image fields — the 61 Wikipedia slugs live in `content/enrichment.json`
+  (`getAllKshetramsEnriched` / `getEnrichedKshetramById`). Any card grid
+  fed raw records silently renders "Photo coming soon" (round 32).
+- Registers/dates: **TER v2.41; TCS v1.27**; user-stories.md v2.2 (all
+  21 stories synced).
   UT-DTL unchanged since round 17;
   UT-ACH-02 rewritten rounds 22/25; UT-AZW-02 round 24; UT-MAP-01..03 +
   UT-TRP-02/03 rewritten rounds 26–28; UT-ABT-01..05 rewritten/added
