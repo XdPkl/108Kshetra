@@ -2862,3 +2862,54 @@ immediately; docs/02-agile doc edits now go through the Write tool only
 | Production build | Clean |
 | E2E (Playwright) | **21/21 pass** — new TC-20 (click → outline + chip + narrowed grid + Clear restores) and TC-20b (a search that empties the result set clears the focus) |
 | Visual gate | **3/3 pass after a repair loop** — desktop full page + map viewport passed; the mobile shot took three iterations, all capture-side: the first shot caught the ~2-3s `flyToBounds` animation mid-flight (waits extended to 3.5s), a page-text drag produced a selection band (drag now starts inside the map sliver), and a 2-temple cluster's outline is ~13×35px at zoom 9 — unreadable in the 73px sliver below the round-26 floating panel (the 15-temple cluster, same as desktop, is the mobile evidence) — `docs/03-design/gate-shots/map-cluster-focus-31/` |
+
+## Version 2.41 — Browse Grid Photo Fix (2026-10-04, round 32)
+
+**Trigger (PO report):** "In Kshetram page, there were many photos already
+available, but all are showing as Photo coming soon. Why?" Investigation
+confirmed the report for the `/kshetrams` directory: all 108 cards showed
+the placeholder and ZERO Wikipedia summary requests fired from the page.
+
+### Root cause
+
+The kshetram data is two-layered: the base records (`content/kshetrams.json`)
+carry no image fields at all (0 of 108 have `photo`/`wiki`), while the
+61 Wikipedia article slugs the photo pipeline resolves live in the
+enrichment layer (`content/enrichment.json`, merged by
+`getAllKshetramsEnriched` / `getEnrichedKshetramById`). The browse grid
+consumed `useKshetrams()` → `getAllKshetrams()` — the RAW, un-enriched
+records (wiring unchanged since the initial delivery) — so every card
+passed `wiki: null` to `useWikiImage` and no fetch was ever attempted.
+Detail pages, the map's result cards and the home featured cards all
+consume enriched records, which is why their photos loaded while the
+directory's did not. Verified live before the fix: detail page fetch →
+200 + 1280px hero image; browse → 0 requests, 108 placeholders.
+
+### Fix
+
+`useKshetrams()` now returns `getAllKshetramsEnriched()` (one line + the
+why-comment; the hook's only consumer is BrowsePage). Photos flow to the
+cards through the existing KshetramCard pipeline unchanged.
+
+### Expected outcome (not a partial fix)
+
+- **42 of 108** cards render real Wikimedia photographs (object-cover,
+  consistent band heights).
+- **61** summary lookups now fire (all available slugs); of those, ~19
+  resolve to articles without a usable lead image or 404 (documented
+  gotcha 6) → **66** cards honestly keep the designed gopuram
+  "Photo coming soon" placeholder. Those temples have no image source in
+  the dataset until the PO supplies slugs or photos (PO-owned content,
+  flagged in the handover).
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 6 warnings (baseline unchanged) |
+| Unit tests (Vitest) | **246/246 pass (23 suites)** — no test asserted the raw-vs-enriched shape, which is why the regression (never a regression to a previously-working state: browse cards never fetched) survived every gate |
+| Coverage | **89.89% statements / 81.31% branches / 84.44% functions / 91.71% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright) | **21/21 pass** — TC-04's 108-card count unchanged |
+| Verified in DOM (preview build) | 61 summary lookups fired; 42 cards with wikimedia images; 66 placeholders; 0px overflow at 375px |
+| Visual gate | **3/3 pass** — desktop grid top + mid (photo/placeholder rows share identical band heights and aligned action rows; no stretching), mobile top — `docs/03-design/gate-shots/browse-photos-32/` |

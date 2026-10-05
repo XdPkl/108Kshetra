@@ -1561,6 +1561,90 @@
         "customfield_10016": 3
       },
       "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-21 — Browse grid photo fix",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want the kshetrams directory cards to show the temple photographs that are already available in the dataset, instead of \"Photo coming soon\" on all 108 cards."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: The browse grid consumes ENRICHED records (the layer carrying the 61 Wikipedia slugs) so the photo pipeline actually fires."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Cards with a resolvable slug render the temple photograph at the shared card geometry; cards without any image source honestly keep the designed placeholder (PO-owned content)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "Delivered: TER v2.41 / TCS v1.27 (2026-10-04, round 32)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "customfield_10016": 2
+      },
+      "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
     }
   ]
 }

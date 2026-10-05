@@ -594,3 +594,18 @@ live map), so verification is e2e-first.
 Quality gates: TC-QA-01 Pass (0 errors; 6 warnings — +1 accepted same-class set-state-in-effect) · TC-QA-02 Pass (**246/246, 23 suites**; 89.78/81.19/84.26/91.59) · TC-QA-03 Pass · E2E **21/21** · Visual gate **3/3** after repair loop (desktop full + map viewport + mobile 15-cluster focus). Execution recorded in TER v2.40.
 
 *End of Addendum — TCS-108K-008 v1.26*
+
+## Version 1.27 — Browse Grid Photo Fix (2026-10-04)
+
+PO round-32 bug fix (TER v2.41): the `/kshetrams` directory's cards never
+received the enrichment layer carrying the 61 Wikipedia slugs, so no
+photo lookup ever fired and all 108 cards showed the placeholder.
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-BRW-01 | Contract note | Cards now consume ENRICHED records (`useKshetrams` → `getAllKshetramsEnriched`); existing assertions (108 cards, count line, filters) unchanged and passing — the raw-vs-enriched shape was never asserted, which is why the gap survived every gate |
+| TC-04 | E2E | Unchanged — 108-card count holds; photo rendering verified in DOM (61 lookups fired, 42 photos) and visually |
+
+Quality gates: TC-QA-01 Pass (0 errors; 6 warnings) · TC-QA-02 Pass (**246/246, 23 suites**; 89.89/81.31/84.44/91.71) · TC-QA-03 Pass · E2E **21/21** · Visual gate **3/3**. Execution recorded in TER v2.41.
+
+*End of Addendum — TCS-108K-008 v1.27*
