@@ -199,7 +199,7 @@ test.describe('V3 yatra toolkit', () => {
     await page.getByRole('button', { name: /explore hymn & meaning/i }).click();
     await expect(page.getByText(/word-by-word meaning/i)).toBeVisible();
     // The featured desam card lives on the Sacred places tab
-    await page.getByRole('tab', { name: /sacred places \(12\)/i }).click();
+    await page.getByRole('tab', { name: /sacred places \(14\)/i }).click();
     await expect(page.getByRole('link', { name: /view kshetram/i })).toBeVisible();
 
     // Chronological prev/next navigation

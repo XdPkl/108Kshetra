@@ -794,6 +794,24 @@ shippable, verifiable stories).
   (TER v2.41, 2026-10-04 — round 32).
 - Delivered as TER v2.41 / TCS v1.27. Synced as DTRPR108K-105 (2026-10-04).
 
+**US-PO-22 — PO PDF-guide data corrections (clash resolution)** (3 pts, Priority 1) — *FR-8..12, FR-20..25*
+> As the Product Owner, I want the site dataset to match my seven regional
+> Divya Desam reference guides wherever they conflict, the extracted PDF
+> details being the point of truth (PO ruling, 2026-10-18).
+
+- Source: the PO's seven regional guides (compiled workbook:
+  docs/04-review/po-pdf-guides-vs-site-comparison.xlsx, 1,188 field rows;
+  ruling recorded in-workbook and in commit fe0e7e2). Applied: 2 Tamil
+  name corrections (திருக்கச்சி அத்திகிரி, சீராமவிண்ணகரம்), 3 deity
+  names, 11 posture (திருக்கோலம்) corrections and azhwar-set corrections
+  on 22 temples (8 replaced, 14 extended) in kshetrams.json; 6 dossier
+  Mangalasasanam blocks reconciled to the PDF pasuram breakdowns.
+- Follow-ups flagged, not in scope: 5 Chola temples absent from the PDFs;
+  dossier↔dataset subset gaps on untouched temples; optional imports
+  (455 missing utsavar/thayar/vimanam/tree/theertham values, 73 pasuram
+  counts) remain PO-optional (TER v2.42, 2026-10-18 — round 33).
+- Delivered as TER v2.42 / TCS v1.28. Synced as DTRPR108K-106 (2026-10-18).
+
 ### Story-Point Summary (v2.1)
 
 | Epic | Stories | Points |
@@ -855,3 +873,15 @@ points via a follow-up edit (see the script header).
 | Story | US-PO-19 — Homepage "option 1" redesign | EP-PO-ITER | 5 | DTRPR108K-102 |
 | Story | US-PO-20 — Map cluster focus: outline + list filter | EP-PO-ITER | 3 | DTRPR108K-103 |
 | Story | US-PO-21 — Browse grid photo fix | EP-PO-ITER | 2 | DTRPR108K-105 |
+| Story | US-PO-22 — PO PDF-guide data corrections (clash resolution) | EP-PO-ITER | 3 | DTRPR108K-106 |
+
+## Version 2.3 — PO PDF-Guide Data Corrections (2026-10-18)
+
+Round 33 (TER v2.42): the PO supplied seven regional Divya Desam reference
+guides covering all 108 temples and ruled that, wherever the extracted PDF
+details clash with the site dataset, the extracted PDF details are the
+point of truth. US-PO-22 (3 pts) records the applied corrections —
+2 Tamil names, 3 deity names, 11 postures, 22 azhwar sets, 6 dossier
+Mangalasasanam blocks — with the comparison workbook as the traceable
+evidence base. The story is to be transitioned **Done** at creation per
+the established convention.

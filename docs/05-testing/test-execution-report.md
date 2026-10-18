@@ -2913,3 +2913,64 @@ cards through the existing KshetramCard pipeline unchanged.
 | E2E (Playwright) | **21/21 pass** — TC-04's 108-card count unchanged |
 | Verified in DOM (preview build) | 61 summary lookups fired; 42 cards with wikimedia images; 66 placeholders; 0px overflow at 375px |
 | Visual gate | **3/3 pass** — desktop grid top + mid (photo/placeholder rows share identical band heights and aligned action rows; no stretching), mobile top — `docs/03-design/gate-shots/browse-photos-32/` |
+
+## Version 2.42 — PO PDF-Guide Data Corrections (2026-10-18, round 33)
+
+**Trigger:** the PO supplied seven regional Divya Desam reference guides
+(Vada Nadu, Vinnulagam, Nadu Nadu, Thondai Nadu, Pandiya Nadu, Chola Nadu,
+Malai Nadu — 108 temples × 11 fields) and ruled: *wherever the extracted
+PDF details clash with the site dataset, the extracted PDF details are the
+point of truth* (recorded in commit fe0e7e2 and inside the workbook).
+
+### Evidence base
+
+The guides were transcribed and compared field-by-field against
+`content/kshetrams.json` in `docs/04-review/po-pdf-guides-vs-site-comparison.xlsx`
+(1,188 side-by-side rows; Summary / Temple Index / Side-by-Side /
+Differences / Review sheets; 13/13 build-time cross-checks pass). Regional
+groupings match 1:1; 103/108 site temples have PDF records.
+
+### Applied corrections (37 records in kshetrams.json, 6 dossier blocks)
+
+- **Names (2):** kanchi-varadaraja → திருக்கச்சி அத்திகிரி (was the Shiva
+  temple's ஏகம்பன்); sirkazhi → சீராமவிண்ணகரம் (சீர்காழி) (was a conflation
+  with திருக்கண்ணங்குடி).
+- **Deity names (3):** thirukkulandai → Mayakkoothan; thiruvali-thirunagari
+  → Vayalali Manavalan (Vedarajan); manimadakoil → Nandhavilakku Perumal.
+- **Postures (11):** PDF திருக்கோலம் adopted (thirukkaragam, thiruputkuzhi,
+  thirupperai, srivaikuntam, thiruppuliangudi, tholaivillimangalam,
+  madurai-koodal, thirupullani, thirukkoshtiyur, thirumeyyam,
+  thiruvanparisaram).
+- **Azhwar sets (22):** 8 membership conflicts replaced by the PDF set
+  (incl. paramapadam's 8-azhwar siddhanta list with திருப்பாண், without
+  பூதத்தாழ்வார்); 14 sites where the PDF lists azhwars the dataset lacked
+  were extended (e.g. Tirupati now carries all 11 azhwars).
+- **Dossier Mangalasasanam blocks (6):** the detail-page tab renders a
+  separate per-azhwar count layer (`dossier-templates.json`), which the
+  workbook did not compare; the visual gate caught paramapadam listing 10
+  azhwars with pre-existing counts. Blocks that contradicted the PDF were
+  re-set to the PDF pasuram breakdowns (paramapadam, thirukkoshtiyur,
+  thirupparkadal, thiruppadagam, thirumaliruncholai; mathura drops the
+  contradicted thirumazhisai entry).
+
+### Deliberately not applied (flagged for the PO)
+
+- Name *variants* (7) where both names are traditional — not clashes.
+- Dossier↔dataset *subset gaps* on untouched temples (pre-existing).
+- Optional imports: 455 missing utsavar/thayar/vimanam/tree/theertham
+  values and 73 pasuram counts (no clash — the site simply lacks them);
+  needs a schema + UI decision.
+- 5 Chola temples (kandiyur, kabisthalam, thirukkoodalur, thiruvazhundur,
+  thiruchirupuliyur) have no PDF record; the PDFs' claimed 108-series
+  numbering conflicts across documents on 20 numbers.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 6 warnings (baseline unchanged) |
+| Unit tests (Vitest) | **246/246 pass (23 suites)** — 3 Poigai count assertions updated 12→14 (saintPages UT-AZW-03) |
+| Coverage | **89.89% statements / 81.31% branches / 84.44% functions / 91.71% lines** (gate 80%) |
+| Production build | Clean |
+| E2E (Playwright) | **21/21 pass** — TC-18's azhwar-detail tab assertion updated 12→14 |
+| Visual gate | **6/6 pass** — kanchi detail (corrected Tamil name), paramapadam Mangalasasanam tab (8 azhwars, PDF counts, பூதத்தாழ்வார்/குலசேகர absent), Poigai hero (14 desams) + places tab, browse grid — `docs/03-design/gate-shots/data-corrections-33/` |

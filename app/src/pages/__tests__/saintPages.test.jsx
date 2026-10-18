@@ -28,7 +28,7 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-10-01 poigai mock restyle)', 
     expect(screen.getByText('Kasara Yogi')).toBeInTheDocument(); // remaining epithets stay as chips
     expect(screen.getByText(/100 pasurams/i)).toBeInTheDocument();
     // stat row carries the derived count (the places card moved into its tab)
-    expect(screen.getAllByText(/12 Divya Desams/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/14 Divya Desams/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText(/Thiruvekka \(Kanchipuram\)/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText(/Kanchipuram District, Tamil Nadu/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText(/Panchajanya/i)).toBeInTheDocument();
@@ -51,8 +51,8 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-10-01 poigai mock restyle)', 
     expect(screen.getAllByRole('link', { name: /search on youtube/i }).length).toBeGreaterThanOrEqual(1);
     await user.click(screen.getByRole('tab', { name: 'Sources' }));
     expect(screen.getAllByText(/Project Madurai Texts/i).length).toBeGreaterThanOrEqual(1);
-    await user.click(screen.getByRole('tab', { name: /sacred places \(12\)/i }));
-    expect(screen.getByRole('link', { name: /browse all 12 desams/i })).toHaveAttribute('href', '/kshetrams?azhwar=poigai');
+    await user.click(screen.getByRole('tab', { name: /sacred places \(14\)/i }));
+    expect(screen.getByRole('link', { name: /browse all 14 desams/i })).toHaveAttribute('href', '/kshetrams?azhwar=poigai');
     // featured desam card (first desam with a wiki photo) + celestial grouping
     expect(screen.getByRole('link', { name: /view kshetram/i })).toHaveAttribute('href', '/kshetram/kanchi-varadaraja');
     expect(screen.getByText(/celestial divya desams/i)).toBeInTheDocument();
@@ -145,7 +145,7 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-10-01 poigai mock restyle)', 
     await user.click(screen.getByRole('tab', { name: /hymns & meaning/i }));
     expect(window.location.hash).toBe('#hymns');
     fireEvent.keyDown(screen.getByRole('tab', { name: /hymns & meaning/i }), { key: 'ArrowRight' });
-    expect(screen.getByRole('tab', { name: /sacred places \(12\)/i })).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('tab', { name: /sacred places \(14\)/i })).toHaveAttribute('aria-selected', 'true');
     expect(window.location.hash).toBe('#places');
   });
 });

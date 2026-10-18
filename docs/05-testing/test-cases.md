@@ -609,3 +609,20 @@ photo lookup ever fired and all 108 cards showed the placeholder.
 Quality gates: TC-QA-01 Pass (0 errors; 6 warnings) · TC-QA-02 Pass (**246/246, 23 suites**; 89.89/81.31/84.44/91.71) · TC-QA-03 Pass · E2E **21/21** · Visual gate **3/3**. Execution recorded in TER v2.41.
 
 *End of Addendum — TCS-108K-008 v1.27*
+
+## Version 1.28 — PO PDF-Guide Data Corrections (2026-10-18)
+
+Round 33 (TER v2.42): the PO's seven regional guides became the point of
+truth for dataset clashes (PO ruling, 2026-10-18). Data-only round; two
+assertions carried Poigai's desam count, which rose 12 → 14 when
+திருஊரகம் and திருவேக்கா joined his mangalasasanam set per the PDF.
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-AZW-03 | Assertion update | Hero stat "14 Divya Desams", "Sacred places (14)" tab and "browse all 14 desams" link (was 12) |
+| TC-18 | E2E assertion update | Azhwar-detail tab locator `/sacred places \(14\)/` (was 12) |
+| UT-DTL (dossiers) | Data contract note | Mangalasasanam perAzhwar blocks for paramapadam, thirukkoshtiyur, thirupparkadal, thiruppadagam and thirumaliruncholai now mirror the PDF pasuram breakdowns (mathura drops the contradicted thirumazhisai entry); no shape change — 246/246 holds unchanged |
+
+Quality gates: TC-QA-01 Pass (0 errors; 6 warnings) · TC-QA-02 Pass (**246/246, 23 suites**; 89.89/81.31/84.44/91.71) · TC-QA-03 Pass · E2E **21/21** · Visual gate **6/6**. Execution recorded in TER v2.42.
+
+*End of Addendum — TCS-108K-008 v1.28*

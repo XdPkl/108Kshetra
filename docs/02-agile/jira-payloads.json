@@ -1645,6 +1645,93 @@
         "customfield_10016": 2
       },
       "parentEpicSummary": "EP-PO-ITER — PO Refinement Iterations"
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-22 — PO PDF-guide data corrections (clash resolution)",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "customfield_10016": 3,
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want the site dataset to match my seven regional Divya Desam reference guides wherever they conflict, the extracted PDF details being the point of truth (PO ruling, 2026-10-18)."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: kshetrams.json carries the PDF values for the recorded clashes — 2 Tamil names, 3 deity names, 11 postures, 22 azhwar sets (workbook: docs/04-review/po-pdf-guides-vs-site-comparison.xlsx)."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: dossier Mangalasasanam blocks that contradicted the PDF (6 temples) mirror the PDF pasuram breakdowns."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: all gates hold — 246/246 unit, 21/21 e2e, coverage >= 80%, lint 0 errors, visual 6/6."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Delivered as TER v2.42 / TCS v1.28 (round 33, 2026-10-18)."
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   ]
 }

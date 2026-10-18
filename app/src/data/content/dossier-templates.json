@@ -898,19 +898,11 @@
       "perAzhwar": [
         [
           "thirumangai",
-          2
-        ],
-        [
-          "bhoothath",
-          2
-        ],
-        [
-          "pey",
-          1
+          8
         ],
         [
           "thirumazhisai",
-          1
+          2
         ]
       ],
       "excerpts": [
@@ -6527,19 +6519,15 @@
         ],
         [
           "thirumangai",
-          33
+          46
         ],
         [
           "bhoothath",
-          3
-        ],
-        [
-          "pey",
           1
         ],
         [
           "nammazhwar",
-          46
+          36
         ]
       ],
       "excerpts": [
@@ -6716,14 +6704,6 @@
     "mangalasasanam": {
       "perAzhwar": [
         [
-          "periyazhwar",
-          11
-        ],
-        [
-          "thirumangai",
-          13
-        ],
-        [
           "bhoothath",
           2
         ],
@@ -6736,8 +6716,16 @@
           1
         ],
         [
-          "nammazhwar",
+          "thirumangai",
           11
+        ],
+        [
+          "periyazhwar",
+          21
+        ],
+        [
+          "andal",
+          3
         ]
       ],
       "excerpts": [
@@ -8746,10 +8734,6 @@
         [
           "thirumangai",
           10
-        ],
-        [
-          "thirumazhisai",
-          1
         ]
       ],
       "excerpts": [
@@ -9030,24 +9014,8 @@
     "mangalasasanam": {
       "perAzhwar": [
         [
-          "periyazhwar",
-          9
-        ],
-        [
-          "andal",
-          5
-        ],
-        [
-          "thirumangai",
-          11
-        ],
-        [
-          "nammazhwar",
-          9
-        ],
-        [
           "poigai",
-          3
+          1
         ],
         [
           "bhoothath",
@@ -9059,14 +9027,30 @@
         ],
         [
           "thirumazhisai",
-          4
+          13
+        ],
+        [
+          "nammazhwar",
+          9
+        ],
+        [
+          "periyazhwar",
+          5
+        ],
+        [
+          "thirumangai",
+          11
         ],
         [
           "kulasekhara",
           2
         ],
         [
-          "thiruppaan",
+          "andal",
+          3
+        ],
+        [
+          "thondaradippodi",
           1
         ]
       ],
@@ -9157,8 +9141,20 @@
     "mangalasasanam": {
       "perAzhwar": [
         [
+          "poigai",
+          2
+        ],
+        [
+          "pey",
+          1
+        ],
+        [
+          "thirumazhisai",
+          2
+        ],
+        [
           "nammazhwar",
-          12
+          24
         ],
         [
           "thirumangai",
@@ -9166,31 +9162,11 @@
         ],
         [
           "periyazhwar",
-          5
-        ],
-        [
-          "andal",
           4
         ],
         [
-          "poigai",
-          2
-        ],
-        [
-          "bhoothath",
-          2
-        ],
-        [
-          "pey",
-          5
-        ],
-        [
-          "thirumazhisai",
-          2
-        ],
-        [
-          "kulasekhara",
-          2
+          "andal",
+          1
         ],
         [
           "thiruppaan",
