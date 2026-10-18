@@ -8,7 +8,7 @@ live `assets/index-*.js` via `node -e "...includes(...)"` — gotcha 12; MapPage
 strings live in the lazy `assets/MapPage-*.js` chunk). Working tree clean.
 No preview server running. Scratch scripts deleted. Nothing in flight.
 
-## 1. What this session delivered (rounds 24–28 + audit + Jira, all live)
+## 1. What this session delivered (rounds 24–32 + audit + Jira sync, all live)
 
 | Commit | Work | Register |
 |---|---|---|
@@ -323,11 +323,11 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
 
 ```
 # app/  (quality gates — CI parity)
-npm test                 # 241 unit / 23 suites (global timeout 15s)
-npm run test:coverage    # gates: 80% stmts/branches/funcs/lines (~90.5%)
-npm run lint             # oxlint (0 errors; 5 warnings — see TER v2.37)
+npm test                 # 246 unit / 23 suites (global timeout 15s)
+npm run test:coverage    # gates: 80% stmts/branches/funcs/lines (~90%)
+npm run lint             # oxlint (0 errors; 6 warnings — see TER v2.40)
 npm run build            # production build (REBUILD before re-measuring!)
-npx playwright test      # 19 e2e (boots vite preview on :4173)
+npx playwright test      # 21 e2e (boots vite preview on :4173)
 
 # app/  (CMS pipeline self-tests — no Sanity account needed)
 node scripts/sync-content.mjs --fixture scripts/__fixtures__/sync-response.json --check
