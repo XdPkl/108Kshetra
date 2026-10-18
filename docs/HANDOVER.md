@@ -1,12 +1,15 @@
-# HANDOVER — 108 Divya Kshetrams (2026-10-05, after rounds 24–32 + audit + Jira sync)
+# HANDOVER — 108 Divya Kshetrams (2026-10-18, after round 33 / PO-guide data corrections)
 
-State: **Round 32 pushed, CI+Deploy green on `f91ef87`, live verified.**
-`main` = `f91ef87` (Browse grid photo fix) in sync with `origin/main`
-(https://github.com/XdPkl/108Kshetra). Live: https://xdpkl.github.io/108Kshetra/
-— verify bundles by CONTENT, not by hash (CI Linux hashes differ; grep the
-live `assets/index-*.js` via `node -e "...includes(...)"` — gotcha 12; MapPage
-strings live in the lazy `assets/MapPage-*.js` chunk). Working tree clean.
-No preview server running. Scratch scripts deleted. Nothing in flight.
+State: **Round 33 pushed (`e8a23ee`), CI+Deploy pending re-check at handoff —
+verify before relying on live state.** `main` = `e8a23ee` (PO PDF-guide data
+corrections) in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
+Live: https://xdpkl.github.io/108Kshetra/ — verify bundles by CONTENT, not by
+hash (gotcha 12). Working tree clean. No preview server running. Scratch
+scripts deleted. Nothing in flight. NEW THIS SESSION: the PO supplied seven
+regional Divya Desam PDFs covering all 108 temples and RULED (2026-10-18)
+that where the extracted PDF details clash with the site dataset, the
+extracted PDF details are the point of truth — evidence workbook:
+`docs/04-review/po-pdf-guides-vs-site-comparison.xlsx` (1,188 field rows).
 
 ## 1. What this session delivered (rounds 24–32 + audit + Jira sync, all live)
 
@@ -23,6 +26,8 @@ No preview server running. Scratch scripts deleted. Nothing in flight.
 | `3ea21aa` | **Round 30 — homepage rebuilt to "option 1"**: immersive 600px hero reusing the PO-supplied `hero-sunset-lamps.jpg` with the new copy hierarchy (eyebrow, 2-line 66px Cormorant heading, supporting line, real-text Tamil `lang="ta"`, gold "Explore the Kshetrams" + inverse "Plan your yatra", both in the initial viewport); progress strip switches "Begin your yatra"/"Continue your yatra" from live state with the visible "N of 106 visited." equivalent (progressbar contract unchanged); featured grid now the shared KshetramCard in 1/2/3 cols keeping ALL FOUR curated temples (Srirangam, Thiruvengadam, Thirukkachi + Srivilliputhur on a further row); two tradition columns (divider, tertiary Explore links) keeping compact 2×2 PersonPreview profile links; guided-yatra invitation → `/about#guided-yatras` with the shared gopuram illustration + browse quote; **SaintStrip + orphaned FeaturedKshetramCard deleted**. Site-copy hero/home restructured (invocation/subtitle retired, progress+invite added) with fixture + schema lockstep | TER v2.39, TCS v1.25, user-stories US-PO-19 |
 | `a9d57af` | **Round 31 — map cluster focus**: clicking a cluster bubble draws a dashed bounds outline (`Rectangle`, 6/6 dashes, `interactive:false`), gold-rings the focused bubble (`aria-label` on the divIcon) and filters the results grid to the member temples behind a `role="status"` chip (medallion count + Clear); the focus filters the GRID only, never `shown` (feedback would dissolve the clicked cluster); clears on Escape/chip/Reset/scope change/any filter removing a member, NEVER on zoom (the standing fly-to-bounds at maxZoom 9 dissolves the cluster by design — outline is a snapshot). **Jira: US-PO-18/19/20 synced as DTRPR108K-101/102/103** (Done, under epic -82); sync script gains `--only` + requests `fields:['key']` from /search/jql (bare-ID response had duplicated the epic — re-parented stories, duplicate deleted, incident in user-stories v2.2) | TER v2.40, TCS v1.26, user-stories US-PO-20 |
 | `f91ef87` | **Round 32 — browse grid photo fix** (PO report: all 108 cards "Photo coming soon" despite available photos): root cause — the browse grid consumed `useKshetrams()` → RAW records (no image fields) while the 61 Wikipedia slugs live in enrichment.json, which detail/map/home-featured merge but browse never did; no lookup was even attempted (verified live: 0 requests). Fix: `useKshetrams()` returns `getAllKshetramsEnriched()` (one line; only consumer is BrowsePage). Outcome: 61 lookups fire, **42 cards render photos**, 66 honestly keep the placeholder (no slug/no lead image/known 404s — PO-owned content). Not a regression: browse never fetched (wiring unchanged since initial delivery; no test asserted the raw-vs-enriched shape) | TER v2.41, TCS v1.27, user-stories US-PO-21 |
+| `fe0e7e2` + `74f6d89` | **PO comparison workbook + ruling**: 7 PO PDFs transcribed (108 temples × 11 fields) and compared side-by-side against the dataset — Summary/Temple Index/Side-by-Side (1,188 rows)/Differences/Review (13/13 build-time checks, formula-free by design). Key findings: site stores NO utsavar/thayar/vimanam/tree/theertham (455 rows missing on site); pasuramCount empty for 107/108; PDFs cover 103/108 (5 Chola temples absent); 9..11 posture + 3 deity + 8 azhwar-set conflicts; PDFs' 108-numbers conflict across docs on 20 numbers | workbook only |
+| `e8a23ee` | **Round 33 — PO PDF-guide data corrections** (ruling applied): kshetrams.json — 2 Tamil names (kanchi-varadaraja → திருக்கச்சி அத்திகிரி, sirkazhi → சீராமவிண்ணகரம் (சீர்காழி)), 3 deity names, 11 postures, 22 azhwar sets (8 replaced incl. paramapadam's 8-azhwar siddhanta list, 14 extended — Tirupati now 11 azhwars); 6 dossier Mangalasasanam blocks re-set to PDF pasuram breakdowns (visual gate caught the paramapadam tab rendering 10 azhwars from dossier-templates.json — a layer the workbook did NOT compare). Poigai desam count 12→14 (UT-AZW-03 + TC-18). **Jira: US-PO-22 synced as DTRPR108K-106** (Done, under epic -82) | TER v2.42, TCS v1.28, user-stories v2.3 US-PO-22 |
 
 Final gates at handoff: **246/246 unit (23 suites) · 21/21 e2e · coverage
 89.89% stmts / 81.31% branches / 84.44% funcs / 91.71% lines (gate 80%) ·
@@ -31,11 +36,11 @@ CI gate is 0 errors) · build clean ·
 visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/`,
 `acharyas-restyle-25/`, `map-option3-26/`, `map-cluster-slider-28/`,
 `about-option1-29/`, `home-option1-30/`, `map-cluster-focus-31/`,
-`browse-photos-32/`).
+`browse-photos-32/`, `data-corrections-33/`).
 
 ## 2. Open items / likely next requests
 
-- **More PO fix lists** — 32 rounds in ~10 days. Proven loop: inspect
+- **More PO fix lists** — 33 rounds in ~2 weeks. Proven loop: inspect
   brief/mock → implement reusing kshetrams idioms → Playwright measurement
   + screenshots → judge → gates → TER → commit → push → CI/live check.
 - **PO mockups**: rounds 24/25/26 mockup files never existed on disk (the
@@ -54,13 +59,26 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   (nadadur-ammal etc. show pending markers), CEO portrait, azhwar/acharya
   portraits (only Poigai has photos[]; NO acharya has photos[] — 5 wiki
   images + 22 shanka emblem fallbacks on /acharyas are stand-ins).
-- **Jira: FULLY SYNCED through round 32** (epic DTRPR108K-82; stories
-  DTRPR108K-83..99 + 101..103 + 105, all Done). `sync-jira-stories.mjs` gained
+- **Jira: FULLY SYNCED through round 33** (epic DTRPR108K-82; stories
+  DTRPR108K-83..99 + 101..103 + 105 + 106, all Done). `sync-jira-stories.mjs` gained
   `--only=US-PO-x` (stories are NOT deduplicated — always pass --only
   for new stories) and requests `fields:['key']` from /search/jql (the
   bare-ID response once duplicated the epic — incident in user-stories
   v2.2). The API token in `.env.local` works; revoke it if it was ever
   pasted into chat.
+- **PO ruling (2026-10-18): where the extracted PDF details clash with the
+  dataset, the PDF wins** — recorded in the workbook Summary, commits
+  fe0e7e2/74f6d89, applied in round 33 (e8a23ee). Round-33 follow-ups, all
+  PO-optional/PO-owned: (a) import 455 missing utsavar/thayar/vimanam/tree/
+  theertham values + 73 pasuram counts from the workbook (the site has NO
+  schema fields for the five — needs a schema + render decision);
+  (b) 5 Chola temples (kandiyur, kabisthalam, thirukkoodalur, thiruvazhundur,
+  thiruchirupuliyur) have no PDF record; (c) the PDFs' claimed 108-series
+  numbering conflicts across documents on 20 numbers — the site stores no
+  numbers, pick a convention before any are added; (d) pre-existing
+  dossier↔dataset subset gaps on temples NOT touched in round 33 (~8
+  dossiers list fewer azhwars than kshetrams.json; no counts invented —
+  flagged in TER v2.42).
 - **Browse photo ceiling**: 42/108 cards have photos; the other 66 need
   PO-owned data (Wikipedia slugs in enrichment.json or uploaded photos).
   If the PO supplies slugs, edit enrichment.json + the sync fixture
@@ -160,10 +178,16 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   image fields — the 61 Wikipedia slugs live in `content/enrichment.json`
   (`getAllKshetramsEnriched` / `getEnrichedKshetramById`). Any card grid
   fed raw records silently renders "Photo coming soon" (round 32).
-- Registers/dates: **TER v2.41; TCS v1.27**; user-stories.md v2.2 (all
-  21 stories synced).
-  UT-DTL unchanged since round 17;
-  UT-ACH-02 rewritten rounds 22/25; UT-AZW-02 round 24; UT-MAP-01..03 +
+  THIRD layer (round 33): the detail page's Mangalasasanam tab renders
+  `content/dossier-templates.json` `mangalasasanam.perAzhwar` (azhwar +
+  pasuram-count pairs) — NOT `kshetrams.json`'s `azhwars` array; the two
+  can silently diverge (visual gate caught paramapadam at 10 vs 8).
+- Registers/dates: **TER v2.42; TCS v1.28**; user-stories.md v2.3 (all
+  22 stories synced). Comparison workbook (PO PDF guides, round-33
+  evidence base): `docs/04-review/po-pdf-guides-vs-site-comparison.xlsx`.
+  UT-DTL unchanged since round 17; UT-AZW-03 assertions updated round 33
+  (Poigai 12→14); UT-ACH-02 rewritten rounds 22/25; UT-AZW-02 round 24;
+  UT-MAP-01..03 +
   UT-TRP-02/03 rewritten rounds 26–28; UT-ABT-01..05 rewritten/added
   round 29; UT-HOME-01..05 rewritten/added round 30;
   `utils/__tests__/geo.test.js`
@@ -318,6 +342,26 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
     clear. A 2-temple cluster's outline is ~13×35px at zoom 9 — judge
     mobile evidence with the 15-temple cluster, and drag-map pans must
     START inside the map sliver or the page selects text instead.
+54. **Detail-page Mangalasasanam tab = `dossier-templates.json` perAzhwar,
+    not `kshetrams.json` azhwars** (round 33) — a third data layer the
+    comparison workbook didn't cover; when editing azhwar sets, diff the
+    dossier too (see the round-33 section-3 data-layers note).
+55. **xlsx-skill recalc macro hangs on this Windows box** — the skill
+    installs its Basic macro to `~/.config/libreoffice` (Linux-only path)
+    and `subprocess.run` has no timeout on win32, so `xlsx.py recalc`/`audit`
+    stall forever. For xlsx deliverables here: build formula-free with
+    build-time computed cross-checks, then run `scan` + `validate`
+    (openpyxl-only); `soffice --convert-to pdf` (plain conversion, no
+    macro) works fine for visual renders.
+56. **An Excel owner-lock (`~$file.xlsx`) means the file is open on the
+    user's machine** — openpyxl save dies with PermissionError. Retry
+    once, then carry the change in the commit message and tell the user
+    (round 33's workbook ruling edit waited for the PO to close Excel).
+57. **Two back-to-back `npx playwright test` runs collide on the
+    strictPort :4173 preview** — the first run's server can survive its
+    shell and the second run's 21 tests all fail on toBeVisible. Check
+    `netstat -ano | grep 4173`, `taskkill //F //PID <pid>`, re-run once
+    before diagnosing test failures.
 
 ## 5. Command cheat-sheet
 
