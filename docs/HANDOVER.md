@@ -79,10 +79,12 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   dossier↔dataset subset gaps on temples NOT touched in round 33 (~8
   dossiers list fewer azhwars than kshetrams.json; no counts invented —
   flagged in TER v2.42).
-- **Browse photo ceiling**: 42/108 cards have photos; the other 66 need
-  PO-owned data (Wikipedia slugs in enrichment.json or uploaded photos).
-  If the PO supplies slugs, edit enrichment.json + the sync fixture
-  together (`sync-content --fixture --check` 0-diff).
+- **Browse photo ceiling**: 60/108 cards have photos (41 verified live at the
+  round-33 audit + 19 dead Wikipedia slugs fixed in TER v2.43). The other 48
+  need PO-owned data (47 temples have no slug in enrichment.json; Badrinath's
+  article has no usable lead image). If the PO supplies slugs, edit
+  enrichment.json + the sync fixture TOGETHER (`sync-content --fixture
+  --check` 0-diff).
 - **Coverage**: branches 81.19% vs gate 80% — ~1.2pp headroom (the
   cluster-focus branches are e2e-covered, not unit-covered). Any new
   conditional needs a test. CI is 2-core (gotcha 10); one e2e flake
@@ -362,6 +364,17 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
     shell and the second run's 21 tests all fail on toBeVisible. Check
     `netstat -ano | grep 4173`, `taskkill //F //PID <pid>`, re-run once
     before diagnosing test failures.
+58. **Sync-fixture fields are Sanity-SHAPED, not content-shaped** —
+    `kshetram.<id>.azhwars` holds `azhwar.<key>` refs (groqToContent does
+    `slice(7)`, so bare keys mangle into fragments like "ngai") and
+    `mangalasasanam.perAzhwar` holds `{count, azhwarId}` objects. When
+    reconciling the fixture from content JSONs, convert shapes (TER v2.43);
+    keep `sync-content --fixture --check` 0-diff after every content edit.
+59. **Wikipedia rate-limits hard (HTTP 429) after ~25 rapid API calls** —
+    pace summary lookups ~600ms+ with long 429 backoff; opensearch is
+    prefix-only (short queries), REST search (`/w/rest.php/v1/search/page`)
+    limits much faster than the summary API. For article-title hunts,
+    WebSearch + summary verification beat on-wiki search.
 
 ## 5. Command cheat-sheet
 

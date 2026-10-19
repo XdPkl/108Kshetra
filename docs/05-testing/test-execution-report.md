@@ -2974,3 +2974,63 @@ groupings match 1:1; 103/108 site temples have PDF records.
 | Production build | Clean |
 | E2E (Playwright) | **21/21 pass** — TC-18's azhwar-detail tab assertion updated 12→14 |
 | Visual gate | **6/6 pass** — kanchi detail (corrected Tamil name), paramapadam Mangalasasanam tab (8 azhwars, PDF counts, பூதத்தாழ்வார்/குலசேகர absent), Poigai hero (14 desams) + places tab, browse grid — `docs/03-design/gate-shots/data-corrections-33/` |
+
+## Version 2.43 — Dead Wikipedia Slugs Fixed (2026-10-18, round 33 follow-up)
+
+**Trigger:** PO approved hunting correct Wikipedia article titles for the 19
+temples whose enrichment slugs returned HTTP 404 (photos never loaded for
+them; the article-name strings were wrong — typos, wrong disambiguations,
+or spacing/case drift).
+
+### Fix
+
+19 `wiki` slugs corrected in `enrichment.json` **and** the sync fixture
+(0-diff restored). Each replacement was verified against the live summary
+API: correct temple (extract/place check) AND a usable lead image:
+
+| Temple | Old slug (404) | New slug |
+|---|---|---|
+| திருக்கொளி (uraiyur) | Azagiya Manavala Perumal Temple | Azhagiya Manavala Perumal Temple |
+| திருவெள்ளரை | Pundarikakshan Perumal temple | Pundarikakshan Perumal Temple |
+| திருநறையூர் | Nachiyar Kovil | Thirunarayur Nambi Temple |
+| திருக்கண்ணமங்கை | Bhaktavatsala Perumal temple, Thirukannamangai | Bhaktavatsala Perumal temple, Tirukannamangai |
+| திருப்புலியூர் | Puliyoorkavil Sree Krishna Swamy Temple | Puliyur Mahavishnu Temple |
+| திருநாவாய் | Navamukunda Perumal temple, Thirunavaya | Thirunavaya temple |
+| திருவட்டாறு | Adikesava Perumal temple, Kanyakumari district | Adikesava Perumal Temple, Thiruvattar |
+| திருக்கோவிலூர் | Trivikrama Temple, Tirukoyilur | Ulagalantha Perumal Temple, Tirukoyilur |
+| திருக்குறுங்குடி | Nindra Nambi Perumal temple | Vaishnava Nambi and Thirukurungudivalli Nachiar temple |
+| ஆழ்வார் திருநகரி | Adinathar Temple, Alwarthirunagari | Adinatha Perumal Temple |
+| திருவைகுண்டம் | Vaikuntanathar Temple Srivaikuntam | Srivaikuntanathan Perumal temple |
+| திருப்புல்லாணி | Kothandaramaswamy Temple, Thirupullani | Adi Jagannatha Perumal Temple |
+| திருநீர்மலை | Neervanna Perumal temple, Thiruneermalai | Thiruneermalai (temple complex) |
+| திருபரமேஸ்வர விண்ணகரம் | Vaikunda Perumal Temple, Kanchipuram | Tiru Parameswara Vinnagaram |
+| திருவேளுக்கை | Azhagiya Singar Temple, Kanchipuram | Tiruvelukkai |
+| திருத்தாண்கா | Deepa Prakasar Perumal temple | Tiruththanka |
+| திருவல்லூர் | Veeraraghava Perumal temple, Tiruvallur | Veeraraghava Swamy Temple |
+| திருவிடந்தை | Nithya Kalyana Perumal temple | Nithyakalyana Perumal temple |
+| திருக்கடிகை (சோளிங்கர்) | Yoga Narasimha Temple, Sholinghur | Thirukkadigai |
+
+Two near-misses rejected during verification: "Nachiyar Koil, Woraiyur" (a
+different temple, Trichy) and "Kothandaramaswamy Temple" (the Rameswaram
+shrine, not Thirupullani).
+
+### Fixture reconciliation (found during this fix)
+
+The sync fixture had drifted stale against round-33's content corrections —
+running `sync-content` would have **reverted** them. The fixture was
+reconciled from the corrected content in proper Sanity shape:
+19 `wiki` fields, 16 base fields (tamilName/deity/deityForm), 22 azhwar
+arrays (as `azhwar.<key>` refs — `groqToContent` slices the prefix, so bare
+keys get mangled into fragments like "ngai"), and the 6 corrected
+`mangalasasanam.perAzhwar` blocks (as `{count, azhwarId}` refs).
+`sync-content --fixture --check` is back to **0-diff on all 11 content files**.
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 6 warnings (baseline unchanged) |
+| Unit tests (Vitest) | **246/246 pass (23 suites)** |
+| Production build | Clean |
+| E2E (Playwright) | **21/21 pass** |
+| Live photo verification | All 19 new slugs resolve to the correct temple with a usable lead image; expected card-photo count rises **41 → 60** of 108 (placeholders 48: 47 temples without slugs + Badrinath, whose article has no usable lead image) |

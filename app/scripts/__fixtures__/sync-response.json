@@ -176,7 +176,8 @@
       "deity": "Neervannan",
       "deityForm": "Nindran — Standing",
       "azhwars": [
-        "azhwar.thirumangai"
+        "azhwar.thirumangai",
+        "azhwar.bhoothath"
       ],
       "pasuramCount": 0,
       "significance": "The hill where the Lord gave darshan in four forms — standing, seated, reclining and walking — in one complex.",
@@ -192,7 +193,7 @@
         ],
         "notes": "Hill shrine has steps — darshan by climb"
       },
-      "wiki": "Neervanna Perumal temple, Thiruneermalai",
+      "wiki": "Thiruneermalai (temple complex)",
       "moolavar": {
         "name": "Neervannan",
         "tamilName": "நீர்வண்ணன்",
@@ -223,7 +224,7 @@
       "_type": "kshetram",
       "order": 3,
       "name": "Thirukkachi (Kanchipuram — Atthigiri)",
-      "tamilName": "திருக்கச்சி ஏகம்பன்",
+      "tamilName": "திருக்கச்சி அத்திகிரி",
       "temple": "Sri Varadharaja Perumal Temple",
       "place": "Kanchipuram",
       "state": "Tamil Nadu",
@@ -396,7 +397,9 @@
       "deityForm": "Kidandan — Reclining",
       "azhwars": [
         "azhwar.thirumazhisai",
-        "azhwar.thirumangai"
+        "azhwar.thirumangai",
+        "azhwar.poigai",
+        "azhwar.pey"
       ],
       "pasuramCount": 0,
       "significance": "The Lord who obeyed his devotee Thirumazhisai Azhwar’s word and shifted the shrine — \"as told, so done\".",
@@ -605,7 +608,10 @@
       "deity": "Ulagalantha Perumal (Trivikrama)",
       "deityForm": "Nindran — Standing",
       "azhwars": [
-        "azhwar.thirumangai"
+        "azhwar.thirumangai",
+        "azhwar.poigai",
+        "azhwar.pey",
+        "azhwar.thirumazhisai"
       ],
       "pasuramCount": 0,
       "significance": "The colossus of Vamana’s three strides — one foot raised to measure the very universe.",
@@ -889,7 +895,7 @@
       "state": "Tamil Nadu",
       "region": "Thondai Nadu",
       "deity": "Karunakaran",
-      "deityForm": "Nindran — Standing",
+      "deityForm": "Irundhan — Seated",
       "azhwars": [
         "azhwar.thirumangai"
       ],
@@ -1171,7 +1177,7 @@
         ],
         "notes": "Pallava-era structure"
       },
-      "wiki": "Vaikunda Perumal Temple, Kanchipuram",
+      "wiki": "Tiru Parameswara Vinnagaram",
       "moolavar": {
         "name": "Vaikundanathan",
         "tamilName": "வைகுந்தநாதன்",
@@ -1294,7 +1300,8 @@
       "deity": "Pavalavannan",
       "deityForm": "Nindran — Standing",
       "azhwars": [
-        "azhwar.thirumangai"
+        "azhwar.thirumangai",
+        "azhwar.bhoothath"
       ],
       "pasuramCount": 0,
       "significance": "The coral-hued Lord who appeared from the fire of the sacrificial rites of the sages.",
@@ -1437,7 +1444,8 @@
       "deity": "Pandava Thoodhar",
       "deityForm": "Irundhan — Seated",
       "azhwars": [
-        "azhwar.thirumangai"
+        "azhwar.thirumangai",
+        "azhwar.thirumazhisai"
       ],
       "pasuramCount": 0,
       "significance": "Krishna seated in his giant form as the messenger (thoodhar) of the Pandavas before the great war.",
@@ -1520,19 +1528,11 @@
       "mangalasasanam": {
         "perAzhwar": [
           {
-            "count": 2,
+            "count": 8,
             "azhwarId": "azhwar.thirumangai"
           },
           {
             "count": 2,
-            "azhwarId": "azhwar.bhoothath"
-          },
-          {
-            "count": 1,
-            "azhwarId": "azhwar.pey"
-          },
-          {
-            "count": 1,
             "azhwarId": "azhwar.thirumazhisai"
           }
         ],
@@ -1876,7 +1876,7 @@
       "deity": "Yoga Narasimha (Azhagiya Singar)",
       "deityForm": "Irundhan — Seated",
       "azhwars": [
-        "azhwar.thirumazhisai",
+        "azhwar.pey",
         "azhwar.thirumangai"
       ],
       "pasuramCount": 0,
@@ -1893,7 +1893,7 @@
         ],
         "notes": ""
       },
-      "wiki": "Azhagiya Singar Temple, Kanchipuram",
+      "wiki": "Tiruvelukkai",
       "moolavar": {
         "name": "Azhagiya Singar (Yoga Narasimha)",
         "tamilName": "அழகிய சிங்கர்",
@@ -2036,7 +2036,7 @@
         ],
         "notes": ""
       },
-      "wiki": "Deepa Prakasar Perumal temple",
+      "wiki": "Tiruththanka",
       "moolavar": {
         "name": "Deepa Prakasar (Vilakkoli Perumal)",
         "tamilName": "விளக்கொளி பெருமாள்",
@@ -2161,7 +2161,7 @@
       "state": "Tamil Nadu",
       "region": "Thondai Nadu",
       "deity": "Vijayaraghava",
-      "deityForm": "Nindran — Standing",
+      "deityForm": "Irundhan — Seated",
       "azhwars": [
         "azhwar.thirumangai"
       ],
@@ -2215,7 +2215,8 @@
       "deity": "Vaidya Veeraraghava",
       "deityForm": "Kidandan — Reclining",
       "azhwars": [
-        "azhwar.thirumangai"
+        "azhwar.thirumangai",
+        "azhwar.thirumazhisai"
       ],
       "pasuramCount": 0,
       "significance": "The divine physician — the Lord reclines on his serpent bed here healing the ills of his devotees.",
@@ -2231,7 +2232,7 @@
         ],
         "notes": "Known as Vaidya Veeraraghava — prayers for healing"
       },
-      "wiki": "Veeraraghava Perumal temple, Tiruvallur",
+      "wiki": "Veeraraghava Swamy Temple",
       "moolavar": {
         "name": "Vaidya Veeraraghava",
         "tamilName": "வைத்திய வீரராகவன்",
@@ -2445,7 +2446,7 @@
         ],
         "notes": "Popular for marriage blessings"
       },
-      "wiki": "Nithya Kalyana Perumal temple",
+      "wiki": "Nithyakalyana Perumal temple",
       "moolavar": {
         "name": "Nithyakalyana (Aadalmaiyappan)",
         "tamilName": "நித்திய கல்யாண பெருமாள்",
@@ -2655,7 +2656,7 @@
         ],
         "notes": "Yoga Anjaneyar hill shrine nearby"
       },
-      "wiki": "Yoga Narasimha Temple, Sholinghur",
+      "wiki": "Thirukkadigai",
       "moolavar": {
         "name": "Yoga Narasimha (Akkarakani)",
         "tamilName": "யோக நரசிம்மர்",
@@ -3003,7 +3004,7 @@
         ],
         "notes": "Goddess-led temple — Nachiyar receives first honours"
       },
-      "wiki": "Azagiya Manavala Perumal Temple",
+      "wiki": "Azhagiya Manavala Perumal Temple",
       "moolavar": {
         "name": "Azhagiya Manavalan",
         "tamilName": "அழகிய மணவாளன்",
@@ -3317,7 +3318,7 @@
         ],
         "notes": "White hill (vellai — white); Marutha vahanam festival"
       },
-      "wiki": "Pundarikakshan Perumal temple",
+      "wiki": "Pundarikakshan Perumal Temple",
       "moolavar": {
         "name": "Pundarikakshan",
         "tamilName": "புண்டரீகாட்சன்",
@@ -4964,7 +4965,7 @@
         ],
         "notes": "Nachiyar leads all processions — only temple where the Goddess is honoured first"
       },
-      "wiki": "Nachiyar Kovil",
+      "wiki": "Thirunarayur Nambi Temple",
       "moolavar": {
         "name": "Thirunarayoor Nambi (Srinivasa)",
         "tamilName": "நம்பி",
@@ -5272,7 +5273,7 @@
         ],
         "notes": "Famed Abhishekam; bee-mandapa (vanamali) legend"
       },
-      "wiki": "Bhaktavatsala Perumal temple, Thirukannamangai",
+      "wiki": "Bhaktavatsala Perumal temple, Tirukannamangai",
       "moolavar": {
         "name": "Bhaktavatsala Perumal",
         "tamilName": "பக்தவத்சல பெருமாள்",
@@ -6578,7 +6579,8 @@
       "deity": "Govindaraja",
       "deityForm": "Kidandan — Reclining",
       "azhwars": [
-        "azhwar.thirumangai"
+        "azhwar.thirumangai",
+        "azhwar.kulasekhara"
       ],
       "pasuramCount": 0,
       "significance": "Lord Vishnu reclines within the famed Nataraja temple complex — the vision of Siva and Vishnu as one.",
@@ -6724,7 +6726,7 @@
       "_type": "kshetram",
       "order": 50,
       "name": "Thirukkannalangudi (Sirkazhi)",
-      "tamilName": "திருக்கண்ணங்குடி சீர்காழி",
+      "tamilName": "சீராமவிண்ணகரம் (சீர்காழி)",
       "temple": "Sri Trivikrama Perumal Temple (Kazheesirama Vinnagaram)",
       "place": "Sirkazhi, Mayiladuthurai",
       "state": "Tamil Nadu",
@@ -6871,7 +6873,7 @@
       "place": "Thirunangur, Mayiladuthurai",
       "state": "Tamil Nadu",
       "region": "Chola Nadu",
-      "deity": "Lakshmi Narasimha",
+      "deity": "Vayalali Manavalan (Vedarajan)",
       "deityForm": "Irundhan — Seated",
       "azhwars": [
         "azhwar.thirumangai"
@@ -7568,7 +7570,7 @@
       "place": "Thirunangur, Mayiladuthurai",
       "state": "Tamil Nadu",
       "region": "Chola Nadu",
-      "deity": "Narayanan",
+      "deity": "Nandhavilakku Perumal",
       "deityForm": "Irundhan — Seated",
       "azhwars": [
         "azhwar.thirumangai"
@@ -8725,7 +8727,7 @@
         ],
         "notes": ""
       },
-      "wiki": "Trivikrama Temple, Tirukoyilur",
+      "wiki": "Ulagalantha Perumal Temple, Tirukoyilur",
       "moolavar": {
         "name": "Trivikrama (Ulagalantha Perumal)",
         "tamilName": "உலகளந்த பெருமாள்",
@@ -8865,7 +8867,9 @@
       "deityForm": "Nindran — Standing",
       "azhwars": [
         "azhwar.nammazhwar",
-        "azhwar.thirumangai"
+        "azhwar.thirumangai",
+        "azhwar.thirumazhisai",
+        "azhwar.periyazhwar"
       ],
       "pasuramCount": 0,
       "significance": "The beautiful Nambi of the Mahendragiri foothills — where the Lord himself came as a disciple to Vaishnava teachers.",
@@ -8881,7 +8885,7 @@
         ],
         "notes": "Five forms of the Lord worshipped in one complex"
       },
-      "wiki": "Nindra Nambi Perumal temple",
+      "wiki": "Vaishnava Nambi and Thirukurungudivalli Nachiar temple",
       "moolavar": {
         "name": "Nindra Nambi (Vaamana)",
         "tamilName": "நின்ற நம்பி",
@@ -9196,7 +9200,7 @@
         ],
         "notes": "Birthplace of Nammazhwar; Garuda seva in Vaikasi"
       },
-      "wiki": "Adinathar Temple, Alwarthirunagari",
+      "wiki": "Adinatha Perumal Temple",
       "moolavar": {
         "name": "Aadhinathan (Polindu Nindra Piran)",
         "tamilName": "ஆதிநாதன்",
@@ -9479,7 +9483,7 @@
       "state": "Tamil Nadu",
       "region": "Pandiya Nadu",
       "deity": "Makara Nedunkuzhai Kathan",
-      "deityForm": "Kidandan — Reclining",
+      "deityForm": "Irundhan — Seated",
       "azhwars": [
         "azhwar.nammazhwar",
         "azhwar.thirumangai"
@@ -9628,7 +9632,7 @@
       "state": "Tamil Nadu",
       "region": "Pandiya Nadu",
       "deity": "Vaikuntanathan",
-      "deityForm": "Kidandan — Reclining",
+      "deityForm": "Nindran — Standing",
       "azhwars": [
         "azhwar.nammazhwar",
         "azhwar.thirumangai"
@@ -9647,7 +9651,7 @@
         ],
         "notes": "Nava Thirupathi group on the Thamirabarani"
       },
-      "wiki": "Vaikuntanathar Temple Srivaikuntam",
+      "wiki": "Srivaikuntanathan Perumal temple",
       "moolavar": {
         "name": "Vaikuntanathan (Kallarpiran)",
         "tamilName": "கல்லர் பிரான்",
@@ -9777,7 +9781,7 @@
       "place": "Perungulam, Thoothukudi",
       "state": "Tamil Nadu",
       "region": "Pandiya Nadu",
-      "deity": "Srinivasan",
+      "deity": "Mayakkoothan",
       "deityForm": "Nindran — Standing",
       "azhwars": [
         "azhwar.nammazhwar",
@@ -9980,7 +9984,7 @@
       "state": "Tamil Nadu",
       "region": "Pandiya Nadu",
       "deity": "Kaisina Vendhan",
-      "deityForm": "Nindran — Standing",
+      "deityForm": "Kidandan — Reclining",
       "azhwars": [
         "azhwar.nammazhwar",
         "azhwar.thirumangai"
@@ -10032,7 +10036,7 @@
       "state": "Tamil Nadu",
       "region": "Pandiya Nadu",
       "deity": "Aravindalochanan",
-      "deityForm": "Nindran — Standing",
+      "deityForm": "Irundhan — Seated",
       "azhwars": [
         "azhwar.nammazhwar",
         "azhwar.thirumangai"
@@ -10182,7 +10186,7 @@
       "deity": "Nindra Narayanan",
       "deityForm": "Nindran — Standing",
       "azhwars": [
-        "azhwar.nammazhwar",
+        "azhwar.bhoothath",
         "azhwar.thirumangai"
       ],
       "pasuramCount": 0,
@@ -10482,7 +10486,7 @@
       "state": "Tamil Nadu",
       "region": "Pandiya Nadu",
       "deity": "Koodal Azhagar",
-      "deityForm": "Nindran — Standing",
+      "deityForm": "Irundhan — Seated",
       "azhwars": [
         "azhwar.periyazhwar",
         "azhwar.thirumangai"
@@ -10641,7 +10645,9 @@
       "azhwars": [
         "azhwar.periyazhwar",
         "azhwar.andal",
-        "azhwar.thirumangai"
+        "azhwar.thirumangai",
+        "azhwar.bhoothath",
+        "azhwar.nammazhwar"
       ],
       "pasuramCount": 0,
       "significance": "The handsome Azhagar of the fragrant hills who rides to Madurai each Chithirai for the river goddess.",
@@ -10736,19 +10742,15 @@
             "azhwarId": "azhwar.andal"
           },
           {
-            "count": 33,
+            "count": 46,
             "azhwarId": "azhwar.thirumangai"
           },
           {
-            "count": 3,
+            "count": 1,
             "azhwarId": "azhwar.bhoothath"
           },
           {
-            "count": 1,
-            "azhwarId": "azhwar.pey"
-          },
-          {
-            "count": 46,
+            "count": 36,
             "azhwarId": "azhwar.nammazhwar"
           }
         ],
@@ -10810,7 +10812,7 @@
       "deity": "Kaalameghan",
       "deityForm": "Nindran — Standing",
       "azhwars": [
-        "azhwar.periyazhwar",
+        "azhwar.nammazhwar",
         "azhwar.thirumangai"
       ],
       "pasuramCount": 0,
@@ -10860,7 +10862,7 @@
       "state": "Tamil Nadu",
       "region": "Pandiya Nadu",
       "deity": "Kalyana Jagannathan",
-      "deityForm": "Kidandan — Reclining",
+      "deityForm": "Irundhan — Seated",
       "azhwars": [
         "azhwar.thirumangai",
         "azhwar.andal",
@@ -10880,7 +10882,7 @@
         ],
         "notes": "Darbasayana — Rama reclines on darba grass"
       },
-      "wiki": "Kothandaramaswamy Temple, Thirupullani",
+      "wiki": "Adi Jagannatha Perumal Temple",
       "moolavar": {
         "name": "Adi Jagannatha (Darbasayana Rama)",
         "tamilName": "ஆதி ஜெகந்நாதன்",
@@ -10998,10 +11000,14 @@
       "state": "Tamil Nadu",
       "region": "Pandiya Nadu",
       "deity": "Uraga Mellanayanan",
-      "deityForm": "Irundhan — Seated",
+      "deityForm": "Kidandan — Reclining",
       "azhwars": [
+        "azhwar.bhoothath",
+        "azhwar.pey",
+        "azhwar.thirumazhisai",
         "azhwar.thirumangai",
-        "azhwar.nammazhwar"
+        "azhwar.periyazhwar",
+        "azhwar.andal"
       ],
       "pasuramCount": 0,
       "significance": "The ashtaanga-vimana where Ramanuja proclaimed the sacred names aloud to all — the Ashtakshara kshetram.",
@@ -11082,14 +11088,6 @@
       "mangalasasanam": {
         "perAzhwar": [
           {
-            "count": 11,
-            "azhwarId": "azhwar.periyazhwar"
-          },
-          {
-            "count": 13,
-            "azhwarId": "azhwar.thirumangai"
-          },
-          {
             "count": 2,
             "azhwarId": "azhwar.bhoothath"
           },
@@ -11103,7 +11101,15 @@
           },
           {
             "count": 11,
-            "azhwarId": "azhwar.nammazhwar"
+            "azhwarId": "azhwar.thirumangai"
+          },
+          {
+            "count": 21,
+            "azhwarId": "azhwar.periyazhwar"
+          },
+          {
+            "count": 3,
+            "azhwarId": "azhwar.andal"
           }
         ],
         "excerpts": [
@@ -11162,7 +11168,7 @@
       "state": "Tamil Nadu",
       "region": "Pandiya Nadu",
       "deity": "Sathyagiri Nathan",
-      "deityForm": "Nindran — Standing",
+      "deityForm": "Kidandan — Reclining",
       "azhwars": [
         "azhwar.thirumangai"
       ],
@@ -11308,8 +11314,8 @@
       "deity": "Anantha Padmanabha",
       "deityForm": "Kidandan — Reclining",
       "azhwars": [
-        "azhwar.nammazhwar",
-        "azhwar.thirumangai"
+        "azhwar.thirumazhisai",
+        "azhwar.nammazhwar"
       ],
       "pasuramCount": 0,
       "significance": "The Lord reclines eternally on Anantha through three doors — the royal shrine of Travancore and its hidden treasures.",
@@ -11452,7 +11458,7 @@
       "state": "Tamil Nadu",
       "region": "Malai Nadu",
       "deity": "Thiruvazhmarbhan",
-      "deityForm": "Nindran — Standing",
+      "deityForm": "Irundhan — Seated",
       "azhwars": [
         "azhwar.nammazhwar",
         "azhwar.thirumangai"
@@ -11913,7 +11919,7 @@
         ],
         "notes": "One of the five Vishnu shrines of Chengannur"
       },
-      "wiki": "Puliyoorkavil Sree Krishna Swamy Temple",
+      "wiki": "Puliyur Mahavishnu Temple",
       "moolavar": {
         "name": "Maayapiran (Purushothaman)",
         "tamilName": "மாயப்பிரான்",
@@ -12205,7 +12211,7 @@
         ],
         "notes": "Bharathapuzha bali-rituals for ancestors"
       },
-      "wiki": "Navamukunda Perumal temple, Thirunavaya",
+      "wiki": "Thirunavaya temple",
       "moolavar": {
         "name": "Navamukundan",
         "tamilName": "நாவாய் முகுந்தன்",
@@ -12796,7 +12802,7 @@
         ],
         "notes": "Metal-inlaid reclining image; Otraikkadal mandapam"
       },
-      "wiki": "Adikesava Perumal temple, Kanyakumari district",
+      "wiki": "Adikesava Perumal Temple, Thiruvattar",
       "moolavar": {
         "name": "Aadhikesava Perumal",
         "tamilName": "ஆதிகேசவன்",
@@ -12925,8 +12931,7 @@
       "deity": "Uyyavandan (Abhayapradan)",
       "deityForm": "Nindran — Standing",
       "azhwars": [
-        "azhwar.nammazhwar",
-        "azhwar.thirumangai"
+        "azhwar.kulasekhara"
       ],
       "pasuramCount": 0,
       "significance": "The refuge-granting (Abhayapradha) Lord of Kaladi’s neighbourhood — shield of the surrendered soul.",
@@ -13227,7 +13232,11 @@
         "azhwar.thirumazhisai",
         "azhwar.nammazhwar",
         "azhwar.kulasekhara",
-        "azhwar.thirumangai"
+        "azhwar.thirumangai",
+        "azhwar.periyazhwar",
+        "azhwar.andal",
+        "azhwar.thondaradippodi",
+        "azhwar.thiruppaan"
       ],
       "pasuramCount": 0,
       "significance": "The Lord of the Seven Hills — the most visited shrine in the world, sung as the boundless Venkata hill by the Azhwars.",
@@ -13555,7 +13564,10 @@
       "deityForm": "Nindran — Standing",
       "azhwars": [
         "azhwar.thirumangai",
-        "azhwar.kulasekhara"
+        "azhwar.kulasekhara",
+        "azhwar.nammazhwar",
+        "azhwar.periyazhwar",
+        "azhwar.thondaradippodi"
       ],
       "pasuramCount": 0,
       "significance": "The birth-city of Rama on the Sarayu — sung from afar by Thirumangai Azhwar who never left Tamil soil.",
@@ -13659,7 +13671,8 @@
       "deity": "Moorthy (Muktinath)",
       "deityForm": "Nindran — Standing",
       "azhwars": [
-        "azhwar.thirumangai"
+        "azhwar.thirumangai",
+        "azhwar.periyazhwar"
       ],
       "pasuramCount": 0,
       "significance": "The Himalayan shrine of the sacred saligrama stones — 108 waterspouts of liberation at 3,800 metres.",
@@ -14214,7 +14227,9 @@
       "deityForm": "Nindran — Standing",
       "azhwars": [
         "azhwar.thirumangai",
-        "azhwar.periyazhwar"
+        "azhwar.periyazhwar",
+        "azhwar.nammazhwar",
+        "azhwar.andal"
       ],
       "pasuramCount": 0,
       "significance": "The birth-city of Krishna on the Yamuna — where the Lord lifted Govardhana hill on his little finger.",
@@ -14303,10 +14318,6 @@
           {
             "count": 10,
             "azhwarId": "azhwar.thirumangai"
-          },
-          {
-            "count": 1,
-            "azhwarId": "azhwar.thirumazhisai"
           }
         ],
         "excerpts": [
@@ -14518,11 +14529,11 @@
       "deity": "Kalyana Narayanan (Dwarakadhish)",
       "deityForm": "Nindran — Standing",
       "azhwars": [
-        "azhwar.thirumangai",
-        "azhwar.andal",
-        "azhwar.periyazhwar",
+        "azhwar.thirumazhisai",
         "azhwar.nammazhwar",
-        "azhwar.kulasekhara"
+        "azhwar.thirumangai",
+        "azhwar.periyazhwar",
+        "azhwar.andal"
       ],
       "pasuramCount": 0,
       "significance": "Krishna’s golden city by the western sea — the gateway (dwaraka) city that the Arabian waters once swallowed.",
@@ -14672,7 +14683,10 @@
         "azhwar.thirumazhisai",
         "azhwar.nammazhwar",
         "azhwar.periyazhwar",
-        "azhwar.thirumangai"
+        "azhwar.thirumangai",
+        "azhwar.kulasekhara",
+        "azhwar.andal",
+        "azhwar.thondaradippodi"
       ],
       "pasuramCount": 0,
       "significance": "The Ocean of Milk where Vishnu reclines on Ananta — a Divya Desam beyond earthly geography, reached in contemplation.",
@@ -14737,23 +14751,7 @@
       "mangalasasanam": {
         "perAzhwar": [
           {
-            "count": 9,
-            "azhwarId": "azhwar.periyazhwar"
-          },
-          {
-            "count": 5,
-            "azhwarId": "azhwar.andal"
-          },
-          {
-            "count": 11,
-            "azhwarId": "azhwar.thirumangai"
-          },
-          {
-            "count": 9,
-            "azhwarId": "azhwar.nammazhwar"
-          },
-          {
-            "count": 3,
+            "count": 1,
             "azhwarId": "azhwar.poigai"
           },
           {
@@ -14765,16 +14763,32 @@
             "azhwarId": "azhwar.pey"
           },
           {
-            "count": 4,
+            "count": 13,
             "azhwarId": "azhwar.thirumazhisai"
+          },
+          {
+            "count": 9,
+            "azhwarId": "azhwar.nammazhwar"
+          },
+          {
+            "count": 5,
+            "azhwarId": "azhwar.periyazhwar"
+          },
+          {
+            "count": 11,
+            "azhwarId": "azhwar.thirumangai"
           },
           {
             "count": 2,
             "azhwarId": "azhwar.kulasekhara"
           },
           {
+            "count": 3,
+            "azhwarId": "azhwar.andal"
+          },
+          {
             "count": 1,
-            "azhwarId": "azhwar.thiruppaan"
+            "azhwarId": "azhwar.thondaradippodi"
           }
         ],
         "excerpts": [
@@ -14833,13 +14847,14 @@
       "deity": "Vaikuntanathan",
       "deityForm": "Irundhan — Seated",
       "azhwars": [
-        "azhwar.nammazhwar",
         "azhwar.poigai",
-        "azhwar.bhoothath",
         "azhwar.pey",
         "azhwar.thirumazhisai",
+        "azhwar.nammazhwar",
+        "azhwar.thirumangai",
         "azhwar.periyazhwar",
-        "azhwar.thirumangai"
+        "azhwar.andal",
+        "azhwar.thiruppaan"
       ],
       "pasuramCount": 0,
       "significance": "The supreme abode Vaikuntam itself — the final destination of the liberated soul, the last of the 108.",
@@ -14904,31 +14919,11 @@
       "mangalasasanam": {
         "perAzhwar": [
           {
-            "count": 12,
-            "azhwarId": "azhwar.nammazhwar"
-          },
-          {
-            "count": 1,
-            "azhwarId": "azhwar.thirumangai"
-          },
-          {
-            "count": 5,
-            "azhwarId": "azhwar.periyazhwar"
-          },
-          {
-            "count": 4,
-            "azhwarId": "azhwar.andal"
-          },
-          {
             "count": 2,
             "azhwarId": "azhwar.poigai"
           },
           {
-            "count": 2,
-            "azhwarId": "azhwar.bhoothath"
-          },
-          {
-            "count": 5,
+            "count": 1,
             "azhwarId": "azhwar.pey"
           },
           {
@@ -14936,8 +14931,20 @@
             "azhwarId": "azhwar.thirumazhisai"
           },
           {
-            "count": 2,
-            "azhwarId": "azhwar.kulasekhara"
+            "count": 24,
+            "azhwarId": "azhwar.nammazhwar"
+          },
+          {
+            "count": 1,
+            "azhwarId": "azhwar.thirumangai"
+          },
+          {
+            "count": 4,
+            "azhwarId": "azhwar.periyazhwar"
+          },
+          {
+            "count": 1,
+            "azhwarId": "azhwar.andal"
           },
           {
             "count": 1,
