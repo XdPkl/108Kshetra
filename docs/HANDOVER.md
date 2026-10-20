@@ -1,12 +1,14 @@
-# HANDOVER — 108 Divya Kshetrams (2026-10-20, after round 34 — Anbil photos)
+# HANDOVER — 108 Divya Kshetrams (2026-10-20, end of session — round 34 + deity-render follow-ups)
 
-State: **`main` pushed, CI+Deploy green, live verified (Anbil photos HTTP 200
-+ deity photos render full-frame).** Round 34 = Anbil photo upload
-(`b0643fc`) + full-frame deity render fix (TER v2.45)
-in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
+State: **`10e9fe7` pushed, CI+Deploy green, live verified (Anbil photos
+HTTP 200; deity boxes render at fixed landscape 560px / portrait 480px).**
+Round 34 = Thiru Anbil photo upload (`b0643fc`) + three same-day
+deity-render follow-ups from PO feedback (TER v2.45 full-frame → v2.46
+fixed orientation boxes → v2.47 fixed frame widths), all in sync with
+`origin/main` (https://github.com/XdPkl/108Kshetra).
 Live: https://xdpkl.github.io/108Kshetra/ — verify bundles by CONTENT, not by
 hash (gotcha 12). Working tree clean. No preview server running. Scratch
-scripts deleted. Nothing in flight. THIS SESSION (all 2026-10-18): the PO
+scripts deleted. Nothing in flight. THIS SESSION (2026-10-18 rounds 24-33 + 2026-10-20 round 34): the PO
 supplied seven regional Divya Desam PDFs covering all 108 temples and RULED
 that where the extracted PDF details clash with the site dataset, the
 extracted PDF details are the point of truth — evidence workbook:
@@ -31,7 +33,11 @@ Round 33 applied the ruling; a follow-up fixed 19 dead Wikipedia slugs
 | `f91ef87` | **Round 32 — browse grid photo fix** (PO report: all 108 cards "Photo coming soon" despite available photos): root cause — the browse grid consumed `useKshetrams()` → RAW records (no image fields) while the 61 Wikipedia slugs live in enrichment.json, which detail/map/home-featured merge but browse never did; no lookup was even attempted (verified live: 0 requests). Fix: `useKshetrams()` returns `getAllKshetramsEnriched()` (one line; only consumer is BrowsePage). Outcome: 61 lookups fire, **42 cards render photos**, 66 honestly keep the placeholder (no slug/no lead image/known 404s — PO-owned content). Not a regression: browse never fetched (wiring unchanged since initial delivery; no test asserted the raw-vs-enriched shape) | TER v2.41, TCS v1.27, user-stories US-PO-21 |
 | `fe0e7e2` + `74f6d89` | **PO comparison workbook + ruling**: 7 PO PDFs transcribed (108 temples × 11 fields) and compared side-by-side against the dataset — Summary/Temple Index/Side-by-Side (1,188 rows)/Differences/Review (13/13 build-time checks, formula-free by design). Key findings: site stores NO utsavar/thayar/vimanam/tree/theertham (455 rows missing on site); pasuramCount empty for 107/108; PDFs cover 103/108 (5 Chola temples absent); 9..11 posture + 3 deity + 8 azhwar-set conflicts; PDFs' 108-numbers conflict across docs on 20 numbers | workbook only |
 | `e8a23ee` | **Round 33 — PO PDF-guide data corrections** (ruling applied): kshetrams.json — 2 Tamil names (kanchi-varadaraja → திருக்கச்சி அத்திகிரி, sirkazhi → சீராமவிண்ணகரம் (சீர்காழி)), 3 deity names, 11 postures, 22 azhwar sets (8 replaced incl. paramapadam's 8-azhwar siddhanta list, 14 extended — Tirupati now 11 azhwars); 6 dossier Mangalasasanam blocks re-set to PDF pasuram breakdowns (visual gate caught the paramapadam tab rendering 10 azhwars from dossier-templates.json — a layer the workbook did NOT compare). Poigai desam count 12→14 (UT-AZW-03 + TC-18). **Jira: US-PO-22 synced as DTRPR108K-106** (Done, under epic -82) | TER v2.42, TCS v1.28, user-stories v2.3 US-PO-22 |
-| (follow-up 2, same day) | **Deity photos in fixed orientation boxes** (PO feedback): PhotoImg tags landscape/portrait on load; 16:10 / 3:4 contain boxes keep columns layout-stable, full frame always (TER v2.46) | TER v2.46 |
+| `ceca643` | **Round 33 follow-up — dead Wikipedia slugs fixed**: 19 `enrichment.json` slugs corrected (typos/wrong disambiguations/spacing), each verified live to resolve to the correct temple WITH a lead image; two near-misses rejected. Card photos **41 → 60 of 108**. Sync fixture reconciled from corrected content in proper Sanity shape (19 wiki + 16 base fields + 22 azhwar ref-arrays + 6 perAzhwar ref-blocks) — it had drifted enough that a real sync would have REVERTED round 33; `sync-content --check` back to 0-diff on all 11 files | TER v2.43 |
+| `b0643fc` | **Round 34 — Thiru Anbil photo upload**: three PO photographs wired — `desam-6.jpg` gopuram (card band + detail hero), `desam-6-moolavar.jpg` (reclining Sundararaja Perumal), `desam-6-urchavar.jpg` (HEIF source converted to JPEG). dossier-templates.json gains moolavar + urchavar photo arrays (**FIRST Urchavar photo**; deity census 3 → 5 of 216) + a NEW kshetram-level `photos[]` with end-to-end pipeline support (GROQ → groqToContent → to-sanity-docs reverse, verify lossless; studio schema media field); KshetramCard/MapResultCard prefer curated `photos[0].src`. Browse photos 60 → 61 of 108. **Jira: US-PO-23 = DTRPR108K-107** (Done, epic -82) | TER v2.44, user-stories v2.4 |
+| `90fadaa` | **Deity photos render full-frame** (PO feedback): `.deity-photo img` natural aspect in kshetram-detail.css + layout.css — the 16:10 cover crop that sliced the Anbil Moolavar/Urchavar is gone | TER v2.45 |
+| `9906076` | **Deity photos in fixed orientation boxes** (PO feedback): PhotoImg tags landscape/portrait on load; 16:10 / 3:4 contain boxes keep columns layout-stable, full frame always (supersedes v2.45 natural aspect) | TER v2.46 |
+| `10e9fe7` | **Fixed frame widths** (PO asked for the optimized width): landscape max **560px** (column width + hero-band idiom), portrait max **480px** centered (avoids 747px-tall boxes); max-width keeps mobile safe | TER v2.47 |
 
 Final gates at handoff: **247/247 unit (23 suites) · 21/21 e2e · coverage
 89.89% stmts / 81.31% branches / 84.44% funcs / 91.71% lines (gate 80%) ·
@@ -40,11 +46,24 @@ CI gate is 0 errors) · build clean ·
 visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/`,
 `acharyas-restyle-25/`, `map-option3-26/`, `map-cluster-slider-28/`,
 `about-option1-29/`, `home-option1-30/`, `map-cluster-focus-31/`,
-`browse-photos-32/`, `data-corrections-33/`).
+`browse-photos-32/`, `data-corrections-33/`, `anbil-photos-34/`)
+
+Coverage figures are the round-33 measurement; the round-34 commits are
+classed CSS/light-JS (full suite green on CI per commit — the deity
+onLoad orientation tag is browser-exercised, not unit-covered)..
 
 ## 2. Open items / likely next requests
 
-- **More PO fix lists** — 33 rounds in ~2 weeks. Proven loop: inspect
+- **PO PHOTO BATCHES (expected next)** — the PO explicitly wants fast
+  turnaround (complained about a 40-minute first upload). Agreed fast path
+  per batch, ONE commit for all temples in it: convert photos (sharp,
+  HEIF→JPEG; ≤400 KB sRGB; name desam-<serial>[-slot].jpg) → wire
+  dossier-templates.json + fixture in Sanity shape → `sync-content
+  --fixture --check` 0-diff + `npm run verify` lossless → build + ONE
+  screenshot per temple slot → TER line → commit/push → ONE CI poll. Skip
+  full local gates (CI runs them) and skip Jira/user-stories per batch
+  unless the PO asks. Wiring rules live in gotcha 60.
+- **More PO fix lists** — 34 rounds in ~3 weeks. Proven loop: inspect
   brief/mock → implement reusing kshetrams idioms → Playwright measurement
   + screenshots → judge → gates → TER → commit → push → CI/live check.
 - **PO mockups**: rounds 24/25/26 mockup files never existed on disk (the
@@ -208,7 +227,7 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   `content/dossier-templates.json` `mangalasasanam.perAzhwar` (azhwar +
   pasuram-count pairs) — NOT `kshetrams.json`'s `azhwars` array; the two
   can silently diverge (visual gate caught paramapadam at 10 vs 8).
-- Registers/dates: **TER v2.44; TCS v1.28**; user-stories.md v2.4 (all
+- Registers/dates: **TER v2.47; TCS v1.28**; user-stories.md v2.4 (all
   23 stories synced). Comparison workbook (PO PDF guides, round-33
   evidence base): `docs/04-review/po-pdf-guides-vs-site-comparison.xlsx`.
   UT-DTL unchanged since round 17; UT-AZW-03 assertions updated round 33
