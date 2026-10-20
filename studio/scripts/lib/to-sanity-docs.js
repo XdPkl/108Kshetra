@@ -199,6 +199,8 @@ export async function toSanityDocs(content, resolvePhoto) {
         };
       }
       doc.visuals = dossier.visuals;
+      const photos = await toPhotos(dossier.photos, resolvePhoto);
+      if (photos) doc.photos = photos;
     }
     const [lat, lng] = COORDS[k.id] ?? [];
     if (lat != null) doc.coords = {lat, lng};

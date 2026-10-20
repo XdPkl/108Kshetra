@@ -107,6 +107,7 @@ export const GROQ = `{
     },
     visuals,
     "photoUrl": photo.asset->url,
+    "photos": photos{alt, credit, wiki, srcUrl, "imageUrl": image.asset->url},
     coords
   },
   "azhwars": *[_type == "azhwar" && !(_id in path("drafts.**"))] | order(order asc) {
@@ -238,6 +239,7 @@ export function groqToContent(rawResult) {
           ),
         },
         visuals: doc.visuals,
+        photos: photoEntries(doc.photos, 1280),
       };
       if (doc.isApprovedSample) templates[id] = dossier;
       else dossierTemplates[id] = dossier;

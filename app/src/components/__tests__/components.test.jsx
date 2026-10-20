@@ -28,6 +28,14 @@ describe('KshetramCard', () => {
     expect(screen.getByText(srirangam.tamilName)).toBeInTheDocument();
     expect(screen.getByText(srirangam.temple)).toBeInTheDocument();
   });
+
+  it('prefers a curated photos[0].src over the wiki fallback (US-PO-23)', () => {
+    const anbil = { ...kshetrams.find((k) => k.id === 'anbil'), wiki: 'Some Article', photos: [{ src: 'photos/desam-6.jpg', alt: 'Thiru Anbil gopuram' }] };
+    render(<MemoryRouter><KshetramCard kshetram={anbil} /></MemoryRouter>);
+    const img = screen.getByAltText('Thiru Anbil Temple');
+    expect(img.getAttribute('src')).toMatch(/photos\/desam-6\.jpg$/);
+    expect(screen.queryByText('Photo coming soon')).not.toBeInTheDocument();
+  });
 });
 
 describe('Header', () => {

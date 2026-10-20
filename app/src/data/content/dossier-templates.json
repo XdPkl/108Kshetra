@@ -1861,7 +1861,14 @@
         "thaayar": {
           "name": "Azhagiya Valli Thayar (சுந்தரவல்லி / அழகியவல்லி)",
           "legend": "Seated in an independent shrine within the inner corridor. Manifested out of divine affection (Anbu) to grant darshan to Sage Sutapa"
-        }
+        },
+        "photos": [
+          {
+            "src": "photos/desam-6-moolavar.jpg",
+            "alt": "THIRU ANBIL — Moolavar Sri Sundararaja Perumal (Vadivazhagiya Nambi) reclining on Adisesha",
+            "credit": "Product Owner dossier (Divya Desam 6)"
+          }
+        ]
       },
       "urchavar": {
         "names": {
@@ -1871,7 +1878,14 @@
         "thaayar": {
           "name": "Sundaravalli Thayar",
           "legend": "Accompanies Urchavar during festival processions (Purappadu)"
-        }
+        },
+        "photos": [
+          {
+            "src": "photos/desam-6-urchavar.jpg",
+            "alt": "THIRU ANBIL — Urchavar Sri Sundararajan with Shankha and Chakra",
+            "credit": "Product Owner dossier (Divya Desam 6)"
+          }
+        ]
       },
       "sanctumNote": "Two Visible Thaayars"
     },
@@ -1960,7 +1974,14 @@
         "Dravida Veda Text Archive: Project Madurai (Nanmugan Thiruvanthadhi, Verse 36)",
         "Video Upanyasam Query: \"Thiru Anbil Divya Desam Velukkudi Krishnan\" / \"Anbil Sundararaja Perumal Sthala Puranam\""
       ]
-    }
+    },
+    "photos": [
+      {
+        "src": "photos/desam-6.jpg",
+        "alt": "THIRU ANBIL — temple gopuram with the flanking red-and-white prakaram wall",
+        "credit": "Product Owner dossier (Divya Desam 6)"
+      }
+    ]
   },
   "koviladi": {
     "serial": 4,

@@ -1732,6 +1732,112 @@
           ]
         }
       }
+    },
+    {
+      "fields": {
+        "project": {
+          "key": "DTRPR108K"
+        },
+        "issuetype": {
+          "name": "Story"
+        },
+        "summary": "US-PO-23 — Thiru Anbil photo upload (temple, Moolavar, Urchavar)",
+        "labels": [
+          "divya-kshetra",
+          "v3"
+        ],
+        "customfield_10016": 2,
+        "description": {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "As the Product Owner, I want my three Thiru Anbil photographs (temple gopuram, Moolavar Sundararaja Perumal reclining on Adisesha, Urchavar Sundararajan) uploaded to the site, replacing any placeholder they cover."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: The temple photograph renders as the Thiru Anbil browse/map card band and the detail-page hero; the Moolavar and Urchavar photographs render as the Deities-tab leads with the lightbox showing the full frames."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: The Urchavar photograph is the site first (0 to 1 of 108 Urchavar slots); curated Moolavar photos rise 3 to 4; the browse card photo count rises 60 to 61 of 108."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: The HEIF Urchavar source is converted to JPEG (browsers cannot render HEIF); all three files are JPEG sRGB at or under 400 KB, named per the upload spec: photos/desam-6.jpg, desam-6-moolavar.jpg, desam-6-urchavar.jpg."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: The sync pipeline carries kshetram-level photos end-to-end (GROQ fetch, groqToContent dossier mapping, reverse to-sanity-docs mapping, studio schema field); verify round-trip is lossless and sync-content --check is 0-diff on all 11 content files."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "content": [
+                        {
+                          "type": "text",
+                          "text": "AC: Card components prefer a curated photos[0].src over the wiki fallback (unit-tested)."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   ]
 }

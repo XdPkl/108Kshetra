@@ -3034,3 +3034,68 @@ keys get mangled into fragments like "ngai"), and the 6 corrected
 | Production build | Clean |
 | E2E (Playwright) | **21/21 pass** |
 | Live photo verification | All 19 new slugs resolve to the correct temple with a usable lead image; expected card-photo count rises **41 → 60** of 108 (placeholders 48: 47 temples without slugs + Badrinath, whose article has no usable lead image) |
+
+## Version 2.44 — Thiru Anbil Photo Upload (2026-10-20, round 34)
+
+**Trigger:** the PO uploaded three Thiru Anbil photographs (temple
+gopuram, Moolavar, Urchavar) with the standing instruction to upload them
+and replace anything already on the site. Anbil had no photo anywhere (no
+enrichment wiki slug, no dossier photos — one of the 48 placeholder
+temples), so nothing was replaced; all three are additions.
+
+### Files delivered (app/public/photos/, per the PO upload spec)
+
+| File | Content | Source → delivered |
+|---|---|---|
+| desam-6.jpg | Temple gopuram with the red-and-white prakaram wall (card band + detail hero) | JPEG 1000×750 300 KB → re-encoded 219 KB |
+| desam-6-moolavar.jpg | Moolavar Sri Sundararaja Perumal (Vadivazhagiya Nambi) reclining on Adisesha | JPEG 1200×449 139 KB → 109 KB |
+| desam-6-urchavar.jpg | Urchavar Sri Sundararajan with Shankha and Chakra | **HEIF 980×1316 → JPEG 256 KB** (browsers cannot render HEIF; converted with sharp) |
+
+Serial 6 is anbil's dossier serial (the desam-N naming convention; the
+three pre-existing desam-86/88/89 files follow the PO dossier batches).
+
+### Wiring
+
+- `dossier-templates.json` anbil: `deities.moolavar.photos[0]`,
+  `deities.urchavar.photos[0]` — the **first Urchavar photo on the site**
+  (1 of 108 Urchavar slots; curated Moolavar photos 3 → 4 of 108; deity
+  census 5 of 216) — and a NEW top-level `photos[0]` for the temple, which
+  reaches the detail page via the existing enrichment merge (the detail
+  hero already read `kshetram.photos[0].src`; this is its first producer).
+- **Pipeline support for kshetram-level photos added end-to-end** (the
+  escape hatch the three existing temple photos never had): GROQ fetches
+  `photos{alt, credit, wiki, srcUrl, imageUrl}` on the kshetram
+  projection; `groqToContent` maps them into the dossier object
+  (photoEntries 1280); `to-sanity-docs` reverse-maps them (the studio
+  verify round-trip stays lossless); the studio kshetram schema gains a
+  media-group "Temple photos" array of the shared `photo` object.
+- Card consumers `KshetramCard` and MapPage's `MapResultCard` now prefer a
+  curated `photos[0].src` over `photo`/wiki (one line each, mirroring the
+  detail hero's precedence). `TempleCard` untouched (test-only importer).
+- Sync fixture: anbil doc gains the three photo arrays in Sanity shape
+  (`srcUrl` file paths — same pattern as the three existing dossier
+  photos). `sync-content --fixture --check` **0-diff on all 11 content
+  files**; `npm run verify` **round-trip lossless on all 11**; `sanity
+  schema validate` **0 errors / 0 warnings**.
+- Browse card photos rise **60 → 61 of 108** (anbil was a placeholder).
+
+### Live verification (preview build)
+
+All three images render and load (`naturalWidth > 0`): browse card band
+`/108Kshetra/photos/desam-6.jpg`, detail hero (same file, caption
+"Temple exterior · illustrative"), Deities tab moolavar + urchavar leads.
+Gate shots: `docs/03-design/gate-shots/anbil-photos-34/` (browse card
+desktop + mobile, detail hero, Deities tab; the tab element shot clips
+the column headings under the sticky header — capture artifact only, the
+hero shot shows the same section clean).
+
+### Execution summary
+
+| Gate | Result |
+|---|---|
+| oxlint | 0 errors / 6 warnings (baseline unchanged) |
+| Unit tests (Vitest) | **247/247 pass (23 suites)** — new KshetramCard curated-photo precedence case |
+| Production build | Clean |
+| E2E (Playwright) | **21/21 pass** |
+| CMS self-tests | sync --check 0-diff (11 files) · verify round-trip lossless · schema validate 0/0 |
+| Jira | US-PO-23 synced as **DTRPR108K-107** (Done, epic DTRPR108K-82) via `--only=US-PO-23` |

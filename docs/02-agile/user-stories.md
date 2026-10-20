@@ -812,6 +812,30 @@ shippable, verifiable stories).
   counts) remain PO-optional (TER v2.42, 2026-10-18 — round 33).
 - Delivered as TER v2.42 / TCS v1.28. Synced as DTRPR108K-106 (2026-10-18).
 
+
+**US-PO-23 — Thiru Anbil photo upload (temple, Moolavar, Urchavar)** (2 pts, Priority 1) — *FR-20..25, FR-83/85*
+> As the Product Owner, I want my three Thiru Anbil photographs (temple
+> gopuram, Moolavar Sundararaja Perumal reclining on Adisesha, Urchavar
+> Sundararajan) uploaded to the site, replacing any placeholder they cover.
+
+- Delivered 2026-10-20 (round 34): three JPEGs at `app/public/photos/`
+  (`desam-6.jpg` 1000×750 temple master, `desam-6-moolavar.jpg` 1200×449,
+  `desam-6-urchavar.jpg` 980×1316 — the HEIF iPhone source converted to
+  JPEG, which browsers cannot render). Anbil had no photo before (no wiki
+  slug, no dossier photos), so nothing was replaced — all three are new.
+- Wiring: `dossier-templates.json` anbil gains `deities.moolavar.photos[0]`
+  and `deities.urchavar.photos[0]` (the site's FIRST Urchavar photo — 1 of
+  108 Urchavar slots; curated Moolavar photos rise 3 → 4), plus a new
+  top-level `photos[0]` that flows through the enrichment merge to the
+  detail hero. Pipeline support added end-to-end: GROQ fetches kshetram
+  `photos`, groqToContent maps them into the dossier (photoEntries 1280),
+  to-sanity-docs reverse-maps them (verify round-trip lossless), and the
+  studio schema gains a media-group "Temple photos" array.
+- Card consumers (`KshetramCard`, MapPage's MapResultCard) now prefer a
+  curated `photos[0].src` over `photo`/wiki — unit-tested (247/247).
+  Browse card photos rise **60 → 61 of 108** (anbil was a placeholder).
+- Delivered as TER v2.44. Synced as DTRPR108K-107 (2026-10-20).
+
 ### Story-Point Summary (v2.1)
 
 | Epic | Stories | Points |
@@ -874,6 +898,7 @@ points via a follow-up edit (see the script header).
 | Story | US-PO-20 — Map cluster focus: outline + list filter | EP-PO-ITER | 3 | DTRPR108K-103 |
 | Story | US-PO-21 — Browse grid photo fix | EP-PO-ITER | 2 | DTRPR108K-105 |
 | Story | US-PO-22 — PO PDF-guide data corrections (clash resolution) | EP-PO-ITER | 3 | DTRPR108K-106 |
+| Story | US-PO-23 — Thiru Anbil photo upload (temple, Moolavar, Urchavar) | EP-PO-ITER | 2 | DTRPR108K-107 |
 
 ## Version 2.3 — PO PDF-Guide Data Corrections (2026-10-18)
 
@@ -885,3 +910,16 @@ point of truth. US-PO-22 (3 pts) records the applied corrections —
 Mangalasasanam blocks — with the comparison workbook as the traceable
 evidence base. The story is to be transitioned **Done** at creation per
 the established convention.
+
+## Version 2.4 — Thiru Anbil Photo Upload (2026-10-20)
+
+Round 34 (TER v2.44): the PO supplied three Thiru Anbil photographs —
+temple gopuram, Moolavar (Sundararaja Perumal on Adisesha) and Urchavar
+(Sundararajan). US-PO-23 (2 pts) uploads them per the photo spec: the
+HEIF source converted to browser-safe JPEG, wired through
+dossier-templates.json deity arrays plus a new kshetram-level photos
+pipeline (GROQ + transform + reverse mapping + studio schema), with the
+card consumers preferring curated photos over the wiki fallback. The
+Urchavar photo is the site's first; browse card photos rise 60 → 61 of
+108. The story is transitioned **Done** at creation per the established
+convention (DTRPR108K-107).

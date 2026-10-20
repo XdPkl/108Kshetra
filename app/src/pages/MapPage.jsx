@@ -84,7 +84,7 @@ const pillIdle = `${pillBase} border border-[#E3D2AE] bg-[#FFFDF7] font-medium t
 function MapResultCard({ kshetram: k, km, selected, onSelect }) {
   const { isVisited, toggleVisited } = useVisited();
   const visited = isVisited(k.id);
-  const image = useWikiImage(k.wiki ?? null, k.photo ?? null);
+  const image = useWikiImage(k.wiki ?? null, k.photos?.[0]?.src ?? k.photo ?? null);
   return (
     <li
       className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-[#FFFDF7] shadow-xs transition-all duration-300 ${

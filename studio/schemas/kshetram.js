@@ -58,6 +58,7 @@ const kshetram = defineType({
 
     // --- media & location ---
     {name: 'photo', type: 'image', title: 'Card / hero photo', group: 'media', options: {hotspot: true}, description: 'Shown on browse cards and the featured strip. Falls back to the Wikipedia photo if empty.'},
+    {name: 'photos', type: 'array', title: 'Temple photos', group: 'media', of: [{type: 'photo'}], description: 'Curated temple photographs (upload or file-based srcUrl). The first entry is the detail-page hero and card photo.'},
     {name: 'coords', type: 'geopoint', title: 'Coordinates', group: 'media', description: 'Leave empty only for the two celestial realms.'},
   ],
   preview: {

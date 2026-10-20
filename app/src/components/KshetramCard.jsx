@@ -21,7 +21,7 @@ export default function KshetramCard({ kshetram }) {
   const { isInTrip, toggleTrip } = useTrip();
   const visited = isVisited(kshetram.id);
   const inTrip = isInTrip(kshetram.id);
-  const image = useWikiImage(kshetram.wiki ?? null, kshetram.photo ?? null);
+  const image = useWikiImage(kshetram.wiki ?? null, kshetram.photos?.[0]?.src ?? kshetram.photo ?? null);
   const serial = getDDSerial(kshetram.id);
 
   return (
