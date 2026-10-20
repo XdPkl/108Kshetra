@@ -3152,3 +3152,32 @@ panoramic contained with tint bands above/below), Urchavar box 525×700
 `docs/03-design/gate-shots/anbil-photos-34/deities-fixed-boxes.png`.
 Build clean; component + CSS only (no test surface — CI runs the full
 suite on push). No content/fixture change.
+
+## Version 2.47 — Fixed Frame Widths For Deity Photos (2026-10-20, round 34 follow-up 3)
+
+**Trigger:** PO feedback — pin a fixed width for each orientation
+(separately for landscape and portrait) and ask for the optimized value.
+
+### Values set
+
+- **Landscape: 560px** (`16:10` → 560×350 photo area) — matches the
+  measured desktop column (558px) and the ~580px hero-band idiom; a
+  1600×1000 master renders ~2.9 device-px per CSS px on 2× retina (beyond
+  sharp; larger masters add page weight, not detail).
+- **Portrait: 480px** (`3:4` → 480×640) — prominent but avoids the 747px
+  height a 560px-wide portrait would reach, keeping the Name/Thaayar text
+  above the fold on laptop screens; centered in its column.
+
+Implementation: the `onLoad` orientation tag now also marks the frame
+(`box-landscape` / `box-portrait`); CSS caps the frame width
+(`max-width: 560px / 480px; margin-inline: auto` for portrait), so the
+box shrinks safely below the cap on narrow screens and thumbnails are
+unaffected. Applied in `kshetram-detail.css` + `layout.css` (legacy,
+aligned).
+
+### Verification
+
+Rebuilt + preview at 1440px: landscape frame 558px (column-limited, at
+the cap), portrait frame 478px centered (480 minus border). Gate shot:
+`docs/03-design/gate-shots/anbil-photos-34/deities-fixed-widths.png`.
+Build clean; component + CSS only. No content/fixture change.

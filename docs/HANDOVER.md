@@ -400,7 +400,7 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
     limits much faster than the summary API. For article-title hunts,
     WebSearch + summary verification beat on-wiki search.
 
-60. **PO photos can arrive as HEIF (iPhone)** — browsers cannot render HEIF; convert with sharp (it decodes HEIF on this box): `sharp(src).jpeg({quality: 85, mozjpeg: true})`. Also: ESM scratch scripts must live in `app/` to resolve playwright, detail-page hrefs carry the `/108Kshetra/` basename in Playwright (use `a[href*=...]`), and the Deities tab is `role=tab`, not a button. Deity photos fit into FIXED orientation boxes — landscape 16:10, portrait 3:4, object-fit:contain on the tint (TER v2.46; the PO asked for two stable sizes; v2.45 natural-aspect superseded). Full frame ALWAYS: never crop deity sources to fit.
+60. **PO photos can arrive as HEIF (iPhone)** — browsers cannot render HEIF; convert with sharp (it decodes HEIF on this box): `sharp(src).jpeg({quality: 85, mozjpeg: true})`. Also: ESM scratch scripts must live in `app/` to resolve playwright, detail-page hrefs carry the `/108Kshetra/` basename in Playwright (use `a[href*=...]`), and the Deities tab is `role=tab`, not a button. Deity photos fit into FIXED orientation boxes at FIXED widths — landscape 16:10 max 560px, portrait 3:4 max 480px centered, object-fit:contain on the tint (TER v2.46 + v2.47, PO-set; v2.45 natural-aspect superseded). Full frame ALWAYS: never crop deity sources to fit.
 
 ## 5. Command cheat-sheet
 

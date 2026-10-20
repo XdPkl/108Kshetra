@@ -31,7 +31,12 @@
 /* Fixed orientation boxes: the whole photo is contained (never cropped), so the
    Moolavar/Urchavar columns stay layout-stable regardless of source shape. */
 .kxd .deity-photo .img-landscape { aspect-ratio: 16 / 10; object-fit: contain; background: var(--tint); }
-.kxd .deity-photo .img-portrait { aspect-ratio: 3 / 4; object-fit: contain; background: var(--tint); } /* natural aspect — full frame, no crop (PO feedback, round 34) */
+.kxd .deity-photo .img-portrait { aspect-ratio: 3 / 4; object-fit: contain; background: var(--tint); }
+/* Fixed frame widths (PO-set): landscape boxes match the desktop column
+   (~558px) and the ~580px hero-band idiom; portrait stays prominent without
+   pushing the deity text below the fold. max-width keeps mobile safe. */
+.kxd .deity-photo.box-landscape { max-width: 560px; }
+.kxd .deity-photo.box-portrait { max-width: 480px; margin-inline: auto; } /* natural aspect — full frame, no crop (PO feedback, round 34) */
 .kxd .deity-thumbs { display: flex; gap: 8px; margin-bottom: 14px; }
 .kxd .deity-thumbs button { flex: 1; padding: 0; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; background: var(--tint); }
 .kxd .deity-thumbs img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
