@@ -3125,3 +3125,30 @@ frames, zero crop). Gate shot:
 `docs/03-design/gate-shots/anbil-photos-34/deities-fullframe.png`.
 Build clean; CSS-only (no unit/e2e surface — CI runs the full suite on
 push). No content/fixture change, so the sync checks are untouched.
+
+## Version 2.46 — Deity Photos In Fixed Orientation Boxes (2026-10-20, round 34 follow-up 2)
+
+**Trigger:** PO feedback on the natural-aspect render — keep two fixed
+sizes, portrait and landscape, and fit every Moolavar/Urchavar photo into
+its box so the page layout stays stable.
+
+### Fix
+
+`PhotoImg` tags each photo with its orientation on load
+(`img-landscape` / `img-portrait` by naturalWidth vs naturalHeight); CSS
+gives landscape photos a fixed **16:10** box and portrait photos a fixed
+**3:4** box (both ratios from the PO upload spec) with `object-fit:
+contain` on the tint — the whole picture is always visible, never
+cropped (previous PO requirement preserved), and the boxes are identical
+for every temple regardless of source shape. Applied in
+`kshetram-detail.css` (live `.kxd` rules) and `layout.css` (shadowed
+legacy, aligned). Supersedes the natural-aspect render of TER v2.45.
+
+### Verification
+
+Rebuilt + preview: Moolavar box 558×349 (exactly 16:10; the 1200×449
+panoramic contained with tint bands above/below), Urchavar box 525×700
+(exactly 3:4; the 980×1316 portrait fills it). Gate shot:
+`docs/03-design/gate-shots/anbil-photos-34/deities-fixed-boxes.png`.
+Build clean; component + CSS only (no test surface — CI runs the full
+suite on push). No content/fixture change.

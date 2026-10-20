@@ -24,6 +24,13 @@ function PhotoImg({ photo, alt, className }) {
       alt={alt}
       loading="lazy"
       className={className}
+      onLoad={(e) => {
+        // Fixed orientation boxes (landscape 16:10 / portrait 3:4): tag the
+        // photo once its natural shape is known so the box, not the photo,
+        // owns the layout.
+        const img = e.currentTarget;
+        img.classList.add(img.naturalWidth >= img.naturalHeight ? 'img-landscape' : 'img-portrait');
+      }}
       onError={(e) => { e.currentTarget.style.display = 'none'; }}
     />
   );
