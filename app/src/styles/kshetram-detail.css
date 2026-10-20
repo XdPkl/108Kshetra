@@ -27,7 +27,7 @@
 .kxd .sanctum-callout { background: var(--tint); border: 1px solid var(--line); border-left: 3px solid var(--gold); border-radius: 10px; padding: 16px 18px; margin-top: 24px; }
 .kxd .sanctum-callout p { margin: 0; }
 .kxd .deity-photo { display: block; width: 100%; padding: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--tint); margin-bottom: 14px; }
-.kxd .deity-photo img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+.kxd .deity-photo img { width: 100%; height: auto; display: block; } /* natural aspect — full frame, no crop (PO feedback, round 34) */
 .kxd .deity-thumbs { display: flex; gap: 8px; margin-bottom: 14px; }
 .kxd .deity-thumbs button { flex: 1; padding: 0; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; background: var(--tint); }
 .kxd .deity-thumbs img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }

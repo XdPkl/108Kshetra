@@ -135,7 +135,7 @@
   border-radius: var(--radius-card);
   overflow: hidden;
 }
-.deity-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.deity-photo img { width: 100%; height: auto; display: block; } /* natural aspect — full frame, no crop (PO feedback, round 34) */
 .deity-photo--placeholder {
   display: flex;
   align-items: center;

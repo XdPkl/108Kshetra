@@ -1,8 +1,8 @@
 # HANDOVER — 108 Divya Kshetrams (2026-10-20, after round 34 — Anbil photos)
 
-State: **`b0643fc` pushed, CI+Deploy green, live verified (three Anbil photos
-HTTP 200 + wired content grepped in the deployed bundle).** `main` = `b0643fc`
-(round 34 — Thiru Anbil photo upload)
+State: **`main` pushed, CI+Deploy green, live verified (Anbil photos HTTP 200
++ deity photos render full-frame).** Round 34 = Anbil photo upload
+(`b0643fc`) + full-frame deity render fix (TER v2.45)
 in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
 Live: https://xdpkl.github.io/108Kshetra/ — verify bundles by CONTENT, not by
 hash (gotcha 12). Working tree clean. No preview server running. Scratch
@@ -31,7 +31,7 @@ Round 33 applied the ruling; a follow-up fixed 19 dead Wikipedia slugs
 | `f91ef87` | **Round 32 — browse grid photo fix** (PO report: all 108 cards "Photo coming soon" despite available photos): root cause — the browse grid consumed `useKshetrams()` → RAW records (no image fields) while the 61 Wikipedia slugs live in enrichment.json, which detail/map/home-featured merge but browse never did; no lookup was even attempted (verified live: 0 requests). Fix: `useKshetrams()` returns `getAllKshetramsEnriched()` (one line; only consumer is BrowsePage). Outcome: 61 lookups fire, **42 cards render photos**, 66 honestly keep the placeholder (no slug/no lead image/known 404s — PO-owned content). Not a regression: browse never fetched (wiring unchanged since initial delivery; no test asserted the raw-vs-enriched shape) | TER v2.41, TCS v1.27, user-stories US-PO-21 |
 | `fe0e7e2` + `74f6d89` | **PO comparison workbook + ruling**: 7 PO PDFs transcribed (108 temples × 11 fields) and compared side-by-side against the dataset — Summary/Temple Index/Side-by-Side (1,188 rows)/Differences/Review (13/13 build-time checks, formula-free by design). Key findings: site stores NO utsavar/thayar/vimanam/tree/theertham (455 rows missing on site); pasuramCount empty for 107/108; PDFs cover 103/108 (5 Chola temples absent); 9..11 posture + 3 deity + 8 azhwar-set conflicts; PDFs' 108-numbers conflict across docs on 20 numbers | workbook only |
 | `e8a23ee` | **Round 33 — PO PDF-guide data corrections** (ruling applied): kshetrams.json — 2 Tamil names (kanchi-varadaraja → திருக்கச்சி அத்திகிரி, sirkazhi → சீராமவிண்ணகரம் (சீர்காழி)), 3 deity names, 11 postures, 22 azhwar sets (8 replaced incl. paramapadam's 8-azhwar siddhanta list, 14 extended — Tirupati now 11 azhwars); 6 dossier Mangalasasanam blocks re-set to PDF pasuram breakdowns (visual gate caught the paramapadam tab rendering 10 azhwars from dossier-templates.json — a layer the workbook did NOT compare). Poigai desam count 12→14 (UT-AZW-03 + TC-18). **Jira: US-PO-22 synced as DTRPR108K-106** (Done, under epic -82) | TER v2.42, TCS v1.28, user-stories v2.3 US-PO-22 |
-| `b0643fc` | **Round 34 — Thiru Anbil photo upload**: three PO photographs wired (desam-6.jpg gopuram → card band + detail hero; desam-6-moolavar.jpg; desam-6-urchavar.jpg — HEIF source converted to JPEG). dossier-templates.json gains moolavar + urchavar photo arrays (FIRST Urchavar photo; deity census 5 of 216) + a NEW kshetram-level photos[] with end-to-end pipeline support (GROQ → groqToContent → to-sanity-docs reverse, verify lossless; studio schema media field); KshetramCard/MapResultCard prefer curated photos[0].src. Browse photos 60 → 61 of 108. Jira US-PO-23 = DTRPR108K-107 | TER v2.44, user-stories v2.4 |
+| (follow-up, same day) | **Deity photos render full-frame** (PO feedback): `.deity-photo img` natural aspect in kshetram-detail.css + layout.css — the 16:10 cover crop that sliced the Anbil Moolavar/Urchavar is gone; upload-spec deity guidance superseded (TER v2.45) | TER v2.45 |
 
 Final gates at handoff: **247/247 unit (23 suites) · 21/21 e2e · coverage
 89.89% stmts / 81.31% branches / 84.44% funcs / 91.71% lines (gate 80%) ·
@@ -100,8 +100,9 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   to-sanity-docs mapping → studio schema media group); KshetramCard and
   MapResultCard prefer curated `photos[0].src` over photo/wiki.
 - **Photo upload spec (given to the PO 2026-10-18)** — temples & deities:
-  JPEG sRGB ≤400 KB, master **1600×1000 (16:10)** (hero ~580×300, deity
-  slots 16:10, card bands crop from it); azhwar/acharya portraits:
+  JPEG sRGB ≤400 KB, master **1600×1000 (16:10)** (hero ~580×300, card
+  bands crop from it; deity slots render at natural aspect — send
+  originals, no cropping needed); azhwar/acharya portraits:
   **1200×1600 (3:4)** face upper-third (rendered 240×320, object-position
   top); send ORIGINALS, not WhatsApp forwards (recompression). Wiring
   convention: `app/public/photos/desam-<serial>.jpg` /
@@ -399,7 +400,7 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
     limits much faster than the summary API. For article-title hunts,
     WebSearch + summary verification beat on-wiki search.
 
-60. **PO photos can arrive as HEIF (iPhone)** — browsers cannot render HEIF; convert with sharp (it decodes HEIF on this box): `sharp(src).jpeg({quality: 85, mozjpeg: true})`. Also: ESM scratch scripts must live in `app/` to resolve playwright, detail-page hrefs carry the `/108Kshetra/` basename in Playwright (use `a[href*=...]`), and the Deities tab is `role=tab`, not a button. Deity photos render 16:10 object-fit:cover with the full frame in the lightbox — never crop deity sources to fit.
+60. **PO photos can arrive as HEIF (iPhone)** — browsers cannot render HEIF; convert with sharp (it decodes HEIF on this box): `sharp(src).jpeg({quality: 85, mozjpeg: true})`. Also: ESM scratch scripts must live in `app/` to resolve playwright, detail-page hrefs carry the `/108Kshetra/` basename in Playwright (use `a[href*=...]`), and the Deities tab is `role=tab`, not a button. Deity photos render NATURAL aspect, full frame (TER v2.45 — the PO rejected the former 16:10 cover crop); never crop deity sources to fit.
 
 ## 5. Command cheat-sheet
 

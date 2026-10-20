@@ -3099,3 +3099,29 @@ hero shot shows the same section clean).
 | E2E (Playwright) | **21/21 pass** |
 | CMS self-tests | sync --check 0-diff (11 files) · verify round-trip lossless · schema validate 0/0 |
 | Jira | US-PO-23 synced as **DTRPR108K-107** (Done, epic DTRPR108K-82) via `--only=US-PO-23` |
+
+## Version 2.45 — Deity Photos Render Full-Frame (2026-10-20, round 34 follow-up)
+
+**Trigger:** PO feedback — the deity photographs were cropped: the Anbil
+Moolavar (1200×449 panoramic) lost its sides and the Urchavar (980×1316
+portrait) its top/bottom to the former `aspect-ratio: 16/10;
+object-fit: cover` render.
+
+### Fix (CSS-only)
+
+`.deity-photo img` now renders natural aspect (`height: auto`, no
+aspect-ratio/object-fit) in `kshetram-detail.css` (the live `.kxd` rule)
+and `layout.css` (shadowed legacy rule, aligned so the component cannot
+regress to a crop if reused outside `.kxd`). The lightbox already showed
+the full frame and is unchanged. The 16:10 "deity slots" guidance in the
+photo upload spec is superseded — deity files are wired at native aspect;
+send originals, no cropping needed.
+
+### Verification
+
+Rebuilt + preview: rendered boxes match native aspect exactly (558×209
+for the 1200×449 Moolavar, 525×705 for the 980×1316 Urchavar — full
+frames, zero crop). Gate shot:
+`docs/03-design/gate-shots/anbil-photos-34/deities-fullframe.png`.
+Build clean; CSS-only (no unit/e2e surface — CI runs the full suite on
+push). No content/fixture change, so the sync checks are untouched.
