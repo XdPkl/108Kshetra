@@ -1,15 +1,17 @@
-# HANDOVER — 108 Divya Kshetrams (2026-10-18, after round 33 / PO-guide data corrections)
+# HANDOVER — 108 Divya Kshetrams (2026-10-18, after round 33 + slug-fix follow-up)
 
-State: **Round 33 pushed (`e8a23ee`), CI+Deploy pending re-check at handoff —
-verify before relying on live state.** `main` = `e8a23ee` (PO PDF-guide data
-corrections) in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
+State: **`ceca643` pushed, CI+Deploy green, live verified (new slugs grepped
+in the deployed bundle).** `main` = `ceca643` (dead Wikipedia slugs fixed)
+in sync with `origin/main` (https://github.com/XdPkl/108Kshetra).
 Live: https://xdpkl.github.io/108Kshetra/ — verify bundles by CONTENT, not by
 hash (gotcha 12). Working tree clean. No preview server running. Scratch
-scripts deleted. Nothing in flight. NEW THIS SESSION: the PO supplied seven
-regional Divya Desam PDFs covering all 108 temples and RULED (2026-10-18)
+scripts deleted. Nothing in flight. THIS SESSION (all 2026-10-18): the PO
+supplied seven regional Divya Desam PDFs covering all 108 temples and RULED
 that where the extracted PDF details clash with the site dataset, the
 extracted PDF details are the point of truth — evidence workbook:
 `docs/04-review/po-pdf-guides-vs-site-comparison.xlsx` (1,188 field rows).
+Round 33 applied the ruling; a follow-up fixed 19 dead Wikipedia slugs
+(photos 41 → 60 of 108) and reconciled the drifted sync fixture (0-diff).
 
 ## 1. What this session delivered (rounds 24–32 + audit + Jira sync, all live)
 
@@ -28,6 +30,7 @@ extracted PDF details are the point of truth — evidence workbook:
 | `f91ef87` | **Round 32 — browse grid photo fix** (PO report: all 108 cards "Photo coming soon" despite available photos): root cause — the browse grid consumed `useKshetrams()` → RAW records (no image fields) while the 61 Wikipedia slugs live in enrichment.json, which detail/map/home-featured merge but browse never did; no lookup was even attempted (verified live: 0 requests). Fix: `useKshetrams()` returns `getAllKshetramsEnriched()` (one line; only consumer is BrowsePage). Outcome: 61 lookups fire, **42 cards render photos**, 66 honestly keep the placeholder (no slug/no lead image/known 404s — PO-owned content). Not a regression: browse never fetched (wiring unchanged since initial delivery; no test asserted the raw-vs-enriched shape) | TER v2.41, TCS v1.27, user-stories US-PO-21 |
 | `fe0e7e2` + `74f6d89` | **PO comparison workbook + ruling**: 7 PO PDFs transcribed (108 temples × 11 fields) and compared side-by-side against the dataset — Summary/Temple Index/Side-by-Side (1,188 rows)/Differences/Review (13/13 build-time checks, formula-free by design). Key findings: site stores NO utsavar/thayar/vimanam/tree/theertham (455 rows missing on site); pasuramCount empty for 107/108; PDFs cover 103/108 (5 Chola temples absent); 9..11 posture + 3 deity + 8 azhwar-set conflicts; PDFs' 108-numbers conflict across docs on 20 numbers | workbook only |
 | `e8a23ee` | **Round 33 — PO PDF-guide data corrections** (ruling applied): kshetrams.json — 2 Tamil names (kanchi-varadaraja → திருக்கச்சி அத்திகிரி, sirkazhi → சீராமவிண்ணகரம் (சீர்காழி)), 3 deity names, 11 postures, 22 azhwar sets (8 replaced incl. paramapadam's 8-azhwar siddhanta list, 14 extended — Tirupati now 11 azhwars); 6 dossier Mangalasasanam blocks re-set to PDF pasuram breakdowns (visual gate caught the paramapadam tab rendering 10 azhwars from dossier-templates.json — a layer the workbook did NOT compare). Poigai desam count 12→14 (UT-AZW-03 + TC-18). **Jira: US-PO-22 synced as DTRPR108K-106** (Done, under epic -82) | TER v2.42, TCS v1.28, user-stories v2.3 US-PO-22 |
+| `ceca643` | **Round 33 follow-up — dead Wikipedia slugs fixed**: 19 `enrichment.json` slugs corrected (typos/wrong disambiguations/spacing — e.g. Azagiya→Azhagiya, Nachiyar Kovil→Thirunarayur Nambi Temple, Sholinghur→Thirukkadigai), each verified live to resolve to the correct temple WITH a lead image; two near-misses rejected (Woraiyur's Nachiyar Koil, Rameswaram's Kothandaramaswamy). Card photos **41 → 60 of 108**. Sync fixture reconciled from corrected content in proper Sanity shape (19 wiki + 16 base fields + 22 azhwar ref-arrays + 6 perAzhwar ref-blocks) — it had drifted stale enough that a real sync would have REVERTED round 33; `sync-content --check` back to 0-diff on all 11 files | TER v2.43 |
 
 Final gates at handoff: **246/246 unit (23 suites) · 21/21 e2e · coverage
 89.89% stmts / 81.31% branches / 84.44% funcs / 91.71% lines (gate 80%) ·
@@ -85,6 +88,21 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   article has no usable lead image). If the PO supplies slugs, edit
   enrichment.json + the sync fixture TOGETHER (`sync-content --fixture
   --check` 0-diff).
+- **Deity photos: 3 of 216 slots filled** — only 3 curated Moolavar photos
+  exist (desam-86 → tiruvallur, desam-88 → mahabalipuram, desam-89 →
+  nilathingal-thundam, all in `app/public/photos/` wired via
+  `dossier-templates.json` `deities.moolavar.photos[]`); ZERO Urchavar
+  photos anywhere. The PO has the upload spec and is expected to send
+  photos — wire them in batches as they arrive.
+- **Photo upload spec (given to the PO 2026-10-18)** — temples & deities:
+  JPEG sRGB ≤400 KB, master **1600×1000 (16:10)** (hero ~580×300, deity
+  slots 16:10, card bands crop from it); azhwar/acharya portraits:
+  **1200×1600 (3:4)** face upper-third (rendered 240×320, object-position
+  top); send ORIGINALS, not WhatsApp forwards (recompression). Wiring
+  convention: `app/public/photos/desam-<serial>.jpg` /
+  `saint-<id>.jpg`, referenced from `dossier-templates.json`
+  (`deities.moolavar.photos[]` / `deities.urchavar.photos[]` as
+  `{src, alt, credit}`, max 3 per deity: 1 lead + 2 thumbs).
 - **Coverage**: branches 81.19% vs gate 80% — ~1.2pp headroom (the
   cluster-focus branches are e2e-covered, not unit-covered). Any new
   conditional needs a test. CI is 2-core (gotcha 10); one e2e flake
@@ -184,7 +202,7 @@ visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/
   `content/dossier-templates.json` `mangalasasanam.perAzhwar` (azhwar +
   pasuram-count pairs) — NOT `kshetrams.json`'s `azhwars` array; the two
   can silently diverge (visual gate caught paramapadam at 10 vs 8).
-- Registers/dates: **TER v2.42; TCS v1.28**; user-stories.md v2.3 (all
+- Registers/dates: **TER v2.43; TCS v1.28**; user-stories.md v2.3 (all
   22 stories synced). Comparison workbook (PO PDF guides, round-33
   evidence base): `docs/04-review/po-pdf-guides-vs-site-comparison.xlsx`.
   UT-DTL unchanged since round 17; UT-AZW-03 assertions updated round 33
