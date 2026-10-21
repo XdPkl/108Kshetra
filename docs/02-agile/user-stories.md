@@ -899,6 +899,8 @@ points via a follow-up edit (see the script header).
 | Story | US-PO-21 — Browse grid photo fix | EP-PO-ITER | 2 | DTRPR108K-105 |
 | Story | US-PO-22 — PO PDF-guide data corrections (clash resolution) | EP-PO-ITER | 3 | DTRPR108K-106 |
 | Story | US-PO-23 — Thiru Anbil photo upload (temple, Moolavar, Urchavar) | EP-PO-ITER | 2 | DTRPR108K-107 |
+| Story | US-PO-24 — Mobile compatibility fixes (F1-F5) + link audit (L1-L3) | EP-PO-ITER | 8 | not yet synced |
+| Story | US-PO-25 — Kshetram-detail page: seven-item PO fix list | EP-PO-ITER | 2 | not yet synced |
 
 ## Version 2.3 — PO PDF-Guide Data Corrections (2026-10-18)
 
@@ -923,3 +925,60 @@ card consumers preferring curated photos over the wiki fallback. The
 Urchavar photo is the site's first; browse card photos rise 60 → 61 of
 108. The story is transitioned **Done** at creation per the established
 convention (DTRPR108K-107).
+
+## Version 2.5 — Mobile & Link Audit + Kshetram-Detail PO Fixes (2026-10-22)
+
+Rounds 35-36 (TER v2.48 + v2.49, TCS v1.29): the external mobile/link
+audit of 2026-10-18 (154 routes, 999 inventoried link destinations) plus
+a seven-item PO fix list on the kshetram detail page. Both stories are
+**delivered and verified**; Jira sync is PENDING (use
+`sync-jira-stories.mjs --only` when requested — stories are not
+deduplicated).
+
+**US-PO-24 — Mobile compatibility fixes (F1-F5) + link audit (L1-L3)** (8 pts, Priority 1) — *FR-32, FR-64/65, FR-67, FR-69, FR-83, FR-87*
+> As a pilgrim on a phone, I want the header, temple/Azhwar detail pages,
+> directory intros and the Yatra map usable at 320-414px, and every
+> control to do what its label says (skip links jump, Get directions
+> opens directions).
+
+- F1 header shrinks/wraps below lg with a 44px menu target; F2 detail
+  heroes/grids gain minmax(0,1fr) containment + emergency word-wrap;
+  F3 Azhwar hero stacks ≤480px and stats wrap ≤800px; F4 the three
+  directory intros use full width below lg; F5 the map's filters move
+  into a collapsible panel + toolbar above the map below 1024px
+  (expanding pushes the map down; one filter state; invalidateSize).
+- L1: 39 focusable skip-link targets (`#azhwar-main`, `#acharya-main`);
+  L2: dravidaveda.org renders an honest "Temporarily unavailable" state
+  pending owner review (config-driven, full CMS pipeline wired); L3:
+  "Get directions" opens `maps/dir/?api=1` with verified dataset
+  coordinates for all 106 terrestrial desams (View-on-map stays search;
+  celestial omit travel). Acharya birthplace district un-glued (11
+  profiles overflowed at 320px); inquiry success copy labelled a local
+  draft.
+- Verified: 0 document overflows across all 154 routes at 320/390
+  (temples+azhwars also 360/414); interaction probes (trip counts
+  0/10/106, map expand/collapse/pan/marker taps, legacy `/map?t=`
+  links, skip-link keyboard focus at 390 + 1280); desktop before/after
+  at 1024/1280/1440/1920 pixel-identical except intended text changes.
+- Delivered as TER v2.48 / TCS v1.29 (UT-LNK-01..10, UT-ACT-01..02).
+
+**US-PO-25 — Kshetram-detail page: seven-item PO fix list** (2 pts, Priority 1) — *FR-69, FR-83, FR-85*
+> As the Product Owner, I want seven specific corrections on the temple
+> detail page: no illustrative caption, a working Share button, no
+  Divya-Desam number in Quick facts, no GPS coordinates, the full
+  good-faith footer note, no Listen buttons, and discourse titles that
+  link to YouTube.
+
+- Share root-caused and fixed: desktop browsers expose `navigator.share`
+  but reject with NotAllowedError when no sheet can open — the old
+  silent catch made the button look dead; only AbortError (dismiss)
+  stays quiet now, everything else falls back to clipboard + legacy
+  copy with "Link copied ✓" (UT-ACT-01/02).
+- Removed: hero caption, Quick-facts serial row, GPS coordinates (both
+  surfaces), "Listen to recitation" (Mangalasasanam + legacy Pasuram
+  paths). Footer `compiledNote` gains "Content is provided in good faith
+  for devotional and educational purposes." Texts & discourses titles
+  link directly to their YouTube videos (dataset search queries —
+  curated video URLs remain PO-optional).
+- Delivered as TER v2.49 / TCS v1.29. Live preview spot-check confirmed
+  all seven on /kshetram/srirangam.

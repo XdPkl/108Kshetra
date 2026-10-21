@@ -41,7 +41,7 @@ field rows; applied in round 33).
 | `90fadaa` | **Deity photos render full-frame** (PO feedback): `.deity-photo img` natural aspect in kshetram-detail.css + layout.css — the 16:10 cover crop that sliced the Anbil Moolavar/Urchavar is gone | TER v2.45 |
 | `9906076` | **Deity photos in fixed orientation boxes** (PO feedback): PhotoImg tags landscape/portrait on load; 16:10 / 3:4 contain boxes keep columns layout-stable, full frame always (supersedes v2.45 natural aspect) | TER v2.46 |
 | `10e9fe7` | **Fixed frame widths** (PO asked for the optimized width): landscape max **560px** (column width + hero-band idiom), portrait max **480px** centered (avoids 747px-tall boxes); max-width keeps mobile safe | TER v2.47 |
-| `d485843` | **Rounds 35-36 — mobile audit + link audit + kshetram-detail PO fixes**: F1 header shrinks/wraps <lg + 44px menu; F2 detail heroes/grids minmax(0,1fr) + overflow-wrap (≤800px only); F3 azhwar hero stacks ≤480px, stats wrap ≤800px; F4 directory intros max-w-full below lg; F5 map filters below lg into a collapsible panel + toolbar ABOVE the map (expand pushes map down, one filter state, invalidateSize); L1 skip targets `#azhwar-main`/`#acharya-main` tabIndex=-1 (39 pages, all tab states); L2 dravidaveda.org → honest "Temporarily unavailable" via `UNAVAILABLE_SOURCE_DOMAINS` config (full pipeline wired; owner review pending); L3 Get directions → `maps/dir/?api=1&destination=<coords>` via split builders (106 terrestrial, View-on-map stays search, celestial omitted); acharya birthplace district un-glued (11 profiles overflowed 320px); inquiry copy labelled local draft. PO list: hero caption removed; **Share fixed** (desktop navigator.share rejects non-abort → clipboard + execCommand fallback); Quick-facts serial + GPS coordinates removed; footer good-faith sentence; Listen-to-recitation removed (both paths); Texts & discourses titles link directly to YouTube | TER v2.48 + v2.49 |
+| `d485843` | **Rounds 35-36 — mobile audit + link audit + kshetram-detail PO fixes**: F1 header shrinks/wraps <lg + 44px menu; F2 detail heroes/grids minmax(0,1fr) + overflow-wrap (≤800px only); F3 azhwar hero stacks ≤480px, stats wrap ≤800px; F4 directory intros max-w-full below lg; F5 map filters below lg into a collapsible panel + toolbar ABOVE the map (expand pushes map down, one filter state, invalidateSize); L1 skip targets `#azhwar-main`/`#acharya-main` tabIndex=-1 (39 pages, all tab states); L2 dravidaveda.org → honest "Temporarily unavailable" via `UNAVAILABLE_SOURCE_DOMAINS` config (full pipeline wired; owner review pending); L3 Get directions → `maps/dir/?api=1&destination=<coords>` via split builders (106 terrestrial, View-on-map stays search, celestial omitted); acharya birthplace district un-glued (11 profiles overflowed 320px); inquiry copy labelled local draft. PO list: hero caption removed; **Share fixed** (desktop navigator.share rejects non-abort → clipboard + execCommand fallback); Quick-facts serial + GPS coordinates removed; footer good-faith sentence; Listen-to-recitation removed (both paths); Texts & discourses titles link directly to YouTube | TER v2.48 + v2.49, TCS v1.29, user-stories v2.5 |
 
 Final gates at handoff: **259/259 unit (24 suites) · 21/21 e2e ·
 oxlint 0 errors / 6 accepted warnings · build clean ·
@@ -70,8 +70,9 @@ re-measurement locally.
   that row's `flex-wrap` in MapPage); (c) curated DIRECT YouTube video
   URLs for Texts & discourses — the dataset carries search queries only,
   titles currently link to YouTube video results; supply per-row video
-  URLs to wire deep links; (d) Jira NOT synced for rounds 35-36
-  (user-stories table still v2.4) — sync on request with
+  URLs to wire deep links; (d) Jira NOT synced for rounds 35-36 — the
+  stories are authored in user-stories.md v2.5 (US-PO-24/25) with keys
+  "not yet synced"; sync on request with
   `sync-jira-stories.mjs --only`.
 - **PO PHOTO BATCHES (expected next)** — the PO explicitly wants fast
   turnaround (complained about a 40-minute first upload). Agreed fast path
@@ -246,9 +247,9 @@ re-measurement locally.
   `content/dossier-templates.json` `mangalasasanam.perAzhwar` (azhwar +
   pasuram-count pairs) — NOT `kshetrams.json`'s `azhwars` array; the two
   can silently diverge (visual gate caught paramapadam at 10 vs 8).
-- Registers/dates: **TER v2.49; TCS v1.28**; user-stories.md v2.4 (all
-  23 stories synced; rounds 35-36 not yet authored). Comparison workbook
-  (PO PDF guides, round-33
+- Registers/dates: **TER v2.49; TCS v1.29**; user-stories.md v2.5 (25
+  stories; US-PO-24/25 authored for rounds 35-36, Jira sync pending).
+  Comparison workbook (PO PDF guides, round-33
   evidence base): `docs/04-review/po-pdf-guides-vs-site-comparison.xlsx`.
   UT-DTL unchanged since round 17; UT-AZW-03 assertions updated round 33
   (Poigai 12→14); UT-ACH-02 rewritten rounds 22/25; UT-AZW-02 round 24;

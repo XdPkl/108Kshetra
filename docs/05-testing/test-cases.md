@@ -626,3 +626,38 @@ assertions carried Poigai's desam count, which rose 12 → 14 when
 Quality gates: TC-QA-01 Pass (0 errors; 6 warnings) · TC-QA-02 Pass (**246/246, 23 suites**; 89.89/81.31/84.44/91.71) · TC-QA-03 Pass · E2E **21/21** · Visual gate **6/6**. Execution recorded in TER v2.42.
 
 *End of Addendum — TCS-108K-008 v1.28*
+
+## Version 1.29 — Mobile & Link Audit Fixes + Kshetram-Detail PO Fixes (2026-10-22)
+
+Rounds 35-36 (TER v2.48 + v2.49): the external mobile/link audit (F1-F5,
+L1-L3) and a seven-item kshetram-detail PO list. New suite
+`src/pages/__tests__/linkRegression.test.jsx` (UT-LNK) locks the link
+surface; PageActions gains the desktop share-fallback cases (UT-ACT);
+four existing assertions were updated for deliberately removed surfaces.
+
+| ID | Change | Detail |
+|---|---|---|
+| UT-LNK-01 | New | URL builders split: `mapsSearchUrl` → `/maps/search/…`, `mapsDirectionsUrl` → `/maps/dir/?api=1&destination=…`; directions never embed "directions to" |
+| UT-LNK-02 | New | Every terrestrial desam (106) has a coords.json destination; thirupparkadal + paramapadam have none (celestial) |
+| UT-LNK-03 | New | KshetramDetail Overview, Visit info and Location "Get directions" all use the directions API URL; "View on Google Maps" stays a search URL |
+| UT-LNK-04 | New | Celestial desam detail renders no directions / view-on-map actions |
+| UT-LNK-05 | New | All 12 Azhwar pages expose exactly one focusable `#azhwar-main` (tabIndex −1) wrapping the tab rail + panels, stable after tab switches; skip link targets it |
+| UT-LNK-06 | New | All 27 Acharya pages expose a focusable `#acharya-main` wrapping the dossier with `#identification` preserved inside it |
+| UT-LNK-07 | New | Sources rows citing `UNAVAILABLE_SOURCE_DOMAINS` (dravidaveda.org) render the citation + "Temporarily unavailable" with NO anchor; working repositories keep their links |
+| UT-LNK-08 | New | Media digital-texts rows for the unavailable domain render text + note with NO anchor |
+| UT-LNK-09 | New | Route-id inventory: 108/12/27 records, unique kebab-case ids (page-coverage reconciliation) |
+| UT-LNK-10 | New | The audit's long-name + celestial detail routes render an h1 (render-smoke across the F2 set) |
+| UT-ACT-01 | New | PageActions: a failing (non-abort) `navigator.share` falls back to the clipboard and shows "Link copied ✓" (the desktop dead-button fix) |
+| UT-ACT-02 | New | PageActions: AbortError (visitor dismissed the sheet) stays quiet — no clipboard write |
+| UT-DTL (PasuramSection) | Assertion update | "Listen ↗" link removed everywhere — assert absent |
+| UT-DTL-14..17 (VisualsMedia) | Assertion update | Discourse titles link directly to YouTube (`youtube videos:` accessible names); "Search videos" chip absent |
+| UT-ABT-01 | Assertion update | Success copy now "Inquiry Saved" + local-draft wording ("saved on this device as a draft", "not been sent") |
+
+Quality gates: TC-QA-01 Pass (0 errors; 6 accepted warnings) · TC-QA-02
+Pass (**259/259, 24 suites**; coverage gate via CI ≥80% — last full local
+measurement remains round 33's 89.89/81.31) · TC-QA-03 Pass · E2E
+**21/21** · Mobile sweep **0 overflows** (154 routes @320/390,
+temples+azhwars @360/414) · Desktop 4-width before/after pixel-identical
+except intended text changes. Execution recorded in TER v2.48 + v2.49.
+
+*End of Addendum — TCS-108K-008 v1.29*
