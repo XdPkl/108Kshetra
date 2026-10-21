@@ -12,7 +12,7 @@
 import { useState } from 'react';
 import { Crosshair, Navigation } from 'lucide-react';
 import { distanceKm } from '../utils/geo.js';
-import { MAPS_URL_TEMPLATE } from '../data/config.js';
+import { mapsDirectionsUrl } from '../data/config.js';
 
 const STATUS = {
   idle: 'idle',
@@ -42,8 +42,10 @@ export default function DistanceFromMe({ coords, mapQuery, variant }) {
   };
 
   if (!coords) return null;
+  // Link-audit L3: directions mode with the temple's verified dataset
+  // coordinates as the destination (place query only as a fallback).
   const directionsHref = mapQuery
-    ? `${MAPS_URL_TEMPLATE}${encodeURIComponent(`directions to ${mapQuery}`)}`
+    ? mapsDirectionsUrl(coords ? coords.join(',') : mapQuery)
     : null;
   const directions = directionsHref ? (
     <a

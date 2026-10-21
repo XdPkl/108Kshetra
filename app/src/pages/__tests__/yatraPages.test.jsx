@@ -372,7 +372,7 @@ describe('AboutPage (UT-ABT-01, FR-87)', () => {
     await user.type(within(dialog).getByLabelText(/phone \/ whatsapp/i), '+91 98765 43210');
     await user.type(within(dialog).getByLabelText(/email address/i), 'devotee@example.com');
     await user.click(within(dialog).getByRole('button', { name: /submit schedule inquiry/i }));
-    expect(await within(dialog).findByText(/inquiry received/i)).toBeInTheDocument();
+    expect(await within(dialog).findByText(/inquiry saved/i)).toBeInTheDocument();
     expect(within(dialog).getByText(/YATRA-\d{4}/)).toBeInTheDocument();
     expect(within(dialog).getByText(/chola nadu heritage yatra/i)).toBeInTheDocument();
   });
@@ -396,10 +396,13 @@ describe('AboutPage (UT-ABT-01, FR-87)', () => {
     await user.clear(within(dialog).getByLabelText(/phone \/ whatsapp/i));
     await user.click(within(dialog).getByRole('button', { name: /submit schedule inquiry/i }));
     expect(within(dialog).getByRole('alert')).toHaveTextContent(/share at least one contact method/i);
-    expect(within(dialog).queryByText(/inquiry received/i)).not.toBeInTheDocument();
-    // one method unblocks the confirmed-delivery success state
+    expect(within(dialog).queryByText(/inquiry saved/i)).not.toBeInTheDocument();
+    // one method unblocks the success state — labelled honestly as a local
+    // draft (link-audit addendum: no delivery is claimed until wired)
     await user.type(within(dialog).getByLabelText(/phone \/ whatsapp/i), '+91 98765 43210');
     await user.click(within(dialog).getByRole('button', { name: /submit schedule inquiry/i }));
-    expect(await within(dialog).findByText(/inquiry received/i)).toBeInTheDocument();
+    expect(await within(dialog).findByText(/inquiry saved/i)).toBeInTheDocument();
+    expect(within(dialog).getByText(/saved on this device as a draft/i)).toBeInTheDocument();
+    expect(within(dialog).getByText(/not been sent/i)).toBeInTheDocument();
   });
 });

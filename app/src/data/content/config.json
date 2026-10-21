@@ -16,5 +16,7 @@
     "ramanuja",
     "pillai-lokacharya"
   ],
-  "MAPS_URL_TEMPLATE": "https://www.google.com/maps/search/"
+  "MAPS_URL_TEMPLATE": "https://www.google.com/maps/search/",
+  "MAPS_DIRECTIONS_URL_TEMPLATE": "https://www.google.com/maps/dir/?api=1&destination=",
+  "UNAVAILABLE_SOURCE_DOMAINS": ["dravidaveda.org"]
 }

@@ -276,6 +276,11 @@
      is reached sooner; facts condense to a tight stack beneath. */
   .kxd .azd-hero { grid-template-columns: minmax(0, 128px) minmax(0, 1fr); gap: 16px; }
   .kxd .azd-hero figure { grid-row: auto; }
+  /* Mobile-audit F3: the pasuram / Divya Desam statistics were a non-wrapping
+     flex row — on narrow columns they spilled past the identity. Wrapping
+     keeps both stats readable inside the column. */
+  .kxd .azd-stats { flex-wrap: wrap; row-gap: 8px; }
+  .kxd .azd-stats .azd-stat { min-width: 0; }
   .kxd .azd-facts { grid-template-columns: 1fr; gap: 0; padding-top: 12px; }
   .kxd .azd-facts > div + div { border-left: 0; padding-left: 0; padding-top: 10px; margin-top: 10px; border-top: 1px solid var(--line); }
   .kxd .azd-facts > div:first-child { padding-top: 0; }
@@ -290,7 +295,7 @@
   .kxd .azd-icono-photo { max-width: 240px; }
   .kxd .azd-verseband { grid-template-columns: 1fr; }
   .kxd .azd-lamp { display: none; }
-  .kxd .acd-hero { grid-template-columns: 1fr; gap: 28px; }
+  .kxd .acd-hero { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .kxd .acd-stepper { flex-wrap: wrap; justify-content: flex-start; gap: 14px; }
   .kxd .acd-stepper::before { content: none; }
   .kxd .acd-row { grid-template-columns: 1fr; }
@@ -301,4 +306,17 @@
   .kxd .acd-pada { grid-template-columns: 1fr; gap: 0; }
   .kxd .acd-grid3 { grid-template-columns: 1fr; }
   .kxd .acd-sources { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  /* Mobile-audit F3: below 480px even the 128px portrait column squeezes the
+     identity past the viewport — stack portrait above identity, cap the
+     portrait, and let names wrap. The desktop split hero is untouched. */
+  .kxd .azd-hero { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .kxd .azd-hero .azd-portrait { max-width: 152px; }
+  .kxd .azd-identity { min-width: 0; }
+  .kxd .azd-identity h1, .kxd .azd-epithet, .kxd .azd-aliases { overflow-wrap: anywhere; }
+  /* Statistics wrap to their own line here — the inline left divider would
+     read as a stray rule at a line start, so the gap alone separates them. */
+  .kxd .azd-stats .azd-stat + .azd-stat { border-left: 0; padding-left: 0; }
 }

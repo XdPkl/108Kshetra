@@ -3,8 +3,9 @@
  * rescanned per the PO round-17 audit: a compact three-column Azhwar
  * name/count list (two columns on mobile), verse cards with intentional
  * line breaks, and the word-by-word glossary + commentary in labelled
- * disclosure sections so the verse and Listen action stay visible.
- * Falls back to the legacy single-pasuram display.
+ * disclosure sections. Falls back to the legacy single-pasuram display.
+ * (The "Listen to recitation" search link was removed by PO request,
+ * round 36.)
  * @param {object} props
  * @param {Kshetram & object} props.kshetram - enriched record
  */
@@ -13,13 +14,6 @@ import { Link } from 'react-router-dom';
 import { getAzhwarById } from '../../data/api.js';
 import PasuramSection from '../PasuramSection.jsx';
 import NotDocumented from './NotDocumented.jsx';
-
-function listenHrefFor(excerpt) {
-  if (excerpt.audio) return excerpt.audio;
-  return excerpt.work
-    ? `https://archive.org/search?query=${encodeURIComponent(`${excerpt.work} pasuram recitation`)}`
-    : null;
-}
 
 /** Dataset verse text uses "*" as line separators — split into lines. */
 function verseLines(text) {
@@ -34,7 +28,6 @@ function verseLines(text) {
 /** One excerpt: verse card + glossary/commentary disclosures. */
 function Excerpt({ excerpt }) {
   const azhwar = getAzhwarById(excerpt.azhwarId);
-  const href = listenHrefFor(excerpt);
   const title = `${azhwar ? azhwar.name : excerpt.azhwarId}${excerpt.work ? ` · ${excerpt.work}` : ' · representative pasuram'}${excerpt.verse ? ` (${excerpt.verse})` : ''}`;
   const tamil = verseLines(excerpt.tamil);
   const transliteration = verseLines(excerpt.transliteration);
@@ -57,11 +50,6 @@ function Excerpt({ excerpt }) {
           </p>
         ) : null}
         {excerpt.meaning ? <p className="verse-meaning">{excerpt.meaning}</p> : null}
-        {href ? (
-          <a className="btn" href={href} target="_blank" rel="noopener noreferrer">
-            Listen to recitation
-          </a>
-        ) : null}
       </div>
       {Array.isArray(excerpt.wordMeanings) && excerpt.wordMeanings.length > 0 ? (
         <details className="disclosure">

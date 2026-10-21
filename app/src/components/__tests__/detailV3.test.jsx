@@ -171,12 +171,15 @@ describe('MangalasasanamSection branches', () => {
 });
 
 describe('VisualsMedia (FR-83)', () => {
-  it('renders visual markers and video-search cards safely', () => {
+  it('renders visual markers and discourse titles that link to YouTube (round 36)', () => {
     render(<VisualsMedia kshetram={srirangam} />);
     expect(screen.getByText(/236-foot/i)).toBeInTheDocument();
-    const chip = screen.getAllByRole('link', { name: /search videos/i })[0];
-    expect(chip).toHaveAttribute('href', expect.stringContaining('youtube.com'));
-    expect(chip).toHaveAttribute('rel', 'noopener noreferrer');
+    // PO round 36: each Texts & discourses title links directly to its
+    // YouTube videos; the separate "Search videos" chip is gone
+    const link = screen.getAllByRole('link', { name: /youtube videos:/i })[0];
+    expect(link).toHaveAttribute('href', expect.stringContaining('youtube.com/results?search_query='));
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(screen.queryByRole('link', { name: /search videos/i })).not.toBeInTheDocument();
   });
 
   it('shows the fallback when no media exists', () => {

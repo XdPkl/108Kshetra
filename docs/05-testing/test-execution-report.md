@@ -3181,3 +3181,155 @@ Rebuilt + preview at 1440px: landscape frame 558px (column-limited, at
 the cap), portrait frame 478px centered (480 minus border). Gate shot:
 `docs/03-design/gate-shots/anbil-photos-34/deities-fixed-widths.png`.
 Build clean; component + CSS only. No content/fixture change.
+
+## Version 2.48 — Mobile Compatibility Fixes F1–F5 + Link Audit L1–L3 (2026-10-20, round 35)
+
+**Trigger:** the external mobile-audit (2026-10-18, reviewed commit
+`ad268a3`) + link-audit addendum. Confirmed findings re-verified on
+current main before fixing (spot probe: header 341px vs 320 client on
+every page; bhoothath 448px at 390; three temple pages up to 440px at
+390 — all reproducing the audit).
+
+### Fixes
+
+- **F1 Header <360px** (`Header.jsx`): brand may shrink below lg
+  (`min-w-0`, title wraps only when the row would overflow), compact
+  title <360px, Menu target 44×44. Desktop classes keep `lg:shrink-0` /
+  `whitespace-nowrap`.
+- **F2 detail hero containment ≤800px** (`detail-theme.css`,
+  `kshetram-detail.css`): single-column heroes/grids switch `1fr` →
+  `minmax(0,1fr)` (hero, fact-row, overview/location/two-columns/
+  timing/deity-pair/acd-hero) + `overflow-wrap:anywhere` on hero h1,
+  temple-name, breadcrumb current page, deity `.value`. Names stay
+  complete; the tab rail keeps its intentional horizontal scroll.
+- **F3 Azhwar hero ≤480px** (`saint-detail.css`): portrait stacks above
+  identity (capped 152px), identity min-width:0 + emergency wrap; at
+  ≤800px `.azd-stats` wraps (divider removed ≤480px where stacking is
+  certain). Desktop split hero untouched.
+- **F4 directory intros** (`BrowsePage/AzhwarsPage/AcharyasPage.jsx`):
+  `max-w-[52%]` → `max-w-full lg:max-w-[52%]`.
+- **F5 map controls <1024px** (`MapPage.jsx`): floating panel becomes
+  desktop-only; below lg a Filters disclosure + Fit results/My location
+  toolbar render in normal flow ABOVE the map — expanding PUSHES the map
+  down (never overlays), collapsing leaves it unobstructed. One control
+  set/state per breakpoint; `invalidateSize()` after layout changes;
+  cluster-slider row wraps below lg only (desktop row byte-identical).
+- **L1 skip targets** (`AzhwarDetailPage/AcharyaDetailPage.jsx` +
+  `.skip-target` CSS): `#azhwar-main` wraps tab rail + panels (stable
+  across tabs); `#acharya-main` wraps the dossier sections. Both
+  `tabIndex={-1}` + scroll-margin; existing section IDs preserved.
+- **L3 directions URLs** (`data/config.js` builders +
+  `KshetramDetailPage`/`DistanceFromMe`/`VisitInfoSection`): "Get
+  directions" now `https://www.google.com/maps/dir/?api=1&destination=`
+  with the temple's dataset coordinates (all 106 terrestrial covered by
+  coords.json; place-name fallback); "View on Google Maps" stays a
+  search URL; celestial desams still omit travel actions.
+- **L2 dravidaveda.org** (`config.json` `UNAVAILABLE_SOURCE_DOMAINS` +
+  `SaintSources`/`SaintMedia`): citations render complete with an honest
+  "Temporarily unavailable" note instead of a link; no substitute URL
+  invented. Wired through the full content pipeline (GROQ → to-app-json
+  → to-sanity-docs → simulate-groq → studio schema → fixture).
+- **Acharya birthplace glue**: explicit space between place name and
+  district note (JSX glued them into one unbreakable ~200px run that
+  overflowed 11 profiles at 320px).
+- **Inquiry honesty** (site-copy + fixture): success copy relabels the
+  localStorage-only record as a draft saved on this device ("Inquiry
+  Saved", "has not been sent") — no delivery promise until an endpoint
+  exists.
+
+### Verification
+
+- **Unit**: 257/257 (24 suites; +10 new in
+  `src/pages/__tests__/linkRegression.test.jsx` — URL builders,
+  directions/search hrefs on Overview/Visit/Location, celestial
+  omission, 39 skip targets across ALL 12 azhwar + 27 acharya pages,
+  unavailable-domain rendering, route-id inventory). oxlint 0 errors / 6
+  accepted warnings. Build clean. `sync-content --fixture --check`
+  0-diff; studio `verify --local` round-trip lossless (11 files);
+  `sanity schema validate` 0/0.
+- **E2E**: 21/21 (TC-02..TC-19).
+- **Mobile sweep (post-fix)**: all 154 routes at 320+390; all 108
+  temples + 12 azhwars also at 360+414; acharyas re-run at 320/360/414
+  after the glue fix — **0 document overflows** (was: 154/154 at 320,
+  20 pages at 390). Representatives at 768/800/801/1023/1024: 50/50 ok.
+- **F1 probes (320)**: trip counts 0/10/106 — brand/Trip/Menu fully
+  visible, menu 44×44, drawer opens/closes with no horizontal scroll.
+- **F5 probes (320/360/390/414)**: collapsed = no panel over the map;
+  expanded = panel above map (e.g. 390: panel bottom 730 < map top 747),
+  map pushed down and restored on collapse; search/region/scope/cluster
+  functional; drag-pan confirmed (pane translate 0,0 → 93,58); cluster
+  tap filters results (chip); individual marker tap opens the popup
+  after zoom-in; legacy `/map?t=srirangam,tirupati` loads 2 stops and
+  opens the planner dialog.
+- **L1 probes (390 + 1280)**: skip links move focus to the targets
+  (`document.activeElement` = `#azhwar-main` / `#acharya-main`) and
+  scroll past the sticky header; unit asserts targets in all tab states.
+- **Desktop preservation**: before/after full-page captures at
+  1024/1280/1440/1920 (12 page-states × 4 widths). 44/48 pixel-identical
+  (mean 0.0000). Remaining diffs are exactly the intended text changes:
+  azhwar Sources rows (link → "Temporarily unavailable", 0.13–0.21% px),
+  azhwar Media tab (+24px height from the unavailable note), acharya
+  birthplace line (space where text was glued; ≤0.03% px, 1024 shot one
+  line taller). Map page: after-code captures are pixel-identical to
+  each other (0.000% across two runs); a stable 0.015–0.02% residual vs
+  the 13:15 baseline sits in remote Wikipedia card-photo bands (same
+  imagery, ±1 RGB on isolated pixels — thumbnail byte variance, not
+  layout). Gate shots:
+  `docs/03-design/gate-shots/mobile-audit-35/` (9 shots incl.
+  map-1440-desktop-composition).
+
+### Open items for the PO
+
+- L2: confirm the canonical Dravida Veda repository URL (or retire the
+  citation); the config-list entry flips the row back to a link when
+  verified.
+- Desktop floating-panel cluster-slider row renders ~3px into the
+  panel's right padding (pre-existing; fixing it changes the desktop
+  panel composition — needs PO approval, one-line `flex-wrap`).
+- Real iOS Safari / Android Chrome keyboard + touch checks still
+  pending (audit limit); 200% text-zoom reflow checked at 640 CSS px
+  via the 320 sweep + DPR 2 idiom only.
+
+## Version 2.49 — Kshetram Detail Page PO Fixes (2026-10-22, round 36)
+
+**Trigger:** PO fix list on the kshetram detail page (7 items).
+
+### Fixes
+
+1. Hero photo caption "Temple exterior · illustrative" removed
+   (`KshetramDetailPage.jsx`).
+2. **Share button dead on desktops** — `PageActions.jsx` returned silently
+   whenever `navigator.share` existed but the sheet could not open
+   (typical desktop Chrome/Windows: NotAllowedError). Now only an
+   `AbortError` (visitor closed the sheet) ends quietly; every other
+   failure falls through to the clipboard (with a legacy
+   `execCommand` copy for blocked clipboards), showing "Link copied ✓".
+3. Quick facts: the "Divya Desam ‹serial›" row removed
+   (`VisitInfoSection.jsx`); the hero eyebrow keeps the serial (untouched).
+4. GPS coordinates removed from BOTH surfaces — the Location tab's
+   Location-details block and the "Shrine at a glance" fact sheet
+   (`KshetramDetailPage.jsx`, `ShrineProfile.jsx`).
+5. Footer `compiledNote` (site-copy + fixture lockstep) gains the PO's
+   good-faith sentence: "Content is provided in good faith for devotional
+   and educational purposes."
+6. "Listen to recitation" removed from the Mangalasasanam excerpts AND
+   the legacy Pasuram section's "Listen ↗" (same feature, both paths) —
+   `MangalasasanamSection.jsx`, `PasuramSection.jsx`.
+7. Texts & discourses (`VisualsMedia.jsx`): each discourse title is now a
+   direct link to its YouTube videos (`youtube.com/results?search_query=…`,
+   dataset-supplied queries — no video IDs invented); the separate
+   "Search videos" chip and per-row "YouTube search" meta are gone.
+
+### Verification
+
+Unit **259/259** (24 suites; +2 PageActions cases — non-abort share
+failure falls back to the clipboard, AbortError stays quiet; 3 assertions
+updated for the removed Listen/Search-videos surfaces). oxlint 0 errors /
+6 accepted warnings. Build clean. `sync-content --fixture --check` 0-diff.
+E2E **21/21** (incl. the TC-15 Share clipboard journey). Live preview
+spot-check on /kshetram/srirangam: caption absent; injected
+failing-`navigator.share` → "Link copied ✓"; Quick facts starts at
+Region; no "GPS coordinates" on Overview/Location; zero Listen buttons
+and zero archive.org links on Mangalasasanam; Media discourse titles
+link to YouTube with no stray chips; footer carries the good-faith
+sentence.

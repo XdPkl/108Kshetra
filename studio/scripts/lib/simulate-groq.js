@@ -49,6 +49,8 @@ export function simulateGroq(docs) {
       featuredKshetrams: refIds(docs.configDoc.featuredKshetrams),
       featuredAcharyas: refIds(docs.configDoc.featuredAcharyas),
       mapsUrlTemplate: docs.configDoc.mapsUrlTemplate,
+      mapsDirectionsUrlTemplate: docs.configDoc.mapsDirectionsUrlTemplate,
+      unavailableSourceDomains: docs.configDoc.unavailableSourceDomains,
     },
   };
 }

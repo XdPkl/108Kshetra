@@ -23,7 +23,7 @@ import { MapContainer, TileLayer, CircleMarker, Marker, Polyline, Rectangle, Pop
 import L from 'leaflet';
 import {
   MapPin, Plus, Printer, RotateCcw, Route as RouteIcon,
-  Share2, Trash2, Crosshair,
+  Share2, Trash2, Crosshair, SlidersHorizontal, ChevronDown,
 } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 import { getAllKshetramsEnriched, getAllAzhwars } from '../data/api.js';
@@ -189,6 +189,10 @@ export default function MapPage() {
   const [clusterTick, setClusterTick] = useState(0);
   const [tileError, setTileError] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  // Mobile-audit F5: below lg the filter controls live in a collapsible
+  // panel ABOVE the map (expanding pushes the map down, never over it);
+  // collapsed by default so the map is unobstructed on load.
+  const [filtersOpen, setFiltersOpen] = useState(false);
   // Focused cluster (round 31): the bubble the visitor clicked — a dashed
   // bounds outline on the map + the results grid filtered to its member
   // temples. Cleared by Escape, the chip's Clear, Reset filters, a scope
@@ -328,6 +332,15 @@ export default function MapPage() {
     return () => mapApi.removeControl(zoom);
   }, [mapApi]);
 
+  // Mobile-audit F5: opening/closing the in-flow filter panel (and crossing
+  // the lg breakpoint) shifts the map's box — re-measure after layout
+  // settles so Leaflet's viewport and hit-testing stay correct.
+  useEffect(() => {
+    if (!mapApi) return undefined;
+    const t = setTimeout(() => mapApi.invalidateSize(), 250);
+    return () => clearTimeout(t);
+  }, [mapApi, filtersOpen, isDesktop]);
+
   const clusters = useMemo(() => {
     if (!mapApi || scope === 'trip' || mapApi.getZoom() > CLUSTER_MAX_ZOOM || shown.length < 2) return [];
     return clusterByDistanceKm(shown.map((k) => k.coords), clusterKm)
@@ -386,11 +399,12 @@ export default function MapPage() {
 
   // Bounds follow the intended result set — the CURRENT filtered results,
   // not the whole archive (the Reset-filters control restores all temples).
-  // Left padding clears the floating filter panel.
+  // Left padding clears the DESKTOP floating filter panel; below lg the
+  // controls no longer sit over the map, so the padding is symmetric.
   const fitResults = () => {
     if (!mapApi || shown.length === 0) return;
     mapApi.fitBounds(L.latLngBounds(shown.map((k) => k.coords)), {
-      paddingTopLeft: [340, 24],
+      paddingTopLeft: isDesktop ? [340, 24] : [24, 24],
       paddingBottomRight: [24, 24],
       maxZoom: 12,
     });
@@ -475,8 +489,12 @@ export default function MapPage() {
           </button>
         ) : null}
         {/* Cluster-distance slider (PO round 28): governs which temples
-            share a bubble below zoom 9; changing it never moves the map. */}
-        <div className="flex items-center justify-between gap-3 text-[13px] font-medium text-[#332417]">
+            share a bubble below zoom 9; changing it never moves the map.
+            max-lg:flex-wrap: on phone-width panels the control group drops
+            to its own line instead of spilling (mobile-audit F5). Desktop
+            keeps the exact pre-fix row (its ~3px padding overhang is
+            flagged for PO decision, not silently changed). */}
+        <div className="flex items-center justify-between gap-3 max-lg:flex-wrap max-lg:gap-y-2 text-[13px] font-medium text-[#332417]">
           <label htmlFor="map-cluster-km" className="min-w-0 shrink-0">
             Cluster temples within
           </label>
@@ -568,6 +586,41 @@ export default function MapPage() {
           </span>
         </button>
       </div>
+
+      {/* ---- Mobile (<1024px) map controls in normal flow (mobile-audit
+           F5): the floating panel covered most of the phone map. Filters
+           collapse behind one disclosure — expanding PUSHES the map down,
+           never overlays it. Same control instances and state as the
+           desktop panel (one set per breakpoint, no duplicate ids). ---- */}
+      {!isDesktop ? (
+        <div className="pb-4">
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setFiltersOpen((v) => !v)}
+              aria-expanded={filtersOpen}
+              aria-controls="map-filters"
+              className="inline-flex items-center gap-2 rounded-lg border border-[#E3D2AE] bg-[#FFFDF7] px-3.5 py-2 text-[13px] font-semibold text-[#332417] shadow-md transition-colors hover:border-[#C99A2E] hover:bg-[#FAF2E3]"
+            >
+              <SlidersHorizontal className="h-4 w-4 text-[#96731F]" aria-hidden="true" />
+              Filters
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-200 ${filtersOpen ? 'rotate-180' : ''}`}
+                aria-hidden="true"
+              />
+            </button>
+            {mapActions}
+          </div>
+          {filtersOpen ? (
+            <div
+              id="map-filters"
+              className="mt-3 flex flex-col gap-3 rounded-2xl border border-[#E3D2AE] bg-[#FFFDF7] p-4 shadow-md"
+            >
+              {filterControls}
+            </div>
+          ) : null}
+        </div>
+      ) : null}
 
       {/* ---- Full-width map with floating controls ---- */}
       <div
@@ -697,17 +750,14 @@ export default function MapPage() {
           ) : null}
         </MapContainer>
 
-        {/* Floating search/filter panel — upper left. Below lg it also
-            carries the map controls, which would collide with a full-width
-            panel if absolutely positioned in the corner. */}
-        <div className="absolute left-3 top-3 z-[500] flex w-[min(340px,calc(100%-24px))] flex-col gap-3 rounded-2xl border border-[#E3D2AE] bg-[#FFFDF7]/95 p-4 shadow-md backdrop-blur-xs">
-          {filterControls}
-          {!isDesktop ? (
-            <div className="flex flex-wrap items-center justify-end gap-2 border-t border-[#E3D2AE] pt-3">
-              {mapActions}
-            </div>
-          ) : null}
-        </div>
+        {/* Floating search/filter panel — upper left (desktop only; below lg
+            the same controls render in the collapsible panel above the map,
+            mobile-audit F5). */}
+        {isDesktop ? (
+          <div className="absolute left-3 top-3 z-[500] flex w-[min(340px,calc(100%-24px))] flex-col gap-3 rounded-2xl border border-[#E3D2AE] bg-[#FFFDF7]/95 p-4 shadow-md backdrop-blur-xs">
+            {filterControls}
+          </div>
+        ) : null}
 
         {/* Map corner controls — upper right (desktop only) */}
         {isDesktop ? (

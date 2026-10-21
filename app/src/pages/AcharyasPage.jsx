@@ -146,7 +146,7 @@ export default function AcharyasPage() {
           aria-hidden="true"
           className="pointer-events-none absolute right-0 top-0 hidden h-full w-1/2 select-none object-contain object-[right_bottom] opacity-60 [mask-composite:intersect] [mask-image:linear-gradient(to_left,black_72%,transparent),linear-gradient(to_bottom,black_72%,transparent)] lg:block"
         />
-        <div className="relative max-w-[52%]">
+        <div className="relative max-w-full lg:max-w-[52%]">
           <p className="text-[0.72rem] font-bold uppercase tracking-[0.16em] text-[#B34700]">
             {SITE_COPY.acharyasPage.eyebrow}
           </p>

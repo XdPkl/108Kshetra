@@ -236,6 +236,8 @@ export async function toSanityDocs(content, resolvePhoto) {
     featuredKshetrams: config.FEATURED_KSHETRAM_IDS.map(kshetramRef),
     featuredAcharyas: config.FEATURED_ACHARYA_IDS.map(acharyaRef),
     mapsUrlTemplate: config.MAPS_URL_TEMPLATE,
+    mapsDirectionsUrlTemplate: config.MAPS_DIRECTIONS_URL_TEMPLATE,
+    unavailableSourceDomains: config.UNAVAILABLE_SOURCE_DOMAINS ?? [],
   };
 
   return {kshetramDocs, azhwarDocs, acharyaDocs, aboutDoc, siteCopyDoc, configDoc};

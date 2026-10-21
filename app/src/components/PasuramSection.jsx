@@ -1,7 +1,8 @@
 /**
  * PasuramSection — a representative Mangalasasanam pasuram in Tamil with
- * transliteration, meaning and a curated "listen" link (FR-64/65), rendered
- * in the zip-parity ornate verse container (UXD v3.0 Gate 3).
+ * transliteration and meaning (FR-64/65), rendered in the zip-parity
+ * ornate verse container (UXD v3.0 Gate 3). (The "Listen ↗" search link
+ * was removed by PO request, round 36.)
  * @param {object} props
  * @param {object|null} props.pasuram - {azhwarId, reference, work, tamil?, transliteration?, meaning}
  * @param {boolean} [props.bare] - render only the verse container (embedded in the V3 Mangalasasanam section)
@@ -11,9 +12,6 @@ import { getAzhwarById } from '../data/api.js';
 export default function PasuramSection({ pasuram, bare = false }) {
   if (!pasuram) return null;
   const azhwar = getAzhwarById(pasuram.azhwarId);
-  const listenHref = pasuram.work
-    ? `https://archive.org/search?query=${encodeURIComponent(`${pasuram.work} pasuram recitation`)}`
-    : null;
   const container = (
     <div className="relative rounded-2xl border border-[#C99A2E]/55 bg-[#F6EBD6] px-6 py-8 text-center overflow-hidden">
       <div className="absolute inset-2 border border-[#C99A2E]/30 rounded-xl pointer-events-none" aria-hidden="true" />
@@ -33,17 +31,6 @@ export default function PasuramSection({ pasuram, bare = false }) {
         <footer className="mt-4 text-xs text-[#66523D]">
           — {azhwar ? azhwar.name : pasuram.azhwarId}, {pasuram.reference}
         </footer>
-        {listenHref ? (
-          <a
-            className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg bg-[#FAF2E3] hover:bg-[#C99A2E]/20 border border-[#C99A2E]/60 text-xs font-bold uppercase tracking-wider text-[#7A2E00] transition-colors shadow-xs"
-            href={listenHref}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span aria-hidden="true">▶</span>
-            <span>Listen ↗</span>
-          </a>
-        ) : null}
       </blockquote>
     </div>
   );

@@ -11,19 +11,41 @@ import { Printer, Share2 } from 'lucide-react';
 export default function PageActions({ variant }) {
   const [copied, setCopied] = useState(false);
 
-  const share = async () => {
-    const { title, url } = document;
-    if (navigator.share) {
-      try {
-        await navigator.share({ title, url });
-        return;
-      } catch {
-        return; // user dismissed the share sheet
-      }
-    }
-    await navigator.clipboard.writeText(window.location.href);
+  const showCopied = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const share = async () => {
+    const url = window.location.href;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: document.title, url });
+        return; // shared through the sheet
+      } catch (err) {
+        // AbortError = the visitor closed the sheet — do nothing more.
+        // Any other failure (desktop browsers expose navigator.share but
+        // cannot open a sheet) falls through to the clipboard, which is
+        // what made Share look dead (PO round 36).
+        if (err?.name === 'AbortError') return;
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      showCopied();
+    } catch {
+      // clipboard blocked/unavailable (e.g. non-secure context) — legacy copy
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      ta.remove();
+      if (ok) showCopied();
+    }
   };
 
   const print = () => window.print();

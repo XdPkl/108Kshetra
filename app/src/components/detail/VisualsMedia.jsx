@@ -1,8 +1,8 @@
 /**
  * VisualsMedia — "Sacred features & resources" (FR-83), retitled and
  * de-duplicated per the PO round-17 audit: numbered "What to look for"
- * markers, then a single labelled resource list where YouTube entries are
- * explicitly labelled as search links (title 20px, metadata 14px) and
+ * markers, then a single labelled resource list where each discourse
+ * title links directly to its YouTube videos (PO round 36) and
  * literature rows carry no invented links or thumbnails. A fully empty
  * block shows the documented fallback note.
  * @param {object} props
@@ -47,21 +47,20 @@ export default function VisualsMedia({ kshetram }) {
           ) : <div />}
           <div>
             <h3>Texts &amp; discourses</h3>
-            <p className="resource-meta">Search links open YouTube or archive searches — no recordings are hosted here.</p>
+            <p className="resource-meta">Each title opens its YouTube videos — no recordings are hosted here.</p>
             {Array.isArray(v.videoSearches) && v.videoSearches.map((q) => (
               <div className="resource" key={q}>
                 <h3>
                   <YouTubeIcon />
-                  {q}
+                  <a
+                    href={`https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`YouTube videos: ${q}`}
+                  >
+                    {q}
+                  </a>
                 </h3>
-                <p className="resource-meta">YouTube search</p>
-                <a
-                  href={`https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Search videos
-                </a>
               </div>
             ))}
             {Array.isArray(v.literature) && v.literature.map((item) => (

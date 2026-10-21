@@ -57,6 +57,34 @@ describe('PageActions', () => {
     await waitFor(() => expect(screen.getByText(/link copied/i)).toBeInTheDocument());
     expect(writeText).toHaveBeenCalled();
   });
+
+  // PO round 36: desktop browsers expose navigator.share but cannot open a
+  // sheet — the old code swallowed the failure and Share looked dead.
+  it('falls back to the clipboard when the share sheet fails (non-abort)', async () => {
+    const user = userEvent.setup();
+    const share = vi.fn().mockRejectedValue(new DOMException('denied', 'NotAllowedError'));
+    const writeText = vi.fn().mockResolvedValue();
+    vi.stubGlobal('navigator', { share, clipboard: { writeText } });
+    render(<PageActions />);
+    await user.click(screen.getByRole('button', { name: /share/i }));
+    await waitFor(() => expect(screen.getByText(/link copied/i)).toBeInTheDocument());
+    expect(share).toHaveBeenCalled();
+    expect(writeText).toHaveBeenCalled();
+    vi.unstubAllGlobals();
+  });
+
+  it('does nothing when the visitor dismisses the share sheet (AbortError)', async () => {
+    const user = userEvent.setup();
+    const share = vi.fn().mockRejectedValue(new DOMException('cancelled', 'AbortError'));
+    const writeText = vi.fn().mockResolvedValue();
+    vi.stubGlobal('navigator', { share, clipboard: { writeText } });
+    render(<PageActions />);
+    await user.click(screen.getByRole('button', { name: /share/i }));
+    await waitFor(() => expect(share).toHaveBeenCalled());
+    expect(writeText).not.toHaveBeenCalled();
+    expect(screen.queryByText(/link copied/i)).not.toBeInTheDocument();
+    vi.unstubAllGlobals();
+  });
 });
 
 describe('PasuramSection', () => {
@@ -75,7 +103,8 @@ describe('PasuramSection', () => {
     expect(screen.getByText('இடவாழி')).toBeInTheDocument();
     expect(screen.getByText('Idavaazhi')).toBeInTheDocument();
     expect(screen.getByText(/TVM 5-8-11/)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /listen/i })).toHaveAttribute('href', expect.stringContaining('archive.org'));
+    // PO round 36: the "Listen ↗" search link is removed everywhere
+    expect(screen.queryByRole('link', { name: /listen/i })).not.toBeInTheDocument();
   });
 });
 

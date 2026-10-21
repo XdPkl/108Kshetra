@@ -1,9 +1,10 @@
 /**
  * ShrineProfile — the round-16 mock's "Shrine at a glance" fact sheet
- * (FR-83): gold-labelled ruled rows for region, geography, GPS, Vimanam,
+ * (FR-83): gold-labelled ruled rows for region, geography, Vimanam,
  * Theertham, Sthala Vriksham, sanctum posture, distinctive form and
  * orientation. Renders whatever exists; the dossier posture string's
- * "Unique feature:" tail becomes the Distinctive form row.
+ * "Unique feature:" tail becomes the Distinctive form row. (GPS row
+ * removed by PO request, round 36.)
  * @param {object} props
  * @param {Kshetram & object} props.kshetram - enriched record
  */
@@ -20,7 +21,6 @@ export default function ShrineProfile({ kshetram }) {
   const rows = [
     ['Region', p.regionNote ?? kshetram.region],
     ['Location', p.location ?? `${kshetram.place} · ${kshetram.state}`],
-    ['GPS coordinates', p.gps ?? (kshetram.coords ? `${kshetram.coords[0]}° N, ${kshetram.coords[1]}° E` : null)],
     ['Vimanam', p.vimanam],
     ['Theertham', p.theertham],
     ['Sthala Vriksham', p.sthalaVriksham],

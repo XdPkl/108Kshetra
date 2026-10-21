@@ -212,6 +212,9 @@ export default function AzhwarDetailPage() {
         </div>
       </section>
 
+      {/* Link-audit L1: the "Skip to azhwar details" target — a focusable
+          wrapper around the dossier (tab rail + panels, stable across tabs). */}
+      <div id="azhwar-main" tabIndex={-1} className="skip-target">
       {/* Sticky five-tab rail (kxd idiom; hash behaviour per mock guidance) */}
       <div className="tabs-rail no-print">
         <div
@@ -509,6 +512,7 @@ export default function AzhwarDetailPage() {
             </aside>
           </div>
         ) : null}
+      </div>
       </div>
 
       {/* Bottom chronological navigation (after every panel) */}

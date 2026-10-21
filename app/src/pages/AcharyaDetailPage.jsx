@@ -166,6 +166,9 @@ export default function AcharyaDetailPage() {
         <span>{acharya.eraGroup ?? 'Guru Parampara'}</span>
       </nav>
 
+      {/* Link-audit L1: the "Skip to acharya details" target — a focusable
+          wrapper around the dossier sections (all section IDs unchanged). */}
+      <div id="acharya-main" tabIndex={-1} className="skip-target">
       {/* 01 Identification — hero: name block | fact sheet | on-this-page rail */}
       <section id="identification" className="acd-hero">
         <div className="min-w-0">
@@ -188,7 +191,10 @@ export default function AcharyaDetailPage() {
                   {birthplaceLink
                     ? <>{acharya.birthplace.name} — <Link to={`/kshetram/${birthplaceLink}`}>view kshetram</Link></>
                     : acharya.birthplace.name}
-                  {acharya.birthplace.district ? <span className="note">{acharya.birthplace.district}</span> : null}
+                  {/* the explicit space keeps the district from gluing onto the
+                      place name (an unbreakable ~200px run that overflowed
+                      the fact column at 320px — mobile-audit round 35) */}
+                  {acharya.birthplace.district ? <span className="note">{' '}{acharya.birthplace.district}</span> : null}
                 </>
               ) : null],
               ['Divine amsam', amsamLink
@@ -456,6 +462,7 @@ export default function AcharyaDetailPage() {
       {/* Closing ornament */}
       <div className="acd-ornament" aria-hidden="true">
         <LotusIcon className="h-4 w-4" />
+      </div>
       </div>
     </div>
   );

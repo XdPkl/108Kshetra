@@ -15,6 +15,7 @@
 import { ArrowRight } from 'lucide-react';
 import NotDocumented from '../detail/NotDocumented.jsx';
 import { assetUrl } from '../../utils/assetUrl.js';
+import { UNAVAILABLE_SOURCE_DOMAINS } from '../../data/config.js';
 
 const ICONOGRAPHY_LABELS = [
   ['posture', 'Posture'],
@@ -26,11 +27,15 @@ const ICONOGRAPHY_LABELS = [
 /** Splits "Title Speaker" rows where the dataset carries a speaker name. */
 const SPEAKER_PATTERN = /\s+(Velukkudi Krishnan|Karunakarachariar|Ananthapadmanabhachariar)$/;
 
-/** "Title — domain" → external https link for the referenced repository. */
+/** "Title — domain" → external https link for the referenced repository.
+ * Link-audit L2: domains pending owner review render no link (the caller
+ * shows an honest unavailable note instead). */
 function repositoryHref(text) {
   const dash = text.indexOf(' — ');
   if (dash <= 0) return null;
-  return `https://${text.slice(dash + 3).replace(/^https?:\/\//, '')}`;
+  const domain = text.slice(dash + 3).replace(/^https?:\/\//, '');
+  if (UNAVAILABLE_SOURCE_DOMAINS.includes(domain)) return null;
+  return `https://${domain}`;
 }
 
 export default function SaintMedia({ visuals, name, photo, onSeeSources }) {
@@ -123,7 +128,9 @@ export default function SaintMedia({ visuals, name, photo, onSeeSources }) {
                       <li key={t}>
                         {href ? (
                           <a href={href} target="_blank" rel="noopener noreferrer">{t} ↗</a>
-                        ) : t}
+                        ) : (
+                          <>{t} <span className="note">— temporarily unavailable</span></>
+                        )}
                       </li>
                     );
                   })}

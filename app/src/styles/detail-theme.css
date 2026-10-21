@@ -56,6 +56,10 @@
 /* Skip link */
 .kxd .skip { position: absolute; left: -9999px; }
 .kxd .skip:focus { left: 20px; top: 20px; background: white; padding: 10px; z-index: 100; }
+/* Skip-link landing targets (link-audit L1): programmatic focus waypoints —
+   scroll clear of the sticky header; no focus ring (they are not controls). */
+.kxd .skip-target { scroll-margin-top: calc(var(--header-h) + 8px); }
+.kxd .skip-target:focus { outline: none; }
 
 /* Breadcrumb — 13px, 20px below (audit item 3) */
 .kxd .breadcrumb { font-size: 13px; line-height: 20px; padding: 0 0 20px; margin: 0; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
@@ -226,7 +230,13 @@
   .kxd h2 { font-size: 28px; line-height: 36px; }
   .kxd h3 { font-size: 22px; line-height: 30px; }
   .kxd .tamil { font-size: 24px; line-height: 36px; }
-  .kxd .hero { grid-template-columns: 1fr; gap: 20px; padding-bottom: 20px; }
+  /* Mobile-audit F2: a bare 1fr track has an automatic minimum, so long
+     unbroken temple names widened the whole page — minmax(0,1fr) + shrinkable
+     children + emergency wrapping keep the hero inside the viewport. Names
+     stay complete; overflow-wrap only breaks a word that cannot fit. */
+  .kxd .hero { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-bottom: 20px; }
+  .kxd .hero > div, .kxd .hero > figure { min-width: 0; }
+  .kxd .hero h1, .kxd .hero .temple-name, .kxd .breadcrumb span[aria-current] { overflow-wrap: anywhere; }
   .kxd .hero figure { grid-row: 2; }
   .kxd .hero-photo-frame { height: 200px; }
   .kxd .tabs { gap: 12px; }
@@ -234,7 +244,7 @@
   .kxd .panel { padding-top: 24px; scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + 2px); }
   .kxd .article-grid { grid-template-columns: 1fr; }
   .kxd .article-grid aside { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 24px; }
-  .kxd .fact-row { grid-template-columns: 35% 1fr; gap: 15px; }
+  .kxd .fact-row { grid-template-columns: 35% minmax(0, 1fr); gap: 15px; }
   .kxd .verse { padding: 20px 16px; }
   .kxd .verse .tamil-verse { font-size: 20px; line-height: 38px; }
   .kxd .transliteration { font-size: 16px; line-height: 27px; }

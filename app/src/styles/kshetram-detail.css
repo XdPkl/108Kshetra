@@ -92,9 +92,13 @@
 }
 @media (max-width: 800px) {
   .kxd .temple-name { font-size: 20px; line-height: 28px; }
-  .kxd .overview-grid, .kxd .location-grid, .kxd .two-columns, .kxd .timing-pair { grid-template-columns: 1fr; }
+  /* Mobile-audit F2 (kshetram grids): minmax(0,1fr) so long deity names
+     (Tamil + transliteration strings) wrap inside the column instead of
+     widening the page; values break only when a segment cannot fit. */
+  .kxd .overview-grid, .kxd .location-grid, .kxd .two-columns, .kxd .timing-pair { grid-template-columns: minmax(0, 1fr); }
   .kxd .two-columns > div + div, .kxd .location-details { border-left: 0; border-top: 1px solid var(--line); padding: 24px 0 0; }
-  .kxd .deity-pair { grid-template-columns: 1fr; }
+  .kxd .deity-pair { grid-template-columns: minmax(0, 1fr); }
+  .kxd .deity-pair .value { overflow-wrap: anywhere; }
   .kxd .deity-pair > div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 16px; }
   .kxd .timing-pair > div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 16px; }
   .kxd .azhwar-list { grid-template-columns: repeat(2, 1fr); gap: 0 16px; }

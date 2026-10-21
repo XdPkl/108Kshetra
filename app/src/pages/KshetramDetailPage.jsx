@@ -17,7 +17,7 @@ import {
   getAllKshetramsEnriched,
   getAzhwarById,
 } from '../data/api.js';
-import { MAPS_URL_TEMPLATE } from '../data/config.js';
+import { mapsSearchUrl, mapsDirectionsUrl } from '../data/config.js';
 import { useWikiImage } from '../hooks/useWikiImage.js';
 import EmptyState from '../components/EmptyState.jsx';
 import NearbyDesams from '../components/NearbyDesams.jsx';
@@ -98,13 +98,14 @@ export default function KshetramDetailPage() {
     .map((azhwarId) => getAzhwarById(azhwarId))
     .filter(Boolean);
   const mapHref = kshetram.mapQuery
-    ? `${MAPS_URL_TEMPLATE}${encodeURIComponent(kshetram.mapQuery)}`
+    ? mapsSearchUrl(kshetram.mapQuery)
     : '';
+  // Link-audit L3: directions mode with an explicit destination — dataset
+  // coordinates when we have them (verified), the place query as fallback.
+  // The two celestial desams have no mapQuery and keep omitting the action.
   const directionsHref = kshetram.mapQuery
-    ? `${MAPS_URL_TEMPLATE}${encodeURIComponent(`directions to ${kshetram.mapQuery}`)}`
+    ? mapsDirectionsUrl(coords ? coords.join(',') : kshetram.mapQuery)
     : '';
-  const gpsText = kshetram.profile?.gps
-    ?? (coords ? `${coords[0]}° N, ${coords[1]}° E` : null);
   // Audit tab 1: a brief factual orientation — the profile's location text,
   // not the mythological origin prose (which stays in the History tab).
   const intro = kshetram.profile?.location
@@ -222,7 +223,6 @@ export default function KshetramDetailPage() {
               />
             </div>
           </div>
-          <figcaption className="photo-caption">Temple exterior · illustrative</figcaption>
         </figure>
       </section>
 
@@ -359,12 +359,6 @@ export default function KshetramDetailPage() {
                   <h3>Location details</h3>
                   <div className="label">Address</div>
                   <p>{kshetram.place} · {kshetram.state}</p>
-                  {gpsText ? (
-                    <>
-                      <div className="label">GPS coordinates</div>
-                      <p>{gpsText}</p>
-                    </>
-                  ) : null}
                   {directionsHref ? (
                     <a
                       className="btn primary directions"

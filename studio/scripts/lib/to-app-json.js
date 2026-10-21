@@ -145,7 +145,9 @@ export const GROQ = `{
     stats,
     "featuredKshetrams": featuredKshetrams[]->._id,
     "featuredAcharyas": featuredAcharyas[]->._id,
-    mapsUrlTemplate
+    mapsUrlTemplate,
+    mapsDirectionsUrlTemplate,
+    unavailableSourceDomains
   }
 }`;
 
@@ -355,6 +357,8 @@ export function groqToContent(rawResult) {
     FEATURED_KSHETRAM_IDS: result.config?.featuredKshetrams?.map(kshetramId),
     FEATURED_ACHARYA_IDS: result.config?.featuredAcharyas?.map(acharyaId),
     MAPS_URL_TEMPLATE: result.config?.mapsUrlTemplate,
+    MAPS_DIRECTIONS_URL_TEMPLATE: result.config?.mapsDirectionsUrlTemplate,
+    UNAVAILABLE_SOURCE_DOMAINS: result.config?.unavailableSourceDomains ?? [],
   };
 
   return content;

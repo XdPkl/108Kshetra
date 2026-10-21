@@ -196,14 +196,15 @@ describe('KshetramDetailPage (UT-DTL-01..04, V3 UT-DTL-14..17)', () => {
     for (const link of links) expect(link).toHaveAttribute('href', expect.stringContaining('/kshetram/'));
   });
 
-  it('shows template pasuram excerpts with word-by-word meaning and listen links (FR-64/65/83)', async () => {
+  it('shows template pasuram excerpts with word-by-word meaning (FR-64/65/83; listen links removed round 36)', async () => {
     const user = userEvent.setup();
     renderAt('/kshetram/srirangam');
     await user.click(screen.getByRole('tab', { name: /mangalasasanam/i }));
     // Full template (PO sample): two representative excerpts
     expect(screen.getByRole('heading', { name: /Thondaradippodi Azhwar · Thirumaalai/i })).toBeInTheDocument();
     expect(screen.getAllByText(/Word-by-word meaning/i).length).toBeGreaterThanOrEqual(2);
-    expect(screen.getAllByRole('link', { name: /listen/i }).length).toBeGreaterThanOrEqual(2);
+    // PO round 36: the "Listen to recitation" search links are removed
+    expect(screen.queryAllByRole('link', { name: /listen/i })).toHaveLength(0);
     // Legacy single-pasuram display still works where no template exists
     cleanup();
     window.history.replaceState(null, '', window.location.pathname);

@@ -11,7 +11,7 @@
  */
 import { Clock } from 'lucide-react';
 import { Navigation } from 'lucide-react';
-import { MAPS_URL_TEMPLATE } from '../../data/config.js';
+import { mapsDirectionsUrl } from '../../data/config.js';
 import NotDocumented from './NotDocumented.jsx';
 
 const FESTIVAL_PATTERN = /ekad[ai]si|utsavam|festival|brahmotsavam/i;
@@ -29,8 +29,10 @@ function splitNotes(notes) {
 export default function VisitInfoSection({ kshetram }) {
   const { timings, festivals, access, tips, references } = kshetram;
   const p = kshetram.profile ?? {};
+  // Link-audit L3: directions mode with the dataset coordinates as the
+  // destination (place query fallback) — not a search URL.
   const directionsHref = kshetram.mapQuery
-    ? `${MAPS_URL_TEMPLATE}${encodeURIComponent(`directions to ${kshetram.mapQuery}`)}`
+    ? mapsDirectionsUrl(kshetram.coords ? kshetram.coords.join(',') : kshetram.mapQuery)
     : null;
   const { special, festival } = splitNotes(timings?.notes);
   const hasFestivals = Array.isArray(festivals) && festivals.length > 0;
@@ -108,10 +110,6 @@ export default function VisitInfoSection({ kshetram }) {
 
         <aside className="visit-card">
           <h3>Quick facts</h3>
-          <div className="times">
-            <span>Divya Desam</span>
-            <strong>{kshetram.serial ?? '—'}</strong>
-          </div>
           <div className="times">
             <span>Region</span>
             <span>{kshetram.region}</span>

@@ -120,13 +120,16 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 lg:h-16 flex items-center justify-between gap-2 xl:gap-4">
 
         {/* ================= 1. BRAND LOGO & SACRED TITLE ================= */}
+        {/* Mobile-audit F1: the brand may shrink and its title wrap below lg so
+            Trip + the 44px Menu target always fit (compact type only <360px);
+            at lg+ the row has room and shrink-0/nowrap keep the desktop look. */}
         <Link
           to="/"
           onClick={closeAll}
-          className="flex items-center gap-2.5 shrink-0 text-left group"
+          className="flex items-center gap-2.5 max-[359.98px]:gap-1.5 min-w-0 shrink lg:shrink-0 text-left group"
           title="108 Divya Kshetrams — Sanctuary Home"
         >
-          <div className="p-1 rounded-lg bg-[#FAF2E3] border border-[#C99A2E]/50 group-hover:border-[#C99A2E] transition-all">
+          <div className="p-1 rounded-lg bg-[#FAF2E3] border border-[#C99A2E]/50 group-hover:border-[#C99A2E] transition-all shrink-0">
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="#C99A2E" aria-hidden="true" focusable="false">
               <circle cx="12" cy="2.2" r="1.3" />
               <path d="M9.6 4.7h4.8l-.5 3H10.1l-.5-3z" />
@@ -136,9 +139,9 @@ export default function Header() {
               <path fill="#96731F" d="M11.2 17.9h1.6v2.9h-1.6z" />
             </svg>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col min-w-0">
             <div className="flex items-center gap-1.5">
-              <span className="font-display text-[1.125rem] lg:text-[1.375rem] font-bold text-[#FFFDF7] leading-none whitespace-nowrap group-hover:text-[#E2C47C] transition-colors">
+              <span className="font-display text-[1.125rem] max-[359.98px]:text-[0.95rem] lg:text-[1.375rem] font-bold text-[#FFFDF7] leading-none max-lg:leading-tight max-lg:whitespace-normal whitespace-nowrap group-hover:text-[#E2C47C] transition-colors">
                 108 Divya Kshetrams
               </span>
               <ThirumanIcon className="w-3.5 h-4.5 hidden sm:inline-block opacity-85 shrink-0" />
@@ -451,7 +454,7 @@ export default function Header() {
         </nav>
 
         {/* ================= 3. RIGHT UTILITIES ================= */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
 
           {/* Darshan Counter Pill (2xl+ — below that the 19.5px nav fills the row) */}
           {visitedCount > 0 && (
@@ -482,11 +485,11 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Mobile Menu Hamburger */}
+          {/* Mobile Menu Hamburger — 44×44 target (mobile-audit F1) */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg text-[#FFFDF7] hover:bg-[#FFFDF7]/10 lg:hidden"
+            className="p-2 min-w-11 min-h-11 inline-flex items-center justify-center rounded-lg text-[#FFFDF7] hover:bg-[#FFFDF7]/10 lg:hidden"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
           >

@@ -22791,11 +22791,11 @@
         "submit": "Submit Schedule Inquiry",
         "privacyNote": "We protect your privacy. Your information is used strictly to coordinate temple yatra schedules.",
         "success": {
-          "eyebrow": "Inquiry Received",
+          "eyebrow": "Inquiry Saved",
           "greetingPrefix": "Radhe Krishna,",
           "greetingFallback": "Devotee",
-          "bodyLead": "Your pilgrimage inquiry has been logged under reference",
-          "bodyTail": ". Our yatra coordinator will share the detailed day-wise itinerary, departure dates, and sattvic stay arrangements via WhatsApp and email within 24 hours.",
+          "bodyLead": "Your pilgrimage inquiry is saved on this device as a draft, with reference",
+          "bodyTail": ". It has not been sent to the yatra coordinator yet — inquiry delivery is being set up with the team. Keep this reference for your records.",
           "summaryLabels": {
             "circuit": "Selected Circuit:",
             "devotees": "Devotees:",
@@ -22895,7 +22895,7 @@
     },
     "footer": {
       "prayer": "சர்வம் ஸ்ரீமந் நாராயண சரணாரவிந்தார்ப்பணமஸ்து",
-      "compiledNote": "Compiled with reverence from the Nalayira Divya Prabandham tradition and standard published lists of the 108 Divya Desams.",
+      "compiledNote": "Compiled with reverence from the Nalayira Divya Prabandham tradition and standard published lists of the 108 Divya Desams. Content is provided in good faith for devotional and educational purposes.",
       "goodFaithNote": "Content is provided in good faith for devotional and educational purposes.",
       "privacyNote": "Your visited marks and trip are stored only in your browser — never sent to any server.",
       "mark": "108 Divya Desams • Sri Ramanuja Dasa"
@@ -22920,6 +22920,8 @@
       "acharya.ramanuja",
       "acharya.pillai-lokacharya"
     ],
-    "mapsUrlTemplate": "https://www.google.com/maps/search/"
+    "mapsUrlTemplate": "https://www.google.com/maps/search/",
+    "mapsDirectionsUrlTemplate": "https://www.google.com/maps/dir/?api=1&destination=",
+    "unavailableSourceDomains": ["dravidaveda.org"]
   }
 }
