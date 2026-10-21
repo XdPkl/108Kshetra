@@ -1,20 +1,23 @@
-# HANDOVER — 108 Divya Kshetrams (2026-10-20, end of session — round 34 + deity-render follow-ups)
+# HANDOVER — 108 Divya Kshetrams (2026-10-22, end of session — rounds 35-36: mobile + link audit fixes, kshetram-detail PO fixes)
 
-State: **`10e9fe7` pushed, CI+Deploy green, live verified (Anbil photos
-HTTP 200; deity boxes render at fixed landscape 560px / portrait 480px).**
-Round 34 = Thiru Anbil photo upload (`b0643fc`) + three same-day
-deity-render follow-ups from PO feedback (TER v2.45 full-frame → v2.46
-fixed orientation boxes → v2.47 fixed frame widths), all in sync with
-`origin/main` (https://github.com/XdPkl/108Kshetra).
+State: **`d485843` pushed, CI+Deploy green, live verified.**
+Rounds 35-36 = external mobile-audit F1-F5 + link-audit L1-L3 (TER
+v2.48) + a seven-item kshetram-detail PO fix list (TER v2.49) — ONE
+commit because the rounds share files. Prior: round 34 Anbil photos +
+deity-render follow-ups (`10e9fe7`). All in sync with `origin/main`
+(https://github.com/XdPkl/108Kshetra).
 Live: https://xdpkl.github.io/108Kshetra/ — verify bundles by CONTENT, not by
 hash (gotcha 12). Working tree clean. No preview server running. Scratch
-scripts deleted. Nothing in flight. THIS SESSION (2026-10-18 rounds 24-33 + 2026-10-20 round 34): the PO
-supplied seven regional Divya Desam PDFs covering all 108 temples and RULED
-that where the extracted PDF details clash with the site dataset, the
-extracted PDF details are the point of truth — evidence workbook:
-`docs/04-review/po-pdf-guides-vs-site-comparison.xlsx` (1,188 field rows).
-Round 33 applied the ruling; a follow-up fixed 19 dead Wikipedia slugs
-(photos 41 → 60 of 108) and reconciled the drifted sync fixture (0-diff).
+scripts deleted. Nothing in flight. THIS SESSION (2026-10-22, rounds 35-36): the external mobile/link audit
+brief (2026-10-18 zip handoff; findings re-verified on current main
+before fixing) drove F1-F5 + L1-L3 + the PO kshetram-detail list; 0
+document overflows across all 154 routes at 320/390 (temples+azhwars
+also 360/414), desktop pixel-comparisons at 4 widths except the intended
+text changes. Earlier session-chain context: the PO supplied seven
+regional Divya Desam PDFs and RULED that where extracted PDF details
+clash with the site dataset, the PDFs are the point of truth — evidence
+workbook: `docs/04-review/po-pdf-guides-vs-site-comparison.xlsx` (1,188
+field rows; applied in round 33).
 
 ## 1. What this session delivered (rounds 24–32 + audit + Jira sync, all live)
 
@@ -38,22 +41,38 @@ Round 33 applied the ruling; a follow-up fixed 19 dead Wikipedia slugs
 | `90fadaa` | **Deity photos render full-frame** (PO feedback): `.deity-photo img` natural aspect in kshetram-detail.css + layout.css — the 16:10 cover crop that sliced the Anbil Moolavar/Urchavar is gone | TER v2.45 |
 | `9906076` | **Deity photos in fixed orientation boxes** (PO feedback): PhotoImg tags landscape/portrait on load; 16:10 / 3:4 contain boxes keep columns layout-stable, full frame always (supersedes v2.45 natural aspect) | TER v2.46 |
 | `10e9fe7` | **Fixed frame widths** (PO asked for the optimized width): landscape max **560px** (column width + hero-band idiom), portrait max **480px** centered (avoids 747px-tall boxes); max-width keeps mobile safe | TER v2.47 |
+| `d485843` | **Rounds 35-36 — mobile audit + link audit + kshetram-detail PO fixes**: F1 header shrinks/wraps <lg + 44px menu; F2 detail heroes/grids minmax(0,1fr) + overflow-wrap (≤800px only); F3 azhwar hero stacks ≤480px, stats wrap ≤800px; F4 directory intros max-w-full below lg; F5 map filters below lg into a collapsible panel + toolbar ABOVE the map (expand pushes map down, one filter state, invalidateSize); L1 skip targets `#azhwar-main`/`#acharya-main` tabIndex=-1 (39 pages, all tab states); L2 dravidaveda.org → honest "Temporarily unavailable" via `UNAVAILABLE_SOURCE_DOMAINS` config (full pipeline wired; owner review pending); L3 Get directions → `maps/dir/?api=1&destination=<coords>` via split builders (106 terrestrial, View-on-map stays search, celestial omitted); acharya birthplace district un-glued (11 profiles overflowed 320px); inquiry copy labelled local draft. PO list: hero caption removed; **Share fixed** (desktop navigator.share rejects non-abort → clipboard + execCommand fallback); Quick-facts serial + GPS coordinates removed; footer good-faith sentence; Listen-to-recitation removed (both paths); Texts & discourses titles link directly to YouTube | TER v2.48 + v2.49 |
 
-Final gates at handoff: **247/247 unit (23 suites) · 21/21 e2e · coverage
-89.89% stmts / 81.31% branches / 84.44% funcs / 91.71% lines (gate 80%) ·
-oxlint 0 errors / 6 warnings (+1 accepted same-class set-state-in-effect;
-CI gate is 0 errors) · build clean ·
+Final gates at handoff: **259/259 unit (24 suites) · 21/21 e2e ·
+oxlint 0 errors / 6 accepted warnings · build clean ·
+sync fixture 0-diff · studio round-trip lossless · schema 0/0 ·
+mobile sweep 0 overflows (154 routes @320/390, temples+azhwars @360/414) ·
 visual gates green** (gate shots: `docs/03-design/gate-shots/azhwars-restyle-24/`,
 `acharyas-restyle-25/`, `map-option3-26/`, `map-cluster-slider-28/`,
 `about-option1-29/`, `home-option1-30/`, `map-cluster-focus-31/`,
-`browse-photos-32/`, `data-corrections-33/`, `anbil-photos-34/`)
+`browse-photos-32/`, `data-corrections-33/`, `anbil-photos-34/`,
+`mobile-audit-35/`)
 
-Coverage figures are the round-33 measurement; the round-34 commits are
-classed CSS/light-JS (full suite green on CI per commit — the deity
-onLoad orientation tag is browser-exercised, not unit-covered)..
+Coverage: last full local measurement is the round-33 one (89.89/81.31 —
+CI's 80% gate ran green per commit since); rounds 35-36 added
++12 tests (linkRegression ×10, PageActions fallback ×2) with no coverage
+re-measurement locally.
 
 ## 2. Open items / likely next requests
 
+- **AUDIT FOLLOW-UPS PENDING PO (rounds 35-36)**: (a) L2 — confirm the
+  canonical Dravida Veda repository URL (or retire the citation);
+  removing the domain from `UNAVAILABLE_SOURCE_DOMAINS` in
+  `content/config.json` restores the link everywhere; (b) the DESKTOP
+  floating-panel cluster-slider row renders ~3px into its right padding
+  (pre-existing) — fixing it wraps the row and changes desktop
+  composition, so it awaits PO approval (delete the `max-lg:` prefix on
+  that row's `flex-wrap` in MapPage); (c) curated DIRECT YouTube video
+  URLs for Texts & discourses — the dataset carries search queries only,
+  titles currently link to YouTube video results; supply per-row video
+  URLs to wire deep links; (d) Jira NOT synced for rounds 35-36
+  (user-stories table still v2.4) — sync on request with
+  `sync-jira-stories.mjs --only`.
 - **PO PHOTO BATCHES (expected next)** — the PO explicitly wants fast
   turnaround (complained about a 40-minute first upload). Agreed fast path
   per batch, ONE commit for all temples in it: convert photos (sharp,
@@ -227,8 +246,9 @@ onLoad orientation tag is browser-exercised, not unit-covered)..
   `content/dossier-templates.json` `mangalasasanam.perAzhwar` (azhwar +
   pasuram-count pairs) — NOT `kshetrams.json`'s `azhwars` array; the two
   can silently diverge (visual gate caught paramapadam at 10 vs 8).
-- Registers/dates: **TER v2.47; TCS v1.28**; user-stories.md v2.4 (all
-  23 stories synced). Comparison workbook (PO PDF guides, round-33
+- Registers/dates: **TER v2.49; TCS v1.28**; user-stories.md v2.4 (all
+  23 stories synced; rounds 35-36 not yet authored). Comparison workbook
+  (PO PDF guides, round-33
   evidence base): `docs/04-review/po-pdf-guides-vs-site-comparison.xlsx`.
   UT-DTL unchanged since round 17; UT-AZW-03 assertions updated round 33
   (Poigai 12→14); UT-ACH-02 rewritten rounds 22/25; UT-AZW-02 round 24;
@@ -420,6 +440,10 @@ onLoad orientation tag is browser-exercised, not unit-covered)..
     WebSearch + summary verification beat on-wiki search.
 
 60. **PO photos can arrive as HEIF (iPhone)** — browsers cannot render HEIF; convert with sharp (it decodes HEIF on this box): `sharp(src).jpeg({quality: 85, mozjpeg: true})`. Also: ESM scratch scripts must live in `app/` to resolve playwright, detail-page hrefs carry the `/108Kshetra/` basename in Playwright (use `a[href*=...]`), and the Deities tab is `role=tab`, not a button. Deity photos fit into FIXED orientation boxes at FIXED widths — landscape 16:10 max 560px, portrait 3:4 max 480px centered, object-fit:contain on the tint (TER v2.46 + v2.47, PO-set; v2.45 natural-aspect superseded). Full frame ALWAYS: never crop deity sources to fit.
+
+61. **`navigator.share` EXISTS on desktop Chrome but rejects (NotAllowedError) when no sheet can open** — a silent `catch { return }` makes the Share button look dead. `PageActions` now returns quietly ONLY on AbortError (visitor closed the sheet) and falls through to clipboard + legacy `execCommand` otherwise (round 36). Test corollary: `vi.stubGlobal('navigator', {...navigator})` does NOT copy `defineProperty`'d members (non-enumerable) — stub the whole object explicitly: `vi.stubGlobal('navigator', { share, clipboard: { writeText } })`.
+
+62. **Desktop-preservation audits: compare the SAME build twice before trusting a diff** — remote Wikipedia thumbnails served different bytes hours apart (±1 RGB on ~0.02% of map-card pixels) while two consecutive after-code captures were 0.000% apart; a stable after-vs-after pair proves the residual is fetch variance, not layout. Also: a `flex-wrap` fix that "fits" on desktop can still WRAP there if the row was secretly over-budget — measure the row in both builds before scoping (the cluster-slider row is ~3px over the desktop panel padding; fix parked for PO approval).
 
 ## 5. Command cheat-sheet
 
