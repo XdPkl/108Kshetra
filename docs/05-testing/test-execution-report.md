@@ -3333,3 +3333,38 @@ Region; no "GPS coordinates" on Overview/Location; zero Listen buttons
 and zero archive.org links on Mangalasasanam; Media discourse titles
 link to YouTube with no stray chips; footer carries the good-faith
 sentence.
+
+## Version 2.50 — Acharya Portrait Batch (2026-10-22, round 37)
+
+**Trigger:** PO supplied a zip of acharya portraits (21 files).
+
+### Delivered
+
+17 portraits converted (sharp, sRGB JPEG q85, 71-151 KB, sources
+765-946×1024) to `app/public/photos/saint-<id>.jpg` and wired as
+`photos[0]` on the acharya records (`acharyas.json` + sync fixture in
+lockstep; the CMS pipeline — GROQ photos projection, photoEntries,
+to-sanity-docs, studio `photo` array — already existed from rounds
+34/19). Curated photos take precedence over the 5 Wikipedia slugs
+(nathamuni, yamunacharya, ramanuja, pillai-lokacharya,
+manavala-mamunigal); 12 further cards replace their shanka-emblem
+fallback. Home's featured-acharya strip (PersonPreview) picks the same
+curated photos.
+
+**Not wired (honest placeholders remain):** 4 zip files match no acharya
+in the dataset (Senai Mudaliyar, Thiruvarangathu Amudanar, Alagiya
+Manavala Perumal Nayanar, Nayanaracan Pillai — wrong-person mapping
+risk, no records invented); 10 dataset acharyas had no photo in the zip
+(thirukachi-nambigal, thirukkurugai-piran-pillan, koorathazhwan,
+mudaliyandan, ananthazhwan, vaduga-nambi, engalazhwan, nadadur-ammal,
+kidambi-appullar, p-b-anna).
+
+### Verification
+
+`sync-content --fixture --check` 0-diff; studio `verify --local`
+round-trip lossless; build clean; unit 259/259; lint 0 err/6 warn.
+Preview: 17 `photos/saint-*` portraits render on /acharyas with 0 broken
+images after the lazy-load priming pass (the last era's cards sit below
+the fold — an initial "4 broken" report was the lazy-load timing, not
+decode failure; direct URL loads decode fine); 0 wiki portraits remain.
+Gate shot: `docs/03-design/gate-shots/acharya-photos-37/`.
