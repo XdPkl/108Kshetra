@@ -3398,3 +3398,11 @@ build clean; unit 259/259; lint 0 err/6 warn. Preview: 27/27 WebP
 portraits render, 0 broken after lazy-load priming, 0 stale JPG
 references. Gate shot updated:
 `docs/03-design/gate-shots/acharya-photos-37/acharyas-directory-1440.png`.
+
+## Version 2.52 — PO Ruling: Unmatched Portrait Files Closed (2026-10-22)
+
+PO ruling (2026-10-22): the three portrait files that match no dataset
+acharya — Senai Mudaliyar, Nayanaracan Pillai, Alagiya Manavala Perumal
+Nayanar — are to be IGNORED. No wiring, no new records; the v2.50/v2.51
+"Not wired" flags are closed with no further action. All 27 dataset
+acharyas carry curated transparent portraits (v2.51).
