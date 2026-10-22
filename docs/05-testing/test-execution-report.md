@@ -3484,3 +3484,27 @@ the L1 skip target and every biography section are unchanged.
   1440/768/390 + pillai-lokacharya 1440 + p-b-anna 390). This is an
   APPROVED layout change: desktop intentionally differs from the old
   two-column text hero; no other page type is affected.
+
+## Version 2.55 — Fact Sheet Spread Under Portrait + Text (2026-10-22, round 38 follow-up)
+
+**Trigger:** PO feedback on the new Identification hero — the section
+with names/titles, birthplace, divine amsam and jayanthi should spread
+under BOTH the portrait and the text column, not sit under the text
+alone.
+
+### Delivered
+
+CSS-only: `.acd-facts` now spans grid columns 1-2 (portrait + identity)
+at desktop and the full width at ≤1100; the portrait occupies row 1 so
+the fact sheet always clears the taller of portrait/intro before
+spreading. Rail (col 3) and the mobile stack are unchanged.
+
+### Verification
+
+Measured Nathamuni at 1440/1024/768/390: facts left edge aligns with the
+portrait column (144 = 144 at 1440), width 832px/976px spanning both
+columns (mobile stacked unchanged), top clears both portrait and
+identity bottoms, rail intact, scrollWidth == clientWidth everywhere.
+Lint 0 err/6 warn; build clean; CSS-only (CI runs the full suite).
+Gate shots updated: `acharya-hero-38/nathamuni-1440.png` +
+`nathamuni-1024-spread-facts.png`.

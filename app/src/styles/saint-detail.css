@@ -199,9 +199,11 @@
  * arched cream stage left (~36%), identity + facts right, rail kept.
  * ==================================================================== */
 .kxd .acd-hero--portrait { grid-template-columns: minmax(235px, 36%) minmax(0, 1fr) 280px; }
-.kxd .acd-hero--portrait .acd-portrait { grid-column: 1; grid-row: 1 / 3; margin: 0; text-align: center; }
+/* PO round 38 follow-up: the fact sheet (names/titles, birthplace, amsam,
+   jayanthi) spreads under BOTH the portrait and the text column. */
+.kxd .acd-hero--portrait .acd-portrait { grid-column: 1; grid-row: 1; margin: 0; text-align: center; }
 .kxd .acd-hero--portrait .acd-identity { grid-column: 2; grid-row: 1; }
-.kxd .acd-hero--portrait .acd-facts { grid-column: 2; grid-row: 2; }
+.kxd .acd-hero--portrait .acd-facts { grid-column: 1 / 3; grid-row: 2; }
 .kxd .acd-hero--portrait > aside { grid-column: 3; grid-row: 1 / 3; }
 /* Period line under the Tamil name (moved out of the fact sheet per mockup) */
 .kxd .acd-period { font-size: 13px; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 16px; }
@@ -293,9 +295,9 @@
   .kxd .azd-icono-grid { grid-template-columns: 160px minmax(0, 1fr); gap: 24px; }
   .kxd .acd-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .kxd .acd-hero--portrait { grid-template-columns: minmax(180px, 30%) minmax(0, 1fr); }
-  .kxd .acd-hero--portrait .acd-portrait { grid-row: 1 / 3; }
+  .kxd .acd-hero--portrait .acd-portrait { grid-row: 1; }
   .kxd .acd-hero--portrait .acd-identity { grid-column: 2; grid-row: 1; }
-  .kxd .acd-hero--portrait .acd-facts { grid-column: 2; grid-row: 2; }
+  .kxd .acd-hero--portrait .acd-facts { grid-column: 1 / -1; grid-row: 2; }
   .kxd .acd-hero--portrait > aside { grid-column: 1 / -1; grid-row: auto; }
   .kxd .acd-rail { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); padding: 20px 0 0; position: static; }
 }
