@@ -3431,3 +3431,56 @@ the batch: poigai + nammazhwar webp); lint 0 err/6 warn. Preview:
 poigai detail hero serves `saint-poigai.webp`; Home featured strip shows
 the new azhwar portraits alongside the acharya ones. Gate shot:
 `docs/03-design/gate-shots/azhwar-photos-37/azhwars-directory-1440.png`.
+
+## Version 2.54 — Acharya Identification Hero Rebuilt To The Portrait Mockup (2026-10-22, round 38)
+
+**Trigger:** approved HTML mockup (acharya-portrait-mockup.html) —
+portrait added to every acharya detail page.
+
+### Delivered
+
+New reusable **`AcharyaPortrait`** component: the acharya's transparent
+WebP master in a softly tinted cream stage with a thin gold border and
+an arched top (180px dome desktop / 145px mobile), fixed display height
+(405px / 310px) with `object-fit: contain` + bottom object-position so
+every figure and seat stays whole and seats align at the stage floor;
+`mix-blend-mode: multiply` composites the transparency onto the cream.
+Clicking opens the shared GalleryLightbox enlarged view — Escape
+closes, Tab is trapped inside, and focus returns to the portrait
+trigger. Missing photo ⇒ the component renders nothing and the text
+layout stands alone.
+
+Hero layout (`.acd-hero--portrait`): desktop = portrait column
+(minmax(235px,36%), measured 36-39% incl. gap) | identity (eyebrow,
+name, Tamil, **period line — moved out of the fact sheet per the
+mockup, with an sr-only "Period" label** , intro) + fact sheet |
+existing 280px On-this-page rail untouched. ≤1100: portrait + text two
+columns, rail spans below. ≤800: stacked exactly per the brief —
+English name, Tamil, period, centered 250px portrait, introduction,
+identification details; the rail hides and a collapsible "Explore this
+acharya" `<details>` (same seven anchors) replaces it. All section IDs,
+the L1 skip target and every biography section are unchanged.
+
+### Verification
+
+- Nathamuni measured at 1440/1024/768/390/320: portrait share 39%/34%,
+  rail visible ≥1100, collapsible ≤800, mobile order exact
+  (h1 166 → tamil 223 → period 267 → portrait 316 → intro 716 → facts
+  862 at 768), scrollWidth == clientWidth at every width (no h-scroll).
+- Extreme art (tall crown pillai-lokacharya, widest p-b-anna, staff
+  manavala-mamunigal, vedanta-desika) at 1440 + 390: whole figure fits
+  (box 393×405 / 230×310, constant across acharyas), bottom-aligned to
+  the stage floor, zero overflow.
+- Lightbox probes: opens with focus inside the dialog; Escape AND the
+  Close button both return focus to "Enlarge <name> portrait"; mobile
+  collapsible expands with all 7 anchors jumping (hash + scroll
+  verified).
+- Gates: unit **262/262** (25 suites; +3 AcharyaPortrait cases — stage
+  render, missing-photo grace, focus contract), lint 0 err/6 accepted
+  warn, build clean, e2e **21/21**, no content/fixture change (sync
+  untouched — photo data already wired in v2.51).
+- Before/after record: `108k-acharya-before/` (temp captures) vs gate
+  shots `docs/03-design/gate-shots/acharya-hero-38/` (nathamuni
+  1440/768/390 + pillai-lokacharya 1440 + p-b-anna 390). This is an
+  APPROVED layout change: desktop intentionally differs from the old
+  two-column text hero; no other page type is affected.

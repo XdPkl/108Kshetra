@@ -18,6 +18,7 @@ import { getAcharyaById, getAllAcharyas, getKshetramById } from '../data/api.js'
 import EmptyState from '../components/EmptyState.jsx';
 import NotDocumented from '../components/detail/NotDocumented.jsx';
 import { LotusIcon, ShankaIcon } from '../components/SacredIcons.jsx';
+import AcharyaPortrait from '../components/detail/AcharyaPortrait.jsx';
 import SaintGlyph from '../components/saint/SaintGlyph.jsx';
 import SaintLegend from '../components/saint/SaintLegend.jsx';
 import PendingContent from '../components/saint/PendingContent.jsx';
@@ -169,22 +170,32 @@ export default function AcharyaDetailPage() {
       {/* Link-audit L1: the "Skip to acharya details" target — a focusable
           wrapper around the dossier sections (all section IDs unchanged). */}
       <div id="acharya-main" tabIndex={-1} className="skip-target">
-      {/* 01 Identification — hero: name block | fact sheet | on-this-page rail */}
-      <section id="identification" className="acd-hero">
-        <div className="min-w-0">
+      {/* 01 Identification — hero: arched portrait | name block + fact
+          sheet | on-this-page rail (PO mockup, round 38). The modifier
+          class carries the portrait grid; without a photo the plain text
+          layout stands. */}
+      <section id="identification" className={`acd-hero ${acharya.photos?.[0]?.src ? 'acd-hero--portrait' : ''}`}>
+        <AcharyaPortrait name={acharya.name} photo={acharya.photos?.[0] ?? null} />
+
+        <div className="min-w-0 acd-identity">
           <p className="eyebrow">
             ॥ Sri Vaishnava Sampradaya · {acharya.eraGroup ?? 'Guru Parampara'} ॥
           </p>
           <h1>{acharya.name}</h1>
           <p className="tamil" lang="ta">{acharya.tamilName}</p>
+          {acharya.era ? (
+            <p className="acd-period">
+              <span className="sr-only">Period </span>
+              {acharya.era}
+            </p>
+          ) : null}
           {lead ? <p className="hero-summary">{lead}</p> : null}
         </div>
 
-        <div className="min-w-0">
+        <div className="min-w-0 acd-facts">
           <ShankaIcon className="acd-shanka" aria-hidden="true" />
           <dl className="facts">
             {[
-              ['Period', acharya.era],
               ['Names & titles', acharya.titles?.length ? acharya.titles.join(', ') : null],
               ['Birthplace', acharya.birthplace ? (
                 <>
@@ -210,7 +221,8 @@ export default function AcharyaDetailPage() {
           </dl>
         </div>
 
-        {/* On this page rail */}
+        {/* On this page rail — desktop/tablet; below lg the collapsible
+            "Explore this acharya" section replaces it (round 38) */}
         <aside>
           <nav aria-label="On this page" className="acd-rail">
             <p className="eyebrow">On this page</p>
@@ -227,6 +239,19 @@ export default function AcharyaDetailPage() {
           </nav>
         </aside>
       </section>
+
+      {/* Mobile rail replacement (PO mockup, round 38) */}
+      <details className="acd-mobile-contents no-print">
+        <summary>Explore this acharya</summary>
+        <nav aria-label="On this page">
+          {SECTIONS.map(({ id: sid, num, label }) => (
+            <a key={sid} href={`#${sid}`}>
+              <span className="acd-rail-num" aria-hidden="true">{num}</span>
+              <span>{label}</span>
+            </a>
+          ))}
+        </nav>
+      </details>
 
       {/* 02 Life & Miracles — life blocks in data order, chronology stepper after the first */}
       <DossierSection id="history" num="02" title="Life & Miracles">

@@ -193,6 +193,29 @@
 
 /* 01 Identification — name block | fact sheet | on-this-page rail */
 .kxd .acd-hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) 280px; gap: 40px; align-items: start; padding: 2px 0 8px; }
+
+/* ======================================================================
+ * Acharya Identification hero with portrait (PO mockup, round 38):
+ * arched cream stage left (~36%), identity + facts right, rail kept.
+ * ==================================================================== */
+.kxd .acd-hero--portrait { grid-template-columns: minmax(235px, 36%) minmax(0, 1fr) 280px; }
+.kxd .acd-hero--portrait .acd-portrait { grid-column: 1; grid-row: 1 / 3; margin: 0; text-align: center; }
+.kxd .acd-hero--portrait .acd-identity { grid-column: 2; grid-row: 1; }
+.kxd .acd-hero--portrait .acd-facts { grid-column: 2; grid-row: 2; }
+.kxd .acd-hero--portrait > aside { grid-column: 3; grid-row: 1 / 3; }
+/* Period line under the Tamil name (moved out of the fact sheet per mockup) */
+.kxd .acd-period { font-size: 13px; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 16px; }
+/* Arched tinted stage — thin gold border, rounded dome, cream fill; the
+   transparent master composites with multiply so no white fringe shows.
+   Fixed display height + contain + bottom object-position = every figure
+   fits whole and seats align at the stage floor across all acharyas. */
+.kxd .acd-portrait-stage { padding: 18px 10px 8px; border: 1px solid var(--line); border-radius: 180px 180px 6px 6px; background: var(--tint); }
+.kxd .acd-portrait button { border: 0; background: none; padding: 0; width: 100%; display: block; cursor: zoom-in; border-radius: inherit; }
+.kxd .acd-portrait button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.kxd .acd-portrait img { display: block; width: 100%; height: 405px; object-fit: contain; object-position: center bottom; mix-blend-mode: multiply; }
+.kxd .acd-portrait figcaption { margin-top: 13px; font-size: 11px; color: var(--gold); letter-spacing: 0.13em; text-transform: uppercase; }
+/* Mobile rail replacement — visible below lg only (block order below) */
+.kxd .acd-mobile-contents { display: none; }
 .kxd .acd-shanka { width: 48px; height: 48px; color: var(--gold); margin: 0 0 10px; }
 .kxd .acd-rail { border-left: 1px solid var(--line); padding-left: 24px; position: sticky; top: calc(var(--header-h) + 24px); }
 .kxd .acd-rail-list { list-style: none; margin: 10px 0 0; padding: 0; }
@@ -269,6 +292,11 @@
   .kxd .azd-sources-grid { grid-template-columns: 1fr; }
   .kxd .azd-icono-grid { grid-template-columns: 160px minmax(0, 1fr); gap: 24px; }
   .kxd .acd-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .kxd .acd-hero--portrait { grid-template-columns: minmax(180px, 30%) minmax(0, 1fr); }
+  .kxd .acd-hero--portrait .acd-portrait { grid-row: 1 / 3; }
+  .kxd .acd-hero--portrait .acd-identity { grid-column: 2; grid-row: 1; }
+  .kxd .acd-hero--portrait .acd-facts { grid-column: 2; grid-row: 2; }
+  .kxd .acd-hero--portrait > aside { grid-column: 1 / -1; grid-row: auto; }
   .kxd .acd-rail { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); padding: 20px 0 0; position: static; }
 }
 @media (max-width: 800px) {
@@ -306,6 +334,34 @@
   .kxd .acd-pada { grid-template-columns: 1fr; gap: 0; }
   .kxd .acd-grid3 { grid-template-columns: 1fr; }
   .kxd .acd-sources { grid-template-columns: 1fr; }
+}
+
+/* Mobile Identification hero (PO mockup, round 38): English name, Tamil
+   name, period, PORTRAIT, introduction, identification details — the
+   rail hides and the collapsible "Explore this acharya" takes over. */
+@media (max-width: 800px) {
+  .kxd .acd-hero--portrait { display: flex; flex-direction: column; gap: 0; }
+  .kxd .acd-hero--portrait .acd-identity { display: contents; }
+  .kxd .acd-identity .eyebrow { order: 0; margin-bottom: 12px; }
+  .kxd .acd-identity h1 { order: 1; margin-bottom: 7px; }
+  .kxd .acd-identity .tamil { order: 2; margin-bottom: 8px; }
+  .kxd .acd-identity .acd-period { order: 3; margin-bottom: 22px; }
+  .kxd .acd-hero--portrait .acd-portrait { order: 4; width: 250px; align-self: center; margin: 0 auto 25px; }
+  .kxd .acd-portrait-stage { padding: 15px 9px 8px; border-radius: 145px 145px 5px 5px; }
+  .kxd .acd-portrait img { height: 310px; }
+  .kxd .acd-identity .hero-summary { order: 5; }
+  .kxd .acd-hero--portrait .acd-facts { order: 6; margin-top: 22px; min-width: 0; }
+  .kxd .acd-hero--portrait > aside { display: none; }
+  .kxd .acd-mobile-contents {
+    display: block;
+    margin: 25px 0 0;
+    font-size: 14px;
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  .kxd .acd-mobile-contents summary { color: var(--rust); cursor: pointer; font-weight: 600; }
+  .kxd .acd-mobile-contents a { display: flex; gap: 10px; align-items: baseline; text-decoration: none; padding: 7px 0; }
+  .kxd .acd-mobile-contents a:hover { color: var(--accent); }
 }
 
 @media (max-width: 480px) {
