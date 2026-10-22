@@ -8947,7 +8947,14 @@
           "thaayar": {
             "name": "Kurungudivalli Thayar / Thirumamagal (குறுங்குடிவல்லி தாயார்)",
             "legend": "Seated in an independent, prominent shrine within the inner prakaram facing East"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-65-moolavar.webp",
+              "alt": "Thirukkurungudi — Moolavar Nindra Nambi",
+              "credit": "Product Owner dossier (Divya Desam 65)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -8957,7 +8964,14 @@
           "thaayar": {
             "name": "Sridevi and Bhudevi",
             "legend": "Accompanies Urchavar during all major festivals and Kaisika Ekadashi"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-65-urchavar.jpg",
+              "alt": "Thirukkurungudi — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 65)"
+            }
+          ]
         },
         "sanctumNote": "Five Pancha-Nambi Shrines in Complex:"
       },
@@ -9035,7 +9049,14 @@
       "coords": {
         "lat": 8.606,
         "lng": 77.555
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-65.jpg",
+          "alt": "Thirukkurungudi — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 65)"
+        }
+      ]
     },
     {
       "_id": "kshetram.nanguneri",
@@ -9105,7 +9126,14 @@
           "thaayar": {
             "name": "வரமங்கை தாயார் / சிரிவரமங்கை (Varamangai Thayar / Srivaramangai)",
             "legend": "Seated directly beside Moolavar inside the main Garbhagriha"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-66-moolavar.jpg",
+              "alt": "Thirucheeravaramangai (Nanguneri) — Moolavar Thothadrinathan (Deivanayagan)",
+              "credit": "Product Owner dossier (Divya Desam 66)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -9115,7 +9143,14 @@
           "thaayar": {
             "name": "Sridevi and Bhudevi",
             "legend": "Accompanies Urchavar during festive processions"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-66-urchavar.jpg",
+              "alt": "Thirucheeravaramangai (Nanguneri) — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 66)"
+            }
+          ]
         },
         "sanctumNote": "Dual Thaayars Seated beside Moolavar"
       },
@@ -9189,7 +9224,14 @@
       "coords": {
         "lat": 8.493,
         "lng": 77.668
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-66.jpg",
+          "alt": "Thirucheeravaramangai (Nanguneri) — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 66)"
+        }
+      ]
     },
     {
       "_id": "kshetram.alwar-thirunagari",
@@ -9262,7 +9304,14 @@
           "thaayar": {
             "name": "ஆதிநாதவல்லி / குருகூர்வல்லி (Adinathavalli Thayar / Kurugurvalli)",
             "legend": "Seated in dedicated independent shrines within the inner prakaram"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-67-moolavar.jpg",
+              "alt": "Azhwar Thirunagari — Moolavar Aadhinathan",
+              "credit": "Product Owner dossier (Divya Desam 67)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -9272,7 +9321,14 @@
           "thaayar": {
             "name": "Sridevi and Bhudevi",
             "legend": "Positioned beside Urchavar during festive processions"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-67-urchavar.jpg",
+              "alt": "Azhwar Thirunagari — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 67)"
+            }
+          ]
         },
         "sanctumNote": "Swayambhu Feet + Nammalwar Shrine"
       },
@@ -9345,7 +9401,14 @@
       "coords": {
         "lat": 8.64,
         "lng": 78.01
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-67.jpg",
+          "alt": "Azhwar Thirunagari — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 67)"
+        }
+      ]
     },
     {
       "_id": "kshetram.thirukkolur",
@@ -9414,7 +9477,14 @@
           "thaayar": {
             "name": "குமுதவல்லி தாயார் (Kumudavalli Thayar) & கோளூர்வல்லி தாயார் (Kolurvalli Thayar)",
             "legend": "Seated in dedicated shrines within the inner prakaram facing East"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-68-moolavar.webp",
+              "alt": "Thirukkolur — Moolavar Vaithamanithi",
+              "credit": "Product Owner dossier (Divya Desam 68)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -9424,7 +9494,14 @@
           "thaayar": {
             "name": "Kumudavalli & Kolurvalli",
             "legend": "Positioned beside Urchavar during festive processions"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-68-urchavar.jpg",
+              "alt": "Thirukkolur — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 68)"
+            }
+          ]
         },
         "sanctumNote": "Reclining with Marakkal (Measuring Vessel)"
       },
@@ -9491,7 +9568,14 @@
       "coords": {
         "lat": 8.62,
         "lng": 78.03
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-68.webp",
+          "alt": "Thirukkolur — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 68)"
+        }
+      ]
     },
     {
       "_id": "kshetram.thirupperai",
@@ -9560,7 +9644,14 @@
           "thaayar": {
             "name": "குழைக்காதுவல்லி தாயார் (Kuzhaikkaaduvalli) & திருப்புரைதேவி தாயார் (Thirupuraidevi)",
             "legend": "Seated in dedicated independent shrines within the inner corridor facing East"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-69-moolavar.webp",
+              "alt": "Thirupper — Moolavar Makara Nedunkuzhai Kathan",
+              "credit": "Product Owner dossier (Divya Desam 69)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -9570,7 +9661,14 @@
           "thaayar": {
             "name": "Kuzhaikkaaduvalli & Thirupuraidevi",
             "legend": "Accompanies Urchavar during festive processions and the Vaikasi Visakam Garuda Sevai"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-69-urchavar.jpg",
+              "alt": "Thirupper — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 69)"
+            }
+          ]
         },
         "sanctumNote": "Two Visible Thaayars inside Garbhagriha"
       },
@@ -9640,7 +9738,14 @@
       "coords": {
         "lat": 8.645,
         "lng": 78.055
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-69.webp",
+          "alt": "Thirupper — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 69)"
+        }
+      ]
     },
     {
       "_id": "kshetram.srivaikuntam",
@@ -9710,7 +9815,14 @@
           "thaayar": {
             "name": "வைகுந்தவல்லி தாயார் (Vaikunthavalli) & பூதேவி தாயார் (Bhudevi)",
             "legend": "Seated in dedicated independent shrines within the inner corridor facing East"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-70-moolavar.jpg",
+              "alt": "Thiruvaikundam (Srivaikuntam) — Moolavar Vaikuntanathan",
+              "credit": "Product Owner dossier (Divya Desam 70)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -9720,7 +9832,14 @@
           "thaayar": {
             "name": "Sridevi and Bhudevi",
             "legend": "Positioned beside Urchavar during festive processions and the Vaikasi Visakam Garuda Sevai"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-70-urchavar.webp",
+              "alt": "Thiruvaikundam (Srivaikuntam) — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 70)"
+            }
+          ]
         },
         "sanctumNote": "Adisesha Hood over Standing Moolavar"
       },
@@ -9790,7 +9909,14 @@
       "coords": {
         "lat": 8.632,
         "lng": 78.081
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-70.jpg",
+          "alt": "Thiruvaikundam (Srivaikuntam) — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 70)"
+        }
+      ]
     },
     {
       "_id": "kshetram.thirukkulandai",
@@ -9842,6 +9968,38 @@
       "coords": {
         "lat": 8.59,
         "lng": 78.13
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-71.webp",
+          "alt": "Thirukkulandai (Perungulam) — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 71)"
+        }
+      ],
+      "deities": {
+        "moolavar": {
+          "names": {
+            "tamil": "ஸ்ரீநிவாசன்",
+            "translit": "Srinivasan (Makara Nedunkuzhai Kannan)"
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-71-moolavar.jpg",
+              "alt": "Thirukkulandai (Perungulam) — Moolavar Mayakkoothan",
+              "credit": "Product Owner dossier (Divya Desam 71)"
+            }
+          ]
+        },
+        "urchavar": {
+          "names": {},
+          "photos": [
+            {
+              "srcUrl": "photos/desam-71-urchavar.jpg",
+              "alt": "Thirukkulandai (Perungulam) — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 71)"
+            }
+          ]
+        }
       }
     },
     {
@@ -9911,7 +10069,14 @@
           "thaayar": {
             "name": "வரகுணவல்லி தாயார் / வரகுணமங்கை (Varagunavalli Thayar / Varagunamangai)",
             "legend": "Seated in her dedicated independent shrine facing East inside the inner corridor"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-72-moolavar.jpg",
+              "alt": "Thiruvaragunamangai — Moolavar Vijayasan",
+              "credit": "Product Owner dossier (Divya Desam 72)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -9921,7 +10086,14 @@
           "thaayar": {
             "name": "Varagunavalli Thayar",
             "legend": "Accompanies Urchavar during festive processions and the 9 Garuda Sevai"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-72-urchavar-02.jpg",
+              "alt": "Thiruvaragunamangai — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 72)"
+            }
+          ]
         },
         "sanctumNote": "Two Visible Thaayars inside Garbhagriha"
       },
@@ -9992,7 +10164,14 @@
       "coords": {
         "lat": 8.67,
         "lng": 78.06
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-72.jpg",
+          "alt": "Thiruvaragunamangai — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 72)"
+        }
+      ]
     },
     {
       "_id": "kshetram.thiruppuliangudi",
@@ -10044,6 +10223,38 @@
       "coords": {
         "lat": 8.62,
         "lng": 78.05
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-73.jpg",
+          "alt": "Thiruppuliangudi — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 73)"
+        }
+      ],
+      "deities": {
+        "moolavar": {
+          "names": {
+            "tamil": "கைசின வேந்தன்",
+            "translit": "Kaisina Vendhan (Bhoomipalar)"
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-73-moolavar.webp",
+              "alt": "Thiruppuliangudi — Moolavar Kaisina Vendhan",
+              "credit": "Product Owner dossier (Divya Desam 73)"
+            }
+          ]
+        },
+        "urchavar": {
+          "names": {},
+          "photos": [
+            {
+              "srcUrl": "photos/desam-73-urchavar.jpg",
+              "alt": "Thiruppuliangudi — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 73)"
+            }
+          ]
+        }
       }
     },
     {
@@ -10117,12 +10328,46 @@
             {
               "name": "கருத்தடங்கண்ணி தாயார் (Karuthadanganni Thayar / Alamelumangai)"
             }
+          ],
+          "photos": [
+            {
+              "srcUrl": "photos/desam-74-moolavar.jpg",
+              "alt": "Thirutholaivillimangalam — Moolavar Aravindalochanan",
+              "credit": "Product Owner dossier (Divya Desam 74)"
+            },
+            {
+              "srcUrl": "photos/desam-74-moolavar-02.jpg",
+              "alt": "Thirutholaivillimangalam — Moolavar Aravindalochanan",
+              "credit": "Product Owner dossier (Divya Desam 74)"
+            },
+            {
+              "srcUrl": "photos/desam-74-devapiran-moolavar.jpg",
+              "alt": "Thirutholaivillimangalam — Moolavar Aravindalochanan (Devapiran twin temple)",
+              "credit": "Product Owner dossier (Divya Desam 74)"
+            }
           ]
         },
         "urchavar": {
           "names": {
             "translit": "Devapiran with Sridevi & Bhudevi | Aravindalochanan with dual Thaayars"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-74-urchavar.jpg",
+              "alt": "Thirutholaivillimangalam — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 74)"
+            },
+            {
+              "srcUrl": "photos/desam-74-devapiran-urchavar.jpg",
+              "alt": "Thirutholaivillimangalam — Urchavar (procession deity) (Devapiran twin temple)",
+              "credit": "Product Owner dossier (Divya Desam 74)"
+            },
+            {
+              "srcUrl": "photos/desam-74-devapiran-urchavar-02.jpg",
+              "alt": "Thirutholaivillimangalam — Urchavar (procession deity) (Devapiran twin temple)",
+              "credit": "Product Owner dossier (Divya Desam 74)"
+            }
+          ]
         },
         "sanctumNote": "Shrine 1: Devapiran stands facing East, flanked by Sridevi and Bhudevi inside the main sanctum"
       },
@@ -10192,7 +10437,24 @@
       "coords": {
         "lat": 8.61,
         "lng": 78.06
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-74.jpg",
+          "alt": "Thirutholaivillimangalam — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 74)"
+        },
+        {
+          "srcUrl": "photos/desam-74-02.jpg",
+          "alt": "Thirutholaivillimangalam — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 74)"
+        },
+        {
+          "srcUrl": "photos/desam-74-devapiran.jpg",
+          "alt": "Thirutholaivillimangalam — temple gopuram (Devapiran twin temple)",
+          "credit": "Product Owner dossier (Divya Desam 74)"
+        }
+      ]
     },
     {
       "_id": "kshetram.thiruthangal",
@@ -10262,7 +10524,19 @@
           "thaayar": {
             "name": "Sengamalavalli Thayar / Kamaladevi (செங்கமலவல்லி தாயார்)",
             "legend": "Seated in her dedicated independent shrine on the hillock complex facing East"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-75-moolavar.jpg",
+              "alt": "Thiruthangal — Moolavar Nindra Narayanan",
+              "credit": "Product Owner dossier (Divya Desam 75)"
+            },
+            {
+              "srcUrl": "photos/desam-75-moolavar-02.jpg",
+              "alt": "Thiruthangal — Moolavar Nindra Narayanan",
+              "credit": "Product Owner dossier (Divya Desam 75)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -10272,7 +10546,19 @@
           "thaayar": {
             "name": "Sridevi, Bhudevi, Neeladevi, and Jambavati",
             "legend": "Unique setup: Four consorts accompany Urchavar during festive processions"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-75-urchavar.jpg",
+              "alt": "Thiruthangal — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 75)"
+            },
+            {
+              "srcUrl": "photos/desam-75-urchavar-02.jpg",
+              "alt": "Thiruthangal — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 75)"
+            }
+          ]
         },
         "sanctumNote": "Four Visible Consorts inside Sanctum Complex"
       },
@@ -10337,7 +10623,19 @@
       "coords": {
         "lat": 9.334,
         "lng": 78.096
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-75.jpg",
+          "alt": "Thiruthangal — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 75)"
+        },
+        {
+          "srcUrl": "photos/desam-75-02.jpg",
+          "alt": "Thiruthangal — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 75)"
+        }
+      ]
     },
     {
       "_id": "kshetram.srivilliputhur",
@@ -10413,7 +10711,19 @@
           },
           "thaayar": {
             "name": "/ Andal"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-76-moolavar.jpg",
+              "alt": "Srivilliputhur — Moolavar Vatapatrasayi",
+              "credit": "Product Owner dossier (Divya Desam 76)"
+            },
+            {
+              "srcUrl": "photos/desam-76-moolavar-02.jpg",
+              "alt": "Srivilliputhur — Moolavar Vatapatrasayi",
+              "credit": "Product Owner dossier (Divya Desam 76)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -10423,7 +10733,19 @@
           "thaayar": {
             "name": "Andal Nachiyar",
             "legend": "Accompanies Rangamannar during all major festivals, holding the divine parrot (Kili)"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-76-urchavar.jpg",
+              "alt": "Srivilliputhur — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 76)"
+            },
+            {
+              "srcUrl": "photos/desam-76-urchavar-02.jpg",
+              "alt": "Srivilliputhur — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 76)"
+            }
+          ]
         },
         "sanctumNote": "Massive Reclining Setup in Upper Tier"
       },
@@ -10494,7 +10816,19 @@
       "coords": {
         "lat": 9.495,
         "lng": 77.632
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-76.jpg",
+          "alt": "Srivilliputhur — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 76)"
+        },
+        {
+          "srcUrl": "photos/desam-76-02.jpg",
+          "alt": "Srivilliputhur — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 76)"
+        }
+      ]
     },
     {
       "_id": "kshetram.madurai-koodal",
@@ -10567,7 +10901,19 @@
           "thaayar": {
             "name": "Madhuravalli Thayar / Vyooha Nayagi (மதுரவல்லி தாயார்)",
             "legend": "\"Goddess of Sweetness\"; seated in an independent shrine facing East in the main prakaram"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-77-moolavar.jpg",
+              "alt": "Thirukkoodal (Madurai) — Moolavar Koodal Azhagar",
+              "credit": "Product Owner dossier (Divya Desam 77)"
+            },
+            {
+              "srcUrl": "photos/desam-77-moolavar-02.jpg",
+              "alt": "Thirukkoodal (Madurai) — Moolavar Koodal Azhagar",
+              "credit": "Product Owner dossier (Divya Desam 77)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -10577,7 +10923,19 @@
           "thaayar": {
             "name": "Madhuravalli & Maragathavalli",
             "legend": "Accompanies Urchavar during festive processions"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-77-urchavar.jpg",
+              "alt": "Thirukkoodal (Madurai) — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 77)"
+            },
+            {
+              "srcUrl": "photos/desam-77-urchavar-02.jpg",
+              "alt": "Thirukkoodal (Madurai) — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 77)"
+            }
+          ]
         },
         "sanctumNote": "Three-Tiered Ashtanga Sanctum"
       },
@@ -10649,7 +11007,19 @@
       "coords": {
         "lat": 9.914,
         "lng": 78.117
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-77.jpg",
+          "alt": "Thirukkoodal (Madurai) — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 77)"
+        },
+        {
+          "srcUrl": "photos/desam-77-02.jpg",
+          "alt": "Thirukkoodal (Madurai) — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 77)"
+        }
+      ]
     },
     {
       "_id": "kshetram.thirumaliruncholai",
@@ -10725,7 +11095,19 @@
           "thaayar": {
             "name": "Sundaravalli Thayar (சுந்தரவல்லி தாயார்)",
             "legend": "Seated in an independent, prominent shrine within the second prakaram facing East"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-78-moolavar.jpg",
+              "alt": "Thirumaalirunsolai (Azhagar Kovil) — Moolavar Kallazhagar",
+              "credit": "Product Owner dossier (Divya Desam 78)"
+            },
+            {
+              "srcUrl": "photos/desam-78-moolavar-02.jpg",
+              "alt": "Thirumaalirunsolai (Azhagar Kovil) — Moolavar Kallazhagar",
+              "credit": "Product Owner dossier (Divya Desam 78)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -10735,7 +11117,19 @@
           "thaayar": {
             "name": "Sridevi & Bhudevi",
             "legend": "Positioned beside Urchavar during all major festive processions (Chithirai Thiruvizha)"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-78-urchavar.jpg",
+              "alt": "Thirumaalirunsolai (Azhagar Kovil) — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 78)"
+            },
+            {
+              "srcUrl": "photos/desam-78-urchavar-02.jpg",
+              "alt": "Thirumaalirunsolai (Azhagar Kovil) — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 78)"
+            }
+          ]
         },
         "sanctumNote": "Two Visible Thaayars inside Garbhagriha"
       },
@@ -10818,7 +11212,19 @@
       "coords": {
         "lat": 10.074,
         "lng": 78.229
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-78.jpg",
+          "alt": "Thirumaalirunsolai (Azhagar Kovil) — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 78)"
+        },
+        {
+          "srcUrl": "photos/desam-78-02.jpg",
+          "alt": "Thirumaalirunsolai (Azhagar Kovil) — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 78)"
+        }
+      ]
     },
     {
       "_id": "kshetram.thirumogur",
@@ -10870,6 +11276,38 @@
       "coords": {
         "lat": 9.984,
         "lng": 78.182
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-79.jpg",
+          "alt": "Thirumogur — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 79)"
+        }
+      ],
+      "deities": {
+        "moolavar": {
+          "names": {
+            "tamil": "காளமேக பெருமாள்",
+            "translit": "Kaalameghan (Kalamegha)"
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-79-moolavar.webp",
+              "alt": "Thirumogur — Moolavar Kaalameghan",
+              "credit": "Product Owner dossier (Divya Desam 79)"
+            }
+          ]
+        },
+        "urchavar": {
+          "names": {},
+          "photos": [
+            {
+              "srcUrl": "photos/desam-79-urchavar.jpg",
+              "alt": "Thirumogur — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 79)"
+            }
+          ]
+        }
       }
     },
     {
@@ -10941,7 +11379,19 @@
           "thaayar": {
             "name": "Padmasani Thayar / Kalyanavalli (பத்மாசனி / கல்யாணவல்லி)",
             "legend": "Seated in her dedicated shrine facing East"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-80-moolavar.jpg",
+              "alt": "Thiruppullani (Darbasayana) — Moolavar Kalyana Jagannathan",
+              "credit": "Product Owner dossier (Divya Desam 80)"
+            },
+            {
+              "srcUrl": "photos/desam-80-moolavar-02.jpg",
+              "alt": "Thiruppullani (Darbasayana) — Moolavar Kalyana Jagannathan",
+              "credit": "Product Owner dossier (Divya Desam 80)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -10950,7 +11400,19 @@
           "thaayar": {
             "name": "Padmasani & Sita Devi",
             "legend": "Positioned beside Urchavar during festive processions"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-80-urchavar.jpg",
+              "alt": "Thiruppullani (Darbasayana) — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 80)"
+            },
+            {
+              "srcUrl": "photos/desam-80-urchavar-02.jpg",
+              "alt": "Thiruppullani (Darbasayana) — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 80)"
+            }
+          ]
         },
         "sanctumNote": "Dual Sanctum Setup"
       },
@@ -11008,7 +11470,19 @@
       "coords": {
         "lat": 9.4,
         "lng": 78.48
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-80.jpg",
+          "alt": "Thiruppullani (Darbasayana) — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 80)"
+        },
+        {
+          "srcUrl": "photos/desam-80-02.jpg",
+          "alt": "Thiruppullani (Darbasayana) — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 80)"
+        }
+      ]
     },
     {
       "_id": "kshetram.thirukkoshtiyur",
@@ -11081,7 +11555,19 @@
           "thaayar": {
             "name": "Thirumamagal Thayar / Thirumagal (திருமாமகள் தாயார்)",
             "legend": "Resides in her dedicated shrine in the inner corridor"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-81-moolavar.jpg",
+              "alt": "Thirukkotiyoor — Moolavar Uraga Mellanayanan",
+              "credit": "Product Owner dossier (Divya Desam 81)"
+            },
+            {
+              "srcUrl": "photos/desam-81-moolavar-02.jpg",
+              "alt": "Thirukkotiyoor — Moolavar Uraga Mellanayanan",
+              "credit": "Product Owner dossier (Divya Desam 81)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -11091,7 +11577,19 @@
           "thaayar": {
             "name": "Sridevi and Bhudevi",
             "legend": "Accompanies Urchavar during all major festivals"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-81-urchavar.jpg",
+              "alt": "Thirukkotiyoor — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 81)"
+            },
+            {
+              "srcUrl": "photos/desam-81-urchavar-02.jpg",
+              "alt": "Thirukkotiyoor — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 81)"
+            }
+          ]
         },
         "sanctumNote": "Three-Tiered Ashtanga Sanctum"
       },
@@ -11176,7 +11674,19 @@
       "coords": {
         "lat": 9.538,
         "lng": 78.235
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-81.jpg",
+          "alt": "Thirukkotiyoor — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 81)"
+        },
+        {
+          "srcUrl": "photos/desam-81-02.jpg",
+          "alt": "Thirukkotiyoor — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 81)"
+        }
+      ]
     },
     {
       "_id": "kshetram.thirumeyyam",
@@ -11245,7 +11755,19 @@
           "thaayar": {
             "name": "Uyyavantha Nachiyar / Uyyavanthal (உய்யவந்த நாச்சியார்)",
             "legend": "\"Goddess who arrived to redeem humanity\"; seated in a separate shrine in the rock-cut complex"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-82-moolavar.jpg",
+              "alt": "Thirumeyyam — Moolavar Sathyagiri Nathan",
+              "credit": "Product Owner dossier (Divya Desam 82)"
+            },
+            {
+              "srcUrl": "photos/desam-82-moolavar-02.jpg",
+              "alt": "Thirumeyyam — Moolavar Sathyagiri Nathan",
+              "credit": "Product Owner dossier (Divya Desam 82)"
+            }
+          ]
         },
         "urchavar": {
           "names": {
@@ -11254,7 +11776,19 @@
           "thaayar": {
             "name": "Uyyavantha Nachiyar",
             "legend": "Accompanies Urchavar during festive processions"
-          }
+          },
+          "photos": [
+            {
+              "srcUrl": "photos/desam-82-urchavar.jpg",
+              "alt": "Thirumeyyam — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 82)"
+            },
+            {
+              "srcUrl": "photos/desam-82-urchavar-02.jpg",
+              "alt": "Thirumeyyam — Urchavar (procession deity)",
+              "credit": "Product Owner dossier (Divya Desam 82)"
+            }
+          ]
         },
         "sanctumNote": "Massive Rock-Cut Reclining Image"
       },
@@ -11320,7 +11854,19 @@
       "coords": {
         "lat": 10.241,
         "lng": 78.792
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-82.jpg",
+          "alt": "Thirumeyyam — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 82)"
+        },
+        {
+          "srcUrl": "photos/desam-82-02.jpg",
+          "alt": "Thirumeyyam — temple gopuram",
+          "credit": "Product Owner dossier (Divya Desam 82)"
+        }
+      ]
     },
     {
       "_id": "kshetram.thiruvananthapuram",
@@ -14853,7 +15399,14 @@
           "Thirupparkadal Divya Desam Velukkudi Krishnan",
           "Samudra Manthan Ksheerabdhinaathan"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-107.jpg",
+          "alt": "Thiruppaarkadal — The Ocean of Milk (celestial realm)",
+          "credit": "Product Owner dossier (Divya Desam 107)"
+        }
+      ]
     },
     {
       "_id": "kshetram.paramapadam",
@@ -15013,7 +15566,14 @@
           "Paramapadam Sri Vaikuntam Velukkudi Krishnan",
           "Thiruvaimozhi Soozhvisumbu Animegam Upanyasam"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/desam-108.jpg",
+          "alt": "Thirupparamapadham — Vaikuntam (celestial realm)",
+          "credit": "Product Owner dossier (Divya Desam 108)"
+        }
+      ]
     }
   ],
   "azhwars": [

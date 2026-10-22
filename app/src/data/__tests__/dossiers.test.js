@@ -13,15 +13,19 @@ describe('Divya Desam dossier templates (dossier population)', () => {
   const siteIds = new Set(getAllKshetrams().map((k) => k.id));
   const azhwarIds = new Set(getAllAzhwars().map((a) => a.id));
 
-  it('covers 93 kshetrams with ids that all exist in the site dataset', () => {
-    expect(Object.keys(DOSSIER_TEMPLATES).length).toBe(93);
+  it('covers 96 kshetrams with ids that all exist in the site dataset', () => {
+    // 93 full dossiers + 3 photo-only entries (round 39: thirukkulandai,
+    // thiruppuliangudi, thirumogur — PO photo batches with no dossier doc)
+    expect(Object.keys(DOSSIER_TEMPLATES).length).toBe(96);
     for (const id of Object.keys(DOSSIER_TEMPLATES)) {
       expect(siteIds.has(id), `unknown kshetram id ${id}`).toBe(true);
     }
   });
 
   it('assigns each dossier serial at most once', () => {
-    const serials = Object.values(DOSSIER_TEMPLATES).map((t) => t.serial);
+    // Photo-only entries carry no serial — the PO's dossier numbering is
+    // unknown for them and nothing on the site renders one (round 39).
+    const serials = Object.values(DOSSIER_TEMPLATES).map((t) => t.serial).filter((s) => s != null);
     expect(new Set(serials).size).toBe(serials.length);
     for (const s of serials) {
       expect(s, 'serial range').toBeGreaterThanOrEqual(1);
@@ -31,6 +35,8 @@ describe('Divya Desam dossier templates (dossier population)', () => {
 
   it('carries the dossier five-section content per template', () => {
     for (const [id, t] of Object.entries(DOSSIER_TEMPLATES)) {
+      // Photo-only entries (no serial) are image wiring, not dossier prose
+      if (t.serial == null) continue;
       expect(t.profile?.vimanam ?? t.profile?.location, `${id} profile`).toBeTruthy();
       expect(t.deities?.moolavar, `${id} moolavar`).toBeTruthy();
       expect(t.puranam?.legend?.length, `${id} legend`).toBeGreaterThan(0);
@@ -52,7 +58,7 @@ describe('Divya Desam dossier templates (dossier population)', () => {
   });
 
   it('leaves the V2 enrichment of unpopulated kshetrams intact', () => {
-    for (const id of ['thiruvekka', 'uppiliappan', 'thirumogur', 'kandiyur']) {
+    for (const id of ['thiruvekka', 'uppiliappan', 'kandiyur']) {
       expect(ENRICHMENT[id], `${id} V2 fallback`).toBeTruthy();
       expect(DOSSIER_TEMPLATES[id], `${id} has no dossier`).toBeUndefined();
     }

@@ -3508,3 +3508,48 @@ identity bottoms, rail intact, scrollWidth == clientWidth everywhere.
 Lint 0 err/6 warn; build clean; CSS-only (CI runs the full suite).
 Gate shots updated: `acharya-hero-38/nathamuni-1440.png` +
 `nathamuni-1024-spread-facts.png`.
+
+## Version 2.56 — Pandiya Nadu + Vinnulagam Photo Batches (2026-10-22, round 39)
+
+**Trigger:** PO zips — PandiyaNaadu (19 temple folders, gopuram/moolavar/
+urchavar slots) and Vinnulagam (the two celestial realms).
+
+### Delivered
+
+All 18 Pandiya Nadu temples (serials 65-82) plus both celestials wired
+through the round-34 kshetram-photos pipeline: gopuram shots → kshetram
+`photos[]` (card band + detail hero, curated photos replace the wiki/
+placeholder display), moolavar/urchavar shots → `deities.*.photos[]`
+(Deities tab lead + thumbs, max 3 per array). 84 of 86 files converted
+(sRGB JPEG q85; the 9 alpha sources as WebP; one 2560px master resized
+to the 1600px cap → 306KB; every file ≤400KB). Tholaivillimangalam's
+twin temples share dataset serial 74 — both represented (photos =
+Aravindalochanar gopurams + Devapiran gopuram; moolavar = 2+1; urchavar
+= 1+2); the Devapiran gopuram-02 and moolavar-02 were skipped to honor
+the 3-per-slot cap (files retained by the PO, not uploaded).
+Thirucheevaramangai/Totadrinathan mapped to nanguneri (Deity match).
+
+**Pipeline change (to-app-json):** full dossiers gate on the PO dossier
+`serial`; the 3 temples with NO dossier document (thirukkulandai,
+thiruppuliangudi, thirumogur) now emit **photo-only entries without a
+serial** — inventing one would either duplicate another temple's
+"Divya Desam N" eyebrow (the PO dossier scheme ≠ site order, e.g. their
+71/73/79 are taken by thiruvanparisaram/parameswara-vinnagaram/
+thiruneeragam) or change today's eyebrow (region-only). Their minimal
+deities nodes are seeded from enrichment names; rendering is unchanged
+(form/thaayar still fall back to the base record).
+
+### Verification
+
+`sync-content --fixture --check` 0-diff; studio round-trip lossless;
+unit **262/262** (dossier tests updated: 96 entries, serial-uniqueness
+and five-section checks skip serial-less photo-only entries,
+thirumogur moved off the unpopulated list); lint 0 err/6 warn; build
+clean; e2e **21/21**. Preview: /kshetrams?region=Pandiya Nadu = 18/18
+cards with curated photos, 0 broken; srivilliputhur hero + Deities tab
+(moolavar lead + urchavar lead + 2 thumbs); tholaivillimangalam twins
+all wired; thirumogur eyebrow stays "Pandiya Nadu" with the new hero.
+Celestials: thirupparkadal desam-107 + paramapadam desam-108 heroes.
+Gate shots: `docs/03-design/gate-shots/pandiya-vinnulagam-photos-39/`.
+Browse curated-photo ceiling: 61 → 79 of 108 (78 terrestrial + 2
+celestial); deity slots 5 → ~60 of 216.

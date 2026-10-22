@@ -205,7 +205,10 @@ export function groqToContent(rawResult) {
 
     if (doc.coords) coords[id] = [doc.coords.lat, doc.coords.lng];
 
-    if (doc.serial) {
+    // Full dossiers carry a PO dossier serial; photo-only entries (temples
+    // whose PO batch supplied images but no dossier document) emit without
+    // one — the site renders no serial for them either (round 39).
+    if (doc.serial || doc.photos || doc.deities?.moolavar || doc.deities?.urchavar) {
       const dossier = {
         serial: doc.serial,
         profile: doc.profile,
