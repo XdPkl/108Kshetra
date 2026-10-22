@@ -3406,3 +3406,28 @@ acharya — Senai Mudaliyar, Nayanaracan Pillai, Alagiya Manavala Perumal
 Nayanar — are to be IGNORED. No wiring, no new records; the v2.50/v2.51
 "Not wired" flags are closed with no further action. All 27 dataset
 acharyas carry curated transparent portraits (v2.51).
+
+## Version 2.53 — Azhwar Portraits Replaced With Transparent Masters (2026-10-22, round 37 follow-up 2)
+
+**Trigger:** PO supplied all 12 Azhwar portraits as transparent PNGs.
+
+### Delivered
+
+Same treatment as the acharya batch (TER v2.51): WebP-with-alpha q85
+(84-340 KB, all under the 400 KB budget) at `photos/saint-<id>.webp`,
+wired as `photos[0]` in `azhwar-details.json` + sync fixture for all
+12 azhwars. Poigai's round-19 painting (`saint-poigai.jpg`) is replaced
+by the new transparent portrait (jpg deleted). Every /azhwars card and
+every azhwar-detail hero now renders a curated portrait — the watermark
+fallback and wiki portraits are gone from the directory (the fallback
+code path stays covered by the Identification component test).
+
+### Verification
+
+`sync-content --fixture --check` 0-diff; studio round-trip lossless;
+build clean; unit **259/259** (UT-AZW-03 portrait assertions updated for
+the batch: poigai + nammazhwar webp); lint 0 err/6 warn. Preview:
+12/12 WebP portraits on /azhwars, 0 broken after lazy-load priming;
+poigai detail hero serves `saint-poigai.webp`; Home featured strip shows
+the new azhwar portraits alongside the acharya ones. Gate shot:
+`docs/03-design/gate-shots/azhwar-photos-37/azhwars-directory-1440.png`.

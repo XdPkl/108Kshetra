@@ -75,16 +75,17 @@ describe('AzhwarDetailPage (UT-AZW-03, FR-90; 2026-10-01 poigai mock restyle)', 
 
   it('shows the portrait and chronological navigation', () => {
     renderAt('/azhwar/poigai');
-    // PO-supplied painting as the hero portrait
-    expect(screen.getByAltText(/painting of poigai azhwar/i)).toHaveAttribute('src', expect.stringContaining('photos/saint-poigai.jpg'));
+    // Round 37 follow-up: the PO painting was replaced by the transparent WebP portrait batch
+    expect(screen.getByAltText(/portrait of poigai azhwar/i)).toHaveAttribute('src', expect.stringContaining('photos/saint-poigai.webp'));
     expect(screen.getByRole('link', { name: /next: bhoothathazhwar/i })).toHaveAttribute('href', '/azhwar/bhoothath');
     expect(screen.getAllByText(/← All Azhwars/i).length).toBeGreaterThanOrEqual(1);
   });
 
-  it('renders the placeholder portrait for saints without a supplied photo', () => {
+  it('renders the curated portrait (round 37: every azhwar now has one)', () => {
     renderAt('/azhwar/nammazhwar');
-    // UXD v3.0: the placeholder became the Thiruman watermark behind the labelled frame
-    expect(screen.getByLabelText(/nammazhwar portrait/i)).toBeInTheDocument();
+    // The transparent WebP batch covered all 12 azhwars — the watermark
+    // fallback itself stays covered in saintComponents (Identification).
+    expect(screen.getByAltText(/portrait of nammalwar/i)).toHaveAttribute('src', expect.stringContaining('photos/saint-nammazhwar.webp'));
   });
 
   it('renders the dossier-populated Nammazhwar with prev/next navigation', async () => {

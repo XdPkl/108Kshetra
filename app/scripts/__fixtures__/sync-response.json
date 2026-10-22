@@ -15226,9 +15226,9 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-poigai.jpg",
-          "alt": "Painting of Poigai Azhwar with joined palms",
-          "credit": "Painting supplied by the Product Owner"
+          "srcUrl": "photos/saint-poigai.webp",
+          "alt": "Portrait of Poigai Azhwar",
+          "credit": "Portrait supplied by the Product Owner"
         }
       ]
     },
@@ -15435,7 +15435,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-bhoothath.webp",
+          "alt": "Portrait of Bhoothathazhwar",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "azhwar.pey",
@@ -15635,7 +15642,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-pey.webp",
+          "alt": "Portrait of Peyazhwar",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "azhwar.thirumazhisai",
@@ -15851,7 +15865,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-thirumazhisai.webp",
+          "alt": "Portrait of Thirumazhisai Azhwar",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "azhwar.nammazhwar",
@@ -16065,7 +16086,14 @@
           "Uyarvara Uyarsulum Pasuram Eedu Vyakhyanam Karunakarachariar",
           "Nammalwar Vaibhavam and Dravida Veda Ananthapadmanabhachariar"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-nammazhwar.webp",
+          "alt": "Portrait of Nammalwar",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "azhwar.madhurakavi",
@@ -16246,7 +16274,14 @@
           "Devu Matrariyen Pasuram Detailed Vyakhyanam Karunakarachariar",
           "Acharya Bhakti and Madhurakavi Vaibhavam Ananthapadmanabhachariar"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-madhurakavi.webp",
+          "alt": "Portrait of Madhurakavi Azhwar",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "azhwar.kulasekhara",
@@ -16435,7 +16470,14 @@
         "digitalTexts": [
           "Dravida Veda Repository — dravidaveda.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-kulasekhara.webp",
+          "alt": "Portrait of Kulasekhara Azhwar",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "azhwar.periyazhwar",
@@ -16651,7 +16693,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-periyazhwar.webp",
+          "alt": "Portrait of Periyazhwar",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "azhwar.andal",
@@ -16904,7 +16953,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-andal.webp",
+          "alt": "Portrait of Andal",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "azhwar.thondaradippodi",
@@ -17129,7 +17185,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-thondaradippodi.webp",
+          "alt": "Portrait of Thondaradippodi Azhwar",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "azhwar.thiruppaan",
@@ -17327,7 +17390,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-thiruppaan.webp",
+          "alt": "Portrait of Thiruppaan Azhwar",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "azhwar.thirumangai",
@@ -17564,7 +17634,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-thirumangai.webp",
+          "alt": "Portrait of Thirumangai Azhwar",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     }
   ],
   "acharyas": [

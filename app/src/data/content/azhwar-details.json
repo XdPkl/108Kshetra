@@ -195,9 +195,9 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-poigai.jpg",
-        "alt": "Painting of Poigai Azhwar with joined palms",
-        "credit": "Painting supplied by the Product Owner"
+        "src": "photos/saint-poigai.webp",
+        "alt": "Portrait of Poigai Azhwar",
+        "credit": "Portrait supplied by the Product Owner"
       }
     ]
   },
@@ -391,6 +391,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-bhoothath.webp",
+        "alt": "Portrait of Bhoothathazhwar",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   "pey": {
@@ -578,6 +585,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-pey.webp",
+        "alt": "Portrait of Peyazhwar",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   "thirumazhisai": {
@@ -781,6 +795,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-thirumazhisai.webp",
+        "alt": "Portrait of Thirumazhisai Azhwar",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   "nammazhwar": {
@@ -982,6 +1003,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-nammazhwar.webp",
+        "alt": "Portrait of Nammalwar",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   "madhurakavi": {
@@ -1150,6 +1178,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-madhurakavi.webp",
+        "alt": "Portrait of Madhurakavi Azhwar",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   "kulasekhara": {
@@ -1326,6 +1361,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-kulasekhara.webp",
+        "alt": "Portrait of Kulasekhara Azhwar",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   "periyazhwar": {
@@ -1529,6 +1571,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-periyazhwar.webp",
+        "alt": "Portrait of Periyazhwar",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   "andal": {
@@ -1769,6 +1818,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-andal.webp",
+        "alt": "Portrait of Andal",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   "thondaradippodi": {
@@ -1981,6 +2037,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-thondaradippodi.webp",
+        "alt": "Portrait of Thondaradippodi Azhwar",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   "thiruppaan": {
@@ -2166,6 +2229,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-thiruppaan.webp",
+        "alt": "Portrait of Thiruppaan Azhwar",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   "thirumangai": {
@@ -2390,6 +2460,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-thirumangai.webp",
+        "alt": "Portrait of Thirumangai Azhwar",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   }
 }
