@@ -205,7 +205,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-nathamuni.jpg",
+        "src": "photos/saint-nathamuni.webp",
         "alt": "Portrait of Nathamuni",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -408,7 +408,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-uyyakondar.jpg",
+        "src": "photos/saint-uyyakondar.webp",
         "alt": "Portrait of Uyyakondar",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -601,7 +601,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-manakkal-nambi.jpg",
+        "src": "photos/saint-manakkal-nambi.webp",
         "alt": "Portrait of Manakkal Nambi",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -832,7 +832,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-yamunacharya.jpg",
+        "src": "photos/saint-yamunacharya.webp",
         "alt": "Portrait of Yamunacharya",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -1024,7 +1024,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-periya-nambi.jpg",
+        "src": "photos/saint-periya-nambi.webp",
         "alt": "Portrait of Periya Nambi",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -1205,6 +1205,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-thirukachi-nambigal.webp",
+        "alt": "Portrait of Thirukachi Nambigal",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   {
@@ -1474,7 +1481,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-ramanuja.jpg",
+        "src": "photos/saint-ramanuja.webp",
         "alt": "Portrait of Sri Ramanujacharya",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -1495,6 +1502,13 @@
     "guru": "ramanuja",
     "sishyas": [
       "engalazhwan"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-thirukkurugai-piran-pillan.webp",
+        "alt": "Portrait of Thirukkurugai Piran Pillan",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   {
@@ -1713,6 +1727,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-koorathazhwan.webp",
+        "alt": "Portrait of Koorathazhwan",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   {
@@ -1907,6 +1928,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-mudaliyandan.webp",
+        "alt": "Portrait of Mudaliyandan",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   {
@@ -2105,7 +2133,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-embar.jpg",
+        "src": "photos/saint-embar.webp",
         "alt": "Portrait of Embar",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -2310,6 +2338,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-ananthazhwan.webp",
+        "alt": "Portrait of Ananthazhwan",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   {
@@ -2494,6 +2529,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-vaduga-nambi.webp",
+        "alt": "Portrait of Vaduga Nambi",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   {
@@ -2664,7 +2706,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-vangipuram-nambi.jpg",
+        "src": "photos/saint-vangipuram-nambi.webp",
         "alt": "Portrait of Vangipuram Nambi",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -2883,7 +2925,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-parasara-bhattar.jpg",
+        "src": "photos/saint-parasara-bhattar.webp",
         "alt": "Portrait of Parasara Bhattar",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -3075,7 +3117,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-nanjiyyar.jpg",
+        "src": "photos/saint-nanjiyyar.webp",
         "alt": "Portrait of Nanjiyyar",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -3259,6 +3301,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-engalazhwan.webp",
+        "alt": "Portrait of Engalazhwan",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   {
@@ -3272,7 +3321,14 @@
       "Nadadur Ammal",
       "Nadadoor Ammal"
     ],
-    "guru": "engalazhwan"
+    "guru": "engalazhwan",
+    "photos": [
+      {
+        "src": "photos/saint-nadadur-ammal.webp",
+        "alt": "Portrait of Nadadur Ammal",
+        "credit": "Portrait supplied by the Product Owner"
+      }
+    ]
   },
   {
     "id": "nampillai",
@@ -3459,7 +3515,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-nampillai.jpg",
+        "src": "photos/saint-nampillai.webp",
         "alt": "Portrait of Nampillai",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -3645,7 +3701,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-periyavachan-pillai.jpg",
+        "src": "photos/saint-periyavachan-pillai.webp",
         "alt": "Portrait of Periyavachan Pillai",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -3829,7 +3885,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-vadakku-thiruveedhi-pillai.jpg",
+        "src": "photos/saint-vadakku-thiruveedhi-pillai.webp",
         "alt": "Portrait of Vadakku Thiruveedhi Pillai",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -4021,7 +4077,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-pillai-lokacharya.jpg",
+        "src": "photos/saint-pillai-lokacharya.webp",
         "alt": "Portrait of Pillai Lokacharya",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -4041,6 +4097,13 @@
     ],
     "sishyas": [
       "vedanta-desika"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-kidambi-appullar.webp",
+        "alt": "Portrait of Kidambi Appullar",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   },
   {
@@ -4306,7 +4369,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-vedanta-desika.jpg",
+        "src": "photos/saint-vedanta-desika.webp",
         "alt": "Portrait of Vedanta Desika",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -4331,7 +4394,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-thiruvaimozhi-pillai.jpg",
+        "src": "photos/saint-thiruvaimozhi-pillai.webp",
         "alt": "Portrait of Thiruvaimozhi Pillai",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -4544,7 +4607,7 @@
     ],
     "photos": [
       {
-        "src": "photos/saint-manavala-mamunigal.jpg",
+        "src": "photos/saint-manavala-mamunigal.webp",
         "alt": "Portrait of Sri Manavala Mamunigal",
         "credit": "Portrait supplied by the Product Owner"
       }
@@ -4747,6 +4810,13 @@
       "Dravida Veda Repository — dravidaveda.org",
       "Project Madurai Texts — projectmadurai.org",
       "Koyil Archival Library — koyil.org"
+    ],
+    "photos": [
+      {
+        "src": "photos/saint-p-b-anna.webp",
+        "alt": "Portrait of P.B. Anna",
+        "credit": "Portrait supplied by the Product Owner"
+      }
     ]
   }
 ]

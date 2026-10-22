@@ -3368,3 +3368,33 @@ images after the lazy-load priming pass (the last era's cards sit below
 the fold — an initial "4 broken" report was the lazy-load timing, not
 decode failure; direct URL loads decode fine); 0 wiki portraits remain.
 Gate shot: `docs/03-design/gate-shots/acharya-photos-37/`.
+
+## Version 2.51 — Acharya Portraits Replaced With Transparent Masters (2026-10-22, round 37 follow-up)
+
+**Trigger:** PO re-supplied the acharya portraits as transparent-background
+PNGs (30 files, 1.1-2.5 MB each) — this batch covers **all 27 dataset
+acharyas** (the previous batch's 17 plus the 10 that had been missing).
+
+### Delivered
+
+Transparency cannot survive the JPEG upload spec, so the masters were
+converted to **WebP with alpha** (quality 85 — 159-351 KB each, every file
+under the 400 KB budget; palette-PNG was rejected at 408-626 KB with
+banding risk on painting gradients). All 27 records rewired to
+`photos/saint-<id>.webp` in `acharyas.json` + sync fixture; the 17
+superseded `saint-*.jpg` files deleted (`saint-poigai.jpg` is an azhwar
+and stays). Every /acharyas card now renders a curated portrait — no
+shanka portrait fallbacks and no Wikipedia portraits remain on the
+directory; the Home featured strip follows automatically.
+
+**Still unwired (unchanged policy):** 3 files match no dataset acharya —
+Senai Mudaliyar, Nayanaracan Pillai, Alagiya Manavala Perumal Nayanar
+(no wrong-person guessing, no records invented).
+
+### Verification
+
+`sync-content --fixture --check` 0-diff; studio round-trip lossless;
+build clean; unit 259/259; lint 0 err/6 warn. Preview: 27/27 WebP
+portraits render, 0 broken after lazy-load priming, 0 stale JPG
+references. Gate shot updated:
+`docs/03-design/gate-shots/acharya-photos-37/acharyas-directory-1440.png`.

@@ -17781,7 +17781,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-nathamuni.jpg",
+          "srcUrl": "photos/saint-nathamuni.webp",
           "alt": "Portrait of Nathamuni",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -17991,7 +17991,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-uyyakondar.jpg",
+          "srcUrl": "photos/saint-uyyakondar.webp",
           "alt": "Portrait of Uyyakondar",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -18191,7 +18191,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-manakkal-nambi.jpg",
+          "srcUrl": "photos/saint-manakkal-nambi.webp",
           "alt": "Portrait of Manakkal Nambi",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -18429,7 +18429,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-yamunacharya.jpg",
+          "srcUrl": "photos/saint-yamunacharya.webp",
           "alt": "Portrait of Yamunacharya",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -18628,7 +18628,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-periya-nambi.jpg",
+          "srcUrl": "photos/saint-periya-nambi.webp",
           "alt": "Portrait of Periya Nambi",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -18816,7 +18816,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-thirukachi-nambigal.webp",
+          "alt": "Portrait of Thirukachi Nambigal",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "acharya.ramanuja",
@@ -19092,7 +19099,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-ramanuja.jpg",
+          "srcUrl": "photos/saint-ramanuja.webp",
           "alt": "Portrait of Sri Ramanujacharya",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -19115,6 +19122,13 @@
       "guru": "acharya.ramanuja",
       "sishyas": [
         "acharya.engalazhwan"
+      ],
+      "photos": [
+        {
+          "srcUrl": "photos/saint-thirukkurugai-piran-pillan.webp",
+          "alt": "Portrait of Thirukkurugai Piran Pillan",
+          "credit": "Portrait supplied by the Product Owner"
+        }
       ]
     },
     {
@@ -19340,7 +19354,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-koorathazhwan.webp",
+          "alt": "Portrait of Koorathazhwan",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "acharya.mudaliyandan",
@@ -19541,7 +19562,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-mudaliyandan.webp",
+          "alt": "Portrait of Mudaliyandan",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "acharya.embar",
@@ -19746,7 +19774,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-embar.jpg",
+          "srcUrl": "photos/saint-embar.webp",
           "alt": "Portrait of Embar",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -19958,7 +19986,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-ananthazhwan.webp",
+          "alt": "Portrait of Ananthazhwan",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "acharya.vaduga-nambi",
@@ -20149,7 +20184,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-vaduga-nambi.webp",
+          "alt": "Portrait of Vaduga Nambi",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "acharya.vangipuram-nambi",
@@ -20326,7 +20368,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-vangipuram-nambi.jpg",
+          "srcUrl": "photos/saint-vangipuram-nambi.webp",
           "alt": "Portrait of Vangipuram Nambi",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -20552,7 +20594,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-parasara-bhattar.jpg",
+          "srcUrl": "photos/saint-parasara-bhattar.webp",
           "alt": "Portrait of Parasara Bhattar",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -20751,7 +20793,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-nanjiyyar.jpg",
+          "srcUrl": "photos/saint-nanjiyyar.webp",
           "alt": "Portrait of Nanjiyyar",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -20942,7 +20984,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-engalazhwan.webp",
+          "alt": "Portrait of Engalazhwan",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "acharya.nadadur-ammal",
@@ -20957,7 +21006,14 @@
         "Nadadur Ammal",
         "Nadadoor Ammal"
       ],
-      "guru": "acharya.engalazhwan"
+      "guru": "acharya.engalazhwan",
+      "photos": [
+        {
+          "srcUrl": "photos/saint-nadadur-ammal.webp",
+          "alt": "Portrait of Nadadur Ammal",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     },
     {
       "_id": "acharya.nampillai",
@@ -21151,7 +21207,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-nampillai.jpg",
+          "srcUrl": "photos/saint-nampillai.webp",
           "alt": "Portrait of Nampillai",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -21344,7 +21400,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-periyavachan-pillai.jpg",
+          "srcUrl": "photos/saint-periyavachan-pillai.webp",
           "alt": "Portrait of Periyavachan Pillai",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -21535,7 +21591,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-vadakku-thiruveedhi-pillai.jpg",
+          "srcUrl": "photos/saint-vadakku-thiruveedhi-pillai.webp",
           "alt": "Portrait of Vadakku Thiruveedhi Pillai",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -21734,7 +21790,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-pillai-lokacharya.jpg",
+          "srcUrl": "photos/saint-pillai-lokacharya.webp",
           "alt": "Portrait of Pillai Lokacharya",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -21756,6 +21812,13 @@
       ],
       "sishyas": [
         "acharya.vedanta-desika"
+      ],
+      "photos": [
+        {
+          "srcUrl": "photos/saint-kidambi-appullar.webp",
+          "alt": "Portrait of Kidambi Appullar",
+          "credit": "Portrait supplied by the Product Owner"
+        }
       ]
     },
     {
@@ -22028,7 +22091,7 @@
       },
       "photos": [
         {
-          "srcUrl": "photos/saint-vedanta-desika.jpg",
+          "srcUrl": "photos/saint-vedanta-desika.webp",
           "alt": "Portrait of Vedanta Desika",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -22055,7 +22118,7 @@
       ],
       "photos": [
         {
-          "srcUrl": "photos/saint-thiruvaimozhi-pillai.jpg",
+          "srcUrl": "photos/saint-thiruvaimozhi-pillai.webp",
           "alt": "Portrait of Thiruvaimozhi Pillai",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -22279,7 +22342,7 @@
       "amsamAcharyaId": "acharya.ramanuja",
       "photos": [
         {
-          "srcUrl": "photos/saint-manavala-mamunigal.jpg",
+          "srcUrl": "photos/saint-manavala-mamunigal.webp",
           "alt": "Portrait of Sri Manavala Mamunigal",
           "credit": "Portrait supplied by the Product Owner"
         }
@@ -22489,7 +22552,14 @@
           "Project Madurai Texts — projectmadurai.org",
           "Koyil Archival Library — koyil.org"
         ]
-      }
+      },
+      "photos": [
+        {
+          "srcUrl": "photos/saint-p-b-anna.webp",
+          "alt": "Portrait of P.B. Anna",
+          "credit": "Portrait supplied by the Product Owner"
+        }
+      ]
     }
   ],
   "about": {
