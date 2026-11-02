@@ -46,7 +46,7 @@ export default function AcharyaPortrait({ name, photo }) {
     };
   }, [enlarged]);
 
-  if (!photo?.src) return null;
+  if (!assetUrl(photo?.src)) return null;
 
   return (
     <>

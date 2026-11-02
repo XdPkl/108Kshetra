@@ -11,14 +11,20 @@ describe('assetUrl (US-CMS-01)', () => {
     expect(assetUrl('/photos/x.jpg')).toBe(`${base}photos/x.jpg`);
   });
 
-  it('passes absolute and inline URLs through unchanged', () => {
+  it('rejects external URLs', () => {
     const urls = [
       'https://cdn.sanity.io/images/abc/123/xyz-640x480.jpg?w=640&auto=format',
       'https://upload.wikimedia.org/wikipedia/commons/a/ab/Srirangam.jpg',
-      'data:image/png;base64,AAAA',
-      'blob:https://example.org/1234',
+      '//example.org/image.jpg',
+      ' https://example.org/image.jpg',
     ];
-    for (const url of urls) expect(assetUrl(url)).toBe(url);
+    for (const url of urls) expect(assetUrl(url)).toBeNull();
+  });
+
+  it('allows browser-local uploaded images', () => {
+    for (const url of ['data:image/png;base64,AAAA', 'blob:https://example.org/1234']) {
+      expect(assetUrl(url)).toBe(url);
+    }
   });
 
   it('returns nullish input untouched', () => {

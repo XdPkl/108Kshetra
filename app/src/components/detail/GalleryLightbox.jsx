@@ -8,26 +8,11 @@
  * @param {() => void} props.onClose
  * @param {(delta: number) => void} [props.onNavigate] - move ±1 photo (wrap-around)
  */
-import { useEffect, useState } from 'react';
-import { fetchWikiImage } from '../../utils/wikiImage.js';
+import { useEffect } from 'react';
 import { assetUrl } from '../../utils/assetUrl.js';
 
-/** Resolves a photo entry to a displayable image (src or cached/fetched wiki thumb). */
-function usePhotoSource(photo) {
-  const [resolved, setResolved] = useState(() => (photo?.src ? assetUrl(photo.src) : null));
-  useEffect(() => {
-    if (!photo || photo.src) return undefined;
-    let cancelled = false;
-    fetchWikiImage(photo.wiki ?? null).then((img) => {
-      if (!cancelled) setResolved(img.src);
-    });
-    return () => { cancelled = true; };
-  }, [photo]);
-  return resolved;
-}
-
 function LightboxImage({ photo }) {
-  const src = usePhotoSource(photo);
+  const src = assetUrl(photo?.src);
   if (!src) {
     return <span className="deity-photo deity-photo--placeholder" aria-label={photo?.alt ?? 'Photo placeholder'}>◆</span>;
   }

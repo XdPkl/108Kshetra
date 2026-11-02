@@ -107,8 +107,13 @@ function CeoPortrait({ photo, setPhoto }) {
     reader.readAsDataURL(file);
   };
   const onUrl = () => {
-    const url = window.prompt('Enter an image URL for the CEO photo:', '');
+    const url = window.prompt('Enter a bundled photo path (photos/filename.jpg):', '');
     if (url && url.trim()) {
+      if (!assetUrl(url)) {
+        setError('Use a bundled photo path or upload an image file.');
+        return;
+      }
+      setError('');
       try { localStorage.setItem('kshetra_ceo_photo', url.trim()); } catch { /* session only */ }
       setPhoto(url.trim());
     }
@@ -121,7 +126,7 @@ function CeoPortrait({ photo, setPhoto }) {
   return (
     <div className="dir w-full max-w-[140px] shrink-0">
       <div className="dir-portrait">
-        {photo ? (
+        {assetUrl(photo) ? (
           <img
             src={assetUrl(photo)}
             alt={`${ceo.name}, CEO of Kshetra Tours`}
@@ -152,8 +157,8 @@ function CeoPortrait({ photo, setPhoto }) {
               <span>Upload</span>
               <input id="ceo-photo-upload" type="file" accept="image/*" onChange={onUpload} className="sr-only" />
             </label>
-            <button type="button" onClick={onUrl} className="ui-btn ui-btn--secondary ui-btn--small" title="Provide image link URL">
-              URL
+            <button type="button" onClick={onUrl} className="ui-btn ui-btn--secondary ui-btn--small" title="Use a bundled photo path">
+              Local path
             </button>
           </div>
           {error ? <p className="ui-field-error text-center text-[12px]">{error}</p> : null}

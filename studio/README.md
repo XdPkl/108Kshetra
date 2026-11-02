@@ -115,3 +115,6 @@ Notes:
 Known follow-up when the live project exists: run `npm run verify` (live) once
 after import to confirm Sanity's storage round-trips the two celestial-desam
 `null` timings verbatim (proven offline; the verifier will catch any drift).
+
+## Photo policy update (2026-11-02)
+The website now renders bundled photos only. Wikipedia photo discovery is disabled, and remote image URLs (including Sanity CDN URLs) are rejected. The existing sync still emits CDN URLs for Sanity uploads, so those photos will show placeholders until an asset-download step bundles them with the site. Do not rely on the older CDN publishing description above for photos. Browser-local portrait uploads remain local previews.

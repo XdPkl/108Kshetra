@@ -90,7 +90,7 @@ export default function SaintMedia({ visuals, name, photo, onSeeSources }) {
 
       {visuals.iconography || hasTexts || onSeeSources ? (
         <div className="azd-icono-grid section-rule">
-          {photo?.src ? (
+          {assetUrl(photo?.src) ? (
             <img
               className="azd-icono-photo"
               src={assetUrl(photo.src)}

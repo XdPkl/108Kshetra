@@ -267,11 +267,11 @@ describe('AboutPage desk branches (round-23 editorial restyle)', () => {
     const user = userEvent.setup();
     // PO round 4: upload/URL controls are admin-gated — enable the flag
     localStorage.setItem('kshetra_admin', '1');
-    const prompt = vi.spyOn(window, 'prompt').mockReturnValue('https://example.com/ceo.jpg');
+    const prompt = vi.spyOn(window, 'prompt').mockReturnValue('photos/ceo.jpg');
     renderAt('/about', <AboutPage />);
-    await user.click(screen.getByRole('button', { name: /^url$/i }));
+    await user.click(screen.getByRole('button', { name: /local path/i }));
     expect(prompt).toHaveBeenCalled();
-    expect(screen.getByRole('img', { name: /ceo of kshetra tours/i })).toHaveAttribute('src', 'https://example.com/ceo.jpg');
+    expect(screen.getByRole('img', { name: /ceo of kshetra tours/i })).toHaveAttribute('src', `${import.meta.env.BASE_URL}photos/ceo.jpg`);
     await user.click(screen.getByRole('button', { name: /^reset$/i }));
     expect(screen.queryByRole('img', { name: /ceo of kshetra tours/i })).not.toBeInTheDocument();
   });

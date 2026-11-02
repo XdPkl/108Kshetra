@@ -1,33 +1,12 @@
 /**
- * useWikiImage — resolves an image (local src first,
- * else the cached Wikipedia lead thumbnail) but returns the raw entry so
- * zip-parity layouts can render the <img> with their own markup (UXD v3.0).
- * @param {string|null} title - Wikipedia article title
- * @param {string|null} [src] - direct image URL/path (takes precedence)
- * @returns {{src: string|null, credit: string|null}}
+ * Resolves only explicitly supplied local images. The legacy hook name is
+ * retained for existing callers; Wikipedia titles never trigger requests.
+ * @param {string|null} _title - retained metadata, not an image source
+ * @param {string|null} src - bundled path or local browser image
+ * @returns {{src: string|null, credit: null}}
  */
-import { useEffect, useState } from 'react';
-import { fetchWikiImage, getCachedWikiImage } from '../utils/wikiImage.js';
 import { assetUrl } from '../utils/assetUrl.js';
 
-export function useWikiImage(title, src = null) {
-  const [entry, setEntry] = useState(() => {
-    if (src) return { src: assetUrl(src), credit: null };
-    return getCachedWikiImage(title) || { src: null, credit: null };
-  });
-
-  useEffect(() => {
-    if (src) {
-      setEntry({ src: assetUrl(src), credit: null });
-      return undefined;
-    }
-    if (!title || getCachedWikiImage(title)) return undefined;
-    let cancelled = false;
-    fetchWikiImage(title).then((value) => {
-      if (!cancelled) setEntry(value);
-    });
-    return () => { cancelled = true; };
-  }, [title, src]);
-
-  return entry;
+export function useWikiImage(_title, src = null) {
+  return { src: assetUrl(src) || null, credit: null };
 }
