@@ -3,10 +3,12 @@
  *
  * Content lives in content/kshetrams.json (editable via the Sanity CMS;
  * synced by .github/workflows/content-sync.yml). Array order defines the
- * DD serial numbers (getDDSerial) — do not reorder.
+ * DD serial numbers (getDDSerial); separately listed twin shrines share a
+ * divyaDesamId to preserve the traditional numbering. Do not reorder.
  *
  * @typedef {Object} Kshetram
  * @property {string}  id            Stable lowercase-kebab slug (public URL segment)
+ * @property {string}  [divyaDesamId] Traditional grouping id for a separately listed twin shrine
  * @property {string}  name          English display name
  * @property {string}  tamilName     Tamil script name
  * @property {string}  temple        Temple name
@@ -23,5 +25,5 @@
 
 import kshetrams from './content/kshetrams.json';
 
-/** All 108 Divya Desams, in traditional order. */
+/** Shrine entries covering the traditional 108 Divya Desams, in order. */
 export { kshetrams };

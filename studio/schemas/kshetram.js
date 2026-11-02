@@ -20,7 +20,8 @@ const kshetram = defineType({
   ],
   fields: [
     // --- base ---
-    {name: 'order', type: 'number', title: 'Traditional order (1–108)', group: 'base', validation: (r) => r.required().min(1).max(108), readOnly: true, description: 'Defines the Divya Desam serial — managed by the sync tooling.'},
+    {name: 'order', type: 'number', title: 'Shrine listing order', group: 'base', validation: (r) => r.required().integer().min(1), readOnly: true, description: 'Listing position, including separately listed twin shrines. Managed by the import tooling.'},
+    S('divyaDesamId', 'Traditional Divya Desam grouping', {group: 'base', readOnly: true, description: 'Optional stable shrine id shared by twin entries to preserve the traditional 108 numbering. Managed by tooling.'}),
     S('name', 'English name', {group: 'base', validation: (r) => r.required()}),
     S('tamilName', 'Tamil name', {group: 'base', validation: (r) => r.required()}),
     S('temple', 'Temple', {group: 'base', validation: (r) => r.required()}),

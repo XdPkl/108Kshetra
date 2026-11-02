@@ -22,6 +22,7 @@ import {
   User,
 } from 'lucide-react';
 import { kshetrams } from '../data/kshetrams.js';
+import { getVisitedDivyaDesamCount } from '../data/api.js';
 import { ABOUT } from '../data/about.js';
 import { SITE_COPY } from '../data/siteCopy.js';
 import { TempleGopuramIcon, ThirumanIcon, LotusIcon } from './SacredIcons.jsx';
@@ -45,7 +46,7 @@ const pillActive = 'bg-[#FFFDF7]/15 text-[#E2C47C]! font-bold';
 export default function Header() {
   const { count: tripCount } = useTrip();
   const { visitedIds } = useVisited();
-  const visitedCount = visitedIds.length;
+  const visitedCount = getVisitedDivyaDesamCount(visitedIds);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 

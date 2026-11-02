@@ -2195,16 +2195,46 @@
         "17:00",
         "18:30"
       ],
-      "notes": "Twin shrines (Irattai Thirupathi) — count as one Desam"
+      "notes": "Confirm opening times locally before visiting this Irattai Thirupathi shrine."
     },
     "moolavar": {
-      "name": "Aravindalochanan / Devapiran",
+      "name": "Aravindalochanan",
       "tamilName": "அரவிந்தலோசனன்",
-      "form": "Nindran — standing"
+      "form": "Irundhan — Seated"
     },
     "thaayar": {
-      "name": "Karthigai Thaayar",
-      "tamilName": "கார்த்திகை தாயார்"
+      "name": "Karuthadanganni Thayar",
+      "tamilName": "கருத்தடங்கண்ணி தாயார்"
+    },
+    "urchavar": null,
+    "puranam": "Two shrines — Devapiran and Aravindalochanan — stand on the two banks of the dry riverbed and are worshipped together as the \"twin birthplace\" (Irattai Thirupathi) of the Nava Thirupathi.",
+    "pasuram": {
+      "azhwarId": "nammazhwar",
+      "reference": "Thiruvoimozhi 6-5",
+      "work": "Thiruvoimozhi",
+      "meaning": "The lotus-eyed twin lords of Tholaivillimangalam whom one hymn embraces both at once."
+    }
+  },
+  "tholaivillimangalam-devapiran": {
+    "timings": {
+      "morning": [
+        "08:00",
+        "11:00"
+      ],
+      "evening": [
+        "17:00",
+        "18:30"
+      ],
+      "notes": "Confirm opening times locally before visiting this Irattai Thirupathi shrine."
+    },
+    "moolavar": {
+      "name": "Devapiran / Srinivasan",
+      "tamilName": "தேவபிரான் / ஸ்ரீநிவாசன்",
+      "form": "Nindran — Standing"
+    },
+    "thaayar": {
+      "name": "Alamelumangai Thayar",
+      "tamilName": "அலமேலுமங்கை தாயார்"
     },
     "urchavar": null,
     "puranam": "Two shrines — Devapiran and Aravindalochanan — stand on the two banks of the dry riverbed and are worshipped together as the \"twin birthplace\" (Irattai Thirupathi) of the Nava Thirupathi.",

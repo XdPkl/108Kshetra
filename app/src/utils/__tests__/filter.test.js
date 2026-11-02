@@ -32,8 +32,8 @@ describe('matchesSearch (UT-FLT-01)', () => {
 });
 
 describe('filterKshetrams (UT-FLT-02..04)', () => {
-  it('returns all 108 when no filter is active', () => {
-    expect(filterKshetrams(kshetrams, azhwars, emptyFilters)).toHaveLength(108);
+  it('returns all 109 when no filter is active', () => {
+    expect(filterKshetrams(kshetrams, azhwars, emptyFilters)).toHaveLength(109);
   });
 
   it('filters by state', () => {

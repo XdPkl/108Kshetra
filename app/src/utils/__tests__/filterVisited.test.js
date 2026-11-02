@@ -13,7 +13,7 @@ describe('visited-status filter (UT-FLT-05)', () => {
   it('is inactive by default and in isFiltersEmpty', () => {
     expect(isFiltersEmpty(EMPTY_FILTERS)).toBe(true);
     expect(filterKshetrams(kshetrams, azhwars, { ...EMPTY_FILTERS }, ['srirangam']))
-      .toHaveLength(108);
+      .toHaveLength(109);
   });
 
   it('"visited" keeps only visited ids; "unvisited" the complement', () => {
@@ -21,7 +21,7 @@ describe('visited-status filter (UT-FLT-05)', () => {
     expect(filterKshetrams(kshetrams, azhwars, { ...base, visited: 'visited' }, ['srirangam']).map((k) => k.id))
       .toEqual(['srirangam']);
     const unvisited = filterKshetrams(kshetrams, azhwars, { ...base, visited: 'unvisited' }, ['srirangam']);
-    expect(unvisited).toHaveLength(107);
+    expect(unvisited).toHaveLength(108);
     expect(unvisited.some((k) => k.id === 'srirangam')).toBe(false);
   });
 

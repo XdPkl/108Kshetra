@@ -161,6 +161,7 @@ export async function toSanityDocs(content, resolvePhoto) {
       significance: k.significance,
       mapQuery: k.mapQuery,
     };
+    if (k.divyaDesamId) doc.divyaDesamId = k.divyaDesamId;
     // V2 group — nulls preserved verbatim (celestial desams render them).
     for (const key of ['timings', 'wiki', 'moolavar', 'thaayar', 'urchavar', 'puranam']) {
       if (key in v2) doc[key] = v2[key];

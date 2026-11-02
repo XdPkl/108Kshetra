@@ -90,15 +90,15 @@ describe('YatraProgressTracker (round-23 compaction)', () => {
     confirmSpy.mockRestore();
   });
 
-  it('scopes the yatra to the 106 earthly kshetrams, ignoring celestial marks (PO 2026-09-25)', () => {
+  it('scopes the yatra to the 107 earthly kshetrams, ignoring celestial marks (PO 2026-09-25)', () => {
     markVisited('srirangam', true);
     markVisited('thiruparkadal', true); // celestial abode — beyond earthly travel
     const earthlyIds = new Set(
       getAllKshetrams().filter((k) => k.region !== 'Celestial').map((k) => k.id),
     );
-    expect(earthlyIds.size).toBe(106);
+    expect(earthlyIds.size).toBe(107);
     renderAt('/', <YatraProgressTracker total={earthlyIds.size} eligibleIds={earthlyIds} />);
-    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-label', '1 of 106 kshetrams visited');
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-label', '1 of 107 kshetrams visited');
   });
 });
 
@@ -212,20 +212,20 @@ describe('BrowsePage status filters (UXD v3.0)', () => {
     await user.click(chola);
     expect(countText(/^40 kshetrams$/i)).toBeInTheDocument();
     await user.click(chola);
-    expect(countText(/^108 kshetrams$/i)).toBeInTheDocument();
+    expect(countText(/^109 kshetrams$/i)).toBeInTheDocument();
   }, 15_000);
 
   it('sorts Z–A and filters by deity form and azhwar', async () => {
     const user = userEvent.setup();
     renderAt('/kshetrams?azhwar=andal', <BrowsePage />);
-    expect(countText(/^\d+ kshetrams?$/i)).not.toHaveTextContent('108 kshetrams');
+    expect(countText(/^\d+ kshetrams?$/i)).not.toHaveTextContent('109 kshetrams');
     await user.click(screen.getByRole('button', { name: /more filters/i }));
     await user.selectOptions(screen.getByLabelText('Azhwar'), '');
-    expect(countText(/^108 kshetrams$/i)).toBeInTheDocument();
+    expect(countText(/^109 kshetrams$/i)).toBeInTheDocument();
     const deitySelect = screen.getByLabelText('Deity form');
     const firstValue = deitySelect.querySelector('option:nth-child(2)').value;
     await user.selectOptions(deitySelect, firstValue);
-    expect(countText(/^\d+ kshetrams?$/i)).not.toHaveTextContent('108 kshetrams');
+    expect(countText(/^\d+ kshetrams?$/i)).not.toHaveTextContent('109 kshetrams');
     await user.selectOptions(screen.getByLabelText('Sort by'), 'za');
     const names = screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent);
     const desc = [...names].sort((a, b) => b.localeCompare(a));

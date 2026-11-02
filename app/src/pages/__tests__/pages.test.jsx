@@ -28,21 +28,21 @@ describe('HomePage (UT-HOME-01..03; round-30 option-1 redesign)', () => {
     expect(screen.getByRole('link', { name: /plan your yatra/i })).toHaveAttribute('href', '/map');
   });
 
-  it('drives the pilgrimage strip from live state with the 108/106 scope', () => {
+  it('drives the pilgrimage strip from live state with the 108/107 scope', () => {
     renderAt('/');
     // Empty state — "Begin your yatra", zero progress, scope sentence intact
     expect(screen.getByRole('heading', { name: /begin your yatra/i })).toBeInTheDocument();
     const progressbar = screen.getByRole('progressbar');
     expect(progressbar).toHaveAttribute('aria-valuenow', '0');
-    expect(progressbar).toHaveAttribute('aria-label', '0 of 106 kshetrams visited');
-    expect(screen.getByText(/0 of 106 visited/i)).toBeInTheDocument();
+    expect(progressbar).toHaveAttribute('aria-label', '0 of 107 kshetrams visited');
+    expect(screen.getByText(/0 of 107 visited/i)).toBeInTheDocument();
     expect(screen.getByText(/the archive holds 108 divya desams/i)).toBeInTheDocument();
     // Returning visitor — the heading and the real stored count switch
     markVisited('srirangam', true);
     cleanup();
     renderAt('/');
     expect(screen.getByRole('heading', { name: /continue your yatra/i })).toBeInTheDocument();
-    expect(screen.getByText(/1 of 106 visited/i)).toBeInTheDocument();
+    expect(screen.getByText(/1 of 107 visited/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /reset progress/i })).toBeInTheDocument();
   });
 
@@ -82,10 +82,10 @@ describe('HomePage (UT-HOME-01..03; round-30 option-1 redesign)', () => {
 });
 
 describe('BrowsePage (UT-BRW-01..04)', () => {
-  it('shows all 108 kshetrams with the result count', () => {
+  it('shows all 109 kshetrams with the result count', () => {
     renderAt('/kshetrams');
-    expect(screen.getByText('108 kshetrams')).toBeInTheDocument();
-    expect(screen.getAllByRole('article')).toHaveLength(108);
+    expect(screen.getByText('109 kshetrams')).toBeInTheDocument();
+    expect(screen.getAllByRole('article')).toHaveLength(109);
   });
 
   it('narrows results as the user types and updates the count (UT-BRW-02)', async () => {
@@ -94,7 +94,7 @@ describe('BrowsePage (UT-BRW-01..04)', () => {
     await user.type(screen.getByLabelText(/search kshetrams/i), 'kanchipuram');
     // scope to .result-count — the nav also carries an "108 Kshetrams" label
     await vi.waitFor(() => {
-      expect(document.querySelector('.result-count').textContent).not.toBe('108 kshetrams');
+      expect(document.querySelector('.result-count').textContent).not.toBe('109 kshetrams');
     });
     expect(screen.getAllByRole('article').length).toBeGreaterThan(0);
   });
@@ -108,19 +108,19 @@ describe('BrowsePage (UT-BRW-01..04)', () => {
     expect(names).toEqual(sorted);
   });
 
-  it('shows the empty state and restores all 108 after reset (UT-BRW-03/04)', async () => {
+  it('shows the empty state and restores all 109 after reset (UT-BRW-03/04)', async () => {
     const user = userEvent.setup();
     renderAt('/kshetrams');
     await user.type(screen.getByLabelText(/search kshetrams/i), 'atlantis');
     expect(await screen.findByText(/no kshetrams found/i)).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: /clear all filters/i }));
-    expect(await screen.findByText('108 kshetrams')).toBeInTheDocument();
+    expect(await screen.findByText('109 kshetrams')).toBeInTheDocument();
   });
 
   it('filters by azhwar via the ?azhwar= query param (FR-41)', async () => {
     renderAt('/kshetrams?azhwar=andal');
     expect((await screen.findAllByRole('article')).length).toBeGreaterThan(0);
-    expect(screen.queryByText('108 kshetrams')).not.toBeInTheDocument();
+    expect(screen.queryByText('109 kshetrams')).not.toBeInTheDocument();
   });
 });
 

@@ -266,9 +266,9 @@ describe('MapPage workspace (round-23)', () => {
     expect(screen.queryByRole('button', { name: /reset filters/i })).not.toBeInTheDocument();
     await user.type(screen.getByLabelText(/search kshetrams/i), 'kanchipuram');
     const narrowed = screen.getAllByTestId('map-marker').length;
-    expect(narrowed).toBeLessThan(106);
+    expect(narrowed).toBeLessThan(107);
     await user.click(screen.getByRole('button', { name: /reset filters/i }));
-    expect(screen.getAllByTestId('map-marker').length).toBe(106);
+    expect(screen.getAllByTestId('map-marker').length).toBe(107);
     expect(screen.getByLabelText(/search kshetrams/i)).toHaveValue('');
     expect(screen.queryByRole('button', { name: /reset filters/i })).not.toBeInTheDocument();
   });

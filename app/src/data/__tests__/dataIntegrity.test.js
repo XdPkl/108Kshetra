@@ -7,7 +7,7 @@ import { kshetrams } from '../kshetrams.js';
 import { azhwars } from '../azhwars.js';
 import { FEATURED_KSHETRAM_IDS } from '../config.js';
 
-const EXPECTED_TOTAL = 108;
+const EXPECTED_TOTAL = 109;
 const REQUIRED_STRING_FIELDS = [
   'id', 'name', 'tamilName', 'temple', 'place', 'state', 'region',
   'deity', 'deityForm', 'significance',
@@ -16,8 +16,18 @@ const REQUIRED_STRING_FIELDS = [
 const EARTHLY_STATE = (k) => k.state !== 'Celestial';
 
 describe('kshetrams dataset', () => {
-  it('contains exactly 108 records (UT-DATA-01)', () => {
+  it('contains 109 shrine entries covering 108 traditional Divya Desams (UT-DATA-01)', () => {
     expect(kshetrams).toHaveLength(EXPECTED_TOTAL);
+    expect(new Set(kshetrams.map((k) => k.divyaDesamId ?? k.id)).size).toBe(108);
+  });
+
+  it('traditional grouping ids resolve to an existing shrine without chained groups', () => {
+    for (const k of kshetrams.filter((entry) => entry.divyaDesamId)) {
+      expect(typeof k.divyaDesamId).toBe('string');
+      const parent = kshetrams.find((entry) => entry.id === k.divyaDesamId);
+      expect(parent, k.id).toBeDefined();
+      expect(parent.divyaDesamId, k.id).toBeUndefined();
+    }
   });
 
   it('has unique ids (UT-DATA-01)', () => {

@@ -89,7 +89,7 @@ const fromVisuals = (visuals) => {
  */
 export const GROQ = `{
   "kshetrams": *[_type == "kshetram" && !(_id in path("drafts.**"))] | order(order asc) {
-    _id, order, name, tamilName, temple, place, state, region, deity, deityForm,
+    _id, order, divyaDesamId, name, tamilName, temple, place, state, region, deity, deityForm,
     "azhwars": azhwars[]->._id, pasuramCount, significance, mapQuery,
     timings, wiki, moolavar, thaayar, urchavar, puranam,
     "pasuram": pasuram{reference, work, meaning, tamil, transliteration, "azhwarId": azhwar->._id},
@@ -180,6 +180,7 @@ export function groqToContent(rawResult) {
       significance: doc.significance,
       mapQuery: doc.mapQuery,
     };
+    if (doc.divyaDesamId) base.divyaDesamId = doc.divyaDesamId;
     if (doc.photoUrl) base.photo = sized(doc.photoUrl, 640);
     kshetrams.push(base);
 

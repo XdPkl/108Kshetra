@@ -29,7 +29,7 @@ edit can never reach visitors. Every change is a git commit, so rollback is
    npm install
    npm run import
    ```
-   This creates all 150 documents (108 kshetrams, 12 azhwars, 27 acharyas,
+   This creates all 151 documents (109 shrine entries, 12 azhwars, 27 acharyas,
    3 singletons) and uploads the 4 existing photos. Re-running is
    safe (it replaces in place).
 6. **Verify the round-trip** (still from `studio/`):
@@ -92,6 +92,35 @@ Notes:
 | Want a full content backup | Sanity manage → project → dataset → Export (JSONL) — the repo JSON is also always a complete snapshot |
 
 ## Architecture / developer notes
+
+### Irattai Thirupathi split (2026-11-02)
+
+The checked-in dataset lists Aravindalochanar (`tholaivillimangalam`, the
+existing URL) and Devapiran (`tholaivillimangalam-devapiran`) separately.
+Each has its own deity details, bundled photos, visit marks and trip stops.
+No other shrine was removed; identifying any redundant entry is deferred to
+the Product Owner's review. There are currently 109 shrine entries and 107
+earthly temple stops. Branding and the traditional total remain 108.
+
+Devapiran's optional `divyaDesamId` points to `tholaivillimangalam`, preserving
+traditional card numbering after the split and counting the pair once in the
+header's traditional-total counter. The home progress tracker counts each
+earthly shrine visit separately. Both dossiers retain their source serial 51.
+Coordinates are a shared approximate Irattai Thirupathi location, not surveyed
+entrance pins; the map searches identify each temple by name.
+
+The import, GROQ query, schema and sync conversion preserve the grouping field.
+Before enabling live CMS sync, reconcile/import these checked-in records into
+Sanity so an older CMS dataset does not overwrite the split. No live import
+or publication was performed for this change.
+
+Shrine identities and postures were checked against
+[Indian Heritage](https://indian-heritage.org/temple/divyadesams/divya94.html)
+and the existing Product Owner dossier. The approximate pair location follows
+[the Irattai Thiruppathy reference](https://en.wikipedia.org/wiki/Irattai_Thiruppathy).
+No remote photos are fetched or rendered.
+
+### Content modules
 
 - `schemas/` — Sanity schema mirroring the app's JSON shapes 1:1 (document
   types: kshetram, azhwar, acharya + about/siteCopy/config singletons;

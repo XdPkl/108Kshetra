@@ -1307,9 +1307,9 @@
   },
   {
     "id": "tholaivillimangalam",
-    "name": "Thirutholaivillimangalam",
-    "tamilName": "திருத்தொலைவில்லிமங்கலம்",
-    "temple": "Sri Aravindalochna / Srinivasa Temples (Irattai Thirupathi)",
+    "name": "Thirutholaivillimangalam — Aravindalochanar",
+    "tamilName": "திருத்தொலைவில்லிமங்கலம் — அரவிந்தலோசனர்",
+    "temple": "Sri Aravindalochanar Temple (Irattai Thirupathi)",
     "place": "Tholaivillimangalam, Thoothukudi",
     "state": "Tamil Nadu",
     "region": "Pandiya Nadu",
@@ -1320,8 +1320,27 @@
       "thirumangai"
     ],
     "pasuramCount": 0,
-    "significance": "The twin temples (Irattai Thirupathi) counted as one Desam — the lotus-eyed Lord and Devapiran.",
-    "mapQuery": "Irattai Tirupati Tholaivillimangalam"
+    "significance": "The seated, lotus-eyed Lord of the northern Irattai Thirupathi shrine. Listed separately from the nearby Devapiran temple for visits and trip planning.",
+    "mapQuery": "Aravindalochanar Temple Tholaivillimangalam"
+  },
+  {
+    "id": "tholaivillimangalam-devapiran",
+    "name": "Thirutholaivillimangalam — Devapiran",
+    "tamilName": "திருத்தொலைவில்லிமங்கலம் — தேவபிரான்",
+    "temple": "Sri Devapiran / Srinivasa Perumal Temple (Irattai Thirupathi)",
+    "place": "Tholaivillimangalam, Thoothukudi",
+    "state": "Tamil Nadu",
+    "region": "Pandiya Nadu",
+    "deity": "Devapiran / Srinivasan",
+    "deityForm": "Nindran — Standing",
+    "azhwars": [
+      "nammazhwar",
+      "thirumangai"
+    ],
+    "pasuramCount": 0,
+    "significance": "The standing Lord of the southern Irattai Thirupathi shrine. Listed separately from the nearby Aravindalochanar temple for visits and trip planning.",
+    "mapQuery": "Devapiran Temple Tholaivillimangalam",
+    "divyaDesamId": "tholaivillimangalam"
   },
   {
     "id": "thiruthangal",

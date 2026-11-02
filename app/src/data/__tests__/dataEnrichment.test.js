@@ -31,7 +31,7 @@ describe('enrichment coverage', () => {
       expect(coords[1], `${k.id} longitude range`).toBeGreaterThan(60);
       expect(coords[1], `${k.id} longitude range`).toBeLessThan(97);
     }
-    expect(nonCelestial).toHaveLength(106);
+    expect(nonCelestial).toHaveLength(107);
   });
 
   it('celestial desams have no coordinates', () => {

@@ -43,7 +43,7 @@ describe('URL builders (link-audit L3)', () => {
   it('gives every terrestrial desam a coordinate destination; celestial none', () => {
     const terrestrial = kshetrams.filter((k) => k.mapQuery);
     const celestial = kshetrams.filter((k) => !k.mapQuery);
-    expect(terrestrial).toHaveLength(106);
+    expect(terrestrial).toHaveLength(107);
     expect(celestial.map((k) => k.id)).toEqual(['thirupparkadal', 'paramapadam']);
     for (const k of terrestrial) {
       expect(Array.isArray(coords[k.id])).toBe(true);
@@ -145,7 +145,7 @@ describe('Route id inventory (page-coverage reconciliation)', () => {
       expect(ids, name).toHaveLength(new Set(ids).size);
       for (const id of ids) expect(id, `${name}:${id}`).toMatch(KEBAB);
     }
-    expect(kshetrams).toHaveLength(108);
+    expect(kshetrams).toHaveLength(109);
     expect(azhwars).toHaveLength(12);
     expect(acharyas).toHaveLength(27);
   });

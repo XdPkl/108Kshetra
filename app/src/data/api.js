@@ -14,17 +14,31 @@ import { getEnrichment } from './enrichment/index.js';
 /** Azhwars merged with their saint-template details (US-AZW-03). */
 const enrichedAzhwars = azhwars.map((a) => ({ ...a, ...(AZHWAR_DETAILS[a.id] ?? {}) }));
 
-/** @returns {Kshetram[]} all 108 kshetrams in traditional order. */
+/** @returns {Kshetram[]} all shrine entries in traditional Divya Desam order. */
 export function getAllKshetrams() {
   return kshetrams;
 }
 
-/** Traditional Divya Desam serial (1..108) by dataset order (UXD v3.0 cards). */
-const DD_SERIALS = new Map(kshetrams.map((k, i) => [k.id, i + 1]));
+// Individually listed twin shrines share their traditional number so later
+// public serials remain stable when another shrine entry is added.
+const desamIds = [...new Set(kshetrams.map((k) => k.divyaDesamId ?? k.id))];
+const DD_SERIALS = new Map(kshetrams.map((k) => [
+  k.id, desamIds.indexOf(k.divyaDesamId ?? k.id) + 1,
+]));
 
 /** @param {string} id - kshetram slug @returns {number|undefined} DD serial */
 export function getDDSerial(id) {
   return DD_SERIALS.get(id);
+}
+
+/**
+ * Counts traditional Divya Desams represented by visited shrine ids.
+ * Twin shrine visits count once in the traditional 108-total header.
+ * @param {string[]} ids - visited shrine ids
+ * @returns {number} distinct known traditional Divya Desams
+ */
+export function getVisitedDivyaDesamCount(ids) {
+  return new Set(ids.map((id) => DD_SERIALS.get(id)).filter(Boolean)).size;
 }
 
 /** @returns {(Kshetram & object)[]} all kshetrams merged with enrichment data. */

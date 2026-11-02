@@ -6244,23 +6244,20 @@
     "serial": 51,
     "profile": {
       "regionNote": "Pandiya Naadu",
-      "location": "Tholaivillimangalam Village, Thoothukudi District, Tamil Nadu. Located ~38 km east of Tirunelveli and ~3 km from Alwarthirunagari along the Tamiraparani River",
+      "location": "Tholaivillimangalam Village, Thoothukudi District, Tamil Nadu. The northern Aravindalochanar shrine of Irattai Thirupathi, near the Tamiraparani River.",
       "sthalaVriksham": "Vaazhai (Banana Tree - Musa acuminata) / Vilvam",
       "vimanam": "Kumuda Vimanam",
       "theertham": "Varuna Theertham / Tamiraparani River",
-      "posture": "Twin Shrine 1 (Devapiran / Devarabiran): Nindra Thirukkolam (Standing posture facing East) | Twin Shrine 2 (Aravindalochanan): Irundha Thirukkolam (Seated posture facing East)",
+      "posture": "Irundha Thirukkolam (Seated posture facing East)",
       "orientation": "Facing East",
-      "gps": "8.6258° N, 77.9542° E"
+      "gps": "Approximate Irattai Thirupathi location: 8.61111° N, 77.97222° E. Search by temple name for the individual entrance."
     },
     "deities": {
       "moolavar": {
         "names": {
-          "translit": "தேவபிரான் / देवराट् / Devapiran (Lord of the Celestials) | அரவிந்தலோசனன் / செந்தாமரைக்கண்ணன் / अरविन्दलोचन / Aravindalochanan (Lotus-Eyed Lord)"
+          "translit": "Aravindalochanan / Senthamaraikannan"
         },
         "thaayar": [
-          {
-            "name": "அலமேலுமங்கை தாயார் (Alamelumangai Thayar / Padmavathi)"
-          },
           {
             "name": "கருத்தடங்கண்ணி தாயார் (Karuthadanganni Thayar / Alamelumangai)"
           }
@@ -6268,44 +6265,29 @@
         "photos": [
           {
             "src": "photos/desam-74-moolavar.jpg",
-            "alt": "Thirutholaivillimangalam — Moolavar Aravindalochanan",
+            "alt": "Thirutholaivillimangalam — Aravindalochanan / Senthamaraikannan — Moolavar",
             "credit": "Product Owner dossier (Divya Desam 74)"
           },
           {
             "src": "photos/desam-74-moolavar-02.jpg",
-            "alt": "Thirutholaivillimangalam — Moolavar Aravindalochanan",
-            "credit": "Product Owner dossier (Divya Desam 74)"
-          },
-          {
-            "src": "photos/desam-74-devapiran-moolavar.jpg",
-            "alt": "Thirutholaivillimangalam — Moolavar Aravindalochanan (Devapiran twin temple)",
+            "alt": "Thirutholaivillimangalam — Aravindalochanan / Senthamaraikannan — Moolavar",
             "credit": "Product Owner dossier (Divya Desam 74)"
           }
         ]
       },
       "urchavar": {
         "names": {
-          "translit": "Devapiran with Sridevi & Bhudevi | Aravindalochanan with dual Thaayars"
+          "translit": "Aravindalochanan"
         },
         "photos": [
           {
             "src": "photos/desam-74-urchavar.jpg",
-            "alt": "Thirutholaivillimangalam — Urchavar (procession deity)",
-            "credit": "Product Owner dossier (Divya Desam 74)"
-          },
-          {
-            "src": "photos/desam-74-devapiran-urchavar.jpg",
-            "alt": "Thirutholaivillimangalam — Urchavar (procession deity) (Devapiran twin temple)",
-            "credit": "Product Owner dossier (Divya Desam 74)"
-          },
-          {
-            "src": "photos/desam-74-devapiran-urchavar-02.jpg",
-            "alt": "Thirutholaivillimangalam — Urchavar (procession deity) (Devapiran twin temple)",
+            "alt": "Thirutholaivillimangalam — Aravindalochanan / Senthamaraikannan — Urchavar",
             "credit": "Product Owner dossier (Divya Desam 74)"
           }
         ]
       },
-      "sanctumNote": "Shrine 1: Devapiran stands facing East, flanked by Sridevi and Bhudevi inside the main sanctum"
+      "sanctumNote": "Aravindalochanan is seated facing East in the northern Irattai Thirupathi shrine."
     },
     "puranam": {
       "prathyaksham": "Sage Suprabha, Varuna Deva, and Indra",
@@ -6315,8 +6297,7 @@
       ],
       "legend": [
         "Legend of the Bow and Balance (Tholai-Villi) — Sage Suprabha performed deep penance here to prepare a sacrificial ground. While clearing the land, he found a magical bow (Villi) and a wooden scale balance (Tholai). When he touched them, they transformed into a handsome man and woman who had been cursed by Sage Durvasa for their arrogance. Lord Vishnu appeared, restored their celestial forms, and accepted the site as Tholaivillimangalam (\"The Sacred Site of the Bow and Balance\")",
-        "Worship with Red Lotuses (Aravinda) — Sage Suprabha picked red lotuses (Senthamarai) daily from the local pond and offered them to the Lord. Pleased by his floral devotion, Lord Vishnu assumed the name Aravindalochanan (\"The Lotus-Eyed Sovereign\")",
-        "Nava Tirupathi Astrological Alignment — Twin Tirupathi represents Kethu (Devapiran) and Rahu (Aravindalochanan) in the planetary alignment of the Nava Tirupathi circuit"
+        "Worship with Red Lotuses (Aravinda) — Sage Suprabha picked red lotuses (Senthamarai) daily from the local pond and offered them to the Lord. Pleased by his floral devotion, Lord Vishnu assumed the name Aravindalochanan (\"The Lotus-Eyed Sovereign\")"
       ]
     },
     "mangalasasanam": {
@@ -6360,10 +6341,9 @@
     },
     "visuals": {
       "descriptions": [
-        "Twin Sanctum Structure: Two distinct temple complexes situated ~500 meters apart amidst dense riverine groves",
-        "Moolavar Form (Devapiran): Standing deity (Nindra Thirukkolam) facing East in Shrine 1",
-        "Moolavar Form (Aravindalochanan): Seated deity (Irundha Thirukkolam) facing East in Shrine 2 with Karuthadanganni Thayar",
-        "Urchavar Form: Devapiran and Aravindalochanan cast in fine Panchaloha with Sridevi and Bhudevi"
+        "Aravindalochanan is seated facing East in the northern Irattai Thirupathi shrine.",
+        "Irundha Thirukkolam (Seated posture facing East)",
+        "One of the two separate temple complexes of Irattai Thirupathi."
       ],
       "literature": [
         "Project Madurai Text Archives (Thiruvaimozhi 6.5)",
@@ -6373,17 +6353,130 @@
     "photos": [
       {
         "src": "photos/desam-74.jpg",
-        "alt": "Thirutholaivillimangalam — temple gopuram",
+        "alt": "Thirutholaivillimangalam — Aravindalochanan / Senthamaraikannan — temple gopuram",
         "credit": "Product Owner dossier (Divya Desam 74)"
       },
       {
         "src": "photos/desam-74-02.jpg",
-        "alt": "Thirutholaivillimangalam — temple gopuram",
+        "alt": "Thirutholaivillimangalam — Aravindalochanan / Senthamaraikannan — temple gopuram",
         "credit": "Product Owner dossier (Divya Desam 74)"
+      }
+    ]
+  },
+  "tholaivillimangalam-devapiran": {
+    "serial": 51,
+    "profile": {
+      "regionNote": "Pandiya Naadu",
+      "location": "Tholaivillimangalam Village, Thoothukudi District, Tamil Nadu. The southern Devapiran shrine of Irattai Thirupathi, near the Tamiraparani River.",
+      "sthalaVriksham": "Vaazhai (Banana Tree - Musa acuminata) / Vilvam",
+      "vimanam": "Kumuda Vimanam",
+      "theertham": "Varuna Theertham / Tamiraparani River",
+      "posture": "Nindra Thirukkolam (Standing posture facing East)",
+      "orientation": "Facing East",
+      "gps": "Approximate Irattai Thirupathi location: 8.61111° N, 77.97222° E. Search by temple name for the individual entrance."
+    },
+    "deities": {
+      "moolavar": {
+        "names": {
+          "translit": "Devapiran / Srinivasan"
+        },
+        "thaayar": [
+          {
+            "name": "அலமேலுமங்கை தாயார் (Alamelumangai Thayar / Padmavathi)"
+          }
+        ],
+        "photos": [
+          {
+            "src": "photos/desam-74-devapiran-moolavar.jpg",
+            "alt": "Thirutholaivillimangalam — Devapiran / Srinivasan — Moolavar",
+            "credit": "Product Owner dossier (Divya Desam 74)"
+          }
+        ]
       },
+      "urchavar": {
+        "names": {
+          "translit": "Devapiran with Sridevi and Bhudevi"
+        },
+        "photos": [
+          {
+            "src": "photos/desam-74-devapiran-urchavar.jpg",
+            "alt": "Thirutholaivillimangalam — Devapiran / Srinivasan — Urchavar",
+            "credit": "Product Owner dossier (Divya Desam 74)"
+          },
+          {
+            "src": "photos/desam-74-devapiran-urchavar-02.jpg",
+            "alt": "Thirutholaivillimangalam — Devapiran / Srinivasan — Urchavar",
+            "credit": "Product Owner dossier (Divya Desam 74)"
+          }
+        ]
+      },
+      "sanctumNote": "Devapiran stands facing East with Sridevi and Bhudevi."
+    },
+    "puranam": {
+      "prathyaksham": "Sage Suprabha, Varuna Deva, and Indra",
+      "timeline": "Core stone sanctums built during Early Pandya reign (8th-9th Century CE) Renovated by Chola, Vijayanagara, and Madurai Nayak kings who established festival grants for the annual Vaikasi Visakam Garuda Sevai",
+      "literature": [
+        "Explicitly recorded in Nammalwar's Thiruvaimozhi (6.5) and Nava Tirupathi Mahatmyam"
+      ],
+      "legend": [
+        "Legend of the Bow and Balance (Tholai-Villi) — Sage Suprabha performed deep penance here to prepare a sacrificial ground. While clearing the land, he found a magical bow (Villi) and a wooden scale balance (Tholai). When he touched them, they transformed into a handsome man and woman who had been cursed by Sage Durvasa for their arrogance. Lord Vishnu appeared, restored their celestial forms, and accepted the site as Tholaivillimangalam (\"The Sacred Site of the Bow and Balance\")",
+        "Worship with Red Lotuses (Aravinda) — Sage Suprabha picked red lotuses (Senthamarai) daily from the local pond and offered them to the Lord. Pleased by his floral devotion, Lord Vishnu assumed the name Aravindalochanan (\"The Lotus-Eyed Sovereign\")"
+      ]
+    },
+    "mangalasasanam": {
+      "perAzhwar": [
+        [
+          "nammazhwar",
+          11
+        ]
+      ],
+      "excerpts": [
+        {
+          "azhwarId": "nammazhwar",
+          "work": "Thiruvaimozhi (6.5.1)",
+          "tamil": "துலைவில்லி மங்கலம் தொழும் இவளை* தொலையுறு சுடரொளி தோற்றுவித்தாய்!* அலைகடல் கடைந்தவனே! என்னம்மா!* சிலைவளைத்து இலங்கை செற்றவனே! என்று* அலை கழல் தொழும் இவள் அன்னைமீர்!* நிலைமை என் நினைவு எண்ணிப் பார்க்கிலே.",
+          "transliteration": "Thulaivilli maṅgalam thoḻum ivaḷai* Tholaiyuṟu suḍaroḷi thōṟṟuviththāy!* Alaikadal kaḍaiyndhavanē! eṉnammā!* Silaivaḷaiththu ilaṅgai seṟṟavanē! eṉṟu* Alai kaḻal thoḻum ivaḷ annaimīr!* Nilaimai eṉ niṉaivu eṇṇip pārkkilē",
+          "wordMeanings": [
+            [
+              "Thulaivilli maṅgalam thoḻum ivaḷai",
+              "This young maiden who bows to Tholaivillimangalam"
+            ],
+            [
+              "Tholaiyuṟu suḍaroḷi thōṟṟuviththāy",
+              "You who manifested the matchless cosmic light!"
+            ],
+            [
+              "Alaikadal kaḍaiyndhavanē",
+              "O Lord who churned the wavy Milk Ocean!"
+            ],
+            [
+              "Silaivaḷaiththu ilaṅgai seṟṟavanē",
+              "O Rama who bent His bow to shatter Lanka!"
+            ],
+            [
+              "Nilaimai eṉ niṉaivu eṇṇip pārkkilē",
+              "O mothers! Consider her deep longing state for the Lord's lotus feet!"
+            ]
+          ],
+          "significance": "Nammalwar assumes the Nayaki Bhava (Parankusha Nayaki), describing a mother observing her daughter's intense spiritual longing for Lord Aravindalochanan of Tholaivillimangalam"
+        }
+      ]
+    },
+    "visuals": {
+      "descriptions": [
+        "Devapiran stands facing East with Sridevi and Bhudevi.",
+        "Nindra Thirukkolam (Standing posture facing East)",
+        "One of the two separate temple complexes of Irattai Thirupathi."
+      ],
+      "literature": [
+        "Project Madurai Text Archives (Thiruvaimozhi 6.5)",
+        "Video Search Query: \"Irattai Tirupathi Tholaivillimangalam History Velukkudi\""
+      ]
+    },
+    "photos": [
       {
         "src": "photos/desam-74-devapiran.jpg",
-        "alt": "Thirutholaivillimangalam — temple gopuram (Devapiran twin temple)",
+        "alt": "Thirutholaivillimangalam — Devapiran / Srinivasan — temple gopuram",
         "credit": "Product Owner dossier (Divya Desam 74)"
       }
     ]

@@ -13,21 +13,27 @@ describe('Divya Desam dossier templates (dossier population)', () => {
   const siteIds = new Set(getAllKshetrams().map((k) => k.id));
   const azhwarIds = new Set(getAllAzhwars().map((a) => a.id));
 
-  it('covers 96 kshetrams with ids that all exist in the site dataset', () => {
+  it('covers 97 shrine entries with ids that all exist in the site dataset', () => {
     // 93 full dossiers + 3 photo-only entries (round 39: thirukkulandai,
     // thiruppuliangudi, thirumogur — PO photo batches with no dossier doc)
-    expect(Object.keys(DOSSIER_TEMPLATES).length).toBe(96);
+    // The Tholaivillimangalam dossier is split into its two shrine entries.
+    expect(Object.keys(DOSSIER_TEMPLATES).length).toBe(97);
     for (const id of Object.keys(DOSSIER_TEMPLATES)) {
       expect(siteIds.has(id), `unknown kshetram id ${id}`).toBe(true);
     }
   });
 
-  it('assigns each dossier serial at most once', () => {
+  it('assigns each dossier serial to only one traditional Divya Desam', () => {
     // Photo-only entries carry no serial — the PO's dossier numbering is
     // unknown for them and nothing on the site renders one (round 39).
-    const serials = Object.values(DOSSIER_TEMPLATES).map((t) => t.serial).filter((s) => s != null);
-    expect(new Set(serials).size).toBe(serials.length);
-    for (const s of serials) {
+    const owners = new Map();
+    for (const [id, dossier] of Object.entries(DOSSIER_TEMPLATES)) {
+      const s = dossier.serial;
+      if (s == null) continue;
+      const shrine = getAllKshetrams().find((k) => k.id === id);
+      const group = shrine.divyaDesamId ?? shrine.id;
+      if (owners.has(s)) expect(owners.get(s), `duplicate serial ${s}`).toBe(group);
+      owners.set(s, group);
       expect(s, 'serial range').toBeGreaterThanOrEqual(1);
       expect(s, 'serial range').toBeLessThanOrEqual(108);
     }
