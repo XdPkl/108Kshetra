@@ -176,12 +176,12 @@ describe('MapPage (UT-MAP-01..03, FR-76..78)', () => {
     addToTrip('tirupati');
     renderAt('/map', <MapPage />);
     const all = screen.getAllByTestId('map-marker').length;
-    expect(screen.getByRole('button', { name: `All (${all})` })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'All (106)' })).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Visited (1)' }));
     expect(screen.getAllByTestId('map-marker')).toHaveLength(1);
     await user.click(screen.getByRole('button', { name: 'In trip (1)' }));
     expect(screen.getAllByTestId('map-marker')).toHaveLength(1);
-    await user.click(screen.getByRole('button', { name: `All (${all})` }));
+    await user.click(screen.getByRole('button', { name: 'All (106)' }));
     expect(screen.getAllByTestId('map-marker')).toHaveLength(all);
   });
 

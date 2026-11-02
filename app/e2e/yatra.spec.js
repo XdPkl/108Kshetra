@@ -13,9 +13,9 @@ test.describe('V3 yatra toolkit', () => {
     await expect(page.getByRole('button', { name: /✓ visited/i })).toHaveAttribute('aria-pressed', 'true');
 
     await page.goto('');
-    // Yatra progress counts only the 107 earthly kshetrams (PO 2026-09-25);
+    // Yatra progress counts only the 106 earthly Divya Desams (PO 2026-09-25);
     // the 2026-09 refresh exposes the count via the progressbar contract.
-    await expect(page.getByRole('progressbar')).toHaveAttribute('aria-label', '1 of 107 kshetrams visited');
+    await expect(page.getByRole('progressbar')).toHaveAttribute('aria-label', '1 of 106 kshetrams visited');
 
     await page.goto('kshetrams');
     // 2026-09-30 restyle: the visited checkbox became the "Visited (N)" scope pill
@@ -27,7 +27,7 @@ test.describe('V3 yatra toolkit', () => {
     await page.goto('');
     page.once('dialog', (dialog) => dialog.accept());
     await page.getByRole('button', { name: /reset progress/i }).click();
-    await expect(page.getByRole('progressbar')).toHaveAttribute('aria-label', '0 of 107 kshetrams visited');
+    await expect(page.getByRole('progressbar')).toHaveAttribute('aria-label', '0 of 106 kshetrams visited');
   });
 
   test('TC-14: map renders desams, tooltips on hover, filters by region and opens a popup page', async ({ page }) => {

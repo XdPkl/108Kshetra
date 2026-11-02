@@ -3,28 +3,29 @@
  * ivory card subordinate to the hero. The heading answers the visitor's
  * state — "Begin your yatra" empty, "Continue your yatra" returning —
  * above the supporting line, the progressbar (unchanged contract:
- * aria-label "{count} of {total} kshetrams visited") and the 108/107
+ * aria-label "{count} of {total} kshetrams visited") and the 108/106
  * scope sentence (site-copy `progressScope`); the gold "Mark a visit"
  * action and the visited total sit right. The reset control renders
- * only when progress exists (native confirm). Counts only the 107
- * terrestrial shrines — the two celestial abodes are beyond physical
+ * only when progress exists (native confirm). Counts the 106 terrestrial
+ * Divya Desams, grouping twin temples — celestial abodes are beyond physical
  * travel (PO 2026-09-25); counts come from live state, never hard-coded.
  * @param {object} props
- * @param {number} [props.total] - total scoped kshetrams (default 107 earthly)
+ * @param {number} [props.total] - total scoped Divya Desams (default 106 earthly)
  * @param {Set<string>} [props.eligibleIds] - ids that count toward the yatra
  */
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useVisited } from '../../hooks/useVisited.js';
 import { SITE_COPY } from '../../data/siteCopy.js';
+import { getVisitedDivyaDesamCount } from '../../data/api.js';
 
 // Kshetrams gold action on the shared .ui-btn base (round-29 idiom).
 const goldBtn = 'ui-btn rounded-lg! bg-[#96731F] text-[#FFFDF7]! shadow-xs transition-colors hover:bg-[#7A2E00]! group';
 
-export default function YatraProgressTracker({ total = 107, eligibleIds }) {
+export default function YatraProgressTracker({ total = 106, eligibleIds }) {
   const { visitedIds, resetVisited } = useVisited();
   const scopedIds = eligibleIds ? visitedIds.filter((id) => eligibleIds.has(id)) : visitedIds;
-  const count = scopedIds.length;
+  const count = getVisitedDivyaDesamCount(scopedIds);
   const percentage = Math.round((count / total) * 100);
   const fillWidth = count > 0 ? Math.max(3, percentage) : 0;
   const { progress } = SITE_COPY.home;

@@ -26,7 +26,7 @@ import {
   Share2, Trash2, Crosshair, SlidersHorizontal, ChevronDown,
 } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
-import { getAllKshetramsEnriched, getAllAzhwars } from '../data/api.js';
+import { getAllKshetramsEnriched, getAllAzhwars, getDivyaDesamCount, getDivyaDesamCountsByRegion } from '../data/api.js';
 import { buildRegionColors } from '../utils/regionColors.js';
 import { clusterByDistanceKm, distanceKm } from '../utils/geo.js';
 import { matchesSearch } from '../utils/filter.js';
@@ -173,11 +173,7 @@ export default function MapPage() {
   }, []);
   const regions = useMemo(() => [...new Set(plotted.map((k) => k.region))], [plotted]);
   const colors = useMemo(() => buildRegionColors(regions), [regions]);
-  const counts = useMemo(() => {
-    const c = {};
-    plotted.forEach((k) => { c[k.region] = (c[k.region] ?? 0) + 1; });
-    return c;
-  }, [plotted]);
+  const counts = useMemo(() => getDivyaDesamCountsByRegion(plotted), [plotted]);
 
   const [search, setSearch] = useState('');
   const [region, setRegion] = useState('');
@@ -228,8 +224,8 @@ export default function MapPage() {
   )), [plotted, search, region, azhwars]);
 
   const scopeCounts = useMemo(() => ({
-    all: regionShown.length,
-    visited: regionShown.filter((k) => visitedIds.includes(k.id)).length,
+    all: getDivyaDesamCount(regionShown),
+    visited: getDivyaDesamCount(regionShown.filter((k) => visitedIds.includes(k.id))),
     trip: regionShown.filter((k) => tripIds.includes(k.id)).length,
   }), [regionShown, visitedIds, tripIds]);
 
@@ -240,7 +236,7 @@ export default function MapPage() {
   }, [regionShown, scope, visitedIds, tripIds]);
 
   // One result-count presentation (title-strip summary + dock header)
-  const resultCount = `${shown.length} of ${plotted.length} terrestrial desams shown`;
+  const resultCount = `${getDivyaDesamCount(shown)} of ${getDivyaDesamCount(plotted)} terrestrial desams shown`;
   const filtersActive = search !== '' || region !== '' || scope !== 'all';
 
   const resetFilters = () => {
@@ -449,7 +445,7 @@ export default function MapPage() {
         onChange={(e) => setRegion(e.target.value)}
         className="w-full"
       >
-        <option value="">All regions ({plotted.length})</option>
+        <option value="">All regions ({getDivyaDesamCount(plotted)})</option>
         {regions.map((r) => <option key={r} value={r}>{r} ({counts[r]})</option>)}
       </FilterSelect>
       <div className="flex items-center gap-2 flex-wrap" role="group" aria-label="Showing">

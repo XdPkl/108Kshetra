@@ -13,7 +13,7 @@
  */
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen } from 'lucide-react';
-import { getAllAzhwars, getKshetramsByAzhwar } from '../data/api.js';
+import { getAllAzhwars, getKshetramsByAzhwar, getDivyaDesamCount } from '../data/api.js';
 import { useWikiImage } from '../hooks/useWikiImage.js';
 import { ThirumanIcon, LotusIcon } from '../components/SacredIcons.jsx';
 import { SITE_COPY } from '../data/siteCopy.js';
@@ -21,6 +21,7 @@ import gopuramIllustration from '../assets/gopuram-illustration.jpg';
 
 function AzhwarCard({ azhwar }) {
   const desams = getKshetramsByAzhwar(azhwar.id);
+  const desamCount = getDivyaDesamCount(desams);
   const image = useWikiImage(azhwar.wiki ?? null, azhwar.photos?.[0]?.src ?? null);
 
   return (
@@ -80,12 +81,12 @@ function AzhwarCard({ azhwar }) {
               aria-hidden="true"
             />
           </Link>
-          {desams.length > 0 ? (
+          {desamCount > 0 ? (
             <Link
               to={`/kshetrams?azhwar=${azhwar.id}`}
               className="text-[13px] font-bold text-[#96731F]! underline underline-offset-2 transition-colors hover:text-[#7A2E00]!"
             >
-              {desams.length} Divya Desams
+              {desamCount} Divya Desams
             </Link>
           ) : (
             <p className="max-w-[20ch] text-right text-[12px] leading-snug text-[#66523D]">

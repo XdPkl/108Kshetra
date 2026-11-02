@@ -8,7 +8,7 @@ import { azhwars } from './azhwars.js';
 import { AZHWAR_DETAILS } from './azhwar-details.js';
 import { acharyas } from './acharyas.js';
 import { FEATURED_KSHETRAM_IDS, FEATURED_ACHARYA_IDS } from './config.js';
-import { uniqueSorted } from '../utils/group.js';
+import { groupBy, uniqueSorted } from '../utils/group.js';
 import { getEnrichment } from './enrichment/index.js';
 
 /** Azhwars merged with their saint-template details (US-AZW-03). */
@@ -39,6 +39,25 @@ export function getDDSerial(id) {
  */
 export function getVisitedDivyaDesamCount(ids) {
   return new Set(ids.map((id) => DD_SERIALS.get(id)).filter(Boolean)).size;
+}
+
+/**
+ * Counts Divya Desams while retaining separately listed temple entries.
+ * @param {Kshetram[]} [entries] - all or filtered shrine entries
+ * @returns {number} distinct Divya Desams
+ */
+export function getDivyaDesamCount(entries = kshetrams) {
+  return new Set(entries.map((k) => k.divyaDesamId ?? k.id)).size;
+}
+
+/**
+ * Returns traditional regional totals, counting twin temples together.
+ * @param {Kshetram[]} [entries] - all or filtered shrine entries
+ * @returns {Record<string, number>} Divya Desam totals by region
+ */
+export function getDivyaDesamCountsByRegion(entries = kshetrams) {
+  return Object.fromEntries([...groupBy(entries, (k) => k.region)]
+    .map(([region, shrines]) => [region, getDivyaDesamCount(shrines)]));
 }
 
 /** @returns {(Kshetram & object)[]} all kshetrams merged with enrichment data. */

@@ -98,14 +98,15 @@ Notes:
 The checked-in dataset lists Aravindalochanar (`tholaivillimangalam`, the
 existing URL) and Devapiran (`tholaivillimangalam-devapiran`) separately.
 Each has its own deity details, bundled photos, visit marks and trip stops.
-No other shrine was removed; identifying any redundant entry is deferred to
-the Product Owner's review. There are currently 109 shrine entries and 107
-earthly temple stops. Branding and the traditional total remain 108.
+Both temples constitute one Divya Desam. There are 109 separate temple entries
+covering 108 Divya Desams: 106 terrestrial, including 18 in Pandiya Nadu.
+The separate entries are intentional; no other entry needs removal for the totals.
 
 Devapiran's optional `divyaDesamId` points to `tholaivillimangalam`, preserving
 traditional card numbering after the split and counting the pair once in the
-header's traditional-total counter. The home progress tracker counts each
-earthly shrine visit separately. Both dossiers retain their source serial 51.
+header's traditional-total counter. All Divya Desam counters, including the
+home tracker, browse results, regional totals, map and Azhwar lists, group
+the twins together. Visit marks and trip stops remain separate for each temple. Both dossiers retain their source serial 51.
 Coordinates are a shared approximate Irattai Thirupathi location, not surveyed
 entrance pins; the map searches identify each temple by name.
 

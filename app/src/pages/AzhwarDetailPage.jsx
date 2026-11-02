@@ -27,6 +27,7 @@ import {
   getAzhwarNeighbours,
   getEnrichedKshetramById,
   getKshetramsByAzhwar,
+  getDivyaDesamCount,
 } from '../data/api.js';
 import EmptyState from '../components/EmptyState.jsx';
 import NotDocumented from '../components/detail/NotDocumented.jsx';
@@ -54,6 +55,7 @@ export default function AzhwarDetailPage() {
   const panelRef = useRef(null);
   // Hooks must run unconditionally — before the unknown-id early return
   const desams = getKshetramsByAzhwar(id ?? '');
+  const desamCount = getDivyaDesamCount(desams);
   const featuredDesam = desams.find((k) => getEnrichedKshetramById(k.id)?.wiki) ?? desams[0] ?? null;
   const featuredPhoto = useWikiImage(
     featuredDesam ? (getEnrichedKshetramById(featuredDesam.id)?.wiki ?? null) : null,
@@ -95,7 +97,7 @@ export default function AzhwarDetailPage() {
   const tabs = [
     { id: 'life', label: 'Life & tradition' },
     { id: 'hymns', label: 'Hymns & meaning' },
-    { id: 'places', label: `Sacred places (${desams.length})` },
+    { id: 'places', label: `Sacred places (${desamCount})` },
     { id: 'media', label: 'Media' },
     { id: 'sources', label: 'Sources' },
   ];
@@ -173,7 +175,7 @@ export default function AzhwarDetailPage() {
             </span>
             <span className="azd-stat">
               <TempleGopuramIcon className="h-5 w-5" />
-              {desams.length} Divya Desams
+              {desamCount} Divya Desams
             </span>
           </div>
         </div>
@@ -410,7 +412,7 @@ export default function AzhwarDetailPage() {
           <div>
             <h2>Divya Desams in his hymns</h2>
             <p className="azd-sub">
-              {desams.length} sacred places glorified by {azhwar.name}.
+              {desamCount} sacred places glorified by {azhwar.name}.
             </p>
             <div className="azd-places">
               {featuredDesam ? (
@@ -463,7 +465,7 @@ export default function AzhwarDetailPage() {
                 ) : null}
                 <p className="azd-browse">
                   <Link className="btn primary" to={`/kshetrams?azhwar=${azhwar.id}`}>
-                    Browse all {desams.length} desams
+                    Browse all {desamCount} desams
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </p>

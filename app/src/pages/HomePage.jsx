@@ -12,7 +12,7 @@
  */
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { getAllAzhwars, getAllKshetrams, getFeaturedAcharyas } from '../data/api.js';
+import { getAllAzhwars, getAllKshetrams, getFeaturedAcharyas, getDivyaDesamCount } from '../data/api.js';
 import { SITE_COPY } from '../data/siteCopy.js';
 import gopuramIllustration from '../assets/gopuram-illustration.jpg';
 import Hero from '../components/home/Hero.jsx';
@@ -58,14 +58,13 @@ export default function HomePage() {
   const { azhwarStrip, acharyaStrip, invite } = SITE_COPY.home;
   // The yatra counts only the earthly kshetrams — the 2 celestial abodes
   // (Thiruppaarkadal, Paramapadham) are not physically visitable.
-  const earthlyIds = new Set(
-    getAllKshetrams().filter((k) => k.region !== 'Celestial').map((k) => k.id),
-  );
+  const earthlyShrines = getAllKshetrams().filter((k) => k.region !== 'Celestial');
+  const earthlyIds = new Set(earthlyShrines.map((k) => k.id));
   return (
     <div className="dir">
       <Hero />
 
-      <YatraProgressTracker total={earthlyIds.size} eligibleIds={earthlyIds} />
+      <YatraProgressTracker total={getDivyaDesamCount(earthlyShrines)} eligibleIds={earthlyIds} />
 
       <FeaturedKshetrams />
 

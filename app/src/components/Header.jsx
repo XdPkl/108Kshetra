@@ -21,8 +21,7 @@ import {
   ArrowRight,
   User,
 } from 'lucide-react';
-import { kshetrams } from '../data/kshetrams.js';
-import { getVisitedDivyaDesamCount } from '../data/api.js';
+import { getDivyaDesamCountsByRegion, getVisitedDivyaDesamCount } from '../data/api.js';
 import { ABOUT } from '../data/about.js';
 import { SITE_COPY } from '../data/siteCopy.js';
 import { TempleGopuramIcon, ThirumanIcon, LotusIcon } from './SacredIcons.jsx';
@@ -57,13 +56,7 @@ export default function Header() {
   const templeDropdownRef = useRef(null);
   const toursDropdownRef = useRef(null);
 
-  const regionCounts = useMemo(() => {
-    const counts = {};
-    kshetrams.forEach((k) => {
-      counts[k.region] = (counts[k.region] ?? 0) + 1;
-    });
-    return counts;
-  }, []);
+  const regionCounts = useMemo(() => getDivyaDesamCountsByRegion(), []);
 
   // Close dropdowns on outside click
   useEffect(() => {

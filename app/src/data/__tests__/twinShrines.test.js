@@ -5,6 +5,7 @@ import { resolve } from 'node:path';
 import {
   getAllKshetrams, getEnrichedKshetramById, getDDSerial,
   getVisitedDivyaDesamCount,
+  getDivyaDesamCount, getDivyaDesamCountsByRegion,
 } from '../api.js';
 
 const ARAVINDALOCHANAR = 'tholaivillimangalam';
@@ -12,6 +13,16 @@ const DEVAPIRAN = 'tholaivillimangalam-devapiran';
 const twins = [ARAVINDALOCHANAR, DEVAPIRAN].map(getEnrichedKshetramById);
 
 describe('Irattai Thirupathi shrine entries', () => {
+  it('counts 106 terrestrial and 18 Pandiya Nadu Divya Desams without removing either temple', () => {
+    const shrines = getAllKshetrams();
+    expect(getDivyaDesamCount()).toBe(108);
+    expect(getDivyaDesamCount(shrines.filter((k) => k.state !== 'Celestial'))).toBe(106);
+    expect(getDivyaDesamCountsByRegion()['Pandiya Nadu']).toBe(18);
+    expect(getDivyaDesamCount(twins)).toBe(1);
+    expect(getDivyaDesamCount([twins[1]])).toBe(1);
+    expect(getDivyaDesamCount([])).toBe(0);
+    expect(shrines.filter((k) => k.region === 'Pandiya Nadu')).toHaveLength(19);
+  });
   it('preserves the existing route and gives the standing and seated shrines their own details', () => {
     const [seated, standing] = twins;
     expect(seated.name).toContain('Aravindalochanar');

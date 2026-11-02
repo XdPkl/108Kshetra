@@ -10,7 +10,7 @@
 import { useMemo, useState } from 'react';
 import { useKshetrams } from '../hooks/useKshetrams.js';
 import { useKshetramFilters } from '../hooks/useKshetramFilters.js';
-import { getFilterOptions } from '../data/api.js';
+import { getFilterOptions, getDivyaDesamCount, getVisitedDivyaDesamCount } from '../data/api.js';
 import { useVisited } from '../hooks/useVisited.js';
 import { useTrip } from '../hooks/useTrip.js';
 import KshetramCard from '../components/KshetramCard.jsx';
@@ -60,7 +60,8 @@ export default function BrowsePage() {
     label: r === 'Celestial' ? 'Vinnulagam' : r,
   }))];
 
-  const countLabel = `${visible.length} kshetram${visible.length === 1 ? '' : 's'}`;
+  const desamCount = getDivyaDesamCount(visible);
+  const countLabel = `${desamCount} kshetram${desamCount === 1 ? '' : 's'}`;
 
   return (
     <div>
@@ -154,7 +155,7 @@ export default function BrowsePage() {
             <svg viewBox="0 0 24 24" className="h-[18px] w-[18px] text-[#96731F]" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
               <circle cx="12" cy="12" r="9" /><path d="M8.5 12.2l2.4 2.4 4.6-5" />
             </svg>
-            Visited ({visitedIds.length})
+            Visited ({getVisitedDivyaDesamCount(visitedIds)})
           </button>
           <button
             type="button"
@@ -257,6 +258,11 @@ export default function BrowsePage() {
       </div>
 
       {/* Card grid / empty state */}
+      {visible.length > desamCount && (
+        <p className="mt-3 text-sm text-[#66523D]">
+          {visible.length} temple entries. The two Tholaivillimangalam temples constitute one Divya Desam.
+        </p>
+      )}
       {visible.length === 0 ? (
         <div className="mt-6 rounded-2xl border border-[#E3D2AE] bg-[#FFFDF7] p-12 text-center" role="status">
           <p className="font-display text-xl font-semibold text-[#7A2E00]">No kshetrams found</p>
